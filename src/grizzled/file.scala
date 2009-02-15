@@ -107,7 +107,7 @@ object file
 
     /**
      * Return a list of paths matching a pathname pattern. The pattern may
-     * contain simple shell-style wildcards. See {@link #fnmatch}.
+     * contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
      *
      * @param path  The path to expand.
      *

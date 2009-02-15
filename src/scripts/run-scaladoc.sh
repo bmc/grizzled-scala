@@ -5,8 +5,8 @@ top=$(dirname $(dirname $here))
 
 # Because the Ant scaladoc task isn't working.
 scaladoc \
--doctitle sake \
--windowtitle sake \
+-doctitle "Grizzled Scala Library" \
+-windowtitle "Grizzled Scala Library" \
 -d $top/docs \
 -footer "Copyright 2009 Brian M. Clapper" \
 -header "sake: A Scala build tool" \
