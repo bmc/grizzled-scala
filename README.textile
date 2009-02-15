@@ -1,0 +1,4 @@
+h1. Grizzled: A general-purpose library of Scala classes and objects
+
+This is the Grizzled Scala API, which is similar to the clapper.org
+Grizzled Python API, only for Scala. (Duh.)
