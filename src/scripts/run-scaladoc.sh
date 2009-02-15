@@ -10,5 +10,6 @@ scaladoc \
 -d $top/docs \
 -footer "Copyright 2009 Brian M. Clapper" \
 -header "sake: A Scala build tool" \
+-stylesheetfile $top/src/style.css \
 $(find $top/src -name '*.scala')
 

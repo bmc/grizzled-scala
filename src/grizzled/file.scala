@@ -191,26 +191,25 @@ object file
     }
 
     /**
-     * <p>Similar to Python's <tt>fnmatch()</tt> function, this function
-     * determines whether a name (strint) matches a wildcard pattern.</p>
+     * Similar to Python's <tt>fnmatch()</tt> function, this function
+     * determines whether a string matches a wildcard pattern. Patterns
+     * are Unix shell-style wildcards:
      *
-     * <p>Patterns are Unix shell-style:</p>
-     *
-     * <table border="0">
+     * <table border="0" cellspacing="2" class="list">
      *   <tr>
-     *     <td align="right">*</td>
+     *     <td align="right" class="code">*</td>
      *     <td align="left">matches everything</td>
      *   </tr>
      *   <tr>
-     *     <td align="right">?</td>
+     *     <td align="right" class="code">?</td>
      *     <td align="left">matches any single character</td>
      *   </tr>
      *   <tr>
-     *     <td align="right">[set]</td>
+     *     <td align="right" class="code">[set]</td>
      *     <td align="left">matches any character in <i>set</i></td>
      *   </tr>
      *   <tr>
-     *     <td align="right">[!set]</td>
+     *     <td align="right" class="code">[!set]</td>
      *     <td align="left">matches any character not in <i>set</i></td>
      *   </tr>
      * </table>
