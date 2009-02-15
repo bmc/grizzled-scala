@@ -1,0 +1,223 @@
+<!--
+  Ant build file for clapper.org Java utility library
+  ===========================================================================
+  $Id$
+
+  This software is released under a BSD-style license:
+
+  Copyright (c) 2004-2007 Brian M. Clapper. All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are
+  met:
+
+  1.  Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+  2.  The end-user documentation included with the redistribution, if any,
+      must include the following acknowlegement:
+
+        "This product includes software developed by Brian M. Clapper
+        (bmc@clapper.org, http://www.clapper.org/bmc/). That software is
+        copyright (c) 2004-2007 Brian M. Clapper."
+
+      Alternately, this acknowlegement may appear in the software itself,
+      if wherever such third-party acknowlegements normally appear.
+
+  3.  Neither the names "clapper.org", "clapper.org Java Utility Library",
+      nor any of the names of the project contributors may be used to
+      endorse or promote products derived from this software without prior
+      written permission. For written permission, please contact
+      bmc@clapper.org.
+
+  4.  Products derived from this software may not be called "clapper.org
+      Java Utility Library", nor may "clapper.org" appear in their names
+      without prior written permission of Brian M.a Clapper.
+
+  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
+  NO EVENT SHALL BRIAN M. CLAPPER BE LIABLE FOR ANY DIRECT, INDIRECT,
+  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<project name="grizzled" default="lib" basedir=".">
+  <description>
+    Build file for Grizzled Scala library
+  </description>
+
+  <!--
+  ***************************************************************************
+                                Properties
+  ***************************************************************************
+  -->
+
+  <property environment="env"/>
+
+  <condition property="scala.home" value="${env.SCALA_HOME}">
+    <isset property="env.SCALA_HOME"/>
+  </condition>
+  <fail unless="scala.home">
+You must set the SCALA_HOME environment variable.
+  </fail>
+
+  <property name="scala.compiler" value="${scala.home}/lib/scala-compiler.jar"/>
+  <property name="scala.library" value="${scala.home}/lib/scala-library.jar"/>
+  <property name="scala.lib" value="${scala.home}/lib"/>
+
+  <dirname property="top.dir" file="${ant.file}"/> <!-- path to this dir -->
+  <property name="src.top.relative" value="src"/>
+  <property name="src.top" location="${src.top.relative}"/>
+  <property name="src.dir" location="${src.top}/grizzled"/>
+
+  <property name="build.dir.relative" value="build"/>
+  <property name="build.dir"  location="${build.dir.relative}"/>
+
+  <property name="build.classes.dir" location="${build.dir}/classes"/>
+
+  <property name="docs.dir" value="${top.dir}/docs"/>
+
+  <property name="code.jar.name" value="grizzled"/>
+  <property name="code.jar.file" value="${code.jar.name}.jar"/>
+  <property name="code.jar.path" value="${build.dir}/lib/${code.jar.file}"/>
+  <property name="docs.top.dir" value="${top.dir}/docs"/>
+  <property name="docs.api.dir" value="${docs.top.dir}/api"/>
+  <property name="classpath" value="${build.classes.dir}"/>
+
+  <property name="javac.debug" value="false"/>
+  <property name="javac.compilerargs" value=""/>
+
+  <property file="build.properties"/>
+  <!--
+  ***************************************************************************
+                             Tasks and Macros
+  ***************************************************************************
+  -->
+
+  <taskdef resource="scala/tools/ant/antlib.xml">
+    <classpath>
+      <pathelement location="${scala.compiler}"/>
+      <pathelement location="${scala.library}"/>
+    </classpath>
+  </taskdef>
+
+  <macrodef name="scalac">
+    <attribute default="${src.dir}" name="srcdir"/>
+    <attribute default="${build.classes.dir}" name="destdir"/>
+    <attribute default="${javac.classpath}" name="classpath"/>
+    <attribute default="${includes}" name="includes"/>
+    <attribute default="${excludes}" name="excludes"/>
+    <attribute default="jvm-${javac.debug}" name="debug"/>
+    <attribute default="${javac.compilerargs}" name="addparams"/>
+    <attribute default="" name="sourcepath"/>
+    <element name="customize" optional="true"/>
+    <sequential>
+      <scalac addparams="@{addparams}"
+              destdir="@{destdir}"
+              encoding="${source.encoding}"
+              excludes="@{excludes}"
+              includes="@{includes}"
+              sourcepath="@{sourcepath}"
+              srcdir="@{srcdir}"
+              target="jvm-${javac.target}">
+        <classpath>
+          <path path="@{classpath}"/>
+          <fileset dir="${scala.lib}">
+            <include name="**/*.jar"/>
+          </fileset>
+        </classpath>
+        <customize/>
+      </scalac>
+    </sequential>
+  </macrodef>
+
+  <!--
+  ***************************************************************************
+                          Initialization Targets
+  ***************************************************************************
+  -->
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp>
+      <format property="build.date" pattern="dd MMMM, yyyy HH:mm:ss z"
+              locale="en"/>
+    </tstamp>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${compiled.classes.dir}"/>
+    <depend srcdir="${src.dir}" destdir="${compiled.classes.dir}"/>
+  </target>
+
+  <!--
+  ***************************************************************************
+                               Code Targets
+  ***************************************************************************
+  -->
+
+  <target name="build" depends="grizzled.jar"/>
+  <target name="compile" depends="init,lib"/>
+  <target name="compile-all" depends="compile"/>
+
+  <target name="lib" depends="init">
+    <scalac srcdir="${javac.src.dir}"
+            destdir="${compiled.classes.dir}"/>
+  </target>
+
+  <!--
+  ***************************************************************************
+                              Doc targets
+  ***************************************************************************
+  -->
+
+  <target name="doc"
+          description="Generate API Docs">
+    <mkdir dir="${docs.api.dir}"/>
+
+    <target depends="init" name="scaladoc"/>
+        <mkdir dir="${docs.api.dir}"/>
+        <!-- Can't get scaladoc task to work. This is a temporary hackaround. -->
+        <exec executable="/bin/sh">
+          <arg value="${src.dir}/scripts/run-scaladoc.sh"/>
+        </exec>
+  </target>
+
+  <target name="docs" depends="doc"/>
+  <target name="javadocs" depends="doc"/>
+  <target name="javadoc" depends="doc"/>
+
+  <!--
+  ***************************************************************************
+                             Packaging Targets
+  ***************************************************************************
+  -->
+
+  <target name="jar" depends="grizzled.jar"
+          description="Synonym for 'grizzled.jar'"/>
+
+  <target name="grizzled.jar" depends="compile-all"
+          description="Generate the distribution">
+    <mkdir dir="${build.dir}/lib"/>
+    <jar jarfile="${code.jar.path}" basedir="${compiled.classes.dir}"/>
+  </target>
+
+  <!--
+  ***************************************************************************
+                             Clean-up Targets
+  ***************************************************************************
+  -->
+
+  <target name="clean"
+        description="clean up" >
+
+    <delete failonerror="false" includeEmptyDirs="true">
+      <fileset dir="${build.dir}"/>
+    </delete>
+
+    <delete dir="${install.tmp}"/>
+  </target>
+</project>
