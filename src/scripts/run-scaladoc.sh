@@ -7,7 +7,7 @@ top=$(dirname $(dirname $here))
 scaladoc \
 -doctitle sake \
 -windowtitle sake \
--d $top/doc \
+-d $top/docs \
 -footer "Copyright 2009 Brian M. Clapper" \
 -header "sake: A Scala build tool" \
 $(find $top/src -name '*.scala')

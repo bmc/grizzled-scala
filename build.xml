@@ -1,11 +1,13 @@
 <!--
-  Ant build file for clapper.org Java utility library
+  NOTE: The following will be modified to include any other contributors.
+
+  Ant build file for Grizzled Scala utility library
   ===========================================================================
   $Id$
 
   This software is released under a BSD-style license:
 
-  Copyright (c) 2004-2007 Brian M. Clapper. All rights reserved.
+  Copyright (c) 2009 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -19,20 +21,20 @@
 
         "This product includes software developed by Brian M. Clapper
         (bmc@clapper.org, http://www.clapper.org/bmc/). That software is
-        copyright (c) 2004-2007 Brian M. Clapper."
+        copyright (c) 2009 Brian M. Clapper."
 
       Alternately, this acknowlegement may appear in the software itself,
       if wherever such third-party acknowlegements normally appear.
 
-  3.  Neither the names "clapper.org", "clapper.org Java Utility Library",
+  3.  Neither the names "clapper.org", "Grizzled Scala Utility Library",
       nor any of the names of the project contributors may be used to
       endorse or promote products derived from this software without prior
       written permission. For written permission, please contact
       bmc@clapper.org.
 
-  4.  Products derived from this software may not be called "clapper.org
-      Java Utility Library", nor may "clapper.org" appear in their names
-      without prior written permission of Brian M.a Clapper.
+  4.  Products derived from this software may not be called "Grizzled
+      Scala Utility Library", nor may "clapper.org" appear in their names
+      without prior written permission of Brian M. Clapper.
 
   THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
   WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -73,7 +75,8 @@ You must set the SCALA_HOME environment variable.
   <dirname property="top.dir" file="${ant.file}"/> <!-- path to this dir -->
   <property name="src.top.relative" value="src"/>
   <property name="src.top" location="${src.top.relative}"/>
-  <property name="src.dir" location="${src.top}/grizzled"/>
+  <property name="scala.src.dir" location="${src.top}/grizzled"/>
+  <property name="scripts.src.dir" location="${src.top}/scripts"/>
 
   <property name="build.dir.relative" value="build"/>
   <property name="build.dir"  location="${build.dir.relative}"/>
@@ -106,36 +109,6 @@ You must set the SCALA_HOME environment variable.
     </classpath>
   </taskdef>
 
-  <macrodef name="scalac">
-    <attribute default="${src.dir}" name="srcdir"/>
-    <attribute default="${build.classes.dir}" name="destdir"/>
-    <attribute default="${javac.classpath}" name="classpath"/>
-    <attribute default="${includes}" name="includes"/>
-    <attribute default="${excludes}" name="excludes"/>
-    <attribute default="jvm-${javac.debug}" name="debug"/>
-    <attribute default="${javac.compilerargs}" name="addparams"/>
-    <attribute default="" name="sourcepath"/>
-    <element name="customize" optional="true"/>
-    <sequential>
-      <scalac addparams="@{addparams}"
-              destdir="@{destdir}"
-              encoding="${source.encoding}"
-              excludes="@{excludes}"
-              includes="@{includes}"
-              sourcepath="@{sourcepath}"
-              srcdir="@{srcdir}"
-              target="jvm-${javac.target}">
-        <classpath>
-          <path path="@{classpath}"/>
-          <fileset dir="${scala.lib}">
-            <include name="**/*.jar"/>
-          </fileset>
-        </classpath>
-        <customize/>
-      </scalac>
-    </sequential>
-  </macrodef>
-
   <!--
   ***************************************************************************
                           Initialization Targets
@@ -149,8 +122,8 @@ You must set the SCALA_HOME environment variable.
               locale="en"/>
     </tstamp>
     <!-- Create the build directory structure used by compile -->
-    <mkdir dir="${compiled.classes.dir}"/>
-    <depend srcdir="${src.dir}" destdir="${compiled.classes.dir}"/>
+    <mkdir dir="${build.classes.dir}"/>
+    <depend srcdir="${scala.src.dir}" destdir="${build.classes.dir}"/>
   </target>
 
   <!--
@@ -159,13 +132,28 @@ You must set the SCALA_HOME environment variable.
   ***************************************************************************
   -->
 
+  <target name="all" depends="build,scaladoc"/>
   <target name="build" depends="grizzled.jar"/>
   <target name="compile" depends="init,lib"/>
   <target name="compile-all" depends="compile"/>
 
   <target name="lib" depends="init">
-    <scalac srcdir="${javac.src.dir}"
-            destdir="${compiled.classes.dir}"/>
+    <scalac addparams=""
+            destdir="${build.classes.dir}"
+            encoding="ISO-8859-1"
+            excludes=""
+            includes="**/*.scala"
+            sourcepath=""
+            srcdir="${scala.src.dir}"
+            classpath="${classpath}"
+            target="jvm-1.5">
+      <classpath>
+        <path path="${classpath}"/>
+        <fileset dir="${scala.lib}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </scalac>
   </target>
 
   <!--
@@ -174,21 +162,17 @@ You must set the SCALA_HOME environment variable.
   ***************************************************************************
   -->
 
-  <target name="doc"
-          description="Generate API Docs">
-    <mkdir dir="${docs.api.dir}"/>
-
-    <target depends="init" name="scaladoc"/>
-        <mkdir dir="${docs.api.dir}"/>
-        <!-- Can't get scaladoc task to work. This is a temporary hackaround. -->
-        <exec executable="/bin/sh">
-          <arg value="${src.dir}/scripts/run-scaladoc.sh"/>
-        </exec>
-  </target>
-
+  <target name="doc" depends="scaladoc"
+          description="Generate API Docs"/>
   <target name="docs" depends="doc"/>
-  <target name="javadocs" depends="doc"/>
-  <target name="javadoc" depends="doc"/>
+
+  <target depends="init" name="scaladoc">
+    <mkdir dir="${docs.api.dir}"/>
+    <!-- Can't get scaladoc task to work. Temporary hackaround. -->
+    <exec executable="/bin/sh">
+      <arg value="${scripts.src.dir}/run-scaladoc.sh"/>
+    </exec>
+  </target>
 
   <!--
   ***************************************************************************
@@ -202,7 +186,7 @@ You must set the SCALA_HOME environment variable.
   <target name="grizzled.jar" depends="compile-all"
           description="Generate the distribution">
     <mkdir dir="${build.dir}/lib"/>
-    <jar jarfile="${code.jar.path}" basedir="${compiled.classes.dir}"/>
+    <jar jarfile="${code.jar.path}" basedir="${build.classes.dir}"/>
   </target>
 
   <!--
