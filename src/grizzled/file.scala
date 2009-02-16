@@ -193,6 +193,101 @@ object file
     }
 
     /**
+     * An extended <i>glob</i> function that supports all the wildcards of
+     * the <tt>glob()</tt> function, as well as a special "**" wildcard that
+     * recursively matches any directory. (Think "ant".) Adapted from the
+     * function of the same name in the Grizzled Python Utility Library.
+     *
+     * @param pattern   The wildcard pattern
+     * @param directory The directory in which to do the globbing
+     *
+     * @return list of matches, or an empty list for none
+     */
+    def eglob(pattern: String, directory: String): List[String] =
+    {
+        def doGlob(pieces: List[String], directory: String): List[String] =
+        {
+            import scala.collection.mutable.ArrayBuffer
+
+            val fDir = new File(directory)
+            val result = new ArrayBuffer[String]()
+
+            if (! fDir.isDirectory)
+                Nil
+
+            else
+            {
+                val piece = pieces(0)
+                val last = (pieces.length == 1)
+
+                if (piece == "**")
+                {
+                    val remainingPieces =
+                        if (last) Nil
+                        else pieces.drop(1)
+
+                    for (tuple <- walk(directory, true))
+                    {
+                        val (root, dirs, files) = tuple
+
+                        if (last)
+                            // At the end of a pattern, "**" just recursively
+                            // matches directories.
+                            result += root
+                        else
+                        {
+                            // Recurse downward, trying to match the rest of
+                            // the pattern.
+
+                            val subResult = doGlob(remainingPieces, root)
+                            for (partialPath <- subResult)
+                                result += partialPath
+                        }
+                    }
+                }
+
+                else
+                {
+                    // Regular glob pattern.
+
+                    val matches = glob(directory + File.separator + piece)
+                    if (matches.length > 0)
+                    {
+                        if (last)
+                        {
+                            for (m <- matches)
+                                result += m
+                        }
+
+                        else
+                        {
+                            val remainingPieces = pieces.drop(1)
+                            for (m <- matches)
+                            {
+                                val subResult = doGlob(remainingPieces, m)
+                                for (partialPath <- subResult)
+                                    result += partialPath
+                            }
+                        }
+                    }
+                }
+            }
+
+            result.toList
+        }
+
+        // Split into pieces. Note: If there's a leading "/", split() will
+        // produce an extra empty array element. Prevent that.
+        val pieces =
+            if (pattern(0) == File.separatorChar)
+                pattern.slice(1, pattern.length).split(File.separator)
+            else
+                pattern.split(File.separator)
+
+        doGlob(pieces.toList, directory)
+    }
+
+    /**
      * Similar to Python's <tt>fnmatch()</tt> function, this function
      * determines whether a string matches a wildcard pattern. Patterns
      * are Unix shell-style wildcards:
@@ -240,6 +335,76 @@ object file
         val flags = if (sys.os != Posix) Pattern.CASE_INSENSITIVE else 0
         val re = Pattern.compile(regexPattern, flags)
         re.matcher(name).matches
+    }
+
+    /**
+     * Directory tree generator, adapted from Python's <tt>os.walk()</tt>
+     * function.
+     *
+     * <p>For each directory in the directory tree rooted at top (including top
+     * itself, but excluding '.' and '..'), yields a 3-tuple</p>
+     *
+     * <blockquote><pre>dirpath, dirnames, filenames</pre></blockquote>
+     *
+     * <p><i>dirpath</i> is a string, the path to the directory.
+     * <i>dirnames</i> is a list of the names of the subdirectories in
+     * <i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
+     * of the names of the non-directory files in <i>dirpath</i>. Note that
+     * the names in the lists are just names, with no path components. To
+     * get a full path (which begins with top) to a file or directory in
+     * <i>dirpath</i>, <tt>dirpath + java.io.File.separator + name</tt>.</p>
+     *
+     * <p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
+     * generated before the triples for any of its subdirectories
+     * (directories are generated top down). If <tt>topdown</tt> is
+     * <tt>false</tt>, the triple for a directory is generated after the
+     * triples for all of its subdirectories (directories are generated
+     * bottom up).</p>
+     *
+     * <p><b>WARNING!</b> This method does <i>not</i> grok symlinks!
+     *
+     * @param top     name of starting directory
+     * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>
+     *                otherwise
+     *
+     * @return iterator of triplets, as described above.
+     */
+    def walk(top: String, topdown: Boolean):
+        List[(String, List[String], List[String])] =
+    {
+        // This needs to be made more efficient, with some kind of generator.
+        import scala.collection.mutable.ArrayBuffer
+
+        val dirs = new ArrayBuffer[String]()
+        val nondirs = new ArrayBuffer[String]()
+        val result = new ArrayBuffer[(String, List[String], List[String])]()
+        val fTop = new File(top)
+        val names = fTop.list
+
+        for (name <- names)
+        {
+            val f = new File(top + File.separator + name)
+            if (f.isDirectory)
+                dirs += name
+            else
+                nondirs += name
+        }
+
+        if (topdown)
+            result += (top, dirs.toList, nondirs.toList)
+            
+        for (name <- dirs)
+        {
+            val path = top + File.separator + name
+
+            for (tuple <- walk(path, topdown))
+                result += tuple
+        }
+        
+        if (! topdown)
+            result += (top, dirs.toList, nondirs.toList)
+
+        result.toList
     }
 
     /**
