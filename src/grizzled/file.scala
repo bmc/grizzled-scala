@@ -502,6 +502,64 @@ object file
     }
 
     /**
+     * Recursively copy a source directory and its contents to a target
+     * directory. Creates the target directory if it does not exist.
+     *
+     * @param sourceDir  the source directory
+     * @param targetDir  the target directory
+     */
+    def copyTree(sourceDir: String, targetDir: String)
+    {
+        val fSource = new File(sourceDir)
+
+        if (! fSource.exists())
+            throw new FileDoesNotExistException(sourceDir)
+
+        if (! fSource.isDirectory)
+            throw new IOException("Source directory \"" + sourceDir +
+                                  "\" is not a directory.")
+
+        val files = fSource.list
+        new File(targetDir).mkdirs
+        for (f <- files)
+        {
+            val sourceFilename = sourceDir + File.separator + f
+            val targetFilename = targetDir + File.separator + f
+
+            if (new File(sourceFilename).isDirectory)
+                copyTree(sourceFilename, targetFilename)
+            else
+                copyFile(sourceFilename, targetFilename)
+        }
+    }
+
+    /**
+     * Recursively remove a directory tree. This function is conceptually
+     * equivalent to <tt>rm -r</tt> on a Unix system.
+     *
+     * @param dir  The directory
+     */
+    def deleteTree(dir: String)
+    {
+        val fDir = new File(dir)
+        if (! new File(dir).isDirectory)
+            throw new IOException("\"" + dir + "\" is not a directory.")
+
+        var files = fDir.list
+        for (name <- files)
+        {
+            val fullPath = dir + File.separator + name
+            val f = new File(fullPath)
+            if (f.isDirectory)
+                deleteTree(fullPath)
+            else
+                f.delete()
+        }
+
+        fDir.delete()
+    }
+
+    /**
      * Similar to the Unix <i>touch</i> command, this function:
      *
      * <ul>
