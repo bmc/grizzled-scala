@@ -2,7 +2,9 @@ package grizzled
 
 import scala.util.matching.Regex
 
-import java.io.File
+import java.io.{File, IOException}
+
+class FileDoesNotExistException(message: String) extends Exception
 
 object file
 {
@@ -239,4 +241,202 @@ object file
         val re = Pattern.compile(regexPattern, flags)
         re.matcher(name).matches
     }
+
+    /**
+     * Copy multiple files to a target directory. Also see the version of this
+     * method that takes only one file.
+     *
+     * @param files        An <tt>Iterable</tt> of file names to be copied
+     * @param targetDir    Path name to target directory
+     * @param createTarget <tt>true</tt> to create the target directory,
+     *                     <tt>false</tt> to throw an exception if the
+     *                     directory doesn't already exist.
+     *
+     * @throws FileDoesNotExistException a source file or the target directory
+     *                                   doesn't exist
+     * @throws IOException cannot create target directory
+     */
+    def copy(files: Iterable[String],
+             targetDir: String,
+             createTarget: Boolean): Unit =
+    {
+        import java.io.{BufferedInputStream, BufferedOutputStream}
+        import java.io.{FileInputStream, FileOutputStream}
+
+        val target = new File(targetDir)
+
+        if ((! target.exists()) && (createTarget))
+            if (! target.mkdirs())
+                throw new IOException("Unable to create target directory \"" +
+                                      targetDir + "\"")
+
+        if (target.exists() && (! target.isDirectory()))
+            throw new IOException("Cannot copy files to non-directory \"" +
+                                  targetDir + "\"")
+
+        if (! target.exists())
+            throw new FileDoesNotExistException("Target directory \"" +
+                                                targetDir + "\" does not exist.")
+
+        for (file <- files)
+        {
+            val targetFile = targetDir + File.separator + basename(file)
+            val in = new BufferedInputStream(new FileInputStream(file))
+            val out = new BufferedOutputStream(new FileOutputStream(targetFile))
+
+            try
+            {
+                var c: Int = in.read()
+                while (c != -1)
+                {
+                    out.write(c)
+                    c = in.read()
+                }
+            }
+
+            finally
+            {
+                in.close()
+                out.close()
+            }
+        }
+    }
+
+    /**
+     * Copy multiple files to a target directory. Also see the version of this
+     * method that takes only one file. If the target directory does not exist,
+     * it is created.
+     *
+     * @param files        An <tt>Iterable</tt> of file names to be copied
+     * @param targetDir    Path name to target directory
+     *
+     * @throws FileDoesNotExistException a source file or the target directory
+     *                                   doesn't exist
+     * @throws IOException cannot create target directory
+     */
+    def copy(files: Iterable[String], targetDir: String): Unit =
+        copy(files, targetDir, true)
+
+    /**
+     * Copy a file to a directory.
+     *
+     * @param file         Path name of the file to copy
+     * @param targetDir    Path name to target directory
+     * @param createTarget <tt>true</tt> to create the target directory,
+     *                     <tt>false</tt> to throw an exception if the
+     *                     directory doesn't already exist.
+     *
+     * @throws FileDoesNotExistException source file or target directory
+     *                                   doesn't exist
+     * @throws IOException cannot create target directory
+     */
+    def copy(file: String, targetDir: String, createTarget: Boolean): Unit =
+        copy(List[String](file), targetDir, createTarget)
+
+    /**
+     * Copy a file to a directory. If the target directory does not exist,
+     * it is created.
+     *
+     * @param file         Path name of the file to copy
+     * @param targetDir    Path name to target directory
+     *
+     * @throws FileDoesNotExistException a source file or the target directory
+     *                                   doesn't exist
+     * @throws IOException cannot create target directory
+     */
+    def copy(file: String, targetDir: String): Unit =
+        copy(file, targetDir, true)
+
+    /**
+     * Similar to the Unix <i>touch</i> command, this function:
+     *
+     * <ul>
+     *   <li>updates the access and modification times for any existing files
+     *       in a list of files
+     *   <li>creates any non-existent files in the list of files
+     * </ul>
+     *
+     * If any file in the list is a directory, this method will throw an
+     * exception.
+     *
+     * @param files  Iterable of files to touch
+     * @param time   Set the last-modified time to this time, or to the current
+     *               time if this parameter is negative.
+     *
+     * @throws IOException on error
+     */
+    def touch(files: Iterable[String], time: Long): Unit =
+    {
+        val useTime = if (time < 0) System.currentTimeMillis else time
+        for (name <- files)
+        {
+            val file = new File(name)
+
+            if (file.isDirectory)
+                throw new IOException("File \"" + name + "\" is a directory")
+
+            if (! file.exists())
+                file.createNewFile()
+
+            file.setLastModified(useTime)
+        }
+    }
+
+    /**
+     * Similar to the Unix <i>touch</i> command, this function:
+     *
+     * <ul>
+     *   <li>updates the access and modification times for any existing files
+     *       in a list of files
+     *   <li>creates any non-existent files in the list of files
+     * </ul>
+     *
+     * If any file in the list is a directory, this method will throw an
+     * exception.
+     *
+     * This version of <tt>touch()</tt> always set the last-modified time to
+     * the current time.
+     *
+     * @param files  Iterable of files to touch
+     *
+     * @throws IOException on error
+     */
+    def touch(files: Iterable[String]): Unit = touch(files, -1)
+
+    /**
+     * Similar to the Unix <i>touch</i> command, this function:
+     *
+     * <ul>
+     *   <li>updates the access and modification times for a file
+     *   <li>creates the file if it does not exist
+     * </ul>
+     *
+     * If the file is a directory, this method will throw an exception.
+     *
+     * @param path  The file to touch
+     * @param time  Set the last-modified time to this time, or to the current
+     *              time if this parameter is negative.
+     *
+     * @throws IOException on error
+     */
+    def touch(path: String, time: Long): Unit = touch(List[String](path), time)
+
+    /**
+     * Similar to the Unix <i>touch</i> command, this function:
+     *
+     * <ul>
+     *   <li>updates the access and modification times for a file
+     *   <li>creates the file if it does not exist
+     * </ul>
+     *
+     * If the file is a directory, this method will throw an exception.
+     *
+     * This version of <tt>touch()</tt> always set the last-modified time to
+     * the current time.
+     *
+     * @param path  The file to touch
+     *
+     * @throws IOException on error
+     */
+    def touch(path: String): Unit = touch(path, -1)
 }
