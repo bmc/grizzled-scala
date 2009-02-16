@@ -212,62 +212,48 @@ object file
             val fDir = new File(directory)
             val result = new ArrayBuffer[String]()
 
-            if (! fDir.isDirectory)
-                Nil
+            val piece = pieces(0)
+            val last = (pieces.length == 1)
+
+            if (piece == "**")
+            {
+                val remainingPieces = if (last) Nil else pieces.drop(1)
+
+                for (tuple <- walk(directory, true))
+                {
+                    val (root, dirs, files) = tuple
+
+                    if (last)
+                        // At the end of a pattern, "**" just recursively
+                        // matches directories.
+                        result += root
+
+                    else
+                        // Recurse downward, trying to match the rest of
+                        // the pattern.
+                        result ++= doGlob(remainingPieces, root)
+                }
+            }
 
             else
             {
-                val piece = pieces(0)
-                val last = (pieces.length == 1)
+                // Regular glob pattern.
 
-                if (piece == "**")
+                val matches = glob(directory + File.separator + piece)
+                if (matches.length > 0)
                 {
-                    val remainingPieces =
-                        if (last) Nil
-                        else pieces.drop(1)
+                    if (last)
+                        result ++= matches
 
-                    for (tuple <- walk(directory, true))
+                    else
                     {
-                        val (root, dirs, files) = tuple
-
-                        if (last)
-                            // At the end of a pattern, "**" just recursively
-                            // matches directories.
-                            result += root
-                        else
+                        val remainingPieces = pieces.drop(1)
+                        for (m <- matches;
+                             if (new File(m).isDirectory))
                         {
-                            // Recurse downward, trying to match the rest of
-                            // the pattern.
-
-                            val subResult = doGlob(remainingPieces, root)
+                            val subResult = doGlob(remainingPieces, m)
                             for (partialPath <- subResult)
                                 result += partialPath
-                        }
-                    }
-                }
-
-                else
-                {
-                    // Regular glob pattern.
-
-                    val matches = glob(directory + File.separator + piece)
-                    if (matches.length > 0)
-                    {
-                        if (last)
-                        {
-                            for (m <- matches)
-                                result += m
-                        }
-
-                        else
-                        {
-                            val remainingPieces = pieces.drop(1)
-                            for (m <- matches)
-                            {
-                                val subResult = doGlob(remainingPieces, m)
-                                for (partialPath <- subResult)
-                                    result += partialPath
-                            }
                         }
                     }
                 }
@@ -394,12 +380,7 @@ object file
             result += (top, dirs.toList, nondirs.toList)
             
         for (name <- dirs)
-        {
-            val path = top + File.separator + name
-
-            for (tuple <- walk(path, topdown))
-                result += tuple
-        }
+            result ++= walk(top + File.separator + name, topdown)
         
         if (! topdown)
             result += (top, dirs.toList, nondirs.toList)
@@ -425,9 +406,6 @@ object file
              targetDir: String,
              createTarget: Boolean): Unit =
     {
-        import java.io.{BufferedInputStream, BufferedOutputStream}
-        import java.io.{FileInputStream, FileOutputStream}
-
         val target = new File(targetDir)
 
         if ((! target.exists()) && (createTarget))
@@ -444,27 +422,7 @@ object file
                                                 targetDir + "\" does not exist.")
 
         for (file <- files)
-        {
-            val targetFile = targetDir + File.separator + basename(file)
-            val in = new BufferedInputStream(new FileInputStream(file))
-            val out = new BufferedOutputStream(new FileOutputStream(targetFile))
-
-            try
-            {
-                var c: Int = in.read()
-                while (c != -1)
-                {
-                    out.write(c)
-                    c = in.read()
-                }
-            }
-
-            finally
-            {
-                in.close()
-                out.close()
-            }
-        }
+            copyFile(file, targetDir + File.separator + basename(file))
     }
 
     /**
@@ -511,6 +469,37 @@ object file
      */
     def copy(file: String, targetDir: String): Unit =
         copy(file, targetDir, true)
+
+    /**
+     * Copy a source file to a target file, using binary copying.
+     *
+     * @param sourcePath  path to the source file
+     * @param targetPath  path to the target file
+     */
+    def copyFile(sourcePath: String, targetPath: String)
+    {
+        import java.io.{BufferedInputStream, BufferedOutputStream}
+        import java.io.{FileInputStream, FileOutputStream}
+
+        val in = new BufferedInputStream(new FileInputStream(sourcePath))
+        val out = new BufferedOutputStream(new FileOutputStream(targetPath))
+
+        try
+        {
+            var c: Int = in.read()
+            while (c != -1)
+            {
+                out.write(c)
+                c = in.read()
+            }
+        }
+
+        finally
+        {
+            in.close()
+            out.close()
+        }
+    }
 
     /**
      * Similar to the Unix <i>touch</i> command, this function:
