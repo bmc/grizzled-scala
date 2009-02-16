@@ -90,13 +90,13 @@ object file
             ("", "")
         else if (! path.contains(sep))
             (".", path)
-        else
+        else 
         {
             val components = path.split(sep).toList
             val listTuple = components.splitAt(components.length - 1)
 
-            (listTuple._1 mkString ("", sep, ""),
-             listTuple._2 mkString ("", sep, ""))
+            (listTuple._1 mkString sep,
+             listTuple._2 mkString sep)
         }
     }
 
