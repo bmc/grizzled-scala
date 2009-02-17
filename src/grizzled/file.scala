@@ -239,10 +239,14 @@ object file
             {
                 // Regular glob pattern.
 
-                val matches = glob(directory + File.separator + piece)
+                val path = directory + File.separator + piece
+                val matches = glob(path)
                 if (matches.length > 0)
                 {
-                    if (last)
+                    if ((matches.length == 1) && (matches(0) == path))
+                        result += piece // without the path info
+
+                    else if (last)
                         result ++= matches
 
                     else
