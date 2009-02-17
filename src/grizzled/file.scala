@@ -655,4 +655,134 @@ object file
      * @throws IOException on error
      */
     def touch(path: String): Unit = touch(path, -1)
+
+    /**
+     * Normalize a path, eliminating double slashes, etc.
+     *
+     * @param path   the path
+     *
+     * @return the normalized path
+     */
+    def normalizePath(path: String): String =
+    {
+        import grizzled.sys.os
+        import grizzled.sys.OperatingSystem._
+
+        os match
+        {
+            case Posix => normalizePosixPath(path)
+            case Windows => normalizeWindowsPath(path)
+            case _ => throw new UnsupportedOperationException(
+                "Unknown OS: " + os)
+        }
+    }
+
+    /**
+     * Adapted from the Python version of normpath() in Python's
+     * <tt>os.ntpath</tt> module.
+     *
+     * @param path   the path
+     *
+     * @return the normalized path
+     */
+    private[grizzled] def normalizeWindowsPath(path: String): String =
+    {
+        // We need to be careful here. If the prefix is empty, and the path
+        // starts with a backslash, it could either be an absolute path on
+        // the current drive (\dir1\dir2\file) or a UNC filename
+        // (\\server\mount\dir1\file). It is therefore imperative NOT to
+        // collapse multiple backslashes blindly in that case. The code
+        // below preserves multiple backslashes when there is no drive
+        // letter. This means that the invalid filename \\\a\b is preserved
+        // unchanged, where a\\\b is normalised to a\b. It's not clear that
+        // there is any better behaviour for such edge cases.
+
+        def splitdrive(p: String): (String, String) =
+        {
+            // Split a pathname into drive and path specifiers. Returns a
+            // 2-tuple (drive,path)"; either part may be empty".
+
+            if (p.length == 0)
+                ("", "")
+            else if (p(0) == ':')
+                ("", p.drop(1))
+            else if ((p.length > 1) && (p(1) == ':'))
+                (p.take(2), p.drop(2))
+            else
+                ("", p)
+        }
+
+        var (prefix, newPath) = splitdrive(path)
+        if (prefix.length == 0)
+        {
+            // No drive letter - preserve initial backslashes
+
+            while ((newPath(0) == '\\') && (newPath.length > 0))
+            {
+                prefix += "\\"
+                newPath = newPath.drop(1)
+            }
+        }
+        else
+        {
+            // We have a drive letter - collapse initial backslashes
+
+            if (newPath.startsWith("\\"))
+            {
+                prefix += "\\"
+                while (newPath.startsWith("\\"))
+                    newPath = newPath.drop(1)
+            }
+        }
+
+        newPath = normalizePosixPath(newPath.replace("\\", "/"))
+        prefix + newPath.replace("/", "\\")
+    }
+
+    /**
+     * Adapted from the Python version of normpath() in Python's
+     * <tt>os.posixpath</tt> module.
+     *
+     * @param path   the path
+     *
+     * @return the normalized path
+     */
+    private[grizzled] def normalizePosixPath(path: String): String =
+    {
+        import scala.collection.mutable.ListBuffer
+
+        path match
+        {
+            case "" => "."
+
+            case _ =>
+                // POSIX allows one or two initial slashes, but treats
+                // three or more as a single slash.
+
+                val initialSlashes =
+                    if (path.startsWith("//") && (! path.startsWith("///")))
+                        2
+                    else if (path.startsWith("/"))
+                        1
+                    else
+                        0
+                var newPieces = new ListBuffer[String]()
+                for (piece <- path.split("/");
+                     if ((piece != ".") && (piece != "")))
+                {
+                    val newLength = newPieces.length
+                    if ((piece != "..") ||
+                        ((initialSlashes == 0) && (newLength == 0)) ||
+                        ((newLength > 0) && (newPieces(newLength - 1) == "..")))
+                        newPieces += piece
+                    else if (newLength > 0)
+                        newPieces.remove(0)
+                }
+
+                if (initialSlashes > 0)
+                    ("/" * initialSlashes) + (newPieces mkString "/")
+                else
+                    newPieces mkString "/"
+        }
+    }
 }
