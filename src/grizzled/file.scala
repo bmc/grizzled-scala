@@ -162,9 +162,8 @@ object file
 
         }
 
-        val wildcards = new Regex("[\\*\\?\\[]")
-        val pattern = wildcards.pattern
-        if (! pattern.matcher(path).find)
+        val wildcards = """[\*\?\[]""".r
+        if ((wildcards findFirstIn path) == None)
             List[String](path)
 
         else
@@ -176,12 +175,12 @@ object file
             else
             {
                 val dirs =
-                    if (pattern.matcher(dirname).find)
+                    if ((wildcards findFirstIn dirname) != None)
                         glob(dirname)
                     else
                         List[String](dirname)
                 val globber =
-                    if (pattern.matcher(basename).find)
+                    if ((wildcards findFirstIn basename) != None)
                         glob1 _
                     else
                         glob0 _
@@ -309,22 +308,23 @@ object file
      */
     def fnmatch(name: String, pattern: String): Boolean =
     {
-        import java.util.regex.Pattern
         import grizzled.sys
         import grizzled.sys.OperatingSystem._
 
         // Convert to regular expression pattern.
 
-        val regexPattern = "^" +
-                           pattern.replace("\\", "\\\\")
-                                   .replace(".", "\\.")
-                                   .replace("*", ".*")
-                                   .replace("[!", "[^")
-                                   .replace("?", ".") +
-                           "$";
-        val flags = if (sys.os != Posix) Pattern.CASE_INSENSITIVE else 0
-        val re = Pattern.compile(regexPattern, flags)
-        re.matcher(name).matches
+        val caseConv: String => String =
+            if (sys.os == Posix)
+                {s => s}
+            else
+                {s => s.toLowerCase}
+
+        val regex = caseConv("^" + pattern.replace("\\", "\\\\")
+                                          .replace(".", "\\.")
+                                          .replace("*", ".*")
+                                          .replace("[!", "[^")
+                                          .replace("?", ".") + "$").r
+        (regex findFirstIn caseConv(name)) != None
     }
 
     /**
@@ -657,6 +657,26 @@ object file
     def touch(path: String): Unit = touch(path, -1)
 
     /**
+     * Split a Windows-style path into drive name and path portions.
+     *
+     * @param path  the path
+     *
+     * @return a (drive, path) tuple, either component of which can be
+     * *       an empty string
+     */
+    def splitDrivePath(path: String): (String, String) =
+    {
+        if (path.length == 0)
+            ("", "")
+        else if (path(0) == ':')
+            ("", path.drop(1))
+        else if ((path.length > 1) && (path(1) == ':'))
+            (path.take(2), path.drop(2))
+        else
+            ("", path)
+    }
+
+    /**
      * Normalize a path, eliminating double slashes, etc.
      *
      * @param path   the path
@@ -678,14 +698,14 @@ object file
     }
 
     /**
-     * Adapted from the Python version of normpath() in Python's
-     * <tt>os.ntpath</tt> module.
+     * Normalize a Windows path name. Handles UNC paths. Adapted from the
+     * Python version of normpath() in Python's <tt>os.ntpath</tt> module.
      *
      * @param path   the path
      *
      * @return the normalized path
      */
-    private[grizzled] def normalizeWindowsPath(path: String): String =
+    def normalizeWindowsPath(path: String): String =
     {
         // We need to be careful here. If the prefix is empty, and the path
         // starts with a backslash, it could either be an absolute path on
@@ -695,31 +715,16 @@ object file
         // below preserves multiple backslashes when there is no drive
         // letter. This means that the invalid filename \\\a\b is preserved
         // unchanged, where a\\\b is normalised to a\b. It's not clear that
-        // there is any better behaviour for such edge cases.
+        // there is any better behavior for such edge cases.
 
-        def splitdrive(p: String): (String, String) =
-        {
-            // Split a pathname into drive and path specifiers. Returns a
-            // 2-tuple (drive,path)"; either part may be empty".
-
-            if (p.length == 0)
-                ("", "")
-            else if (p(0) == ':')
-                ("", p.drop(1))
-            else if ((p.length > 1) && (p(1) == ':'))
-                (p.take(2), p.drop(2))
-            else
-                ("", p)
-        }
-
-        var (prefix, newPath) = splitdrive(path)
+        var (prefix, newPath) = splitDrivePath(path)
         if (prefix.length == 0)
         {
             // No drive letter - preserve initial backslashes
 
             while ((newPath(0) == '\\') && (newPath.length > 0))
             {
-                prefix += "\\"
+                prefix += newPath.take(1)
                 newPath = newPath.drop(1)
             }
         }

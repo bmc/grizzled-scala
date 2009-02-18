@@ -6,7 +6,7 @@ import java.io.File
 
 object sys
 {
-    /**
+	/**
      * Indicator of current operating system.
      *
      * <ul>
@@ -20,7 +20,7 @@ object sys
      */
     object OperatingSystem extends Enumeration
     {
-        val Posix = Value("Posix")
+    	val Posix = Value("Posix")
         val Mac = Value("Mac OS")
         val Windows = Value("Windows")
         val WindowsCE = Value("Windows CE")
