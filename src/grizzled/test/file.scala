@@ -1,7 +1,7 @@
 import org.scalatest.FunSuite
 import grizzled.file._
 
-class FileTest extends FunSuite
+class FileTest extends GrizzledFunSuite
 {
     test("basename with empty string should return empty string")
     {
@@ -15,7 +15,7 @@ class FileTest extends FunSuite
 
     test("basename of a relative path")
     {
-        expect("foo")   { basename("foo") }
+        expect("foo", "basename(\"foo\")")   { basename("foo") }
         expect("bar")  { basename("foo/bar") }
         expect("foo")  { basename("../foo") }
     }
@@ -55,10 +55,36 @@ class FileTest extends FunSuite
             ("foo", "f*o") -> true,
             ("foo", "f*b") -> false,
             ("foo", "*") -> true,
-            ("foo", "*o") -> true
+            ("foo", "*o") -> true,
+            ("a.c", "*.c") -> true,
+            ("abc", "[!a-r]*") -> false,
+            ("radfa.c", "[!a-r]*") -> false,
+            ("radfa.c", "[^a-r]*") -> false,
+            ("sabc", "[!a-r]*") -> true,
+            ("sabc", "[^a-r]*") -> true
         )
 
         for(((string, pattern), expected) <- data)
-            expect(expected)   { fnmatch(string, pattern) }
+        {
+            expect(expected, 
+                   "fnmatch(\"" + string + "\", \"" + pattern + "\")")
+            {
+                fnmatch(string, pattern) 
+            }
+        }
+    }
+
+    test("normalizePosixPath")
+    {
+        val data = Map(
+            "/foo/../bar/////baz" -> "/bar/baz",
+            "///////foo/bar/" -> "/foo/bar"
+        )
+
+        for ((path, expected) <- data)
+            expect(expected, "normalizePosixPath(\"" + path + "\")") 
+            {
+                normalizePosixPath(path)
+            }
     }
 }

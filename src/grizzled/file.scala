@@ -765,7 +765,7 @@ object file
      *
      * @return the normalized path
      */
-    private[grizzled] def normalizePosixPath(path: String): String =
+    def normalizePosixPath(path: String): String =
     {
         import scala.collection.mutable.ListBuffer
 
