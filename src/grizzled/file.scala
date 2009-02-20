@@ -828,4 +828,56 @@ object file
                     newPieces mkString "/"
         }
     }
+
+    /**
+     * Converts a path name from its operating system-specific format to a
+     * universal path notation. Universal path notation always uses a
+     * Unix-style "/" to separate path elements. A universal path can be
+     * converted to a native (operating system-specific) path via the
+     * <tt>native_path()</tt> function. Note that on POSIX-compliant systems,
+     * this function simply returns the <tt>path</tt> parameter unmodified.
+     *
+     * @param path the path to convert to universal path notation
+     *
+     * @return the universal path
+     */
+    def universalPath(path: String): String =
+    {
+        import grizzled.sys.os
+        import grizzled.sys.OperatingSystem._
+
+        os match
+        {
+            case Posix => path
+            case Windows => path.replace(File.separator, "/")
+            case _ => throw new UnsupportedOperationException(
+                "Unknown OS: " + os)
+        }
+    }
+
+    /**
+     * Converts a path name from universal path notation to the operating
+     * system-specific format. Universal path notation always uses a
+     * Unix-style "/" to separate path elements. A native path can be
+     * converted to a universal path via the <tt>universal_path()</tt>
+     * function. Note that on POSIX-compliant systems, this function simply
+     * returns the <tt>path</tt> parameter unmodified.
+     *
+     * @param path the path to convert from universtal to native path notation
+     *
+     * @return the native path
+     */
+    def nativePath(path: String): String =
+    {
+        import grizzled.sys.os
+        import grizzled.sys.OperatingSystem._
+
+        os match
+        {
+            case Posix => path
+            case Windows => path.replace("/", File.separator)
+            case _ => throw new UnsupportedOperationException(
+                "Unknown OS: " + os)
+        }
+    }
 }

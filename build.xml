@@ -91,7 +91,6 @@ You must set the SCALA_HOME environment variable.
   <property name="code.jar.path" value="${build.dir}/lib/${code.jar.file}"/>
   <property name="docs.top.dir" value="${top.dir}/docs"/>
   <property name="docs.api.dir" value="${docs.top.dir}/api"/>
-  <property name="classpath" value="${build.classes.dir}"/>
 
   <property name="javac.debug" value="false"/>
   <property name="javac.compilerargs" value=""/>
@@ -110,13 +109,26 @@ You must set the SCALA_HOME environment variable.
     </classpath>
   </taskdef>
 
-  <path id="scalatest.classpath">
+  <path id="test.classpath">
     <pathelement location="${scala.library}"/>
     <pathelement location="${scala.lib}/scalatest.jar"/>
+    <pathelement location="${build.classes.dir}"/>
+  </path>
+
+  <path id="lib.classpath">
+    <pathelement location="${scala.library}"/>
+
+    <fileset dir="${scala.lib}">
+      <include name="**/*.jar"/>
+    </fileset>
   </path>
 
   <taskdef name="scalatest" classname="org.scalatest.tools.ScalaTestTask">
-    <classpath refid="scalatest.classpath"/>
+    <classpath>
+      <fileset dir="${scala.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </classpath>
   </taskdef>
 
   <!--
@@ -156,15 +168,8 @@ You must set the SCALA_HOME environment variable.
             sourcepath=""
             deprecation="yes"
             srcdir="${scala.src.dir}"
-            classpath="${classpath}"
-            target="jvm-1.5">
-      <classpath>
-        <path path="${classpath}"/>
-        <fileset dir="${scala.lib}">
-          <include name="**/*.jar"/>
-        </fileset>
-      </classpath>
-    </scalac>
+            classpathref="lib.classpath"
+            target="jvm-1.5"/>
   </target>
 
   <target name="test.compile" depends="init">
@@ -176,15 +181,8 @@ You must set the SCALA_HOME environment variable.
             sourcepath=""
             deprecation="yes"
             srcdir="${scala.src.dir}"
-            classpath="${classpath}"
-            target="jvm-1.5">
-      <classpath>
-        <path path="${classpath}"/>
-        <fileset dir="${scala.lib}">
-          <include name="**/*.jar"/>
-        </fileset>
-      </classpath>
-    </scalac>
+            classpathref="test.classpath"
+            target="jvm-1.5"/>
   </target>
 
   <!--
@@ -218,10 +216,19 @@ You must set the SCALA_HOME environment variable.
 
   <target depends="init" name="scaladoc">
     <mkdir dir="${docs.api.dir}"/>
-    <!-- Can't get scaladoc task to work. Temporary hackaround. -->
-    <exec executable="/bin/sh">
-      <arg value="${scripts.src.dir}/run-scaladoc.sh"/>
-    </exec>
+    <scaladoc srcdir="${scala.src.dir}"
+              destdir="${docs.api.dir}"
+              windowtitle="Grizzled Scala Library"
+              deprecation="yes"
+              unchecked="yes"
+              doctitle="Grizzled Scala Library"
+              stylesheetfile="${src.top}/style.css"
+              header="Grizzled Scala Library"
+              footer="Copyright 2009 Brian M. Clapper"
+              classpathref="lib.classpath">
+      <include name="**/*.scala"/>
+      <exclude name="**/test/*.scala"/>
+    </scaladoc>
   </target>
 
   <!--
@@ -250,8 +257,7 @@ You must set the SCALA_HOME environment variable.
 
     <delete failonerror="false" includeEmptyDirs="true">
       <fileset dir="${build.dir}"/>
+      <fileset dir="${docs.top.dir}"/>
     </delete>
-
-    <delete dir="${install.tmp}"/>
   </target>
 </project>
