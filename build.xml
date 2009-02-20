@@ -68,9 +68,9 @@
 You must set the SCALA_HOME environment variable.
   </fail>
 
-  <property name="scala.compiler" value="${scala.home}/lib/scala-compiler.jar"/>
-  <property name="scala.library" value="${scala.home}/lib/scala-library.jar"/>
   <property name="scala.lib" value="${scala.home}/lib"/>
+  <property name="scala.compiler" value="${scala.lib}/scala-compiler.jar"/>
+  <property name="scala.library" value="${scala.lib}/scala-library.jar"/>
 
   <dirname property="top.dir" file="${ant.file}"/> <!-- path to this dir -->
   <property name="src.top.relative" value="src"/>
@@ -82,6 +82,7 @@ You must set the SCALA_HOME environment variable.
   <property name="build.dir"  location="${build.dir.relative}"/>
 
   <property name="build.classes.dir" location="${build.dir}/classes"/>
+  <property name="test.classes.dir" location="${build.dir}/test/classes"/>
 
   <property name="docs.dir" value="${top.dir}/docs"/>
 
@@ -109,6 +110,15 @@ You must set the SCALA_HOME environment variable.
     </classpath>
   </taskdef>
 
+  <path id="scalatest.classpath">
+    <pathelement location="${scala.library}"/>
+    <pathelement location="${scala.lib}/scalatest.jar"/>
+  </path>
+
+  <taskdef name="scalatest" classname="org.scalatest.tools.ScalaTestTask">
+    <classpath refid="scalatest.classpath"/>
+  </taskdef>
+
   <!--
   ***************************************************************************
                           Initialization Targets
@@ -123,6 +133,7 @@ You must set the SCALA_HOME environment variable.
     </tstamp>
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build.classes.dir}"/>
+    <mkdir dir="${test.classes.dir}"/>
     <depend srcdir="${scala.src.dir}" destdir="${build.classes.dir}"/>
   </target>
 
@@ -133,15 +144,15 @@ You must set the SCALA_HOME environment variable.
   -->
 
   <target name="all" depends="compile,jar,scaladoc"/>
-  <target name="compile" depends="init,lib"/>
+  <target name="compile" depends="init,lib,test.compile"/>
   <target name="compile-all" depends="compile"/>
 
   <target name="lib" depends="init">
     <scalac addparams=""
             destdir="${build.classes.dir}"
             encoding="ISO-8859-1"
-            excludes=""
             includes="**/*.scala"
+            excludes="**/test/*.scala"
             sourcepath=""
             srcdir="${scala.src.dir}"
             classpath="${classpath}"
@@ -154,6 +165,44 @@ You must set the SCALA_HOME environment variable.
       </classpath>
     </scalac>
   </target>
+
+  <target name="test.compile" depends="init">
+    <scalac addparams=""
+            destdir="${test.classes.dir}"
+            encoding="ISO-8859-1"
+            includes="**/test/*.scala"
+            excludes=""
+            sourcepath=""
+            srcdir="${scala.src.dir}"
+            classpath="${classpath}"
+            target="jvm-1.5">
+      <classpath>
+        <path path="${classpath}"/>
+        <fileset dir="${scala.lib}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </scalac>
+  </target>
+
+  <!--
+  ***************************************************************************
+                               Test Targets
+  ***************************************************************************
+  -->
+
+  <target name="test.nodep" depends="" description="Run tests">
+    <scalatest>
+      <runpath>
+        <pathelement location="${test.classes.dir}"/>
+        <pathelement location="${build.classes.dir}"/>
+      </runpath>
+      <reporter type="stdout" config=""/>
+    </scalatest>
+  </target>
+
+  <target name="test" depends="test.compile, test.nodep"
+          description="Run tests"/>
 
   <!--
   ***************************************************************************

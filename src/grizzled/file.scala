@@ -88,15 +88,24 @@ object file
 
         if ((path == null) || (path.length == 0))
             ("", "")
+        else if ((path == ".") || (path == ".."))
+            (path, "")
         else if (! path.contains(sep))
             (".", path)
+        else if (path == "/")
+            ("/", "")
         else 
         {
             val components = path.split(sep).toList
-            val listTuple = components.splitAt(components.length - 1)
 
-            (listTuple._1 mkString sep,
-             listTuple._2 mkString sep)
+            if (components.length == 1)
+                (components(0), "")
+            else
+            {
+                val listTuple = components.splitAt(components.length - 1)
+
+                (listTuple._1 mkString sep, listTuple._2 mkString sep)
+            }
         }
     }
 
@@ -145,8 +154,7 @@ object file
         {
             if (basename.length == 0)
             {
-                val f = new File(dirname)
-                if (f.isDirectory)
+                if (new File(dirname).isDirectory)
                     List[String](basename)
                 else
                     Nil
@@ -159,7 +167,6 @@ object file
                 else
                     Nil
             }
-
         }
 
         val wildcards = """[\*\?\[]""".r
@@ -265,15 +272,21 @@ object file
             result.toList
         }
 
-        // Split into pieces. Note: If there's a leading "/", split() will
-        // produce an extra empty array element. Prevent that.
-        val pieces =
-            if (pattern(0) == File.separatorChar)
-                pattern.slice(1, pattern.length).split(File.separator)
-            else
-                pattern.split(File.separator)
+        if (pattern.length == 0)
+            List(".")
 
-        doGlob(pieces.toList, directory)
+        else
+        {
+            // Split into pieces. Note: If there's a leading "/", split() will
+            // produce an extra empty array element. Prevent that.
+            val pieces =
+                if (pattern(0) == File.separatorChar)
+                    pattern.slice(1, pattern.length).split(File.separator)
+                else
+                    pattern.split(File.separator)
+
+            doGlob(pieces.toList, directory)
+        }
     }
 
     /**
