@@ -735,7 +735,7 @@ object file
         {
             // No drive letter - preserve initial backslashes
 
-            while ((newPath(0) == '\\') && (newPath.length > 0))
+            while ((newPath.length > 0) && (newPath(0) == '\\'))
             {
                 prefix += newPath.take(1)
                 newPath = newPath.drop(1)
@@ -743,7 +743,7 @@ object file
         }
         else
         {
-            // We have a drive letter - collapse initial backslashes
+            // We have a drive letter. Collapse initial backslashes
 
             if (newPath.startsWith("\\"))
             {
@@ -753,8 +753,33 @@ object file
             }
         }
 
-        newPath = normalizePosixPath(newPath.replace("\\", "/"))
-        prefix + newPath.replace("/", "\\")
+        import scala.collection.mutable.ListBuffer
+
+        val pieces = newPath.split("\\\\")
+        val newPieces = new ListBuffer[String]()
+        for (piece <- pieces
+             if ((piece != "") && (piece != ".")))
+        {
+            if (piece == "..")
+            {
+                val last = newPieces.length - 1
+                if ((newPieces.length > 0) && (newPieces(last) != ".."))
+                    newPieces.remove(last)
+
+                else if (! ((newPieces.length == 0) && (prefix.endsWith("\\"))))
+                    newPieces += piece
+            }
+
+            else
+                newPieces += piece
+        }
+
+        // If the path is now empty, substitute ".".
+
+        if ((prefix.length == 0) && (newPieces.length == 0))
+            "."
+        else
+            prefix + (newPieces mkString "\\")
     }
 
     /**
@@ -772,7 +797,7 @@ object file
         path match
         {
             case "" => "."
-
+            case "." => "."
             case _ =>
                 // POSIX allows one or two initial slashes, but treats
                 // three or more as a single slash.

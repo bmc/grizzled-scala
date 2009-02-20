@@ -78,13 +78,40 @@ class FileTest extends GrizzledFunSuite
     {
         val data = Map(
             "/foo/../bar/////baz" -> "/bar/baz",
-            "///////foo/bar/" -> "/foo/bar"
+            "///////foo/bar/" -> "/foo/bar",
+            "." -> ".",
+            "" -> ".",
+            "/" -> "/",
+            "//" -> "//",
+            "///" -> "/",
+            "//////////////////." -> "/"
         )
 
         for ((path, expected) <- data)
             expect(expected, "normalizePosixPath(\"" + path + "\")") 
             {
                 normalizePosixPath(path)
+            }
+    }
+
+    test("normalizeWindowsPath")
+    {
+        val data = Map(
+            "\\" -> "\\",
+            "c:\\foo\\" -> "c:\\foo",
+            "c:\\foo" -> "c:\\foo",
+            "c:\\foo\\bar" -> "c:\\foo\\bar",
+            "\\\\server\\foo" -> "\\\\server\\foo",
+            "\\\\server\\foo\\bar\\..\\baz" -> "\\\\server\\foo\\baz",
+            "c:\\foo\\bar\\..\\baz" -> "c:\\foo\\baz",
+            "\\.." -> "\\",
+            "\\..\\.." -> "\\"
+        )
+
+        for ((path, expected) <- data)
+            expect(expected, "normalizeWindowsPath(\"" + path + "\")") 
+            {
+                normalizeWindowsPath(path)
             }
     }
 }
