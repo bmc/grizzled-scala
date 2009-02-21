@@ -49,7 +49,11 @@ object file
         else
         {
             val components = path.split(sep)
-            components.take(components.length - 1) mkString ("", sep, "")
+            val result = components.take(components.length - 1) mkString sep
+            if (result.length == 0)
+                sep
+            else
+                result
         }
     }
 
@@ -103,8 +107,13 @@ object file
             else
             {
                 val listTuple = components.splitAt(components.length - 1)
-
-                (listTuple._1 mkString sep, listTuple._2 mkString sep)
+                val s: String = listTuple._1 mkString sep
+                val prefix = 
+                    if ((s.length == 0) && (path startsWith sep))
+                        sep
+                    else
+                        s
+                (prefix, listTuple._2 mkString sep)
             }
         }
     }

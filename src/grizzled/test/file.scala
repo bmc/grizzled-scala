@@ -1,51 +1,60 @@
 import org.scalatest.FunSuite
 import grizzled.file._
 
+// FIXME: Need to figure out how to test in a platform-independent way.
+
 class FileTest extends GrizzledFunSuite
 {
-    test("basename with empty string should return empty string")
+    test("basename")
     {
-        expect("") { basename("") }
-    }
+        val data = Map(
+            ""             -> "",
+            "foo"          -> "foo",
+            "foo/bar"      -> "bar",
+            "."            -> ".",
+            "../foo"       -> "foo",
+            "/foo/bar/baz" -> "baz"
+        )
 
-    test("basename of simple path should return itself")
-    {
-        expect("foo") { "foo" }
-    }
-
-    test("basename of a relative path")
-    {
-        expect("foo", "basename(\"foo\")")   { basename("foo") }
-        expect("bar")  { basename("foo/bar") }
-        expect("foo")  { basename("../foo") }
+        for((path, expected) <- data)
+            expect(expected, "basename(\"" + path + "\")") { basename(path)}
     }
 
     test("dirname with empty string should return empty string")
     {
-        expect("") { dirname("") }
-    }
+        val data = Map(
+            ""             -> "",
+            "foo"          -> ".",
+            "foo/bar"      -> "foo",
+            "."            -> ".",
+            "../foo"       -> "..",
+            "/foo/bar/baz" -> "/foo/bar",
+            "/foo"         -> "/",
+            "/foo"         -> "/",
+            "/"            -> "/",
+            "////"         -> "/"
+        )
 
-    test("dirname of simple path should return '.'")
-    {
-        expect(".") { dirname("foo") }
-    }
-
-    test("dirname of a relative path")
-    {
-        expect(".")    { dirname("foo") }
-        expect("foo")  { dirname("foo/bar") }
-        expect("..")   { dirname("../foo") }
+        for((path, expected) <- data)
+            expect(expected, "dirname(\"" + path + "\")") { dirname(path)}
     }
 
     test("pathsplit")
     {
-        expect(("", ""))       { pathsplit("") }
-        expect(("", ""))       { pathsplit(null) }
-        expect((".", "foo"))   { pathsplit("foo") }
-        expect(("foo", "bar")) { pathsplit("foo/bar") }
-        expect(("..", "foo"))  { pathsplit("../foo") }
-        expect(("/", ""))      { pathsplit("/") }
-        expect((".", ""))      { pathsplit(".") }
+        val data = Map(
+            ""             -> ("", ""),
+            "foo"          -> (".", "foo"),
+            "foo/bar"      -> ("foo", "bar"),
+            "."            -> (".", ""),
+            "../foo"       -> ("..", "foo"),
+            "./foo"        -> (".", "foo"),
+            "/foo/bar/baz" -> ("/foo/bar", "baz"),
+            "/foo"         -> ("/", "foo"),
+            "/"            -> ("/",  "")
+        )
+
+        for((path, expected) <- data)
+            expect(expected, "pathsplit(\"" + path + "\")") { pathsplit(path)}
     }
 
     test("fnmatch")
