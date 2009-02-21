@@ -156,8 +156,8 @@ You must set the SCALA_HOME environment variable.
   -->
 
   <target name="all" depends="compile,jar,scaladoc"/>
-  <target name="compile" depends="init,lib,test.compile"/>
-  <target name="compile-all" depends="compile"/>
+  <target name="compile" depends="init,lib"/>
+  <target name="compile-all" depends="compile, test.compile"/>
 
   <target name="lib" depends="init">
     <scalac addparams=""

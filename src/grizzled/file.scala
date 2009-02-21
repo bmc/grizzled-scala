@@ -6,6 +6,9 @@ import java.io.{File, IOException}
 
 class FileDoesNotExistException(message: String) extends Exception
 
+/**
+ * Useful file-related utility functions.
+ */
 object file
 {
     /**
@@ -96,8 +99,8 @@ object file
             (path, "")
         else if (! path.contains(sep))
             (".", path)
-        else if (path == "/")
-            ("/", "")
+        else if (path == sep)
+            (sep, "")
         else 
         {
             val components = path.split(sep).toList

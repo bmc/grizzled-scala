@@ -3,6 +3,9 @@ import grizzled.file._
 
 // FIXME: Need to figure out how to test in a platform-independent way.
 
+/**
+ * Tests the grizzled.file functions.
+ */
 class FileTest extends GrizzledFunSuite
 {
     test("basename")
@@ -20,7 +23,7 @@ class FileTest extends GrizzledFunSuite
             expect(expected, "basename(\"" + path + "\")") { basename(path)}
     }
 
-    test("dirname with empty string should return empty string")
+    test("dirname")
     {
         val data = Map(
             ""             -> "",
