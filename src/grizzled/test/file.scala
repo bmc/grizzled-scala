@@ -8,7 +8,7 @@ import grizzled.file._
  */
 class FileTest extends GrizzledFunSuite
 {
-    test("basename")
+    test("basename, Posix")
     {
         val data = Map(
             ""             -> "",
@@ -21,6 +21,26 @@ class FileTest extends GrizzledFunSuite
 
         for((path, expected) <- data)
             expect(expected, "basename(\"" + path + "\")") { basename(path)}
+    }
+
+    test("basename, Windows")
+    {
+        System.setProperty("grizzled.file.separator", "\\")
+
+        val data = Map(
+            ""                -> "",
+            "foo"             -> "foo",
+            "foo\\bar"        -> "bar",
+            "."               -> ".",
+            "..\\foo"         -> "foo",
+            "\\foo\\bar\\baz" -> "baz",
+            "D:\\foo\\bar"    -> "bar"
+        )
+
+        for((path, expected) <- data)
+            expect(expected, "basename(\"" + path + "\")") { basename(path)}
+
+        System.setProperty("grizzled.file.separator", "")
     }
 
     test("dirname")

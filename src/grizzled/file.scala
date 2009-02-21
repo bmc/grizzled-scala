@@ -11,6 +11,27 @@ class FileDoesNotExistException(message: String) extends Exception
  */
 object file
 {
+    import string._ // Grizzled string functions
+
+    /**
+     * File separator. Exactly like Java's <tt>File.separator</tt>.
+     * If system property "grizzled.file.separator" is set,
+     * however, this value is set to "grizzled.file.separator", instead.
+     * (This behavior is useful for testing.)
+     */
+    def fileSeparator: String =
+    {
+        val s = System.getProperty("grizzled.file.separator")
+        if (s == null)
+            File.separator
+        else if (s.length == 0)
+            File.separator
+        else if (s.length == 1)
+            s
+        else
+            throw new IllegalArgumentException("Bad file separator: " + s)
+    }
+
     /**
      * Get the Java system properties as a Scala iterable. The iterable
      * will produce a (name, value) tuple.
@@ -43,18 +64,19 @@ object file
      */
     def dirname(path: String): String =
     {
-        val sep = File.separator
-
         if ((path == null) || (path.length == 0))
             ""
-        else if (! path.contains(sep))
+        else if (! path.contains(fileSeparator))
             "."
         else
         {
-            val components = path.split(sep)
-            val result = components.take(components.length - 1) mkString sep
+            // Use a character to split, so it's not interpreted as a regular
+            // expression (which causes problems with a Windows-style "\"
+            val components = path.split(fileSeparator(0))
+            val len = components.length
+            val result = components.take(len - 1) mkString fileSeparator
             if (result.length == 0)
-                sep
+                fileSeparator
             else
                 result
         }
@@ -69,16 +91,16 @@ object file
      */
     def basename(path: String): String =
     {
-        val sep = File.separator
-
         if ((path == null) || (path.length == 0))
             ""
-        else if (! path.contains(sep))
+        else if (! path.contains(fileSeparator))
             path
         else
         {
-            val components = path.split(sep)
-            components.drop(components.length - 1) mkString ("", sep, "")
+            // Use a character to split, so it's not interpreted as a regular
+            // expression (which causes problems with a Windows-style "\"
+            val components = path.split(fileSeparator(0))
+            components.drop(components.length - 1) mkString fileSeparator
         }
     }
 
@@ -91,32 +113,32 @@ object file
      */
     def pathsplit(path: String): (String, String) =
     {
-        val sep = File.separator
-
         if ((path == null) || (path.length == 0))
             ("", "")
         else if ((path == ".") || (path == ".."))
             (path, "")
-        else if (! path.contains(sep))
+        else if (! path.contains(fileSeparator))
             (".", path)
-        else if (path == sep)
-            (sep, "")
+        else if (path == fileSeparator)
+            (fileSeparator, "")
         else 
         {
-            val components = path.split(sep).toList
+            // Use a character to split, so it's not interpreted as a regular
+            // expression (which causes problems with a Windows-style "\"
+            val components = path.split(fileSeparator(0)).toList
 
             if (components.length == 1)
                 (components(0), "")
             else
             {
                 val listTuple = components.splitAt(components.length - 1)
-                val s: String = listTuple._1 mkString sep
+                val s: String = listTuple._1 mkString fileSeparator
                 val prefix = 
-                    if ((s.length == 0) && (path startsWith sep))
-                        sep
+                    if ((s.length == 0) && (path startsWith fileSeparator))
+                        fileSeparator
                     else
                         s
-                (prefix, listTuple._2 mkString sep)
+                (prefix, listTuple._2 mkString fileSeparator)
             }
         }
     }
@@ -140,8 +162,6 @@ object file
     {
         // This method is essentially a direct translation of the Python
         // glob.glob() function.
-
-        val sep = File.separator
 
         def glob1(dirname: String, pattern: String): List[String] =
         {
@@ -173,7 +193,7 @@ object file
             }
             else
             {
-                val path = dirname + sep + basename
+                val path = dirname + fileSeparator + basename
                 if (new File(path).exists())
                     List[String](basename)
                 else
@@ -205,7 +225,7 @@ object file
                         glob0 _
                  for (d <- dirs;
                       name <- globber(d, basename))
-                     yield d + sep + name
+                     yield d + fileSeparator + name
              }
         }
     }
@@ -257,7 +277,7 @@ object file
             {
                 // Regular glob pattern.
 
-                val path = directory + File.separator + piece
+                val path = directory + fileSeparator + piece
                 val matches = glob(path)
                 if (matches.length > 0)
                 {
@@ -292,10 +312,10 @@ object file
             // Split into pieces. Note: If there's a leading "/", split() will
             // produce an extra empty array element. Prevent that.
             val pieces =
-                if (pattern(0) == File.separatorChar)
-                    pattern.slice(1, pattern.length).split(File.separator)
+                if (pattern startsWith fileSeparator)
+                    pattern.slice(1, pattern.length).split(fileSeparator)
                 else
-                    pattern.split(File.separator)
+                    pattern.split(fileSeparator)
 
             doGlob(pieces.toList, directory)
         }
@@ -367,7 +387,7 @@ object file
      * of the names of the non-directory files in <i>dirpath</i>. Note that
      * the names in the lists are just names, with no path components. To
      * get a full path (which begins with top) to a file or directory in
-     * <i>dirpath</i>, <tt>dirpath + java.io.File.separator + name</tt>.</p>
+     * <i>dirpath</i>, <tt>dirpath + java.io.fileSeparator + name</tt>.</p>
      *
      * <p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
      * generated before the triples for any of its subdirectories
@@ -398,7 +418,7 @@ object file
 
         for (name <- names)
         {
-            val f = new File(top + File.separator + name)
+            val f = new File(top + fileSeparator + name)
             if (f.isDirectory)
                 dirs += name
             else
@@ -409,7 +429,7 @@ object file
             result += (top, dirs.toList, nondirs.toList)
             
         for (name <- dirs)
-            result ++= walk(top + File.separator + name, topdown)
+            result ++= walk(top + fileSeparator + name, topdown)
         
         if (! topdown)
             result += (top, dirs.toList, nondirs.toList)
@@ -451,7 +471,7 @@ object file
                                                 targetDir + "\" does not exist.")
 
         for (file <- files)
-            copyFile(file, targetDir + File.separator + basename(file))
+            copyFile(file, targetDir + fileSeparator + basename(file))
     }
 
     /**
@@ -552,8 +572,8 @@ object file
         new File(targetDir).mkdirs
         for (f <- files)
         {
-            val sourceFilename = sourceDir + File.separator + f
-            val targetFilename = targetDir + File.separator + f
+            val sourceFilename = sourceDir + fileSeparator + f
+            val targetFilename = targetDir + fileSeparator + f
 
             if (new File(sourceFilename).isDirectory)
                 copyTree(sourceFilename, targetFilename)
@@ -577,7 +597,7 @@ object file
         var files = fDir.list
         for (name <- files)
         {
-            val fullPath = dir + File.separator + name
+            val fullPath = dir + fileSeparator + name
             val f = new File(fullPath)
             if (f.isDirectory)
                 deleteTree(fullPath)
@@ -861,7 +881,7 @@ object file
         os match
         {
             case Posix => path
-            case Windows => path.replace(File.separator, "/")
+            case Windows => path.replace(fileSeparator, "/")
             case _ => throw new UnsupportedOperationException(
                 "Unknown OS: " + os)
         }
@@ -887,7 +907,7 @@ object file
         os match
         {
             case Posix => path
-            case Windows => path.replace("/", File.separator)
+            case Windows => path.replace("/", fileSeparator)
             case _ => throw new UnsupportedOperationException(
                 "Unknown OS: " + os)
         }
