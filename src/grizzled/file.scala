@@ -32,6 +32,8 @@ object file
             throw new IllegalArgumentException("Bad file separator: " + s)
     }
 
+    def fileSeparatorChar = fileSeparator(0)
+
     /**
      * Get the Java system properties as a Scala iterable. The iterable
      * will produce a (name, value) tuple.
@@ -70,9 +72,7 @@ object file
             "."
         else
         {
-            // Use a character to split, so it's not interpreted as a regular
-            // expression (which causes problems with a Windows-style "\"
-            val components = path.split(fileSeparator(0))
+            val components = splitPath(path)
             val len = components.length
             val result = components.take(len - 1) mkString fileSeparator
             if (result.length == 0)
@@ -97,21 +97,20 @@ object file
             path
         else
         {
-            // Use a character to split, so it's not interpreted as a regular
-            // expression (which causes problems with a Windows-style "\"
-            val components = path split fileSeparator(0)
+            val components = splitPath(path)
             components.drop(components.length - 1) mkString fileSeparator
         }
     }
 
     /**
      * Split a path into directory (dirname) and file (basename) components.
+     * Analogous to Python's <tt>os.path.pathsplit()</tt> function.
      *
      * @param path  the path to split
      *
      * @return a (dirname, basename) tuple of strings
      */
-    def pathsplit(path: String): (String, String) =
+    def dirnameBasename(path: String): (String, String) =
     {
         if ((path == null) || (path.length == 0))
             ("", "")
@@ -124,7 +123,8 @@ object file
         else 
         {
             // Use a character to split, so it's not interpreted as a regular
-            // expression (which causes problems with a Windows-style "\"
+            // expression (which causes problems with a Windows-style "\".
+            // NOTE: We deliberately don't use splitPath() here.
             val components = (path split fileSeparator(0)).toList
 
             if (components.length == 1)
@@ -207,7 +207,7 @@ object file
 
         else
         {
-            val (dirname, basename) = pathsplit(path)
+            val (dirname, basename) = dirnameBasename(path)
             if (dirname.length == 0)
                 for (name <- glob1(pwd, basename)) yield name
 
@@ -257,10 +257,8 @@ object file
             {
                 val remainingPieces = if (last) Nil else pieces.drop(1)
 
-                for (tuple <- walk(directory, true))
+                for ((root, dirs, files) <- walk(directory, true))
                 {
-                    val (root, dirs, files) = tuple
-
                     if (last)
                         // At the end of a pattern, "**" just recursively
                         // matches directories.
@@ -304,19 +302,15 @@ object file
             result.toList
         }
 
+        // Main eglob() logic
+
         if (pattern.length == 0)
             List(".")
 
         else
         {
-            // Split into pieces. Note: If there's a leading "/", split() will
-            // produce an extra empty array element. Prevent that.
-            val pieces =
-                if (pattern startsWith fileSeparator)
-                    pattern.slice(1, pattern.length).split(fileSeparator)
-                else
-                    pattern.split(fileSeparator)
-
+            // Split into pieces.
+            val pieces = splitPath(pattern)
             doGlob(pieces.toList, directory)
         }
     }
@@ -435,6 +429,108 @@ object file
             result += (top, dirs.toList, nondirs.toList)
 
         result.toList
+    }
+
+    /**
+     * Split a path into its constituent components. If the path is
+     * absolute, the first piece will have a file separator in the
+     * beginning. Examples:
+     *
+     * <table border="1">
+     *   <tr>
+     *     <th>Input</th>
+     *     <th>Output</th>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">""</td>
+     *      <td class="code">List[String]("")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"/"</td>
+     *     <td class="code">List[String]("/")
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"foo"</td>
+     *     <td class="code">List[String]("foo")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"foo/bar"</td>
+     *     <td class="code">List[String]("foo", "bar")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"."</td>
+     *     <td class="code">List[String](".")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"../foo"</td>
+     *     <td class="code">List[String]("..", "foo")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"./foo"</td>
+     *     <td class="code">List[String](".", "foo")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"/foo/bar/baz"</td>
+     *     <td class="code">List[String]("/foo", "bar", "baz")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"foo/bar/baz"</td>
+     *     <td class="code">List[String]("foo", "bar", "baz")</td>
+     *   </tr>
+     *   <tr>
+     *     <td class="code">"/foo"</td>
+     *     <td class="code">List[String]("/foo")</td>
+     *   </tr>
+     * </table>
+     *
+     * @param path  the path
+     *
+     * @return the component pieces.
+     */
+    def splitPath(path: String): List[String] =
+    {
+        // Split with the path separator character, rather than the path
+        // separator string. Using the string causes Scala to interpret it
+        // as a regular expression, which causes problems when the separator
+        // is a backslash (as on Windows). We could escape the backslash,
+        // but it's just as easy to split on the character, not the string,
+        
+        import grizzled.sys.os
+        import grizzled.sys.OperatingSystem._
+
+        // Special case for Windows. (Stupid drive letters.)
+
+        val (prefix, usePath) = 
+            os match
+            {
+                case Windows => splitDrivePath(path)
+                case _       => ("", path)
+            }
+
+        // If there are leading file separator characters, split() will
+        // produce extra empty array elements. Prevent that.
+
+        val subpath = usePath.foldLeft("") 
+        {
+            (c1, c2) => // Note: c1 and c2 are strings, not characters
+            if (c1 == fileSeparator)
+                c2.toString
+            else
+                c1 + c2
+        }
+
+        val absolute = path.startsWith(fileSeparator) || (prefix != "")
+        val pieces = (subpath split fileSeparatorChar).toList
+        if (absolute)
+        {
+            if (pieces.length == 0)
+                List[String](prefix + fileSeparator)
+            else
+                (prefix + fileSeparator + pieces.head) :: pieces.tail
+        }
+
+        else
+            pieces
     }
 
     /**

@@ -89,7 +89,7 @@ class FileTest extends GrizzledFunSuite
         }
     }
 
-    test("pathsplit, Posix")
+    test("dirnameBasename, Posix")
     {
         withPosixEnv
         {
@@ -106,14 +106,14 @@ class FileTest extends GrizzledFunSuite
             )
 
             for((path, expected) <- data)
-                expect(expected, "pathsplit(\"" + path + "\")") 
+                expect(expected, "dirnameBasename(\"" + path + "\")") 
                 {
-                    pathsplit(path)
+                    dirnameBasename(path)
                 }
         }
     }
 
-    test("pathsplit, Windows")
+    test("dirnameBasename, Windows")
     {
         withWindowsEnv
         {
@@ -131,13 +131,63 @@ class FileTest extends GrizzledFunSuite
             )
 
             for((path, expected) <- data)
-                expect(expected, "pathsplit(\"" + path + "\")") 
+                expect(expected, "dirnameBasename(\"" + path + "\")") 
                 {
-                    pathsplit(path)
+                    dirnameBasename(path)
                 }
         }
     }
 
+    test("splitPath, Posix")
+    {
+        withPosixEnv
+        {
+            val data = Map(
+                ""             -> List[String](""),
+                "foo"          -> List[String]("foo"),
+                "foo/bar"      -> List[String]("foo", "bar"),
+                "."            -> List[String]("."),
+                "../foo"       -> List[String]("..", "foo"),
+                "./foo"        -> List[String](".", "foo"),
+                "/foo/bar/baz" -> List[String]("/foo", "bar", "baz"),
+                "foo/bar/baz"  -> List[String]("foo", "bar", "baz"),
+                "/foo"         -> List[String]("/foo"),
+                "/"            -> List[String]("/")
+            )
+
+            for((path, expected) <- data)
+                expect(expected, "splitPath(\"" + path + "\")") 
+                {
+                    splitPath(path)
+                }
+        }
+    }
+
+    test("splitPath, Windows")
+    {
+        withWindowsEnv
+        {
+            val data = Map(
+                ""                -> List[String](""),
+                "foo"             -> List[String]("foo"),
+                "foo\\bar"        -> List[String]("foo", "bar"),
+                "."               -> List[String]("."),
+                "..\\foo"         -> List[String]("..", "foo"),
+                ".\\foo"          -> List[String](".", "foo"),
+                "\\foo\\bar\\baz" -> List[String]("\\foo", "bar", "baz"),
+                "foo\\bar\\baz"   -> List[String]("foo", "bar", "baz"),
+                "\\foo"           -> List[String]("\\foo"),
+                "\\"              -> List[String]("\\"),
+                "d:\\"            -> List[String]("d:\\")
+            )
+
+            for((path, expected) <- data)
+                expect(expected, "splitPath(\"" + path + "\")") 
+                {
+                    splitPath(path)
+                }
+        }
+    }
 
     test("fnmatch")
     {

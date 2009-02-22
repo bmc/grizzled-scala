@@ -33,17 +33,26 @@ object sys
 
     /**
      * Indicator of the current operating system, as defined by the
-     * <tt>OperatingSystem</tt> enumeration.
+     * <tt>OperatingSystem</tt> enumeration. These need to be functions,
+     * not vals, so they can be overridden at runtime by the tests.
      */
-    val os = System.getProperty("os.name").toLowerCase match
+    def grizzledOSName = System.getProperty("grizzled.os.name")
+
+    def osName =
+        if ((grizzledOSName != null) && (grizzledOSName != ""))
+            grizzledOSName
+        else
+            System.getProperty("os.name")
+
+    def os = osName.toLowerCase match
     {
-        case "mac" => Mac
+        case "mac"        => Mac
         case "windows ce" => WindowsCE
-        case "windows" => Windows
-        case "os/2" => OS2
-        case "netware" => NetWare
-        case "openvms" => VMS
-        case _ => Posix
+        case "windows"    => Windows
+        case "os/2"       => OS2
+        case "netware"    => NetWare
+        case "openvms"    => VMS
+        case _            => Posix
     }
 
     /**

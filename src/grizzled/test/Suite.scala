@@ -73,7 +73,13 @@ class GrizzledFunSuite extends FunSuite
      */
     def withWindowsEnv(code: => Any)
     {
-        withProperties(Map("grizzled.file.separator" -> "\\")) { code }
+        withProperties(Map(
+            "grizzled.file.separator" -> "\\",
+            "grizzled.os.name"        -> "Windows"
+        ))
+        {
+            code 
+        }
     }
 
     /**
