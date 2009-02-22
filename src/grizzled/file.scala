@@ -93,13 +93,13 @@ object file
     {
         if ((path == null) || (path.length == 0))
             ""
-        else if (! path.contains(fileSeparator))
+        else if (! (path contains fileSeparator))
             path
         else
         {
             // Use a character to split, so it's not interpreted as a regular
             // expression (which causes problems with a Windows-style "\"
-            val components = path.split(fileSeparator(0))
+            val components = path split fileSeparator(0)
             components.drop(components.length - 1) mkString fileSeparator
         }
     }
@@ -117,7 +117,7 @@ object file
             ("", "")
         else if ((path == ".") || (path == ".."))
             (path, "")
-        else if (! path.contains(fileSeparator))
+        else if (! (path contains fileSeparator))
             (".", path)
         else if (path == fileSeparator)
             (fileSeparator, "")
@@ -125,13 +125,13 @@ object file
         {
             // Use a character to split, so it's not interpreted as a regular
             // expression (which causes problems with a Windows-style "\"
-            val components = path.split(fileSeparator(0)).toList
+            val components = (path split fileSeparator(0)).toList
 
             if (components.length == 1)
                 (components(0), "")
             else
             {
-                val listTuple = components.splitAt(components.length - 1)
+                val listTuple = components splitAt (components.length - 1)
                 val s: String = listTuple._1 mkString fileSeparator
                 val prefix = 
                     if ((s.length == 0) && (path startsWith fileSeparator))
