@@ -438,6 +438,15 @@ object file
     }
 
     /**
+     * Join components of a path together.
+     *
+     * @param pieces  path pieces
+     *
+     * @return a composite path
+     */
+    def joinPath(pieces: String*) = pieces mkString fileSeparator
+
+    /**
      * Copy multiple files to a target directory. Also see the version of this
      * method that takes only one file.
      *
@@ -759,8 +768,7 @@ object file
         // collapse multiple backslashes blindly in that case. The code
         // below preserves multiple backslashes when there is no drive
         // letter. This means that the invalid filename \\\a\b is preserved
-        // unchanged, where a\\\b is normalised to a\b. It's not clear that
-        // there is any better behavior for such edge cases.
+        // unchanged, where a\\\b is normalized to a\b.
 
         var (prefix, newPath) = splitDrivePath(path)
         if (prefix.length == 0)
