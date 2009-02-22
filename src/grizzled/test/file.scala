@@ -10,75 +10,134 @@ class FileTest extends GrizzledFunSuite
 {
     test("basename, Posix")
     {
-        val data = Map(
-            ""             -> "",
-            "foo"          -> "foo",
-            "foo/bar"      -> "bar",
-            "."            -> ".",
-            "../foo"       -> "foo",
-            "/foo/bar/baz" -> "baz"
-        )
+        withPosixEnv
+        {
+            val data = Map(
+                ""             -> "",
+                "foo"          -> "foo",
+                "foo/bar"      -> "bar",
+                "."            -> ".",
+                "../foo"       -> "foo",
+                "/foo/bar/baz" -> "baz"
+            )
 
-        for((path, expected) <- data)
-            expect(expected, "basename(\"" + path + "\")") { basename(path)}
+            for((path, expected) <- data)
+                expect(expected, "basename(\"" + path + "\")") { basename(path)}
+        }
     }
 
     test("basename, Windows")
     {
-        System.setProperty("grizzled.file.separator", "\\")
+        withWindowsEnv
+        {
+            val data = Map(
+                ""                -> "",
+                "foo"             -> "foo",
+                "foo\\bar"        -> "bar",
+                "."               -> ".",
+                "..\\foo"         -> "foo",
+                "\\foo\\bar\\baz" -> "baz",
+                "D:\\foo\\bar"    -> "bar"
+            )
 
-        val data = Map(
-            ""                -> "",
-            "foo"             -> "foo",
-            "foo\\bar"        -> "bar",
-            "."               -> ".",
-            "..\\foo"         -> "foo",
-            "\\foo\\bar\\baz" -> "baz",
-            "D:\\foo\\bar"    -> "bar"
-        )
-
-        for((path, expected) <- data)
-            expect(expected, "basename(\"" + path + "\")") { basename(path)}
-
-        System.setProperty("grizzled.file.separator", "")
+            for((path, expected) <- data)
+                expect(expected, "basename(\"" + path + "\")") { basename(path)}
+        }
     }
 
-    test("dirname")
+    test("dirname, Posix")
     {
-        val data = Map(
-            ""             -> "",
-            "foo"          -> ".",
-            "foo/bar"      -> "foo",
-            "."            -> ".",
-            "../foo"       -> "..",
-            "/foo/bar/baz" -> "/foo/bar",
-            "/foo"         -> "/",
-            "/foo"         -> "/",
-            "/"            -> "/",
-            "////"         -> "/"
-        )
+        withPosixEnv
+        {
+            val data = Map(
+                ""             -> "",
+                "foo"          -> ".",
+                "foo/bar"      -> "foo",
+                "."            -> ".",
+                "../foo"       -> "..",
+                "/foo/bar/baz" -> "/foo/bar",
+                "/foo"         -> "/",
+                "/foo"         -> "/",
+                "/"            -> "/",
+                "////"         -> "/"
+            )
 
-        for((path, expected) <- data)
-            expect(expected, "dirname(\"" + path + "\")") { dirname(path)}
+            for((path, expected) <- data)
+                expect(expected, "dirname(\"" + path + "\")") { dirname(path)}
+        }
     }
 
-    test("pathsplit")
+    test("dirname, Windows")
     {
-        val data = Map(
-            ""             -> ("", ""),
-            "foo"          -> (".", "foo"),
-            "foo/bar"      -> ("foo", "bar"),
-            "."            -> (".", ""),
-            "../foo"       -> ("..", "foo"),
-            "./foo"        -> (".", "foo"),
-            "/foo/bar/baz" -> ("/foo/bar", "baz"),
-            "/foo"         -> ("/", "foo"),
-            "/"            -> ("/",  "")
-        )
+        withWindowsEnv
+        {
+            val data = Map(
+                ""                -> "",
+                "foo"             -> ".",
+                "foo\\bar"        -> "foo",
+                "."               -> ".",
+                "..\\foo"         -> "..",
+                "\\foo\\bar\\baz" -> "\\foo\\bar",
+                "\\foo"           -> "\\",
+                "\\foo"           -> "\\",
+                "\\"              -> "\\",
+                "\\\\\\\\"        -> "\\"
+            )
 
-        for((path, expected) <- data)
-            expect(expected, "pathsplit(\"" + path + "\")") { pathsplit(path)}
+            for((path, expected) <- data)
+                expect(expected, "dirname(\"" + path + "\")") { dirname(path)}
+        }
     }
+
+    test("pathsplit, Posix")
+    {
+        withPosixEnv
+        {
+            val data = Map(
+                ""             -> ("", ""),
+                "foo"          -> (".", "foo"),
+                "foo/bar"      -> ("foo", "bar"),
+                "."            -> (".", ""),
+                "../foo"       -> ("..", "foo"),
+                "./foo"        -> (".", "foo"),
+                "/foo/bar/baz" -> ("/foo/bar", "baz"),
+                "/foo"         -> ("/", "foo"),
+                "/"            -> ("/",  "")
+            )
+
+            for((path, expected) <- data)
+                expect(expected, "pathsplit(\"" + path + "\")") 
+                {
+                    pathsplit(path)
+                }
+        }
+    }
+
+    test("pathsplit, Windows")
+    {
+        withWindowsEnv
+        {
+            val data = Map(
+                ""                -> ("", ""),
+                "foo"             -> (".", "foo"),
+                "foo\\bar"        -> ("foo", "bar"),
+                "."               -> (".", ""),
+                "..\\foo"         -> ("..", "foo"),
+                ".\\foo"          -> (".", "foo"),
+                "\\foo\\bar\\baz" -> ("\\foo\\bar", "baz"),
+                "\\foo"           -> ("\\", "foo"),
+                "\\"              -> ("\\",  ""),
+                "D:\\foo\\bar"    -> ("D:\\foo", "bar")
+            )
+
+            for((path, expected) <- data)
+                expect(expected, "pathsplit(\"" + path + "\")") 
+                {
+                    pathsplit(path)
+                }
+        }
+    }
+
 
     test("fnmatch")
     {
