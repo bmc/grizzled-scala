@@ -37,9 +37,9 @@ object sys
      * <tt>OperatingSystem</tt> enumeration. These need to be functions,
      * not vals, so they can be overridden at runtime by the tests.
      */
-    def grizzledOSName = System.getProperty("grizzled.os.name")
+    private def grizzledOSName = System.getProperty("grizzled.os.name")
 
-    def osName =
+    private def osName =
         if ((grizzledOSName != null) && (grizzledOSName != ""))
             grizzledOSName
         else
