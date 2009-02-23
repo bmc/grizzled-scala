@@ -6,7 +6,7 @@ import java.io.File
 
 object sys
 {
-	/**
+    /**
      * Indicator of current operating system.
      *
      * <ul>
@@ -17,6 +17,7 @@ object sys
      *   <li>NetWare - NetWare
      *   <li>Mac - Mac OS, prior to Mac OS X
      *   <li>Posix - Anything Unix-like, including Mac OS X
+     * </ul>
      */
     object OperatingSystem extends Enumeration
     {
@@ -63,18 +64,12 @@ object sys
      */
     def systemProperties: Iterable[(String, String)] =
     {
-        import scala.collection.mutable.ArrayBuffer
+        import scala.collection.jcl.Hashtable
 
-        val enum = System.getProperties.propertyNames
-        val result = new ArrayBuffer[(String, String)]()
+        // Need to wrap the standard Java system properties in something
+        // Scala's for loop can grok.
 
-        while (enum.hasMoreElements)
-        {
-            val name = enum.nextElement.toString
-            val value = System.getProperty(name)
-            result += (name, value)
-        }
-
-        result.toList
+        for ((k, v) <- new Hashtable(System.getProperties))
+            yield (k.toString, v.toString)
     }
 }
