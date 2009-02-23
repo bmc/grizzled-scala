@@ -45,6 +45,10 @@ object sys
         else
             System.getProperty("os.name")
 
+    /**
+     * The current operating system, a value of the <tt>OperatingSystem</tt>
+     * enumeration.
+     */
     def os = osName.toLowerCase match
     {
         case "mac"        => Mac
