@@ -19,10 +19,12 @@ object string
      *
      * <blockquote><pre>
      * val flag: Boolean = "true" // implicitly converts "true" to <tt>true</tt>
-     * </pre></blockquote
+     * </pre></blockquote>
      *
-     * It honors many common boolean strings, without regard to case. Note,
-     * however, that it is currently English-specific.
+     * This method currently understands the following strings (in any mixture
+     * of upper and lower case). It is currently English-specific.
+     *
+     * <blockquote>true, t, yes, y, 1<br>false, f, no, n, 0</blockquote>
      *
      * @param s  the string to convert
      *
