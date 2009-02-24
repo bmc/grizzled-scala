@@ -1,8 +1,6 @@
 import org.scalatest.FunSuite
 import grizzled.sys._
 
-// FIXME: Need to figure out how to test in a platform-independent way.
-
 /**
  * Tests the grizzled.file functions.
  */

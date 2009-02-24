@@ -8,214 +8,140 @@ import grizzled.file._
  */
 class FileTest extends GrizzledFunSuite
 {
-    test("basename, Posix")
+    test("basename")
     {
-        withPosixEnv
-        {
-            val data = Map(
-                ""             -> "",
-                "foo"          -> "foo",
-                "foo/bar"      -> "bar",
-                "."            -> ".",
-                "../foo"       -> "foo",
-                "/foo/bar/baz" -> "baz"
-            )
+        val data = Map(("", "/")                 -> "",
+                       ("foo", "/")              -> "foo",
+                       ("foo/bar", "/")          -> "bar",
+                       (".", "/")                -> ".",
+                       ("../foo", "/")           -> "foo",
+                       ("/foo/bar/baz", "/")     -> "baz",
+                       ("////", "/")             -> "/",
 
-            for((path, expected) <- data)
-                expect(expected, "basename(\"" + path + "\")") 
-                { 
-                    basename(path, this.fileSep)
-                }
-        }
+                       ("", "\\")                -> "",
+                       ("foo", "\\")             -> "foo",
+                       ("foo\\bar", "\\")        -> "bar",
+                       (".", "\\")               -> ".",
+                       ("..\\foo", "\\")         -> "foo",
+                       ("\\foo\\bar\\baz", "\\") -> "baz",
+                       ("D:\\foo\\bar", "\\")    -> "bar")
+
+        for(((path, sep), expected) <- data)
+            expect(expected, "basename(\"" + path + "\", \"" + sep + "\")") 
+            { 
+                basename(path, sep)
+            }
     }
 
-    test("basename, Windows")
+    test("dirname")
     {
-        withWindowsEnv
-        {
-            val data = Map(
-                ""                -> "",
-                "foo"             -> "foo",
-                "foo\\bar"        -> "bar",
-                "."               -> ".",
-                "..\\foo"         -> "foo",
-                "\\foo\\bar\\baz" -> "baz",
-                "D:\\foo\\bar"    -> "bar"
-            )
+        val data = Map(("", "/")                  -> "",
+                       ("foo", "/")               -> ".",
+                       ("foo/bar", "/")           -> "foo",
+                       (".", "/")                 -> ".",
+                       ("../foo", "/")            -> "..",
+                       ("/foo/bar/baz", "/")      -> "/foo/bar",
+                       ("/foo", "/")             -> "/",
+                       ("/foo", "/")             -> "/",
+                       ("/", "/")                -> "/",
+                       ("////", "/")             -> "/",
 
-            for((path, expected) <- data)
-                expect(expected, "basename(\"" + path + "\")")
-                {
-                    basename(path, this.fileSep)
-                }
-        }
+                       ("", "\\")                -> "",
+                       ("foo", "\\")             -> ".",
+                       ("foo\\bar", "\\")        -> "foo",
+                       (".", "\\")               -> ".",
+                       ("..\\foo", "\\")         -> "..",
+                       ("\\foo\\bar\\baz", "\\") -> "\\foo\\bar",
+                       ("\\foo", "\\")           -> "\\",
+                       ("\\foo", "\\")           -> "\\",
+                       ("\\", "\\")              -> "\\",
+                       ("\\\\\\\\", "\\")        -> "\\")
+
+        for(((path, sep), expected) <- data)
+            expect(expected, "dirname(\"" + path + "\", \"" + sep + "\")") 
+            {
+                dirname(path, sep)
+            }
     }
 
-    test("dirname, Posix")
+    test("dirnameBasename")
     {
-        withPosixEnv
-        {
-            val data = Map(
-                ""             -> "",
-                "foo"          -> ".",
-                "foo/bar"      -> "foo",
-                "."            -> ".",
-                "../foo"       -> "..",
-                "/foo/bar/baz" -> "/foo/bar",
-                "/foo"         -> "/",
-                "/foo"         -> "/",
-                "/"            -> "/",
-                "////"         -> "/"
-            )
+        val data = Map(("", "/")                 -> ("", ""),
+                       ("foo", "/")              -> (".", "foo"),
+                       ("foo/bar", "/")          -> ("foo", "bar"),
+                       (".", "/")                -> (".", ""),
+                       ("../foo", "/")           -> ("..", "foo"),
+                       ("./foo", "/")            -> (".", "foo"),
+                       ("/foo/bar/baz", "/")     -> ("/foo/bar", "baz"),
+                       ("/foo", "/")             -> ("/", "foo"),
+                       ("/", "/")                -> ("/",  ""),
 
-            for((path, expected) <- data)
-                expect(expected, "dirname(\"" + path + "\")")
-                {
-                    dirname(path, this.fileSep)
-                }
-        }
-    }
+                       ("", "\\")                -> ("", ""),
+                       ("foo", "\\")             -> (".", "foo"),
+                       ("foo\\bar", "\\")        -> ("foo", "bar"),
+                       (".", "\\")               -> (".", ""),
+                       ("..\\foo", "\\")         -> ("..", "foo"),
+                       (".\\foo", "\\")          -> (".", "foo"),
+                       ("\\foo\\bar\\baz", "\\") -> ("\\foo\\bar", "baz"),
+                       ("\\foo", "\\")           -> ("\\", "foo"),
+                       ("\\", "\\")              -> ("\\",  ""),
+                       ("D:\\foo\\bar", "\\")    -> ("D:\\foo", "bar"))
 
-    test("dirname, Windows")
-    {
-        withWindowsEnv
-        {
-            val data = Map(
-                ""                -> "",
-                "foo"             -> ".",
-                "foo\\bar"        -> "foo",
-                "."               -> ".",
-                "..\\foo"         -> "..",
-                "\\foo\\bar\\baz" -> "\\foo\\bar",
-                "\\foo"           -> "\\",
-                "\\foo"           -> "\\",
-                "\\"              -> "\\",
-                "\\\\\\\\"        -> "\\"
-            )
-
-            for((path, expected) <- data)
-                expect(expected, "dirname(\"" + path + "\")")
-                { 
-                    dirname(path, this.fileSep)
-                }
-        }
-    }
-
-    test("dirnameBasename, Posix")
-    {
-        withPosixEnv
-        {
-            val data = Map(
-                ""             -> ("", ""),
-                "foo"          -> (".", "foo"),
-                "foo/bar"      -> ("foo", "bar"),
-                "."            -> (".", ""),
-                "../foo"       -> ("..", "foo"),
-                "./foo"        -> (".", "foo"),
-                "/foo/bar/baz" -> ("/foo/bar", "baz"),
-                "/foo"         -> ("/", "foo"),
-                "/"            -> ("/",  "")
-            )
-
-            for((path, expected) <- data)
-                expect(expected, "dirnameBasename(\"" + path + "\")") 
-                {
-                    dirnameBasename(path, this.fileSep)
-                }
-        }
-    }
-
-    test("dirnameBasename, Windows")
-    {
-        withWindowsEnv
-        {
-            val data = Map(
-                ""                -> ("", ""),
-                "foo"             -> (".", "foo"),
-                "foo\\bar"        -> ("foo", "bar"),
-                "."               -> (".", ""),
-                "..\\foo"         -> ("..", "foo"),
-                ".\\foo"          -> (".", "foo"),
-                "\\foo\\bar\\baz" -> ("\\foo\\bar", "baz"),
-                "\\foo"           -> ("\\", "foo"),
-                "\\"              -> ("\\",  ""),
-                "D:\\foo\\bar"    -> ("D:\\foo", "bar")
-            )
-
-            for((path, expected) <- data)
-                expect(expected, "dirnameBasename(\"" + path + "\")") 
-                {
-                    dirnameBasename(path, this.fileSep)
-                }
-        }
+        for(((path, sep), expected) <- data)
+            expect(expected, 
+                   "dirnameBasename(\"" + path + "\", \"" + sep + "\")") 
+            {
+                dirnameBasename(path, sep)
+            }
     }
 
     test("splitPath, Posix")
     {
-        withPosixEnv
-        {
-            val data = Map(
-                ""             -> List[String](""),
-                "foo"          -> List[String]("foo"),
-                "foo/bar"      -> List[String]("foo", "bar"),
-                "."            -> List[String]("."),
-                "../foo"       -> List[String]("..", "foo"),
-                "./foo"        -> List[String](".", "foo"),
-                "/foo/bar/baz" -> List[String]("/foo", "bar", "baz"),
-                "foo/bar/baz"  -> List[String]("foo", "bar", "baz"),
-                "/foo"         -> List[String]("/foo"),
-                "/"            -> List[String]("/")
-            )
+        val data = Map(
+            ("", "/")                  -> List[String](""),
+            ("foo", "/")               -> List[String]("foo"),
+            ("foo/bar", "/")           -> List[String]("foo", "bar"),
+            (".", "/")                 -> List[String]("."),
+            ("../foo", "/")            -> List[String]("..", "foo"),
+            ("./foo", "/")             -> List[String](".", "foo"),
+            ("/foo/bar/baz", "/")      -> List[String]("/foo", "bar", "baz"),
+            ("foo/bar/baz", "/")       -> List[String]("foo", "bar", "baz"),
+            ("/foo", "/")              -> List[String]("/foo"),
+            ("/", "/")                 -> List[String]("/"),
 
-            for((path, expected) <- data)
-                expect(expected, "splitPath(\"" + path + "\")") 
-                {
-                    splitPath(path, this.fileSep)
-                }
-        }
-    }
-
-    test("splitPath, Windows")
-    {
-        withWindowsEnv
-        {
-            val data = Map(
-                ""                -> List[String](""),
-                "foo"             -> List[String]("foo"),
-                "foo\\bar"        -> List[String]("foo", "bar"),
-                "."               -> List[String]("."),
-                "..\\foo"         -> List[String]("..", "foo"),
-                ".\\foo"          -> List[String](".", "foo"),
-                "\\foo\\bar\\baz" -> List[String]("\\foo", "bar", "baz"),
-                "foo\\bar\\baz"   -> List[String]("foo", "bar", "baz"),
-                "\\foo"           -> List[String]("\\foo"),
-                "\\"              -> List[String]("\\"),
-                "d:\\"            -> List[String]("d:\\")
-            )
-
-            for((path, expected) <- data)
-                expect(expected, "splitPath(\"" + path + "\")") 
-                {
-                    splitPath(path, this.fileSep)
-                }
+            ("", "\\")                 -> List[String](""),
+            ("foo", "\\")              -> List[String]("foo"),
+            ("foo\\bar", "\\")         -> List[String]("foo", "bar"),
+            (".", "\\")                -> List[String]("."),
+            ("..\\foo", "\\")          -> List[String]("..", "foo"),
+            (".\\foo", "\\")           -> List[String](".", "foo"),
+            ("\\foo\\bar\\baz", "\\")  -> List[String]("\\foo", "bar", "baz"),
+            ("foo\\bar\\baz", "\\")    -> List[String]("foo", "bar", "baz"),
+            ("\\foo", "\\")            -> List[String]("\\foo"),
+            ("\\", "\\")               -> List[String]("\\"),
+            ("d:\\", "\\")             -> List[String]("d:\\")
+        )
+            
+        for(((path, sep), expected) <- data)
+            expect(expected, "splitPath(\"" + path + "\", \"" + sep + "\")") 
+            {
+                splitPath(path, sep)
         }
     }
 
     test("fnmatch")
     {
-        val data = Map(
-            ("foo", "f*") -> true,
-            ("foo", "f*o") -> true,
-            ("foo", "f*b") -> false,
-            ("foo", "*") -> true,
-            ("foo", "*o") -> true,
-            ("a.c", "*.c") -> true,
-            ("abc", "[!a-r]*") -> false,
-            ("radfa.c", "[!a-r]*") -> false,
-            ("radfa.c", "[^a-r]*") -> false,
-            ("sabc", "[!a-r]*") -> true,
-            ("sabc", "[^a-r]*") -> true
-        )
+        val data = Map(("foo", "f*")          -> true,
+                       ("foo", "f*o")         -> true,
+                       ("foo", "f*b")         -> false,
+                       ("foo", "*")           -> true,
+                       ("foo", "*o")          -> true,
+                       ("a.c", "*.c")         -> true,
+                       ("abc", "[!a-r]*")     -> false,
+                       ("radfa.c", "[!a-r]*") -> false,
+                       ("radfa.c", "[^a-r]*") -> false,
+                       ("sabc", "[!a-r]*")    -> true,
+                       ("sabc", "[^a-r]*")    -> true)
 
         for(((string, pattern), expected) <- data)
         {
@@ -229,16 +155,14 @@ class FileTest extends GrizzledFunSuite
 
     test("normalizePosixPath")
     {
-        val data = Map(
-            "/foo/../bar/////baz" -> "/bar/baz",
-            "///////foo/bar/" -> "/foo/bar",
-            "." -> ".",
-            "" -> ".",
-            "/" -> "/",
-            "//" -> "//",
-            "///" -> "/",
-            "//////////////////." -> "/"
-        )
+        val data = Map("/foo/../bar/////baz" -> "/bar/baz",
+                       "///////foo/bar/" -> "/foo/bar",
+                       "." -> ".",
+                       "" -> ".",
+                       "/" -> "/",
+                       "//" -> "//",
+                       "///" -> "/",
+                       "//////////////////." -> "/")
 
         for ((path, expected) <- data)
             expect(expected, "normalizePosixPath(\"" + path + "\")") 
