@@ -21,7 +21,7 @@ object sys
      */
     object OperatingSystem extends Enumeration
     {
-    	val Posix = Value("Posix")
+        val Posix = Value("Posix")
         val Mac = Value("Mac OS")
         val Windows = Value("Windows")
         val WindowsCE = Value("Windows CE")
@@ -33,32 +33,26 @@ object sys
     import OperatingSystem._
 
     /**
-     * Indicator of the current operating system, as defined by the
-     * <tt>OperatingSystem</tt> enumeration. These need to be functions,
-     * not vals, so they can be overridden at runtime by the tests.
-     */
-    private def grizzledOSName = System.getProperty("grizzled.os.name")
-
-    private def osName =
-        if ((grizzledOSName != null) && (grizzledOSName != ""))
-            grizzledOSName
-        else
-            System.getProperty("os.name")
-
-    /**
      * The current operating system, a value of the <tt>OperatingSystem</tt>
      * enumeration.
      */
-    def os = osName.toLowerCase match
-    {
-        case "mac"        => Mac
-        case "windows ce" => WindowsCE
-        case "windows"    => Windows
-        case "os/2"       => OS2
-        case "netware"    => NetWare
-        case "openvms"    => VMS
-        case _            => Posix
-    }
+    val os = getOS(System.getProperty("os.name"))
+
+    /**
+     * Version of the <tt>os</tt> function that takes an operating system name
+     * and returns the <tt>OperatingSystem</tt> enumerated value.
+     */
+    def getOS(name: String) =
+        name.toLowerCase match
+        {
+            case "mac"        => Mac
+            case "windows ce" => WindowsCE
+            case "windows"    => Windows
+            case "os/2"       => OS2
+            case "netware"    => NetWare
+            case "openvms"    => VMS
+            case _            => Posix
+        }
 
     /**
      * Get the Java system properties as a Scala iterable. The iterable

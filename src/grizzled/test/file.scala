@@ -22,7 +22,10 @@ class FileTest extends GrizzledFunSuite
             )
 
             for((path, expected) <- data)
-                expect(expected, "basename(\"" + path + "\")") { basename(path)}
+                expect(expected, "basename(\"" + path + "\")") 
+                { 
+                    basename(path, this.fileSep)
+                }
         }
     }
 
@@ -41,7 +44,10 @@ class FileTest extends GrizzledFunSuite
             )
 
             for((path, expected) <- data)
-                expect(expected, "basename(\"" + path + "\")") { basename(path)}
+                expect(expected, "basename(\"" + path + "\")")
+                {
+                    basename(path, this.fileSep)
+                }
         }
     }
 
@@ -63,7 +69,10 @@ class FileTest extends GrizzledFunSuite
             )
 
             for((path, expected) <- data)
-                expect(expected, "dirname(\"" + path + "\")") { dirname(path)}
+                expect(expected, "dirname(\"" + path + "\")")
+                {
+                    dirname(path, this.fileSep)
+                }
         }
     }
 
@@ -85,7 +94,10 @@ class FileTest extends GrizzledFunSuite
             )
 
             for((path, expected) <- data)
-                expect(expected, "dirname(\"" + path + "\")") { dirname(path)}
+                expect(expected, "dirname(\"" + path + "\")")
+                { 
+                    dirname(path, this.fileSep)
+                }
         }
     }
 
@@ -108,7 +120,7 @@ class FileTest extends GrizzledFunSuite
             for((path, expected) <- data)
                 expect(expected, "dirnameBasename(\"" + path + "\")") 
                 {
-                    dirnameBasename(path)
+                    dirnameBasename(path, this.fileSep)
                 }
         }
     }
@@ -133,7 +145,7 @@ class FileTest extends GrizzledFunSuite
             for((path, expected) <- data)
                 expect(expected, "dirnameBasename(\"" + path + "\")") 
                 {
-                    dirnameBasename(path)
+                    dirnameBasename(path, this.fileSep)
                 }
         }
     }
@@ -158,7 +170,7 @@ class FileTest extends GrizzledFunSuite
             for((path, expected) <- data)
                 expect(expected, "splitPath(\"" + path + "\")") 
                 {
-                    splitPath(path)
+                    splitPath(path, this.fileSep)
                 }
         }
     }
@@ -184,7 +196,7 @@ class FileTest extends GrizzledFunSuite
             for((path, expected) <- data)
                 expect(expected, "splitPath(\"" + path + "\")") 
                 {
-                    splitPath(path)
+                    splitPath(path, this.fileSep)
                 }
         }
     }

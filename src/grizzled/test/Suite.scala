@@ -2,6 +2,10 @@ import org.scalatest.FunSuite
 
 class GrizzledFunSuite extends FunSuite
 {
+    import grizzled.file.fileSeparator
+
+    var fileSep: String = fileSeparator
+
     override def expect(expected: Any)(actual: => Any) 
     {
         try
@@ -73,12 +77,17 @@ class GrizzledFunSuite extends FunSuite
      */
     def withWindowsEnv(code: => Any)
     {
-        withProperties(Map(
-            "grizzled.file.separator" -> "\\",
-            "grizzled.os.name"        -> "Windows"
-        ))
+        val oldSep = this.fileSep
+        this.fileSep = "\\"
+
+        try
         {
-            code 
+            code
+        }
+
+        finally
+        {
+            this.fileSep = oldSep
         }
     }
 
@@ -90,7 +99,18 @@ class GrizzledFunSuite extends FunSuite
      */
     def withPosixEnv(code: => Any)
     {
-        withProperties(Map("grizzled.file.separator" -> "/")) { code }
+        val oldSep = this.fileSep
+        this.fileSep = "/"
+
+        try
+        {
+            code
+        }
+
+        finally
+        {
+            this.fileSep = oldSep
+        }
     }
 }
 

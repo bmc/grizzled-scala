@@ -13,135 +13,130 @@ object file
 {
     import string._ // Grizzled string functions
 
-    /**
-     * File separator. Exactly like Java's <tt>File.separator</tt>.
-     * If system property "grizzled.file.separator" is set,
-     * however, this value is set to "grizzled.file.separator", instead.
-     * (This behavior is useful for testing.)
-     */
-    def fileSeparator: String =
-    {
-        val s = System.getProperty("grizzled.file.separator")
-        if (s == null)
-            File.separator
-        else if (s.length == 0)
-            File.separator
-        else if (s.length == 1)
-            s
-        else
-            throw new IllegalArgumentException("Bad file separator: " + s)
-    }
-
-    def fileSeparatorChar = fileSeparator(0)
-
-    /**
-     * Get the Java system properties as a Scala iterable. The iterable
-     * will produce a (name, value) tuple.
-     *
-     * @return the system properties as an iterable
-     */
-    def systemProperties: Iterable[(String, String)] =
-    {
-        import scala.collection.mutable.ArrayBuffer
-
-        val enum = System.getProperties.propertyNames
-        val result = new ArrayBuffer[(String, String)]()
-
-        while (enum.hasMoreElements)
-        {
-            val name = enum.nextElement.toString
-            val value = System.getProperty(name)
-            result += (name, value)
-        }
-
-        result.toList
-    }
+    val fileSeparator = File.separator
+    val fileSeparatorChar = fileSeparator(0)
+    val fileSeparatorRegex = (fileSeparator replace ("\\", "\\\\")).r
 
     /**
      * Get the directory name of a pathname.
      *
-     * @param path path (absolute or relative)
+     * @param path    path (absolute or relative)
+     * @param fileSep the file separator to use
      *
      * @return the directory portion
      */
-    def dirname(path: String): String =
+    def dirname(path: String, fileSep: String): String =
     {
         if ((path == null) || (path.length == 0))
             ""
-        else if (! path.contains(fileSeparator))
+        else if (! path.contains(fileSep))
             "."
         else
         {
-            val components = splitPath(path)
+            val components = splitPath(path, fileSep)
             val len = components.length
-            val result = components.take(len - 1) mkString fileSeparator
+            val result = components.take(len - 1) mkString fileSep
             if (result.length == 0)
-                fileSeparator
+                fileSep
             else
                 result
         }
     }
 
     /**
+     * Get the directory name of a pathname, using the file separator of the
+     * current running system.
+     *
+     * @param path path (absolute or relative)
+     *
+     * @return the directory portion
+     */
+    def dirname(path: String): String = dirname(path, fileSeparator)
+
+    /**
      * Get the basename (file name only) part of a path.
+     *
+     * @param path    the path (absolute or relative)
+     * @param fileSep the file separator to use
+     *
+     * @return the file name portion
+     */
+    def basename(path: String, fileSep: String): String =
+    {
+        if ((path == null) || (path.length == 0))
+            ""
+        else if (! (path contains fileSep))
+            path
+        else
+        {
+            val components = splitPath(path, fileSep)
+            components.drop(components.length - 1) mkString fileSep
+        }
+    }
+
+    /**
+     * Get the basename (file name only) part of a path, using the file
+     * separator of the current running system.
      *
      * @param path  the path (absolute or relative)
      *
      * @return the file name portion
      */
-    def basename(path: String): String =
-    {
-        if ((path == null) || (path.length == 0))
-            ""
-        else if (! (path contains fileSeparator))
-            path
-        else
-        {
-            val components = splitPath(path)
-            components.drop(components.length - 1) mkString fileSeparator
-        }
-    }
+    def basename(path: String): String = basename(path, fileSeparator)
 
     /**
      * Split a path into directory (dirname) and file (basename) components.
      * Analogous to Python's <tt>os.path.pathsplit()</tt> function.
      *
-     * @param path  the path to split
+     * @param path    the path to split
+     * @param fileSep the file separator to use
      *
      * @return a (dirname, basename) tuple of strings
      */
-    def dirnameBasename(path: String): (String, String) =
+    def dirnameBasename(path: String, fileSep: String): (String, String) =
     {
         if ((path == null) || (path.length == 0))
             ("", "")
         else if ((path == ".") || (path == ".."))
             (path, "")
-        else if (! (path contains fileSeparator))
+        else if (! (path contains fileSep))
             (".", path)
-        else if (path == fileSeparator)
-            (fileSeparator, "")
+        else if (path == fileSep)
+            (fileSep, "")
         else 
         {
             // Use a character to split, so it's not interpreted as a regular
             // expression (which causes problems with a Windows-style "\".
             // NOTE: We deliberately don't use splitPath() here.
-            val components = (path split fileSeparator(0)).toList
+            val components = (path split fileSep(0)).toList
 
             if (components.length == 1)
                 (components(0), "")
             else
             {
                 val listTuple = components splitAt (components.length - 1)
-                val s: String = listTuple._1 mkString fileSeparator
+                val s: String = listTuple._1 mkString fileSep
                 val prefix = 
-                    if ((s.length == 0) && (path startsWith fileSeparator))
-                        fileSeparator
+                    if ((s.length == 0) && (path startsWith fileSep))
+                        fileSep
                     else
                         s
-                (prefix, listTuple._2 mkString fileSeparator)
+                (prefix, listTuple._2 mkString fileSep)
             }
         }
     }
+
+    /**
+     * Split a path into directory (dirname) and file (basename) components.
+     * Analogous to Python's <tt>os.path.pathsplit()</tt> function. Uses
+     * the file separator of the current running system.
+     *
+     * @param path  the path to split
+     *
+     * @return a (dirname, basename) tuple of strings
+     */
+    def dirnameBasename(path: String): (String, String) =
+        dirnameBasename(path, fileSeparator)
 
     /**
      * Return the current working directory, as an absolute path.
@@ -483,11 +478,12 @@ object file
      *   </tr>
      * </table>
      *
-     * @param path  the path
+     * @param path    the path
+     * @param fileSep the file separator to use
      *
      * @return the component pieces.
      */
-    def splitPath(path: String): List[String] =
+    def splitPath(path: String, fileSep: String): List[String] =
     {
         // Split with the path separator character, rather than the path
         // separator string. Using the string causes Scala to interpret it
@@ -501,11 +497,10 @@ object file
         // Special case for Windows. (Stupid drive letters.)
 
         val (prefix, usePath) = 
-            os match
-            {
-                case Windows => splitDrivePath(path)
-                case _       => ("", path)
-            }
+            if (fileSep == "\\")
+                splitDrivePath(path)
+            else
+                ("", path)
 
         // If there are leading file separator characters, split() will
         // produce extra empty array elements. Prevent that.
@@ -513,20 +508,27 @@ object file
         val subpath = usePath.foldLeft("") 
         {
             (c1, c2) => // Note: c1 and c2 are strings, not characters
-            if (c1 == fileSeparator)
+
+            if (c1 == fileSep)
                 c2.toString
             else
                 c1 + c2
         }
 
-        val absolute = path.startsWith(fileSeparator) || (prefix != "")
-        val pieces = (subpath split fileSeparatorChar).toList
+        val absolute = path.startsWith(fileSep) || (prefix != "")
+
+        // Split on the character, not the full string. Splitting on a string
+        // uses regular expression semantics, which will fail if this is
+        // Windows (and the file separator is "\"). Windows is a pain in the
+        // ass.
+        val pieces = (subpath split fileSep(0)).toList
+        println("Prefix=" + prefix + ", absolute=" + absolute + ", pieces=" + pieces)
         if (absolute)
         {
             if (pieces.length == 0)
-                List[String](prefix + fileSeparator)
+                List[String](prefix + fileSep)
             else
-                (prefix + fileSeparator + pieces.head) :: pieces.tail
+                (prefix + fileSep + pieces.head) :: pieces.tail
         }
 
         else
@@ -534,13 +536,37 @@ object file
     }
 
     /**
+     * Split a path into its constituent components, using the file separator
+     * of the currently running system. See the other version of
+     * <tt>splitPath()</tt> for complete documentation.
+     *
+     * @param path    the path
+     *
+     * @return the component pieces.
+     */
+    def splitPath(path: String): List[String] = splitPath(path, fileSeparator)
+
+    /**
      * Join components of a path together.
+     *
+     * @param fileSep the file separator to use
+     * @param pieces  path pieces
+     *
+     * @return a composite path
+     */
+    def joinPath(fileSep: String, pieces: List[String]): String =
+        pieces mkString fileSep
+
+    /**
+     * Join components of a path together, using the file separator of the
+     * currently running system
      *
      * @param pieces  path pieces
      *
      * @return a composite path
      */
-    def joinPath(pieces: String*) = pieces mkString fileSeparator
+    def joinPath(pieces: String*): String =
+        joinPath(fileSeparator, pieces.toList)
 
     /**
      * Copy multiple files to a target directory. Also see the version of this

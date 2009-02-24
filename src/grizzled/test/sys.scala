@@ -17,7 +17,7 @@ class SysTest extends GrizzledFunSuite
         }
     }
 
-    test("operating system override")
+    test("operating system name")
     {
         import OperatingSystem._
 
@@ -33,9 +33,9 @@ class SysTest extends GrizzledFunSuite
         for ((osName, osType) <- data;
              name <- List(osName.capitalize, osName.toUpperCase, osName))
         {
-            withProperties(Map("grizzled.os.name" -> osName))
+            expect(osType, "OS name \"" + osName + "\" -> " + osType) 
             {
-                expect(osType, "OS name \"" + osName + "\" -> " + osType) {os}
+                getOS(osName)
             }
         }
     }
