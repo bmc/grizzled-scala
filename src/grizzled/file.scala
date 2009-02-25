@@ -991,7 +991,7 @@ object file
                         1
                     else
                         0
-                var newPieces = new ListBuffer[String]()
+                val newPieces = new ListBuffer[String]()
                 for (piece <- path.split("/");
                      if ((piece != ".") && (piece != "")))
                 {
