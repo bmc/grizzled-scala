@@ -665,19 +665,30 @@ object file
         copy(file, targetDir, true)
 
     /**
-     * Copy a source file to a target file, using binary copying.
+     * Copy a source file to a target file, using binary copying. The source
+     * file must be a file. The target path can be a file or a directory; if
+     * it is a directory, the target file will have the same base name as
+     * as the source file.
      *
      * @param sourcePath  path to the source file
-     * @param targetPath  path to the target file
+     * @param targetPath  path to the target file or directory
+     *
+     * @return the full path of the target file
      */
-    def copyFile(sourcePath: String, targetPath: String)
+    def copyFile(sourcePath: String, targetPath: String): String =
     {
-        import java.io.{InputStream, OutputStream}
-        import java.io.{BufferedInputStream, BufferedOutputStream}
-        import java.io.{FileInputStream, FileOutputStream}
+        import java.io.{InputStream, OutputStream,
+                        BufferedInputStream, BufferedOutputStream,
+                        FileInputStream, FileOutputStream}
+
+        val target = 
+            if (new File(targetPath).isDirectory())
+                joinPath(targetPath, basename(sourcePath))
+            else
+                targetPath
 
         val in = new BufferedInputStream(new FileInputStream(sourcePath))
-        val out = new BufferedOutputStream(new FileOutputStream(targetPath))
+        val out = new BufferedOutputStream(new FileOutputStream(target))
 
         try
         {
@@ -693,6 +704,9 @@ object file
 
             // Tail recursion means never having to use a var.
             copyNextByte(in, out)
+
+            // Result
+            target
         }
 
         finally
@@ -873,9 +887,11 @@ object file
     }
 
     /**
-     * Normalize a path, eliminating double slashes, etc.
+     * Normalize a path, eliminating double slashes, resolving embedded
+     * ".." strings (e.g., "/foo/../bar" becomes "/bar"), etc. Works for
+     * Windows and Posix operating systems.
      *
-     * @param path   the path
+     * @param path  the path
      *
      * @return the normalized path
      */
