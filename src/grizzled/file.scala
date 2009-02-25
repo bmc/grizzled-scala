@@ -691,6 +691,7 @@ object file
                 }
             }
 
+            // Tail recursion means never having to use a var.
             copyNextByte(in, out)
         }
 
