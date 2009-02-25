@@ -912,27 +912,18 @@ object file
         // letter. This means that the invalid filename \\\a\b is preserved
         // unchanged, where a\\\b is normalized to a\b.
 
-        var (prefix, newPath) = splitDrivePath(path)
-        if (prefix.length == 0)
+        val (prefix, newPath) = splitDrivePath(path) match
         {
-            // No drive letter - preserve initial backslashes
+            case ("", path) =>
+                // No drive letter - preserve initial backslashes
 
-            while ((newPath.length > 0) && (newPath(0) == '\\'))
-            {
-                prefix += newPath.take(1)
-                newPath = newPath.drop(1)
-            }
-        }
-        else
-        {
-            // We have a drive letter. Collapse initial backslashes
+                (path takeWhile (_ == '\\') mkString "", 
+                 path dropWhile (_ == '\\') mkString "")
 
-            if (newPath.startsWith("\\"))
-            {
-                prefix += "\\"
-                while (newPath.startsWith("\\"))
-                    newPath = newPath.drop(1)
-            }
+            case (prefix, path) =>
+                // We have a drive letter. Collapse initial backslashes
+
+                (prefix + "\\", path dropWhile (_ == '\\') mkString "")
         }
 
         import scala.collection.mutable.ListBuffer
