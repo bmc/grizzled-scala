@@ -932,6 +932,7 @@ object file
 
         def normalizePieces(pieces: List[String]): List[String] =
         {
+            println("pieces=" + pieces)
             pieces match
             {
                 case "" :: tail =>
@@ -941,7 +942,7 @@ object file
                     normalizePieces(tail)
 
                 case a :: ".." :: tail =>
-                    tail
+                    normalizePieces(tail)
 
                 case Nil =>
                     Nil
@@ -954,8 +955,7 @@ object file
         // Normalize the pieces
         val piecesTemp = normalizePieces(newPath.split("\\\\").toList)
 
-        // Finally, remove any leading ".." that shouldn't be there.
-
+        // Remove any leading ".." that shouldn't be there.
         val newPieces =
             if (prefix == "\\")
                 piecesTemp dropWhile (_ == "..")
@@ -963,7 +963,6 @@ object file
                 piecesTemp
 
         // If the path is now empty, substitute ".".
-
         if ((prefix.length == 0) && (newPieces.length == 0))
             "."
         else
@@ -997,24 +996,47 @@ object file
                         1
                     else
                         0
-                val newPieces = new ListBuffer[String]()
-                for (piece <- path.split("/");
-                     if ((piece != ".") && (piece != "")))
+
+                // Function that mostly normalizes the path based on list
+                // matches.
+
+                def normalizePieces(pieces: List[String]): List[String] =
                 {
-                    val newLength = newPieces.length
-                    if ((piece != "..") ||
-                        ((initialSlashes == 0) && (newLength == 0)) ||
-                        ((newLength > 0) && (newPieces(newLength - 1) == "..")))
-                        newPieces += piece
-                    else if (newLength > 0)
-                        newPieces.remove(0)
+                    pieces match
+                    {
+                        case "" :: tail =>
+                            normalizePieces(tail)
+
+                        case "." :: tail =>
+                            normalizePieces(tail)
+
+                        case a :: ".." :: tail =>
+                            normalizePieces(tail)
+
+                        case Nil =>
+                            Nil
+
+                        case _ =>
+                            List[String](pieces.head) ++
+                                normalizePieces(pieces.tail)
+                    }
                 }
+
+                val piecesTemp = normalizePieces(path.split("/").toList)
+
+                // Remove any leading ".." that shouldn't be there.
+                val newPieces =
+                    if (path startsWith "/")
+                        piecesTemp dropWhile (_ == "..")
+                    else
+                        piecesTemp
 
                 if (initialSlashes > 0)
                     ("/" * initialSlashes) + (newPieces mkString "/")
                 else
                     newPieces mkString "/"
-        }
+
+       }
     }
 
     /**

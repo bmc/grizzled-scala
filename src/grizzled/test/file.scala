@@ -180,6 +180,7 @@ class FileTest extends GrizzledFunSuite
             "c:\\foo\\bar" -> "c:\\foo\\bar",
             "\\\\server\\foo" -> "\\\\server\\foo",
             "\\\\server\\foo\\bar\\..\\baz" -> "\\\\server\\foo\\baz",
+            "\\foo\\..\\bar\\\\\\\\\\baz" -> "\\bar\\baz",
             "c:\\foo\\bar\\..\\baz" -> "c:\\foo\\baz",
             "\\.." -> "\\",
             "\\..\\.." -> "\\"
