@@ -5,9 +5,6 @@ import scala.util.matching.Regex
 import java.io.{File, IOException}
 
 /**
- * Converts from a string to a boolean
- */
-/**
  * Useful string-related utility functions.
  */
 object string

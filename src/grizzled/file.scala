@@ -921,31 +921,46 @@ object file
                  path dropWhile (_ == '\\') mkString "")
 
             case (prefix, path) =>
-                // We have a drive letter. Collapse initial backslashes
+                // We have a drive letter.
 
                 (prefix + "\\", path dropWhile (_ == '\\') mkString "")
         }
 
-        import scala.collection.mutable.ListBuffer
+        // Function that mostly normalizes the path based on list matches.
+        // (It doesn't handle leading ".." in an absolute path, such as
+        // "\\..\\..". We handle that later.)
 
-        val pieces = newPath.split("\\\\")
-        val newPieces = new ListBuffer[String]()
-        for (piece <- pieces
-             if ((piece != "") && (piece != ".")))
+        def normalizePieces(pieces: List[String]): List[String] =
         {
-            if (piece == "..")
+            pieces match
             {
-                val last = newPieces.length - 1
-                if ((newPieces.length > 0) && (newPieces(last) != ".."))
-                    newPieces.remove(last)
+                case "" :: tail =>
+                    normalizePieces(tail)
 
-                else if (! ((newPieces.length == 0) && (prefix.endsWith("\\"))))
-                    newPieces += piece
+                case "." :: tail =>
+                    normalizePieces(tail)
+
+                case a :: ".." :: tail =>
+                    tail
+
+                case Nil =>
+                    Nil
+
+                case _ =>
+                    List[String](pieces.head) ++ normalizePieces(pieces.tail)
             }
-
-            else
-                newPieces += piece
         }
+
+        // Normalize the pieces
+        val piecesTemp = normalizePieces(newPath.split("\\\\").toList)
+
+        // Finally, remove any leading ".." that shouldn't be there.
+
+        val newPieces =
+            if (prefix == "\\")
+                piecesTemp dropWhile (_ == "..")
+            else
+                piecesTemp
 
         // If the path is now empty, substitute ".".
 
