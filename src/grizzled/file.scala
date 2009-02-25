@@ -894,6 +894,37 @@ object file
     }
 
     /**
+     * Shared between normalizeWindowsPath() and normalizePosixPath(),
+     * this function normalizes the pieces of a path, handling embedded "..",
+     * empty elements (from splitting when there are adjacent file separators),
+     * etc.
+     *
+     * @param pieces  path components, with no separators
+     *
+     * @return sanitized list of path components
+     */
+    private def normalizePathPieces(pieces: List[String]): List[String] =
+    {
+        pieces match
+        {
+            case Nil =>
+                Nil
+
+            case "" :: tail =>
+                normalizePathPieces(tail)
+
+            case "." :: tail =>
+                normalizePathPieces(tail)
+
+            case a :: ".." :: tail =>
+                normalizePathPieces(tail)
+
+            case _ =>
+                List[String](pieces.head) ++ normalizePathPieces(pieces.tail)
+        }
+    }
+
+    /**
      * Normalize a Windows path name. Handles UNC paths. Adapted from the
      * Python version of normpath() in Python's <tt>os.ntpath</tt> module.
      *
@@ -926,34 +957,10 @@ object file
                 (prefix + "\\", path dropWhile (_ == '\\') mkString "")
         }
 
-        // Function that mostly normalizes the path based on list matches.
-        // (It doesn't handle leading ".." in an absolute path, such as
-        // "\\..\\..". We handle that later.)
-
-        def normalizePieces(pieces: List[String]): List[String] =
-        {
-            println("pieces=" + pieces)
-            pieces match
-            {
-                case "" :: tail =>
-                    normalizePieces(tail)
-
-                case "." :: tail =>
-                    normalizePieces(tail)
-
-                case a :: ".." :: tail =>
-                    normalizePieces(tail)
-
-                case Nil =>
-                    Nil
-
-                case _ =>
-                    List[String](pieces.head) ++ normalizePieces(pieces.tail)
-            }
-        }
-
-        // Normalize the pieces
-        val piecesTemp = normalizePieces(newPath.split("\\\\").toList)
+        // Normalize the path pieces. Note: normalizePathPieces() doesn't
+        // handle leading ".." in an absolute path, such as "\\..\\..". We
+        // handle that later.
+        val piecesTemp = normalizePathPieces(newPath.split("\\\\").toList)
 
         // Remove any leading ".." that shouldn't be there.
         val newPieces =
@@ -997,32 +1004,10 @@ object file
                     else
                         0
 
-                // Function that mostly normalizes the path based on list
-                // matches.
-
-                def normalizePieces(pieces: List[String]): List[String] =
-                {
-                    pieces match
-                    {
-                        case "" :: tail =>
-                            normalizePieces(tail)
-
-                        case "." :: tail =>
-                            normalizePieces(tail)
-
-                        case a :: ".." :: tail =>
-                            normalizePieces(tail)
-
-                        case Nil =>
-                            Nil
-
-                        case _ =>
-                            List[String](pieces.head) ++
-                                normalizePieces(pieces.tail)
-                    }
-                }
-
-                val piecesTemp = normalizePieces(path.split("/").toList)
+                // Normalize the path pieces. Note: normalizePathPieces()
+                // doesn't handle leading ".." in an absolute path, such as
+                // "/../..". We handle that later.
+                val piecesTemp = normalizePathPieces(path.split("/").toList)
 
                 // Remove any leading ".." that shouldn't be there.
                 val newPieces =
@@ -1035,7 +1020,6 @@ object file
                     ("/" * initialSlashes) + (newPieces mkString "/")
                 else
                     newPieces mkString "/"
-
        }
     }
 
