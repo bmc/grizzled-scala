@@ -15,7 +15,6 @@ object file
 
     val fileSeparator = File.separator
     val fileSeparatorChar = fileSeparator(0)
-    val fileSeparatorRegex = (fileSeparator replace ("\\", "\\\\")).r
 
     /**
      * Get the directory name of a pathname.
@@ -27,19 +26,25 @@ object file
      */
     def dirname(path: String, fileSep: String): String =
     {
-        if ((path == null) || (path.length == 0))
-            ""
-        else if (! path.contains(fileSep))
-            "."
-        else
+        val components = splitPath(path, fileSep) 
+        components match
         {
-            val components = splitPath(path, fileSep)
-            val len = components.length
-            val result = components.take(len - 1) mkString fileSep
-            if (result.length == 0)
-                fileSep
-            else
-                result
+            case Nil => 
+                ""
+
+            case List("") =>
+                ""
+
+            case simple :: Nil if (! (simple startsWith fileSep)) =>
+                "."
+
+            case _ =>
+                val len = components.length
+                val result = components.take(len - 1) mkString fileSep
+                if (result.length == 0)
+                    fileSep
+                else
+                    result
         }
     }
 
@@ -63,14 +68,17 @@ object file
      */
     def basename(path: String, fileSep: String): String =
     {
-        if ((path == null) || (path.length == 0))
-            ""
-        else if (! (path contains fileSep))
-            path
-        else
+        val components = splitPath(path, fileSep)
+        components match
         {
-            val components = splitPath(path, fileSep)
-            components.drop(components.length - 1) mkString fileSep
+            case Nil =>
+                ""
+            case List("") =>
+                ""
+            case simple :: Nil if (! (simple startsWith fileSep)) =>
+                path
+            case _ =>
+                components.drop(components.length - 1) mkString fileSep
         }
     }
 
@@ -162,8 +170,10 @@ object file
         {
             val dir = if (dirname.length == 0) pwd else dirname
             val names = new File(dir).list.toList
+
             if (names == null)
                 Nil
+
             else
             {
                 val names2 =
@@ -494,13 +504,17 @@ object file
         import grizzled.sys.os
         import grizzled.sys.OperatingSystem._
 
+        // Null guard.
+
+        val nonNullPath = if (path == null) "" else path
+
         // Special case for Windows. (Stupid drive letters.)
 
         val (prefix, usePath) = 
             if (fileSep == "\\")
-                splitDrivePath(path)
+                splitDrivePath(nonNullPath)
             else
-                ("", path)
+                ("", nonNullPath)
 
         // If there are leading file separator characters, split() will
         // produce extra empty array elements. Prevent that.
@@ -522,7 +536,6 @@ object file
         // Windows (and the file separator is "\"). Windows is a pain in the
         // ass.
         val pieces = (subpath split fileSep(0)).toList
-        println("Prefix=" + prefix + ", absolute=" + absolute + ", pieces=" + pieces)
         if (absolute)
         {
             if (pieces.length == 0)
@@ -599,7 +612,8 @@ object file
 
         if (! target.exists())
             throw new FileDoesNotExistException("Target directory \"" +
-                                                targetDir + "\" does not exist.")
+                                                targetDir + 
+                                                "\" does not exist.")
 
         for (file <- files)
             copyFile(file, targetDir + fileSeparator + basename(file))
@@ -658,6 +672,7 @@ object file
      */
     def copyFile(sourcePath: String, targetPath: String)
     {
+        import java.io.{InputStream, OutputStream}
         import java.io.{BufferedInputStream, BufferedOutputStream}
         import java.io.{FileInputStream, FileOutputStream}
 
@@ -666,12 +681,17 @@ object file
 
         try
         {
-            var c: Int = in.read()
-            while (c != -1)
+            def copyNextByte(in: InputStream, out: OutputStream): Unit =
             {
-                out.write(c)
-                c = in.read()
+                val c: Int = in.read()
+                if (c != -1)
+                {
+                    out.write(c)
+                    copyNextByte(in, out)
+                }
             }
+
+            copyNextByte(in, out)
         }
 
         finally
@@ -725,8 +745,7 @@ object file
         if (! new File(dir).isDirectory)
             throw new IOException("\"" + dir + "\" is not a directory.")
 
-        var files = fDir.list
-        for (name <- files)
+        for (name <- fDir.list)
         {
             val fullPath = dir + fileSeparator + name
             val f = new File(fullPath)
