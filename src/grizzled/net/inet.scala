@@ -56,16 +56,14 @@ object IPAddress
     {
         require((addr.length > 0) && (addr.length <= 4))
         
-        val addrBytes: Array[Int] = addr.toList match
+        addr.toList match
         {
-            case List(a, b, c, d) => Array(a, b, c, d)
-            case List(a, b, c)    => Array(a, b, c, 0)
-            case List(a, b)       => Array(a, b, 0, 0)
-            case List(a)          => Array(a, 0, 0, 0)
+            case List(a, b, c, d) => IPAddress(Array(a, b, c, d))
+            case List(a, b, c)    => IPAddress(Array(a, b, c, 0))
+            case List(a, b)       => IPAddress(Array(a, b, 0, 0))
+            case List(a)          => IPAddress(Array(a, 0, 0, 0))
             case _                => throw new AssertionError(addr.toList)
         }
-
-        IPAddress(addrBytes)
     }
 
     /**
