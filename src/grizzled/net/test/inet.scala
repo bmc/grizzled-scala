@@ -13,6 +13,7 @@ class IPAddressTest extends GrizzledFunSuite
         // input                   expected result and expected string
 
         ("localhost",              List(127, 0, 0, 1), "127.0.0.1"),
+        ("127.0.0.1",              List(127, 0, 0, 1), "127.0.0.1"),
         (List(127, 0, 0, 1),       List(127, 0, 0, 1), "127.0.0.1"),
         (Array(127, 0, 0, 1),      List(127, 0, 0, 1), "127.0.0.1"),
         (List(192, 168, 2, 100),   List(192, 168, 2, 100), "192.168.2.100"),
@@ -23,6 +24,9 @@ class IPAddressTest extends GrizzledFunSuite
         (Array(192, 167),          List(192, 167, 0, 0), "192.167.0.0"),
         (List(192),                List(192, 0, 0, 0), "192.0.0.0"),
         (Array(192),               List(192, 0, 0, 0), "192.0.0.0"),
+        (Array(192, 1, 1, 10, 3),  List(192, 1, 1, 10, 3, 0, 0, 0,
+                                          0, 0, 0,  0, 0, 0, 0, 0),
+                                   "c001:10a:300:0:0:0:0:0"),
         (List(255, 255, 255, 255), List(255, 255, 255, 255), "255.255.255.255"),
         (List(255, 255, 255, 0),   List(255, 255, 255, 0), "255.255.255.0"),
         (List(0, 0, 0, 0),         List(0, 0, 0, 0), "0.0.0.0")
@@ -62,8 +66,11 @@ class IPAddressTest extends GrizzledFunSuite
             }
         }
 
-        intercept(classOf[AssertionError]) { IPAddress(bytes(1, 2, 3, 4, 5)) }
-        intercept(classOf[AssertionError]) { IPAddress(Array(1, 2, 3, 4, 5)) }
+        intercept(classOf[AssertionError])
+        { 
+            IPAddress( (for (i <- 0 to 20) yield i.toByte) toList )
+        }
+
         intercept(classOf[AssertionError]) { IPAddress(Nil) }
     }
 
@@ -102,6 +109,19 @@ class IPAddressTest extends GrizzledFunSuite
             {
                 ipAddr2.hashCode
             }
+        }
+    }
+
+    test("java.net.InetAddress call-throughs")
+    {
+        expect(true, "127.0.0.1 is loopback") 
+        {
+            IPAddress(127, 0, 0, 1) isLoopbackAddress
+        }
+
+        expect(false, "192.168.1.100 is not loopback") 
+        {
+            IPAddress(192, 168, 1, 100) isLoopbackAddress
         }
     }
 }
