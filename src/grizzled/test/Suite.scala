@@ -1,18 +1,25 @@
 import org.scalatest.FunSuite
 
+/**
+ * A version of ScalaTest's FunSuite that actually aborts the running test
+ * if an <tt>expect()</tt> or an <tt>intercept()</tt> fails.
+ */
 class GrizzledFunSuite extends FunSuite
 {
-    override def expect(expected: Any)(actual: => Any) 
+    override def intercept[T <: AnyRef](cls: java.lang.Class[T], message: Any)
+                                       (f: => Any): T =
     {
         try
         {
-            super.expect(expected)(actual)
+            super.intercept(cls, message)(f)
         }
+
         catch
         {
             case ex: java.lang.Throwable =>
                 ex.printStackTrace()
                 System.exit(1)
+                throw ex // not reached, but keeps Scala happy
         }
     }
 

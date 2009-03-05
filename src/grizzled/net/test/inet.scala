@@ -72,11 +72,6 @@ class IPAddressTest extends GrizzledFunSuite
         }
 
         intercept(classOf[IllegalArgumentException]) { IPAddress(Nil) }
-
-        intercept(classOf[IllegalArgumentException])
-        { 
-            (for (i <- 0 to 20) yield i) toList
-        }
     }
 
     test("IPAddress implicits")
