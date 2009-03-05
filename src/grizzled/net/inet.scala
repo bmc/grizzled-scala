@@ -101,7 +101,8 @@ object IPAddress
      *       an IPv4 address, and it will be padded with 0s to 4 bytes.
      *   <li>If the array has between four and 16 values, it is assumed to be
      *       an IPv6 address, and it will be padded with 0s to 16 bytes.
-     *   <li>Anything else will cause an assertion error to be thrown.
+     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
+     *       to be thrown.
      * </ul>
      *
      * @param addr  the address
@@ -121,7 +122,8 @@ object IPAddress
      *       an IPv4 address, and it will be padded with 0s to 4 bytes.
      *   <li>If the array has between four and 16 values, it is assumed to be
      *       an IPv6 address, and it will be padded with 0s to 16 bytes.
-     *   <li>Anything else will cause an assertion error to be thrown.
+     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
+     *       to be thrown.
      * </ul>
      *
      * Example of use:
@@ -147,7 +149,8 @@ object IPAddress
      *   <li>If the argument list has between four and 16 values, it is
      *       assumed to be an IPv6 address, and it will be padded with 0s to
      *       16 bytes.
-     *   <li>Anything else will cause an assertion error to be thrown.
+     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
+     *       to be thrown.
      * </ul>
      *
      * Example of use:
@@ -172,7 +175,8 @@ object IPAddress
      *       IPv4 address, and it will be padded with 0s to 4 bytes.
      *   <li>If the list has between four and 16 values, it is assumed to be
      *       an IPv6 address, and it will be padded with 0s to 16 bytes.
-     *   <li>Anything else will cause an assertion error to be thrown.
+     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
+     *       to be thrown.
      * </ul>
      *
      * @param address  the list of address values
@@ -191,10 +195,15 @@ object IPAddress
             case 16 =>
                 address
 
+            case 0 =>
+                throw new IllegalArgumentException("Empty IP address.")
+
+            case n if (n > 16) =>
+                throw new IllegalArgumentException("IP address (" +
+                                                   address.mkString(",") +
+                                                   ") is too long.")
+
             case n =>
-                if ((n > 16) || (n == 0))
-                    throw new AssertionError("\"" + address.mkString(",") +
-                                             "\": invalid length")
                 val upper = if (n < 4) 4 else 16
                 address ++ (for (i <- n until upper) yield zeroByte)
         }
