@@ -160,7 +160,6 @@ trait UDPDatagramSocket
 
         readNextChar()
         chars.flush()
-        println(chars.toString)
         chars.toString
     }
 }
