@@ -197,23 +197,40 @@ trait UDPDatagramSocket
     def send(data: Seq[Byte], address: IPAddress, port: Int): Unit
 
     /**
-     * Send string data over the socket. Converts the string to UTF-8
-     * bytes, then sends the bytes.
+     * Send string data over the socket. The internal UTF-16 strings are
+     * converted to the specified encoding before being sent.
      *
-     * @param data  the bytes to send
+     * @param data     the string to send
+     * @param encoding the encoding to use
+     * @param address  the IP address to receive the string
+     * @param port     the destination port on the remote machine
      */
-    def sendString(data: String, address: IPAddress, port: Int): Unit =
+    def sendString(data: String, 
+                   encoding: String, 
+                   address: IPAddress, 
+                   port: Int): Unit =
     {
         import java.io.{ByteArrayOutputStream, OutputStreamWriter}
         import java.nio.charset.Charset
 
         val buf = new ByteArrayOutputStream()
-        val writer = new OutputStreamWriter(buf, Charset.forName("UTF-8"))
+        val writer = new OutputStreamWriter(buf, Charset.forName(encoding))
         writer.write(data)
         writer.flush()
         val bytes: Array[Byte] = buf.toByteArray
         send(bytes, address, port)
     }
+
+    /**
+     * Send string data over the socket. Converts the string to UTF-8
+     * bytes, then sends the bytes.
+     *
+     * @param data     the string to send
+     * @param address  the IP address to receive the string
+     * @param port     the destination port on the remote machine
+     */
+    def sendString(data: String, address: IPAddress, port: Int): Unit =
+        sendString(data, "UTF-8", address, port)
 
     /**
      * Receive a buffer of bytes from the socket. The buffer is dynamically
@@ -252,6 +269,22 @@ trait UDPDatagramSocket
 
     /**
      * Receive a string from the socket. The string is assumed to have
+     * been encoded in the specified encoding and is decoded accordingly.
+     *
+     * @param length    maximum number of bytes (not characters) expected
+     * @param encoding  the encoding to use when decoding the string
+     *
+     * @return the string
+     */
+    def receiveString(length: Int, encoding: String): String =
+    {
+        val buf = Array.make[Byte](length, 0)
+        receiveString(buf, encoding)
+    }
+
+
+    /**
+     * Receive a string from the socket. The string is assumed to have
      * been encoded in UTF-8 for transmission and is decoded accordingly.
      *
      * @param length  maximum number of bytes (not characters) expected
@@ -259,22 +292,20 @@ trait UDPDatagramSocket
      * @return the string
      */
     def receiveString(length: Int): String =
-    {
-        val buf = Array.make[Byte](length, 0)
-        receiveString(buf)
-    }
+        receiveString(length, "UTF-8")
 
     /**
      * Receive a string from the socket, using a caller-supplied receive
      * buffer to hold the bytes actually received over the wire. The string
-     * is assumed to have been encoded in UTF-8 for transmission and is
+     * is assumed to have been encoded in the specified encoding and is
      * decoded accordingly.
      *
      * @param buf  the buf into which to read the data
+     * @param encoding  the encoding to use when decoding the string
      *
      * @return the string
      */
-    def receiveString(buf: Array[Byte]): String =
+    def receiveString(buf: Array[Byte], encoding: String): String =
     {
         import java.io.{ByteArrayInputStream, InputStreamReader, StringWriter}
         import java.nio.charset.Charset
@@ -283,7 +314,7 @@ trait UDPDatagramSocket
         val total = receive(buf)
         val bytes = (for (i <- 0 until total) yield buf(i)).toArray
         val stream = new ByteArrayInputStream(bytes)
-        val reader = new InputStreamReader(stream, Charset.forName("UTF-8"))
+        val reader = new InputStreamReader(stream, Charset.forName(encoding))
         val chars = new StringWriter()
 
         def readNextChar(): Unit =
@@ -300,6 +331,19 @@ trait UDPDatagramSocket
         chars.flush()
         chars.toString
     }
+
+    /**
+     * Receive a string from the socket, using a caller-supplied receive
+     * buffer to hold the bytes actually received over the wire. The string
+     * is assumed to have been encoded in UTF-8 for transmission and is
+     * decoded accordingly.
+     *
+     * @param buf  the buf into which to read the data
+     *
+     * @return the string
+     */
+    def receiveString(buf: Array[Byte]): String =
+        receiveString(buf, "UTF-8")
 }
 
 /**
@@ -450,6 +494,37 @@ object UDPDatagramSocket
 
     /**
      * Utility method for sending a non-broadcast UDP packet consisting of
+     * string data. The string data is encoded the specified encoding
+     * before being sent. This method is equivalent to the following code
+     * snippet:
+     *
+     * <blockquote><pre>
+     * // Bind to a local (source) UDP port.
+     * val socket = UDPDatagramSocket.bind()
+     * val address = IPAddress( /* details omitted */ )
+     * val port: Int = ...
+     * val encoding: String = ...
+     *
+     * // Send the string to the specified destination address and UDP port.
+     * socket.send(string, encoding, address, port)
+     *
+     * // Close the socket
+     * socket.close()
+     * </pre></blockquote>
+     *
+     * @param data     String data to send
+     * @param encoding Encoding to use
+     * @param address  IP address to which to send bytes
+     * @param port     UDP port to which to send bytes
+     */
+    def sendString(data: String, 
+                   encoding: String, 
+                   address: IPAddress, 
+                   port: Int): Unit =
+        UDPDatagramSocket.sendString(data, encoding, address, port, false)
+
+    /**
+     * Utility method for sending a non-broadcast UDP packet consisting of
      * string data. The string data is encoded in UTF-8 before being sent.
      * This method is equivalent to the following code snippet:
      *
@@ -471,7 +546,7 @@ object UDPDatagramSocket
      * @param port     UDP port to which to send bytes
      */
     def sendString(data: String, address: IPAddress, port: Int): Unit =
-        UDPDatagramSocket.sendString(data, address, port, false)
+        UDPDatagramSocket.sendString(data, "UTF-8", address, port, false)
 
     /**
      * Utility method for sending a UDP packet consisting string data. The
@@ -495,11 +570,48 @@ object UDPDatagramSocket
      * socket.close()
      * </pre></blockquote>
      *
-     * @param data     String data to send
-     * @param address  IP address to which to send bytes
-     * @param port     UDP port to which to send bytes
+     * @param data      String data to send
+     * @param address   IP address to which to send bytes
+     * @param port      UDP port to which to send bytes
+     * @param broadcast Whether to enable broadcast or not.
      */
     def sendString(data: String,
+                   address: IPAddress, 
+                   port: Int,
+                   broadcast: Boolean): Unit =
+        UDPDatagramSocket.sendString(data, "UTF-8", address, port, broadcast)
+
+    /**
+     * Utility method for sending a UDP packet consisting string data. The
+     * string data is encoded the specified encoding before being sent.
+     * This method is equivalent to the following code snippet:
+     *
+     * <blockquote><pre>
+     * // Bind to a local (source) UDP port.
+     * val socket = UDPDatagramSocket()
+     * val address = IPAddress( /* details omitted */ )
+     * val port: Int = ...
+     * val encoding: String = ...
+     * val broadcast: Boolean = ...
+     *
+     * // Set (or clear) the broadcast flag.
+     * socket.broadcast = broadcast
+     *
+     * // Send the string to the specified destination address and UDP port.
+     * socket.send(string, encoding, address, port)
+     *
+     * // Close the socket
+     * socket.close()
+     * </pre></blockquote>
+     *
+     * @param data      String data to send
+     * @param encoding  Encoding to use
+     * @param address   IP address to which to send bytes
+     * @param port      UDP port to which to send bytes
+     * @param broadcast Whether to enable broadcast or not.
+     */
+    def sendString(data: String,
+                   encoding: String,
                    address: IPAddress, 
                    port: Int,
                    broadcast: Boolean): Unit =
@@ -513,7 +625,7 @@ object UDPDatagramSocket
 
         // Send the encoded message to the broadcast address and destination
         // port.
-        socket.sendString(data, address, port)
+        socket.sendString(data, encoding, address, port)
 
         // Close the socket.
         socket.close()
