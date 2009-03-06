@@ -6,9 +6,147 @@ import java.net.InetAddress
 
 
 /**
- * A <tt>UDPDatagramSocket</tt> object represents a UDP datagram socket,
+ * <p>A <tt>UDPDatagramSocket</tt> object represents a UDP datagram socket,
  * providing a simpler interface to sending and receiving UDP packets than
- * the one provided by the Java JDK.
+ * the one provided by the Java JDK.</p>
+ *
+ * <h2>Sending UDP Datagrams</h2>
+ *
+ * <p>The easiest way to explain how to use this API is with some code. So,
+ * without further ado, the following example shows how you might send the
+ * string "foo" to port 2003 on host "foo.example.com".</p>
+ *
+ * <blockquote><pre>
+ * // Import the appropriate stuff.
+ * import grizzled.net._
+ * 
+ * // First, create an grizzled.net.IPAddress object for the destination 
+ * // machine.
+ * val address = IPAddress("foo.example.com")
+ *
+ * // Next, create the socket object. Since we're sending the packet,
+ * // we don't care what the local port is. By not specifying one, we allow
+ * // the operating system to choose one one for us. Similarly, by not
+ * // passing an explicit address, we indicate that the API should bind to a
+ * // wildcard address, so that the packet can go out over any appropriate 
+ * // interface.
+ * val socket = UDPDatagramSocket()
+ *
+ * // Next, use the sendString() method to send the string
+ * socket.sendString("foo", address, 2003)
+ *
+ * // Finally, close the socket.
+ * socket.close()
+ * </pre></blockquote>
+ *
+ * <p>That's pretty simple. However, using the utility methods provided by the
+ * <tt>UDPDatagramSocket</tt> companion object, we can further simplify the
+ * above code:
+ *
+ * <blockquote><pre>
+ * // Import the appropriate stuff.
+ * import grizzled.net._
+ *
+ * UDPDatagramSocket.sendString("foo", IPAddress("foo.example.com"), 2003)
+ * </pre></blockquote>
+ *
+ * <p>The <tt>sendString()</tt> method in the companion object takes care
+ * of allocating the socket, sending the packet, and closing the socket.
+ * Obviously, if you're planning on sending multiple packets at once, you'll
+ * want to use the first example (perhaps in a loop), so you're not constantly
+ * allocating and deallocating sockets. But sending a one-shot UDP packet
+ * can be as simple as one line of code, as shown in the second example.</p>
+ *
+ * <p>Sending binary data is not much more complicated. You have to convert
+ * the data to a stream of bytes, which the server must then decode. After
+ * that, however, sending the bytes isn't much more difficult than sending
+ * a string. Here's an example, which assumes that you have already encoded
+ * the data to be send into an array of bytes.</p>
+ * 
+ * <blockquote><pre>
+ * // Import the appropriate stuff.
+ * import grizzled.net._
+ * 
+ * // Encode the data into bytes. (Not shown.)
+ * val data: Array[Byte] = encodeTheData()
+ *
+ * // Create the socket object.
+ * val socket = UDPDatagramSocket()
+ *
+ * // Send the data.
+ * socket.send(data, IPAddress("foo.example.com"), 2003)
+ *
+ * // Finally, close the socket.
+ * socket.close()
+ * </pre></blockquote>
+ *
+ * <p>Once again, there's a simple utility method that does most of the work
+ * for you:</p>
+ *
+ * <blockquote><pre>
+ * // Import the appropriate stuff.
+ * import grizzled.net._
+ * 
+ * // Encode the data into bytes. (Not shown.)
+ * val data: Array[Byte] = encodeTheData()
+ *
+ * // Send the data.
+ * UDPDatagramSocket.send(data, IPAddress("foo.example.com"), 2003)
+ * </pre></blockquote>
+ *
+ * <h2>Receiving UDP Datagrams</h2>
+ *
+ * <p>When receiving UDP datagrams, you must first bind to an incoming
+ * socket. That is, you must listen on the port to which clients are sending
+ * their packets. In this example, we create the socket object with the
+ * receiving port, and we allow the wildcard address to be used on the
+ * local machine (permitting us to receive packets on any interface).</p>
+ *
+ * <blockquote><pre>
+ * // Import the appropriate stuff.
+ * import grizzled.net._
+ * 
+ * // Create the socket object.
+ * val socket = UDPDatagramSocket(2003)
+ * </pre></blockquote>
+ *
+ * <p>Next, we want to receive and process the incoming data. Let's assume
+ * that we're receiving the "foo" string (or, for that matter, any string)
+ * being sent by the sample sender, above.</p>
+ *
+ * <blockquote><pre>
+ * // Receive and print strings.
+ * while (true)
+ *     println(socket.receiveString(1024))
+ * </pre></blockquote>
+ *
+ * <p>That code says, "Wait for incoming strings, using a 1024-byte buffer.
+ * Then, decode the strings and print them to standard output.</p>
+ *
+ * <p>Receiving bytes isn't much more difficult.</p>
+ *
+ * <blockquote><pre>
+ * // Allocate a byte buffer. For efficiency, we'll re-use the same buffer
+ * // on every incoming message.
+ * val buf = Array.make[Byte](1024, 0)
+ *
+ * // Receive and process the incoming bytes. The process() method isn't
+ * // shown.
+ * while (true)
+ * {
+ *     val totalRead = socket.receive(buf)
+ *     process(buf, totalRead)
+ * }
+ * </pre></blockquote>
+ *
+ * <p>The above loop can be made even simpler (though a little more obscure),
+ * since the <tt>receive()</tt> method is filling <i>our</i> buffer and
+ * returning a count of the number of bytes it put into the buffer:</p>
+ *
+ * <blockquote><pre>
+ * while (true)
+ *     process(buf, socket.receive(buf))
+ * </pre></blockquote>
  */
 trait UDPDatagramSocket
 {
@@ -194,6 +332,14 @@ private class UDPDatagramSocketImpl(val socket: JDKDatagramSocket)
     }
 }
 
+/**
+ * Companion object for the <tt>UDPDatagramSocket</tt> trait, containing
+ * methods to simplify creation of <tt>UDPDatagramSocket</tt> objects, as
+ * well as some useful utility methods. See the documentation for the
+ * <tt>UDPDatagramSocket</tt> trait for a full treatment on this API.
+ *
+ * @see UDPDatagramSocket
+ */
 object UDPDatagramSocket
 {
     /**
