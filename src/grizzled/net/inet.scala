@@ -64,7 +64,7 @@ class IPAddress(val address: Array[Byte])
      *
      * @return <tt>true</tt> if equal, <tt>false</tt> if not
      */
-    override def equals(other: Any) =
+    override def equals(other: Any): Boolean =
         other match
         {
             case that: IPAddress =>
