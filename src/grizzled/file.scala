@@ -866,6 +866,7 @@ object file
      */
     def touch(path: String): Unit = touch(path, -1)
 
+    private lazy val DrivePathPattern = "^([A-Za-z]?:)?(.*)$".r
     /**
      * Split a Windows-style path into drive name and path portions.
      *
@@ -876,14 +877,18 @@ object file
      */
     def splitDrivePath(path: String): (String, String) =
     {
-        if (path.length == 0)
-            ("", "")
-        else if (path(0) == ':')
-            ("", path.drop(1))
-        else if ((path.length > 1) && (path(1) == ':'))
-            (path.take(2), path.drop(2))
-        else
-            ("", path)
+        path match
+        {
+            case DrivePathPattern(driveSpec, path) =>
+                driveSpec match
+                {
+                    case null => ("", path)
+                    case ":"  => ("", path)
+                    case _    => (driveSpec, path)
+                }
+
+            case _ => ("", path)
+        }
     }
 
     /**
