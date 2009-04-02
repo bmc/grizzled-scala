@@ -124,7 +124,30 @@ class FileTest extends GrizzledFunSuite
             expect(expected, "splitPath(\"" + path + "\", \"" + sep + "\")") 
             {
                 splitPath(path, sep)
-        }
+            }
+    }
+
+    test("splitDrivePath")
+    {
+
+
+        val data = Map(
+            ""                 -> ("", ""),
+            ":"                -> ("", ""),
+            "D:"               -> ("D:", ""),
+            "c:\\"             -> ("c:", "\\"),
+            "c:foo"            -> ("c:", "foo"),
+            "c:foo\\bar"       -> ("c:", "foo\\bar"),
+            "c:\\foo"          -> ("c:", "\\foo"),
+            "\\foo"            -> ("", "\\foo"),
+            "foo"              -> ("", "foo")
+        )
+
+        for((path, expected) <- data)
+            expect(expected, "splitDrivePath(\"" + path + "\"") 
+            {
+                splitDrivePath(path)
+            }
     }
 
     test("fnmatch")
