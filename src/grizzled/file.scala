@@ -277,49 +277,16 @@ object file
 
         def splitPosixEglobPattern(pattern: String): (String, String) =
         {
-            if (pattern(0) == fileSeparatorChar)
+            if (pattern.length == 0)
+                (".", ".")
+
+            else if (pattern(0) == fileSeparatorChar)
                 (pattern drop 1, "/")
+
             else
                 (pattern, ".")
         }
 
-        // Main logic.
-
-        // Account for leading "~"
-        val adjustedPattern =
-            if (pattern.startsWith("~"))
-                normalizePath(joinPath(System.getProperty("user.home"),
-                                       pattern drop 1))
-            else
-                pattern
-
-        import grizzled.sys.os
-        import grizzled.sys.OperatingSystem._
-
-        // Determine leading directory, which is different per OS (because
-        // of Windows' stupid drive letters.
-        val (pathPattern, directory) = os match
-        {
-            case Posix   => splitPosixEglobPattern(adjustedPattern)
-            case Windows => splitWindowsEglobPattern(adjustedPattern)
-            case _       => throw new UnsupportedOperationException(
-                                "Unknown OS \"" + os + "\"")
-        }
-
-        // Do the work.
-        doEglob(pathPattern, directory) map (normalizePath _)
-    }
-
-    /**
-     * Private workhorse function for eglob().
-     *
-     * @param pattern   the wildcard pattern
-     * @param directory the directory in which to do the globbing
-     *
-     * @return list of matches, or an empty list for none
-     */
-    private def doEglob(pattern: String, directory: String): List[String] =
-    {
         def doGlob(pieces: List[String], directory: String): List[String] =
         {
             import scala.collection.mutable.ArrayBuffer
@@ -377,15 +344,34 @@ object file
 
         // Main eglob() logic
 
-        if (pattern.length == 0)
-            doGlob(List("."), directory)
+        // Account for leading "~"
+        val adjustedPattern =
+            if (pattern.length == 0)
+                "."
+            else if (pattern.startsWith("~"))
+                normalizePath(joinPath(System.getProperty("user.home"),
+                                       pattern drop 1))
+            else
+                pattern
 
-        else
+        import grizzled.sys.os
+        import grizzled.sys.OperatingSystem._
+
+        // Determine leading directory, which is different per OS (because
+        // of Windows' stupid drive letters).
+        val (relativePattern, directory) = os match
         {
-            // Split into pieces.
-            val pieces = splitPath(pattern)
-            doGlob(pieces.toList, directory)
+            case Posix   => splitPosixEglobPattern(adjustedPattern)
+            case Windows => splitWindowsEglobPattern(adjustedPattern)
+            case _       => throw new UnsupportedOperationException(
+                                "Unknown OS \"" + os + "\"")
         }
+
+        // Do the actual globbing.
+        val pieces = splitPath(relativePattern)
+        val matches = doGlob(pieces.toList, directory)
+
+        matches map (normalizePath _)
     }
 
     /**
@@ -1095,19 +1081,29 @@ object file
                 // Normalize the path pieces. Note: normalizePathPieces()
                 // doesn't handle leading ".." in an absolute path, such as
                 // "/../..". We handle that later.
-                val piecesTemp = normalizePathPieces(path.split("/").toList)
+                //
+                // Note: Must also account for a single leading ".", which
+                // must be preserved
+                val pieces1 = path.split("/").toList
+                val (prefix, pieces2) = 
+                    if (pieces1(0) == ".")
+                        pieces1 splitAt 1
+                    else
+                        (Nil, pieces1)
+
+                val normalizedPieces1 = normalizePathPieces(pieces2)
 
                 // Remove any leading ".." that shouldn't be there.
-                val newPieces =
+                val normalizedPieces2 =
                     if (path startsWith "/")
-                        piecesTemp dropWhile (_ == "..")
+                        prefix ++ normalizedPieces1 dropWhile (_ == "..")
                     else
-                        piecesTemp
+                        prefix ++ normalizedPieces1
 
                 if (initialSlashes > 0)
-                    ("/" * initialSlashes) + (newPieces mkString "/")
+                    ("/" * initialSlashes) + (normalizedPieces2 mkString "/")
                 else
-                    newPieces mkString "/"
+                    normalizedPieces2 mkString "/"
        }
     }
 
