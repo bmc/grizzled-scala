@@ -238,21 +238,72 @@ object file
     /**
      * An extended <i>glob</i> function that supports all the wildcards of
      * the <tt>glob()</tt> function, as well as a special "**" wildcard that
-     * recursively matches any directory. (Think "ant".) Adapted from the
-     * function of the same name in the Grizzled Python Utility Library.
+     * recursively matches any directory. (Think "ant".)
      *
-     * @param pattern   The wildcard pattern
-     * @param directory The directory in which to do the globbing
+     * @param pattern   the wildcard pattern
      *
      * @return list of matches, or an empty list for none
      */
-    def eglob(pattern: String, directory: String): List[String] =
+    def eglob(pattern: String): List[String] =
+    {
+        def splitWindowsEglobPattern(pattern: String): (String, String) =
+        {
+            splitDrivePath(pattern) match
+            {
+                case ("", "") =>
+                    (".", ".")
+
+                case (drive, "") =>
+                    (drive, ".")
+
+                case (drive, path) =>
+                    // Hack: Can't handle non-absolute paths in a drive.
+                    // Pretend a drive letter means "absolute". Note that
+                    // "drive" can be empty here, which is fine.
+
+                    if (path(0) == '\\')
+                        (drive + "\\", path drop 1)
+                    else
+                        (drive + "\\", path)
+            }
+        }
+
+        def splitPosixEglobPattern(pattern: String): (String, String) =
+        {
+            if (pattern(0) == fileSeparatorChar)
+                (pattern drop 1, "/")
+            else
+                (pattern, ".")
+        }
+
+        import grizzled.sys.os
+        import grizzled.sys.OperatingSystem._
+
+        val (pathPattern, directory) = os match
+        {
+            case Posix   => splitPosixEglobPattern(pattern)
+            case Windows => splitWindowsEglobPattern(pattern)
+            case _       => throw new UnsupportedOperationException(
+                                "Unknown OS \"" + os + "\"")
+        }
+
+        doEglob(pathPattern, directory) map (normalizePath _)
+    }
+
+    /**
+     * Private workhorse function for eglob().
+     *
+     * @param pattern   the wildcard pattern
+     * @param directory the directory in which to do the globbing
+     *
+     * @return list of matches, or an empty list for none
+     */
+    private def doEglob(pattern: String, directory: String): List[String] =
     {
         def doGlob(pieces: List[String], directory: String): List[String] =
         {
             import scala.collection.mutable.ArrayBuffer
 
-            val fDir = new File(directory)
             val result = new ArrayBuffer[String]()
 
             val piece = pieces(0)
@@ -284,10 +335,7 @@ object file
                 val matches = glob(path)
                 if (matches.length > 0)
                 {
-                    if ((matches.length == 1) && (matches(0) == path))
-                        result += piece // without the path info
-
-                    else if (last)
+                    if (last)
                         result ++= matches
 
                     else
@@ -310,7 +358,7 @@ object file
         // Main eglob() logic
 
         if (pattern.length == 0)
-            List(".")
+            doGlob(List("."), directory)
 
         else
         {
@@ -907,10 +955,10 @@ object file
 
         os match
         {
-            case Posix => normalizePosixPath(path)
+            case Posix   => normalizePosixPath(path)
             case Windows => normalizeWindowsPath(path)
-            case _ => throw new UnsupportedOperationException(
-                "Unknown OS: " + os)
+            case _       => throw new UnsupportedOperationException(
+                                "Unknown OS: " + os)
         }
     }
 
@@ -1015,12 +1063,11 @@ object file
             case "." => "."
             case _ =>
                 // POSIX allows one or two initial slashes, but treats
-                // three or more as a single slash.
+                // three or more as a single slash. We don't do that here.
+                // Two initial slashes is also collapsed into one.
 
                 val initialSlashes =
-                    if (path.startsWith("//") && (! path.startsWith("///")))
-                        2
-                    else if (path.startsWith("/"))
+                    if (path.startsWith("/"))
                         1
                     else
                         0
@@ -1063,10 +1110,10 @@ object file
 
         os match
         {
-            case Posix => path
+            case Posix   => path
             case Windows => path.replace(fileSeparator, "/")
-            case _ => throw new UnsupportedOperationException(
-                "Unknown OS: " + os)
+            case _       => throw new UnsupportedOperationException(
+                                "Unknown OS: " + os)
         }
     }
 
@@ -1089,10 +1136,10 @@ object file
 
         os match
         {
-            case Posix => path
+            case Posix   => path
             case Windows => path.replace("/", fileSeparator)
-            case _ => throw new UnsupportedOperationException(
-                "Unknown OS: " + os)
+            case _       => throw new UnsupportedOperationException(
+                                "Unknown OS: " + os)
         }
     }
 }
