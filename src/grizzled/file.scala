@@ -237,8 +237,15 @@ object file
 
     /**
      * An extended <i>glob</i> function that supports all the wildcards of
-     * the <tt>glob()</tt> function, as well as a special "**" wildcard that
-     * recursively matches any directory. (Think "ant".)
+     * the <tt>glob()</tt> function, in addition to:
+     *
+     * <ul>
+     *  <li> a leading "~", signifying the user's home directory
+     *  <li> a special "**" wildcard that recursively matches any directory.
+     *       (Think "ant".)
+     * </ul>
+     *
+     * "~user" is not supported, however.
      *
      * @param pattern   the wildcard pattern
      *
@@ -276,17 +283,30 @@ object file
                 (pattern, ".")
         }
 
+        // Main logic.
+
+        // Account for leading "~"
+        val adjustedPattern =
+            if (pattern.startsWith("~"))
+                normalizePath(joinPath(System.getProperty("user.home"),
+                                       pattern drop 1))
+            else
+                pattern
+
         import grizzled.sys.os
         import grizzled.sys.OperatingSystem._
 
+        // Determine leading directory, which is different per OS (because
+        // of Windows' stupid drive letters.
         val (pathPattern, directory) = os match
         {
-            case Posix   => splitPosixEglobPattern(pattern)
-            case Windows => splitWindowsEglobPattern(pattern)
+            case Posix   => splitPosixEglobPattern(adjustedPattern)
+            case Windows => splitWindowsEglobPattern(adjustedPattern)
             case _       => throw new UnsupportedOperationException(
                                 "Unknown OS \"" + os + "\"")
         }
 
+        // Do the work.
         doEglob(pathPattern, directory) map (normalizePath _)
     }
 
