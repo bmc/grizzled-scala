@@ -1086,7 +1086,9 @@ object file
                 // must be preserved
                 val pieces1 = path.split("/").toList
                 val (prefix, pieces2) = 
-                    if (pieces1(0) == ".")
+                    if (pieces1.length == 0)
+                        (Nil, Nil)
+                    else if (pieces1(0) == ".")
                         pieces1 splitAt 1
                     else
                         (Nil, pieces1)
