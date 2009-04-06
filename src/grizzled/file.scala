@@ -261,7 +261,7 @@ object file
                     (".", ".")
 
                 case (drive, "") =>
-                    (drive, ".")
+                    (".", drive)
 
                 case (drive, path) =>
                     // Hack: Can't handle non-absolute paths in a drive.
@@ -269,9 +269,9 @@ object file
                     // "drive" can be empty here, which is fine.
 
                     if (path(0) == '\\')
-                        (drive + "\\", path drop 1)
+                        (path drop 1, drive + "\\")
                     else
-                        (drive + "\\", path)
+                        (path, drive + "\\")
             }
         }
 
@@ -367,6 +367,7 @@ object file
                                 "Unknown OS \"" + os + "\"")
         }
 
+        printf("directory=%s, relativePattern=%s\n", directory, relativePattern)
         // Do the actual globbing.
         val pieces = splitPath(relativePattern)
         val matches = doGlob(pieces.toList, directory)

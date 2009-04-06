@@ -43,7 +43,7 @@ object sys
      * and returns the <tt>OperatingSystem</tt> enumerated value.
      */
     def getOS(name: String) =
-        name.toLowerCase match
+        name.split("\\s")(0).toLowerCase match
         {
             case "mac"        => Mac
             case "windows ce" => WindowsCE
