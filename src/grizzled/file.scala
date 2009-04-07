@@ -367,7 +367,6 @@ object file
                                 "Unknown OS \"" + os + "\"")
         }
 
-        printf("directory=%s, relativePattern=%s\n", directory, relativePattern)
         // Do the actual globbing.
         val pieces = splitPath(relativePattern)
         val matches = doGlob(pieces.toList, directory)
