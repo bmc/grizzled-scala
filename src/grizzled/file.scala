@@ -2,6 +2,9 @@ package grizzled
 
 import scala.util.matching.Regex
 
+import grizzled.sys.os
+import grizzled.sys.OperatingSystem._
+
 import java.io.{File, IOException}
 
 class FileDoesNotExistException(message: String) extends Exception
@@ -354,9 +357,6 @@ object file
             else
                 pattern
 
-        import grizzled.sys.os
-        import grizzled.sys.OperatingSystem._
-
         // Determine leading directory, which is different per OS (because
         // of Windows' stupid drive letters).
         val (relativePattern, directory) = os match
@@ -407,13 +407,10 @@ object file
      */
     def fnmatch(name: String, pattern: String): Boolean =
     {
-        import grizzled.sys
-        import grizzled.sys.OperatingSystem._
-
         // Convert to regular expression pattern.
 
         val caseConv: String => String =
-            if (sys.os == Posix)
+            if (os == Posix)
                 {s => s}
             else
                 {s => s.toLowerCase}
@@ -556,9 +553,6 @@ object file
         // is a backslash (as on Windows). We could escape the backslash,
         // but it's just as easy to split on the character, not the string,
         
-        import grizzled.sys.os
-        import grizzled.sys.OperatingSystem._
-
         // Null guard.
 
         val nonNullPath = if (path == null) "" else path
@@ -957,9 +951,6 @@ object file
      */
     def normalizePath(path: String): String =
     {
-        import grizzled.sys.os
-        import grizzled.sys.OperatingSystem._
-
         os match
         {
             case Posix   => normalizePosixPath(path)
@@ -1124,9 +1115,6 @@ object file
      */
     def universalPath(path: String): String =
     {
-        import grizzled.sys.os
-        import grizzled.sys.OperatingSystem._
-
         os match
         {
             case Posix   => path
@@ -1150,9 +1138,6 @@ object file
      */
     def nativePath(path: String): String =
     {
-        import grizzled.sys.os
-        import grizzled.sys.OperatingSystem._
-
         os match
         {
             case Posix   => path

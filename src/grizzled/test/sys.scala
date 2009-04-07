@@ -22,6 +22,7 @@ class SysTest extends GrizzledFunSuite
         val data = Map("mac"        -> Mac,
                        "windows ce" -> WindowsCE,
                        "windows"    -> Windows,
+                       "windows xp" -> Windows,
                        "os/2"       -> OS2,
                        "netware"    -> NetWare,
                        "openvms"    -> VMS,

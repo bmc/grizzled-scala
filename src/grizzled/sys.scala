@@ -42,17 +42,22 @@ object sys
      * Version of the <tt>os</tt> function that takes an operating system name
      * and returns the <tt>OperatingSystem</tt> enumerated value.
      */
+    private val WindowsNameMatch = "^(windows)(.*)$".r
     def getOS(name: String) =
-        name.split("\\s")(0).toLowerCase match
+    {
+        val lcName = name.toLowerCase
+        val firstToken = lcName.split("""\s""")(0)
+        firstToken match
         {
-            case "mac"        => Mac
-            case "windows ce" => WindowsCE
-            case "windows"    => Windows
-            case "os/2"       => OS2
-            case "netware"    => NetWare
-            case "openvms"    => VMS
-            case _            => Posix
+            case "windows" if (lcName == "windows ce") => WindowsCE
+            case "windows" if (lcName != "windows ce") => Windows
+            case "mac"                                 => Mac
+            case "os/2"                                => OS2
+            case "netware"                             => NetWare
+            case "openvms"                             => VMS
+            case _                                     => Posix
         }
+    }
 
     /**
      * Get the Java system properties as a Scala iterable. The iterable
