@@ -367,6 +367,9 @@ object file
             case ("", "") =>
                 (".", ".")
 
+            case ("", path) =>
+                (path, ".")
+
             case (drive, "") =>
                 (".", drive)
 
