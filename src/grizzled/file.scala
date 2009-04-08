@@ -256,40 +256,6 @@ object file
      */
     def eglob(pattern: String): List[String] =
     {
-        def splitWindowsEglobPattern(pattern: String): (String, String) =
-        {
-            splitDrivePath(pattern) match
-            {
-                case ("", "") =>
-                    (".", ".")
-
-                case (drive, "") =>
-                    (".", drive)
-
-                case (drive, path) =>
-                    // Hack: Can't handle non-absolute paths in a drive.
-                    // Pretend a drive letter means "absolute". Note that
-                    // "drive" can be empty here, which is fine.
-
-                    if (path(0) == '\\')
-                        (path drop 1, drive + "\\")
-                    else
-                        (path, drive + "\\")
-            }
-        }
-
-        def splitPosixEglobPattern(pattern: String): (String, String) =
-        {
-            if (pattern.length == 0)
-                (".", ".")
-
-            else if (pattern(0) == fileSeparatorChar)
-                (pattern drop 1, "/")
-
-            else
-                (pattern, ".")
-        }
-
         def doGlob(pieces: List[String], directory: String): List[String] =
         {
             import scala.collection.mutable.ArrayBuffer
@@ -359,19 +325,80 @@ object file
 
         // Determine leading directory, which is different per OS (because
         // of Windows' stupid drive letters).
-        val (relativePattern, directory) = os match
-        {
-            case Posix   => splitPosixEglobPattern(adjustedPattern)
-            case Windows => splitWindowsEglobPattern(adjustedPattern)
-            case _       => throw new UnsupportedOperationException(
-                                "Unknown OS \"" + os + "\"")
-        }
+        val (relativePattern, directory) = eglobPatternSplitter(adjustedPattern)
 
         // Do the actual globbing.
         val pieces = splitPath(relativePattern)
         val matches = doGlob(pieces.toList, directory)
 
         matches map (normalizePath _)
+    }
+
+    /**
+     * For the eglob algorithm to work, the pattern needs to be split into a
+     * (directory, subpattern) pair, where the subpattern is relative. This
+     * splitting operating is operating system-dependent, largely because
+     * of Windows' stupid drive letters. This variable holds a partially
+     * applied function for the splitter, determined the first time it is
+     * referenced. That way, eglob() doesn't do this same match on every
+     * call.
+     */
+    private lazy val eglobPatternSplitter = os match
+    {
+        case Posix   => splitPosixEglobPattern(_)
+        case Windows => splitWindowsEglobPattern(_)
+        case _       => throw new UnsupportedOperationException(
+                            "Unknown OS: " + os)
+    }
+
+    /**
+     * Windows pattern splitter for eglob(). See description for the
+     * eglobPatternSplitter value, above.
+     *
+     * @param pattern  the pattern to split
+     *
+     * @return a (directory, subpattern) tuple
+     */
+    private def splitWindowsEglobPattern(pattern: String): (String, String) =
+    {
+        splitDrivePath(pattern) match
+        {
+            case ("", "") =>
+                (".", ".")
+
+            case (drive, "") =>
+                (".", drive)
+
+            case (drive, path) =>
+                // Hack: Can't handle non-absolute paths in a drive.
+                // Pretend a drive letter means "absolute". Note that
+                // "drive" can be empty here, which is fine.
+
+                if (path(0) == '\\')
+                    (path drop 1, drive + "\\")
+                else
+                    (path, drive + "\\")
+        }
+    }
+
+    /**
+     * Posix pattern splitter for eglob(). See description for the
+     * eglobPatternSplitter value, above.
+     *
+     * @param pattern  the pattern to split
+     *
+     * @return a (directory, subpattern) tuple
+     */
+    private def splitPosixEglobPattern(pattern: String): (String, String) =
+    {
+        if (pattern.length == 0)
+            (".", ".")
+
+        else if (pattern(0) == fileSeparatorChar)
+            (pattern drop 1, "/")
+
+        else
+            (pattern, ".")
     }
 
     /**
@@ -940,6 +967,18 @@ object file
     }
 
     /**
+     * Path normalization is operating system-specific. This value
+     * holds the real path normalizer, determined once.
+     */
+    private lazy val doPathNormalizing = os match
+    {
+        case Posix   => normalizePosixPath(_)
+        case Windows => normalizeWindowsPath(_)
+        case _       => throw new UnsupportedOperationException(
+                            "Unknown OS: " + os)
+    }
+
+    /**
      * Normalize a path, eliminating double slashes, resolving embedded
      * ".." strings (e.g., "/foo/../bar" becomes "/bar"), etc. Works for
      * Windows and Posix operating systems.
@@ -948,16 +987,7 @@ object file
      *
      * @return the normalized path
      */
-    def normalizePath(path: String): String =
-    {
-        os match
-        {
-            case Posix   => normalizePosixPath(path)
-            case Windows => normalizeWindowsPath(path)
-            case _       => throw new UnsupportedOperationException(
-                                "Unknown OS: " + os)
-        }
-    }
+    def normalizePath(path: String): String = doPathNormalizing(path)
 
     /**
      * Shared between normalizeWindowsPath() and normalizePosixPath(),
@@ -1101,6 +1131,26 @@ object file
     }
 
     /**
+     * Native-to-universal path conversion is operating system-specific.
+     * These values hold the real converters, determined once.
+     */
+    private lazy val makeUniversalPath: (String) => String = os match
+    {
+        case Posix   => (path: String) => path
+        case Windows => (path: String) => path.replace(fileSeparator, "/")
+        case _       => throw new UnsupportedOperationException(
+                            "Unknown OS: " + os)
+    }
+
+    private lazy val makeNativePath: (String) => String = os match
+    {
+        case Posix   => (path: String) => path
+        case Windows => (path: String) => path.replace("/", fileSeparator)
+        case _       => throw new UnsupportedOperationException(
+                            "Unknown OS: " + os)
+    }
+
+    /**
      * Converts a path name from its operating system-specific format to a
      * universal path notation. Universal path notation always uses a
      * Unix-style "/" to separate path elements. A universal path can be
@@ -1112,16 +1162,7 @@ object file
      *
      * @return the universal path
      */
-    def universalPath(path: String): String =
-    {
-        os match
-        {
-            case Posix   => path
-            case Windows => path.replace(fileSeparator, "/")
-            case _       => throw new UnsupportedOperationException(
-                                "Unknown OS: " + os)
-        }
-    }
+    def universalPath(path: String): String = makeUniversalPath(path)
 
     /**
      * Converts a path name from universal path notation to the operating
@@ -1135,14 +1176,5 @@ object file
      *
      * @return the native path
      */
-    def nativePath(path: String): String =
-    {
-        os match
-        {
-            case Posix   => path
-            case Windows => path.replace("/", fileSeparator)
-            case _       => throw new UnsupportedOperationException(
-                                "Unknown OS: " + os)
-        }
-    }
+    def nativePath(path: String): String = makeNativePath(path)
 }
