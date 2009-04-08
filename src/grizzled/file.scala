@@ -292,13 +292,14 @@ object file
                 if (matches.length > 0)
                 {
                     if (last)
+                        // Save the matches, and stop.
                         result ++= matches
 
                     else
                     {
+                        // Must continue recursing.
                         val remainingPieces = pieces.drop(1)
-                        for (m <- matches;
-                             if (new File(m).isDirectory))
+                        for (m <- matches; if (new File(m).isDirectory))
                         {
                             val subResult = doGlob(remainingPieces, m)
                             for (partialPath <- subResult)
