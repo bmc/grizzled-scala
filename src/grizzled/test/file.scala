@@ -183,6 +183,7 @@ class FileTest extends GrizzledFunSuite
                        "/" -> "/",
                        "//" -> "/",
                        "./." -> ".",
+                       "./bar" -> "bar",
                        "///" -> "/",
                        "//////////////////." -> "/")
 

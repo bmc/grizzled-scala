@@ -1109,29 +1109,32 @@ object file
                 //
                 // Note: Must also account for a single leading ".", which
                 // must be preserved
-                val pieces1 = path.split("/").toList
-                val (prefix, pieces2) = 
-                    if (pieces1.length == 0)
-                        (Nil, Nil)
-                    else if (pieces1(0) == ".")
-                        pieces1 splitAt 1
-                    else
-                        (Nil, pieces1)
+                val pieces =
+                    path.split("/").toList match
+                    {
+                        case Nil              => Nil
+                        case "." :: remainder => remainder
+                        case other            => other
+                    }
 
-                val normalizedPieces1 = normalizePathPieces(pieces2)
+                val normalizedPieces1 = normalizePathPieces(pieces)
 
                 // Remove any leading ".." that shouldn't be there.
                 val normalizedPieces2 =
                     if (path startsWith "/")
-                        prefix ++ normalizedPieces1 dropWhile (_ == "..")
+                        normalizedPieces1 dropWhile (_ == "..")
                     else
-                        prefix ++ normalizedPieces1
+                        normalizedPieces1
 
-                if (initialSlashes > 0)
+                val result =
                     ("/" * initialSlashes) + (normalizedPieces2 mkString "/")
+
+                // An empty string is "."
+                if (result == "")
+                    "."
                 else
-                    normalizedPieces2 mkString "/"
-       }
+                    result
+        }
     }
 
     /**
