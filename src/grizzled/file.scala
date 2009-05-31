@@ -481,7 +481,7 @@ object file
      *
      * @param top     name of starting directory
      * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>
-     *                otherwise
+     *                otherwise.
      *
      * @return iterator of triplets, as described above.
      */
