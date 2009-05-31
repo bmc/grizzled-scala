@@ -507,13 +507,13 @@ object file
         }
 
         if (topdown)
-            result += (top, dirs.toList, nondirs.toList)
+            result += Tuple(top, dirs.toList, nondirs.toList)
             
         for (name <- dirs)
             result ++= walk(top + fileSeparator + name, topdown)
         
         if (! topdown)
-            result += (top, dirs.toList, nondirs.toList)
+            result += Tuple(top, dirs.toList, nondirs.toList)
 
         result.toList
     }

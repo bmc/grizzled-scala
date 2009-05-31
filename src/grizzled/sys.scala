@@ -67,12 +67,19 @@ object sys
      */
     def systemProperties: Iterable[(String, String)] =
     {
-        import scala.collection.jcl.Hashtable
+        // System.properties aren't for-loopable by themselves.
 
-        // Need to wrap the standard Java system properties in something
-        // Scala's for loop can grok.
+        import scala.collection.mutable.ArrayBuffer
 
-        for ((k, v) <- new Hashtable(System.getProperties))
-            yield (k.toString, v.toString)
+        val temp = new ArrayBuffer[(String, String)]()
+        val e = System.getProperties.propertyNames
+        while (e.hasMoreElements)
+        {
+            val name = e.nextElement.toString
+            temp += Tuple(name, System.getProperty(name))
+        }
+
+        for (t <- temp)
+            yield t
     }
 }

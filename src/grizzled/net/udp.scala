@@ -245,7 +245,7 @@ trait UDPDatagramSocket
      */
     def receive(length: Int): (Array[Byte], Int) =
     {
-        val buf = Array.make[Byte](length, 0)
+        val buf = makeByteArray(length)
         val total = receive(buf)
 
         (buf, total)
@@ -278,7 +278,7 @@ trait UDPDatagramSocket
      */
     def receiveString(length: Int, encoding: String): String =
     {
-        val buf = Array.make[Byte](length, 0)
+        val buf = makeByteArray(length)
         receiveString(buf, encoding)
     }
 
@@ -344,6 +344,17 @@ trait UDPDatagramSocket
      */
     def receiveString(buf: Array[Byte]): String =
         receiveString(buf, "UTF-8")
+
+    /**
+     * Make a byte array of a given length, initialized to zeros.
+     *
+     * @param len  length
+     *
+     * @return the array of bytes, initialized to zeros
+     */
+    private def makeByteArray(length: Int): Array[Byte] =
+        {for (i <- 1 to length) yield 0.asInstanceOf[Byte]}.toArray
+
 }
 
 /**

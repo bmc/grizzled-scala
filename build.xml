@@ -71,6 +71,7 @@ You must set the SCALA_HOME environment variable.
   <property name="scala.lib" value="${scala.home}/lib"/>
   <property name="scala.compiler" value="${scala.lib}/scala-compiler.jar"/>
   <property name="scala.library" value="${scala.lib}/scala-library.jar"/>
+  <property name="scala.extra.lib.dir" value="${scala.home}/../extra/lib/"/>
 
   <dirname property="top.dir" file="${ant.file}"/> <!-- path to this dir -->
   <property name="src.top.relative" value="src"/>
@@ -118,6 +119,10 @@ You must set the SCALA_HOME environment variable.
   <path id="lib.classpath">
     <pathelement location="${scala.library}"/>
 
+    <fileset dir="${scala.extra.lib.dir}">
+      <include name="**/*.jar"/>
+    </fileset>
+
     <fileset dir="${scala.lib}">
       <include name="**/*.jar"/>
     </fileset>
@@ -126,6 +131,10 @@ You must set the SCALA_HOME environment variable.
   <taskdef name="scalatest" classname="org.scalatest.tools.ScalaTestTask">
     <classpath>
       <fileset dir="${scala.lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+
+      <fileset dir="${scala.extra.lib.dir}">
         <include name="**/*.jar"/>
       </fileset>
     </classpath>
