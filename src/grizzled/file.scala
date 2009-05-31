@@ -497,23 +497,26 @@ object file
         val fTop = new File(top)
         val names = fTop.list
 
-        for (name <- names)
+        if (names != null)
         {
-            val f = new File(top + fileSeparator + name)
-            if (f.isDirectory)
-                dirs += name
-            else
-                nondirs += name
-        }
+            for (name <- names)
+            {
+                val f = new File(top + fileSeparator + name)
+                if (f.isDirectory)
+                    dirs += name
+                else
+                    nondirs += name
+            }
 
-        if (topdown)
-            result += Tuple(top, dirs.toList, nondirs.toList)
+            if (topdown)
+                result += Tuple(top, dirs.toList, nondirs.toList)
             
-        for (name <- dirs)
-            result ++= walk(top + fileSeparator + name, topdown)
+            for (name <- dirs)
+                result ++= walk(top + fileSeparator + name, topdown)
         
-        if (! topdown)
-            result += Tuple(top, dirs.toList, nondirs.toList)
+            if (! topdown)
+                result += Tuple(top, dirs.toList, nondirs.toList)
+        }
 
         result.toList
     }
