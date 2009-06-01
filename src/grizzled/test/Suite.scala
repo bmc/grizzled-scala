@@ -1,4 +1,5 @@
-import org.scalatest.FunSuite
+import scala.reflect.Manifest
+import org.scalatest.{FunSuite, Assertions}
 
 /**
  * A version of ScalaTest's FunSuite that actually aborts the running test
@@ -6,12 +7,12 @@ import org.scalatest.FunSuite
  */
 class GrizzledFunSuite extends FunSuite
 {
-    override def intercept[T <: AnyRef](cls: java.lang.Class[T], message: Any)
-                                       (f: => Any): T =
+    override def intercept[T <: AnyRef](f: => Any)
+                                       (implicit manifest: Manifest[T]): T =
     {
         try
         {
-            super.intercept(cls, message)(f)
+            super.intercept(f)(manifest)
         }
 
         catch
@@ -23,7 +24,7 @@ class GrizzledFunSuite extends FunSuite
         }
     }
 
-    override def expect(expected: Any, message: Any)(actual: => Any) 
+    override def expect(expected: Any, message: Any)(actual: Any) 
     {
         try
         {

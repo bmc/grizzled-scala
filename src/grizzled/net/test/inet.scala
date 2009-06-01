@@ -14,22 +14,17 @@ class IPAddressTest extends GrizzledFunSuite
 
         ("localhost",              List(127, 0, 0, 1), "127.0.0.1"),
         ("127.0.0.1",              List(127, 0, 0, 1), "127.0.0.1"),
-        (List(127, 0, 0, 1),       List(127, 0, 0, 1), "127.0.0.1"),
         (Array(127, 0, 0, 1),      List(127, 0, 0, 1), "127.0.0.1"),
-        (List(192, 168, 2, 100),   List(192, 168, 2, 100), "192.168.2.100"),
         (Array(192, 168, 2, 100),  List(192, 168, 2, 100), "192.168.2.100"),
-        (List(192, 168, 2),        List(192, 168, 2, 0), "192.168.2.0"),
         (Array(192, 168, 2),       List(192, 168, 2, 0), "192.168.2.0"),
-        (List(192, 167),           List(192, 167, 0, 0), "192.167.0.0"),
         (Array(192, 167),          List(192, 167, 0, 0), "192.167.0.0"),
-        (List(192),                List(192, 0, 0, 0), "192.0.0.0"),
         (Array(192),               List(192, 0, 0, 0), "192.0.0.0"),
         (Array(192, 1, 1, 10, 3),  List(192, 1, 1, 10, 3, 0, 0, 0,
                                           0, 0, 0,  0, 0, 0, 0, 0),
                                    "c001:10a:300:0:0:0:0:0"),
-        (List(255, 255, 255, 255), List(255, 255, 255, 255), "255.255.255.255"),
-        (List(255, 255, 255, 0),   List(255, 255, 255, 0), "255.255.255.0"),
-        (List(0, 0, 0, 0),         List(0, 0, 0, 0), "0.0.0.0")
+        (Array(255, 255, 255, 255),List(255, 255, 255, 255), "255.255.255.255"),
+        (Array(255, 255, 255, 0),  List(255, 255, 255, 0), "255.255.255.0"),
+        (Array(0, 0, 0, 0),        List(0, 0, 0, 0), "0.0.0.0")
     )
 
     def getIPAddress(input: AnyRef): IPAddress =
@@ -38,7 +33,6 @@ class IPAddressTest extends GrizzledFunSuite
             case s: String       => IPAddress("localhost")
             case a: Array[Int]   => IPAddress(a)
             case ab: Array[Byte] => IPAddress(ab)
-            case l: List[Int]    => IPAddress(l map (_ toByte))
             case _               => throw new AssertionError("oops")
         }
 
@@ -66,12 +60,15 @@ class IPAddressTest extends GrizzledFunSuite
             }
         }
 
-        intercept(classOf[IllegalArgumentException])
+        intercept[IllegalArgumentException]
         { 
             IPAddress( (for (i <- 0 to 20) yield i.toByte) toList )
         }
 
-        intercept(classOf[IllegalArgumentException]) { IPAddress(Nil) }
+        intercept[IllegalArgumentException]
+        {
+            IPAddress(Nil) 
+        }
     }
 
     test("IPAddress implicits")

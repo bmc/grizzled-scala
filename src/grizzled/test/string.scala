@@ -51,7 +51,7 @@ class StringTest extends GrizzledFunSuite
                                     input.toUpperCase);
             s <- permutations)
         {
-            intercept(classOf[IllegalArgumentException])
+            intercept[IllegalArgumentException]
             {
                 val b: Boolean = s
                 b

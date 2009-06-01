@@ -192,6 +192,7 @@ You must set the SCALA_HOME environment variable.
             excludes=""
             sourcepath=""
             deprecation="yes"
+            unchecked="yes"
             srcdir="${scala.src.dir}"
             classpathref="test.classpath"
             target="jvm-1.5"/>

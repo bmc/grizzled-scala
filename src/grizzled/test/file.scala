@@ -135,8 +135,8 @@ class FileTest extends GrizzledFunSuite
             ("/", List("foo", "bar"))             -> "foo/bar",
             ("/", List("."))                      -> ".",
             ("/", List("foo", "bar", "baz"))      -> "foo/bar/baz",
-            ("/", List("foo", "bar", "baz", ""))  -> "foo/bar/baz",
-            ("/", List("/foo", "bar", "baz"))     -> "foo/bar/baz",
+            ("/", List("foo", "bar", "baz", ""))  -> "foo/bar/baz/",
+            ("/", List("/foo", "bar", "baz"))     -> "/foo/bar/baz",
             ("/", List("/foo"))                   -> "/foo",
             ("/", List("/"))                      -> "/",
 
@@ -145,17 +145,17 @@ class FileTest extends GrizzledFunSuite
             ("\\", List("foo", "bar"))            -> "foo\\bar",
             ("\\", List("."))                     -> ".",
             ("\\", List("foo", "bar", "baz"))     -> "foo\\bar\\baz",
-            ("\\", List("foo", "bar", "baz", "")) -> "foo\\bar\\baz",
-            ("\\", List("\\foo", "bar", "baz"))   -> "foo\\bar\\baz",
+            ("\\", List("foo", "bar", "baz", "")) -> "foo\\bar\\baz\\",
+            ("\\", List("\\foo", "bar", "baz"))   -> "\\foo\\bar\\baz",
             ("\\", List("\\foo"))                 -> "\\foo",
             ("\\", List("\\"))                    -> "\\",
             ("\\", List("d:\\"))                  -> "d:\\"
         )
             
         for(((sep, pieces), expected) <- data)
-            expect(expected, "joinPath(\"" + pieces + "\", \"" + sep + "\")") 
+            expect(expected, "joinPath(\"" + sep + "\"" + pieces)
             {
-                joinPath(pieces, sep)
+                joinPath(sep, pieces)
             }
     }
 
