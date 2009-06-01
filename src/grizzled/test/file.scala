@@ -127,6 +127,38 @@ class FileTest extends GrizzledFunSuite
             }
     }
 
+    test("joinPath")
+    {
+        val data = Map(
+            ("/", List(""))                       -> "",
+            ("/", List("foo"))                    -> "foo",
+            ("/", List("foo", "bar"))             -> "foo/bar",
+            ("/", List("."))                      -> ".",
+            ("/", List("foo", "bar", "baz"))      -> "foo/bar/baz",
+            ("/", List("foo", "bar", "baz", ""))  -> "foo/bar/baz",
+            ("/", List("/foo", "bar", "baz"))     -> "foo/bar/baz",
+            ("/", List("/foo"))                   -> "/foo",
+            ("/", List("/"))                      -> "/",
+
+            ("\\", List(""))                      -> "",
+            ("\\", List("foo"))                   -> "foo",
+            ("\\", List("foo", "bar"))            -> "foo\\bar",
+            ("\\", List("."))                     -> ".",
+            ("\\", List("foo", "bar", "baz"))     -> "foo\\bar\\baz",
+            ("\\", List("foo", "bar", "baz", "")) -> "foo\\bar\\baz",
+            ("\\", List("\\foo", "bar", "baz"))   -> "foo\\bar\\baz",
+            ("\\", List("\\foo"))                 -> "\\foo",
+            ("\\", List("\\"))                    -> "\\",
+            ("\\", List("d:\\"))                  -> "d:\\"
+        )
+            
+        for(((sep, pieces), expected) <- data)
+            expect(expected, "joinPath(\"" + pieces + "\", \"" + sep + "\")") 
+            {
+                joinPath(pieces, sep)
+            }
+    }
+
     test("splitDrivePath")
     {
 

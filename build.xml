@@ -112,8 +112,10 @@ You must set the SCALA_HOME environment variable.
 
   <path id="test.classpath">
     <pathelement location="${scala.library}"/>
-    <pathelement location="${scala.lib}/scalatest.jar"/>
     <pathelement location="${build.classes.dir}"/>
+    <fileset dir="${scala.extra.lib.dir}">
+      <include name="**/*.jar"/>
+    </fileset>
   </path>
 
   <path id="lib.classpath">
