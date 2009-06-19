@@ -5,7 +5,7 @@ import scala.util.matching.Regex
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
 
-import java.io.{File, IOException}
+import java.io.{File, IOException, InputStream, OutputStream}
 
 class FileDoesNotExistException(message: String) extends Exception
 
@@ -747,6 +747,27 @@ object file
         copy(file, targetDir, true)
 
     /**
+     * Copy an input stream to an output stream, stopping on EOF. This
+     * method does no buffering. If you want buffering, make sure you use a
+     * <tt>java.io.BufferedInputStream</tt> and a
+     * <tt>java.io.BufferedOutputStream</tt>. This method does not close
+     * either stream.
+     *
+     * @param in   the input stream
+     * @param out  the output stream
+     */
+    def copyStream(in: InputStream, out: OutputStream): Unit =
+    {
+        val c: Int = in.read()
+        if (c != -1)
+        {
+            out.write(c)
+            // Tail recursion means never having to use a var.
+            copyStream(in, out)
+        }
+    }
+
+    /**
      * Copy a source file to a target file, using binary copying. The source
      * file must be a file. The target path can be a file or a directory; if
      * it is a directory, the target file will have the same base name as
@@ -774,20 +795,7 @@ object file
 
         try
         {
-            def copyNextByte(in: InputStream, out: OutputStream): Unit =
-            {
-                val c: Int = in.read()
-                if (c != -1)
-                {
-                    out.write(c)
-                    copyNextByte(in, out)
-                }
-            }
-
-            // Tail recursion means never having to use a var.
-            copyNextByte(in, out)
-
-            // Result
+            copyStream(in, out)
             target
         }
 
