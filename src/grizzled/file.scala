@@ -150,6 +150,41 @@ object file
         dirnameBasename(path, fileSeparator)
 
     /**
+     * Split a pathname into the directory name, basename, and extension
+     * pieces.
+     *
+     * @param pathname  the pathname
+     *
+     * @return a 3-tuple of (dirname, basename, extension)
+     */
+    def dirnameBasenameExtension(pathname: String): (String, String, String) =
+         dirnameBasenameExtension(pathname, fileSeparator)
+
+    private lazy val ExtRegexp = """^(.*)(\.[^.]+)$""".r
+
+    /**
+     * Split a pathname into the directory name, basename, and extension
+     * pieces.
+     *
+     * @param pathname the pathname
+     * @param fileSep  the file separator to use
+     *
+     * @return a 3-tuple of (dirname, basename, extension)
+     */
+    def dirnameBasenameExtension(pathname: String, fileSep: String):
+        (String, String, String) =
+    {
+        val (path1, extension) = pathname match
+        {
+            case ExtRegexp(pathNoExt, ext) => (pathNoExt, ext)
+            case _                         => (pathname, "")
+        }
+
+        val (dirname, basename) = dirnameBasename(path1, fileSep)
+        (dirname, basename, extension)
+    }
+
+    /**
      * Return the current working directory, as an absolute path.
      *
      * @return the current working directory

@@ -58,4 +58,24 @@ class StringTest extends GrizzledFunSuite
             }
         }
     }
+
+    test("tokenizing quoted strings")
+    {
+        val data = Map(
+            "a b c"                        -> List("a", "b", "c"),
+            "aa bb cc"                     -> List("aa", "bb", "cc"),
+            "\"aa\\\"a\" 'b'"              -> List("aa\"a", "b"),
+            "one two 'three\" four'"       -> List("one", "two", "three\" four"),
+            "\"a'b    c'\" 'b\\'c  d' a\"" -> List("a'b    c'", "b'c  d", "a\"")
+        )
+
+        for((input, expected) <- data)
+        {
+            expect(expected, "\"" + input + "\" -> " + expected.toString)
+            {
+                tokenizeWithQuotes(input)
+            }
+        }
+
+    }
 }

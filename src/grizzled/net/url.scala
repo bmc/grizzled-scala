@@ -3,7 +3,7 @@ package grizzled.net
 import grizzled.file
 
 import java.net.URL
-import java.io.{File, IOException}
+import java.io.{File, IOException, FileInputStream}
 
 /**
  * URL-related utility methods.
@@ -11,6 +11,24 @@ import java.io.{File, IOException}
 object url
 {
     private lazy val ExtRegexp = """^(.*)(\.[^.]+)$""".r
+
+    private[net] def getOutputFile(url: URL): File =
+    {
+        val urlPath = url.getPath
+        val extension = urlPath match
+        {
+            case ExtRegexp(pathNoExt, ext) => ext
+            case _                         => ".dat"
+        }
+
+        urlPath(urlPath.length - 1) match
+        {
+            case '/' => File.createTempFile("urldownload", extension)
+            case _   => new File(file.joinPath(
+                            System.getProperty("java.io.tmpdir"),
+                            file.basename(urlPath)))
+        }
+    }
 
     /**
      * Download the specified URL to a file. The name of the file is
@@ -22,24 +40,10 @@ object url
      */
     def download(url: String): File =
     {
-        val u = new URL(url)
-        val urlPath = u.getPath
-        val extension = urlPath match
-        {
-            case ExtRegexp(pathNoExt, ext) => ext
-            case _                         => ".dat"
-        }
+        val output = getOutputFile(new URL(url))
 
-        val pathOut = urlPath(urlPath.length - 1) match
-        {
-            case '/' => File.createTempFile("urldownload", extension)
-            case _   => new File(file.joinPath(
-                            System.getProperty("java.io.tmpdir"),
-                            file.basename(urlPath)))
-        }
-
-        download(new URL(url), pathOut)
-        pathOut
+        download(new URL(url), output)
+        output
     }
 
     /**
