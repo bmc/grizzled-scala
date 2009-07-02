@@ -16,18 +16,8 @@ import org.gnu.readline.{Readline => JavaReadline,
  */
 private[javareadline] class ReadlineHistory extends History
 {
-    /**
-     * Add a line to the history.
-     *
-     * @param line  the line to add
-     */
-    def +=(line: String) = JavaReadline.addToHistory(line)
+    protected def append(line: String) = JavaReadline.addToHistory(line)
 
-    /**
-     * Get the contents of the history buffer, in a list.
-     *
-     * @return the history lines
-     */
     def get: List[String] =
     {
         import _root_.java.util.ArrayList
@@ -40,17 +30,24 @@ private[javareadline] class ReadlineHistory extends History
         result.toList
     }
 
-    /**
-     * Clear the history buffer
-     */
     def clear = JavaReadline.clearHistory
+
+    def last: Option[String] =
+    {
+        val history = get
+        history match
+        {
+            case Nil => None
+            case _   => Some(history.last)
+        }
+    }
 }
 
 /**
  * JavaReadline implementation of the Readline trait.
  */
 private[readline] class JavaReadlineImpl(appName: String,
-                                         val autoAddHistory: Boolean,
+                                         override val autoAddHistory: Boolean,
                                          library: JavaReadlineLibrary)
     extends Readline
 {

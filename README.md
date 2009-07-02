@@ -9,10 +9,11 @@ I can easily use it in multiple projects.
 
 Currently, the API is broken into a number of modules:
 
+- `grizzled.file`: File system-related utility functions.
 - `grizzled.net`: Network-related stuff, mostly Scala wrappers to simplify or
   extend the Java `java.net` classes.
+- `grizzled.readline`: Front-end API for various readline-like libraries.
 - `grizzled.string`: Various useful string- and text-related functions.
-- `grizzled.file`: File system-related utility functions.
 - `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
 
 

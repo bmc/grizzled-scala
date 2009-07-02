@@ -7,16 +7,40 @@
 package grizzled.readline
 
 /**
- * Models a readline history.
+ * Models a Readline history: an object that holds previously read
+ * lines.
  */
 trait History
 {
     /**
-     * Add a line to the history.
+     * Add a line to the history. Does not add the line if it is
+     * identical to the most recently added line.
      *
      * @param line  the line to add
      */
-    def +=(line: String)
+    def +=(line: String) =
+    {
+        last match
+        {
+            case None    => append(line)
+            case Some(s) => if (s != line) append(line)
+        }
+    }
+
+    /**
+     * Unconditionally appends the specified line to the history.
+     *
+     * @param line  the line to add
+     */
+    protected def append(line: String)
+
+    /**
+     * Get the last (i.e., most recent) entry from the buffer.
+     *
+     * @return the most recent entry, as an <tt>Option</tt>, or
+     *         <tt>None</tt> if the history buffer is empty
+     */
+    def last: Option[String]
 
     /**
      * Get the contents of the history buffer, in a list.
@@ -178,11 +202,25 @@ object Readline
      * supported:
      *
      * <ul>
-     *   <li><tt>GNUReadline</tt>: The GNU Readline library
-     *   <li><tt>Editline</tt> The Editline library, original from BSD Unix
-     *   <li><tt>Getline</tt> The Getline library
-     *   <li><tt>JLine</tt> The JLine library
-     *   <li><tt>Simple</tt> A simple, not-editing, pure Java implementation
+     *   <li><tt>GNUReadline</tt>: The GNU Readline library. Requires the
+     *       JavaReadline jar
+     *       (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>)
+     *       and the GNU Readline library
+     *       (<a href="http://tiswww.case.edu/php/chet/readline/rltop.html">http://tiswww.case.edu/php/chet/readline/rltop.html</a>).
+     *
+     *   <li><tt>Editline</tt>: The Editline library, originally from BSD Unix.
+     *       Requires the JavaReadline jar
+     *       (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>)
+     *       and the Editline library
+     *       <a href="http://www.thrysoee.dk/editline/">http://www.thrysoee.dk/editline/</a>.
+     *
+     *   <li><tt>Getline</tt>: The Getline library. Requires the JavaReadline jar
+     *       (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>)
+     *       and the Getline library.
+     *
+     *   <li><tt>JLine</tt>: The JLine library. Requires the JLine jar
+     *       (<a href="http://jline.sourceforge.net/">http://jline.sourceforge.net/</a>).
+     *   <li><tt>Simple</tt>: A simple, not-editing, pure Java implementation
      * </ul>
      */
     object ReadlineType extends Enumeration

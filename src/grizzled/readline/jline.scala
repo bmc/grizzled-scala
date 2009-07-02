@@ -14,18 +14,8 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
 {
     val history = reader.getHistory
 
-    /**
-     * Add a line to the history.
-     *
-     * @param line  the line to add
-     */
-    def +=(line: String) = history.addToHistory(line)
+    protected def append(line: String) = history.addToHistory(line)
 
-    /**
-     * Get the contents of the history buffer, in a list.
-     *
-     * @return the history lines
-     */
     def get: List[String] =
     {
         import scala.collection.mutable.ArrayBuffer
@@ -37,17 +27,23 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
         result.toList
     }
 
-    /**
-     * Clear the history buffer
-     */
     def clear = history.clear
+
+    def last: Option[String] =
+    {
+        val s = history.current
+        if ((s == null) || (s.length == 0)) 
+            None 
+        else
+            Some(s)
+    }
 }
 
 /**
  * JLine implementation of the Readline trait.
  */
 private[readline] class JLineImpl(appName: String,
-                                  val autoAddHistory: Boolean)
+                                  override val autoAddHistory: Boolean)
     extends Readline
 {
     val name = this.getClass.getName

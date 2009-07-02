@@ -15,31 +15,27 @@ private[simple] class SimpleHistory extends History
 
     private val history = new ArrayBuffer[String]
 
-    /**
-     * Add a line to the history.
-     *
-     * @param line  the line to add
-     */
-    def +=(line: String) = history += line
+    protected def append(line: String) = history += line
 
-    /**
-     * Get the contents of the history buffer, in a list.
-     *
-     * @return the history lines
-     */
     def get: List[String] = history.toList
 
-    /**
-     * Clear the history buffer
-     */
     def clear = history.clear
+
+    def last: Option[String] =
+    {
+        history.length match
+        {
+            case 0 => None
+            case _ => Some(history.last)
+        }
+    }
 }
 
 /**
  * Simple implementation of the Readline trait.
  */
 private[readline] class SimpleImpl(appName: String,
-                                   val autoAddHistory: Boolean)
+                                   override val autoAddHistory: Boolean)
     extends Readline
 {
     import java.io.{InputStreamReader, LineNumberReader}
