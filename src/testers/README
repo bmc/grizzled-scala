@@ -1,0 +1,7 @@
+This directory contains miscellaneous, non-automated testers. Generally,
+the files in here are intended to be run manually at the command line,
+often as Scala scripts. I use them to test various assumptions while I'm
+developing or modifying the code.
+
+These scripts are NOT for use with ScalaCheck or ScalaTest, and they are
+deliberately excluded from ScalaTest runs.
