@@ -120,7 +120,8 @@ private[readline] class JavaReadlineImpl(appName: String,
             {
                 // First call to completer. Get list of matches.
 
-                val matches = self.completer.complete(text, text)
+                val currentLine = JavaReadline.getLineBuffer
+                val matches = self.completer.complete(text, currentLine)
                 iterator = matches.elements
             }
 

@@ -51,8 +51,8 @@ package grizzled.cmd
 
 import grizzled.readline.Readline.ReadlineType._
 import grizzled.readline.Readline.ReadlineType
-import grizzled.readline.Readline
-import grizzled.readline.History
+import grizzled.readline.{Readline, Completer, History}
+
 import grizzled.string.implicits._
 
 import java.io.EOFException
@@ -312,6 +312,17 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
+     * Completion handler.
+     */
+    private object CommandCompleter extends Completer
+    {
+        def complete(token: String, line: String): List[String] =
+        {
+            Nil
+        }
+    }
+
+    /**
      * Called just before the main loop (<tt>mainLoop()</tt>) begins its
      * command loop, this hook method can be used for initialization. The
      * default implementation does nothing.
@@ -343,20 +354,6 @@ abstract class CommandInterpreter(val appName: String,
      */
     final def mainLoop: Unit =
     {
-        def splitCommandAndArgs(line: String): (String, String) =
-        {
-            // Strip the command name.
-            val lTrimmed = line.ltrim
-            val firstBlank = lTrimmed.indexOf(' ')
-
-            if (firstBlank == -1)
-                (lTrimmed, "")
-            else
-                (lTrimmed.substring(0, firstBlank).trim,
-                 lTrimmed.substring(firstBlank).ltrim)
-
-        }
-
         def process(line: String)
         {
             val (commandName, unparsedArgs) = splitCommandAndArgs(line)
@@ -405,6 +402,27 @@ abstract class CommandInterpreter(val appName: String,
         {
             postLoop
         }
+    }
+
+    /**
+     * Split a command from its argument list, returning the command as
+     * one string and the remaining argument string as the other string.
+     *
+     * @param line  the input type
+     *
+     * @return A (<i>commandName</i>, <i>argumentString</i>) 2-tuple
+     */
+    private def splitCommandAndArgs(line: String): (String, String) =
+    {
+        // Strip the command name.
+        val lTrimmed = line.ltrim
+        val firstBlank = lTrimmed.indexOf(' ')
+
+        if (firstBlank == -1)
+            (lTrimmed, "")
+        else
+            (lTrimmed.substring(0, firstBlank).trim,
+             lTrimmed.substring(firstBlank).ltrim)
     }
 
     /**
