@@ -121,7 +121,7 @@ final class GrizzledString(val string: String)
  * <p>Note how the wrapping logic will "tab" past the prefix on wrapped
  * lines.</p>
  *
- * <p>This method also support the notion of an indentation level, which is
+ * <p>This method also supports the notion of an indentation level, which is
  * independent of the prefix. A non-zero indentation level causes each line,
  * including the first line, to be indented that many characters. Thus,
  * initializing a <tt>WordWrapper</tt> object with an indentation value of 4
@@ -137,24 +137,82 @@ final class GrizzledString(val string: String)
  *        on the rendered output.
  *   <li> Wrapping an already wrapped string is an invitation to trouble.
  * </ol>
+ *
+ * @param wrapWidth   the number of characters after which to wrap each line
+ * @param indentation how many characters to indent
+ * @param prefix      the prefix to use, or "" for none. Cannot be null.
+ * @param indentChar  the indentation character to use.
  */
-class WordWrapper(val lineLength:   Int,
+class WordWrapper(val wrapWidth:    Int,
                   val indentation:  Int,
                   val prefix:       String,
                   val indentChar:   Char)
 {
-    def this(lineLength: Int) = this(lineLength, 0, "", ' ')
+    require(prefix != null)
 
-    def this(lineLength: Int, indentation: Int) = 
-        this(lineLength, indentation, "", ' ')
+    /**
+     * Alternate constructor that allows all parameters to default as follows:
+     *
+     * <ul>
+     *  <li> <tt>wrapWidth=79</tt>
+     *  <li> <tt>indentation=0</tt>
+     *  <li> <tt>prefix=""</tt>
+     *  <li> <tt>indentChar=' '</tt>
+     * </ul>
+     */ 
+    def this() = this(79, 0, "", ' ')
 
-    def this(lineLength: Int, indentation: Int, prefix: String) = 
-        this(lineLength, indentation, prefix, ' ')
+    /**
+     * Alternate constructor that specifies only a width, defaulting all
+     * other constructor parameters as follows:
+     *
+     * <ul>
+     *  <li> <tt>indentation=0</tt>
+     *  <li> <tt>prefix=""</tt>
+     *  <li> <tt>indentChar=' '</tt>
+     * </ul>
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     */ 
+    def this(wrapWidth: Int) = this(wrapWidth, 0, "", ' ')
 
-    def this() = this(79)
+    /**
+     * Alternate constructor that specifies only a width and an indentation
+     * level, defaulting all other constructor parameters as follows:
+     *
+     * <ul>
+     *  <li> <tt>prefix=""</tt>
+     *  <li> <tt>indentChar=' '</tt>
+     * </ul>
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     * @param indentation how many characters to indent
+     */ 
+    def this(wrapWidth: Int, indentation: Int) = 
+        this(wrapWidth, indentation, "", ' ')
+
+    /**
+     * Alternate constructor that specifies a width, an indentation level and
+     * a prefix, defaulting the <tt>indentChar</tt> parameter to a blank.
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     * @param indentation how many characters to indent
+     * @param prefix      the prefix to use, or "" for none. Cannot be null.
+     */ 
+    def this(wrapWidth: Int, indentation: Int, prefix: String) = 
+        this(wrapWidth, indentation, prefix, ' ')
 
     private val prefixLength = prefix.length
 
+    /**
+     * Wrap a string, using the wrap width, prefix, indentation and indentation
+     * character that were specified to the <tt>WordWrapper</tt> constructor.
+     * The resulting string may have embedded newlines in it.
+     *
+     * @param s  the string to wrap
+     *
+     * @return the wrapped string
+     */
     def wrap(s: String): String =
     {
         import scala.collection.mutable.ArrayBuffer
@@ -163,8 +221,17 @@ class WordWrapper(val lineLength:   Int,
         val indentString = indentChar.toString
         val prefixIndentChars = indentString * prefixLength
         val indentChars = indentString * indentation
+        val buf = new ArrayBuffer[String]
+        var thePrefix = prefix
 
-        def assembleLine(buf: ArrayBuffer[String], usePrefix: String): String =
+        def usePrefix =
+        {
+            val result = thePrefix
+            thePrefix = prefixIndentChars
+            result
+        }
+
+        def assembleLine(buf: ArrayBuffer[String]): String =
             usePrefix + indentChars + buf.mkString(" ")
 
         def wrapOneLine(line: String): String =
@@ -174,9 +241,6 @@ class WordWrapper(val lineLength:   Int,
             for (word <- line.split("[\t ]"))
             {
                 val wordLength = word.length
-                val usePrefix = if (result.length == 0) prefix 
-                                else prefixIndentChars
-
                 // Current length is the length of each word in the lineOut
                 // buffer, plus a single blank between them, plus the prefix
                 // length and indentation length, if any. Use a map operation
@@ -186,9 +250,9 @@ class WordWrapper(val lineLength:   Int,
                 val wordLengths = (0 /: lineOut.map(_.length)) (_ + _)
                 val currentLength = totalBlanks + wordLengths + prefixLength +
                                     indentation
-                if ((wordLength + currentLength + 1) > lineLength)
+                if ((wordLength + currentLength + 1) > wrapWidth)
                 {
-                    result += assembleLine(lineOut, usePrefix)
+                    result += assembleLine(lineOut)
                     lineOut.clear
                 }
 
@@ -196,16 +260,11 @@ class WordWrapper(val lineLength:   Int,
             }
 
             if (lineOut.length > 0)
-            {
-                val usePrefix = if (result.length == 0) prefix 
-                                else prefixIndentChars
-                result += assembleLine(lineOut, usePrefix)
-            }
+                result += assembleLine(lineOut)
 
             result.mkString("\n").rtrim
         }
 
-        val buf = new ArrayBuffer[String]
         for (line <-  s.split("\n"))
             buf += wrapOneLine(line)
 
