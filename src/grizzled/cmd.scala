@@ -95,24 +95,21 @@ trait CommandHandler
         }
 
     /**
-     * Compares a prefix string to this command name, to determine whether
-     * the prefix string could possibly be completed by this command's name.
-     * This method is obviously used to facilitate tab-completion. The default
-     * implementation of this method simply forces both strings to lower case
-     * before performing a substring comparison between them. Overridden
-     * definitions of this method can apply other matching criteria.
+     * Compares a prefix string to this command name and its aliases, to
+     * determine whether the prefix string could possibly be completed by
+     * the name or aliases. This method is obviously used to facilitate
+     * tab-completion. The default implementation of this method simply
+     * forces both strings to lower case before performing a substring
+     * comparison between them. Overridden definitions of this method can
+     * apply other matching criteria.
      *
      * @param prefix  the prefix to compare
      *
-     * @return <tt>true</tt> if this command's name could be a valid completion
-     *         of <tt>prefix</tt>, <tt>false</tt> if not
+     * @return a list of the strings (name and/or aliases) that could be
+     *         completed by <tt>prefix</tt>, or <tt>Nil</tt>.
      */
-    def couldComplete(prefix: String): Boolean = 
-        allNames.filter(_.toLowerCase startsWith prefix.toLowerCase) match
-        {
-            case Nil => false
-            case _   => true
-        }
+    def commandNameCompletions(prefix: String): List[String] =
+        allNames.filter(_.toLowerCase startsWith prefix.toLowerCase)
 
     /**
      * This method is called after a line is read that matches this command,
@@ -138,22 +135,17 @@ trait CommandHandler
      * @param command      the command that invoked this handler
      * @param unparsedArgs the remainder of the unparsed command line
      */
-    def handle(command: String, unparsedArgs: String): Unit
+    def runCommand(command: String, unparsedArgs: String): Unit
 
     /**
      * Perform completion on the command, returning the possible completions.
      *
-     * @param commandLine  the entire command line so far
      * @param token        the token within the command line to complete
-     * @param tokenStart   the starting index of the token within the line
-     * @param tokenEnd     the ending index of the token within the line
+     * @param commandLine  the entire command line so far
      *
      * @return the list of completions for <tt>token</tt>, or <tt>Nil</tt>
      */
-    def complete(commandLine: String,
-                 token:       String,
-                 tokenStart:  Int,
-                 tokenEnd:    Int): List[String] = Nil
+    def complete(token: String, commandLine: String): List[String] = Nil
 }
 
 /**
@@ -163,12 +155,19 @@ abstract class CommandInterpreter(val appName: String,
                                   readlineCandidates: List[ReadlineType])
 {
     /**
+     * For sorting names.
+     */
+    private lazy val NameSorter = (a: String, b: String) => a < b
+
+    /**
      * The readline implementation being used.
      */
     val readline = findReadline(readlineCandidates)
 
     if (readline == null)
         throw new Exception("Unable to load a readline library.")
+
+    readline.completer = CommandCompleter
 
     /**
      * Get the history object being used to record command history.
@@ -255,7 +254,6 @@ abstract class CommandInterpreter(val appName: String,
         override val aliases = List("?")
         override val help = """This message"""
 
-        private lazy val nameSorter = (a: String, b: String) => a < b
         private val OutputWidth = 79
 
         private def helpHelp =
@@ -264,7 +262,7 @@ abstract class CommandInterpreter(val appName: String,
 
             // Help only.
 
-            val commandNames = allHandlers.map(_.name).sort(nameSorter)
+            val commandNames = sortedCommandNames(false)
 
             println("Help is available for the following commands:")
             println("-" * OutputWidth)
@@ -302,7 +300,7 @@ abstract class CommandInterpreter(val appName: String,
             }
         }
 
-        def handle(command: String, unparsedArgs: String): Unit =
+        def runCommand(command: String, unparsedArgs: String): Unit =
         {
             if (unparsedArgs == "")
                 helpHelp
@@ -317,8 +315,73 @@ abstract class CommandInterpreter(val appName: String,
     private object CommandCompleter extends Completer
     {
         def complete(token: String, line: String): List[String] =
+            unsortedCompletions(token, line).sort(NameSorter)
+
+        private def unsortedCompletions(token: String, 
+                                        line: String): List[String] =
         {
-            Nil
+            if (line == "")
+            {
+                // Tab completion at the beginning of the line. Return a
+                // list of all commands.
+
+                sortedCommandNames(true)
+            }
+
+            else
+            {
+                val (commandName, unparsedArgs) = splitCommandAndArgs(line)
+
+                if (unparsedArgs == "")
+                {
+                    if (token == "")
+                    {
+                        // Command is complete, but there are no arguments,
+                        // and the user pressed TAB after the completed
+                        // command. Treat this as completion for a given
+                        // command.
+                        completeForCommand(commandName, token, line)
+                    }
+
+                    else
+                    {
+                        // Treat this as completion of a command name.
+
+                        matchingCommandsFor(token)
+                    }
+                }
+
+                else
+                {
+                    // Completion for a specific command. Find the handler
+                    // and let it do the work.
+                    completeForCommand(commandName, token, line)
+                }
+            }
+        }
+
+        private def matchingCommandsFor(token: String): List[String] =
+        {
+            val completions =
+            {
+                for {handler <- allHandlers
+                     val completions = handler.commandNameCompletions(token)
+                     if (completions != Nil)}
+                yield completions
+            }.toList
+
+            completions.flatten[String]
+        }
+
+        private def completeForCommand(commandName: String,
+                                       token:       String,
+                                       line:        String): List[String] =
+        {
+            findCommand(commandName) match
+            {
+                case None          => Nil
+                case Some(handler) => handler.complete(token, line)
+            }
         }
     }
 
@@ -360,13 +423,13 @@ abstract class CommandInterpreter(val appName: String,
 
             findCommand(commandName) match
             {
-                case None    => 
+                case None  => 
                     println("*** Unknown command: " + commandName)
-                case Some(c) => 
-                    if (c.moreInputNeeded(line))
+                case Some(handler) => 
+                    if (handler.moreInputNeeded(line))
                         readAndProcess(line, secondaryPrompt)
                     else
-                        c.handle(commandName, unparsedArgs)
+                        handler.runCommand(commandName, unparsedArgs)
             }
         }
 
@@ -475,6 +538,28 @@ abstract class CommandInterpreter(val appName: String,
             case Nil       => None
             case List(cmd) => Some(cmd)
         }
+    }
+
+    /**
+     * Get a list of all command names, sorted.
+     *
+     * @param includeAliases whether or not to include aliases
+     *
+     * @return All command names, sorted.
+     */
+    private def sortedCommandNames(includeAliases: Boolean): List[String] =
+    {
+        val namesOnly = allHandlers.map(_.name)
+        val allNames = 
+            if (includeAliases)
+                // Extract the aliases, producing a list of lists of strings.
+                // Then, flatten that list of lists into a single list of
+                // strings.
+                namesOnly ::: allHandlers.map(_.aliases).flatten[String]
+            else
+                namesOnly
+
+        allNames.sort(NameSorter)
     }
 }
 

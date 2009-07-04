@@ -144,7 +144,7 @@ private[readline] class JavaReadlineImpl(appName: String,
         {
             val s = JavaReadline.readline(prompt, /* add to history */ false)
             if (s == null)
-                None
+                Some("")
             else
                 Some(s)
         }

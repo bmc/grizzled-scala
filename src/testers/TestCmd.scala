@@ -6,10 +6,16 @@ import grizzled.string.implicits._
 object Foo extends CommandHandler
 {
     val name = "foo"
+    private def validArgs = List("bar", "baz", "fred")
     override val aliases = List("fool")
     val help = """Does that foo thang"""
-    def handle(commandName: String, unparsedArgs: String): Unit = 
+    def runCommand(commandName: String, unparsedArgs: String): Unit = 
         println("*** " + commandName + " " + unparsedArgs)
+    override def complete(token: String, line: String): List[String] =
+        if (token == "")
+            validArgs
+        else
+            validArgs.filter(_ startsWith token)
 }
 
 class Prompt(val cmd: Test) extends CommandHandler
@@ -24,7 +30,7 @@ class Prompt(val cmd: Test) extends CommandHandler
     override def moreInputNeeded(line: String) = (! line.rtrim.endsWith("."))
 
     // Handle the command by changing the prompt.
-    def handle(commandName: String, unparsedArgs: String): Unit = 
+    def runCommand(commandName: String, unparsedArgs: String): Unit = 
     {
         if (unparsedArgs.length > 1)
 	    cmd.prompt = unparsedArgs.substring(0, unparsedArgs.length -1)

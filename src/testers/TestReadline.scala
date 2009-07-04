@@ -55,16 +55,19 @@ object TestReadline
         while (line != None)
         {
             val s = line.get
-            if ((s == "history") || (s == "h"))
+            if (s != "")
             {
-                for ((s, i) <- r.history.get.zipWithIndex)
-                    println(i + ": " + s)
-            }
+                if ((s == "history") || (s == "h"))
+                {
+                    for ((s, i) <- r.history.get.zipWithIndex)
+                        println(i + ": " + s)
+                }
 
-            else
-            {
-                r.history += s
-                println(s)
+                else
+                {
+                    r.history += s
+                    println(s)
+                }
             }
 
             line = r.readline("? ")
