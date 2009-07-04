@@ -43,6 +43,7 @@
 \*---------------------------------------------------------------------------*/
 
 import org.scalatest.FunSuite
+import grizzled.string._
 import grizzled.string.util._
 import grizzled.string.implicits._
 
@@ -110,7 +111,7 @@ class StringTest extends GrizzledFunSuite
             "a b c"                        -> List("a", "b", "c"),
             "aa bb cc"                     -> List("aa", "bb", "cc"),
             "\"aa\\\"a\" 'b'"              -> List("aa\"a", "b"),
-            "one two 'three\" four'"       -> List("one", "two", "three\" four"),
+            "one two '3\" four'"       -> List("one", "two", "3\" four"),
             "\"a'b    c'\" 'b\\'c  d' a\"" -> List("a'b    c'", "b'c  d", "a\"")
         )
 
@@ -158,6 +159,80 @@ class StringTest extends GrizzledFunSuite
             expect(expected, "\"" + input + "\" -> " + expected.toString)
             {
                 input.rtrim
+            }
+        }
+    }
+
+    test("WordWrapper")
+    {
+        val s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "In congue tincidunt fringilla. Sed interdum nibh vitae " +
+                "libero fermentum id dictum risus facilisis. Pellentesque " +
+                "habitant morbi tristique senectus et netus et malesuada " +
+                "fames ac turpis egestas. Sed ante nisi, pharetra ut " +
+                "eleifend vitae, congue ut quam. Vestibulum ante ipsum " +
+                "primis in."
+
+        val data = Map(
+            (s, 79, 0, "", ' ') ->
+"""Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue tincidunt
+fringilla. Sed interdum nibh vitae libero fermentum id dictum risus facilisis.
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+turpis egestas. Sed ante nisi, pharetra ut eleifend vitae, congue ut quam.
+Vestibulum ante ipsum primis in.""",
+
+            (s, 40, 0, "", ' ') ->
+"""Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. In congue tincidunt
+fringilla. Sed interdum nibh vitae
+libero fermentum id dictum risus
+facilisis. Pellentesque habitant morbi
+tristique senectus et netus et malesuada
+fames ac turpis egestas. Sed ante nisi,
+pharetra ut eleifend vitae, congue ut
+quam. Vestibulum ante ipsum primis in.""",
+
+            (s, 40, 5, "", ' ') ->
+"""     Lorem ipsum dolor sit amet,
+     consectetur adipiscing elit. In
+     congue tincidunt fringilla. Sed
+     interdum nibh vitae libero
+     fermentum id dictum risus
+     facilisis. Pellentesque habitant
+     morbi tristique senectus et netus
+     et malesuada fames ac turpis
+     egestas. Sed ante nisi, pharetra ut
+     eleifend vitae, congue ut quam.
+     Vestibulum ante ipsum primis in.""",
+
+            (s, 60, 0, "foobar: ", ' ') ->
+"""foobar: Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. In congue tincidunt fringilla. Sed interdum
+        nibh vitae libero fermentum id dictum risus
+        facilisis. Pellentesque habitant morbi tristique
+        senectus et netus et malesuada fames ac turpis
+        egestas. Sed ante nisi, pharetra ut eleifend vitae,
+        congue ut quam. Vestibulum ante ipsum primis in.""",
+
+            (s, 60, 0, "foobar: ", '.') ->
+"""foobar: Lorem ipsum dolor sit amet, consectetur adipiscing
+........elit. In congue tincidunt fringilla. Sed interdum
+........nibh vitae libero fermentum id dictum risus
+........facilisis. Pellentesque habitant morbi tristique
+........senectus et netus et malesuada fames ac turpis
+........egestas. Sed ante nisi, pharetra ut eleifend vitae,
+........congue ut quam. Vestibulum ante ipsum primis in."""
+
+        )
+
+        for((input, expected) <- data)
+        {
+            val (string, width, indent, prefix, indentChar) = input
+
+            expect(expected, "\"" + input + "\" -> " + expected.toString)
+            {
+                val wrapper = new WordWrapper(width, indent, prefix, indentChar)
+                wrapper.wrap(string)
             }
         }
     }
