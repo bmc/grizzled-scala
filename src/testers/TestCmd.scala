@@ -33,12 +33,27 @@ class Prompt(val cmd: Test) extends CommandHandler
 
 class Test extends CommandInterpreter("Test")
 {
+    val HistoryPath = "/tmp/test.hist"
     val handlers = List(Foo, new Prompt(this))
     var prompt = super.primaryPrompt
     override def primaryPrompt = prompt
 
     override def preLoop =
+    {
         println("Using " + readline + " readline implementation.")
+        val historyFile = new java.io.File(HistoryPath)
+        if (historyFile.exists && historyFile.isFile)
+        {
+            println("Loading history file \"" + HistoryPath + "\"")
+            history.load(historyFile.getPath)
+        }
+    }
+
+    override def postLoop =
+    {
+        println("Saving history to file \"" + HistoryPath + "\"")
+        history.save(HistoryPath)
+    }
 
     override def preCommand(line: String) =
         if (line.ltrim.startsWith("#"))

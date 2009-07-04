@@ -52,6 +52,7 @@ package grizzled.cmd
 import grizzled.readline.Readline.ReadlineType._
 import grizzled.readline.Readline.ReadlineType
 import grizzled.readline.Readline
+import grizzled.readline.History
 import grizzled.string.implicits._
 
 import java.io.EOFException
@@ -170,6 +171,13 @@ abstract class CommandInterpreter(val appName: String,
         throw new Exception("Unable to load a readline library.")
 
     /**
+     * Get the history object being used to record command history.
+     *
+     * @return the <tt>grizzled.readline.History</tt> object
+     */
+    val history: History = readline.history
+
+    /**
      * Alternate constructor taking a single readline implementation. Fails
      * if that readline implementation cannot be found.
      *
@@ -248,15 +256,31 @@ abstract class CommandInterpreter(val appName: String,
         override val help = """This message"""
 
         private lazy val nameSorter = (a: String, b: String) => a < b
+        private val OutputWidth = 79
 
         private def helpHelp =
         {
+            import scala.collection.mutable.ArrayBuffer
+
             // Help only.
 
-            val commandNames = handlers.map(_.name).sort(nameSorter)
+            val commandNames = allHandlers.map(_.name).sort(nameSorter)
+
             println("Help is available for the following commands:")
-            for (c <- commandNames) 
-                println(c)
+            println("-" * OutputWidth)
+
+            // Lay them out in columns. Simple-minded for now.
+            val colSize = (0 /: commandNames.map(_.length)) (Math.max(_, _)) + 2
+            val colsPerLine = OutputWidth / colSize
+            for ((name, i) <- commandNames.zipWithIndex)
+            {
+                if ((i % colsPerLine) == 0)
+                    print("\n")
+                val padding = " " * (colSize - name.length)
+                print(name + padding)
+            }
+
+            print("\n")
         }
 
         private def helpCommand(names: List[String])
