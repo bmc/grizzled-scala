@@ -85,6 +85,135 @@ final class GrizzledString(val string: String)
 }
 
 /**
+ * <p>Wraps strings on word boundaries to fit within a proscribed output
+ * width. The wrapped string may have a prefix or not; prefixes are useful
+ * for error messages, for instance. You tell a <tt>WordWrapper</tt> about
+ * a prefix by passing a non-zero prefix length to the constructor.</p>
+ *
+ * <p><b>Examples:</b></p>
+ * 
+ * <blockquote><pre>Unable to open file /usr/local/etc/wombat: No such file or directory</pre></blockquote>
+ *
+ * <p>might appear like this without a prefix:</p>
+ *
+ * <blockquote><pre>
+ * Unable to open file /usr/local/etc/wombat: No such file or
+ * directory
+ * </pre></blockquote>
+ *
+ * <p>and like this if the prefix is "myprog:"</p>
+ *
+ * <blockquote><pre>
+ * myprog: Unable to open file /usr/local/etc/wombat: No such
+ *         file or directory
+ * </pre></blockquote>
+ *
+ * <p>Alternatively, if the output width is shortened, the same message
+ * can be made to wrap something like this:</p>
+ *
+ * <blockquote><pre>
+ * myprog: Unable to open file
+ *         /usr/local/etc/wombat:
+ *         No such file or
+ *         directory
+ * </pre></blockquote>
+ *
+ * <p>Note how the wrapping logic will "tab" past the prefix on wrapped
+ * lines.</p>
+ *
+ * <p>This method also support the notion of an indentation level, which is
+ * independent of the prefix. A non-zero indentation level causes each line,
+ * including the first line, to be indented that many characters. Thus,
+ * initializing a <tt>WordWrapper</tt> object with an indentation value of 4
+ * will cause each output line to be preceded by 4 blanks. (It's also
+ * possible to change the indentation character from a blank to any other
+ * character.</p>
+ *
+ * <p><b>Notes</b></b>
+ *
+ * <ol>
+ *   <li> The class does not do any special processing of tab characters.
+ *        Embedded tab characters can have surprising (and unwanted) effects
+ *        on the rendered output.
+ *   <li> Wrapping an already wrapped string is an invitation to trouble.
+ * </ol>
+ */
+class WordWrapper(val lineLength:   Int,
+                  val indentation:  Int,
+                  val prefix:       String,
+                  val indentChar:   Char)
+{
+    def this(lineLength: Int) = this(lineLength, 0, "", ' ')
+
+    def this(lineLength: Int, indentation: Int) = 
+        this(lineLength, indentation, "", ' ')
+
+    def this(lineLength: Int, indentation: Int, prefix: String) = 
+        this(lineLength, indentation, prefix, ' ')
+
+    def this() = this(79)
+
+    private val prefixLength = prefix.length
+
+    def wrap(s: String): String =
+    {
+        import scala.collection.mutable.ArrayBuffer
+        import implicits._
+
+        val indentString = indentChar.toString
+        val prefixIndentChars = indentString * prefixLength
+        val indentChars = indentString * indentation
+
+        def assembleLine(buf: ArrayBuffer[String], usePrefix: String): String =
+            usePrefix + indentChars + buf.mkString(" ")
+
+        def wrapOneLine(line: String): String =
+        {
+            val lineOut = new ArrayBuffer[String]
+            val result  = new ArrayBuffer[String]
+            for (word <- line.split("[\t ]"))
+            {
+                val wordLength = word.length
+                val usePrefix = if (result.length == 0) prefix 
+                                else prefixIndentChars
+
+                // Current length is the length of each word in the lineOut
+                // buffer, plus a single blank between them, plus the prefix
+                // length and indentation length, if any. Use a map operation
+                // to map the words to their lengths, and a fold-left operation
+                // to sum them up.
+                val totalBlanks = lineOut.length - 1
+                val wordLengths = (0 /: lineOut.map(_.length)) (_ + _)
+                val currentLength = totalBlanks + wordLengths + prefixLength +
+                                    indentation
+                if ((wordLength + currentLength + 1) > lineLength)
+                {
+                    result += assembleLine(lineOut, usePrefix)
+                    lineOut.clear
+                }
+
+                lineOut += word
+            }
+
+            if (lineOut.length > 0)
+            {
+                val usePrefix = if (result.length == 0) prefix 
+                                else prefixIndentChars
+                result += assembleLine(lineOut, usePrefix)
+            }
+
+            result.mkString("\n").rtrim
+        }
+
+        val buf = new ArrayBuffer[String]
+        for (line <-  s.split("\n"))
+            buf += wrapOneLine(line)
+
+        buf mkString "\n"
+    }
+}
+
+/**
  * Implicits, for conversion from Scala's <tt>RichString</tt> and Java's
  * <tt>String</tt> to <tt>GrizzledString</tt> and back again. Also contains
  * other implicit conversions.
