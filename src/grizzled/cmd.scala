@@ -75,7 +75,12 @@ trait CommandHandler
      */
     val aliases: List[String] = Nil
 
-    private[this] def allNames = name :: aliases
+    /**
+     * The help for this command. The help string is written as is to the
+     * screen. It is not wrapped, indented, or otherwise reformatted. It
+     * may be a single string or a multiline string.
+     */
+    val help: String
 
     /**
      * Compares a command name (that the user typed in, for instance) to
@@ -123,11 +128,6 @@ trait CommandHandler
     def moreInputNeeded(lineSoFar: String): Boolean = false
 
     /**
-     * The help for this command.
-     */
-    val help: String
-
-    /**
      * Handle the command. The first white space-delimited token in the command
      * string is guaranteed to match the name of this command, by the rules of
      * the <tt>matches()</tt> method.
@@ -146,10 +146,15 @@ trait CommandHandler
      * @return the list of completions for <tt>token</tt>, or <tt>Nil</tt>
      */
     def complete(token: String, commandLine: String): List[String] = Nil
+
+    /**
+     * Convenience method to retrieve the combined list of names and aliases.
+     */
+    private[this] def allNames = name :: aliases
 }
 
 /**
- * Base class of any interpreter.
+ * Base class of any command interpreter.
  */
 abstract class CommandInterpreter(val appName: String,
                                   readlineCandidates: List[ReadlineType])
@@ -310,7 +315,8 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
-     * Completion handler.
+     * Readline completion handler. Conditionally completes command names
+     * or defers to command handlers for individual completion.
      */
     private object CommandCompleter extends Completer
     {
@@ -437,7 +443,7 @@ abstract class CommandInterpreter(val appName: String,
         {
             readline.readline(prompt) match
             {
-                case None       => 
+                case None => 
                     // Use an exception to indicate EOF, to unwind the stack.
                     throw new EOFException
 
