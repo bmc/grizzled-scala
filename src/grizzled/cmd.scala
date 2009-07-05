@@ -61,6 +61,9 @@ import java.io.EOFException
  * Trait for an object (or class) that handles a single command. All logic
  * for a given command is embodied in a single object that mixes in this
  * trait.
+ *
+ * Note: Any command handler may raise EOFException to signal that the
+ * interpreter should end.
  */
 trait CommandHandler
 {
@@ -154,7 +157,36 @@ trait CommandHandler
 }
 
 /**
- * Base class of any command interpreter.
+ * <h2>Introduction</h2>
+ *
+ * <p>Base class of any command interpreter.</p> This class and the
+ * <tt>CommandHandler</tt> trait provide a simple framework for writing
+ * line-oriented command-interpreters. This framework is conceptually similar
+ * to the Python <tt>cmd</tt> module and its <tt>Cmd</tt> class, though the
+ * implementation differs substantially in places.</p>
+ *
+ * <p>For reading input from the console, <tt>CommandInterpreter</tt> will
+ * use of any of the readline libraries supported by the
+ * <tt>grizzled.readline</tt> package. All of those libraries support a
+ * persistent command history, and most support command completion and
+ * command editing.</p>
+ *
+ * <h2>Command Parsing</h2>
+ *
+ * <p>A command line consists of an initial command name, followed by a list
+ * of arguments to that command. The <tt>CommandInterpreter</tt> class's
+ * command reader automatically separates the command and the remaining
+ * arguments, via the <tt>splitCommandAndArgs()</tt> method. Parsing the
+ * arguments is left to the actual command implementation. The rules for how
+ * the command is split from the remainder of the input line are outlined
+ * in the documentation for the <tt>splitCommandAndArgs()</tt> method.</p>
+ *
+ * @param appName             the application name, used by some readline
+ *                            libraries for key-binding
+ * @param readlineCandidates  list of readline libraries to try to load, in
+ *                            order. The <tt>ReadlineType</tt> values are
+ *                            defined by the <tt>grizzled.readline</tt>
+ *                            package.
  */
 abstract class CommandInterpreter(val appName: String,
                                   readlineCandidates: List[ReadlineType])
@@ -222,6 +254,20 @@ abstract class CommandInterpreter(val appName: String,
      * retrieved.
      */
     def secondaryPrompt = "> "
+
+    /**
+     * <tt>StartCommandIdentifier is the list of characters that are
+     * permitted as the first character of a white space-delimited,
+     * multicharacter command name. All other characters are assumed to
+     * introduce single-character commands. The default value permits
+     * alphanumeric initial characters. Subclasses may override this value
+     * to permit additional, or different, starting characters for
+     * multicharacter command names. See the <tt>splitCommandAndArgs()</tt>
+     * method for more details.
+     */
+    val StartCommandIdentifier = "abcdefghijklmnopqrstuvwxyz" +
+                                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                                 "0123456789"
 
     /**
      * List of handlers. The subclass must define this value to contain a
@@ -392,6 +438,14 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
+     * Emit an error message in a consistent way. May be overridden by
+     * subclasses. The default implementation prints errors in red.
+     *
+     * @param message the message to emit
+     */
+    def error(message: String) = println(Console.RED + message + Console.RESET)
+
+    /**
      * Called just before the main loop (<tt>mainLoop()</tt>) begins its
      * command loop, this hook method can be used for initialization. The
      * default implementation does nothing.
@@ -409,7 +463,7 @@ abstract class CommandInterpreter(val appName: String,
      * Called just before a command line is interpreted, this hook method can
      * be used to modify the command.
      *
-     * @param commandLine  the unparsed command line
+     * @param commandLine  the command line
      *
      * @return the modified line. If a null or an empty string is returned,
      *         the command is skipped. (This can be useful for handling
@@ -418,48 +472,171 @@ abstract class CommandInterpreter(val appName: String,
     def preCommand(commandLine: String): String = commandLine
 
     /**
+     * Called after a command line is interpreted. The default implementation
+     * does nothing.
+     *
+     * @param commandLine  the command line that just completed
+     */
+    def postCommand(commandLine: String): Unit = return
+
+    /**
+     * Handles a command line, just as if it had been typed directly at the
+     * prompt. This method may be overridden by implementing classes, but
+     * it generally is not.
+     *
+     * @param commandLine  the command line
+     */
+    def handleCommand(commandLine: String): Unit =
+    {
+        val (commandName, unparsedArgs) = splitCommandAndArgs(commandLine)
+
+        findCommand(commandName) match
+        {
+            case None  => 
+                handleUnknownCommand(commandName, unparsedArgs)
+
+            case Some(handler) => 
+                // If more input is needed, then get it and run with that.
+
+                if (handler.moreInputNeeded(commandLine))
+                    readAndProcessCommand(commandLine, secondaryPrompt)
+
+                else
+                {
+                    // Okay, we have the entire command. Allow the subclass
+                    // to preprocess it. If preCommand() changes the actual
+                    // command name, we have to recursively call handleCommand()
+                    // to process the new one. Otherwise, we can just run what
+                    // preCommand() returns.
+
+                    val commandLine2 = preCommand(commandLine)
+                    if ((commandLine2 != null) && (commandLine2.trim != ""))
+                    {
+                        val (name2, args2) = splitCommandAndArgs(commandLine2)
+                        if (name2 == commandName)
+                        {
+                            // No need to reprocess. Add the command to the
+                            // history, run it, and call the postCommand()
+                            // hook.
+
+                            history += commandLine2
+                            handler.runCommand(commandName, args2)
+                            postCommand(commandLine2)
+                        }
+
+                        else
+                        {
+                            // Command name has changed. Handle fresh.
+
+                            handleCommand(commandLine2)
+                        }
+                    }
+                }
+        }
+    }
+
+    /**
+     * Called when an empty command line is entered in response to the
+     * prompt. The default version of this method does nothing.
+     */
+    def handleEmptyCommand: Unit = return
+
+    /**
+     * Called when a command is entered that isn't recognized. The default
+     * version of this method prints an error message and returns.
+     *
+     * @param commandName  the command name
+     * @param unparsedArgs the command arguments
+     */
+    def handleUnknownCommand(commandName: String, unparsedArgs: String) =
+        error("Unknown command: " + commandName)
+
+    /**
+     * Split a command from its argument list, returning the command as
+     * one string and the remaining unparsed argument string as the other
+     * string. The commmand name is parsed from the remaining arguments
+     * using the following rules:
+     *
+     * <ul>
+     *   <li> If the first non-white character if the input line is in the
+     *        <tt>StartCommandIdentifier</tt> string, then the command is
+     *        assumed to be a identifier that is separated from the arguments
+     *        by white space.
+     *   <li> If the first character if the input line is not in the
+     *        <tt>StartCommandIdentifier</tt> string, then the command is
+     *        assumed to be a single-character command, with the arguments
+     *        immediately following the single character.
+     * </ul>
+     *
+     * <p>The <tt>StartCommandIdentifier</tt> string is an overridable field
+     * defined by this class, consisting of the characters permitted to start
+     * a multicharacter command. By default, it consists of alphanumerics.
+     * Subclasses may override it to permit additional, or different, starting
+     * characters for multicharacter commands.</p>
+     *
+     * <p>For example, using the default identifier characters, this function
+     * will break the following commands into command + arguments as shown:</p>
+     *
+     * <table border="0">
+     *   <tr valign="top">
+     *     <td><tt>foo bar baz</tt></td>
+     *     <td>Command <tt>foo</tt>, argument string <tt>"bar baz"</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>!bar</tt></td>
+     *     <td>Command <tt>!</tt> argument string <tt>"bar baz"</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>? one two</tt></td>
+     *     <td>Command <tt>?</tt> argument string <tt>"one two"</tt></td>
+     *   </tr>
+     * </table>
+     *
+     * Subclasses may override this method to parse commands differently.
+     *
+     * @param line  the input type
+     *
+     * @return A (<i>commandName</i>, <i>argumentString</i>) 2-tuple
+     */
+    def splitCommandAndArgs(line: String): (String, String) =
+    {
+        // Strip the command name.
+        val lTrimmed = line.ltrim
+
+        if (lTrimmed == "")
+            ("", "")
+
+        else if (StartCommandIdentifier.indexOf(lTrimmed(0)) == -1)
+            // Single character command.
+            (lTrimmed(0).toString, (lTrimmed drop 1).ltrim)
+
+        else
+        {
+            // White space-delimited identifier command. Parse accordingly.
+
+            val firstBlank = lTrimmed.indexOf(' ')
+
+            if (firstBlank == -1)
+                (lTrimmed, "")
+
+            else
+                (lTrimmed.substring(0, firstBlank).trim,
+                 lTrimmed.substring(firstBlank).ltrim)
+        }
+    }
+
+    /**
      * Repeatedly issue a prompt, accept input, parse an initial prefix from
      * the received input, and dispatch to execution handlers.
      */
     final def mainLoop: Unit =
     {
-        def process(line: String)
-        {
-            val (commandName, unparsedArgs) = splitCommandAndArgs(line)
-
-            findCommand(commandName) match
-            {
-                case None  => 
-                    println("*** Unknown command: " + commandName)
-                case Some(handler) => 
-                    if (handler.moreInputNeeded(line))
-                        readAndProcess(line, secondaryPrompt)
-                    else
-                        handler.runCommand(commandName, unparsedArgs)
-            }
-        }
-
-        def readAndProcess(prefix: String, prompt: String): Unit =
-        {
-            readline.readline(prompt) match
-            {
-                case None => 
-                    // Use an exception to indicate EOF, to unwind the stack.
-                    throw new EOFException
-
-                case Some(line) => 
-                    val line2 = preCommand(prefix + line)
-                    if ((line2 != null) && (line2.trim.length > 0))
-                        process(line2)
-            }
-
-            readAndProcess("", primaryPrompt)
-        }
-
         preLoop
         try
         {
-            readAndProcess("", primaryPrompt)
+            readAndProcessCommand("", primaryPrompt)
         }
 
         catch
@@ -474,24 +651,30 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
-     * Split a command from its argument list, returning the command as
-     * one string and the remaining argument string as the other string.
+     * Read and process the next command.
      *
-     * @param line  the input type
-     *
-     * @return A (<i>commandName</i>, <i>argumentString</i>) 2-tuple
+     * @param prefix  Any already-read command string, to which subsequent
+     *                input is to be suffixed. (Useful for commands that
+     *                span input lines.) Use "" to indicate none.
+     * @param prompt  Prompt to issue
      */
-    private def splitCommandAndArgs(line: String): (String, String) =
+    private def readAndProcessCommand(prefix: String, prompt: String): Unit =
     {
-        // Strip the command name.
-        val lTrimmed = line.ltrim
-        val firstBlank = lTrimmed.indexOf(' ')
+        readline.readline(prompt) match
+        {
+            case None => 
+                // Use an exception to indicate EOF, to unwind the stack.
+                throw new EOFException
 
-        if (firstBlank == -1)
-            (lTrimmed, "")
-        else
-            (lTrimmed.substring(0, firstBlank).trim,
-             lTrimmed.substring(firstBlank).ltrim)
+            case Some(line) => 
+                val line2 = preCommand(prefix + line)
+                if ((line2 == null) || (line2.trim.length == 0))
+                    handleEmptyCommand
+                else
+                    handleCommand(line2)
+        }
+
+        readAndProcessCommand("", primaryPrompt)
     }
 
     /**
@@ -574,6 +757,172 @@ abstract class CommandInterpreter(val appName: String,
  */
 object CmdUtil
 {
-    def tokenize(commandLine: String): List[String] =
-        commandLine.trim.split("[ \t]+").toList
+    def tokenize(unparsedArgs: String): List[String] =
+    {
+        val trimmed = unparsedArgs.trim
+        if (trimmed == "")
+            Nil
+        else
+            trimmed.split("[ \t]+").toList
+    }
 }
+
+/**
+ * <p>A simple "history" (alias: "h") handler that displays the history to
+ * standard output. This history handler supports the following usage:</p>
+ *
+ * <blockquote><pre>history [n]</pre></blockquote>
+ *
+ * <p>Where <i>n</i> is the number of (most recent) history entries to show.
+ * If absent, <i>n</i> defaults to the size of the history buffer.</p>
+ *
+ * <p>This handler is <i>not</i> installed by default. It is provided as a
+ * convenience, for command interpreters to use if desired.</p>
+ */
+class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
+{
+    val name = "history"
+    override val aliases = List("h")
+
+    val history = cmd.history 
+    val help = """Show history. 
+                 |
+                 |Usage: history [n]
+                 |
+                 |where n is the number of recent history entries to show.""".
+               stripMargin
+
+    def runCommand(commandName: String, unparsedArgs: String): Unit = 
+    {
+        val tokens = CmdUtil.tokenize(unparsedArgs)
+        val historyCommands = history.get
+
+        def show(commands: List[String], startingNumber: Int) =
+            for ((line, i) <- commands.zipWithIndex)
+                format("%3d: %s\n", startingNumber + i, line)
+
+        if (tokens.length > 0)
+        {
+            try
+            {
+                val n = tokens(0).toInt
+                if (historyCommands.length > n)
+                    show(historyCommands.slice(historyCommands.length -n,
+                                               historyCommands.length), 
+                         historyCommands.length - n)
+                else
+                    show(historyCommands, 1)
+            }
+
+            catch
+            {
+                case e: NumberFormatException =>
+                    println("Bad number: \"" + tokens(0) + "\"")
+                    Nil
+            }
+        }
+
+        else
+        {
+            show(historyCommands, 1)
+        }
+    }
+}
+
+/**
+ * <p>A simple "redo" command handler that supports re-issuing a numbered
+ * command from the history or the last command with a given prefix. For
+ * example, it supports the following syntaxes:</p>
+ *
+ * <table border="0">
+ *   <tr valign="top">
+ *     <td><tt>!10</tt>, <tt>! 10</tt>, or <tt>r 10</tt></td>
+ *     <td>Repeat the 10th command in the history.</td>
+ *   </tr>
+ *
+ *   <tr valign="top">
+ *     <td><tt>!ec</tt>, <tt>! ec</tt>, or <tt>r ec</tt></td>
+ *     <td>Repeat the most recent command whose name begins with "ec"</td>
+ *   </tr>
+ *
+ *   <tr valign="top">
+ *     <td><tt>!!</tt>, <tt>! !</tt>, <tt>r</tt></td>
+ *     <td>Repeat the last command.</td>
+ *   </tr>
+ * </table>
+ *
+ * <p>This handler is <i>not</i> installed by default. It is provided as a
+ * convenience, for command interpreters to use if desired.</p>
+ */
+class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
+{
+    val name = "r"
+    override val aliases = List("!")
+
+    val history = cmd.history 
+    val help = """Reissue a command, by partial name or number.
+                 |
+                 |Usage: r namePrefix  -or-  !namePrefix
+                 |       r number      -or-  !number
+                 |
+                 | For example:
+                 |
+                 | !ec   Run the most recent command whose name starts with "ec"
+                 | r ec  Run the most recent command whose name starts with "ec"
+                 | !10   Run the command numbered 10 in the history
+                 | r 10  Run the command numbered 10 in the history""".
+               stripMargin
+
+    def runCommand(commandName: String, unparsedArgs: String): Unit = 
+    {
+        val lTrimmedArgs = unparsedArgs.ltrim
+        val historyBuf = history.get
+
+        if ( ((commandName == "r") && (lTrimmedArgs == "")) ||
+             ((commandName == "!") && (lTrimmedArgs == "!")) )
+        {
+            // Reissue last command from history.
+
+            if (historyBuf.length == 0)
+                cmd.error("Empty command history.")
+            else
+                cmd.handleCommand(historyBuf(historyBuf.length - 1))
+        }
+
+        else
+        {
+            assert(lTrimmedArgs != "")
+
+            val commandId = lTrimmedArgs.split("[ \t]+")(0)
+
+            try
+            {
+                val n = commandId.toInt
+                if ( (n < 1) || (n > historyBuf.length) )
+                    cmd.error("No command has number " + n)
+                else
+                    cmd.handleCommand(historyBuf(n - 1))
+            }
+
+            catch
+            {
+                case _: NumberFormatException => 
+                    rerunCommandByPrefix(commandId)
+            }
+        }
+    }
+
+    private def rerunCommandByPrefix(prefix: String) =
+    {
+        history.get.reverse.filter(_.startsWith(prefix)) match
+        {
+            case Nil => 
+                cmd.error("No command matches \"" + prefix + "\"")
+
+            case line :: rest =>
+                cmd.handleCommand(line)
+        }
+    }
+}
+
+ 

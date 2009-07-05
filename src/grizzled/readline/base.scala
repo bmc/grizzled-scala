@@ -169,6 +169,7 @@ class NullCompleter extends Completer
 /**
  * Defines the readline-like functionality supported by this API. A
  * <tt>Readline</tt> class provides:
+ *
  * <ul>
  *   <li> a means to read lines of input from (presumably) a terminal
  *   <li> a history mechanism
@@ -194,10 +195,9 @@ trait Readline
     val history: History
 
     /**
-     * Whether or not to add lines to the history automatically. Defaults to
-     * <tt>true</tt>. Some clients might want to handle the history themselves.
+     * Whether or not to add lines to the history automatically.
      */
-    val autoAddHistory: Boolean = true
+    val autoAddHistory: Boolean
 
     /**
      * Read a line of input from the console.

@@ -92,7 +92,7 @@ private[javareadline] class ReadlineHistory extends History
  */
 private[readline] class JavaReadlineImpl(appName: String,
                                          readlineName: String,
-                                         override val autoAddHistory: Boolean,
+                                         val autoAddHistory: Boolean,
                                          library: JavaReadlineLibrary)
     extends Readline
 {

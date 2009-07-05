@@ -90,7 +90,7 @@ final class GrizzledString(val string: String)
  * for error messages, for instance. You tell a <tt>WordWrapper</tt> about
  * a prefix by passing a non-zero prefix length to the constructor.</p>
  *
- * <p><b>Examples:</b></p>
+ * <h2>Examples:</h2>
  * 
  * <blockquote><pre>Unable to open file /usr/local/etc/wombat: No such file or directory</pre></blockquote>
  *
@@ -129,7 +129,7 @@ final class GrizzledString(val string: String)
  * possible to change the indentation character from a blank to any other
  * character.</p>
  *
- * <p><b>Notes</b></b>
+ * <h2>Notes</h2>
  *
  * <ol>
  *   <li> The class does not do any special processing of tab characters.

@@ -40,7 +40,10 @@ class Prompt(val cmd: Test) extends CommandHandler
 class Test extends CommandInterpreter("Test")
 {
     val HistoryPath = "/tmp/test.hist"
-    val handlers = List(Foo, new Prompt(this))
+    val handlers = List(Foo, 
+                        new Prompt(this), 
+                        new HistoryHandler(this),
+                        new RedoHandler(this))
     var prompt = super.primaryPrompt
     override def primaryPrompt = prompt
 

@@ -87,7 +87,7 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
  * JLine implementation of the Readline trait.
  */
 private[readline] class JLineImpl(appName: String,
-                                  override val autoAddHistory: Boolean)
+                                  val autoAddHistory: Boolean)
     extends Readline
 {
     val name = "JLine"
