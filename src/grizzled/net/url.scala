@@ -44,7 +44,7 @@
 
 package grizzled.net
 
-import grizzled.file
+import grizzled.file.{util => FileUtil}
 
 import java.net.URL
 import java.io.{File, IOException, FileInputStream}
@@ -68,9 +68,9 @@ object url
         urlPath(urlPath.length - 1) match
         {
             case '/' => File.createTempFile("urldownload", extension)
-            case _   => new File(file.joinPath(
+            case _   => new File(FileUtil.joinPath(
                             System.getProperty("java.io.tmpdir"),
-                            file.basename(urlPath)))
+                            FileUtil.basename(urlPath)))
         }
     }
 
@@ -144,7 +144,7 @@ object url
             throw new IOException("Output file \"" + pathOut + "\" exists " +
                                   "and is a directory.")
 
-        val dir = new File(file.dirname(pathOut.getCanonicalPath))
+        val dir = new File(FileUtil.dirname(pathOut.getCanonicalPath))
         if ((! dir.exists) && (! dir.mkdirs()))
             throw new IOException("Can't create either target directory \"" +
                                   dir.toString + "\" or one of its parents.")
@@ -157,7 +157,7 @@ object url
         // Copy and close.
         try
         {
-            file.copyStream(in, out)
+            FileUtil.copyStream(in, out)
         }
 
         finally

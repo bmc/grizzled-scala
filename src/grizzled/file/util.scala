@@ -42,7 +42,7 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-package grizzled
+package grizzled.file
 
 import scala.util.matching.Regex
 
@@ -56,7 +56,7 @@ class FileDoesNotExistException(message: String) extends Exception
 /**
  * Useful file-related utility functions.
  */
-object file
+object util
 {
     import string._ // Grizzled string functions
 

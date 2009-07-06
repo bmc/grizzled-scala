@@ -43,7 +43,7 @@
 \*---------------------------------------------------------------------------*/
 
 import org.scalatest.FunSuite
-import grizzled.file._
+import grizzled.file.util._
 
 /**
  * Tests the grizzled.file functions.
