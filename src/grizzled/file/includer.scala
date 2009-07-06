@@ -200,7 +200,10 @@ class Includer(val source: Source,
         includeRegex.findFirstMatchIn(line) match
         {
             case None =>
-                line
+                if (line.endsWith("\n"))
+                    line.substring(0, line.length - 1)
+                else
+                    line
 
             case Some(incMatch) =>
                 if (sourceStack.length >= maxNesting)
