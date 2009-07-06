@@ -50,8 +50,8 @@ import scala.util.matching.Regex
 import java.net.URI
 
 /**
- * Process <i>include</i> directives in files, returning a <tt>Source</tt>-like
- * object.
+ * Process <i>include</i> directives in files, returning an iterator over
+ * lines from the flattened files.
  *
  * <p>The <tt>grizzled.file.Includer</tt> class can be used to process
  * <i>includes</i> within a text file, returning a file-like object. It
@@ -60,12 +60,10 @@ import java.net.URI
  * 
  * <h3>Syntax</h3>
  *
-
  * <p>The <i>include</i> syntax is defined by a regular expression; any
  * line that matches the regular expression is treated as an <i>include</i>
  * directive. The default regular expression, <tt>^%include\s"([^"]+)"$</tt>
  * matches include directives like this:</p>
-
  *
  * <blockquote><pre>
  * %include "/absolute/path/to/file"
@@ -196,35 +194,30 @@ class Includer(val source: Source,
             }
         }
 
-        def getNext: String =
+        import grizzled.file.{util => futil}
+
+        val line = nextFromStack
+        includeRegex.findFirstMatchIn(line) match
         {
-            import grizzled.file.{util => futil}
+            case None =>
+                line
 
-            val line = nextFromStack
-            includeRegex.findFirstMatchIn(line) match
-            {
-                case None =>
-                    line
+            case Some(incMatch) =>
+                if (sourceStack.length >= maxNesting)
+                    throw new IllegalStateException("Max nesting level (" +
+                                                    maxNesting + ") " +
+                                                    "exceeded.")
 
-                case Some(incMatch) =>
-                    if (sourceStack.length >= maxNesting)
-                        throw new IllegalStateException("Max nesting level (" +
-                                                        maxNesting + ") " +
-                                                        "exceeded.")
-
-                    val curURI =  new URI(sourceStack.top.source.descr)
-                    val path = futil.joinPath(futil.dirname(curURI.getPath),
-                                             incMatch.group(1))
-                    val newURI = new URI(curURI.getScheme,
-                                         curURI.getHost,
-                                         path,
-                                         curURI.getFragment)
-                    sourceStack.push(new IncludeSource(Source.fromFile(newURI)))
-                    getNext
-            }
+                val curURI =  new URI(sourceStack.top.source.descr)
+                val path = futil.joinPath(futil.dirname(curURI.getPath),
+                                          incMatch.group(1))
+                val newURI = new URI(curURI.getScheme,
+                                     curURI.getHost,
+                                     path,
+                                     curURI.getFragment)
+                sourceStack.push(new IncludeSource(Source.fromFile(newURI)))
+                next
         }
-
-        getNext
     }
 }
 
