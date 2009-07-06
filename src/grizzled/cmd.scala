@@ -157,12 +157,13 @@ trait CommandHandler
 }
 
 /**
- * <h2>Introduction</h2>
- *
- * <p>Base class of any command interpreter.</p> This class and the
- * <tt>CommandHandler</tt> trait provide a simple framework for writing
- * line-oriented command-interpreters. This framework is conceptually similar
- * to the Python <tt>cmd</tt> module and its <tt>Cmd</tt> class, though the
+ * Base class for command interpreters.
+ * 
+ * <p><tt>CommandInterpreter</tt> is the base class of any command
+ * interpreter.</p> This class and the <tt>CommandHandler</tt> trait
+ * provide a simple framework for writing line-oriented
+ * command-interpreters. This framework is conceptually similar to the
+ * Python <tt>cmd</tt> module and its <tt>Cmd</tt> class, though the
  * implementation differs substantially in places.</p>
  *
  * <p>For reading input from the console, <tt>CommandInterpreter</tt> will
@@ -170,8 +171,6 @@ trait CommandHandler
  * <tt>grizzled.readline</tt> package. All of those libraries support a
  * persistent command history, and most support command completion and
  * command editing.</p>
- *
- * <h2>Command Parsing</h2>
  *
  * <p>A command line consists of an initial command name, followed by a list
  * of arguments to that command. The <tt>CommandInterpreter</tt> class's
@@ -256,7 +255,7 @@ abstract class CommandInterpreter(val appName: String,
     def secondaryPrompt = "> "
 
     /**
-     * <tt>StartCommandIdentifier is the list of characters that are
+     * <tt>StartCommandIdentifier</tt> is the list of characters that are
      * permitted as the first character of a white space-delimited,
      * multicharacter command name. All other characters are assumed to
      * introduce single-character commands. The default value permits
@@ -342,7 +341,9 @@ abstract class CommandInterpreter(val appName: String,
                         val header = "Help for \"" + cmd.name + "\""
                         println("\n" + header + "\n" + ("-" * header.length))
                         if (cmd.aliases != Nil)
-                            println("Aliases: " + cmd.aliases.mkString(", "))
+                            printf("Aliases: %s\n\n", 
+                                   cmd.aliases.mkString(", "))
+
                         println(cmd.help)
 
                     case None =>
@@ -577,7 +578,7 @@ abstract class CommandInterpreter(val appName: String,
      * <p>For example, using the default identifier characters, this function
      * will break the following commands into command + arguments as shown:</p>
      *
-     * <table border="0">
+     * <table border="0" cellpadding="2">
      *   <tr valign="top">
      *     <td><tt>foo bar baz</tt></td>
      *     <td>Command <tt>foo</tt>, argument string <tt>"bar baz"</tt></td>
@@ -594,7 +595,7 @@ abstract class CommandInterpreter(val appName: String,
      *   </tr>
      * </table>
      *
-     * Subclasses may override this method to parse commands differently.
+     * <p>Subclasses may override this method to parse commands differently.</p>
      *
      * @param line  the input type
      *
@@ -768,6 +769,8 @@ object CmdUtil
 }
 
 /**
+ * Simple history command handler.
+ * 
  * <p>A simple "history" (alias: "h") handler that displays the history to
  * standard output. This history handler supports the following usage:</p>
  *
@@ -830,11 +833,13 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
 }
 
 /**
+ * Simple "redo command" handler.
+ * 
  * <p>A simple "redo" command handler that supports re-issuing a numbered
  * command from the history or the last command with a given prefix. For
  * example, it supports the following syntaxes:</p>
  *
- * <table border="0">
+ * <table border="0" cellpadding="2">
  *   <tr valign="top">
  *     <td><tt>!10</tt>, <tt>! 10</tt>, or <tt>r 10</tt></td>
  *     <td>Repeat the 10th command in the history.</td>
