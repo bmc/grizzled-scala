@@ -49,6 +49,8 @@ package grizzled.file.filter
 
 import grizzled.string.implicits._
 
+import scala.io.Source
+
 /**
  * Assemble input lines, honoring backslash escapes for line continuation.
  * <tt>BackslashContinuedLineIterator</tt> takes an iterator over lines of
@@ -83,6 +85,13 @@ class BackslashContinuedLineIterator(val source: Iterator[String])
     // Match this in reverse. Makes it easier for the backslashes to do a
     // greedy match.
     private val ReversedContinuedLine = """^(\\+)(.*)$""".r
+
+    /**
+     * Alternate constructor that takes a <tt>Source</tt> object.
+     *
+     * @param source source from which to read lines
+     */
+    def this(source: Source) = this(source.getLines)
 
     /**
      * Determine whether there's any input remaining.

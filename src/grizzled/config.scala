@@ -51,6 +51,7 @@
 package grizzled.config
 
 import grizzled.file.Includer
+import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
 import grizzled.string.implicits._
 
@@ -283,7 +284,9 @@ object Configuration
      *
      * @return the <tt>Configuration</tt> object.
      */
-    def apply(source: Source): Configuration =
+    def apply(source: Source): Configuration = readConfig(source)
+
+    private def readConfig(source: Source): Configuration =
     {
         val config             =  new Configuration
         var curSection: String = null
@@ -329,7 +332,7 @@ object Configuration
                                                    "[a-zA-Z0-9_.]+",
                                                    true)
 
-        for (line <- Includer(source))
+        for (line <- new BackslashContinuedLineIterator(Includer(source)))
         {
             line match
             {
