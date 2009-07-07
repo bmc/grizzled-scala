@@ -42,7 +42,7 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-package grizzled.string
+package grizzled.string.template
 
 import scala.util.matching.Regex
 
@@ -61,33 +61,20 @@ class VariableNotFoundException(val variableName: String)
  * A simple, configurable string template that substitutes variable references
  * within a string.
  *
- * @param varRegex  The regular expression for a variable reference. Must
- *                  contain a single group that extracts the name.
- * @param resolver  An object (e.g., a Map) that has a <tt>get()</tt> method
- *                  that returns a string value for a variable name.
- * @param safe      <tt>true</tt> for a "safe" template that just substitutes
- *                  a blank string for an unknown variable, <tt>false</tt>
- *                  for one that throws an exception.
+ * @param varRegex    The regular expression for a variable reference. Must
+ *                    contain a single group that extracts the name.
+ * @param resolveVar  A function that takes a variable name as a parameter and
+ *                    returns an <tt>Option[String]</tt> value for the variable,
+ *                    or <tt>None</tt> if there is no value 
+ *                    (<tt>Map[String, String].get()</tt>, for instance).
+ * @param safe        <tt>true</tt> for a "safe" template that just substitutes
+ *                    a blank string for an unknown variable, <tt>false</tt>
+ *                    for one that throws an exception.
  */
 class StringTemplate(private val varRegex: Regex, 
-                     private val resolver: StringTemplate.Resolver,
+                     private val resolveVar: (String) => Option[String],
                      val safe: Boolean)
 {
-    // Kludge: Have to cast the resolver to an Any/Any type, because
-    // structural types work via reflection, and reflection has to work
-    // with type erasure. If a Map[String,String] is passed as the
-    // resolver, Scala will fail to find a "get(String)" method, because,
-    // due to erasure, the REAL method is "get(Any)". Hence this kludged
-    // cast. (At least it's hidden from the caller.)
-    //
-    // The second part of the kludge is to try the first resolver (in case
-    // the caller passed in a non-generic object), trap the
-    // NoSuchMethodException, and try the second one in the "catch" clause.
-    // That's done in the getVar() method.
-
-    private type GenericResolverType = {def get(s: Any): Option[Any]}
-    private val genericResolver = resolver.asInstanceOf[GenericResolverType]
-
     /**
      * Replace all variable references in the given string. Variable references
      * are recognized per the regular expression passed to the constructor. If
@@ -149,20 +136,7 @@ class StringTemplate(private val varRegex: Regex,
      */
     private def getVar(name: String): String =
     {
-        // Kludge alert. See docs at the top of the class, above the
-        // GenericResolverType declaration.
-
-        val value =
-            try
-            {
-                resolver.get(name)
-            }
-            catch
-            {
-                case _: NoSuchMethodException => genericResolver.get(name)
-            }
-
-        value match
+        resolveVar(name) match
         {
             case None =>
                 if (safe)
@@ -181,7 +155,6 @@ class StringTemplate(private val varRegex: Regex,
  */
 object StringTemplate
 {
-    type Resolver = {def get(s: String): Option[String]}
 }
 
 /**
@@ -189,26 +162,31 @@ object StringTemplate
  * (or <tt>$varname</tt>) for variable references. A variable's name may consist
  * of alphanumerics and underscores.
  *
- * @param resolver  An object (e.g., a Map) that has a <tt>get()</tt> method
- *                  that returns a string value for a variable name.
- * @param safe      <tt>true</tt> for a "safe" template that just substitutes
- *                  a blank string for an unknown variable, <tt>false</tt>
- *                  for one that throws an exception.
+ * @param resolveVar  A function that takes a variable name as a parameter and
+ *                    returns an <tt>Option[String]</tt> value for the variable,
+ *                    or <tt>None</tt> if there is no value 
+ *                    (<tt>Map[String, String].get()</tt>, for instance).
+ * @param safe        <tt>true</tt> for a "safe" template that just substitutes
+ *                    a blank string for an unknown variable, <tt>false</tt>
+ *                    for one that throws an exception.
  */
-class UnixShellStringTemplate (resolver: StringTemplate.Resolver, safe: Boolean)
-    extends StringTemplate("""\$\{?([a-zA-Z0-9_]+)\}?""".r, resolver, safe)
+class UnixShellStringTemplate(resolveVar: (String) => Option[String],
+                              safe:       Boolean)
+    extends StringTemplate("""\$\{?([a-zA-Z0-9_]+)\}?""".r, resolveVar, safe)
 
 /**
  * A string template that uses the cmd Windows.exe syntax <tt>%varname%</tt>
  * for variable references. A variable's name may consist of alphanumerics and
  * underscores.
  *
- * @param resolver  An object (e.g., a Map) that has a <tt>get()</tt> method
- *                  that returns a string value for a variable name.
- * @param safe      <tt>true</tt> for a "safe" template that just substitutes
- *                  a blank string for an unknown variable, <tt>false</tt>
- *                  for one that throws an exception.
+ * @param resolveVar  A function that takes a variable name as a parameter and
+ *                    returns an <tt>Option[String]</tt> value for the variable,
+ *                    or <tt>None</tt> if there is no value 
+ *                    (<tt>Map[String, String].get()</tt>, for instance).
+ * @param safe        <tt>true</tt> for a "safe" template that just substitutes
+ *                    a blank string for an unknown variable, <tt>false</tt>
+ *                    for one that throws an exception.
  */
-class WindowsCmdStringTemplate (resolver: StringTemplate.Resolver, 
-                                safe:     Boolean)
-    extends StringTemplate("""%([a-zA-Z0-9_]+)%""".r, resolver, safe)
+class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
+                               safe:       Boolean)
+    extends StringTemplate("""%([a-zA-Z0-9_]+)%""".r, resolveVar, safe)
