@@ -42,49 +42,39 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-/**
- * Some collection-related helpers.
- */
-package grizzled.collection
-
-import java.util.{Collection, Iterator => JIterator}
+import org.scalatest.FunSuite
+import grizzled.file.filter._
 
 /**
- * Useful for converting a collection into an object suitable for use with
- * Scala's <tt>for</tt> loop.
+ * Tests the grizzled.file.filter functions.
  */
-class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
+class FileFilterTest extends GrizzledFunSuite
 {
-
-    /**
-     * Alternate constructor that takes a collection.
-     *
-     * @param collection  the collection
-     */
-    def this(collection: Collection[T]) = this(collection.iterator)
-
-    def hasNext: Boolean = iterator.hasNext
-    def next: T = iterator.next
-}
-
-/**
- * An <tt>Iterator</tt> for lists.
- */
-class ListIterator[T](val list: List[T]) extends Iterator[T]
-{
-    private var cursor = 0
-
-    def hasNext: Boolean = cursor < list.length
-    def next: T =
+    test("BackslashContinuedLineIterator")
     {
-        val result = list(cursor)
-        cursor += 1
-        result
-    }
-}
+        val data = List[(List[String], List[String])](
+            (List("Lorem ipsum dolor sit amet, consectetur \\",
+                  "adipiscing elit.",
+                  "In congue tincidunt fringilla. \\",
+                  "Sed interdum nibh vitae \\",
+                  "libero",
+                  "fermentum id dictum risus facilisis."),
+             List("Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                  "In congue tincidunt fringilla. Sed interdum nibh vitae libero",
+                  "fermentum id dictum risus facilisis."))
+        )
 
-object implicits
-{
-    implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
-        new CollectionIterator[T](c)
+        for((input, expected) <- data)
+            expect(expected, 
+                   "BackslashContinuedLineIterator(\"" + input + "\")")
+            { 
+                import grizzled.collection.ListIterator
+                val iterator = new ListIterator[String](input)
+                val result = 
+                    {for (line <- new BackslashContinuedLineIterator(iterator))
+                         yield line}.toList
+                result
+            }
+    }
+
 }

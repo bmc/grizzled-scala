@@ -51,6 +51,8 @@
 package grizzled.config
 
 import grizzled.file.Includer
+import grizzled.string.template.UnixShellStringTemplate
+import grizzled.string.implicits._
 
 import scala.collection.mutable.{Map => MutableMap}
 
@@ -159,23 +161,6 @@ class Configuration(defaultValues: Map[String, String])
         sectionMap contains sectionName
 
     /**
-     * Get the list of option names.
-     *
-     * @param sectionName the section's name
-     *
-     * @return a list of option names in that section
-     *
-     * @throws NoSuchSectionException if the section doesn't exist
-     */
-    def options(sectionName: String): Iterator[String] =
-    {
-        if (! hasSection(sectionName))
-            throw new NoSuchSectionException(sectionName)
-
-        sectionMap(sectionName).keys
-    }
-
-    /**
      * Get the value for an option in a section.
      *
      * @param sectionName  the section name
@@ -186,7 +171,7 @@ class Configuration(defaultValues: Map[String, String])
      * @throws NoSuchSectionException if the section doesn't exist
      * @throws NoSuchOptionException  if the option doesn't exist
      */
-    def getOption(sectionName: String, optionName: String): String =
+    def option(sectionName: String, optionName: String): String =
     {
         if (! hasSection(sectionName))
             throw new NoSuchSectionException(sectionName)
@@ -208,12 +193,29 @@ class Configuration(defaultValues: Map[String, String])
      *
      * @throws NoSuchSectionException if the section doesn't exist
      */
-    def getOptions(sectionName: String): Map[String, String] =
+    def options(sectionName: String): Map[String, String] =
     {
         if (! hasSection(sectionName))
             throw new NoSuchSectionException(sectionName)
 
         Map.empty[String, String] ++ sectionMap(sectionName)
+    }
+
+    /**
+     * Get the list of option names.
+     *
+     * @param sectionName the section's name
+     *
+     * @return a list of option names in that section
+     *
+     * @throws NoSuchSectionException if the section doesn't exist
+     */
+    def optionNames(sectionName: String): Iterator[String] =
+    {
+        if (! hasSection(sectionName))
+            throw new NoSuchSectionException(sectionName)
+
+        sectionMap(sectionName).keys
     }
 
     /**
@@ -232,11 +234,21 @@ object Configuration
     import java.io.File
     import scala.io.Source
 
-    private val ValidSection     = """^\s*\[([^\s\[\]]+)\]\s*$""".r
+    private val SectionName      = """([^\s\[\]]+)""".r
+    private val ValidSection     = ("""^\s*\[""" + 
+                                    SectionName.toString +
+                                    """\]\s*$""").r
     private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
     private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
     private val CommentLine      = """^\s*(#.*)$""".r
-    private val Assignment       = """^\s*([-a-zA-Z0-9_.]+)\s*[:=]\s*(.*)$""".r
+    private val BlankLine        = """^(\s*)$""".r
+    private val OptionName       = """([-a-zA-Z0-9_.]+)""".r
+    private val Assignment       = ("""^\s*""" + 
+                                    OptionName.toString +
+                                    """\s*[:=]\s*(.*)$""").r
+    private val FullVariableRef  = (SectionName.toString + """\.""" +
+                                    OptionName.toString).r
+
     /**
      * Read a configuration file.
      *
@@ -276,32 +288,75 @@ object Configuration
         val config             =  new Configuration
         var curSection: String = null
 
+        object VarResolver
+        {
+            def get(varName: String): Option[String] =
+            {
+                try
+                {
+                    varName match
+                    {
+                        case FullVariableRef(section, option) => 
+                            Some(config.option(section, option))
+                        case OptionName(option) => 
+                            Some(config.option(curSection, option))
+                        case _ =>
+                            throw new ConfigException("Reference to " +
+                                                      "nonexistent section " +
+                                                      "or option: ${" +
+                                                      varName + "}")
+                    }
+                }
+
+                catch
+                {
+                    case _: NoSuchOptionException =>
+                        throw new ConfigException(
+                            "In section [" + curSection + "]: Reference to " +
+                            "nonexistent option in ${" + varName + "}"
+                        )
+
+                    case _: NoSuchSectionException => ""
+                        throw new ConfigException(
+                            "In section [" + curSection + "]: Reference to " +
+                            "nonexistent section in ${" + varName + "}"
+                        )
+                }
+            }
+        }
+
+        val template = new UnixShellStringTemplate(VarResolver.get, 
+                                                   "[a-zA-Z0-9_.]+",
+                                                   true)
+
         for (line <- Includer(source))
         {
             line match
             {
                 case CommentLine(_) =>
-
+    
+                case BlankLine(_) =>
+    
                 case ValidSection(name) =>
                     config.addSection(name)
                     curSection = name
-
+    
                 case BadSectionFormat(section) =>
                     throw new ConfigException("Badly formatted section: \"" +
                                               section + "\"")
-
+    
                 case BadSectionName(name) =>
                     throw new ConfigException("Bad section name: \"%s\"" + name)
-
+    
                 case Assignment(optionName, value) =>
                     if (curSection == null)
                         throw new ConfigException("Assignment \"" +
                                                   optionName + "=" + value +
                                                   "\" occurs before the " +
                                                   "first section.")
-
-                    config.addOption(curSection, optionName, value)
-
+                    val newValue = template.substitute(value)
+                    config.addOption(curSection, optionName, newValue)
+    
                 case _ =>
                     throw new ConfigException("Unknown configuration line: \"" +
                                               line + "\"")
@@ -311,3 +366,4 @@ object Configuration
         config
     }
 }
+    

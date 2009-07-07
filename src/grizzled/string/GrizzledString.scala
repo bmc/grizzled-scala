@@ -80,4 +80,18 @@ final class GrizzledString(val string: String)
      * @return possibly modified string
      */
     def rtrim: String = RTrimRegex.replaceFirstIn(string, "")
+
+    /**
+     * Like perl's <tt>chomp()</tt>: Remove any newline at the end of the
+     * line.
+     *
+     * @param line  the line
+     *
+     * @return the possibly modified line
+     */
+    def chomp: String =
+        if (string.endsWith("\n"))
+            string.substring(0, string.length - 1)
+        else
+            string
 }
