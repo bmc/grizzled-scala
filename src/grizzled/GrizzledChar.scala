@@ -42,50 +42,67 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-package grizzled.string
+package grizzled
+
+import scala.util.matching.Regex
 
 /**
- * Miscellaneous implicit string conversions.
+ * An analog to Scala's <tt>RichChar</tt> class, providing some methods
+ * that neither <tt>RichChar</tt> nor <tt>Char</tt> (nor, for that matter,
+ * <tt>java.lang.Character</tt>) provide.
  */
-object implicits
+final class GrizzledChar(val character: Char)
 {
     /**
-     * An implicit conversion that handles creating a Boolean from a string
-     * value. This implicit definition, when in scope, allows code like
-     * the following:
+     * Determine whether the character represents a valid hexadecimal
+     * digit. This is a specialization of <tt>isDigit(radix)</tt>.
      *
-     * <blockquote><pre>
-     * val flag: Boolean = "true" // implicitly converts "true" to <tt>true</tt>
-     * </pre></blockquote>
-     *
-     * This method currently understands the following strings (in any mixture
-     * of upper and lower case). It is currently English-specific.
-     *
-     * <blockquote>true, t, yes, y, 1<br>false, f, no, n, 0</blockquote>
-     *
-     * @param s  the string to convert
-     *
-     * @return a boolean value
-     *
-     * @throws IllegalArgumentException if <tt>s</tt> cannot be parsed
+     * @return <tt>true</tt> if the character is a valid hexadecimal
+     *         digit, <tt>false</tt> if not.
      */
-    implicit def bool(s: String): Boolean =
-        s.trim.toLowerCase match
+    def isHexDigit = isDigit(16)
+
+    /**
+     * Determine whether the character represents a valid digit in a
+     * given base.
+     *
+     * @param radix the radix
+     *
+     * @return <tt>true</tt> if the character is a valid digit in the
+     *         indicated radix, <tt>false</tt> if not.
+     */
+    def isDigit(radix: Int): Boolean =
+    {
+        try
         {
-            case "true"  => true
-            case "t"     => true
-            case "yes"   => true
-            case "y"     => true
-            case "1"     => true
-
-            case "false" => false
-            case "f"     => false
-            case "no"    => false
-            case "n"     => false
-            case "0"     => false
-
-            case _       => 
-                throw new IllegalArgumentException("Can't convert string \"" +
-                                                   s + "\" to boolean.")
+            Integer.parseInt(character.toString, radix)
+            true
         }
+        catch
+        {
+            case _: NumberFormatException => false
+        }
+    }
+}
+    
+/**
+ * Companion object for <tt>GrizzledChar</tt>, containing implicits and
+ * other stuff.
+ */
+object GrizzledChar
+{
+    import scala.runtime.RichChar
+
+    implicit def Char_GrizzledChar(c: Char) = new GrizzledChar(c)
+    implicit def GrizzledChar_Char(c: GrizzledChar) = c.character
+
+    implicit def JavaCharacter_GrizzledChar(c: java.lang.Character) =
+        new GrizzledChar(c.charValue)
+    implicit def GrizzledChar_JavaCharacter(c: GrizzledChar) =
+        new java.lang.Character(c.character)
+
+    implicit def RichChar_GrizzledChar(c: RichChar) =
+        new GrizzledChar(c.self.asInstanceOf[Char])
+    implicit def GrizzledChar_RichChar(c: GrizzledChar) =
+        new RichChar(c.character)
 }

@@ -44,6 +44,8 @@
 
 package grizzled.string
 
+import grizzled.GrizzledString._
+
 /**
  * <p>Wraps strings on word boundaries to fit within a proscribed output
  * width. The wrapped string may have a prefix or not; prefixes are useful

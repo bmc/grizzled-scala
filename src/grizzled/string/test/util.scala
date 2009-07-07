@@ -125,44 +125,6 @@ class StringTest extends GrizzledFunSuite
 
     }
 
-    test("ltrim")
-    {
-        val data = Map(
-            "a b c"                        -> "a b c",
-            "                     a"       -> "a",
-            "                     a  "     -> "a  ",
-            "                      "       -> "",
-            ""                             -> ""
-        )
-
-        for((input, expected) <- data)
-        {
-            expect(expected, "\"" + input + "\" -> " + expected.toString)
-            {
-                input.ltrim
-            }
-        }
-    }
-
-    test("rtrim")
-    {
-        val data = Map(
-            "a b c"                        -> "a b c",
-            "a                     "       -> "a",
-            "  a                     "     -> "  a",
-            "                      "       -> "",
-            ""                             -> ""
-        )
-
-        for((input, expected) <- data)
-        {
-            expect(expected, "\"" + input + "\" -> " + expected.toString)
-            {
-                input.rtrim
-            }
-        }
-    }
-
     test("WordWrapper")
     {
         val s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +

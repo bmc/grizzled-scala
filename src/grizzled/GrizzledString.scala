@@ -42,7 +42,7 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-package grizzled.string
+package grizzled
 
 import scala.util.matching.Regex
 
@@ -106,27 +106,15 @@ final class GrizzledString(val string: String)
     def translateMetachars: String =
     {
         import grizzled.parsing.{IteratorStream, Pushback}
+        import grizzled.GrizzledChar._
 
         val stream = new IteratorStream[Char](string) with Pushback[Char]
 
         def parseHexDigits: List[Char] =
         {
-            def isHexDigit(c: Char): Boolean =
-            {
-                try
-                {
-                    Integer.parseInt(c.toString, 16)
-                    true
-                }
-                catch
-                {
-                    case _: NumberFormatException => false
-                }
-            }
-
             stream.next match
             {
-                case Some(c) if isHexDigit(c) =>
+                case Some(c) if c.isHexDigit =>
                     c :: parseHexDigits
                 case Some(c) =>
                     stream.pushback(c)
@@ -183,3 +171,19 @@ final class GrizzledString(val string: String)
     }
 }
     
+/**
+ * Companion object for <tt>GrizzledString</tt>, containing implicits and
+ * other stuff.
+ */
+object GrizzledString
+{
+    import scala.runtime.RichString
+
+    implicit def JavaString_GrizzledString(s: String) = new GrizzledString(s)
+    implicit def GrizzledString_JavaString(gs: GrizzledString) = gs.string
+
+    implicit def GrizzledString_RichString(gs: GrizzledString) =
+        new RichString(gs.string)
+    implicit def RichString_GrizzledString(rs: RichString) =
+        new GrizzledString(rs.self)
+}

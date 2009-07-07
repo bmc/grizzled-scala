@@ -42,50 +42,52 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-package grizzled.string
+import org.scalatest.FunSuite
+import grizzled.GrizzledChar._
 
 /**
- * Miscellaneous implicit string conversions.
+ * Tests the GrizzledChar class.
  */
-object implicits
+class GrizzledCharTest extends GrizzledFunSuite
 {
-    /**
-     * An implicit conversion that handles creating a Boolean from a string
-     * value. This implicit definition, when in scope, allows code like
-     * the following:
-     *
-     * <blockquote><pre>
-     * val flag: Boolean = "true" // implicitly converts "true" to <tt>true</tt>
-     * </pre></blockquote>
-     *
-     * This method currently understands the following strings (in any mixture
-     * of upper and lower case). It is currently English-specific.
-     *
-     * <blockquote>true, t, yes, y, 1<br>false, f, no, n, 0</blockquote>
-     *
-     * @param s  the string to convert
-     *
-     * @return a boolean value
-     *
-     * @throws IllegalArgumentException if <tt>s</tt> cannot be parsed
-     */
-    implicit def bool(s: String): Boolean =
-        s.trim.toLowerCase match
+    test("isHexDigit")
+    {
+        val data = Map('0' -> true,
+                       '1' -> true,
+                       '2' -> true,
+                       '3' -> true,
+                       '4' -> true,
+                       '5' -> true,
+                       '6' -> true,
+                       '7' -> true,
+                       '8' -> true,
+                       '9' -> true,
+                       'a' -> true,
+                       'A' -> true,
+                       'b' -> true,
+                       'B' -> true,
+                       'c' -> true,
+                       'C' -> true,
+                       'd' -> true,
+                       'D' -> true,
+                       'e' -> true,
+                       'E' -> true,
+                       'f' -> true,
+                       'F' -> true,
+                       'g' -> false,
+                       'G' -> false,
+                       '!' -> false,
+                       ':' -> false,
+                       '+' -> false,
+                       '-' -> false,
+                       '.' -> false)
+
+        for((c, expected) <- data)
         {
-            case "true"  => true
-            case "t"     => true
-            case "yes"   => true
-            case "y"     => true
-            case "1"     => true
-
-            case "false" => false
-            case "f"     => false
-            case "no"    => false
-            case "n"     => false
-            case "0"     => false
-
-            case _       => 
-                throw new IllegalArgumentException("Can't convert string \"" +
-                                                   s + "\" to boolean.")
+            expect(expected, "'" + c + "' -> " + expected.toString)
+            {
+                c.isHexDigit
+            }
         }
+    }
 }

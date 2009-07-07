@@ -42,50 +42,69 @@
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \*---------------------------------------------------------------------------*/
 
-package grizzled.string
+import org.scalatest.FunSuite
+import grizzled.GrizzledString._
 
 /**
- * Miscellaneous implicit string conversions.
+ * Tests the GrizzledString class.
  */
-object implicits
+class GrizzledStringTest extends GrizzledFunSuite
 {
-    /**
-     * An implicit conversion that handles creating a Boolean from a string
-     * value. This implicit definition, when in scope, allows code like
-     * the following:
-     *
-     * <blockquote><pre>
-     * val flag: Boolean = "true" // implicitly converts "true" to <tt>true</tt>
-     * </pre></blockquote>
-     *
-     * This method currently understands the following strings (in any mixture
-     * of upper and lower case). It is currently English-specific.
-     *
-     * <blockquote>true, t, yes, y, 1<br>false, f, no, n, 0</blockquote>
-     *
-     * @param s  the string to convert
-     *
-     * @return a boolean value
-     *
-     * @throws IllegalArgumentException if <tt>s</tt> cannot be parsed
-     */
-    implicit def bool(s: String): Boolean =
-        s.trim.toLowerCase match
+    test("ltrim")
+    {
+        val data = Map(
+            "a b c"                        -> "a b c",
+            "                     a"       -> "a",
+            "                     a  "     -> "a  ",
+            "                      "       -> "",
+            ""                             -> ""
+        )
+
+        for((input, expected) <- data)
         {
-            case "true"  => true
-            case "t"     => true
-            case "yes"   => true
-            case "y"     => true
-            case "1"     => true
-
-            case "false" => false
-            case "f"     => false
-            case "no"    => false
-            case "n"     => false
-            case "0"     => false
-
-            case _       => 
-                throw new IllegalArgumentException("Can't convert string \"" +
-                                                   s + "\" to boolean.")
+            expect(expected, "\"" + input + "\" -> " + expected.toString)
+            {
+                input.ltrim
+            }
         }
+    }
+
+    test("rtrim")
+    {
+        val data = Map(
+            "a b c"                        -> "a b c",
+            "a                     "       -> "a",
+            "  a                     "     -> "  a",
+            "                      "       -> "",
+            ""                             -> ""
+        )
+
+        for((input, expected) <- data)
+        {
+            expect(expected, "\"" + input + "\" -> " + expected.toString)
+            {
+                input.rtrim
+            }
+        }
+    }
+
+    test("translateMetachars")
+    {
+        val data = Map(
+            "a b c"                        -> "a b c",
+            "\\u2122"                      -> "\u2122",
+            "\\t\\n\\afooness"             -> "\t\n\\afooness",
+            "\\u212a"                      -> "\u212a",
+            "\\u212x"                      -> "\\u212x",
+            "\\\\t"                        -> "\\t"
+        )
+
+        for((input, expected) <- data)
+        {
+            expect(expected, "\"" + input + "\" -> " + expected.toString)
+            {
+                input.translateMetachars
+            }
+        }
+    }
 }
