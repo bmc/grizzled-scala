@@ -173,8 +173,9 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
                            resolveVar, 
                            safe)
 {
-    private val EscapedDollar = """\$\$""" // regexp string, for replaceAll
-    private val Placeholder   = "\u0001"   // temporarily replaces $$
+    private val EscapedDollar = """(\\*)(\\\$)""".r
+    private val RealEscapeToken = "\u0001"
+    private val NonEscapeToken  = "\u0002"
 
     /**
      * Alternate constructor that uses a variable name pattern that permits
@@ -214,12 +215,36 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
      */
     override def substitute(s: String): String =
     {
-        // Kludge to handle escaped "$$". Temporarily replace it with something
+        // Kludge to handle escaped "$". Temporarily replace it with something
         // highly unlikely to be in the string. Then, put a single "$" in its
-        // place, after the substitution.
+        // place, after the substitution. Must be sure to handle even versus
+        // odd number of backslash characters.
 
-        super.substitute(s.replaceAll(EscapedDollar, Placeholder)).
-        replaceAll(Placeholder, """\$""");
+        def preSub(s: String): List[String] =
+        {
+            val opt = EscapedDollar.findFirstMatchIn(s)
+            opt match
+            {
+                case None =>
+                    List(s)
+
+                case Some(m) if ((m.group(1).length % 2) == 0) =>
+                    // Odd number of backslashes before "$", including
+                    // the one with the dollar token (group 2). Valid escape.
+                    List(s.substring(0, m.start(2)), RealEscapeToken) :::
+                    preSub(s.substring(m.end(2)))
+
+                case Some(m) =>
+                    // Even number of backslashes before "$", including
+                    // the one with the dollar token (group 2). Not an escape.
+                    List(s.substring(0, m.start(2)), NonEscapeToken) :::
+                    preSub(s.substring(m.end(2)))
+            }
+        }
+
+        val s2 = super.substitute(preSub(s) mkString "")
+        s2.replaceAll(RealEscapeToken, """\$""")
+          .replaceAll(NonEscapeToken, """\\\$""")
     }
 }
 

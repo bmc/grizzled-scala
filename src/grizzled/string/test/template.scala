@@ -69,7 +69,7 @@ class StringTemplateTest extends GrizzledFunSuite
                  "bar" -> "$foo",
                  "baz" -> "YAWN")) -> "FOO bar FOO YAWN $",
 
-            ("$foo bar $bar ${baz} $$",
+            ("""$foo bar $bar ${baz} \$""",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
                  "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $"

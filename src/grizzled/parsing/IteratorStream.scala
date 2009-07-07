@@ -69,6 +69,8 @@ package grizzled.parsing
  */
 class IteratorStream[T](private val iterator: Iterator[T])
 {
+    private var count = 0
+
     /**
      * Alternate constructor that takes an <tt>Iterable</tt>.
      *
@@ -86,9 +88,20 @@ class IteratorStream[T](private val iterator: Iterator[T])
     {
         if (! iterator.hasNext)
             None
+
         else
+        {
+            count += 1
             Some(iterator.next)
+        }
     }
+
+    /**
+     * Get the count of the number of items consumed so far.
+     *
+     * @return the count
+     */
+    def totalRead: Int = count
 }
 
 /**
@@ -115,6 +128,13 @@ trait Pushback[T] extends IteratorStream[T]
         else
             Some(pushbackStack.pop)
     }
+
+    /**
+     * Get the count of the number of items consumed so far.
+     *
+     * @return the count
+     */
+    override def totalRead: Int = (super.totalRead - pushbackStack.length)
 
     /**
      * Push a single item back onto the stream.
