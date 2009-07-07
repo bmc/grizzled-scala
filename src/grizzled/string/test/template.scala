@@ -54,10 +54,10 @@ class StringTemplateTest extends GrizzledFunSuite
     {
         val data = Map(
 
-            ("$foo bar $bar ${baz} $$",
+            ("$foo bar $bar ${baz} $",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $$",
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
 
             ("$foo bar $bar ${baz} $_",
              Map("foo" -> "FOO",
@@ -72,7 +72,7 @@ class StringTemplateTest extends GrizzledFunSuite
             ("$foo bar $bar ${baz} $$",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $$"
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $"
         )
 
         for {(input, expected) <- data
@@ -92,7 +92,7 @@ class StringTemplateTest extends GrizzledFunSuite
             ("$foo bar $bar ${baz} $$ $x",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $$",
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $ ",
 
             ("$foo bar $bar ${baz} $_",
              Map("foo" -> "FOO",
@@ -124,25 +124,25 @@ class StringTemplateTest extends GrizzledFunSuite
     {
         val data = Map(
 
-            ("%foo% bar %bar% %baz% %%",
+            ("%foo% bar %bar% %baz% %",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %%",
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
 
             ("%foo% bar %bar% %baz% %_%",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
                  "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
 
-            ("%foo% bar %bar% %baz% %frodo%%",
+            ("%foo% bar %bar% %baz% %frodo%x",
              Map("foo" -> "FOO",
                  "bar" -> "%foo%",
-                 "baz" -> "YAWN")) -> "FOO bar FOO YAWN %",
+                 "baz" -> "YAWN")) -> "FOO bar FOO YAWN x",
 
             ("%foo% bar %bar% %baz% %%",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %%"
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %"
         )
 
         for {(input, expected) <- data
@@ -162,17 +162,17 @@ class StringTemplateTest extends GrizzledFunSuite
             ("%foo% bar %bar% ${baz} %% %x%",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %%",
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
 
             ("%foo% bar %bar% %baz% %_%",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
                  "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
 
-            ("%foo% bar %bar% ${baz} %frodo%%",
+            ("%foo% bar %bar% ${baz} %frodo%x",
              Map("foo" -> "FOO",
                  "bar" -> "%foo%",
-                 "baz" -> "YAWN")) -> "FOO FOO BARSKI YAWN %",
+                 "baz" -> "YAWN")) -> "FOO FOO BARSKI YAWN x",
 
             ("%foo% bar %bar% %baz% %y%",
              Map("foo" -> "FOO",

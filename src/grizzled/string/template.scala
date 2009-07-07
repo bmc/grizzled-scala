@@ -151,16 +151,10 @@ class StringTemplate(private val varRegex: Regex,
 }
 
 /**
- * Companion object.
- */
-object StringTemplate
-{
-}
-
-/**
  * A string template that uses the Unix shell-like syntax <tt>${varname}</tt>
  * (or <tt>$varname</tt>) for variable references. A variable's name may consist
- * of alphanumerics and underscores.
+ * of alphanumerics and underscores. To include a literal "$" in a string,
+ * use two in a row ("$$").
  *
  * @param resolveVar   A function that takes a variable name as a parameter
  *                     and returns an <tt>Option[String]</tt> value for the
@@ -179,6 +173,9 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
                            resolveVar, 
                            safe)
 {
+    private val EscapedDollar = """\$\$""" // regexp string, for replaceAll
+    private val Placeholder   = "\u0001"   // temporarily replaces $$
+
     /**
      * Alternate constructor that uses a variable name pattern that permits
      * variable names with alphanumerics and underscore.
@@ -193,12 +190,44 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
      */
     def this(resolveVar:  (String) => Option[String], safe: Boolean) =
         this(resolveVar, "[a-zA-Z0-9_]+", safe)
+
+    /**
+     * Replace all variable references in the given string. Variable references
+     * are recognized per the regular expression passed to the constructor. If
+     * a referenced variable is not found in the resolver, this method either:
+     *
+     * <ul>
+     *   <li> throws a <tt>VariableNotFoundException</tt> (if <tt>safe</tt> is
+     *        <tt>false</tt>), or
+     *   <li> substitutes an empty string (if <tt>safe</tt> is <tt>true</tt>)
+     * </ul>
+     *
+     * Recursive references are supported (but beware of infinite recursion).
+     *
+     * @param s  the string in which to replace variable references
+     *
+     * @return the result
+     *
+     * @throws VariableNotFoundException  a referenced variable could not be
+     *                                    found, and <tt>safe</tt> is
+     *                                    <tt>false</tt>
+     */
+    override def substitute(s: String): String =
+    {
+        // Kludge to handle escaped "$$". Temporarily replace it with something
+        // highly unlikely to be in the string. Then, put a single "$" in its
+        // place, after the substitution.
+
+        super.substitute(s.replaceAll(EscapedDollar, Placeholder)).
+        replaceAll(Placeholder, """\$""");
+    }
 }
 
 /**
- * A string template that uses the cmd Windows.exe syntax <tt>%varname%</tt>
- * for variable references. A variable's name may consist of alphanumerics and
- * underscores.
+ * A string template that uses the cmd Windows.exe syntax
+ * <tt>%varname%</tt> for variable references. A variable's name may
+ * consist of alphanumerics and underscores. To include a literal "%" in a
+ * string, use two in a row ("%%").
  *
  * @param resolveVar   A function that takes a variable name as a parameter
  *                     and returns an <tt>Option[String]</tt> value for the
@@ -217,6 +246,9 @@ class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
                            resolveVar, 
                            safe)
 {
+    private val EscapedPercent = """%%"""   // regexp string, for replaceAll
+    private val Placeholder    = "\u0001"   // temporarily replaces $$
+
     /**
      * Alternate constructor that uses a variable name pattern that permits
      * variable names with alphanumerics and underscore.
@@ -231,4 +263,35 @@ class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
      */
     def this(resolveVar:  (String) => Option[String], safe: Boolean) =
         this(resolveVar, "[a-zA-Z0-9_]+", safe)
+
+    /**
+     * Replace all variable references in the given string. Variable references
+     * are recognized per the regular expression passed to the constructor. If
+     * a referenced variable is not found in the resolver, this method either:
+     *
+     * <ul>
+     *   <li> throws a <tt>VariableNotFoundException</tt> (if <tt>safe</tt> is
+     *        <tt>false</tt>), or
+     *   <li> substitutes an empty string (if <tt>safe</tt> is <tt>true</tt>)
+     * </ul>
+     *
+     * Recursive references are supported (but beware of infinite recursion).
+     *
+     * @param s  the string in which to replace variable references
+     *
+     * @return the result
+     *
+     * @throws VariableNotFoundException  a referenced variable could not be
+     *                                    found, and <tt>safe</tt> is
+     *                                    <tt>false</tt>
+     */
+    override def substitute(s: String): String =
+    {
+        // Kludge to handle escaped "%%". Temporarily replace it with something
+        // highly unlikely to be in the string. Then, put a single "%" in its
+        // place, after the substitution.
+
+        super.substitute(s.replaceAll(EscapedPercent, Placeholder)).
+        replaceAll(Placeholder, "%");
+    }
 }
