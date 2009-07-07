@@ -94,4 +94,92 @@ final class GrizzledString(val string: String)
             string.substring(0, string.length - 1)
         else
             string
+
+    /**
+     * Translate any metacharacters (e.g,. \t, \n, \u2122) into their real
+     * characters, and return the translated string. Metacharacter sequences
+     * that cannot be parsed (because they're unrecognized, because the Unicode
+     * number isn't four digits, etc.) are passed along unchanged.
+     *
+     * @return the possibly translated string
+     */
+    def translateMetachars: String =
+    {
+        import grizzled.parsing.{IteratorStream, Pushback}
+
+        val stream = new IteratorStream[Char](string) with Pushback[Char]
+
+        def parseHexDigits: List[Char] =
+        {
+            def isHexDigit(c: Char): Boolean =
+            {
+                try
+                {
+                    Integer.parseInt(c.toString, 16)
+                    true
+                }
+                catch
+                {
+                    case _: NumberFormatException => false
+                }
+            }
+
+            stream.next match
+            {
+                case Some(c) if isHexDigit(c) =>
+                    c :: parseHexDigits
+                case Some(c) =>
+                    stream.pushback(c)
+                    Nil
+                case None =>
+                    Nil
+            }
+        }
+    
+        def parseUnicode: List[Char] =
+        {
+            val digits = parseHexDigits
+            if (digits == Nil)
+                Nil
+    
+            else if (digits.length != 4)
+            {
+                // Invalid Unicode string.
+
+                List('\\', 'u') ++ digits
+            }
+    
+            else
+                List(Integer.parseInt(digits mkString "", 16).
+                     asInstanceOf[Char])
+        }
+    
+        def parseMeta: List[Char] =
+        {
+            stream.next match
+            {
+                case Some('t')  => List('\t')
+                case Some('f')  => List('\f')
+                case Some('n')  => List('\n')
+                case Some('r')  => List('\r')
+                case Some('\\') => List('\\')
+                case Some('u')  => parseUnicode
+                case Some(c)    => List('\\', c)
+                case None       => Nil
+            }
+        }
+    
+        def translate: List[Char] =
+        {
+            stream.next match
+            {
+                case Some('\\') => parseMeta ::: translate
+                case Some(c)    => c :: translate
+                case None       => Nil
+            }
+        }
+    
+        translate mkString ""
+    }
 }
+    
