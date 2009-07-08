@@ -55,8 +55,6 @@ import grizzled.readline.{Readline, Completer, History}
 
 import grizzled.GrizzledString._
 
-import java.io.EOFException
-
 /**
  * Actions returned by handlers.
  */
@@ -68,9 +66,6 @@ case class Stop() extends CommandAction
  * Trait for an object (or class) that handles a single command. All logic
  * for a given command is embodied in a single object that mixes in this
  * trait.
- *
- * Note: Any command handler may raise EOFException to signal that the
- * interpreter should end.
  */
 trait CommandHandler
 {
@@ -686,11 +681,6 @@ abstract class CommandInterpreter(val appName: String,
         try
         {
             readAndProcessCommand("", primaryPrompt)
-        }
-
-        catch
-        {
-            case e: EOFException => println("*** EOF")
         }
 
         finally
