@@ -72,7 +72,12 @@ class StringTemplateTest extends GrizzledFunSuite
             ("""$foo bar $bar ${baz} \$""",
              Map("foo" -> "FOO",
                  "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $"
+                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
+
+            ("""$foo ${foobar?blitz}""",
+             Map("foo" -> "FOO",
+                 "bar" -> "BARSKI",
+                 "baz" -> "YAWN")) -> "FOO blitz"
         )
 
         for {(input, expected) <- data

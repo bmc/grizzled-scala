@@ -53,7 +53,7 @@ package grizzled.config
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
-import grizzled.string.implicits._
+import grizzled.GrizzledString._
 
 import scala.collection.mutable.{Map => MutableMap}
 
@@ -240,23 +240,21 @@ class NoSuchOptionException(message: String)
  * Substitution</a></h5>
  *
  * <p>To prevent the parser from interpreting metacharacter sequences,
- * variable substitutions and other special characters, enclose part or
- * all of the value in single quotes.
+ * variable substitutions and other special characters, use the "->"
+ * assignment operator, instead of ":" or "=".</p>
+ *
  * <p>For example, suppose you want to set variable "prompt" to the
  * literal value "Enter value. To specify a newline, use \n." The following
  * configuration file line will do the trick:</p>
  *
- * <blockquote><pre>prompt: 'Enter value. To specify a newline, use \n'
+ * <blockquote><pre>prompt -> Enter value. To specify a newline, use \n
  * </pre></blockquote>
  *
  * <p>Similarly, to set variable "abc" to the literal string "${foo}"
  * suppressing the parser's attempts to expand "${foo}" as a variable
  * reference, you could use:</p>
  *
- * <blockquote><pre>abc: '${foo}'</pre></blockquote>
- *
- * <p>To include a literal single quote, you must escape it with a
- * backslash.</p>
+ * <blockquote><pre>abc -> ${foo}</pre></blockquote>
  *
  * <p>Note: It's also possible, though hairy, to escape the special meaning
  * of special characters via the backslash character. For instance, you can
@@ -272,23 +270,11 @@ class NoSuchOptionException(message: String)
  * those passes honors and processes backslash escapes. This problem would
  * go away if the configuration file parser parsed both metacharacter
  * sequences and variable substitutions itself, in one pass. It doesn't
- * currently do that, because I wanted to make use of the existing
- * {@link XStringBuffer#decodeMetacharacters()} method and the
- * {@link UnixShellVariableSubstituter} class. In general, you're better off
- * just sticking with single quotes.</p>
- *
- * <h5>Double Quotes</h5>
- *
- * <p>Double quotes can be used to escape the special meaning of white
- * space, while still permitting metacharacters and variable references to
- * be expanded. (Metacharacter and variable references are not expanded
- * between single quotes.) When retrieving a variable's value via
- * {@link #getConfigurationValue}, a program will not be able to tell whether
- * double quotes were used or not, since {@link #getConfigurationValue}
- * returns the "cooked" value as a single string. However, callers can use
- * the {@link #getConfigurationTokens} method to retrieve the parsed tokens
- * that comprise a configuration value. Double- and single-quoted strings are
- * returned as individual tokens.</p>
+ * currently do that, because it uses the separate
+ * <tt>grizzled.string.template.UnixShellStringTemplate</tt> class
+ * <tt>grizzled.GrizzledString.translateMetachars()</tt> method to do the
+ * variable substitution and metacharacter translation. In general, you're
+ * better off just sticking with the "->" assignment operator.</p>
  *
  * <h4>Includes</h4>
  *
@@ -321,14 +307,9 @@ class NoSuchOptionException(message: String)
  *
  * <h4>Comments and Blank Lines</h4>
  *
- * <p>A comment line is a one whose first non-whitespace character is a "#"
- * or a "!". This comment syntax is identical to the one supported by a
- * Java properties file. A blank line is a line containing no content, or
- * one containing only whitespace. Blank lines and comments are ignored.</p>
- *
- * @version <tt>$Revision$</tt>
- *
- * @author Copyright &copy; 2004-2007 Brian M. Clapper
+ * <p>A comment line is a one whose first non-whitespace character is a "#".
+ * A blank line is a line containing no content, or one containing only
+ * white space. Blank lines and comments are ignored.</p>
  */
 class Configuration(defaultValues: Map[String, String])
 {
@@ -486,7 +467,10 @@ object Configuration
     private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
     private val CommentLine      = """^\s*(#.*)$""".r
     private val BlankLine        = """^(\s*)$""".r
-    private val OptionName       = """([-a-zA-Z0-9_]+)""".r
+    private val OptionName       = """([a-zA-Z0-9_.]+)""".r
+    private val RawAssignment    = ("""^\s*""" + 
+                                    OptionName.toString +
+                                    """\s*->\s*(.*)$""").r
     private val Assignment       = ("""^\s*""" + 
                                     OptionName.toString +
                                     """\s*[:=]\s*(.*)$""").r
@@ -600,8 +584,16 @@ object Configuration
                                                   optionName + "=" + value +
                                                   "\" occurs before the " +
                                                   "first section.")
-                    val newValue = template.substitute(value)
+                    val newValue = template.substitute(value.translateMetachars)
                     config.addOption(curSection, optionName, newValue)
+
+                case RawAssignment(optionName, value) =>
+                    if (curSection == null)
+                        throw new ConfigException("Assignment \"" +
+                                                  optionName + "=" + value +
+                                                  "\" occurs before the " +
+                                                  "first section.")
+                    config.addOption(curSection, optionName, value)
     
                 case _ =>
                     throw new ConfigException("Unknown configuration line: \"" +

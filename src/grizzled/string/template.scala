@@ -58,11 +58,17 @@ class VariableNotFoundException(val variableName: String)
     extends Exception("Variable \"" + variableName + "\" not found.")
 
 /**
+ * Information about a parsed variable name.
+ */
+class Variable(val start: Int, 
+               val end: Int, 
+               val name: String, 
+               val default: Option[String])
+
+/**
  * A simple, configurable string template that substitutes variable references
  * within a string.
  *
- * @param varRegex    The regular expression for a variable reference. Must
- *                    contain a single group that extracts the name.
  * @param resolveVar  A function that takes a variable name as a parameter and
  *                    returns an <tt>Option[String]</tt> value for the variable,
  *                    or <tt>None</tt> if there is no value 
@@ -71,9 +77,8 @@ class VariableNotFoundException(val variableName: String)
  *                    a blank string for an unknown variable, <tt>false</tt>
  *                    for one that throws an exception.
  */
-class StringTemplate(private val varRegex: Regex, 
-                     private val resolveVar: (String) => Option[String],
-                     val safe: Boolean)
+abstract class StringTemplate(val resolveVar: (String) => Option[String],
+                              val safe: Boolean)
 {
     /**
      * Replace all variable references in the given string. Variable references
@@ -100,21 +105,16 @@ class StringTemplate(private val varRegex: Regex,
     {
         def doSub(s2: String): String =
         {
-            varRegex.findFirstMatchIn(s2) match
+            findVariableReference(s2) match
             {
                 case None =>
                     s2
 
-                case Some(matcher) =>
-                    // Don't use Regex.replaceFirstIn, because it wants to
-                    // do "$" group substitutions in the replacement string,
-                    // which can cause problems if the replacement string
-                    // contains embedded "$" characters. Do it manually.
-                    val varName = matcher.group(1)
-                    var endString = if (matcher.end == s2.length) ""
-                                    else s2.substring(matcher.end)
-                    val transformed = s2.substring(0, matcher.start) +
-                                      getVar(varName) +
+                case Some(variable) =>
+                    var endString = if (variable.end == s2.length) ""
+                                    else s2.substring(variable.end)
+                    val transformed = s2.substring(0, variable.start) +
+                                      getVar(variable.name, variable.default) +
                                       endString
                     doSub(transformed)
             }
@@ -124,22 +124,35 @@ class StringTemplate(private val varRegex: Regex,
     }
 
     /**
+     * Parse the location of the first variable in string.
+     *
+     * @param s  the string
+     *
+     * @return an <tt>Option[Variable]</tt>, specifying the variable's
+     *         location; or <tt>None</tt> if not found
+     */
+    protected def findVariableReference(s: String): Option[Variable]
+
+    /**
      * Get a variable's value, returning an empty string or throwing an
      * exception, depending on the setting of <tt>safe</tt>.
      *
-     * @param name  the variable name
+     * @param name    the variable name
+     * @param default default value, or None if there isn't one
      *
      * @return the value of the variable
      *
      * @throws VariableNotFoundException  the variable could not be found
      *                                    and <tt>safe</tt> is <tt>false</tt>
      */
-    private def getVar(name: String): String =
+    private def getVar(name: String, default: Option[String]): String =
     {
         resolveVar(name) match
         {
             case None =>
-                if (safe)
+                if (default != None)
+                    default.get
+                else if (safe)
                     ""
                 else
                     throw new VariableNotFoundException(name)
@@ -154,7 +167,20 @@ class StringTemplate(private val varRegex: Regex,
  * A string template that uses the Unix shell-like syntax <tt>${varname}</tt>
  * (or <tt>$varname</tt>) for variable references. A variable's name may consist
  * of alphanumerics and underscores. To include a literal "$" in a string,
- * use two in a row ("$$").
+ * escape it with a backslash.
+ *
+ * <p>For this class, the general form of a variable reference is:</p>
+ *
+ * <blockquote><pre>${varname?default}</pre></blockquote>
+ *
+ * <p>The <tt>?default</tt> suffix is optional and specifies a default value
+ * to be used if the variable has no value.</p>
+ *
+ * <p>A shorthand form of a variable reference is:</p>
+ *
+ * <blockquote><pre>$varname</pre></blockquote>
+ *
+ * <p>The <i>default</i> capability is not available in the shorthand form.</p>
  *
  * @param resolveVar   A function that takes a variable name as a parameter
  *                     and returns an <tt>Option[String]</tt> value for the
@@ -169,10 +195,17 @@ class StringTemplate(private val varRegex: Regex,
 class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
                               namePattern: String,
                               safe:        Boolean)
-    extends StringTemplate(("""\$\{?(""" + namePattern + """)\}?""").r, 
-                           resolveVar, 
+    extends StringTemplate(resolveVar, 
                            safe)
 {
+    // ${foo} or ${foo?default}
+    private var LongFormVariable = ("""\$\{(""" + 
+                                    namePattern + 
+                                    """)(\?[^}]*)?\}""").r
+
+    // $foo
+    private var ShortFormVariable = ("""\$(""" + namePattern + ")").r
+
     private val EscapedDollar = """(\\*)(\\\$)""".r
     private val RealEscapeToken = "\u0001"
     private val NonEscapeToken  = "\u0002"
@@ -246,6 +279,47 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
         s2.replaceAll(RealEscapeToken, """\$""")
           .replaceAll(NonEscapeToken, """\\\$""")
     }
+
+    /**
+     * Parse the location of the first variable in string.
+     *
+     * @param s  the string
+     *
+     * @return an <tt>Option[Variable]</tt>, specifying the variable's
+     *         location; or <tt>None</tt> if not found
+     */
+    protected def findVariableReference(s: String): Option[Variable] =
+    {
+        LongFormVariable.findFirstMatchIn(s) match
+        {
+            case Some(m1) =>
+                val name = m1.group(1)
+                val default = m1.group(2) match
+                {
+                    case null      =>
+                        None
+                    case s: String =>
+                        // Pull off the "?". Can't do Some(s drop 1),
+                        // because that yields a RichString, not a String.
+                        // Casting doesn't work, either. But assigning to a
+                        // temporary string does.
+                        val realDefault: String = s drop 1
+                        Some(realDefault)
+                }
+
+                Some(new Variable(m1.start, m1.end, name, default))
+
+            case None =>
+                ShortFormVariable.findFirstMatchIn(s) match
+                {
+                    case Some(m2) =>
+                        Some(new Variable(m2.start, m2.end, 
+                                          m2.group(1), None))
+                    case None =>
+                        None
+                }
+        }
+    }
 }
 
 /**
@@ -267,10 +341,9 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
 class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
                                namePattern: String,
                                safe:        Boolean)
-    extends StringTemplate(("""%(""" + namePattern + """)%""").r, 
-                           resolveVar, 
-                           safe)
+    extends StringTemplate(resolveVar, safe)
 {
+    private val Variable       = ("""%(""" + namePattern + """)%""").r
     private val EscapedPercent = """%%"""   // regexp string, for replaceAll
     private val Placeholder    = "\u0001"   // temporarily replaces $$
 
@@ -318,5 +391,26 @@ class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
 
         super.substitute(s.replaceAll(EscapedPercent, Placeholder)).
         replaceAll(Placeholder, "%");
+    }
+
+    /**
+     * Parse the location of the first variable in string.
+     *
+     * @param s  the string
+     *
+     * @return an <tt>Option[Variable]</tt>, specifying the variable's
+     *         location; or <tt>None</tt> if not found
+     */
+    protected def findVariableReference(s: String): Option[Variable] =
+    {
+        Variable.findFirstMatchIn(s) match
+        {
+            case Some(m) =>
+                val name = m.group(1)
+                Some(new Variable(m.start, m.end, name, None))
+
+            case None =>
+                None
+        }
     }
 }
