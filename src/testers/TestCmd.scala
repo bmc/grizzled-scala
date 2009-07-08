@@ -1,7 +1,7 @@
 // Run this as a script.
 
 import grizzled.cmd._
-import grizzled.string.implicits._
+import grizzled.GrizzledString._
 
 object Foo extends CommandHandler
 {
@@ -9,8 +9,12 @@ object Foo extends CommandHandler
     private def validArgs = List("bar", "baz", "fred")
     override val aliases = List("fool")
     val help = """Does that foo thang"""
-    def runCommand(commandName: String, unparsedArgs: String): Unit = 
+    def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
+    {
         println("*** " + commandName + " " + unparsedArgs)
+        ContinueReading()
+    }
+
     override def complete(token: String, line: String): List[String] =
         if (token == "")
             validArgs
@@ -30,11 +34,21 @@ class Prompt(val cmd: Test) extends CommandHandler
     override def moreInputNeeded(line: String) = (! line.rtrim.endsWith("."))
 
     // Handle the command by changing the prompt.
-    def runCommand(commandName: String, unparsedArgs: String): Unit = 
+    def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
     {
         if (unparsedArgs.length > 1)
 	    cmd.prompt = unparsedArgs.substring(0, unparsedArgs.length -1)
+        ContinueReading()
     }
+}
+
+object ExitHandler extends CommandHandler
+{
+    val name = "exit"
+    val help = "Exit the interpreter"
+
+    def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
+        Stop()
 }
 
 class Test extends CommandInterpreter("Test")
@@ -43,7 +57,8 @@ class Test extends CommandInterpreter("Test")
     val handlers = List(Foo, 
                         new Prompt(this), 
                         new HistoryHandler(this),
-                        new RedoHandler(this))
+                        new RedoHandler(this),
+                        ExitHandler)
     var prompt = super.primaryPrompt
     override def primaryPrompt = prompt
 
@@ -56,6 +71,12 @@ class Test extends CommandInterpreter("Test")
             println("Loading history file \"" + HistoryPath + "\"")
             history.load(historyFile.getPath)
         }
+    }
+
+    override def handleEOF =
+    {
+        error("Use Ctrl-C or type \"exit\" to exit.")
+        ContinueReading()
     }
 
     override def postLoop =
