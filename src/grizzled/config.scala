@@ -56,6 +56,7 @@ import grizzled.string.template.UnixShellStringTemplate
 import grizzled.GrizzledString._
 
 import scala.collection.mutable.{Map => MutableMap}
+import scala.io.Source
 
 /**
  * Base class for all configuration exceptions.
@@ -78,14 +79,15 @@ class DuplicateOptionException(sectionName: String, optionName: String)
 /**
  * Thrown when an expected section is not present in the confiruation.
  */
-class NoSuchSectionException(message: String)
-    extends ConfigException(message)
+class NoSuchSectionException(sectionName: String)
+    extends ConfigException("Section \"" + sectionName + "\" does not exist.")
 
 /**
  * Thrown when an expected option is not present in the confiruation.
  */
-class NoSuchOptionException(message: String)
-    extends ConfigException(message)
+class NoSuchOptionException(sectionName: String, optionName: String)
+    extends ConfigException("Section \"" + sectionName + "\" does not have " +
+                            "an option named \"" + optionName + "\".")
 
 /**
  * An INI-style configuration file parser.
@@ -128,7 +130,7 @@ class NoSuchOptionException(message: String)
  *
  * <p>There can be any amount of whitespace before and after the brackets
  * in a section name; the whitespace is ignored. Section names may consist
- * of alphanumeric characters and periods. Anything else is not
+ * of alphanumeric characters and underscores. Anything else is not
  * permitted.</p>
  *
  * <h4>Variable Syntax</h4>
@@ -311,24 +313,18 @@ class NoSuchOptionException(message: String)
  * A blank line is a line containing no content, or one containing only
  * white space. Blank lines and comments are ignored.</p>
  */
-class Configuration(defaultValues: Map[String, String])
+class Configuration
 {
-    // This complicated-looking transform maps the defaultValues map into a new
-    // one with the keys all normalized by transformOptionName().
-    val defaults = Map(
-        (defaultValues.map((a) => (transformOptionName(a._1), a._2))).toSeq: _*
-    )
+    private val SpecialSections = Set("env", "system")
 
-    val sectionMap = MutableMap.empty[String, MutableMap[String, String]]
-
-    def this() = this(Map.empty[String, String])
+    private val sections = MutableMap.empty[String, MutableMap[String, String]]
 
     /**
      * Get the list of section names.
      *
      * @return the section names, in a iterator
      */
-    def sectionNames: Iterator[String] = sectionMap.keys
+    def sectionNames: Iterator[String] = sections.keys
 
     /**
      * Add a section to the configuration.
@@ -339,10 +335,13 @@ class Configuration(defaultValues: Map[String, String])
      */
     protected def addSection(sectionName: String): Unit =
     {
-        if (sectionMap contains sectionName)
+        if (sections contains sectionName)
             throw new DuplicateSectionException(sectionName)
 
-        sectionMap(sectionName) = MutableMap.empty[String, String]
+        if (SpecialSections contains sectionName)
+            throw new DuplicateSectionException(sectionName)
+
+        sections(sectionName) = MutableMap.empty[String, String]
     }
 
     /**
@@ -360,10 +359,14 @@ class Configuration(defaultValues: Map[String, String])
                             optionName: String,
                             value: String)
     {
+        if (SpecialSections contains sectionName)
+            throw new ConfigException("Can't add an option to read-only " +
+                                      "section \"" + sectionName + "\"")
+
         if (! hasSection(sectionName))
             throw new NoSuchSectionException(sectionName)
 
-        val optionMap = sectionMap(sectionName)
+        val optionMap = sections(sectionName)
         val canonicalOptionName = transformOptionName(optionName)
         if (optionMap.contains(canonicalOptionName))
             throw new DuplicateOptionException(sectionName, optionName)
@@ -380,7 +383,7 @@ class Configuration(defaultValues: Map[String, String])
      *         <tt>false</tt> otherwise
      */
     def hasSection(sectionName: String): Boolean =
-        sectionMap contains sectionName
+        sections contains sectionName
 
     /**
      * Get the value for an option in a section.
@@ -395,15 +398,30 @@ class Configuration(defaultValues: Map[String, String])
      */
     def option(sectionName: String, optionName: String): String =
     {
-        if (! hasSection(sectionName))
-            throw new NoSuchSectionException(sectionName)
+        sectionName match
+        {
+            case "env" =>
+                val option = System.getenv(optionName)
+                if (option == null)
+                    throw new NoSuchOptionException(sectionName, optionName)
+                option
 
-        val options = sectionMap(sectionName)
-        val canonicalOptionName = transformOptionName(optionName)
-        if (! options.contains(canonicalOptionName))
-            throw new NoSuchOptionException(canonicalOptionName)
+            case "system" =>
+                val option = System.getProperties.getProperty(optionName)
+                if (option == null)
+                    throw new NoSuchOptionException(sectionName, optionName)
+                option
 
-        options(canonicalOptionName)
+            case _ =>
+                if (! hasSection(sectionName))
+                    throw new NoSuchSectionException(sectionName)
+
+                val options = sections(sectionName)
+                val canonicalOptionName = transformOptionName(optionName)
+                if (! options.contains(canonicalOptionName))
+                    throw new NoSuchOptionException(sectionName, optionName)
+                options(canonicalOptionName)
+        }
     }
 
     /**
@@ -420,7 +438,7 @@ class Configuration(defaultValues: Map[String, String])
         if (! hasSection(sectionName))
             throw new NoSuchSectionException(sectionName)
 
-        Map.empty[String, String] ++ sectionMap(sectionName)
+        Map.empty[String, String] ++ sections(sectionName)
     }
 
     /**
@@ -437,7 +455,7 @@ class Configuration(defaultValues: Map[String, String])
         if (! hasSection(sectionName))
             throw new NoSuchSectionException(sectionName)
 
-        sectionMap(sectionName).keys
+        sections(sectionName).keys
     }
 
     /**
@@ -452,14 +470,22 @@ class Configuration(defaultValues: Map[String, String])
 }
 
 /**
+ * A configuration reader: Reads a source and produces a parsed
+ * configuration.
+ */
+object ConfigurationReader
+{
+}
+   
+
+/**
  * Companion object for the <tt>Configuration</tt> class
  */
 object Configuration
 {
     import java.io.File
-    import scala.io.Source
 
-    private val SectionName      = """([^\s\[\]]+)""".r
+    private val SectionName      = """([a-zA-Z0-9_]+)""".r
     private val ValidSection     = ("""^\s*\[""" + 
                                     SectionName.toString +
                                     """\]\s*$""").r
@@ -467,15 +493,15 @@ object Configuration
     private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
     private val CommentLine      = """^\s*(#.*)$""".r
     private val BlankLine        = """^(\s*)$""".r
-    private val OptionName       = """([a-zA-Z0-9_.]+)""".r
+    private val VariableName     = """([a-zA-Z0-9_.]+)""".r
     private val RawAssignment    = ("""^\s*""" + 
-                                    OptionName.toString +
+                                    VariableName.toString +
                                     """\s*->\s*(.*)$""").r
     private val Assignment       = ("""^\s*""" + 
-                                    OptionName.toString +
+                                    VariableName.toString +
                                     """\s*[:=]\s*(.*)$""").r
     private val FullVariableRef  = (SectionName.toString + """\.""" +
-                                    OptionName.toString).r
+                                    VariableName.toString).r
 
     /**
      * Read a configuration file.
@@ -511,51 +537,20 @@ object Configuration
      *
      * @return the <tt>Configuration</tt> object.
      */
-    def apply(source: Source): Configuration = readConfig(source)
+    def apply(source: Source): Configuration = read(source)
 
-    private def readConfig(source: Source): Configuration =
+    /**
+     * Read a configuration.
+     */
+    private def read(source: Source): Configuration =
     {
         val config             =  new Configuration
         var curSection: String = null
 
-        object VarResolver
-        {
-            def get(varName: String): Option[String] =
-            {
-                try
-                {
-                    varName match
-                    {
-                        case FullVariableRef(section, option) => 
-                            Some(config.option(section, option))
-                        case OptionName(option) => 
-                            Some(config.option(curSection, option))
-                        case _ =>
-                            throw new ConfigException("Reference to " +
-                                                      "nonexistent section " +
-                                                      "or option: ${" +
-                                                      varName + "}")
-                    }
-                }
+        def resolveVariable(varName: String): Option[String] =
+            getVar(config, curSection, varName)
 
-                catch
-                {
-                    case _: NoSuchOptionException =>
-                        throw new ConfigException(
-                            "In section [" + curSection + "]: Reference to " +
-                            "nonexistent option in ${" + varName + "}"
-                        )
-
-                    case _: NoSuchSectionException => ""
-                        throw new ConfigException(
-                            "In section [" + curSection + "]: Reference to " +
-                            "nonexistent section in ${" + varName + "}"
-                        )
-                }
-            }
-        }
-
-        val template = new UnixShellStringTemplate(VarResolver.get, 
+        val template = new UnixShellStringTemplate(resolveVariable,
                                                    "[a-zA-Z0-9_.]+",
                                                    true)
 
@@ -602,6 +597,39 @@ object Configuration
         }
 
         config
+    }
+
+    private def getVar(config: Configuration,
+                       curSection: String, 
+                       varName: String): Option[String] =
+    {
+        try
+        {
+            varName match
+            {
+                case FullVariableRef(section, option) => 
+                    Some(config.option(section, option))
+                case VariableName(option) => 
+                    Some(config.option(curSection, option))
+                case _ =>
+                    throw new ConfigException("Reference to nonexistent " +
+                                              "section or option: ${ " +
+                                              varName + "}")
+            }
+        }
+
+        catch
+        {
+            case _: NoSuchOptionException =>
+                throw new ConfigException("In section [" + curSection + 
+                                          "]: Reference to nonexistent " +
+                                          "option in ${" + varName + "}")
+
+            case _: NoSuchSectionException =>
+                throw new ConfigException("In section [" + curSection + 
+                                          "]: Reference to nonexistent " +
+                                          "option in ${" + varName + "}")
+        }
     }
 }
     
