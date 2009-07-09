@@ -468,6 +468,15 @@ abstract class CommandInterpreter(val appName: String,
     def error(message: String) = println(Console.RED + message + Console.RESET)
 
     /**
+     * Emit a warning message in a consistent way. May be overridden by
+     * subclasses. The default implementation prints the message with the
+     * prefix "Warning: ".
+     *
+     * @param message the message to emit
+     */
+    def warning(message: String) = println("Warning: " + message)
+
+    /**
      * Called just before the main loop (<tt>mainLoop()</tt>) begins its
      * command loop, this hook method can be used for initialization. The
      * default implementation does nothing.
