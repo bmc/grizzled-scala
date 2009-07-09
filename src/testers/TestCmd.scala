@@ -5,10 +5,10 @@ import grizzled.GrizzledString._
 
 object Foo extends CommandHandler
 {
-    val name = "foo"
+    val CommandName = "foo"
     private def validArgs = List("bar", "baz", "fred")
     override val aliases = List("fool")
-    val help = """Does that foo thang"""
+    val Help = """Does that foo thang"""
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
     {
         println("*** " + commandName + " " + unparsedArgs)
@@ -24,8 +24,8 @@ object Foo extends CommandHandler
 
 class Prompt(val cmd: Test) extends CommandHandler
 {
-    val name = "prompt"
-    val help = """Change the prompt. Usage: prompt string"""
+    val CommandName = "prompt"
+    val Help = """Change the prompt. Usage: prompt string"""
 
     // Test the "more input needed" capability by insisting that this
     // command end with a period. If the string doesn't end with a period,
@@ -44,8 +44,8 @@ class Prompt(val cmd: Test) extends CommandHandler
 
 object ExitHandler extends CommandHandler
 {
-    val name = "exit"
-    val help = "Exit the interpreter"
+    val CommandName = "exit"
+    val Help = "Exit the interpreter"
 
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
         Stop

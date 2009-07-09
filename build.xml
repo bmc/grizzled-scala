@@ -254,7 +254,7 @@ You must set the SCALA_HOME environment variable.
   <target name="jar" depends="grizzled.jar"
           description="Synonym for 'grizzled.jar'"/>
 
-  <target name="grizzled.jar" depends="compile-all"
+  <target name="grizzled.jar" depends="compile, test"
           description="Generate the distribution">
     <mkdir dir="${build.dir}/lib"/>
     <jar jarfile="${code.jar.path}" basedir="${build.classes.dir}"/>

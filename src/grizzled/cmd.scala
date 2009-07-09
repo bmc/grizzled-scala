@@ -87,7 +87,7 @@ trait CommandHandler
      * The name of the command. This name, or any of the aliases (see below)
      * will cause the command to be invoked.
      */
-    val name: String
+    val CommandName: String
 
     /**
      * Additional aliases for the command, if any.
@@ -99,7 +99,7 @@ trait CommandHandler
      * screen. It is not wrapped, indented, or otherwise reformatted. It
      * may be a single string or a multiline string.
      */
-    val help: String
+    val Help: String
 
     /**
      * Compares a command name (that the user typed in, for instance) to
@@ -172,7 +172,7 @@ trait CommandHandler
     /**
      * Convenience method to retrieve the combined list of names and aliases.
      */
-    private[this] def allNames = name :: aliases
+    private[this] def allNames = CommandName :: aliases
 }
 
 /**
@@ -319,9 +319,9 @@ abstract class CommandInterpreter(val appName: String,
      */
     object HelpHandler extends CommandHandler
     {
-        val name = "help"
+        val CommandName = "help"
         override val aliases = List("?")
-        override val help = """This message"""
+        override val Help = """This message"""
 
         private val OutputWidth = 79
 
@@ -357,13 +357,13 @@ abstract class CommandInterpreter(val appName: String,
                 findCommand(name) match
                 {
                     case Some(cmd) =>
-                        val header = "Help for \"" + cmd.name + "\""
+                        val header = "Help for \"" + cmd.CommandName + "\""
                         println("\n" + header + "\n" + ("-" * header.length))
                         if (cmd.aliases != Nil)
                             printf("Aliases: %s\n\n", 
                                    cmd.aliases.mkString(", "))
 
-                        println(cmd.help)
+                        println(cmd.Help)
 
                     case None =>
                         println("\nHelp is unavailable for \"" + name + "\"")
@@ -668,11 +668,12 @@ abstract class CommandInterpreter(val appName: String,
                     history += commandLine
                     val commandLine2 = preCommand(commandLine)
                     assert(commandLine2 != null)
-                    if (commandLine2 == commandLine)
+                    if ((commandLine2 == commandLine) ||
+                        (splitCommandAndArgs(commandLine2)._1 == commandName))
                     {
-                        val action = handler.runCommand(name, args)
+                        val action = handler.runCommand(commandName, args)
                         if (action != Stop)
-                            postCommand(name, args)
+                            postCommand(commandName, args)
                         action
                     }
                     else
@@ -855,7 +856,7 @@ abstract class CommandInterpreter(val appName: String,
      */
     private def sortedCommandNames(includeAliases: Boolean): List[String] =
     {
-        val namesOnly = allHandlers.map(_.name)
+        val namesOnly = allHandlers.map(_.CommandName)
         val allNames = 
             if (includeAliases)
                 // Extract the aliases, producing a list of lists of strings.
@@ -900,11 +901,11 @@ object CmdUtil
  */
 class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
 {
-    val name = "history"
+    val CommandName = "history"
     override val aliases = List("h")
 
     val history = cmd.history 
-    val help = """Show history. 
+    val Help = """Show history. 
                  |
                  |Usage: history [n]
                  |
@@ -979,11 +980,11 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
  */
 class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
 {
-    val name = "r"
+    val CommandName = "r"
     override val aliases = List("!")
 
     val history = cmd.history 
-    val help = """Reissue a command, by partial name or number.
+    val Help = """Reissue a command, by partial name or number.
                  |
                  |Usage: r namePrefix  -or-  !namePrefix
                  |       r number      -or-  !number
