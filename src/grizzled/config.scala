@@ -425,6 +425,32 @@ class Configuration
     }
 
     /**
+     * Get the value for an option in a section, supplying a default if the
+     * option or the section doesn't exist.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     * @param default      default value
+     *
+     * @return the option's value (which may be the default)
+     */
+    def option(sectionName: String, 
+               optionName: String, 
+               default: String): String =
+    {
+        try
+        {
+            option(sectionName, optionName)
+        }
+
+        catch
+        {
+            case _: NoSuchOptionException => default
+            case _: NoSuchSectionException => default
+        }
+    }
+
+    /**
      * Get all options in a section.
      *
      * @param sectionName  the section name

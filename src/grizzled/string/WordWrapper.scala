@@ -233,3 +233,57 @@ class WordWrapper(val wrapWidth:    Int,
         buf mkString "\n"
     }
 }
+
+/**
+ * Companion object for <tt>WordWrapper</tt>.
+ */
+object WordWrapper
+{
+    /**
+     * Create a <tt>WordWrapper</tt>.
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     * @param indentation how many characters to indent
+     * @param prefix      the prefix to use, or "" for none. Cannot be null.
+     * @param indentChar  the indentation character to use.
+     */
+    def apply(wrapWidth:    Int,
+              indentation:  Int,
+              prefix:       String,
+              indentChar:   Char) =
+        new WordWrapper(wrapWidth, indentation, prefix, indentChar)
+
+    /**
+     * Create a <tt>WordWrapper</tt> with all the default values.
+     */ 
+    def apply() = new WordWrapper
+
+    /**
+     * Alternate constructor that specifies only a width, defaulting all
+     * other constructor parameters.
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     */ 
+    def apply(wrapWidth: Int) = new WordWrapper(wrapWidth)
+
+    /**
+     * Alternate constructor that specifies only a width and an indentation
+     * level, defaulting all other constructor parameters.
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     * @param indentation how many characters to indent
+     */ 
+    def apply(wrapWidth: Int, indentation: Int) = 
+        new WordWrapper(wrapWidth, indentation)
+
+    /**
+     * Alternate constructor that specifies a width, an indentation level and
+     * a prefix, defaulting the <tt>indentChar</tt> parameter to a blank.
+     *
+     * @param wrapWidth   the number of characters after which to wrap each line
+     * @param indentation how many characters to indent
+     * @param prefix      the prefix to use, or "" for none. Cannot be null.
+     */ 
+    def apply(wrapWidth: Int, indentation: Int, prefix: String) = 
+        new WordWrapper(wrapWidth, indentation, prefix)
+}
