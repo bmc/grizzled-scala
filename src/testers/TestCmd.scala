@@ -12,7 +12,7 @@ object Foo extends CommandHandler
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
     {
         println("*** " + commandName + " " + unparsedArgs)
-        ContinueReading()
+        KeepGoing
     }
 
     override def complete(token: String, line: String): List[String] =
@@ -38,7 +38,7 @@ class Prompt(val cmd: Test) extends CommandHandler
     {
         if (unparsedArgs.length > 1)
 	    cmd.prompt = unparsedArgs.substring(0, unparsedArgs.length -1)
-        ContinueReading()
+        KeepGoing
     }
 }
 
@@ -48,7 +48,7 @@ object ExitHandler extends CommandHandler
     val help = "Exit the interpreter"
 
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
-        Stop()
+        Stop
 }
 
 class Test extends CommandInterpreter("Test")
@@ -76,7 +76,7 @@ class Test extends CommandInterpreter("Test")
     override def handleEOF =
     {
         error("Use Ctrl-C or type \"exit\" to exit.")
-        ContinueReading()
+        KeepGoing
     }
 
     override def postLoop =

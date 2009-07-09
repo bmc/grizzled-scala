@@ -58,9 +58,23 @@ import grizzled.GrizzledString._
 /**
  * Actions returned by handlers.
  */
-sealed trait CommandAction
-case class ContinueReading() extends CommandAction
-case class Stop() extends CommandAction
+sealed abstract class CommandAction
+case object KeepGoing extends CommandAction
+case object Stop extends CommandAction
+
+/**
+ * Mapped commands.
+ */
+sealed abstract class Command
+case object EOFCommand extends Command
+case object EmptyCommand extends Command
+case class KnownCommand(handler: CommandHandler, 
+                        fullInputLine: String,
+                        name: String,
+                        args: String) extends Command
+case class UnknownCommand(fullInputLine: String,
+                          name: String, 
+                          args: String) extends Command
 
 /**
  * Trait for an object (or class) that handles a single command. All logic
@@ -140,8 +154,8 @@ trait CommandHandler
      * @param command      the command that invoked this handler
      * @param unparsedArgs the remainder of the unparsed command line
      *
-     * @return <tt>ContinueReading()</tt> to tell the main loop to continue,
-     *         or <tt>Stop()</tt> to tell the main loop to be done.
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
+     *         or <tt>Stop</tt> to tell the main loop to be done.
      */
     def runCommand(command: String, unparsedArgs: String): CommandAction
 
@@ -364,7 +378,7 @@ abstract class CommandInterpreter(val appName: String,
             else
                 helpCommand(CmdUtil.tokenize(unparsedArgs))
 
-            ContinueReading()
+            KeepGoing
         }
     }
 
@@ -469,67 +483,84 @@ abstract class CommandInterpreter(val appName: String,
 
     /**
      * Called just before a command line is interpreted, this hook method can
-     * be used to modify the command.
+     * edit the command.
      *
      * @param commandLine  the command line
      *
-     * @return the modified line. If a null or an empty string is returned,
-     *         the command is skipped. (This can be useful for handling
-     *         commands, for instance.)
+     * @return the possibly edited command. Never null.
      */
     def preCommand(commandLine: String): String = commandLine
 
     /**
      * Called after a command line is interpreted. The default implementation
-     * simply returns <tt>ContinueReading()</tt>.
+     * simply returns <tt>KeepGoing</tt>.
      *
      * @param command      the command that invoked this handler
      * @param unparsedArgs the remainder of the unparsed command line
      *
-     * @return <tt>ContinueReading()</tt> to tell the main loop to continue,
-     *         or <tt>Stop()</tt> to tell the main loop to be done.
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
+     *         or <tt>Stop</tt> to tell the main loop to be done.
      */
     def postCommand(command: String, unparsedArgs: String): CommandAction =
-        return ContinueReading()
+        return KeepGoing
 
     /**
      * Called when an empty command line is entered in response to the
      * prompt. The default version of this method simply returns
-     * <tt>ContinueReading()</tt>.
+     * <tt>KeepGoing</tt>.
      *
-     * @return <tt>ContinueReading()</tt> to tell the main loop to continue,
-     *         or <tt>Stop()</tt> to tell the main loop to be done.
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
+     *         or <tt>Stop</tt> to tell the main loop to be done.
      */
-    def handleEmptyCommand: CommandAction = return ContinueReading()
+    def handleEmptyCommand: CommandAction = return KeepGoing
 
     /**
      * Called when an end-of-file condition is encountered while reading a
      * command (On Unix-like systems, with some readline libraries, this
      * happens when the user pressed Ctrl-D). prompt. The default version
-     * of this method simply returns <tt>Stop()</tt>, causing the command
+     * of this method simply returns <tt>Stop</tt>, causing the command
      * loop to exit.
      *
-     * @return <tt>ContinueReading()</tt> to tell the main loop to continue,
-     *         or <tt>Stop()</tt> to tell the main loop to be done.
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
+     *         or <tt>Stop</tt> to tell the main loop to be done.
      */
-    def handleEOF: CommandAction = return Stop()
+    def handleEOF: CommandAction = return Stop
 
     /**
      * Called when a command is entered that isn't recognized. The default
      * version of this method prints an error message and returns
-     * <tt>ContinueReading()</tt>.
+     * <tt>KeepGoing</tt>.
      *
      * @param commandName  the command name
      * @param unparsedArgs the command arguments
      *
-     * @return <tt>ContinueReading()</tt> to tell the main loop to continue,
-     *         or <tt>Stop()</tt> to tell the main loop to be done.
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
+     *         or <tt>Stop</tt> to tell the main loop to be done.
      */
     def handleUnknownCommand(commandName: String, 
                              unparsedArgs: String): CommandAction =
     {
         error("Unknown command: " + commandName)
-        ContinueReading()
+        KeepGoing
+    }
+
+    /**
+     * Called when an exception occurs during the main loop. This method
+     * can handle the exception however it wants; it must return either
+     * <tt>KeepGoing</tt> or <tt>Stop</tt>. The default version
+     * of this method dumps the exception stack trace and returns
+     * <tt>Stop</tt>.
+     *
+     * @param e  the exception
+     *
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
+     *         or <tt>Stop</tt> to tell the main loop to be done.
+     */
+    def handleException(e: Exception): CommandAction =
+    {
+        error("Exception: " + e.getClass.toString)
+        e.printStackTrace(System.out)
+        Stop
     }
 
     /**
@@ -614,60 +645,47 @@ abstract class CommandInterpreter(val appName: String,
      *
      * @param commandLine  the command line
      *
-     * @return <tt>ContinueReading</tt> to tell the main loop to continue,
+     * @return <tt>KeepGoing</tt> to tell the main loop to continue,
      *         or <tt>Stop</tt> to tell the main loop to be done.
      */
-    final def handleCommand(commandLine: String): CommandAction =
+    final def handleCommand(commandLine: Option[String]): CommandAction =
     {
-        val (commandName, unparsedArgs) = splitCommandAndArgs(commandLine)
-
-        findCommand(commandName) match
+        try
         {
-            case None  => 
-                handleUnknownCommand(commandName, unparsedArgs)
+            mapCommandLine(commandLine) match
+            {
+                case EOFCommand  => 
+                    handleEOF
 
-            case Some(handler) => 
-                // If more input is needed, then get it and run with that.
+                case EmptyCommand =>
+                    handleEmptyCommand
 
-                if (handler.moreInputNeeded(commandLine))
-                    readAndProcessCommand(commandLine, secondaryPrompt)
+                case UnknownCommand(commandLine, commandName, args) =>
+                    history += commandLine
+                    handleUnknownCommand(commandName, args)
 
-                else
-                {
-                    // Okay, we have the entire command. Allow the subclass
-                    // to preprocess it. If preCommand() changes the actual
-                    // command name, we have to recursively call handleCommand()
-                    // to process the new one. Otherwise, we can just run what
-                    // preCommand() returns.
-
+                case KnownCommand(handler, commandLine, commandName, args) =>
+                    history += commandLine
                     val commandLine2 = preCommand(commandLine)
-                    if ((commandLine2 == null) || (commandLine2.trim == ""))
-                        ContinueReading()
-
+                    assert(commandLine2 != null)
+                    if (commandLine2 == commandLine)
+                    {
+                        val action = handler.runCommand(name, args)
+                        if (action != Stop)
+                            postCommand(name, args)
+                        action
+                    }
                     else
                     {
-                        val (name2, args2) = splitCommandAndArgs(commandLine2)
-                        if (name2 == commandName)
-                        {
-                            // No need to reprocess. Add the command to the
-                            // history, run it, and call the postCommand()
-                            // hook.
-
-                            history += commandLine2
-                            val action = handler.runCommand(commandName, args2)
-                            if (action != Stop())
-                                postCommand(name2, args2)
-                            action
-                        }
-
-                        else
-                        {
-                            // Command name has changed. Handle fresh.
-
-                            handleCommand(commandLine2)
-                        }
+                        handleCommand(Some(commandLine2))
                     }
-                }
+            }
+        }
+
+        catch
+        {
+            case e: Exception =>
+                handleException(e)
         }
     }
 
@@ -680,7 +698,7 @@ abstract class CommandInterpreter(val appName: String,
         preLoop
         try
         {
-            readAndProcessCommand("", primaryPrompt)
+            readAndProcessCommand
         }
 
         finally
@@ -690,37 +708,90 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
+     * Read a command line
+     *
+     * @return <tt>Some(line)</tt> if a line was read, or <tt>None</tt> for
+     *         EOF. Note that an empty string results in <tt>Some("")</tt>,
+     *         not <tt>None</tt>.
+     */
+    private def readCommand: Option[String] =
+    {
+        def doRead(lineSoFar: String, usePrompt: String): Option[String] =
+        {
+            val s = readline.readline(usePrompt)
+            val readlineResult = s match
+            {
+                case None if (lineSoFar == "") => None
+                case None                      => Some(lineSoFar)
+                case Some(line)                => Some(lineSoFar + line)
+            }
+
+            readlineResult match
+            {
+                case None =>
+                    None
+
+                case Some(line) if ((line == null) || (line.trim == "")) =>
+                    Some("")
+
+                case Some(line) =>
+                    val (name, args) = splitCommandAndArgs(line)
+
+                    findCommand(name) match
+                    {
+                        case None =>
+                            Some(line)
+
+                        case Some(handler) =>
+                            if (! handler.moreInputNeeded(line))
+                                Some(line)
+                            else
+                                doRead(line + " ", secondaryPrompt)
+                    }
+            }
+        }
+
+        doRead("", primaryPrompt)
+    }
+
+    /**
+     * Map a command string to a <tt>Command</tt> object.
+     *
+     * @param commandLine  the command line
+     *
+     * @return the <tt>Command</tt> object
+     */
+    private def mapCommandLine(commandLine: Option[String]): Command =
+    {
+        commandLine match
+        {
+            case None =>
+                EOFCommand
+
+            case Some(line) if ((line == null) || (line.trim == "")) =>
+                EmptyCommand
+
+            case Some(line) =>
+                val (commandName, args) = splitCommandAndArgs(line)
+                findCommand(commandName) match
+                {
+                    case None =>
+                        UnknownCommand(line, commandName, args)
+                    case Some(handler) =>
+                        KnownCommand(handler, line, commandName, args)
+                }
+        }
+    }
+
+    /**
      * Read and process the next command.
      *
-     * @param prefix  Any already-read command string, to which subsequent
-     *                input is to be suffixed. (Useful for commands that
-     *                span input lines.) Use "" to indicate none.
      * @param prompt  Prompt to issue
-     *
-     * @return <tt>ContinueReading</tt> to tell the main loop to continue,
-     *         or <tt>Stop</tt> to tell the main loop to be done.
      */
-    private def readAndProcessCommand(prefix: String, 
-                                      prompt: String): CommandAction =
+    private def readAndProcessCommand: Unit =
     {
-        val action = readline.readline(prompt) match
-        {
-            case None => 
-                handleEOF
-
-            case Some(line) => 
-                val line2 = preCommand(prefix + line)
-                if ((line2 == null) || (line2.trim.length == 0))
-                    handleEmptyCommand
-                else
-                    handleCommand(line2)
-        }
-
-        action match
-        {
-            case Stop() => Stop()
-            case ContinueReading() => readAndProcessCommand("", primaryPrompt)
-        }
+        if (handleCommand(readCommand) == KeepGoing)
+            readAndProcessCommand
     }
 
     /**
@@ -875,7 +946,7 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
             show(historyCommands, 1)
         }
 
-        ContinueReading()
+        KeepGoing
     }
 }
 
@@ -938,10 +1009,13 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
             if (historyBuf.length == 0)
             {
                 cmd.error("Empty command history.")
-                ContinueReading()
+                KeepGoing
             }
             else
-                cmd.handleCommand(historyBuf(historyBuf.length - 1))
+            {
+                val command = historyBuf(historyBuf.length - 1)
+                cmd.handleCommand(Some(command))
+            }
         }
 
         else
@@ -956,10 +1030,13 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
                 if ( (n < 1) || (n > historyBuf.length) )
                 {
                     cmd.error("No command has number " + n)
-                    ContinueReading()
+                    KeepGoing
                 }
                 else
-                    cmd.handleCommand(historyBuf(n - 1))
+                {
+                    val command = historyBuf(n - 1)
+                    cmd.handleCommand(Some(command))
+                }
             }
 
             catch
@@ -976,10 +1053,10 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
         {
             case Nil => 
                 cmd.error("No command matches \"" + prefix + "\"")
-                ContinueReading()
+                KeepGoing
 
             case line :: rest =>
-                cmd.handleCommand(line)
+                cmd.handleCommand(Some(line))
         }
     }
 }
