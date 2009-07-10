@@ -121,23 +121,33 @@ trait History
      */
     def load(path: String) =
     {
-        import _root_.java.io.{FileReader, BufferedReader}
+        import _root_.java.io.{FileReader,
+                               FileNotFoundException,
+                               BufferedReader}
 
-        val f = new BufferedReader(new FileReader(path))
-        clear
-
-        def readHistoryLine: Unit =
+        try
         {
-            val line = f.readLine
-            if (line != null)
+            val f = new BufferedReader(new FileReader(path))
+            clear
+
+            def readHistoryLine: Unit =
             {
-                this += line
-                readHistoryLine
+                val line = f.readLine
+                if (line != null)
+                {
+                    this += line
+                    readHistoryLine
+                }
             }
+
+            readHistoryLine
+            f.close
         }
 
-        readHistoryLine
-        f.close
+        catch
+        {
+            case _: FileNotFoundException =>
+        }
     }
 }
 
