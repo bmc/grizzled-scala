@@ -1,12 +1,14 @@
 // Run this as a script.
 
 import grizzled.cmd._
+import grizzled.readline.ListCompleter
 import grizzled.GrizzledString._
 
 object Foo extends CommandHandler
 {
     val CommandName = "foo"
     private def validArgs = List("bar", "baz", "fred")
+    private val completer = new ListCompleter(validArgs)
     override val aliases = List("fool")
     val Help = """Does that foo thang"""
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
@@ -16,10 +18,7 @@ object Foo extends CommandHandler
     }
 
     override def complete(token: String, line: String): List[String] =
-        if (token == "")
-            validArgs
-        else
-            validArgs.filter(_ startsWith token)
+        completer.complete(token, line)
 }
 
 class Prompt(val cmd: Test) extends CommandHandler

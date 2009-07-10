@@ -167,6 +167,20 @@ class NullCompleter extends Completer
 }
 
 /**
+ * A completer that completes from a list of items.
+ *
+ * @param completions  the list of valid completions
+ */
+class ListCompleter(val completions: List[String]) extends Completer
+{
+    def complete(token: String, line: String): List[String] =
+        if (token == "")
+            completions
+        else
+            completions.filter(_ startsWith token)
+}
+
+/**
  * Defines the readline-like functionality supported by this API. A
  * <tt>Readline</tt> class provides:
  *

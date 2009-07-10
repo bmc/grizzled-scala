@@ -283,7 +283,7 @@ abstract class CommandInterpreter(val appName: String,
      * multicharacter command names. See the <tt>splitCommandAndArgs()</tt>
      * method for more details.
      */
-    val StartCommandIdentifier = "abcdefghijklmnopqrstuvwxyz" +
+    def StartCommandIdentifier = "abcdefghijklmnopqrstuvwxyz" +
                                  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
                                  "0123456789"
 
