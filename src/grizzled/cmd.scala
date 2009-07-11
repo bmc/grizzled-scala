@@ -210,14 +210,32 @@ abstract class CommandInterpreter(val appName: String,
                                   readlineCandidates: List[ReadlineType])
 {
     /**
+     * Assumed output width of the screen.
+     */
+    val OutputWidth = 79
+
+    /**
      * For sorting names.
      */
     private lazy val NameSorter = (a: String, b: String) => a < b
 
     /**
+     * Default list of readline libraries to try, in order.
+     */
+    val DefaultReadlineLibraryList = List(ReadlineType.GNUReadline,
+                                          ReadlineType.EditLine,
+                                          ReadlineType.GetLine,
+                                          ReadlineType.JLine,
+                                          ReadlineType.Simple)
+
+    /**
      * The readline implementation being used.
      */
-    val readline = findReadline(readlineCandidates)
+    val readline = readlineCandidates match
+    {
+        case Nil => findReadline(DefaultReadlineLibraryList)
+        case _   => findReadline(readlineCandidates)
+    }
 
     if (readline == null)
         throw new Exception("Unable to load a readline library.")
@@ -256,11 +274,7 @@ abstract class CommandInterpreter(val appName: String,
      * @param appName   application name
      */
     def this(appName: String) = 
-        this(appName, List(ReadlineType.GNUReadline,
-                           ReadlineType.EditLine,
-                           ReadlineType.GetLine,
-                           ReadlineType.JLine,
-                           ReadlineType.Simple))
+        this(appName, Nil)
 
     /**
      * The primary prompt string.
@@ -323,8 +337,6 @@ abstract class CommandInterpreter(val appName: String,
         override val aliases = List("?")
         override val Help = """This message"""
 
-        private val OutputWidth = 79
-
         private def helpHelp =
         {
             import scala.collection.mutable.ArrayBuffer
@@ -336,18 +348,7 @@ abstract class CommandInterpreter(val appName: String,
             println("Help is available for the following commands:")
             println("-" * OutputWidth)
 
-            // Lay them out in columns. Simple-minded for now.
-            val colSize = (0 /: commandNames.map(_.length)) (Math.max(_, _)) + 2
-            val colsPerLine = OutputWidth / colSize
-            for ((name, i) <- commandNames.zipWithIndex)
-            {
-                if ((i % colsPerLine) == 0)
-                    print("\n")
-                val padding = " " * (colSize - name.length)
-                print(name + padding)
-            }
-
-            print("\n")
+            print(columnarize(commandNames, OutputWidth))
         }
 
         private def helpCommand(names: List[String])
@@ -465,7 +466,8 @@ abstract class CommandInterpreter(val appName: String,
      *
      * @param message the message to emit
      */
-    def error(message: String) = println(Console.RED + message + Console.RESET)
+    def error(message: String) =
+        println(Console.RED + "Error: " + message + Console.RESET)
 
     /**
      * Emit a warning message in a consistent way. May be overridden by
@@ -474,7 +476,8 @@ abstract class CommandInterpreter(val appName: String,
      *
      * @param message the message to emit
      */
-    def warning(message: String) = println("Warning: " + message)
+    def warning(message: String) = 
+        println(Console.YELLOW + "Warning: " + message + Console.RESET)
 
     /**
      * Called just before the main loop (<tt>mainLoop()</tt>) begins its
@@ -700,6 +703,37 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
+     * Take a list of strings and print them in columns.
+     *
+     * @param strings  the list of strings
+     * @param width    how wide a virtual screen to use
+     *
+     * @return a possibly multiline string containing the columnar output
+     */
+    def columnarize(strings: List[String], width: Int): String =
+    {
+        import scala.collection.mutable.ArrayBuffer
+        import grizzled.math.util.max
+
+        val buf = new ArrayBuffer[Char] 
+
+        // Lay them out in columns. Simple-minded for now.
+        val colSize = max(strings.map(_.length): _*) + 2
+        val colsPerLine = width / colSize
+        for ((s, i) <- strings.zipWithIndex)
+        {
+            if ((i % colsPerLine) == 0)
+                buf += '\n'
+
+            val padding = " " * (colSize - s.length)
+            buf ++= (s + padding)
+        }
+
+        buf += '\n'
+        buf mkString ""
+    }
+
+    /**
      * Repeatedly issue a prompt, accept input, parse an initial prefix from
      * the received input, and dispatch to execution handlers.
      */
@@ -821,18 +855,15 @@ abstract class CommandInterpreter(val appName: String,
         else
         {
             val lib = libs.head
-            val result = 
-                try
-                {
-                    Readline(lib, appName, /* autoAddHistory */ false)
-                }
+            try
+            {
+                Readline(lib, appName, /* autoAddHistory */ false)
+            }
 
-                catch
-                {
-                    case e: UnsatisfiedLinkError => findReadline(libs.tail)
-                }
-
-            result
+            catch
+            {
+                case e: UnsatisfiedLinkError => findReadline(libs.tail)
+            }
         }
     }
 
@@ -990,7 +1021,7 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
 class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
 {
     val CommandName = "r"
-    override val aliases = List("!")
+    override val aliases = List("!", "/")
 
     val history = cmd.history 
     val Help = """Reissue a command, by partial name or number.

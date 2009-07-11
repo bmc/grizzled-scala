@@ -77,12 +77,14 @@ object implicits
             case "yes"   => true
             case "y"     => true
             case "1"     => true
+            case "on"    => true
 
             case "false" => false
             case "f"     => false
             case "no"    => false
             case "n"     => false
             case "0"     => false
+            case "off"   => false
 
             case _       => 
                 throw new IllegalArgumentException("Can't convert string \"" +

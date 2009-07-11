@@ -90,10 +90,10 @@ private[javareadline] class ReadlineHistory extends History
 /**
  * JavaReadline implementation of the Readline trait.
  */
-private[readline] class JavaReadlineImpl(appName: String,
-                                         readlineName: String,
-                                         val autoAddHistory: Boolean,
-                                         library: JavaReadlineLibrary)
+private[readline] abstract class JavaReadlineImpl(appName: String,
+                                                  readlineName: String,
+                                                  val autoAddHistory: Boolean,
+                                                  library: JavaReadlineLibrary)
     extends Readline
 {
     val name = readlineName
@@ -103,12 +103,20 @@ private[readline] class JavaReadlineImpl(appName: String,
     JavaReadline.load(library)
     JavaReadline.initReadline(appName)
     JavaReadline.setCompleter(rlCompleter)
+
     Runtime.getRuntime.addShutdownHook(
         new Thread
         {
             override def run = JavaReadline.cleanup
         }
     )
+
+    subclassInit()
+
+    /**
+     * Subclass-specific initialization.
+     */
+    protected def subclassInit(): Unit = return
 
     object rlCompleter extends JavaReadlineCompleter
     {
@@ -177,6 +185,37 @@ private[readline] class GNUReadlineImpl(appName: String,
                              "GNU Readline",
                              autoAddHistory,
                              JavaReadlineLibrary.GnuReadline)
+{
+    /**
+     * Subclass-specific initialization.
+     */
+    override protected def subclassInit(): Unit =
+    {
+        import grizzled.file.util.joinPath
+        import java.io.{File, IOException}
+
+        val initPath = joinPath(System.getProperty("user.home"), ".inputrc")
+        val initFile = new File(initPath)
+        if (initFile.exists && initFile.isFile)
+        {
+            try
+            {
+                JavaReadline.readInitFile(initPath)
+            }
+
+            catch
+            {
+                case e: IOException =>
+                    val message = if (e.getMessage != null)
+                                      e.getMessage
+                                  else
+                                      e.getClass.getName
+                    println("Warning: Can't load \"" + initPath + "\": " +
+                            message)
+            }
+        }
+    }
+}
 
 /**
  * JavaReadline implementation of the Readline trait, specialized for the
