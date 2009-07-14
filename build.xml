@@ -97,6 +97,25 @@ You must set the SCALA_HOME environment variable.
   <property name="javac.compilerargs" value=""/>
 
   <property file="build.properties"/>
+
+  <!-- locate JLine -->
+  <condition property="jline.jar" value="${env.JLINE_JAR}">
+    <isset property="env.JLINE_JAR"/>
+  </condition>
+  <condition property="jline.jar"
+             value="${env.HOME}/java/classes/jline.jar">
+    <not><isset property="env.JLINE_JAR"/></not>
+  </condition>
+
+  <!-- locate Java Readline -->
+  <condition property="javareadline.jar" value="${env.JAVAREADLINE_JAR}">
+    <isset property="env.JAVAREADLINE_JAR"/>
+  </condition>
+  <condition property="javareadline.jar"
+             value="${env.HOME}/java/classes/libreadline-java.jar">
+    <not><isset property="env.JAVAREADLINE_JAR"/></not>
+  </condition>
+
   <!--
   ***************************************************************************
                              Tasks and Macros
@@ -128,6 +147,9 @@ You must set the SCALA_HOME environment variable.
     <fileset dir="${scala.lib}">
       <include name="**/*.jar"/>
     </fileset>
+
+    <pathelement location="${javareadline.jar}"/>
+    <pathelement location="${jline.jar}"/>
   </path>
 
   <taskdef name="scalatest" classname="org.scalatest.tools.ScalaTestTask">
