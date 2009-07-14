@@ -312,12 +312,54 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  * <p>A comment line is a one whose first non-whitespace character is a "#".
  * A blank line is a line containing no content, or one containing only
  * white space. Blank lines and comments are ignored.</p>
+ *
+ * <h4>Caller-supplied Predefined Sections</h4>
+ *
+ * <p>Calling applications may supply predefined sections and options, in
+ * the form of a map. These sections may then be used by other sections,
+ * via variable references. The predefined sections are defined in a map of
+ * maps. The outer map is keyed by predefined section name. The inner maps
+ * consist of options and their values. For instance, to read a
+ * configuration file, giving it access to certain command line parameters,
+ * you could do something like this:</p>
+ *
+ * <blockquote><pre>
+ * object Foo
+ * {
+ *     def main(args: Array[String]) =
+ *     {
+ *         // You'd obviously want to do some real argument checking here.
+ *         val configFile = args(0)
+ *         val name = args(1)
+ *         val ipAddress = args(2)
+ *         val sections = Map("args" -> Map("name" -> name,
+ *                                          "ip" -> ipAddress))
+ *         val config = Configuration(configFile, sections)
+ *         ..
+ *     }
+ * }
+ * </pre></blockquote>
+ *
+ * @param predefinedSections  the predefined sections. An empty map means
+ *                            there are no predefined sections.
  */
-class Configuration
+class Configuration(predefinedSections: Map[String, Map[String, String]])
 {
     private val SpecialSections = Set("env", "system")
 
     private val sections = MutableMap.empty[String, MutableMap[String, String]]
+
+    for ((sectionName, optionMap) <- predefinedSections)
+    {
+        addSection(sectionName)
+        for ((optionName, optionValue) <- optionMap)
+            addOption(sectionName, optionName, optionValue)
+    }
+
+    /**
+     * Alternate constructor for use when there are no predefined sections.
+     */
+    def this() = this(Map.empty[String, Map[String, String]])
 
     /**
      * Get the list of section names.
@@ -432,8 +474,8 @@ class Configuration
      *
      * @return the option's value (which may be the default)
      */
-    def option(sectionName: String, 
-               optionName: String, 
+    def option(sectionName: String,
+               optionName: String,
                default: String): String =
     {
         try
@@ -500,7 +542,7 @@ class Configuration
 object ConfigurationReader
 {
     private val SectionName      = """([a-zA-Z0-9_]+)""".r
-    private val ValidSection     = ("""^\s*\[""" + 
+    private val ValidSection     = ("""^\s*\[""" +
                                     SectionName.toString +
                                     """\]\s*$""").r
     private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
@@ -508,20 +550,59 @@ object ConfigurationReader
     private val CommentLine      = """^\s*(#.*)$""".r
     private val BlankLine        = """^(\s*)$""".r
     private val VariableName     = """([a-zA-Z0-9_.]+)""".r
-    private val RawAssignment    = ("""^\s*""" + 
+    private val RawAssignment    = ("""^\s*""" +
                                     VariableName.toString +
                                     """\s*->\s*(.*)$""").r
-    private val Assignment       = ("""^\s*""" + 
+    private val Assignment       = ("""^\s*""" +
                                     VariableName.toString +
                                     """\s*[:=]\s*(.*)$""").r
     private val FullVariableRef  = (SectionName.toString + """\.""" +
                                     VariableName.toString).r
     /**
      * Read a configuration.
+     *
+     * @param source <tt>scala.io.Source</tt> object to read
+     *
+     * @return the <tt>Configuration</tt> object.
      */
     def read(source: Source): Configuration =
+        read(source, Map.empty[String, Map[String, String]])
+
+    /**
+     * Read a configuration file, permitting some predefined sections to be
+     * added to the configuration before it is read. The predefined sections
+     * are defined in a map of maps. The outer map is keyed by predefined
+     * section name. The inner maps consist of options and their values.
+     * For instance, to read a configuration file, giving it access to
+     * certain command line parameters, you could do something like this:
+     *
+     * <blockquote><pre>
+     * object Foo
+     * {
+     *     def main(args: Array[String]) =
+     *     {
+     *         // You'd obviously want to do some real argument checking here.
+     *         val configFile = args(0)
+     *         val name = args(1)
+     *         val ipAddress = args(2)
+     *         val sections = Map("args" -> Map("name" -> name,
+     *                                          "ip" -> ipAddress))
+     *         val config = Configuration(configFile, sections)
+     *         ..
+     *     }
+     * }
+     * </pre></blockquote>
+     *
+     * @param source    <tt>scala.io.Source</tt> object to read
+     * @param sections  the predefined sections. An empty map means there are
+     *                  no predefined sections.
+     *
+     * @return the <tt>Configuration</tt> object.
+     */
+    def read(source: Source,
+             sections: Map[String, Map[String, String]]): Configuration =
     {
-        val config             =  new Configuration
+        val config             =  new Configuration(sections)
         var curSection: String = null
 
         def resolveVariable(varName: String): Option[String] =
@@ -536,20 +617,20 @@ object ConfigurationReader
             line match
             {
                 case CommentLine(_) =>
-    
+
                 case BlankLine(_) =>
-    
+
                 case ValidSection(name) =>
                     config.addSection(name)
                     curSection = name
-    
+
                 case BadSectionFormat(section) =>
                     throw new ConfigException("Badly formatted section: \"" +
                                               section + "\"")
-    
+
                 case BadSectionName(name) =>
                     throw new ConfigException("Bad section name: \"%s\"" + name)
-    
+
                 case Assignment(optionName, value) =>
                     if (curSection == null)
                         throw new ConfigException("Assignment \"" +
@@ -566,7 +647,7 @@ object ConfigurationReader
                                                   "\" occurs before the " +
                                                   "first section.")
                     config.addOption(curSection, optionName, value)
-    
+
                 case _ =>
                     throw new ConfigException("Unknown configuration line: \"" +
                                               line + "\"")
@@ -577,16 +658,16 @@ object ConfigurationReader
     }
 
     private def getVar(config: Configuration,
-                       curSection: String, 
+                       curSection: String,
                        varName: String): Option[String] =
     {
         try
         {
             varName match
             {
-                case FullVariableRef(section, option) => 
+                case FullVariableRef(section, option) =>
                     Some(config.option(section, option))
-                case VariableName(option) => 
+                case VariableName(option) =>
                     Some(config.option(curSection, option))
                 case _ =>
                     throw new ConfigException("Reference to nonexistent " +
@@ -598,18 +679,18 @@ object ConfigurationReader
         catch
         {
             case _: NoSuchOptionException =>
-                throw new ConfigException("In section [" + curSection + 
+                throw new ConfigException("In section [" + curSection +
                                           "]: Reference to nonexistent " +
                                           "option in ${" + varName + "}")
 
             case _: NoSuchSectionException =>
-                throw new ConfigException("In section [" + curSection + 
+                throw new ConfigException("In section [" + curSection +
                                           "]: Reference to nonexistent " +
                                           "option in ${" + varName + "}")
         }
     }
 }
-   
+
 /**
  * Companion object for the <tt>Configuration</tt> class
  */
@@ -620,37 +701,44 @@ object Configuration
     /**
      * Read a configuration file.
      *
-     * @param path the path to the file.
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(path: String): Configuration = apply(Source.fromFile(path))
-
-    /**
-     * Read a configuration file.
-     *
-     * @param file  the file to read
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(file: File): Configuration = apply(Source.fromFile(file))
-
-    /**
-     * Read a configuration file.
-     *
-     * @param uri URI to the file
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(uri: java.net.URI): Configuration = apply(Source.fromFile(uri))
-
-    /**
-     * Read a configuration file.
-     *
      * @param source <tt>scala.io.Source</tt> object to read
      *
      * @return the <tt>Configuration</tt> object.
      */
     def apply(source: Source): Configuration = ConfigurationReader.read(source)
+
+    /**
+     * Read a configuration file, permitting some predefined sections to be
+     * added to the configuration before it is read. The predefined sections
+     * are defined in a map of maps. The outer map is keyed by predefined
+     * section name. The inner maps consist of options and their values.
+     * For instance, to read a configuration file, giving it access to
+     * certain command line parameters, you could do something like this:
+     *
+     * <blockquote><pre>
+     * object Foo
+     * {
+     *     def main(args: Array[String]) =
+     *     {
+     *         // You'd obviously want to do some real argument checking here.
+     *         val configFile = args(0)
+     *         val name = args(1)
+     *         val ipAddress = args(2)
+     *         val sections = Map("args" -> Map("name" -> name,
+     *                                          "ip" -> ipAddress))
+     *         val config = Configuration(configFile, sections)
+     *         ..
+     *     }
+     * }
+     * </pre></blockquote>
+     *
+     * @param source    <tt>scala.io.Source</tt> object to read
+     * @param sections  the predefined sections. An empty map means there are
+     *                  no predefined sections.
+     *
+     * @return the <tt>Configuration</tt> object.
+     */
+    def apply(source: Source,
+              sections: Map[String, Map[String, String]]): Configuration =
+        ConfigurationReader.read(source, sections)
 }
-    
