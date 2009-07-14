@@ -333,7 +333,7 @@ class Configuration
      *
      * @throws DuplicateSectionException if the section already exists
      */
-    protected def addSection(sectionName: String): Unit =
+    def addSection(sectionName: String): Unit =
     {
         if (sections contains sectionName)
             throw new DuplicateSectionException(sectionName)
@@ -355,9 +355,7 @@ class Configuration
      * @throws DuplicateOptionException if the option already exists in the
      *                                  section
      */
-    protected def addOption(sectionName: String,
-                            optionName: String,
-                            value: String)
+    def addOption(sectionName: String, optionName: String, value: String)
     {
         if (SpecialSections contains sectionName)
             throw new ConfigException("Can't add an option to read-only " +
@@ -501,16 +499,6 @@ class Configuration
  */
 object ConfigurationReader
 {
-}
-   
-
-/**
- * Companion object for the <tt>Configuration</tt> class
- */
-object Configuration
-{
-    import java.io.File
-
     private val SectionName      = """([a-zA-Z0-9_]+)""".r
     private val ValidSection     = ("""^\s*\[""" + 
                                     SectionName.toString +
@@ -528,47 +516,10 @@ object Configuration
                                     """\s*[:=]\s*(.*)$""").r
     private val FullVariableRef  = (SectionName.toString + """\.""" +
                                     VariableName.toString).r
-
-    /**
-     * Read a configuration file.
-     *
-     * @param path the path to the file.
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(path: String): Configuration = apply(Source.fromFile(path))
-
-    /**
-     * Read a configuration file.
-     *
-     * @param file  the file to read
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(file: File): Configuration = apply(Source.fromFile(file))
-
-    /**
-     * Read a configuration file.
-     *
-     * @param uri URI to the file
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(uri: java.net.URI): Configuration = apply(Source.fromFile(uri))
-
-    /**
-     * Read a configuration file.
-     *
-     * @param source <tt>scala.io.Source</tt> object to read
-     *
-     * @return the <tt>Configuration</tt> object.
-     */
-    def apply(source: Source): Configuration = read(source)
-
     /**
      * Read a configuration.
      */
-    private def read(source: Source): Configuration =
+    def read(source: Source): Configuration =
     {
         val config             =  new Configuration
         var curSection: String = null
@@ -657,5 +608,49 @@ object Configuration
                                           "option in ${" + varName + "}")
         }
     }
+}
+   
+/**
+ * Companion object for the <tt>Configuration</tt> class
+ */
+object Configuration
+{
+    import java.io.File
+
+    /**
+     * Read a configuration file.
+     *
+     * @param path the path to the file.
+     *
+     * @return the <tt>Configuration</tt> object.
+     */
+    def apply(path: String): Configuration = apply(Source.fromFile(path))
+
+    /**
+     * Read a configuration file.
+     *
+     * @param file  the file to read
+     *
+     * @return the <tt>Configuration</tt> object.
+     */
+    def apply(file: File): Configuration = apply(Source.fromFile(file))
+
+    /**
+     * Read a configuration file.
+     *
+     * @param uri URI to the file
+     *
+     * @return the <tt>Configuration</tt> object.
+     */
+    def apply(uri: java.net.URI): Configuration = apply(Source.fromFile(uri))
+
+    /**
+     * Read a configuration file.
+     *
+     * @param source <tt>scala.io.Source</tt> object to read
+     *
+     * @return the <tt>Configuration</tt> object.
+     */
+    def apply(source: Source): Configuration = ConfigurationReader.read(source)
 }
     
