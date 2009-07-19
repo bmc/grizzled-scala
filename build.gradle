@@ -1,0 +1,36 @@
+/*                                                -*-groovy-*-                */
+
+def home = System.getProperty("user.home")
+def join(String... args) {args.join(File.separator)} 
+
+localJavaRepo = join(home, "repo", "java")
+localScalaRepo = join(home, "repo", "scala")
+
+repositories
+{
+    mavenCentral()
+    flatDir name: 'localJavaRepo', dirs: localJavaRepo
+    flatDir name: 'localScalaRepo', dirs: localScalaRepo
+}
+
+configurations
+{
+    compile
+    testcompile
+}
+
+dependencies
+{
+    compile group: 'readline', name: 'libreadline-java'
+    compile group: 'jline', name: 'jline', version: '0.9.94'
+    testcompile group: 'scalatest', name: 'scalatest', version: '0.9.5'
+}
+
+task listJars <<
+{
+    configurations.compile.each {File f -> println f.name}
+    configurations.testcompile.each {File f -> println f.name}
+}
+
+task compile
+
