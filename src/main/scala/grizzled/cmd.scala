@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   This software is released under a BSD-style license:
 
   Copyright (c) 2009 Brian M. Clapper. All rights reserved.
@@ -40,7 +41,8 @@
   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+ ---------------------------------------------------------------------------
+*/
 
 /**
  * Classes and objects to aid in the construction of line-oriented command
@@ -205,6 +207,8 @@ trait CommandHandler
  *                            order. The <tt>ReadlineType</tt> values are
  *                            defined by the <tt>grizzled.readline</tt>
  *                            package.
+ * @param useAnsiColors       <tt>true</tt> to use ANSI terminal colors in
+ *                            some output, <tt>false</tt> to avoid them.
  */
 abstract class CommandInterpreter(val appName: String,
                                   readlineCandidates: List[ReadlineType])
