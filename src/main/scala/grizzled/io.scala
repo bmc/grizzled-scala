@@ -12,6 +12,14 @@ import java.io.{InputStream,
                 Reader,
                 Writer}
 
+/**
+ * Provides additional methods, over and above those already present in
+ * the Java <tt>InputStream</tt> class. The <tt>implicits</tt> object
+ * contains implicit conversions between <tt>RichInputStream</tt> and
+ * <tt>InputStream</tt>.
+ *
+ * @param inputStream  the input stream to wrap
+ */
 class RichInputStream(val inputStream: InputStream)
 {
     /**
@@ -21,7 +29,6 @@ class RichInputStream(val inputStream: InputStream)
      * <tt>java.io.BufferedOutputStream</tt>. This method does not close
      * either stream.
      *
-     * @param in   the input stream
      * @param out  the output stream
      */
     def copyTo(out: OutputStream): Unit =
@@ -36,6 +43,10 @@ class RichInputStream(val inputStream: InputStream)
     }
 }
 
+/**
+ * Implicit conversions between <tt>RichInputStream</tt> and
+ * <tt>InputStream</tt> objects.
+ */
 object implicits
 {
     implicit def inputStreamToRichInputStream(inputStream: InputStream) =
