@@ -182,14 +182,26 @@ class NullCompleter extends Completer
  * A completer that completes from a list of items.
  *
  * @param completions  the list of valid completions
+ * @param convert      function to convert both the token to be compared
+ *                     and the candidate completion token, before comparing
+ *                     them (e.g., by converting them to lower case)
  */
-class ListCompleter(val completions: List[String]) extends Completer
+class ListCompleter(val completions: List[String],
+                    val convert: (String) => String) extends Completer
 {
+    /**
+     * Version of the constructor that uses a default, no-op <tt>convert()</tt>
+     * function.
+     *
+     * @param completions  the list of valid completions
+     */
+    def this(completions: List[String]) = this(completions, (s: String) => s)
+
     def complete(token: String, line: String): List[String] =
         if (token == "")
             completions
         else
-            completions.filter(_ startsWith token)
+            completions.filter((s) => convert(s).startsWith(convert(token)))
 }
 
 /**
