@@ -139,6 +139,7 @@ object url
     {
         import java.io.{BufferedInputStream, BufferedOutputStream}
         import java.io.{FileOutputStream}
+        import grizzled.io.implicits._
 
         if (pathOut.isDirectory)
             throw new IOException("Output file \"" + pathOut + "\" exists " +
@@ -157,7 +158,7 @@ object url
         // Copy and close.
         try
         {
-            FileUtil.copyStream(in, out)
+            in.copyTo(out)
         }
 
         finally
