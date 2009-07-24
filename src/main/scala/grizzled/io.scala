@@ -13,6 +13,78 @@ import java.io.{InputStream,
                 Writer}
 
 /**
+ * Contains methods that can read part of a stream or reader.
+ */
+trait PartialReader[T]
+{
+    val reader: {def read(): Int}
+
+    protected def convert(b: Int): T
+
+    /**
+     * Read up to <tt>max</tt> items from the reader.
+     *
+     * @param max  maximum number of items to read
+     *
+     * @return a list of the items
+     */
+    def readSome(max: Int): List[T] =
+    {
+        def doRead(cur: Int): List[T] =
+        {
+            if (cur >= max)
+                Nil
+
+            else
+            {
+                val b = reader.read()
+                if (b == -1)
+                    Nil
+                else
+                    convert(b) :: doRead(cur + 1)
+            }
+        }
+
+        if (reader == null)
+            Nil
+        else
+            doRead(0)
+    }
+}
+
+/**
+ * Provides additional methods, over and above those already present in
+ * the Java <tt>Reader</tt> class. The <tt>implicits</tt> object
+ * contains implicit conversions between <tt>RichReader</tt> and
+ * <tt>Reader</tt>.
+ *
+ * @param reader  the input stream to wrap
+ */
+class RichReader(val reader: Reader) extends PartialReader[Char]
+{
+    protected def convert(b: Int) = b.asInstanceOf[Char]
+
+    /**
+     * Copy the input stream to an output stream, stopping on EOF. This
+     * method does no buffering. If you want buffering, make sure you use a
+     * <tt>java.io.BufferedReader</tt> and a <tt>java.io.BufferedWriter.
+     * This method does not close either object.
+     *
+     * @param out  the output stream
+     */
+    def copyTo(out: Writer): Unit =
+    {
+        val c: Int = reader.read()
+        if (c != -1)
+        {
+            out.write(c)
+            // Tail recursion means never having to use a var.
+            copyTo(out)
+        }
+    }
+}
+
+/**
  * Provides additional methods, over and above those already present in
  * the Java <tt>InputStream</tt> class. The <tt>implicits</tt> object
  * contains implicit conversions between <tt>RichInputStream</tt> and
@@ -20,8 +92,12 @@ import java.io.{InputStream,
  *
  * @param inputStream  the input stream to wrap
  */
-class RichInputStream(val inputStream: InputStream)
+class RichInputStream(val inputStream: InputStream) extends PartialReader[Byte]
 {
+    val reader = inputStream
+
+    protected def convert(b: Int) = b.asInstanceOf[Byte]
+
     /**
      * Copy the input stream to an output stream, stopping on EOF. This
      * method does no buffering. If you want buffering, make sure you use a
@@ -54,4 +130,8 @@ object implicits
 
     implicit def richInputStreamInputStream(richInputStream: RichInputStream) =
         richInputStream.inputStream
+
+    implicit def readerToRichReader(reader: Reader) = new RichReader(reader)
+
+    implicit def richReaderToReader(richReader: RichReader) = richReader.reader
 }
