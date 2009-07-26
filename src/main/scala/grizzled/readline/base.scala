@@ -179,6 +179,73 @@ class NullCompleter extends Completer
 }
 
 /**
+ * A completer that completes path names. Handles "~" expansion, but only
+ * for the current user.
+ */
+class PathnameCompleter extends Completer
+{
+    def complete(token: String, line: String): List[String] =
+    {
+        import grizzled.file.{util => FileUtil}
+        import java.io.File
+
+        val strippedToken = token.trim
+        val expandedToken =
+            if (strippedToken.startsWith("~"))
+            {
+                val userHome = System.getProperty("user.home")
+                if ((strippedToken.length > 1) && 
+                    (strippedToken(1) != File.separatorChar))
+                    // Can't expand ~user
+                    strippedToken
+
+                else if (userHome == null)
+                    strippedToken
+
+                else
+                    userHome + strippedToken.drop(1)
+            }
+            else
+                strippedToken
+
+        val (directory, filename, includeDirectory) =
+            if (expandedToken.length == 0)
+                (".", None, false)
+            else if (! (expandedToken contains File.separator))
+                (".", Some(expandedToken), false)
+            else if (new File(expandedToken).isDirectory)
+                (expandedToken, None, true)
+            else if (expandedToken endsWith File.separator)
+                (expandedToken, None, true)
+            else
+                (FileUtil.dirname(expandedToken),
+                 Some(FileUtil.basename(expandedToken)),
+                 true)
+
+        if (directory.trim == "")
+            Nil
+
+        else
+        {
+            val fDir = new File(directory)
+            val files = fDir.list.filter(s => (! s.startsWith(".")))
+            val matches = filename match
+            {
+                case Some(f) =>
+                    files.filter(s => s.startsWith(f))
+                case None =>
+                    files
+            }
+
+            if (includeDirectory)
+                matches.map(s => FileUtil.joinPath(fDir.getPath, s)).toList
+            else
+                matches.toList
+        }
+    }
+}
+
+/**
  * A completer that completes from a list of items.
  *
  * @param completions  the list of valid completions
