@@ -203,21 +203,21 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  * "pseudosections."</p>
  *
  * <p>The "system" pseudosection is used to interpolate values from
- * <tt>System.properties</tt> For instance, <tt>${system:user.home}</tt>
+ * <tt>System.properties</tt> For instance, <tt>${system.user.home}</tt>
  * substitutes the value of the <tt>user.home</tt> system property
  * (typically, the home directory of the user running <i>curn</i>).
- * Similarly, <tt>${system:user.name}</tt> substitutes the user's name.</p>
+ * Similarly, <tt>${system.user.name}</tt> substitutes the user's name.</p>
  *
  * <p>The "env" pseudosection is used to interpolate values from the
- * environment. On UNIX systems, for instance, <tt>${env:HOME}</tt>
+ * environment. On UNIX systems, for instance, <tt>${env.HOME}</tt>
  * substitutes user's home directory (and is, therefore, a synonym for
- * <tt>${system:user.home}</tt>. On some versions of Windows,
- * <tt>${env:USERNAME}</tt> will substitute the name of the user running
+ * <tt>${system.user.home}</tt>. On some versions of Windows,
+ * <tt>${env.USERNAME}</tt> will substitute the name of the user running
  * <i>curn</i>. Note: On UNIX systems, environment variable names are
- * typically case-sensitive; for instance, <tt>${env:USER}</tt> and
- * <tt>${env:user}</tt> refer to different environment variables. On
+ * typically case-sensitive; for instance, <tt>${env.USER}</tt> and
+ * <tt>${env.user}</tt> refer to different environment variables. On
  * Windows systems, environment variable names are typically
- * case-insensitive; <tt>${env:USERNAME}</tt> and <tt>${env:username}</tt>
+ * case-insensitive; <tt>${env.USERNAME}</tt> and <tt>${env.username}</tt>
  * are equivalent.</p>
  *
  * <p>Notes and caveats:</p>
