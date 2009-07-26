@@ -86,9 +86,9 @@ class Test extends CommandInterpreter("Test")
 
     override def preCommand(line: String) =
         if (line.ltrim.startsWith("#"))
-            ""
+            Some("")
         else
-            line
+            Some(line)
 }
 
 new Test().mainLoop

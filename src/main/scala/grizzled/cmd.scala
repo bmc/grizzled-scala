@@ -503,9 +503,10 @@ abstract class CommandInterpreter(val appName: String,
      *
      * @param commandLine  the command line
      *
-     * @return the possibly edited command. Never null.
+     * @return The possibly edited command, Some("") to signal an empty
+     *         command, or None to signal EOF. 
      */
-    def preCommand(commandLine: String): String = commandLine
+    def preCommand(commandLine: String): Option[String] = Some(commandLine)
 
     /**
      * Called after a command line is interpreted. The default implementation
@@ -668,7 +669,13 @@ abstract class CommandInterpreter(val appName: String,
     {
         try
         {
-            mapCommandLine(commandLine) match
+            val commandLine2 = commandLine match
+            {
+                case None       => None
+                case Some(line) => preCommand(line)
+            }
+
+            mapCommandLine(commandLine2) match
             {
                 case EOFCommand  => 
                     handleEOF
@@ -682,20 +689,10 @@ abstract class CommandInterpreter(val appName: String,
 
                 case KnownCommand(handler, commandLine, commandName, args) =>
                     history += commandLine
-                    val commandLine2 = preCommand(commandLine)
-                    assert(commandLine2 != null)
-                    if ((commandLine2 == commandLine) ||
-                        (splitCommandAndArgs(commandLine2)._1 == commandName))
-                    {
-                        val action = handler.runCommand(commandName, args)
-                        if (action != Stop)
-                            postCommand(commandName, args)
-                        action
-                    }
-                    else
-                    {
-                        handleCommand(Some(commandLine2))
-                    }
+                    val action = handler.runCommand(commandName, args)
+                    if (action != Stop)
+                        postCommand(commandName, args)
+                    action
             }
         }
 
