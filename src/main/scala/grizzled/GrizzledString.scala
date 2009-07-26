@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   This software is released under a BSD-style license:
 
   Copyright (c) 2009 Brian M. Clapper. All rights reserved.
@@ -40,7 +41,8 @@
   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
 package grizzled
 
@@ -94,6 +96,36 @@ final class GrizzledString(val string: String)
             string.substring(0, string.length - 1)
         else
             string
+
+    /**
+     * Tokenize the string on white space. An empty string and a string
+     * with only white space are treated the same. Note that Doing a
+     * <tt>split("""\s+""").toList</tt> on an empty string ("") yields a
+     * list of one item, an empty string. Doing the same operation on a
+     * blank string (" ", for example) yields an empty list. This method
+     * differs from <tt>split("""\s+""").toList</tt>, in that both cases are
+     * treated the same, returning a <tt>Nil</tt>.
+     *
+     * @return A list of tokens, or <tt>Nil</tt> if there aren't any.
+     */
+    def tokenize: List[String] =
+    {
+        string.trim.split("""\s+""").toList match
+        {
+            case Nil =>
+                Nil
+
+            case s :: Nil if (s == "") =>
+                Nil
+
+            case s :: Nil =>
+                List(s)
+
+            case s :: rest =>
+                s :: rest
+        }
+    }
+
 
     /**
      * Translate any metacharacters (e.g,. \t, \n, \u2122) into their real

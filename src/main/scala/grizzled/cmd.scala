@@ -57,6 +57,8 @@ import grizzled.readline.{Readline, Completer, History}
 
 import grizzled.GrizzledString._
 
+import scala.collection.mutable.Stack
+
 /**
  * Actions returned by handlers.
  */
@@ -254,6 +256,15 @@ abstract class CommandInterpreter(val appName: String,
     val history: History = readline.history
 
     /**
+     * The stack of readers. Usually, there will be only one element on this
+     * stack: The readline implementation's readline() function. But callers
+     * can push additional readers on the stack. Each element on the stack is
+     * a function that takes a prompt to display and returns a line of input.
+     */
+    private val readerStack = new Stack[(String) => Option[String]]
+    readerStack.push(readline.readline)
+
+    /**
      * Alternate constructor taking a single readline implementation. Fails
      * if that readline implementation cannot be found.
      *
@@ -331,138 +342,22 @@ abstract class CommandInterpreter(val appName: String,
     def helpHandler = HelpHandler
 
     /**
-     * Default handler for help messages. To redefine how help is generated,
-     * create your own handler and redefine the <tt>helpHandler</tt>
-     * property to return it.
+     * <p>Push another reader on the stack. The reader on top of the stack
+     * is used until it returns <tt>None</tt> (indicating EOF). Then, it is
+     * removed from the stack, and the next reader is used. When the only
+     * reader remaining on the stack returns <tt>None</tt>, the command
+     * interpreter signals an EOF condition to the subclass (by calling
+     * <tt>handleEOF()</tt>).</p>
+     *
+     * <p>The reader is a simple function that takes a prompt string (which it
+     * can choose to ignore) and returns a line of input or <tt>None</tt>
+     * for EOF. The line of input, if returned, should not have a trailing
+     * newline.</p>
+     *
+     * @param reader  the reader function
      */
-    object HelpHandler extends CommandHandler
-    {
-        val CommandName = "help"
-        override val aliases = List("?")
-        override val Help = """This message"""
-
-        private def helpHelp =
-        {
-            import scala.collection.mutable.ArrayBuffer
-
-            // Help only.
-
-            val commandNames = sortedCommandNames(false)
-
-            println("Help is available for the following commands:")
-            println("-" * OutputWidth)
-
-            print(columnarize(commandNames, OutputWidth))
-        }
-
-        private def helpCommand(names: List[String])
-        {
-            for (name <- names)
-            {
-                findCommand(name) match
-                {
-                    case Some(cmd) =>
-                        val header = "Help for \"" + cmd.CommandName + "\""
-                        println("\n" + header + "\n" + ("-" * header.length))
-                        if (cmd.aliases != Nil)
-                            printf("Aliases: %s\n\n", 
-                                   cmd.aliases.mkString(", "))
-
-                        println(cmd.Help)
-
-                    case None =>
-                        println("\nHelp is unavailable for \"" + name + "\"")
-                }
-            }
-        }
-
-        def runCommand(command: String, unparsedArgs: String): CommandAction =
-        {
-            if (unparsedArgs == "")
-                helpHelp
-            else
-                helpCommand(CmdUtil.tokenize(unparsedArgs))
-
-            KeepGoing
-        }
-    }
-
-    /**
-     * Readline completion handler. Conditionally completes command names
-     * or defers to command handlers for individual completion.
-     */
-    private object CommandCompleter extends Completer
-    {
-        def complete(token: String, line: String): List[String] =
-            unsortedCompletions(token, line).sort(NameSorter)
-
-        private def unsortedCompletions(token: String, 
-                                        line: String): List[String] =
-        {
-            if (line == "")
-            {
-                // Tab completion at the beginning of the line. Return a
-                // list of all commands.
-
-                sortedCommandNames(true)
-            }
-
-            else
-            {
-                val (commandName, unparsedArgs) = splitCommandAndArgs(line)
-
-                if (unparsedArgs == "")
-                {
-                    if (token == "")
-                    {
-                        // Command is complete, but there are no arguments,
-                        // and the user pressed TAB after the completed
-                        // command. Treat this as completion for a given
-                        // command.
-                        completeForCommand(commandName, token, line)
-                    }
-
-                    else
-                    {
-                        // Treat this as completion of a command name.
-
-                        matchingCommandsFor(token)
-                    }
-                }
-
-                else
-                {
-                    // Completion for a specific command. Find the handler
-                    // and let it do the work.
-                    completeForCommand(commandName, token, line)
-                }
-            }
-        }
-
-        private def matchingCommandsFor(token: String): List[String] =
-        {
-            val completions =
-            {
-                for {handler <- allHandlers
-                     val completions = handler.commandNameCompletions(token)
-                     if (completions != Nil)}
-                yield completions
-            }.toList
-
-            completions.flatten[String]
-        }
-
-        private def completeForCommand(commandName: String,
-                                       token:       String,
-                                       line:        String): List[String] =
-        {
-            findCommand(commandName) match
-            {
-                case None          => Nil
-                case Some(handler) => handler.complete(token, line)
-            }
-        }
-    }
+    def pushReader(reader: (String) => Option[String]) =
+        readerStack.push(reader)
 
     /**
      * Emit an error message in a consistent way. May be overridden by
@@ -753,6 +648,140 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
+     * Default handler for help messages. To redefine how help is generated,
+     * create your own handler and redefine the <tt>helpHandler</tt>
+     * property to return it.
+     */
+    private[cmd] object HelpHandler extends CommandHandler
+    {
+        val CommandName = "help"
+        override val aliases = List("?")
+        override val Help = """This message"""
+
+        private def helpHelp =
+        {
+            import scala.collection.mutable.ArrayBuffer
+
+            // Help only.
+
+            val commandNames = sortedCommandNames(false)
+
+            println("Help is available for the following commands:")
+            println("-" * OutputWidth)
+
+            print(columnarize(commandNames, OutputWidth))
+        }
+
+        private def helpCommand(names: List[String])
+        {
+            for (name <- names)
+            {
+                findCommand(name) match
+                {
+                    case Some(cmd) =>
+                        val header = "Help for \"" + cmd.CommandName + "\""
+                        println("\n" + header + "\n" + ("-" * header.length))
+                        if (cmd.aliases != Nil)
+                            printf("Aliases: %s\n\n", 
+                                   cmd.aliases.mkString(", "))
+
+                        println(cmd.Help)
+
+                    case None =>
+                        println("\nHelp is unavailable for \"" + name + "\"")
+                }
+            }
+        }
+
+        def runCommand(command: String, unparsedArgs: String): CommandAction =
+        {
+            if (unparsedArgs == "")
+                helpHelp
+            else
+                helpCommand(CmdUtil.tokenize(unparsedArgs))
+
+            KeepGoing
+        }
+    }
+
+    /**
+     * Readline completion handler. Conditionally completes command names
+     * or defers to command handlers for individual completion.
+     */
+    private object CommandCompleter extends Completer
+    {
+        def complete(token: String, line: String): List[String] =
+            unsortedCompletions(token, line).sort(NameSorter)
+
+        private def unsortedCompletions(token: String, 
+                                        line: String): List[String] =
+        {
+            if (line == "")
+            {
+                // Tab completion at the beginning of the line. Return a
+                // list of all commands.
+
+                sortedCommandNames(true)
+            }
+
+            else
+            {
+                val (commandName, unparsedArgs) = splitCommandAndArgs(line)
+
+                if (unparsedArgs == "")
+                {
+                    if (token == "")
+                    {
+                        // Command is complete, but there are no arguments,
+                        // and the user pressed TAB after the completed
+                        // command. Treat this as completion for a given
+                        // command.
+                        completeForCommand(commandName, token, line)
+                    }
+
+                    else
+                    {
+                        // Treat this as completion of a command name.
+
+                        matchingCommandsFor(token)
+                    }
+                }
+
+                else
+                {
+                    // Completion for a specific command. Find the handler
+                    // and let it do the work.
+                    completeForCommand(commandName, token, line)
+                }
+            }
+        }
+
+        private def matchingCommandsFor(token: String): List[String] =
+        {
+            val completions =
+            {
+                for {handler <- allHandlers
+                     val completions = handler.commandNameCompletions(token)
+                     if (completions != Nil)}
+                yield completions
+            }.toList
+
+            completions.flatten[String]
+        }
+
+        private def completeForCommand(commandName: String,
+                                       token:       String,
+                                       line:        String): List[String] =
+        {
+            findCommand(commandName) match
+            {
+                case None          => Nil
+                case Some(handler) => handler.complete(token, line)
+            }
+        }
+    }
+
+    /**
      * Read a command line
      *
      * @return <tt>Some(line)</tt> if a line was read, or <tt>None</tt> for
@@ -763,7 +792,9 @@ abstract class CommandInterpreter(val appName: String,
     {
         def doRead(lineSoFar: String, usePrompt: String): Option[String] =
         {
-            val s = readline.readline(usePrompt)
+            assert (readerStack.size > 0)
+            val reader = readerStack.top
+            val s = reader(usePrompt)
             val readlineResult = s match
             {
                 case None if (lineSoFar == "") => None
@@ -774,7 +805,14 @@ abstract class CommandInterpreter(val appName: String,
             readlineResult match
             {
                 case None =>
-                    None
+                    if (readerStack.size == 1)
+                        // EOF on readline (primary reader)
+                        None
+                    else
+                    {
+                        readerStack.pop
+                        doRead("", primaryPrompt)
+                    }
 
                 case Some(line) if ((line == null) || (line.trim == "")) =>
                     Some("")
