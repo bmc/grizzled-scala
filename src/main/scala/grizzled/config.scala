@@ -297,6 +297,9 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  * %include "http://configs.example.com/mytools/common.cfg"
  * </pre></blockquote>
  *
+ * <p>If the include path is not a URL, and is not an absolute path, its
+ * location is relative to the file that's trying to include it.</p>
+ * 
  * <p>The included file may contain any content that is valid for this
  * parser. It may contain just variable definitions (i.e., the contents of
  * a section, without the section header), or it may contain a complete
