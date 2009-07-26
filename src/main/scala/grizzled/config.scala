@@ -205,7 +205,7 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  * <p>The "system" pseudosection is used to interpolate values from
  * <tt>System.properties</tt> For instance, <tt>${system.user.home}</tt>
  * substitutes the value of the <tt>user.home</tt> system property
- * (typically, the home directory of the user running <i>curn</i>).
+ * (typically, the home directory of the user running the program).
  * Similarly, <tt>${system.user.name}</tt> substitutes the user's name.</p>
  *
  * <p>The "env" pseudosection is used to interpolate values from the
@@ -213,7 +213,7 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  * substitutes user's home directory (and is, therefore, a synonym for
  * <tt>${system.user.home}</tt>. On some versions of Windows,
  * <tt>${env.USERNAME}</tt> will substitute the name of the user running
- * <i>curn</i>. Note: On UNIX systems, environment variable names are
+ * the program. Note: On UNIX systems, environment variable names are
  * typically case-sensitive; for instance, <tt>${env.USER}</tt> and
  * <tt>${env.user}</tt> refer to different environment variables. On
  * Windows systems, environment variable names are typically
