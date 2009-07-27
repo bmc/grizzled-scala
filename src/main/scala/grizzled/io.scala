@@ -7,6 +7,8 @@
  */
 package grizzled.io
 
+import scala.io.Source
+
 import java.io.{InputStream,
                 OutputStream,
                 Reader,
@@ -117,6 +119,37 @@ class RichInputStream(val inputStream: InputStream) extends PartialReader[Byte]
             copyTo(out)
         }
     }
+}
+
+/**
+ * A <tt>MultiSource</tt> contains multiple <tt>scala.io.Source</tt>
+ * objects and satisfies reads from them serially. Once composed, a
+ * <tt>MultiSource</tt> ahcan be used anywhere a <tt>Source</tt> is used.
+ *
+ * @param sources  the sources to wrap
+ */
+class MultiSource(sources: List[Source]) extends Source
+{
+    import collection.MultiIterator
+
+    private val sourceList = sources.toList
+
+    /**
+     * Version of constructor that takes multiple arguments, instead of a list.
+     *
+     * @param sources  the sources to wrap
+     */
+    def this(sources: Source*) = this(sources.toList)
+
+    /**
+     * The actual iterator.
+     */
+    protected val iter: Iterator[Char] = new MultiIterator[Char](sourceList: _*)
+
+    /**
+     * Reset, returning a new source.
+     */
+    def reset: Source = new MultiSource(sourceList)
 }
 
 /**

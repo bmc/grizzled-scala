@@ -72,7 +72,7 @@ class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
 /**
  * An <tt>Iterator</tt> for lists.
  */
-class ListIterator[T](val list: List[T]) extends Iterator[T]
+class ListIterator[+T](val list: List[T]) extends Iterator[T]
 {
     private var cursor = 0
 
@@ -82,6 +82,51 @@ class ListIterator[T](val list: List[T]) extends Iterator[T]
         val result = list(cursor)
         cursor += 1
         result
+    }
+}
+
+/**
+ * An iterator that iterates, serially, over the contents of multiple other
+ * iterators.
+ *
+ * @param iterators  the iterators to wrap
+ */
+class MultiIterator[T](iterators: Iterator[T]*) extends Iterator[T]
+{
+    private var iteratorList: List[Iterator[T]] = iterators.toList
+
+    /**
+     * Determines whether the iterator is empty. A <tt>MultiIterator</tt>
+     * is empty when all contained iterators have been exhausted.
+     *
+     * @return <tt>true</tt> if there's more to read, <tt>false</tt> if not
+     */
+    def hasNext: Boolean =
+    {
+        if (iteratorList.length == 0)
+            false
+
+        else if (iteratorList(0).hasNext)
+            true
+
+        else
+        {
+            iteratorList = iteratorList drop 1
+            hasNext
+        }
+    }
+
+    /**
+     * Get the next element.
+     *
+     * @return the next element
+     */
+    def next: T =
+    {
+        if (! hasNext)
+            throw new java.util.NoSuchElementException
+
+        iteratorList(0).next
     }
 }
 
