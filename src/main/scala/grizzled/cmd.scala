@@ -618,7 +618,8 @@ abstract class CommandInterpreter(val appName: String,
         val colsPerLine = width / colSize
         for ((s, i) <- strings.zipWithIndex)
         {
-            if ((i % colsPerLine) == 0)
+            val count = i + 1
+            if ((count % colsPerLine) == 0)
                 buf += '\n'
 
             val padding = " " * (colSize - s.length)
