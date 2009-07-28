@@ -1092,6 +1092,7 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
             else
             {
                 val command = historyBuf(historyBuf.length - 1)
+                println(command)
                 cmd.handleCommand(Some(command))
             }
         }
@@ -1113,6 +1114,7 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
                 else
                 {
                     val command = historyBuf(n - 1)
+                    println(command)
                     cmd.handleCommand(Some(command))
                 }
             }
@@ -1134,6 +1136,7 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
                 KeepGoing
 
             case line :: rest =>
+                println(line)
                 cmd.handleCommand(Some(line))
         }
     }
