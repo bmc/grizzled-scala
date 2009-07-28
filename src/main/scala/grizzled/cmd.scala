@@ -544,7 +544,7 @@ abstract class CommandInterpreter(val appName: String,
             val command = lTrimmed.takeWhile(isCommandChar).mkString("")
             val args = lTrimmed.dropWhile(isCommandChar).mkString("")
 
-            (command, args)
+            (command, args.ltrim)
         }
     }
 
