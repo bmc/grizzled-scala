@@ -59,6 +59,20 @@ package grizzled.readline
 trait History
 {
     /**
+     * Get maximum history size.
+     *
+     * @return the current max history size, or 0 for unlimited.
+     */
+    def max: Int
+
+    /**
+     * Set maximum history size.
+     *
+     * @param newSize the new max history size, or 0 for unlimited.
+     */
+    def max_=(newSize: Int)
+
+    /**
      * Add a line to the history. Does not add the line if it is
      * identical to the most recently added line.
      *
@@ -74,11 +88,11 @@ trait History
     }
 
     /**
-     * Unconditionally appends the specified line to the history.
+     * Get the current number of entries in the history buffer.
      *
-     * @param line  the line to add
+     * @return the size of the history buffer
      */
-    protected def append(line: String)
+    def size: Int
 
     /**
      * Get the last (i.e., most recent) entry from the buffer.
@@ -151,6 +165,13 @@ trait History
             case _: FileNotFoundException =>
         }
     }
+
+    /**
+     * Unconditionally appends the specified line to the history.
+     *
+     * @param line  the line to add
+     */
+    protected def append(line: String)
 }
 
 /**

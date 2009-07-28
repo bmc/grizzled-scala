@@ -62,8 +62,13 @@ import org.gnu.readline.{Readline => JavaReadline,
  */
 private[javareadline] class ReadlineHistory extends History
 {
-    protected def append(line: String) = JavaReadline.addToHistory(line)
+    private var maxSize = Integer.MAX_VALUE
 
+    /**
+     * Get the contents of the history buffer, in a list.
+     *
+     * @return the history lines
+     */
     def get: List[String] =
     {
         import _root_.java.util.ArrayList
@@ -76,8 +81,17 @@ private[javareadline] class ReadlineHistory extends History
         result.toList
     }
 
+    /**
+     * Clear the history buffer
+     */
     def clear = JavaReadline.clearHistory
 
+    /**
+     * Get the last (i.e., most recent) entry from the buffer.
+     *
+     * @return the most recent entry, as an <tt>Option</tt>, or
+     *         <tt>None</tt> if the history buffer is empty
+     */
     def last: Option[String] =
     {
         val history = get
@@ -85,6 +99,54 @@ private[javareadline] class ReadlineHistory extends History
         {
             case Nil => None
             case _   => Some(history.last)
+        }
+    }
+
+    /**
+     * Get the current number of entries in the history buffer.
+     *
+     * @return the size of the history buffer
+     */
+    def size: Int = get.length
+
+    /**
+     * Get maximum history size.
+     *
+     * @return the current max history size, or 0 for unlimited.
+     */
+    def max: Int = maxSize
+
+    /**
+     * Set maximum history size.
+     *
+     * @param newSize the new max history size, or 0 for unlimited.
+     */
+    def max_=(newSize: Int)
+    {
+        maxSize = newSize
+        ensureMaxSize
+    }
+
+    /**
+     * Unconditionally appends the specified line to the history.
+     *
+     * @param line  the line to add
+     */
+    protected def append(line: String) =
+    {
+        JavaReadline.addToHistory(line)
+        ensureMaxSize
+    }
+
+    private def ensureMaxSize: Unit =
+    {
+        val history = get
+        if (history.length > maxSize)
+        {
+            val newHistory = history drop (history.length - maxSize)
+            clear
+            for (line <- newHistory.reverse)
+                append(line)
         }
     }
 }

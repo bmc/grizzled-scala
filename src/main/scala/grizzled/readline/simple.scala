@@ -60,19 +60,81 @@ private[simple] class SimpleHistory extends History
     import scala.collection.mutable.ArrayBuffer
 
     private val history = new ArrayBuffer[String]
+    private var maxSize = Integer.MAX_VALUE
 
-    protected def append(line: String) = history += line
-
+    /**
+     * Get the contents of the history buffer, in a list.
+     *
+     * @return the history lines
+     */
     def get: List[String] = history.toList
 
+    /**
+     * Clear the history buffer
+     */
     def clear = history.clear
 
+    /**
+     * Get the last (i.e., most recent) entry from the buffer.
+     *
+     * @return the most recent entry, as an <tt>Option</tt>, or
+     *         <tt>None</tt> if the history buffer is empty
+     */
     def last: Option[String] =
     {
         history.length match
         {
             case 0 => None
             case _ => Some(history.last)
+        }
+    }
+
+    /**
+     * Get the current number of entries in the history buffer.
+     *
+     * @return the size of the history buffer
+     */
+    def size: Int = history.length
+
+    /**
+     * Get maximum history size.
+     *
+     * @return the current max history size, or 0 for unlimited.
+     */
+    def max: Int = maxSize
+
+    /**
+     * Set maximum history size.
+     *
+     * @param newSize the new max history size, or 0 for unlimited.
+     */
+    def max_=(newSize: Int)
+    {
+        maxSize = newSize
+        ensureMaxSize
+    }
+
+    /**
+     * Unconditionally appends the specified line to the history.
+     *
+     * @param line  the line to add
+     */
+    protected def append(line: String) =
+    {
+        history += line
+        ensureMaxSize
+    }
+
+    private def ensureMaxSize: Unit =
+    {
+        if (history.length > maxSize)
+        {
+            // Must convert the newHistory variable to a list, because it's
+            // a projection into the real buffer, and it'll go away when the
+            // buffer is cleared.
+            val newHistory = history.drop(history.length - maxSize).toList
+            history.clear
+            history.insertAll(0, newHistory)
         }
     }
 }

@@ -59,9 +59,13 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
     extends History
 {
     val history = reader.getHistory
+    max = Integer.MAX_VALUE
 
-    protected def append(line: String) = history.addToHistory(line)
-
+    /**
+     * Get the contents of the history buffer, in a list.
+     *
+     * @return the history lines
+     */
     def get: List[String] =
     {
         import scala.collection.mutable.ArrayBuffer
@@ -73,8 +77,17 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
         result.toList
     }
 
+    /**
+     * Clear the history buffer
+     */
     def clear = history.clear
 
+    /**
+     * Get the last (i.e., most recent) entry from the buffer.
+     *
+     * @return the most recent entry, as an <tt>Option</tt>, or
+     *         <tt>None</tt> if the history buffer is empty
+     */
     def last: Option[String] =
     {
         val s = history.current
@@ -83,6 +96,34 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
         else
             Some(s)
     }
+
+    /**
+     * Get the current number of entries in the history buffer.
+     *
+     * @return the size of the history buffer
+     */
+    def size: Int = history.size
+
+    /**
+     * Get maximum history size.
+     *
+     * @return the current max history size, or 0 for unlimited.
+     */
+    def max: Int = history.getMaxSize
+
+    /**
+     * Set maximum history size.
+     *
+     * @param newSize the new max history size, or 0 for unlimited.
+     */
+    def max_=(newSize: Int) = history.setMaxSize(newSize)
+
+    /**
+     * Unconditionally appends the specified line to the history.
+     *
+     * @param line  the line to add
+     */
+    protected def append(line: String) = history.addToHistory(line)
 }
 
 /**
