@@ -538,16 +538,13 @@ abstract class CommandInterpreter(val appName: String,
 
         else
         {
-            // White space-delimited identifier command. Parse accordingly.
+            // First token consists of all characters in StartCommandIdentifier.
 
-            val firstBlank = lTrimmed.indexOf(' ')
+            val isCommandChar = (c: Char) => StartCommandIdentifier contains c
+            val command = lTrimmed.takeWhile(isCommandChar).mkString("")
+            val args = lTrimmed.dropWhile(isCommandChar).mkString("")
 
-            if (firstBlank == -1)
-                (lTrimmed, "")
-
-            else
-                (lTrimmed.substring(0, firstBlank).trim,
-                 lTrimmed.substring(firstBlank).ltrim)
+            (command, args)
         }
     }
 
