@@ -249,37 +249,6 @@ private[readline] class GNUReadlineImpl(appName: String,
                              "GNU Readline",
                              autoAddHistory,
                              JavaReadlineLibrary.GnuReadline)
-{
-    /**
-     * Subclass-specific initialization.
-     */
-    override protected def subclassInit(): Unit =
-    {
-        import grizzled.file.util.joinPath
-        import java.io.{File, IOException}
-
-        val initPath = joinPath(System.getProperty("user.home"), ".inputrc")
-        val initFile = new File(initPath)
-        if (initFile.exists && initFile.isFile)
-        {
-            try
-            {
-                JavaReadline.readInitFile(initPath)
-            }
-
-            catch
-            {
-                case e: IOException =>
-                    val message = if (e.getMessage != null)
-                                      e.getMessage
-                                  else
-                                      e.getClass.getName
-                    println("Warning: Can't load \"" + initPath + "\": " +
-                            message)
-            }
-        }
-    }
-}
 
 /**
  * JavaReadline implementation of the Readline trait, specialized for the
