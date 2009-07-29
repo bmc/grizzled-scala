@@ -50,7 +50,17 @@ import scala.util.matching.Regex
 
 /**
  * An analog to Scala's <tt>RichString</tt> class, providing some methods
- * that neither <tt>RichString</tt> nor <tt>String</tt> provide.
+ * that neither <tt>RichString</tt> nor <tt>String</tt> provide. By
+ * importing the implicit conversion functions, you can use the methods in
+ * this class transparently from a <tt>String</tt> or <tt>RichString</tt>
+ * object.
+ *
+ * <blockquote><pre>
+ * import grizzled.string.implicits._
+ *
+ * val s = "a  b          c"
+ * println(s.tokenize) // prints: List(a, b, c)
+ * </pre></blockquote>
  */
 final class GrizzledString(val string: String)
 {

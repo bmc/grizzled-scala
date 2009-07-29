@@ -550,7 +550,8 @@ object util
      * of the names of the non-directory files in <i>dirpath</i>. Note that
      * the names in the lists are just names, with no path components. To
      * get a full path (which begins with top) to a file or directory in
-     * <i>dirpath</i>, <tt>dirpath + java.io.fileSeparator + name</tt>.</p>
+     * <i>dirpath</i>, use <tt>dirpath + java.io.fileSeparator + name</tt>,
+     * or use <tt>joinPath()</tt>.</p>
      *
      * <p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
      * generated before the triples for any of its subdirectories
@@ -565,7 +566,7 @@ object util
      * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>
      *                otherwise.
      *
-     * @return iterator of triplets, as described above.
+     * @return List of triplets, as described above.
      */
     def walk(top: String, topdown: Boolean):
         List[(String, List[String], List[String])] =
@@ -615,43 +616,43 @@ object util
      *   </tr>
      *   <tr>
      *     <td class="code">""</td>
-     *      <td class="code">List[String]("")</td>
+     *      <td class="code">List("")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"/"</td>
-     *     <td class="code">List[String]("/")
+     *     <td class="code">List("/")
      *   </tr>
      *   <tr>
      *     <td class="code">"foo"</td>
-     *     <td class="code">List[String]("foo")</td>
+     *     <td class="code">List("foo")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"foo/bar"</td>
-     *     <td class="code">List[String]("foo", "bar")</td>
+     *     <td class="code">List("foo", "bar")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"."</td>
-     *     <td class="code">List[String](".")</td>
+     *     <td class="code">List(".")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"../foo"</td>
-     *     <td class="code">List[String]("..", "foo")</td>
+     *     <td class="code">List("..", "foo")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"./foo"</td>
-     *     <td class="code">List[String](".", "foo")</td>
+     *     <td class="code">List(".", "foo")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"/foo/bar/baz"</td>
-     *     <td class="code">List[String]("/foo", "bar", "baz")</td>
+     *     <td class="code">List("/foo", "bar", "baz")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"foo/bar/baz"</td>
-     *     <td class="code">List[String]("foo", "bar", "baz")</td>
+     *     <td class="code">List("foo", "bar", "baz")</td>
      *   </tr>
      *   <tr>
      *     <td class="code">"/foo"</td>
-     *     <td class="code">List[String]("/foo")</td>
+     *     <td class="code">List("/foo")</td>
      *   </tr>
      * </table>
      *
@@ -968,11 +969,11 @@ object util
      *   <li>creates any non-existent files in the list of files
      * </ul>
      *
-     * If any file in the list is a directory, this method will throw an
-     * exception.
+     * <p>If any file in the list is a directory, this method will throw an
+     * exception.</p>
      *
-     * This version of <tt>touch()</tt> always set the last-modified time to
-     * the current time.
+     * <p>This version of <tt>touch()</tt> always set the last-modified time to
+     * the current time.</p>
      *
      * @param files  Iterable of files to touch
      *

@@ -51,7 +51,16 @@ import scala.util.matching.Regex
 /**
  * An analog to Scala's <tt>RichChar</tt> class, providing some methods
  * that neither <tt>RichChar</tt> nor <tt>Char</tt> (nor, for that matter,
- * <tt>java.lang.Character</tt>) provide.
+ * <tt>java.lang.Character</tt>) provide. By importing the implicit
+ * conversion functions, you can use the methods in this class
+ * transparently from a <tt>Char</tt>, <tt>RichChar</tt> or
+ * <tt>Character</tt> object.
+ *
+ * <blockquote><pre>
+ * import grizzled.string.implicits._
+ * val ch = 'a'
+ * println(ch.isHexDigit) // prints: true
+ * </pre></blockquote>
  */
 final class GrizzledChar(val character: Char)
 {
