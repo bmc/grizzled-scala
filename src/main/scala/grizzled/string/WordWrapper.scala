@@ -52,7 +52,7 @@ import grizzled.string.implicits._
  * <p>Wraps strings on word boundaries to fit within a proscribed output
  * width. The wrapped string may have a prefix or not; prefixes are useful
  * for error messages, for instance. You tell a <tt>WordWrapper</tt> about
- * a prefix by passing a non-zero prefix length to the constructor.</p>
+ * a prefix by passing a non-empty prefix to the constructor.</p>
  *
  * <h2>Examples:</h2>
  * 
