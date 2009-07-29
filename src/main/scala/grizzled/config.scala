@@ -55,7 +55,7 @@ package grizzled.config
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
-import grizzled.GrizzledString._
+import grizzled.string.implicits._
 
 import scala.collection.mutable.{Map => MutableMap}
 import scala.io.Source

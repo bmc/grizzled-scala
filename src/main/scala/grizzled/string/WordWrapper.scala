@@ -46,7 +46,7 @@
 
 package grizzled.string
 
-import grizzled.GrizzledString._
+import grizzled.string.implicits._
 
 /**
  * <p>Wraps strings on word boundaries to fit within a proscribed output

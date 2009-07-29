@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   This software is released under a BSD-style license:
 
   Copyright (c) 2009 Brian M. Clapper. All rights reserved.
@@ -40,69 +41,55 @@
   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
-package grizzled
-
-import scala.util.matching.Regex
+import org.scalatest.FunSuite
+import grizzled.string.implicits._
 
 /**
- * An analog to Scala's <tt>RichChar</tt> class, providing some methods
- * that neither <tt>RichChar</tt> nor <tt>Char</tt> (nor, for that matter,
- * <tt>java.lang.Character</tt>) provide.
+ * Tests the GrizzledChar class.
  */
-final class GrizzledChar(val character: Char)
+class GrizzledCharTest extends GrizzledFunSuite
 {
-    /**
-     * Determine whether the character represents a valid hexadecimal
-     * digit. This is a specialization of <tt>isDigit(radix)</tt>.
-     *
-     * @return <tt>true</tt> if the character is a valid hexadecimal
-     *         digit, <tt>false</tt> if not.
-     */
-    def isHexDigit = isDigit(16)
-
-    /**
-     * Determine whether the character represents a valid digit in a
-     * given base.
-     *
-     * @param radix the radix
-     *
-     * @return <tt>true</tt> if the character is a valid digit in the
-     *         indicated radix, <tt>false</tt> if not.
-     */
-    def isDigit(radix: Int): Boolean =
+    test("isHexDigit")
     {
-        try
+        val data = Map('0' -> true,
+                       '1' -> true,
+                       '2' -> true,
+                       '3' -> true,
+                       '4' -> true,
+                       '5' -> true,
+                       '6' -> true,
+                       '7' -> true,
+                       '8' -> true,
+                       '9' -> true,
+                       'a' -> true,
+                       'A' -> true,
+                       'b' -> true,
+                       'B' -> true,
+                       'c' -> true,
+                       'C' -> true,
+                       'd' -> true,
+                       'D' -> true,
+                       'e' -> true,
+                       'E' -> true,
+                       'f' -> true,
+                       'F' -> true,
+                       'g' -> false,
+                       'G' -> false,
+                       '!' -> false,
+                       ':' -> false,
+                       '+' -> false,
+                       '-' -> false,
+                       '.' -> false)
+
+        for((c, expected) <- data)
         {
-            Integer.parseInt(character.toString, radix)
-            true
-        }
-        catch
-        {
-            case _: NumberFormatException => false
+            expect(expected, "'" + c + "' -> " + expected.toString)
+            {
+                c.isHexDigit
+            }
         }
     }
-}
-    
-/**
- * Companion object for <tt>GrizzledChar</tt>, containing implicits and
- * other stuff.
- */
-object GrizzledChar
-{
-    import scala.runtime.RichChar
-
-    implicit def Char_GrizzledChar(c: Char) = new GrizzledChar(c)
-    implicit def GrizzledChar_Char(c: GrizzledChar) = c.character
-
-    implicit def JavaCharacter_GrizzledChar(c: java.lang.Character) =
-        new GrizzledChar(c.charValue)
-    implicit def GrizzledChar_JavaCharacter(c: GrizzledChar) =
-        new java.lang.Character(c.character)
-
-    implicit def RichChar_GrizzledChar(c: RichChar) =
-        new GrizzledChar(c.self.asInstanceOf[Char])
-    implicit def GrizzledChar_RichChar(c: GrizzledChar) =
-        new RichChar(c.character)
 }

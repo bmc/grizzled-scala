@@ -46,6 +46,8 @@
 
 package grizzled.string
 
+import scala.runtime.{RichChar, RichString}
+
 /**
  * Miscellaneous implicit string conversions.
  */
@@ -92,4 +94,110 @@ object implicits
                 throw new IllegalArgumentException("Can't convert string \"" +
                                                    s + "\" to boolean.")
         }
+
+    /**
+     * Implicit function to convert from a Java string to a
+     * <tt>GrizzledString</tt>.
+     *
+     * @param s  the Java string
+     *
+     * @return the <tt>GrizzledString</tt>
+     */
+    implicit def JavaString_GrizzledString(s: String) = new GrizzledString(s)
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledString</tt> to a
+     * Java string.
+     *
+     * @param gs  the <tt>GrizzledString</tt>
+     *
+     * @return the Java string
+     */
+    implicit def GrizzledString_JavaString(gs: GrizzledString) = gs.string
+
+    /**
+     * Implicit function to convert from a Scala <tt>RichString</tt> to a
+     * <tt>GrizzledString</tt>.
+     *
+     * @param s  a Scala <tt>RichString</tt>
+     *
+     * @return the <tt>GrizzledString</tt>
+     */
+    implicit def RichString_GrizzledString(rs: RichString) =
+        new GrizzledString(rs.self)
+
+    /**
+     * Implicit function to convert from <tt>GrizzledString</tt> to a
+     * Scala <tt>RichString</tt>.
+     *
+     * @param s  the <tt>GrizzledString</tt>
+     *
+     * @return the Scala <tt>RichString</tt>
+     */
+    implicit def GrizzledString_RichString(gs: GrizzledString) =
+        new RichString(gs.string)
+
+    /**
+     * Implicit function to convert from a character to a <tt>GrizzledChar</tt>.
+     *
+     * @param s  the character
+     *
+     * @return the <tt>GrizzledChar</tt>
+     */
+    implicit def Char_GrizzledChar(c: Char) = new GrizzledChar(c)
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledChar</tt> to a
+     * character.
+     *
+     * @param gc  the <tt>GrizzledChar</tt>
+     *
+     * @return the character
+     */
+    implicit def GrizzledChar_Char(gc: GrizzledChar) = gc.character
+
+    /**
+     * Implicit function to convert from a Java <tt>Character</tt> object
+     * to a <tt>GrizzledChar</tt>.
+     *
+     * @param s  the <tt>Character</tt> object
+     *
+     * @return the <tt>GrizzledChar</tt>
+     */
+    implicit def JavaCharacter_GrizzledChar(c: java.lang.Character) =
+        new GrizzledChar(c.charValue)
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledChar</tt> to a
+     * Java <tt>Character</tt> object.
+     *
+     * @param gc  the <tt>GrizzledChar</tt>
+     *
+     * @return the <tt>Character</tt> object
+     */
+    implicit def GrizzledChar_JavaCharacter(c: GrizzledChar) =
+        new java.lang.Character(c.character)
+
+
+    /**
+     * Implicit function to convert from a Scala <tt>RichChar</tt> object
+     * to a <tt>GrizzledChar</tt>.
+     *
+     * @param s  the <tt>RichChar</tt> object
+     *
+     * @return the <tt>GrizzledChar</tt>
+     */
+    implicit def RichChar_GrizzledChar(c: RichChar) =
+        new GrizzledChar(c.self.asInstanceOf[Char])
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledChar</tt> to a
+     * Scala <tt>RichChar</tt> object.
+     *
+     * @param gc  the <tt>GrizzledChar</tt>
+     *
+     * @return the <tt>RichChar</tt> object
+     */
+    implicit def GrizzledChar_RichChar(c: GrizzledChar) =
+        new RichChar(c.character)
 }

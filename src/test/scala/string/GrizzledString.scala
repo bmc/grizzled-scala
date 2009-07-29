@@ -45,7 +45,7 @@
 */
 
 import org.scalatest.FunSuite
-import grizzled.GrizzledString._
+import grizzled.string.implicits._
 
 /**
  * Tests the GrizzledString class.

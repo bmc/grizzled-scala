@@ -44,7 +44,7 @@
   ---------------------------------------------------------------------------
 */
 
-package grizzled
+package grizzled.string
 
 import scala.util.matching.Regex
 
@@ -138,7 +138,7 @@ final class GrizzledString(val string: String)
     def translateMetachars: String =
     {
         import grizzled.parsing.{IteratorStream, Pushback}
-        import grizzled.GrizzledChar._
+        import grizzled.string.implicits._
 
         val stream = new IteratorStream[Char](string) with Pushback[Char]
 
@@ -201,21 +201,4 @@ final class GrizzledString(val string: String)
     
         translate mkString ""
     }
-}
-    
-/**
- * Companion object for <tt>GrizzledString</tt>, containing implicits and
- * other stuff.
- */
-object GrizzledString
-{
-    import scala.runtime.RichString
-
-    implicit def JavaString_GrizzledString(s: String) = new GrizzledString(s)
-    implicit def GrizzledString_JavaString(gs: GrizzledString) = gs.string
-
-    implicit def GrizzledString_RichString(gs: GrizzledString) =
-        new RichString(gs.string)
-    implicit def RichString_GrizzledString(rs: RichString) =
-        new GrizzledString(rs.self)
 }

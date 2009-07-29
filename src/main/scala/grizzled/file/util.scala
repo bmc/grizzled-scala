@@ -511,7 +511,7 @@ object util
      *   </tr>
      * </table>
      *
-     * An initial period in <tt>filename</tt> not special. Matches are
+     * An initial period in <tt>filename</tt> is not special. Matches are
      * case-sensitive on Posix operating systems, case-insensitive elsewhere.
      *
      * @param name    the name to match
@@ -559,7 +559,7 @@ object util
      * triples for all of its subdirectories (directories are generated
      * bottom up).</p>
      *
-     * <p><b>WARNING!</b> This method does <i>not</i> grok symlinks!
+     * <p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p>
      *
      * @param top     name of starting directory
      * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>

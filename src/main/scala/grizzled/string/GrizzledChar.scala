@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   This software is released under a BSD-style license:
 
   Copyright (c) 2009 Brian M. Clapper. All rights reserved.
@@ -40,54 +41,48 @@
   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
   THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
-import org.scalatest.FunSuite
-import grizzled.GrizzledChar._
+package grizzled.string
+
+import scala.util.matching.Regex
 
 /**
- * Tests the GrizzledChar class.
+ * An analog to Scala's <tt>RichChar</tt> class, providing some methods
+ * that neither <tt>RichChar</tt> nor <tt>Char</tt> (nor, for that matter,
+ * <tt>java.lang.Character</tt>) provide.
  */
-class GrizzledCharTest extends GrizzledFunSuite
+final class GrizzledChar(val character: Char)
 {
-    test("isHexDigit")
-    {
-        val data = Map('0' -> true,
-                       '1' -> true,
-                       '2' -> true,
-                       '3' -> true,
-                       '4' -> true,
-                       '5' -> true,
-                       '6' -> true,
-                       '7' -> true,
-                       '8' -> true,
-                       '9' -> true,
-                       'a' -> true,
-                       'A' -> true,
-                       'b' -> true,
-                       'B' -> true,
-                       'c' -> true,
-                       'C' -> true,
-                       'd' -> true,
-                       'D' -> true,
-                       'e' -> true,
-                       'E' -> true,
-                       'f' -> true,
-                       'F' -> true,
-                       'g' -> false,
-                       'G' -> false,
-                       '!' -> false,
-                       ':' -> false,
-                       '+' -> false,
-                       '-' -> false,
-                       '.' -> false)
+    /**
+     * Determine whether the character represents a valid hexadecimal
+     * digit. This is a specialization of <tt>isDigit(radix)</tt>.
+     *
+     * @return <tt>true</tt> if the character is a valid hexadecimal
+     *         digit, <tt>false</tt> if not.
+     */
+    def isHexDigit = isDigit(16)
 
-        for((c, expected) <- data)
+    /**
+     * Determine whether the character represents a valid digit in a
+     * given base.
+     *
+     * @param radix the radix
+     *
+     * @return <tt>true</tt> if the character is a valid digit in the
+     *         indicated radix, <tt>false</tt> if not.
+     */
+    def isDigit(radix: Int): Boolean =
+    {
+        try
         {
-            expect(expected, "'" + c + "' -> " + expected.toString)
-            {
-                c.isHexDigit
-            }
+            Integer.parseInt(character.toString, radix)
+            true
+        }
+        catch
+        {
+            case _: NumberFormatException => false
         }
     }
 }

@@ -49,7 +49,7 @@
  */
 package grizzled.file.filter
 
-import grizzled.GrizzledString._
+import grizzled.string.implicits._
 
 import scala.io.Source
 

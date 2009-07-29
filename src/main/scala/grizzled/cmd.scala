@@ -55,7 +55,7 @@ import grizzled.readline.Readline.ReadlineType._
 import grizzled.readline.Readline.ReadlineType
 import grizzled.readline.{Readline, Completer, History}
 
-import grizzled.GrizzledString._
+import grizzled.string.implicits._
 
 import scala.collection.mutable.Stack
 
