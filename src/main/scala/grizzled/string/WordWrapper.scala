@@ -195,13 +195,15 @@ class WordWrapper(val wrapWidth:    Int,
             result
         }
 
-        def assembleLine(buf: ArrayBuffer[String]): String =
-            usePrefix + indentChars + buf.mkString(" ")
+        def assembleLine(prefix: String, buf: ArrayBuffer[String]): String =
+            prefix + indentChars + buf.mkString(" ")
 
-        def wrapOneLine(line: String): String =
+        def wrapOneLine(line: String, prefix: String): String =
         {
             val lineOut = new ArrayBuffer[String]
             val result  = new ArrayBuffer[String]
+            var localPrefix = prefix
+
             for (word <- line.split("[\t ]"))
             {
                 val wordLength = word.length
@@ -212,25 +214,29 @@ class WordWrapper(val wrapWidth:    Int,
                 // to sum them up.
                 val totalBlanks = lineOut.length - 1
                 val wordLengths = (0 /: lineOut.map(_.length)) (_ + _)
-                val currentLength = totalBlanks + wordLengths + prefixLength +
-                                    indentation
+                val currentLength = totalBlanks + wordLengths + 
+                                    localPrefix.length + indentation
                 if ((wordLength + currentLength + 1) > wrapWidth)
                 {
-                    result += assembleLine(lineOut)
+                    result += assembleLine(localPrefix, lineOut)
                     lineOut.clear
+                    localPrefix = prefixIndentChars
                 }
 
                 lineOut += word
             }
 
             if (lineOut.length > 0)
-                result += assembleLine(lineOut)
+                result += assembleLine(localPrefix, lineOut)
 
             result.mkString("\n").rtrim
         }
 
-        for (line <-  s.split("\n"))
-            buf += wrapOneLine(line)
+        val lines = s.split("\n")
+        // First prefix is empty.
+        buf += wrapOneLine(lines(0), "")
+        for (line <- lines.drop(1))
+            buf += wrapOneLine(line, prefixIndentChars)
 
         buf mkString "\n"
     }
