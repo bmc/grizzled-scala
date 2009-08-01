@@ -19,6 +19,9 @@ Currently, the library is broken into a number of modules:
 - `grizzled.string`: Various useful string- and text-related functions.
 - `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
 
+The home page for the Grizzled Scala Library is
+<http://www.clapper.org/software/scala/grizzled-scala/>
+
 Building
 --------
 
