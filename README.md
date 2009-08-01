@@ -33,7 +33,7 @@ Tool). Install SBT, as described at the SBT web site. Then, run
 to pull down the external dependencies. After that step, build the Grizzled
 Scala Library with:
 
-    sbt update compile test package
+    sbt compile test package
 
 The resulting jar file will be in the top-level `target` directory.
 
