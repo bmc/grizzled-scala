@@ -12,9 +12,17 @@ easily use it in multiple projects.
 
 Currently, the library is broken into a number of modules:
 
+- `grizzled.binary`: Some code that's useful when dealing with binary
+- `grizzled.cmd`: A framework for building command interpreters, similar (in
+  concept) to Python's `cmd` module.
+- `grizzled.collection`: Helpers for Scala collections
+- `grizzed.config`: An enhanced INI-style configuration parser
 - `grizzled.file`: File system-related utility functions.
+- `grizzled.io`: Some enhanced I/O functions and classes
+- `grizzled.math`: Some simple enhanced math functions
 - `grizzled.net`: Network-related stuff, mostly Scala wrappers to simplify or
   extend the Java `java.net` classes.
+- `grizzled.parsing`: Classes that aid in certain parsing logic
 - `grizzled.readline`: Front-end API for various readline-like libraries.
 - `grizzled.string`: Various useful string- and text-related functions.
 - `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
