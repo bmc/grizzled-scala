@@ -188,31 +188,47 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
             // will fail under certain circumstances, but that's the best
             // we can do.
 
-            def mapTokens(revTokens: List[String]): List[CompletionToken] =
+            def getTokens(line: String): List[CompletionToken] =
             {
-                val (a, b) = revTokens.break(_ == token)
+                // Split the token list around the first occurrence of a
+                // match for the token (which, because the list is reversed,
+                // i really the last occurrence of such a  match).
+                val revTokens = line.tokenize.reverse
+                val (a, b) = revTokens.break(_.startsWith(token))
+                val lastIsWhite = Character.isWhitespace(line.last)
 
                 (a, b) match
                 {
                     case (Nil, Nil) =>
+                        // No tokens (empty list). Cursor is at the beginning.
                         List(Cursor)
 
                     case (Nil, list) =>
-                        // Match on first token (which is really the last
-                        // token).
+                        // Matches first token (which is really the last token).
                         val matchToken = list(0)
                         val rest = list drop 1
-                        mapWithDelims(rest.reverse) ++ 
-                        List(LineToken(matchToken), Cursor)
+                        // Avoid stray leading Delim
+                        rest match
+                        {
+                            case Nil if lastIsWhite =>
+                                List(LineToken(matchToken), Delim, Cursor)
+                            case Nil =>
+                                List(LineToken(matchToken), Cursor)
+                            case _ =>
+                                mapWithDelims(rest.reverse) ++ 
+                                List(Delim, LineToken(matchToken), Cursor)
+                        }
 
                     case (list, Nil) =>
-                        // No match anywhere. Cursor goes at end.
-                        mapWithDelims(list.reverse) ++ List(Cursor)
+                        // No match anywhere. Cursor goes at end. Handle
+                        // white space at end of line.
+                        if (lastIsWhite)
+                            mapWithDelims(list.reverse) ++ List(Delim, Cursor)
+                        else
+                            mapWithDelims(list.reverse) ++ List(Cursor)
 
                     case (list1, list2) =>
-                        // Cursor is between the elements. NOTE:
-                        // intersperse will result in a trailing Delim,
-                        // which we'll drop.
+                        // Cursor is between the elements.
                         val l2 = mapWithDelims(list2.reverse)
                         val l1 = mapWithDelims(list1.reverse)
                         l2 ++ List(Cursor, Delim) ++ l1
@@ -224,7 +240,7 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
                 // First call to completer. Get list of matches.
 
                 val line = JavaReadline.getLineBuffer
-                val tokens = mapTokens(line.tokenize.reverse)
+                val tokens = getTokens(line)
                 val matches = self.completer.complete(token, tokens, line)
                 iterator = matches.elements
             }

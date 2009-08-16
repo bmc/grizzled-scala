@@ -221,8 +221,14 @@ private[readline] class JLineImpl(appName: String,
             val line = if (buf == null) "" else buf
             val tokens = mapTokens(line.toTokens)
             assert (tokens contains Cursor)
-            save(self.completer.complete(findToken(tokens), tokens, line))
-            if (completions.size == 0) -1 else cursor
+            val tokenToComplete = findToken(tokens)
+            save(self.completer.complete(tokenToComplete, tokens, line))
+            if (completions.size == 0) 
+                -1
+            else if (tokenToComplete.length == 0)
+                cursor
+            else
+                cursor - tokenToComplete.length
         }
     }
 

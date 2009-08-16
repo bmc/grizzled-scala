@@ -25,7 +25,7 @@ object TestReadline
             else
                 types(args(0))
 
-        val r = Readline(t, "Test", false)
+        val r = Readline(t, "Test", true)
         println("Using: " + r)
 
         val HistoryPath = "/tmp/readline.hist"
@@ -39,14 +39,28 @@ object TestReadline
         object completer extends Completer
         {
             val completions = List("linux", "lisa", "mac", "freebsd", "freedos")
+            val pathCompleter = new PathnameCompleter
 
-            def complete(token: String, line: String): List[String] =
+            def complete(token: String,
+                         allTokens: List[CompletionToken],
+                         line: String): List[String] =
             {
                 println("token=\"" + token + "\", line=\"" + line + "\"")
+                println("tokens=" + allTokens)
 
-                {for (c <- completions; 
-                      if (c.startsWith(token))) yield c}.toList
-
+                allTokens match
+                {
+                    case Cursor :: rest =>
+                        completions
+                    case LineToken(s) :: Cursor :: rest =>
+                        completions.filter(_.startsWith(s))
+                    case LineToken(s) :: Delim :: Cursor :: rest =>
+                        pathCompleter.complete("", Cursor :: rest, line)
+                    case LineToken(s1) :: Delim :: LineToken(s2) :: Cursor :: rest =>
+                        pathCompleter.complete(s2, Cursor :: rest, line)
+                    case _ =>
+                        Nil
+                }
             }
         }
 
