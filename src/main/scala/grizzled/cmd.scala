@@ -770,7 +770,7 @@ abstract class CommandInterpreter(val appName: String,
             val completions =
             {
                 for {handler <- allHandlers
-                     val completions = handler.commandNameCompletions(token)
+                     completions = handler.commandNameCompletions(token)
                      if (completions != Nil)}
                 yield completions
             }.toList

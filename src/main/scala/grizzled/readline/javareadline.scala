@@ -69,9 +69,7 @@ private[javareadline] class ReadlineHistory extends History
         val history = new ArrayList[String]
 
         JavaReadline.getHistory(history)
-
-        val result = {for (line <- history) yield line}
-        result.toList
+        history.toList
     }
 
     /**

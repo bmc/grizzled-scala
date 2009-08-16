@@ -116,7 +116,6 @@ object sys
             temp += Tuple(name, System.getProperty(name))
         }
 
-        for (t <- temp)
-            yield t
+        temp
     }
 }

@@ -304,8 +304,7 @@ object util
                         glob1 _
                     else
                         glob0 _
-                 for (d <- dirs;
-                      name <- globber(d, basename))
+                 for (d <- dirs; name <- globber(d, basename))
                      yield d + fileSeparator + name
              }
         }

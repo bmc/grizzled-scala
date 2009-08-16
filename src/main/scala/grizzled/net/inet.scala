@@ -242,7 +242,7 @@ object IPAddress
 
             case n =>
                 val upper = if (n < 4) 4 else 16
-                address ++ (for (i <- n until upper) yield zeroByte)
+                address ++ (n until upper map (i => zeroByte))
         }
 
         new IPAddress(fullAddress toArray)

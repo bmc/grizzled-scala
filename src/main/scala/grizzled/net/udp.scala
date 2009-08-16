@@ -349,7 +349,7 @@ trait UDPDatagramSocket
         import scala.collection.mutable.ArrayBuffer
         
         val total = receive(buf)
-        val bytes = (for (i <- 0 until total) yield buf(i)).toArray
+        val bytes = (0 until total map (i => buf(i))).toArray
         val stream = new ByteArrayInputStream(bytes)
         val reader = new InputStreamReader(stream, Charset.forName(encoding))
         val chars = new StringWriter()
@@ -390,8 +390,7 @@ trait UDPDatagramSocket
      * @return the array of bytes, initialized to zeros
      */
     private def makeByteArray(length: Int): Array[Byte] =
-        {for (i <- 1 to length) yield 0.asInstanceOf[Byte]}.toArray
-
+        (1 to length map(_ => 0.toByte)).toArray
 }
 
 /**
