@@ -1,55 +1,40 @@
 /*
   ---------------------------------------------------------------------------
-  This software is released under a BSD-style license:
+  This software is released under a BSD license, adapted from
+  http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009 Brian M. Clapper. All rights reserved.
+  Copyright (c) 2009, Brian M. Clapper
+  All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  1.  Redistributions of source code must retain the above copyright notice,
-      this list of conditions and the following disclaimer.
+  * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
 
-  2.  The end-user documentation included with the redistribution, if any,
-      must include the following acknowlegement:
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
 
-        "This product includes software developed by Brian M. Clapper
-        (bmc@clapper.org, http://www.clapper.org/bmc/). That software is
-        copyright (c) 2009 Brian M. Clapper."
+  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+    names of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
 
-      Alternately, this acknowlegement may appear in the software itself,
-      if wherever such third-party acknowlegements normally appear.
-
-  3.  Neither the names "clapper.org", "The Grizzled Scala Library",
-      nor any of the names of the project contributors may be used to
-      endorse or promote products derived from this software without prior
-      written permission. For written permission, please contact
-      bmc@clapper.org.
-
-  4.  Products derived from this software may not be called "clapper.org
-      Java Utility Library", nor may "clapper.org" appear in their names
-      without prior written permission of Brian M. Clapper.
-
-  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
-  NO EVENT SHALL BRIAN M. CLAPPER BE LIABLE FOR ANY DIRECT, INDIRECT,
-  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   ---------------------------------------------------------------------------
 */
 
-/**
- * Classes, traits, and objects that provide readline semantics. The main
- * <tt>grizzled.readline</tt> package provides the general interface, along
- * with some factory methods. Underlying implementations exist for GNU
- * Readline, JLine and a generic implementation.
- */
 package grizzled.readline
 
 /**
@@ -174,6 +159,11 @@ trait History
     protected def append(line: String)
 }
 
+sealed abstract class CompletionToken;
+case class LineToken(val value: String) extends CompletionToken;
+case object Delim extends CompletionToken;
+case object Cursor extends CompletionToken;
+
 /**
  * Models a completer: An object that, given a line of input and a token
  * within that line, finds possible completions for the token.
@@ -181,14 +171,98 @@ trait History
 trait Completer
 {
     /**
-     * Get all completions for a token.
+     * Get all completions for a token. The <tt>context</tt> argument bears
+     * some explaining. It's designed to allow the completer to locate the
+     * cursor (and the nearest token) via Scala pattern matching, and it
+     * consists of a stream of abstract tokens:
      *
-     * @param token  the token being completed
-     * @param line   the current input line, which includes the token
+     * <ul>
+     *  <li><tt>LineToken</tt> is a token parsed from the line, in an object
+     *      that's similar to <tt>Some</tt>: <tt>LineToken.value</tt> returns
+     *      the token's string.
+     *  <li><tt>Cursor</tt> indicates the location of the cursor
+     *  <li><tt>Delim</tt> indicates the presence of a token delimiter
+     *      (typically white space)
+     * </ul>
+     *
+     * The input line is broken into these tokens, which can then be matched.
+     * For example, consider the following input lines, with the cursor where
+     * the caret is:
+     *
+     * <table border="0">
+     *   <tr valign="top">
+     *     <th>Input</th>
+     *     <th>Tokens</th>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>^</tt>
+     *     <td><tt>Cursor</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>cm^</tt>
+     *     <td><tt>LineToken("cm") Cursor</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>cmd ^</tt>
+     *     <td><tt>LineToken("cmd") Delim Cursor</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>cmd arg1^</tt>
+     *     <td><tt>LineToken("cmd") Delim Token("arg1") Cursor</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>cmd arg1^</tt>
+     *     <td><tt>LineToken("cmd") Delim Token("arg1") Delim Cursor</tt></td>
+     *   </tr>
+     *
+     *   <tr valign="top">
+     *     <td><tt>cmd^ arg1</tt>
+     *     <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
+     *   </tr>
+
+     *   <tr valign="top">
+     *     <td><tt>cm^d arg1</tt>
+     *     <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
+     *   </tr>
+     * </table>
+     *
+     * @param token    the token being completed
+     * @param context  the token context
+     * @param line     the current unparsed input line, which includes the token
      *
      * @return a list of completions, or Nil if there are no matches
      */
-    def complete(token: String, line: String): List[String]
+    def complete(token: String, 
+                 context: List[CompletionToken], 
+                 line: String): List[String]
+}
+
+private[readline] trait CompleterHelper
+{
+    /**
+     * Helper method that takes a set of tokens (of whatever type) and
+     * converts them into <tt>LineToken</tt> objects with <tt>Delim</tt>
+     * objects in between. To get the string to put in the <tt>LineToken</tt>
+     * objects, this method uses the <tt>toString()</tt> method on each passed
+     * token.
+     *
+     * @param tokens  the tokens to map
+     *
+     * @return a list of <tt>CompletionToken</tt> objects consisting of the
+     *         tokens, as strings, with intervening <tt>Delim</tt> characters
+     */
+    def mapWithDelims(tokens: List[Any]): List[CompletionToken] =
+    {
+        // Create (LineToken, Delim) pairs...
+        tokens.flatMap(t => List(LineToken(t.toString), Delim))
+        // ... and drop last Delim
+              .reverse.drop(1).reverse
+    }
 }
 
 /**
@@ -196,7 +270,9 @@ trait Completer
  */
 class NullCompleter extends Completer
 {
-    def complete(token: String, line: String): List[String] = Nil
+    def complete(token: String, 
+                 context: List[CompletionToken], 
+                 line: String): List[String] = Nil
 }
 
 /**
@@ -205,7 +281,9 @@ class NullCompleter extends Completer
  */
 class PathnameCompleter extends Completer
 {
-    def complete(token: String, line: String): List[String] =
+    def complete(token: String, 
+                 context: List[CompletionToken], 
+                 line: String): List[String] =
     {
         import grizzled.file.{util => FileUtil}
         import java.io.File
@@ -285,11 +363,15 @@ class ListCompleter(val completions: List[String],
      */
     def this(completions: List[String]) = this(completions, (s: String) => s)
 
-    def complete(token: String, line: String): List[String] =
+    def complete(token: String, 
+                 context: List[CompletionToken], 
+                 line: String): List[String] =
+    {
         if (token == "")
             completions
         else
             completions.filter((s) => convert(s).startsWith(convert(token)))
+    }
 }
 
 /**

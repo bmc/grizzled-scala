@@ -1,50 +1,43 @@
 /*
   ---------------------------------------------------------------------------
-  This software is released under a BSD-style license:
+  This software is released under a BSD license, adapted from
+  http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009 Brian M. Clapper. All rights reserved.
+  Copyright (c) 2009, Brian M. Clapper
+  All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  1.  Redistributions of source code must retain the above copyright notice,
-      this list of conditions and the following disclaimer.
+  * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
 
-  2.  The end-user documentation included with the redistribution, if any,
-      must include the following acknowlegement:
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
 
-        "This product includes software developed by Brian M. Clapper
-        (bmc@clapper.org, http://www.clapper.org/bmc/). That software is
-        copyright (c) 2009 Brian M. Clapper."
+  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+    names of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
 
-      Alternately, this acknowlegement may appear in the software itself,
-      if wherever such third-party acknowlegements normally appear.
-
-  3.  Neither the names "clapper.org", "The Grizzled Scala Library",
-      nor any of the names of the project contributors may be used to
-      endorse or promote products derived from this software without prior
-      written permission. For written permission, please contact
-      bmc@clapper.org.
-
-  4.  Products derived from this software may not be called "clapper.org
-      Java Utility Library", nor may "clapper.org" appear in their names
-      without prior written permission of Brian M. Clapper.
-
-  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
-  NO EVENT SHALL BRIAN M. CLAPPER BE LIABLE FOR ANY DIRECT, INDIRECT,
-  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   ---------------------------------------------------------------------------
 */
 
 package grizzled.string
+
+import grizzled.parsing.StringToken
 
 import scala.util.matching.Regex
 
@@ -109,7 +102,7 @@ final class GrizzledString(val string: String)
 
     /**
      * Tokenize the string on white space. An empty string and a string
-     * with only white space are treated the same. Note that Doing a
+     * with only white space are treated the same. Note that doing a
      * <tt>split("""\s+""").toList</tt> on an empty string ("") yields a
      * list of one item, an empty string. Doing the same operation on a
      * blank string (" ", for example) yields an empty list. This method
@@ -136,6 +129,72 @@ final class GrizzledString(val string: String)
         }
     }
 
+    /**
+     * Tokenize the string on a set of delimiter characters.
+     *
+     * @param delims the delimiter characters
+     *
+     * @return A list of tokens, or <tt>Nil</tt> if there aren't any.
+     */
+    def tokenize(delims: String): List[String] =
+    {
+        string.trim.split("[" + delims + "]").toList match
+        {
+            case Nil =>
+                Nil
+
+            case s :: Nil =>
+                List(s)
+
+            case s :: rest =>
+                s :: rest
+        }
+    }
+
+    /**
+     * Tokenize the string on a set of delimiter characters, returning
+     * <tt>Token</tt> objects. This method is useful when you need to keep
+     * track of the locations of the tokens within the original string.
+     *
+     * @param delims the delimiter characters
+     *
+     * @return A list of tokens, or <tt>Nil</tt> if there aren't any.
+     */
+    def toTokens(delims: String): List[StringToken] =
+    {
+        val delimRe = ("([^" + delims + "]+)").r
+
+        def find(substring: String, offset: Int): List[StringToken] =
+        {
+            delimRe.findFirstMatchIn(substring) match
+            {
+                case None => 
+                    Nil
+
+                case Some(m) =>
+                    val start = m.start
+                    val end = m.end
+                    val absStart = start + offset
+                    val token = StringToken(m.toString, start + offset)
+                    if (end >= (substring.length - 1))
+                        List(token)
+                    else
+                        token :: find(substring.substring(end + 1),
+                                                          end + 1 + offset)
+            }
+        }
+
+        find(this.string, 0)
+    }
+
+    /**
+     * Tokenize the string on white space, returning <tt>Token</tt>
+     * objects. This method is useful when you need to keep track of the
+     * locations of the tokens within the original string.
+     *
+     * @return A list of tokens, or <tt>Nil</tt> if there aren't any.
+     */
+    def toTokens: List[StringToken] = toTokens(""" \t""")
 
     /**
      * Translate any metacharacters (e.g,. \t, \n, \u2122) into their real

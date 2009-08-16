@@ -1,46 +1,37 @@
 /*
   ---------------------------------------------------------------------------
-  This software is released under a BSD-style license:
+  This software is released under a BSD license, adapted from
+  http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009 Brian M. Clapper. All rights reserved.
+  Copyright (c) 2009, Brian M. Clapper
+  All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  1.  Redistributions of source code must retain the above copyright notice,
-      this list of conditions and the following disclaimer.
+  * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
 
-  2.  The end-user documentation included with the redistribution, if any,
-      must include the following acknowlegement:
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
 
-        "This product includes software developed by Brian M. Clapper
-        (bmc@clapper.org, http://www.clapper.org/bmc/). That software is
-        copyright (c) 2009 Brian M. Clapper."
+  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+    names of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
 
-      Alternately, this acknowlegement may appear in the software itself,
-      if wherever such third-party acknowlegements normally appear.
-
-  3.  Neither the names "clapper.org", "The Grizzled Scala Library",
-      nor any of the names of the project contributors may be used to
-      endorse or promote products derived from this software without prior
-      written permission. For written permission, please contact
-      bmc@clapper.org.
-
-  4.  Products derived from this software may not be called "clapper.org
-      Java Utility Library", nor may "clapper.org" appear in their names
-      without prior written permission of Brian M. Clapper.
-
-  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
-  NO EVENT SHALL BRIAN M. CLAPPER BE LIABLE FOR ANY DIRECT, INDIRECT,
-  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-  NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   ---------------------------------------------------------------------------
 */
 
@@ -53,6 +44,8 @@ package grizzled.readline.javareadline
 import grizzled.readline._
 import grizzled.collection._
 import grizzled.collection.implicits._
+import grizzled.string.implicits._
+
 import org.gnu.readline.{Readline => JavaReadline,
                          ReadlineCompleter => JavaReadlineCompleter,
                          ReadlineLibrary => JavaReadlineLibrary}
@@ -182,25 +175,64 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
      */
     protected def subclassInit(): Unit = return
 
-    object rlCompleter extends JavaReadlineCompleter
+    object rlCompleter extends JavaReadlineCompleter with CompleterHelper
     {
         private var iterator: Iterator[String] = null
 
-        def completer(text: String, state: Int): String =
+        def completer(token: String, state: Int): String =
         {
+            // Note that libreadline-java doesn't supply a cursor, even
+            // though it's possible to get one from GNU Readline and
+            // Editline. Simulate one by assuming that the token being
+            // completed is the last match for the token in the line. This
+            // will fail under certain circumstances, but that's the best
+            // we can do.
+
+            def mapTokens(revTokens: List[String]): List[CompletionToken] =
+            {
+                val (a, b) = revTokens.break(_ == token)
+
+                (a, b) match
+                {
+                    case (Nil, Nil) =>
+                        List(Cursor)
+
+                    case (Nil, list) =>
+                        // Match on first token (which is really the last
+                        // token).
+                        val matchToken = list(0)
+                        val rest = list drop 1
+                        mapWithDelims(rest.reverse) ++ 
+                        List(LineToken(matchToken), Cursor)
+
+                    case (list, Nil) =>
+                        // No match anywhere. Cursor goes at end.
+                        mapWithDelims(list.reverse) ++ List(Cursor)
+
+                    case (list1, list2) =>
+                        // Cursor is between the elements. NOTE:
+                        // intersperse will result in a trailing Delim,
+                        // which we'll drop.
+                        val l2 = mapWithDelims(list2.reverse)
+                        val l1 = mapWithDelims(list1.reverse)
+                        l2 ++ List(Cursor, Delim) ++ l1
+                }
+            }
+
             if (state == 0)
             {
                 // First call to completer. Get list of matches.
 
-                val currentLine = JavaReadline.getLineBuffer
-                val matches = self.completer.complete(text, currentLine)
+                val line = JavaReadline.getLineBuffer
+                val tokens = mapTokens(line.tokenize.reverse)
+                val matches = self.completer.complete(token, tokens, line)
                 iterator = matches.elements
             }
 
             if (iterator.hasNext)
             {
                 val next = iterator.next
-                if (next.startsWith(text))
+                if (next.startsWith(token))
                     next
                 else
                     null
