@@ -1,8 +1,8 @@
 // Run this as a script.
 
 import grizzled.cmd._
-import grizzled.readline.ListCompleter
-import grizzled.GrizzledString._
+import grizzled.readline.{ListCompleter, CompletionToken}
+import grizzled.string.implicits._
 
 object Foo extends CommandHandler
 {
@@ -17,8 +17,10 @@ object Foo extends CommandHandler
         KeepGoing
     }
 
-    override def complete(token: String, line: String): List[String] =
-        completer.complete(token, line)
+    override def complete(token: String,
+                          allTokens: List[CompletionToken],
+                          line: String): List[String] =
+        completer.complete(token, allTokens, line)
 }
 
 class Prompt(val cmd: Test) extends CommandHandler

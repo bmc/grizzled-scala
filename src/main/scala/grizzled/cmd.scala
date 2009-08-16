@@ -155,14 +155,19 @@ trait CommandHandler
     def runCommand(command: String, unparsedArgs: String): CommandAction
 
     /**
-     * Perform completion on the command, returning the possible completions.
+     * Perform completion on the command, returning the possible
+     * completions. This method has the exact same interface and use as the
+     * <tt>complete()</tt> method in <tt>grizzled.readline.Completer</tt>.
+     * Please see that trait for full documentation.
      *
-     * @param token        the token within the command line to complete
-     * @param commandLine  the entire command line so far
-     *
-     * @return the list of completions for <tt>token</tt>, or <tt>Nil</tt>
+     * @param token    the token being completed
+     * @param context  the token context (i.e., list of parsed tokens,
+     *                 with cursor)
+     * @param line     the current unparsed input line, which includes the token
      */
-    def complete(token: String, commandLine: String): List[String] = Nil
+    def complete(token: String, 
+                 context: List[CompletionToken],
+                 commandLine: String): List[String] = Nil
 
     /**
      * Convenience method to retrieve the combined list of names and aliases.
@@ -700,13 +705,26 @@ abstract class CommandInterpreter(val appName: String,
     private object CommandCompleter extends Completer
     {
         def complete(token: String, 
-                     tokens: List[CompletionToken],
+                     allTokens: List[CompletionToken],
                      line: String): List[String] =
-            unsortedCompletions(token, line).sort(NameSorter)
+            unsortedCompletions(token, allTokens, line).sort(NameSorter)
 
         private def unsortedCompletions(token: String, 
+                                        allTokens: List[CompletionToken],
                                         line: String): List[String] =
         {
+            def completeForCommand(commandName: String,
+                                   token:       String,
+                                   line:        String): List[String] =
+            {
+                findCommand(commandName) match
+                {
+                    case None          => Nil
+                    case Some(handler) => handler.complete(token, allTokens, 
+                                                           line)
+                }
+            }
+
             if (line == "")
             {
                 // Tab completion at the beginning of the line. Return a
@@ -758,17 +776,6 @@ abstract class CommandInterpreter(val appName: String,
             }.toList
 
             completions.flatten[String]
-        }
-
-        private def completeForCommand(commandName: String,
-                                       token:       String,
-                                       line:        String): List[String] =
-        {
-            findCommand(commandName) match
-            {
-                case None          => Nil
-                case Some(handler) => handler.complete(token, line)
-            }
         }
     }
 
