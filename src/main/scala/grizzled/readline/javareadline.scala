@@ -235,14 +235,30 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
                 }
             }
 
+            // libreadline-java uses the goofy GNU Readline semantics,
+            // where multiple calls are made, with increasing values of the
+            // "state" variable, to retrieve each completion value.
+            // Returning null tells GNU Readline to stop asking for
+            // results. This approach is suitable when there are huge
+            // numbers of completions and minimal memory, but it's overly
+            // complicated. To map it into an approach that's more
+            // consistent with other readline libraries, we load all the
+            // completions at state 0 (the first call), load an iterator,
+            // and bleed that iterator on subsequent calls.
+
             if (state == 0)
             {
                 // First call to completer. Get list of matches.
 
                 val line = JavaReadline.getLineBuffer
-                val tokens = getTokens(line)
-                val matches = self.completer.complete(token, tokens, line)
-                iterator = matches.elements
+                if (line.trim.length == 0)
+                    iterator = Nil.elements
+                else
+                {
+                    val tokens = getTokens(line)
+                    val matches = self.completer.complete(token, tokens, line)
+                    iterator = matches.elements
+                }
             }
 
             if (iterator.hasNext)
