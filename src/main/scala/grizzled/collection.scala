@@ -82,9 +82,10 @@ class ListIterator[+T](val list: List[T]) extends Iterator[T]
  *
  * @param iterators  the iterators to wrap
  */
-class MultiIterator[T](iterators: Iterator[T]*) extends Iterator[T]
+class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
 {
-    private var iteratorList: List[Iterator[T]] = iterators.toList
+    private val iteratorList: List[Iterator[T]] = iterators.toList
+    private var cursor = 0
 
     /**
      * Determines whether the iterator is empty. A <tt>MultiIterator</tt>
@@ -94,15 +95,15 @@ class MultiIterator[T](iterators: Iterator[T]*) extends Iterator[T]
      */
     def hasNext: Boolean =
     {
-        if (iteratorList.length == 0)
+        if (cursor >= iteratorList.length)
             false
 
-        else if (iteratorList(0).hasNext)
+        else if (iteratorList(cursor).hasNext)
             true
 
         else
         {
-            iteratorList = iteratorList drop 1
+            cursor += 1
             hasNext
         }
     }
@@ -117,7 +118,7 @@ class MultiIterator[T](iterators: Iterator[T]*) extends Iterator[T]
         if (! hasNext)
             throw new java.util.NoSuchElementException
 
-        iteratorList(0).next
+        iteratorList(cursor).next
     }
 }
 
