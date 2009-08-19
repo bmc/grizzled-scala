@@ -122,8 +122,15 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
     }
 }
 
+/**
+ * Implicit conversions for this package.
+ */
 object implicits
 {
+    /**
+     * Convert a Java collection (from <tt>java.util</tt>) into a
+     * <tt>CollectionIterator</tt>.
+     */
     implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
         new CollectionIterator[T](c)
 }

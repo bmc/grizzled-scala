@@ -260,13 +260,7 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
             }
 
             if (iterator.hasNext)
-            {
-                val next = iterator.next
-                if (next.startsWith(token))
-                    next
-                else
-                    null
-            }
+                iterator.next
             else
                 null
         }
