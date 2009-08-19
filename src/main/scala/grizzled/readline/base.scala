@@ -231,18 +231,20 @@ trait Completer
      *   </tr>
      * </table>
      *
-     * @param token    the token being completed
-     * @param context  the token context
-     * @param line     the current unparsed input line, which includes the token
+     * @param token      the token being completed
+     * @param allTokens  all the tokens in the line, broken out, with the cursor
+     *                   inserted (i.e., the token context)
+     * @param line       the current unparsed input line, which includes the
+     *                   token
      *
      * @return a list of completions, or Nil if there are no matches
      */
     def complete(token: String, 
-                 context: List[CompletionToken], 
+                 allTokens: List[CompletionToken], 
                  line: String): List[String]
 }
 
-private[readline] trait CompleterHelper
+trait CompleterHelper
 {
     /**
      * Helper method that takes a set of tokens (of whatever type) and
@@ -262,6 +264,35 @@ private[readline] trait CompleterHelper
         tokens.flatMap(t => List(LineToken(t.toString), Delim))
         // ... and drop last Delim
               .reverse.drop(1).reverse
+    }
+
+    /**
+     * Get the token that precedes the cursor in a list of completion tokens.
+     *
+     * @param tokens  the completion tokens
+     *
+     * @return the token preceding the cursor, or None if the cursor is first.
+     */
+    def tokenBeforeCursor(tokens: List[CompletionToken]): 
+        Option[CompletionToken] =
+    {
+        tokens match
+        {
+            case Nil =>
+                None
+            case Cursor :: rest =>
+                None
+            case Delim :: Cursor :: rest =>
+                None
+            case LineToken(s) :: Cursor :: rest =>
+                Some(LineToken(s))
+            case LineToken(s) :: Delim :: Cursor :: rest =>
+                Some(Delim)
+            case LineToken(s) :: rest =>
+                tokenBeforeCursor(rest)
+            case Delim :: rest =>
+                tokenBeforeCursor(rest)
+        }
     }
 }
 
