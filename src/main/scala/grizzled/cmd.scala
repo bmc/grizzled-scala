@@ -704,18 +704,13 @@ abstract class CommandInterpreter(val appName: String,
      */
     private object CommandCompleter extends Completer
     {
+        import grizzled.readline.{Cursor, Delim, LineToken}
+
         def complete(token: String, 
                      allTokens: List[CompletionToken],
                      line: String): List[String] =
-            unsortedCompletions(token, allTokens, line).sort(NameSorter)
-
-        private def unsortedCompletions(token: String, 
-                                        allTokens: List[CompletionToken],
-                                        line: String): List[String] =
         {
-            def completeForCommand(commandName: String,
-                                   token:       String,
-                                   line:        String): List[String] =
+            def completeForCommand(commandName: String): List[String] =
             {
                 findCommand(commandName) match
                 {
@@ -725,43 +720,23 @@ abstract class CommandInterpreter(val appName: String,
                 }
             }
 
-            if (line == "")
+            val allNames = sortedCommandNames(true)
+            allTokens match
             {
-                // Tab completion at the beginning of the line. Return a
-                // list of all commands.
+                case Nil =>
+                    allNames
 
-                sortedCommandNames(true)
-            }
+                case Cursor :: Nil =>
+                    allNames
 
-            else
-            {
-                val (commandName, unparsedArgs) = splitCommandAndArgs(line)
+                case LineToken(partialCommand) :: Cursor :: Nil =>
+                    matchingCommandsFor(partialCommand)
 
-                if (unparsedArgs == "")
-                {
-                    if (token == "")
-                    {
-                        // Command is complete, but there are no arguments,
-                        // and the user pressed TAB after the completed
-                        // command. Treat this as completion for a given
-                        // command.
-                        completeForCommand(commandName, token, line)
-                    }
+                case LineToken(command) :: Delim :: rest =>
+                    completeForCommand(command)
 
-                    else
-                    {
-                        // Treat this as completion of a command name.
-
-                        matchingCommandsFor(token)
-                    }
-                }
-
-                else
-                {
-                    // Completion for a specific command. Find the handler
-                    // and let it do the work.
-                    completeForCommand(commandName, token, line)
-                }
+                case _ =>
+                    Nil
             }
         }
 
