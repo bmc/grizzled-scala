@@ -212,7 +212,11 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
                                 List(LineToken(matchToken), Delim, Cursor)
                             case Nil =>
                                 List(LineToken(matchToken), Cursor)
-                            case _ =>
+                            case _ if lastIsWhite =>
+                                mapWithDelims(rest.reverse) ++ 
+                                List(Delim, LineToken(matchToken), Delim, 
+                                     Cursor)
+                            case _  =>
                                 mapWithDelims(rest.reverse) ++ 
                                 List(Delim, LineToken(matchToken), Cursor)
                         }
