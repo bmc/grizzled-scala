@@ -129,4 +129,23 @@ class IOTest extends GrizzledFunSuite
                 os.toByteArray.toList
             }
     }
+
+    test("useThenClose")
+    {
+        import java.io.{FileOutputStream, File}
+        import java.nio.channels.Channels
+        import grizzled.io.util._
+
+        val temp = File.createTempFile("test", ".dat")
+        temp.deleteOnExit
+
+        val fs = new FileOutputStream(temp)
+        val chan = Channels.newChannel(fs)
+        assert(chan.isOpen)
+        expect(false, "useThenClose")
+        {
+            useThenClose(chan) {}
+            chan.isOpen
+        }
+    }
 }

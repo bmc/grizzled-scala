@@ -190,6 +190,50 @@ class MultiSource(sources: List[Source]) extends Source
 }
 
 /**
+ * Some utility methods.
+ */
+object util
+{
+    type Closeable = {def close(): Unit}
+
+    /**
+     * <p>Ensure that a closeable object is closed. Note that this function
+     * uses a Scala structural type, rather than a <tt>java.io.Closeable</tt>,
+     * because there are classes and interfaces (e.g.,
+     * <tt>java.sql.ResultSet</tt>) that have <tt>close()</tt> methods that do
+     * not extend or implement <tt>java.io.Closeable</tt>.</p>
+     *
+     * Sample use:
+     *
+     * <blockquote><pre>
+     * val in = new java.io.FileInputStream("/path/to/file")
+     * useThenClose(in)
+     * {
+     *     ...
+     * }
+     * </pre></blockquote>
+     *
+     * The closeable object is not passed into the block, because its type
+     * is useless to the block.
+     *
+     * @param closeable  the object that implements <tt>Closeable</tt>
+     * @param block      the code block to execute with the <tt>Closeable</tt>
+     */
+    def useThenClose(closeable: Closeable)(block: => Unit) =
+    {
+        try
+        {
+            block
+        }
+
+        finally
+        {
+            closeable.close
+        }
+    }
+}
+
+/**
  * Implicit conversions between <tt>RichInputStream</tt> and
  * <tt>InputStream</tt> objects.
  */
