@@ -173,7 +173,7 @@ private[readline] class JLineImpl(appName: String,
                 tokens match
                 {
                     case Nil => 
-                        Nil
+                        List(Cursor)
 
                     case token :: Nil if (before(token)) =>
                         List(Cursor, Delim, LineToken(token.string))
