@@ -218,8 +218,10 @@ object util
      *
      * @param closeable  the object that implements <tt>Closeable</tt>
      * @param block      the code block to execute with the <tt>Closeable</tt>
+     *
+     * @return whatever the block returns
      */
-    def useThenClose(closeable: Closeable)(block: => Unit) =
+    def useThenClose[T](closeable: Closeable)(block: => T) =
     {
         try
         {
