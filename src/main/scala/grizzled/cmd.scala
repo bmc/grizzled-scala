@@ -44,7 +44,14 @@ package grizzled.cmd
 
 import grizzled.readline.Readline.ReadlineType._
 import grizzled.readline.Readline.ReadlineType
-import grizzled.readline.{Readline, CompletionToken, Completer, History}
+import grizzled.readline.{Readline, 
+                          CompletionToken,
+                          Completer,
+                          ListCompleter,
+                          LineToken,
+                          Delim,
+                          Cursor,
+                          History}
 
 import grizzled.string.implicits._
 
@@ -695,6 +702,36 @@ abstract class CommandInterpreter(val appName: String,
                 helpCommand(CmdUtil.tokenize(unparsedArgs))
 
             KeepGoing
+        }
+
+        override def complete(token: String,
+                          allTokens: List[CompletionToken],
+                          line: String): List[String] =
+        {
+            // Get these now, not before-hand, since it's entirely possible
+            // for the caller to install new command handlers on the fly.
+            val commandNames = sortedCommandNames(false)
+            val commandNameCompleter = new ListCompleter(commandNames)
+
+            allTokens match
+            {
+                case Nil =>
+                    assert(false) // shouldn't happen
+                    Nil
+
+                case LineToken(help) :: Cursor :: rest =>
+                    Nil
+
+                case LineToken(help) :: Delim :: Cursor :: rest =>
+                    commandNameCompleter.complete(token, allTokens, line)
+
+                case LineToken(help) :: Delim :: LineToken(cmd) ::
+                     Cursor :: rest =>
+                    commandNameCompleter.complete(token, allTokens, line)
+
+                case _ =>
+                    Nil
+            }
         }
     }
 

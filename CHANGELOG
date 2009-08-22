@@ -1,5 +1,7 @@
 Version 0.2 (...)
 
+- In grizzled.cmd, the default handler for the "help" command now does
+  tab completion on the existing commands.
 - Changed the way grizzled.readline exposes completion context. Instead of
   exposing a cursor, it exposes a tokenized list, with a special Cursor token.
   This approach fits better with Scala's pattern matching.
