@@ -1,4 +1,4 @@
-Version 0.2 (...)
+Version 0.2 (31 August, 2009)
 
 - In grizzled.cmd, the default handler for the "help" command now does
   tab completion on the existing commands.

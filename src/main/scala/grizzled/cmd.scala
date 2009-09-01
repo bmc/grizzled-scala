@@ -345,17 +345,17 @@ abstract class CommandInterpreter(val appName: String,
     def helpHandler = HelpHandler
 
     /**
-     * <p>Push another reader on the stack. The reader on top of the stack
+     * <p>Push a reader on the reader stack. The reader on top of the stack
      * is used until it returns <tt>None</tt> (indicating EOF). Then, it is
      * removed from the stack, and the next reader is used. When the only
      * reader remaining on the stack returns <tt>None</tt>, the command
      * interpreter signals an EOF condition to the subclass (by calling
      * <tt>handleEOF()</tt>).</p>
      *
-     * <p>The reader is a simple function that takes a prompt string (which it
-     * can choose to ignore) and returns a line of input or <tt>None</tt>
-     * for EOF. The line of input, if returned, should not have a trailing
-     * newline.</p>
+     * <p>The reader is a simple function that takes a prompt string (which
+     * it can choose to ignore) and returns a line of input
+     * (<tt>Some(input)</tt>) or <tt>None</tt> for EOF. The line of input,
+     * if returned, should not have a trailing newline.</p>
      *
      * @param reader  the reader function
      */
