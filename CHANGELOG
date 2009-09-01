@@ -1,3 +1,6 @@
+Version 0.3 (...)
+
+---------------------------------------------------------------------------
 Version 0.2 (31 August, 2009)
 
 - In grizzled.cmd, the default handler for the "help" command now does
@@ -9,6 +12,7 @@ Version 0.2 (31 August, 2009)
 - Miscellaneous internal changes where "yield" is used.
 - Changed license to New BSD License.
 
+---------------------------------------------------------------------------
 Version 0.1 (1 August, 2009)
 
 - First release.

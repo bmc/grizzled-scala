@@ -189,47 +189,51 @@ trait Completer
      * For example, consider the following input lines, with the cursor where
      * the caret is:
      *
-     * <table border="0">
-     *   <tr valign="top">
+     * <blockquote>
+     * <table border="0" cellpadding="5">
+     *   <tr valign="top" align="left">
      *     <th>Input</th>
      *     <th>Tokens</th>
      *   </tr>
      *
-     *   <tr valign="top">
+     *   <tr><td colspan="2"><hr></td></tr>
+     *
+     *   <tr valign="top" align="left">
      *     <td><tt>^</tt>
      *     <td><tt>Cursor</tt></td>
      *   </tr>
      *
-     *   <tr valign="top">
+     *   <tr valign="top" align="left">
      *     <td><tt>cm^</tt>
      *     <td><tt>LineToken("cm") Cursor</tt></td>
      *   </tr>
      *
-     *   <tr valign="top">
+     *   <tr valign="top" align="left">
      *     <td><tt>cmd ^</tt>
      *     <td><tt>LineToken("cmd") Delim Cursor</tt></td>
      *   </tr>
      *
-     *   <tr valign="top">
+     *   <tr valign="top" align="left">
      *     <td><tt>cmd arg1^</tt>
      *     <td><tt>LineToken("cmd") Delim Token("arg1") Cursor</tt></td>
      *   </tr>
      *
-     *   <tr valign="top">
+     *   <tr valign="top" align="left">
      *     <td><tt>cmd arg1^</tt>
      *     <td><tt>LineToken("cmd") Delim Token("arg1") Delim Cursor</tt></td>
      *   </tr>
      *
-     *   <tr valign="top">
+     *   <tr valign="top" align="left">
      *     <td><tt>cmd^ arg1</tt>
      *     <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
      *   </tr>
-
-     *   <tr valign="top">
+     *
+     *   <tr valign="top" align="left">
      *     <td><tt>cm^d arg1</tt>
      *     <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
      *   </tr>
      * </table>
+     * </blockquote>
      *
      * @param token      the token being completed
      * @param allTokens  all the tokens in the line, broken out, with the cursor
