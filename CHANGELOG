@@ -1,4 +1,6 @@
 Version 0.3 (...)
+- Fixed tail call optimization problem in grizzled.io.RichOutputStream.
+  Thanks to Claudio Bley (cbley /at/ av-test.de)
 
 ---------------------------------------------------------------------------
 Version 0.2 (31 August, 2009)

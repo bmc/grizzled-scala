@@ -148,13 +148,18 @@ class RichInputStream(val inputStream: InputStream) extends PartialReader[Byte]
      */
     def copyTo(out: OutputStream): Unit =
     {
-        val c: Int = inputStream.read()
-        if (c != -1)
+        def recCopyTo()
         {
-            out.write(c)
-            // Tail recursion means never having to use a var.
-            copyTo(out)
+            val c: Int = inputStream.read()
+            if (c != -1)
+            {
+                out.write(c)
+                // Tail recursion means never having to use a var.
+                recCopyTo()
+            }
         }
+
+        recCopyTo()
     }
 }
 

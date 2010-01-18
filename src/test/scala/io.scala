@@ -130,6 +130,46 @@ class IOTest extends GrizzledFunSuite
             }
     }
 
+    test("RichInputStream.copyTo with big input")
+    {
+        // will fail with java.lang.StackOverflowError if copyTo was
+        // not tail-call optimized
+
+        import java.io.{InputStream, OutputStream}
+        import java.util.Random
+
+        val rnd = new Random()
+        val inp = new InputStream
+        {
+            var countDown = 5000
+
+            override def read(): Int =
+            {
+                if (countDown > 0)
+                {
+                    countDown -= 1
+                    rnd.nextInt(256)
+                }
+                else
+                    -1
+            }
+        }
+        val nul = new OutputStream
+        {
+            override def write(b: Int) = {}
+        }
+
+        try
+        {
+            inp.copyTo(nul)
+        }
+        catch
+        {
+            case e: StackOverflowError =>
+                fail("StackOverflowError - copyTo not tail-call optimized?")
+        }
+    }
+
     test("useThenClose")
     {
         import java.io.{FileOutputStream, File}
