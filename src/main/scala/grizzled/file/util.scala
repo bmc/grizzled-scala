@@ -52,7 +52,7 @@ class FileDoesNotExistException(message: String) extends Exception
  */
 object util
 {
-    import string._ // Grizzled string functions
+    import grizzled.string._ // Grizzled string functions
 
     val fileSeparator = File.separator
     val fileSeparatorChar = fileSeparator(0)
@@ -582,13 +582,13 @@ object util
             }
 
             if (topdown)
-                result += Tuple(top, dirs.toList, nondirs.toList)
+                result += ((top, dirs.toList, nondirs.toList))
             
             for (name <- dirs)
                 result ++= walk(top + fileSeparator + name, topdown)
         
             if (! topdown)
-                result += Tuple(top, dirs.toList, nondirs.toList)
+                result += ((top, dirs.toList, nondirs.toList))
         }
 
         result.toList

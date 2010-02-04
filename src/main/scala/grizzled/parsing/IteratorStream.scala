@@ -69,7 +69,7 @@ class IteratorStream[T](private val iterator: Iterator[T])
      *
      * @param iterable the <tt>Iterable</tt>
      */
-    def this(iterable: Iterable[T]) = this(iterable.elements)
+    def this(iterable: Iterable[T]) = this(iterable.iterator)
 
     /**
      * Get the next item from the stream, advancing the cursor.
@@ -134,7 +134,7 @@ trait Pushback[T] extends IteratorStream[T]
      *
      * @param item  the item
      */
-    def pushback(item: T) = pushbackStack += item
+    def pushback(item: T) = pushbackStack push item
 
     /**
      * Push a list of items back onto the stream. The items are pushed
@@ -153,5 +153,5 @@ trait Pushback[T] extends IteratorStream[T]
      *
      * @param items  the items to push back.
      */
-    def pushback(items: List[T]) = pushbackStack ++= items.reverse
+    def pushback(items: List[T]) = pushbackStack.pushAll(items.reverse)
 }

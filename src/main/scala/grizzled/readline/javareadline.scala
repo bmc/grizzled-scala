@@ -192,7 +192,7 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
                 // match for the token (which, because the list is reversed,
                 // i really the last occurrence of such a  match).
                 val revTokens = line.tokenize.reverse
-                val (a, b) = revTokens.break(_.startsWith(token))
+                val (a, b) = revTokens.span(x => !x.startsWith(token))
                 val lastIsWhite = Character.isWhitespace(line.last)
 
                 (a, b) match
@@ -254,12 +254,12 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
 
                 val line = JavaReadline.getLineBuffer
                 if (line.trim.length == 0)
-                    iterator = Nil.elements
+                    iterator = Nil.iterator
                 else
                 {
                     val tokens = getTokens(line)
                     val matches = self.completer.complete(token, tokens, line)
-                    iterator = matches.elements
+                    iterator = matches.iterator
                 }
             }
 

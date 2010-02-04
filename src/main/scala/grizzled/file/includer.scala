@@ -40,7 +40,7 @@ package grizzled.file
 import scala.io.Source
 import scala.util.matching.Regex
 
-import java.net.URI
+import java.net.{URI, URISyntaxException}
 
 /**
  * Process <i>include</i> directives in files, returning an iterator over
@@ -131,7 +131,7 @@ class Includer(val source: Source,
      */
     private class IncludeSource(val source: Source)
     {
-        val iterator = source.getLines
+        val iterator = source.getLines()
     }
 
     /**
@@ -211,7 +211,7 @@ class Includer(val source: Source,
                                      curURI.getHost,
                                      path,
                                      curURI.getFragment)
-                sourceStack.push(new IncludeSource(Source.fromFile(newURI)))
+                sourceStack.push(new IncludeSource(Source.fromURI(newURI)))
                 next
         }
     }
@@ -306,7 +306,7 @@ object Includer
             }
         }
             
-        Includer(Source.fromFile(getURI), includeRegex, maxNesting)
+        Includer(Source.fromURI(getURI), includeRegex, maxNesting)
     }
 
     /**
@@ -354,7 +354,16 @@ object Includer
     {
         import java.io.{File, FileWriter}
 
-        val includer = Includer(Source.fromFile(pathOrURI))
+        val includer =
+            try
+            {
+                Includer(Source.fromURI(new URI(pathOrURI)))
+            }
+            catch
+            {
+                case _: URISyntaxException =>
+                    Includer(Source.fromFile(new File(pathOrURI)))
+            }
         val fileOut = File.createTempFile(tempPrefix, tempSuffix)
         fileOut.deleteOnExit
         val out = new FileWriter(fileOut)

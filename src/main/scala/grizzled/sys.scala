@@ -113,7 +113,7 @@ object sys
         while (e.hasMoreElements)
         {
             val name = e.nextElement.toString
-            temp += Tuple(name, System.getProperty(name))
+            temp += ((name, System.getProperty(name)))
         }
 
         temp

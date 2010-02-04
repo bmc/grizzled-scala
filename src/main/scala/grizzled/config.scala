@@ -362,7 +362,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      *
      * @return the section names, in a iterator
      */
-    def sectionNames: Iterator[String] = sections.keys
+    def sectionNames: Iterator[String] = sections.keysIterator
 
     /**
      * Add a section to the configuration.
@@ -517,7 +517,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
         if (! hasSection(sectionName))
             throw new NoSuchSectionException(sectionName)
 
-        sections(sectionName).keys
+        sections(sectionName).keysIterator
     }
 
     /**

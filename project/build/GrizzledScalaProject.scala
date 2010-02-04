@@ -70,5 +70,10 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
         "http://scala-tools.org/repo-releases"
 
     val jline = "jline" % "jline" % "0.9.94"
-    val scalatest = "org.scala-tools.testing" % "scalatest" % "0.9.5"
+
+    val newReleaseToolsRepository = "Scala Tools Repository" at
+        "http://nexus.scala-tools.org/content/repositories/snapshots/"
+    val scalatest = "org.scalatest" % "scalatest" %
+        "1.0.1-for-scala-2.8.0.Beta1-with-test-interfaces-0.3-SNAPSHOT"
+
 }

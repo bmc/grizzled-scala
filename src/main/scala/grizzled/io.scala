@@ -172,7 +172,7 @@ class RichInputStream(val inputStream: InputStream) extends PartialReader[Byte]
  */
 class MultiSource(sources: List[Source]) extends Source
 {
-    import collection.MultiIterator
+    import grizzled.collection.MultiIterator
 
     private val sourceList = sources.toList
 
@@ -191,7 +191,7 @@ class MultiSource(sources: List[Source]) extends Source
     /**
      * Reset, returning a new source.
      */
-    def reset: Source = new MultiSource(sourceList)
+    override def reset: Source = new MultiSource(sourceList)
 }
 
 /**

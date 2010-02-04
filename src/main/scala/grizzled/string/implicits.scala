@@ -37,7 +37,8 @@
 
 package grizzled.string
 
-import scala.runtime.{RichChar, RichString}
+import scala.runtime.RichChar
+import scala.collection.immutable.{StringOps, StringLike}
 
 /**
  * Miscellaneous implicit string conversions.
@@ -107,15 +108,15 @@ object implicits
     implicit def GrizzledString_JavaString(gs: GrizzledString) = gs.string
 
     /**
-     * Implicit function to convert from a Scala <tt>RichString</tt> to a
+     * Implicit function to convert from a Scala string object to a
      * <tt>GrizzledString</tt>.
      *
-     * @param s  a Scala <tt>RichString</tt>
+     * @param s  a Scala string
      *
      * @return the <tt>GrizzledString</tt>
      */
-    implicit def RichString_GrizzledString(rs: RichString) =
-        new GrizzledString(rs.self)
+    implicit def ScalaString_GrizzledString(rs: StringLike[String]) =
+        new GrizzledString(rs.toString)
 
     /**
      * Implicit function to convert from <tt>GrizzledString</tt> to a
@@ -123,10 +124,10 @@ object implicits
      *
      * @param s  the <tt>GrizzledString</tt>
      *
-     * @return the Scala <tt>RichString</tt>
+     * @return the Scala string
      */
-    implicit def GrizzledString_RichString(gs: GrizzledString) =
-        new RichString(gs.string)
+    implicit def GrizzledString_ScalaString(gs: GrizzledString) =
+        new StringOps(gs.string)
 
     /**
      * Implicit function to convert from a character to a <tt>GrizzledChar</tt>.

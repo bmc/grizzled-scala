@@ -955,7 +955,7 @@ abstract class CommandInterpreter(val appName: String,
             else
                 namesOnly
 
-        allNames.sort(NameSorter)
+        allNames.sortWith(NameSorter)
     }
 }
 

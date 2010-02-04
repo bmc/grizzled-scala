@@ -121,7 +121,7 @@ class GrizzledStringTest extends GrizzledFunSuite
             "\\\\t"                        -> "\\t"
         )
 
-        for((input, expected) <- data)
+        for ((input, expected) <- data)
         {
             expect(expected, "\"" + input + "\" -> " + expected.toString)
             {

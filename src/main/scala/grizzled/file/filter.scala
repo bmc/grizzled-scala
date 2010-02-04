@@ -84,7 +84,7 @@ class BackslashContinuedLineIterator(val source: Iterator[String])
      *
      * @param source source from which to read lines
      */
-    def this(source: Source) = this(source.getLines)
+    def this(source: Source) = this(source.getLines())
 
     /**
      * Determine whether there's any input remaining.
