@@ -1,6 +1,7 @@
 Version 0.3 (...)
 
 - Converted to Scala 2.8.0
+- Now must be compiled with xsbt (sbt version 0.6.x)
 - Fixed tail call optimization problem in grizzled.io.RichOutputStream.
   Thanks to Claudio Bley (cbley /at/ av-test.de)
 
