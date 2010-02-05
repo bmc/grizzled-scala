@@ -37,6 +37,8 @@
 
 package grizzled.net
 
+import scala.annotation.tailrec
+
 import java.net.{DatagramSocket => JDKDatagramSocket}
 import java.net.{DatagramPacket => JDKDatagramPacket}
 import java.net.InetAddress
@@ -354,7 +356,7 @@ trait UDPDatagramSocket
         val reader = new InputStreamReader(stream, Charset.forName(encoding))
         val chars = new StringWriter()
 
-        def readNextChar(): Unit =
+        @tailrec def readNextChar(): Unit =
         {
             val c: Int = reader.read()
             if (c != -1)

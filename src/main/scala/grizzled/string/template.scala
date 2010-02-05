@@ -38,6 +38,7 @@
 package grizzled.string.template
 
 import scala.util.matching.Regex
+import scala.annotation.tailrec
 
 /**
  * Base class for all <tt>StringTemplate</tt> exceptions.
@@ -96,7 +97,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
      */
     def substitute(s: String): String =
     {
-        def doSub(s2: String): String =
+        @tailrec def doSub(s2: String): String =
         {
             findVariableReference(s2) match
             {

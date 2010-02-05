@@ -98,64 +98,12 @@ import grizzled.string.implicits._
  * @param prefix      the prefix to use, or "" for none. Cannot be null.
  * @param indentChar  the indentation character to use.
  */
-class WordWrapper(val wrapWidth:    Int,
-                  val indentation:  Int,
-                  val prefix:       String,
-                  val indentChar:   Char)
+class WordWrapper(val wrapWidth:    Int = 79,
+                  val indentation:  Int = 0,
+                  val prefix:       String = "",
+                  val indentChar:   Char = ' ')
 {
     require(prefix != null)
-
-    /**
-     * Alternate constructor that allows all parameters to default as follows:
-     *
-     * <ul>
-     *  <li> <tt>wrapWidth=79</tt>
-     *  <li> <tt>indentation=0</tt>
-     *  <li> <tt>prefix=""</tt>
-     *  <li> <tt>indentChar=' '</tt>
-     * </ul>
-     */ 
-    def this() = this(79, 0, "", ' ')
-
-    /**
-     * Alternate constructor that specifies only a width, defaulting all
-     * other constructor parameters as follows:
-     *
-     * <ul>
-     *  <li> <tt>indentation=0</tt>
-     *  <li> <tt>prefix=""</tt>
-     *  <li> <tt>indentChar=' '</tt>
-     * </ul>
-     *
-     * @param wrapWidth   the number of characters after which to wrap each line
-     */ 
-    def this(wrapWidth: Int) = this(wrapWidth, 0, "", ' ')
-
-    /**
-     * Alternate constructor that specifies only a width and an indentation
-     * level, defaulting all other constructor parameters as follows:
-     *
-     * <ul>
-     *  <li> <tt>prefix=""</tt>
-     *  <li> <tt>indentChar=' '</tt>
-     * </ul>
-     *
-     * @param wrapWidth   the number of characters after which to wrap each line
-     * @param indentation how many characters to indent
-     */ 
-    def this(wrapWidth: Int, indentation: Int) = 
-        this(wrapWidth, indentation, "", ' ')
-
-    /**
-     * Alternate constructor that specifies a width, an indentation level and
-     * a prefix, defaulting the <tt>indentChar</tt> parameter to a blank.
-     *
-     * @param wrapWidth   the number of characters after which to wrap each line
-     * @param indentation how many characters to indent
-     * @param prefix      the prefix to use, or "" for none. Cannot be null.
-     */ 
-    def this(wrapWidth: Int, indentation: Int, prefix: String) = 
-        this(wrapWidth, indentation, prefix, ' ')
 
     private val prefixLength = prefix.length
 
@@ -246,43 +194,9 @@ object WordWrapper
      * @param prefix      the prefix to use, or "" for none. Cannot be null.
      * @param indentChar  the indentation character to use.
      */
-    def apply(wrapWidth:    Int,
-              indentation:  Int,
-              prefix:       String,
-              indentChar:   Char) =
+    def apply(wrapWidth:    Int = 79,
+              indentation:  Int = 0,
+              prefix:       String = "",
+              indentChar:   Char = ' ') =
         new WordWrapper(wrapWidth, indentation, prefix, indentChar)
-
-    /**
-     * Create a <tt>WordWrapper</tt> with all the default values.
-     */ 
-    def apply() = new WordWrapper
-
-    /**
-     * Alternate constructor that specifies only a width, defaulting all
-     * other constructor parameters.
-     *
-     * @param wrapWidth   the number of characters after which to wrap each line
-     */ 
-    def apply(wrapWidth: Int) = new WordWrapper(wrapWidth)
-
-    /**
-     * Alternate constructor that specifies only a width and an indentation
-     * level, defaulting all other constructor parameters.
-     *
-     * @param wrapWidth   the number of characters after which to wrap each line
-     * @param indentation how many characters to indent
-     */ 
-    def apply(wrapWidth: Int, indentation: Int) = 
-        new WordWrapper(wrapWidth, indentation)
-
-    /**
-     * Alternate constructor that specifies a width, an indentation level and
-     * a prefix, defaulting the <tt>indentChar</tt> parameter to a blank.
-     *
-     * @param wrapWidth   the number of characters after which to wrap each line
-     * @param indentation how many characters to indent
-     * @param prefix      the prefix to use, or "" for none. Cannot be null.
-     */ 
-    def apply(wrapWidth: Int, indentation: Int, prefix: String) = 
-        new WordWrapper(wrapWidth, indentation, prefix)
 }

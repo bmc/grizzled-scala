@@ -37,6 +37,8 @@
 
 package grizzled.string
 
+import scala.annotation.tailrec
+
 /**
  * Useful string-related utility functions.
  */

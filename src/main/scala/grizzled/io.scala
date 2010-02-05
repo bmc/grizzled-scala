@@ -45,6 +45,7 @@
 package grizzled.io
 
 import scala.io.Source
+import scala.annotation.tailrec
 
 import java.io.{InputStream,
                 OutputStream,
@@ -69,25 +70,25 @@ trait PartialReader[T]
      */
     def readSome(max: Int): List[T] =
     {
-        def doRead(cur: Int): List[T] =
+        @tailrec def doRead(partialList: List[T], cur: Int): List[T] =
         {
             if (cur >= max)
-                Nil
+                partialList
 
             else
             {
                 val b = reader.read()
                 if (b == -1)
-                    Nil
+                    partialList
                 else
-                    convert(b) :: doRead(cur + 1)
+                    doRead(partialList :+ convert(b), cur + 1)
             }
         }
 
         if (reader == null)
             Nil
         else
-            doRead(0)
+            doRead(List.empty[T], 0)
     }
 }
 
@@ -113,13 +114,18 @@ class RichReader(val reader: Reader) extends PartialReader[Char]
      */
     def copyTo(out: Writer): Unit =
     {
-        val c: Int = reader.read()
-        if (c != -1)
+        @tailrec def doCopy: Unit =
         {
-            out.write(c)
-            // Tail recursion means never having to use a var.
-            copyTo(out)
+            val c: Int = reader.read()
+            if (c != -1)
+            {
+                out.write(c)
+                // Tail recursion means never having to use a var.
+                doCopy
+            }
         }
+
+        doCopy
     }
 }
 
@@ -148,18 +154,18 @@ class RichInputStream(val inputStream: InputStream) extends PartialReader[Byte]
      */
     def copyTo(out: OutputStream): Unit =
     {
-        def recCopyTo()
+        @tailrec def recCopyTo: Unit =
         {
             val c: Int = inputStream.read()
             if (c != -1)
             {
                 out.write(c)
                 // Tail recursion means never having to use a var.
-                recCopyTo()
+                recCopyTo
             }
         }
 
-        recCopyTo()
+        recCopyTo
     }
 }
 
