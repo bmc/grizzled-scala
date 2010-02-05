@@ -610,11 +610,12 @@ object util
      * </table>
      *
      * @param path    the path
-     * @param fileSep the file separator to use
+     * @param fileSep the file separator to use. Defaults to the value of
+     *                the "file.separator" property.
      *
      * @return the component pieces.
      */
-    def splitPath(path: String, fileSep: String): List[String] =
+    def splitPath(path: String, fileSep: String = fileSeparator): List[String] =
     {
         // Split with the path separator character, rather than the path
         // separator string. Using the string causes Scala to interpret it
@@ -667,17 +668,6 @@ object util
     }
 
     /**
-     * Split a path into its constituent components, using the file separator
-     * of the currently running system. See the other version of
-     * <tt>splitPath()</tt> for complete documentation.
-     *
-     * @param path    the path
-     *
-     * @return the component pieces.
-     */
-    def splitPath(path: String): List[String] = splitPath(path, fileSeparator)
-
-    /**
      * Join components of a path together.
      *
      * @param fileSep the file separator to use
@@ -715,7 +705,7 @@ object util
      */
     def copy(files: Iterable[String],
              targetDir: String,
-             createTarget: Boolean): Unit =
+             createTarget: Boolean = true): Unit =
     {
         val target = new File(targetDir)
 
@@ -736,21 +726,6 @@ object util
         for (file <- files)
             copyFile(file, targetDir + fileSeparator + basename(file))
     }
-
-    /**
-     * Copy multiple files to a target directory. Also see the version of this
-     * method that takes only one file. If the target directory does not exist,
-     * it is created.
-     *
-     * @param files        An <tt>Iterable</tt> of file names to be copied
-     * @param targetDir    Path name to target directory
-     *
-     * @throws FileDoesNotExistException a source file or the target directory
-     *                                   doesn't exist
-     * @throws IOException cannot create target directory
-     */
-    def copy(files: Iterable[String], targetDir: String): Unit =
-        copy(files, targetDir, true)
 
     /**
      * Copy a file to a directory.
@@ -896,7 +871,7 @@ object util
      *
      * @throws IOException on error
      */
-    def touch(files: Iterable[String], time: Long): Unit =
+    def touchMany(files: Iterable[String], time: Long = -1): Unit =
     {
         val useTime = if (time < 0) System.currentTimeMillis else time
         for (name <- files)
@@ -917,27 +892,6 @@ object util
      * Similar to the Unix <i>touch</i> command, this function:
      *
      * <ul>
-     *   <li>updates the access and modification times for any existing files
-     *       in a list of files
-     *   <li>creates any non-existent files in the list of files
-     * </ul>
-     *
-     * <p>If any file in the list is a directory, this method will throw an
-     * exception.</p>
-     *
-     * <p>This version of <tt>touch()</tt> always set the last-modified time to
-     * the current time.</p>
-     *
-     * @param files  Iterable of files to touch
-     *
-     * @throws IOException on error
-     */
-    def touch(files: Iterable[String]): Unit = touch(files, -1)
-
-    /**
-     * Similar to the Unix <i>touch</i> command, this function:
-     *
-     * <ul>
      *   <li>updates the access and modification times for a file
      *   <li>creates the file if it does not exist
      * </ul>
@@ -950,26 +904,8 @@ object util
      *
      * @throws IOException on error
      */
-    def touch(path: String, time: Long): Unit = touch(List[String](path), time)
-
-    /**
-     * Similar to the Unix <i>touch</i> command, this function:
-     *
-     * <ul>
-     *   <li>updates the access and modification times for a file
-     *   <li>creates the file if it does not exist
-     * </ul>
-     *
-     * If the file is a directory, this method will throw an exception.
-     *
-     * This version of <tt>touch()</tt> always set the last-modified time to
-     * the current time.
-     *
-     * @param path  The file to touch
-     *
-     * @throws IOException on error
-     */
-    def touch(path: String): Unit = touch(path, -1)
+    def touch(path: String, time: Long = -1): Unit =
+        touchMany(List[String](path), time)
 
     private lazy val DrivePathPattern = "^([A-Za-z]?:)?(.*)$".r
     /**

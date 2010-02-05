@@ -174,26 +174,7 @@ final class GrizzledFile(val file: File)
      *
      * @throws IOException on error
      */
-    def touch(time: Long): Unit = util.touch(List(file.getPath), time)
-
-    /**
-     * Similar to the Unix <i>touch</i> command, this function:
-     *
-     * <ul>
-     *   <li>updates the access and modification time for the path
-     *       represented by this object
-     *   <li>creates the path (as a file), if it does not exist
-     * </ul>
-     *
-     * If the file corresponds to an existing directory, this method
-     * will throw an exception.
-     *
-     * @param time   Set the last-modified time to this time, or to the current
-     *               time if this parameter is negative.
-     *
-     * @throws IOException on error
-     */
-    def touch(): Unit = util.touch(List(file.getPath))
+    def touch(time: Long = -1): Unit = util.touch(file.getPath, time)
 
     /**
      * Directory tree generator, adapted from Python's <tt>os.walk()</tt>
@@ -224,12 +205,11 @@ final class GrizzledFile(val file: File)
      *
      * <p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p>
      *
-     * @param top     name of starting directory
      * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>
      *                otherwise.
      *
      * @return List of triplets, as described above.
      */
-    def walk(topdown: Boolean): List[(String, List[String], List[String])] =
+    def walk(topdown: Boolean = true): List[(String, List[String], List[String])] =
         util.walk(file.getPath, topdown)
 }

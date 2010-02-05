@@ -48,7 +48,6 @@ import java.util.{Collection, Iterator => JIterator}
  */
 class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
 {
-
     /**
      * Alternate constructor that takes a collection.
      *
