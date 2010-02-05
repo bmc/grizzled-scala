@@ -38,6 +38,7 @@
 package grizzled.file
 
 import scala.io.Source
+import scala.annotation.tailrec
 import scala.util.matching.Regex
 
 import java.net.{URI, URISyntaxException}
@@ -150,7 +151,7 @@ class Includer(val source: Source,
      */
     def hasNext: Boolean =
     {
-        def somethingHasNext(stack: List[IncludeSource]): Boolean =
+        @tailrec def somethingHasNext(stack: List[IncludeSource]): Boolean =
         {
             if (stack.length == 0)
                 false
@@ -173,7 +174,7 @@ class Includer(val source: Source,
      */
     def next: String =
     {
-        def nextFromStack: String =
+        @tailrec def nextFromStack: String =
         {
             if (sourceStack.length == 0)
                 throw new IllegalStateException("No more data")
@@ -189,31 +190,36 @@ class Includer(val source: Source,
 
         import grizzled.file.{util => futil}
 
-        val line = nextFromStack
-        includeRegex.findFirstMatchIn(line) match
+        @tailrec def doNext: String =
         {
-            case None =>
-                if (line.endsWith("\n"))
-                    line.substring(0, line.length - 1)
-                else
-                    line
+            val line = nextFromStack
+            includeRegex.findFirstMatchIn(line) match
+            {
+                case None =>
+                    if (line.endsWith("\n"))
+                        line.substring(0, line.length - 1)
+                    else
+                        line
 
-            case Some(incMatch) =>
-                if (sourceStack.length >= maxNesting)
-                    throw new IllegalStateException("Max nesting level (" +
-                                                    maxNesting + ") " +
-                                                    "exceeded.")
+                case Some(incMatch) =>
+                    if (sourceStack.length >= maxNesting)
+                        throw new IllegalStateException("Max nesting level (" +
+                                                        maxNesting + ") " +
+                                                        "exceeded.")
 
-                val curURI =  new URI(sourceStack.top.source.descr)
-                val path = futil.joinPath(futil.dirname(curURI.getPath),
-                                          incMatch.group(1))
-                val newURI = new URI(curURI.getScheme,
-                                     curURI.getHost,
-                                     path,
-                                     curURI.getFragment)
-                sourceStack.push(new IncludeSource(Source.fromURI(newURI)))
-                next
+                    val curURI =  new URI(sourceStack.top.source.descr)
+                    val path = futil.joinPath(futil.dirname(curURI.getPath),
+                                              incMatch.group(1))
+                    val newURI = new URI(curURI.getScheme,
+                                         curURI.getHost,
+                                         path,
+                                         curURI.getFragment)
+                    sourceStack.push(new IncludeSource(Source.fromURI(newURI)))
+                    doNext
+            }
         }
+
+        doNext
     }
 }
 
@@ -305,7 +311,7 @@ object Includer
                 }
             }
         }
-            
+
         Includer(Source.fromURI(getURI), includeRegex, maxNesting)
     }
 
