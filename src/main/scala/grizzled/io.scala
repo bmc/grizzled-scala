@@ -47,10 +47,7 @@ package grizzled.io
 import scala.io.Source
 import scala.annotation.tailrec
 
-import java.io.{InputStream,
-                OutputStream,
-                Reader,
-                Writer}
+import java.io.{InputStream, OutputStream, Reader, Writer}
 
 /**
  * Contains methods that can read part of a stream or reader.
@@ -105,8 +102,8 @@ class RichReader(val reader: Reader) extends PartialReader[Char]
     protected def convert(b: Int) = b.asInstanceOf[Char]
 
     /**
-     * Copy the input stream to an output stream, stopping on EOF. This
-     * method does no buffering. If you want buffering, make sure you use a
+     * Copy the reader to a writer, stopping on EOF. This method does no
+     * buffering. If you want buffering, make sure you use a
      * <tt>java.io.BufferedReader</tt> and a <tt>java.io.BufferedWriter.
      * This method does not close either object.
      *
@@ -114,18 +111,18 @@ class RichReader(val reader: Reader) extends PartialReader[Char]
      */
     def copyTo(out: Writer): Unit =
     {
-        @tailrec def doCopy: Unit =
+        @tailrec def doCopyTo: Unit =
         {
             val c: Int = reader.read()
             if (c != -1)
             {
                 out.write(c)
                 // Tail recursion means never having to use a var.
-                doCopy
+                doCopyTo
             }
         }
 
-        doCopy
+        doCopyTo
     }
 }
 
@@ -154,18 +151,18 @@ class RichInputStream(val inputStream: InputStream) extends PartialReader[Byte]
      */
     def copyTo(out: OutputStream): Unit =
     {
-        @tailrec def recCopyTo: Unit =
+        @tailrec def doCopyTo: Unit =
         {
             val c: Int = inputStream.read()
             if (c != -1)
             {
                 out.write(c)
                 // Tail recursion means never having to use a var.
-                recCopyTo
+                doCopyTo
             }
         }
 
-        recCopyTo
+        doCopyTo
     }
 }
 
