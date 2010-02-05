@@ -472,6 +472,8 @@ trait Readline
 
     /**
      * Produce a readable version of this object.
+     *
+     * @return a readable version of this object.
      */
     override def toString = name
 }

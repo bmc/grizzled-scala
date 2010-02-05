@@ -51,6 +51,13 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
 
     override def compileOptions = Unchecked :: super.compileOptions.toList
 
+    // 2.8 and xsbt: Override documentOptions, because they're for 2.7, not
+    // 2.8, and they've changed.
+    private val docTitle = projectName + " " + projectVersion + " API"
+    override def documentOptions = List(CompoundDocOption("-doc-title",
+                                                          docTitle))
+                                                     
+
     override def parallelExecution = true // why not?
 
     /* ---------------------------------------------------------------------- *\
