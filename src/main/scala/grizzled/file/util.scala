@@ -60,12 +60,13 @@ object util
     /**
      * Get the directory name of a pathname.
      *
-     * @param path    path (absolute or relative)
-     * @param fileSep the file separator to use
+     * @param path     path (absolute or relative)
+     * @param fileSep  the file separator to use. Defaults to the value of
+     *                 the "file.separator" property.
      *
      * @return the directory portion
      */
-    def dirname(path: String, fileSep: String): String =
+    def dirname(path: String, fileSep: String = fileSeparator): String =
     {
         val components = splitPath(path, fileSep) 
         components match
@@ -90,24 +91,15 @@ object util
     }
 
     /**
-     * Get the directory name of a pathname, using the file separator of the
-     * current running system.
-     *
-     * @param path path (absolute or relative)
-     *
-     * @return the directory portion
-     */
-    def dirname(path: String): String = dirname(path, fileSeparator)
-
-    /**
      * Get the basename (file name only) part of a path.
      *
-     * @param path    the path (absolute or relative)
-     * @param fileSep the file separator to use
+     * @param path     the path (absolute or relative)
+     * @param fileSep  the file separator to use. Defaults to the value of
+     *                 the "file.separator" property.
      *
      * @return the file name portion
      */
-    def basename(path: String, fileSep: String): String =
+    def basename(path: String, fileSep: String = fileSeparator): String =
     {
         val components = splitPath(path, fileSep)
         components match
@@ -124,25 +116,17 @@ object util
     }
 
     /**
-     * Get the basename (file name only) part of a path, using the file
-     * separator of the current running system.
-     *
-     * @param path  the path (absolute or relative)
-     *
-     * @return the file name portion
-     */
-    def basename(path: String): String = basename(path, fileSeparator)
-
-    /**
      * Split a path into directory (dirname) and file (basename) components.
      * Analogous to Python's <tt>os.path.pathsplit()</tt> function.
      *
-     * @param path    the path to split
-     * @param fileSep the file separator to use
+     * @param path     the path to split
+     * @param fileSep  the file separator to use. Defaults to the value of
+     *                 the "file.separator" property.
      *
      * @return a (dirname, basename) tuple of strings
      */
-    def dirnameBasename(path: String, fileSep: String): (String, String) =
+    def dirnameBasename(path: String,
+                        fileSep: String = fileSeparator): (String, String) =
     {
         if ((path == null) || (path.length == 0))
             ("", "")
@@ -175,29 +159,6 @@ object util
         }
     }
 
-    /**
-     * Split a path into directory (dirname) and file (basename) components.
-     * Analogous to Python's <tt>os.path.pathsplit()</tt> function. Uses
-     * the file separator of the current running system.
-     *
-     * @param path  the path to split
-     *
-     * @return a (dirname, basename) tuple of strings
-     */
-    def dirnameBasename(path: String): (String, String) =
-        dirnameBasename(path, fileSeparator)
-
-    /**
-     * Split a pathname into the directory name, basename, and extension
-     * pieces.
-     *
-     * @param pathname  the pathname
-     *
-     * @return a 3-tuple of (dirname, basename, extension)
-     */
-    def dirnameBasenameExtension(pathname: String): (String, String, String) =
-         dirnameBasenameExtension(pathname, fileSeparator)
-
     private lazy val ExtRegexp = """^(.*)(\.[^.]+)$""".r
 
     /**
@@ -205,11 +166,13 @@ object util
      * pieces.
      *
      * @param pathname the pathname
-     * @param fileSep  the file separator to use
+     * @param fileSep  the file separator to use. Defaults to the value of
+     *                 the "file.separator" property.
      *
      * @return a 3-tuple of (dirname, basename, extension)
      */
-    def dirnameBasenameExtension(pathname: String, fileSep: String):
+    def dirnameBasenameExtension(pathname: String, 
+                                 fileSep: String = fileSeparator):
         (String, String, String) =
     {
         val (path1, extension) = pathname match
@@ -558,7 +521,7 @@ object util
      *
      * @return List of triplets, as described above.
      */
-    def walk(top: String, topdown: Boolean):
+    def walk(top: String, topdown: Boolean = true):
         List[(String, List[String], List[String])] =
     {
         // This needs to be made more efficient, with some kind of generator.

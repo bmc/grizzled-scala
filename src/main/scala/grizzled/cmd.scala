@@ -56,6 +56,7 @@ import grizzled.readline.{Readline,
 import grizzled.string.implicits._
 
 import scala.collection.mutable.Stack
+import scala.annotation.tailrec
 
 /**
  * Actions returned by handlers.
@@ -800,7 +801,8 @@ abstract class CommandInterpreter(val appName: String,
      */
     private def readCommand: Option[String] =
     {
-        def doRead(lineSoFar: String, usePrompt: String): Option[String] =
+        @tailrec def doRead(lineSoFar: String, 
+                            usePrompt: String): Option[String] =
         {
             assert (readerStack.size > 0)
             val reader = readerStack.top
@@ -881,7 +883,7 @@ abstract class CommandInterpreter(val appName: String,
      *
      * @param prompt  Prompt to issue
      */
-    private def readAndProcessCommand: Unit =
+    @tailrec private def readAndProcessCommand: Unit =
     {
         if (handleCommand(readCommand) == KeepGoing)
             readAndProcessCommand
