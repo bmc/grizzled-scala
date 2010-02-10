@@ -57,8 +57,13 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
     override def documentOptions = List(CompoundDocOption("-doc-title",
                                                           docTitle))
                                                      
-
     override def parallelExecution = true // why not?
+
+    // Disable cross-paths, since we're only building under one version.
+    // This simplifies publishing and importing. See
+    // http://groups.google.com/group/simple-build-tool/browse_thread/thread/973b5a2956b5ecbe
+
+    override def disableCrossPaths = true
 
     /* ---------------------------------------------------------------------- *\
                                    Tasks
@@ -66,8 +71,7 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
 
     // Override the default "package" action to make it dependent on "test"
     // and "doc".
-    override def packageAction = 
-        super.packageAction dependsOn(testAction, docAction)
+    override def packageAction = super.packageAction dependsOn(test, doc)
 
     /* ---------------------------------------------------------------------- *\
                        Managed External Dependencies
