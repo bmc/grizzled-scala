@@ -2,7 +2,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009-2010 Brian M. Clapper. All rights reserved.
+  Copyright (c) 2010 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -33,51 +33,32 @@
 \*---------------------------------------------------------------------------*/
 
 import org.scalatest.FunSuite
-import grizzled.binary._
+import grizzled.parsing._
 
 /**
- * Tests the grizzled.binary functions.
+ * Tests the grizzled.io functions.
  */
-class BinaryTest extends GrizzledFunSuite
+class MarkdownTest extends GrizzledFunSuite
 {
-    test("bitCount")
+    test("MarkdownParser.markdownToHTML")
     {
-        val intData = Map[Int, Int](
-            0                -> 0,
-            1                -> 1,
-            2                -> 1,
-            3                -> 2,
-            0x44444444       -> 8,
-            0xeeeeeeee       -> 24,
-            0xffffffff       -> 32,
-            0x7fffffff       -> 31
+        import scala.io.Source
+
+        val data = List(
+            ("*Test*",             "<p><em>Test</em></p>"),
+            ("_Test_",             "<p><em>Test</em></p>"),
+            ("**Test**",           "<p><strong>Test</strong></p>"),
+            ("__Test__",           "<p><strong>Test</strong></p>"),
+            ("___Test___",         "<p><strong><em>Test</em></strong></p>"),
+            ("***Test***",         "<p><strong><em>Test</em></strong></p>"),
+            ("abc\n===\n\ntest\n", "<h1>abc</h1>\n\n<p>test</p>")
         )
 
-        val longData = Map[Long, Int](
-            0l                   -> 0,
-            1l                   -> 1,
-            2l                   -> 1,
-            3l                   -> 2,
-            0x444444444l         -> 9,
-            0xeeeeeeeeel         -> 27,
-            0xffffffffl          -> 32,
-            0x7fffffffl          -> 31,
-            0xffffffffffffl      -> 48
-        )
-
-        for((n, expected) <- intData)
+        for((input, expected) <- data)
         {
-            expect(expected, "\"" + n.toString + "\" -> " + expected.toString) 
+            expect(expected, "MarkdownParser.markdownToHTML() on: " + input)
             {
-                bitCount(n)
-            }
-        }
-
-        for((n, expected) <- longData)
-        {
-            expect(expected, "\"" + n.toString + "\" -> " + expected.toString) 
-            {
-                bitCount(n)
+                Markdown.toHTML(input)
             }
         }
     }

@@ -4,6 +4,8 @@ Version 0.3 (...)
 - Now must be compiled with xsbt (sbt version 0.6.x)
 - Fixed tail call optimization problem in grizzled.io.RichInputStream.
   Thanks to Claudio Bley (cbley /at/ av-test.de)
+- Added grizzled.parsing.MarkdownParser, for parsing Markdown documents.
+  (Uses the Showdown Javascript library, via Mozilla Rhino.)
 
 ---------------------------------------------------------------------------
 Version 0.2 (31 August, 2009)

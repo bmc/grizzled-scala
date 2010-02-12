@@ -37,6 +37,8 @@
 
 import sbt._
 
+import java.io.File
+
 /**
  * Project build file, for SBT.
  */
@@ -73,6 +75,16 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
     // and "doc".
     override def packageAction = super.packageAction dependsOn(test, doc)
 
+    override def updateAction = super.updateAction dependsOn(customUpdate)
+
+    lazy val customUpdate = task { doManualDownloads }
+
+    override def compileAction = super.compileAction dependsOn(postCompile)
+    lazy val postCompile = task { doPostCompile }
+
+    override def cleanAction = super.cleanAction dependsOn(localClean)
+    lazy val localClean = task { doLocalClean }
+
     /* ---------------------------------------------------------------------- *\
                        Managed External Dependencies
     \* ---------------------------------------------------------------------- */
@@ -87,4 +99,63 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
     val scalatest = "org.scalatest" % "scalatest" %
         "1.0.1-for-scala-2.8.0.Beta1-with-test-interfaces-0.3-SNAPSHOT"
 
+    val rhino = "rhino" % "js" % "1.7R2"
+
+    val ShowdownJS = "showdown.js"
+    val ShowdownURL = "http://attacklab.net/showdown/showdown-v0.9.zip"
+    val ShowdownLocal = "lib_managed" / ShowdownJS
+    val ShowdownClassdir = "target" / "classes" / "grizzled" / ShowdownJS
+
+    /* ---------------------------------------------------------------------- *\
+                          Private Helper Methods
+    \* ---------------------------------------------------------------------- */
+
+    private def noisyCopy(source: Path, target: Path) =
+    {
+        log.info("Copying " + source + " to " + target)
+        FileUtilities.copyFile(source, target, log)
+    }
+
+    private def doManualDownloads: Option[String] =
+    {
+        // Download, unpack, and save the Showdown package.
+
+        import java.net.URL
+
+        if (! ShowdownLocal.exists)
+        {
+            FileUtilities.doInTemporaryDirectory[String](log)
+            {
+                tempDir: File =>
+
+                log.info("Downloading and unpacking: " + ShowdownURL)
+                FileUtilities.unzip(new URL(ShowdownURL),
+                                    Path.fromFile(tempDir),
+                                    log)
+
+                val js = Path.fromFile(tempDir) / "src" / ShowdownJS
+                noisyCopy(js, ShowdownLocal)
+
+                Right("")
+            }
+        }
+
+        None
+    }
+
+    private def doPostCompile: Option[String] =
+    {
+        noisyCopy(ShowdownLocal, ShowdownClassdir)
+    }
+
+    private def doLocalClean: Option[String] =
+    {
+        if (ShowdownLocal.exists)
+        {
+            log.info("Deleting " + ShowdownLocal)
+            ShowdownLocal.asFile.delete
+        }
+
+        None
+    }
 }
