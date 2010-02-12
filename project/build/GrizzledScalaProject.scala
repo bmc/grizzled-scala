@@ -72,14 +72,49 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
     \* ---------------------------------------------------------------------- */
 
     // Override the default "package" action to make it dependent on "test"
-    // and "doc".
-    override def packageAction = super.packageAction dependsOn(test, doc)
+    // and "doc". Also, temporarily copy the showdown.js file into the
+    // resources directory.
+    override def packageAction = task
+    {
+        val resourceDir = mainResourcesPath / "grizzled"
+        val copiedShowdown = resourceDir / ShowdownJS
 
-    override def updateAction = super.updateAction dependsOn(customUpdate)
+        FileUtilities.createDirectory(resourceDir, log)
+        try
+        {
+            noisyCopy(ShowdownLocal, copiedShowdown)
+            super.packageAction.run
+        }
+
+        finally
+        {
+            for (path <- List(copiedShowdown, resourceDir, mainResourcesPath))
+            {
+                log.info("Deleting " + path.asFile)
+                path.asFile.delete
+            }
+        }
+    }
+    .dependsOn(test, doc)
+
+    override def updateAction = task
+    {
+        // updateAction invokes customUpdate directly, instead of depending
+        // on it, because customUpdate must run second. If it runs first,
+        // anything it copies into lib_managed gets wiped by super.updateAction.
+
+        super.updateAction.run
+        customUpdate.run
+    }
 
     lazy val customUpdate = task { doManualDownloads }
 
-    override def compileAction = super.compileAction dependsOn(postCompile)
+    override def compileAction = task
+    {
+        super.compileAction.run
+        postCompile.run
+    }
+
     lazy val postCompile = task { doPostCompile }
 
     override def cleanAction = super.cleanAction dependsOn(localClean)
