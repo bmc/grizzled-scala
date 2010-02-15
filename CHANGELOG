@@ -6,6 +6,7 @@ Version 0.3 (...)
   Thanks to Claudio Bley (cbley /at/ av-test.de)
 - Added grizzled.parsing.MarkdownParser, for parsing Markdown documents.
   (Uses the Showdown Javascript library, via Mozilla Rhino.)
+- grizzled.cmd.HelpHandler now supports a ".help" alias.
 
 ---------------------------------------------------------------------------
 Version 0.2 (31 August, 2009)

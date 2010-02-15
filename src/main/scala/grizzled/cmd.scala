@@ -657,7 +657,7 @@ abstract class CommandInterpreter(val appName: String,
     private[cmd] object HelpHandler extends CommandHandler
     {
         val CommandName = "help"
-        override val aliases = List("?")
+        override val aliases = List("?", ".help")
         override val Help = """This message"""
 
         private def helpHelp =
