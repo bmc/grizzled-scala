@@ -43,10 +43,10 @@ package grizzled
 object util
 {
     /**
-     * Used with any object that contains a <tt>close()</tt> method that
+     * <p>Used with any object that contains a <tt>close()</tt> method that
      * returns nothing, <tt>withCloseable()</tt> executes a block of code
      * with the closeable object, ensuring that the object is closed no
-     * matter what. It allows you to replace code like this:
+     * matter what. It allows you to replace code like this:</p>
      *
      * <blockquote><pre>
      * val closeableObject = ...
@@ -60,7 +60,7 @@ object util
      * }
      * </pre></blockquote>
      *
-     * with:
+     * <p>with:</p>
      *
      * <blockquote><pre>
      * withCloseable(closeableObject)
