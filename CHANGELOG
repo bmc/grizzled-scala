@@ -1,7 +1,7 @@
 Version 0.3 (...)
 
 - Converted to Scala 2.8.0
-- Now must be compiled with xsbt (sbt version 0.6.x)
+- Now must be compiled with sbt version 0.7.0 or better.
 - Fixed tail call optimization problem in grizzled.io.RichInputStream.
   Thanks to Claudio Bley (cbley /at/ av-test.de)
 - Added grizzled.parsing.MarkdownParser, for parsing Markdown documents.

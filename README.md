@@ -34,17 +34,17 @@ Building
 --------
 
 Building the Grizzled Scala Library requires [SBT] [sbt] (the Simple Build
-Tool), version 0.6 (also known as xsbt). Install SBT 0.6, as described in
-the [SBT wiki] [xsbt]. Then, run
+Tool), version 0.7.0 or better. Install SBT 0.7.0, as described in
+the [SBT wiki] [sbt-setup]. Then, run
 
-    xsbt update
+    sbt update
 
 to pull down the external dependencies. After that step, build the Grizzled
 Scala Library with:
 
-    xsbt compile test package
+    sbt compile test package
 
 The resulting jar file will be in the top-level `target` directory.
 
   [sbt]: http://code.google.com/p/simple-build-tool
-  [xsbt]: http://code.google.com/p/simple-build-tool/wiki/0_6_Summary
+  [sbt-setup]: http://code.google.com/p/simple-build-tool/wiki/Setup
