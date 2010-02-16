@@ -48,3 +48,5 @@ The resulting jar file will be in the top-level `target` directory.
 
   [sbt]: http://code.google.com/p/simple-build-tool
   [sbt-setup]: http://code.google.com/p/simple-build-tool/wiki/Setup
+---
+Copyright &copy; 2009-2010 Brian M. Clapper, <i>bmc@clapper.org</i>
