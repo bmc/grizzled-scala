@@ -913,7 +913,8 @@ abstract class CommandInterpreter(val appName: String,
 
             catch
             {
-                case e: UnsatisfiedLinkError => findReadline(libs.tail)
+                case e: UnsatisfiedLinkError =>
+                    findReadline(libs.tail)
             }
         }
     }
