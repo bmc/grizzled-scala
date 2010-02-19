@@ -8,6 +8,9 @@ Version 0.3 (...)
   (Uses the Showdown Javascript library, via Mozilla Rhino.)
 - grizzled.cmd.HelpHandler now supports a ".help" alias.
 - Added grizzled.util.withCloseable control structure.
+- The grizzled.readline API now uses org.clapper.editline EditLine
+  implementation, instead of the one in Java-Readline.
+- grizzled.cmd now tries to load EditLine first.
 
 ---------------------------------------------------------------------------
 Version 0.2 (31 August, 2009)
