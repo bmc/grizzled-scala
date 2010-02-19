@@ -290,17 +290,6 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
 
 /**
  * JavaReadline implementation of the Readline trait, specialized for the
- * EditLine library.
- */
-private[readline] class EditlineImpl(appName: String,
-                                     autoAddHistory: Boolean)
-    extends JavaReadlineImpl(appName,
-                             "Editline",
-                             autoAddHistory,
-                             JavaReadlineLibrary.Editline)
-
-/**
- * JavaReadline implementation of the Readline trait, specialized for the
  * GNU Readline library.
  */
 private[readline] class GNUReadlineImpl(appName: String,

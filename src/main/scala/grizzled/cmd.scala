@@ -232,8 +232,8 @@ abstract class CommandInterpreter(val appName: String,
     /**
      * Default list of readline libraries to try, in order.
      */
-    val DefaultReadlineLibraryList = List(ReadlineType.GNUReadline,
-                                          ReadlineType.EditLine,
+    val DefaultReadlineLibraryList = List(ReadlineType.EditLine,
+                                          ReadlineType.GNUReadline,
                                           ReadlineType.GetLine,
                                           ReadlineType.JLine,
                                           ReadlineType.Simple)

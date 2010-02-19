@@ -498,8 +498,8 @@ object Readline
      *       (<a href="http://tiswww.case.edu/php/chet/readline/rltop.html">http://tiswww.case.edu/php/chet/readline/rltop.html</a>).
      *
      *   <li><tt>Editline</tt>: The Editline library, originally from BSD Unix.
-     *       Requires the JavaReadline jar
-     *       (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>)
+     *       Requires the libjavaeditline jar and dynamic library (see
+     *       <a href="http://www.clapper.org/software/java/javaeditline/">http://www.clapper.org/software/java/javaeditline/</a>)
      *       and the Editline library
      *       <a href="http://www.thrysoee.dk/editline/">http://www.thrysoee.dk/editline/</a>.
      *
@@ -516,8 +516,8 @@ object Readline
     {
         type ReadlineType = Value
 
-        val GNUReadline = Value
         val EditLine = Value
+        val GNUReadline = Value
         val GetLine = Value
         val JLine = Value
         val Simple = Value
@@ -549,7 +549,7 @@ object Readline
                 Class.forName("grizzled.readline.javareadline.GNUReadlineImpl")
 
             case EditLine =>
-                Class.forName("grizzled.readline.javareadline.EditlineImpl")
+                Class.forName("grizzled.readline.editline.EditLineImpl")
 
             case GetLine =>
                 Class.forName("grizzled.readline.javareadline.GetlineImpl")
