@@ -9,7 +9,8 @@ Version 0.3 (...)
 - grizzled.cmd.HelpHandler now supports a ".help" alias.
 - Added grizzled.util.withCloseable control structure.
 - The grizzled.readline API now uses org.clapper.editline EditLine
-  implementation, instead of the one in Java-Readline.
+  implementation, instead of the one in Java-Readline. Completion handling
+  is more reliable with the Java Editline implementation.
 - grizzled.cmd now tries to load EditLine first.
 
 ---------------------------------------------------------------------------
