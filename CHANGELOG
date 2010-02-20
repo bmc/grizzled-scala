@@ -1,4 +1,4 @@
-Version 0.3 (...)
+Version 0.3 (20 February, 2010)
 
 - Converted to Scala 2.8.0
 - Now must be compiled with sbt version 0.7.0 or better.
