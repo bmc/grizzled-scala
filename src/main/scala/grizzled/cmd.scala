@@ -1025,17 +1025,18 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
         val tokens = CmdUtil.tokenize(unparsedArgs)
         val historyCommands = history.get
 
-        def filterByRegex(strings: List[String], regex: String): List[String] =
+        def filterByRegex(strings: List[(String, Int)], 
+                          pat: String): List[(String, Int)] =
         {
             try
             {
-                val re = new Regex("(?i)" + regex) // case insensitive
-                strings.filter {s => re.findFirstIn(s) != None}
+                val re = new Regex("(?i)" + pat) // case insensitive
+                strings.filter {tup => re.findFirstIn(tup._1) != None}
             }
             catch
             {
                 case e: PatternSyntaxException =>
-                    error("\"" + regex + "\" is a bad regular " +
+                    error("\"" + pat + "\" is a bad regular " +
                           "expression: " + e.getMessage)
                 Nil
             }
@@ -1048,17 +1049,18 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
                     val n = sTotal.toInt
                     historyCommands.reverse
                                    .zipWithIndex
-                                   .filter {tup => tup._2 < n}
+                                   .slice(0, n)
+                                   .reverse
 
                 case TotalRegex(sTotal) :: regex :: Nil=>
                     val n = sTotal.toInt
-                    filterByRegex(historyCommands, regex)
+                    filterByRegex(historyCommands.zipWithIndex, regex)
                         .reverse
-                        .zipWithIndex
-                        .filter {tup => tup._2 < n}
+                        .slice(0, n)
+                        .reverse
 
                 case regex :: Nil =>
-                    filterByRegex(historyCommands, regex).zipWithIndex
+                    filterByRegex(historyCommands.zipWithIndex, regex)
 
                 case Nil =>
                     historyCommands.zipWithIndex
