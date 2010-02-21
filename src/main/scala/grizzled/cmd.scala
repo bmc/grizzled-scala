@@ -1025,13 +1025,12 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
         val tokens = CmdUtil.tokenize(unparsedArgs)
         val historyCommands = history.get
 
-        def filterByRegex(commands: List[(String, Int)], 
-                          regex: String): List[(String, Int)] =
+        def filterByRegex(strings: List[String], regex: String): List[String] =
         {
             try
             {
                 val re = new Regex("(?i)" + regex) // case insensitive
-                commands.filter {tup => re.findFirstIn(tup._1) != None}
+                strings.filter {s => re.findFirstIn(s) != None}
             }
             catch
             {
@@ -1047,18 +1046,19 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
             {
                 case TotalRegex(sTotal) :: Nil =>
                     val n = sTotal.toInt
-                    historyCommands.zipWithIndex.filter {tup => tup._2 < n}
+                    historyCommands.reverse
+                                   .zipWithIndex
+                                   .filter {tup => tup._2 < n}
 
                 case TotalRegex(sTotal) :: regex :: Nil=>
                     val n = sTotal.toInt
-                    val subset = historyCommands.zipWithIndex.filter 
-                    {
-                        tup => tup._2 < n
-                    }
-                    filterByRegex(subset, regex)
+                    filterByRegex(historyCommands, regex)
+                        .reverse
+                        .zipWithIndex
+                        .filter {tup => tup._2 < n}
 
                 case regex :: Nil =>
-                    filterByRegex(historyCommands.zipWithIndex, regex)
+                    filterByRegex(historyCommands, regex).zipWithIndex
 
                 case Nil =>
                     historyCommands.zipWithIndex
