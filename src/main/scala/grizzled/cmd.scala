@@ -1047,8 +1047,8 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
             {
                 case TotalRegex(sTotal) :: Nil =>
                     val n = sTotal.toInt
-                    historyCommands.reverse
-                                   .zipWithIndex
+                    historyCommands.zipWithIndex
+                                   .reverse
                                    .slice(0, n)
                                    .reverse
 
