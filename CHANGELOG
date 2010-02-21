@@ -1,3 +1,19 @@
+Version 0.3.1 (...)
+
+- grizzled.cmd changes:
+
+  * "history" command now uses this syntax:
+        history [-n] [regex]
+     where "n" is the maximum number of entries to show, and "regex" is a
+     regular expression to filter history entries.
+  * Some commands starting with "." were being incorrectly limited to a
+    single character (e.g., ".r", but not ".read").
+  * General clean-up and bug fixing in the "redo command" handler.
+  * CommandHandler classes can now exempt themselves from the history.
+  * The RedoCommandHandler (which handles the "r" and "!" commands) now
+    exempts itself from the history.
+
+---------------------------------------------------------------------------
 Version 0.3 (20 February, 2010)
 
 - Converted to Scala 2.8.0

@@ -98,6 +98,11 @@ trait CommandHandler
     val aliases: List[String] = Nil
 
     /**
+     * Whether or not the command should be put in the history.
+     */
+    val storeInHistory = true
+
+    /**
      * The help for this command. The help string is written as is to the
      * screen. It is not wrapped, indented, or otherwise reformatted. It
      * may be a single string or a multiline string.
@@ -115,11 +120,13 @@ trait CommandHandler
      * @return <tt>true</tt> if they match, <tt>false</tt> if not
      */
     def matches(candidate: String): Boolean =
+    {
         allNames.filter(_.toLowerCase == candidate.toLowerCase) match
         {
             case Nil => false
             case _   => true
         }
+    }
 
     /**
      * Compares a prefix string to this command name and its aliases, to
@@ -318,7 +325,7 @@ abstract class CommandInterpreter(val appName: String,
      */
     def StartCommandIdentifier = "abcdefghijklmnopqrstuvwxyz" +
                                  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                                 "0123456789"
+                                 "0123456789."
 
     /**
      * List of handlers. The subclass must define this value to contain a
@@ -584,7 +591,8 @@ abstract class CommandInterpreter(val appName: String,
                     handleUnknownCommand(commandName, args)
 
                 case KnownCommand(handler, commandLine, commandName, args) =>
-                    history += commandLine
+                    if (handler.storeInHistory)
+                        history += commandLine
                     val action = handler.runCommand(commandName, args)
                     if (action != Stop)
                         postCommand(commandName, args)
@@ -997,46 +1005,73 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
     override val aliases = List("h")
 
     val history = cmd.history 
-    val Help = """Show history. 
-                 |
-                 |Usage: history [n]
-                 |
-                 |where n is the number of recent history entries to show.""".
-               stripMargin
+    val Help = 
+        """Show history. 
+        |
+        |Usage: history [-n] [regex]
+        |
+        |Where n is the number of recent history entries to show. If a regular
+        |expression is supplied, then only those history entries that match the
+        |regular expression are shown."""
+        .stripMargin
+    
+    private val TotalRegex = """^-([0-9]+)$""".r
 
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
     {
+        import scala.util.matching.Regex
+        import java.util.regex.PatternSyntaxException
+
         val tokens = CmdUtil.tokenize(unparsedArgs)
         val historyCommands = history.get
 
-        def show(commands: List[String], startingNumber: Int) =
-            for ((line, i) <- commands.zipWithIndex)
-                format("%3d: %s\n", startingNumber + i, line)
-
-        if (tokens.length > 0)
+        def filterByRegex(commands: List[(String, Int)], 
+                          regex: String): List[(String, Int)] =
         {
             try
             {
-                val n = tokens(0).toInt
-                if (historyCommands.length > n)
-                    show(historyCommands.slice(historyCommands.length -n,
-                                               historyCommands.length), 
-                         historyCommands.length - n)
-                else
-                    show(historyCommands, 1)
+                val re = new Regex(regex)
+                commands.filter {tup => re.findFirstIn(tup._1) != None}
             }
-
             catch
             {
-                case e: NumberFormatException =>
-                    println("Bad number: \"" + tokens(0) + "\"")
-                    Nil
+                case e: PatternSyntaxException =>
+                    error("\"" + regex + "\" is a bad regular " +
+                          "expression: " + e.getMessage)
+                Nil
             }
         }
 
-        else
+        val toShow =
+            tokens match
+            {
+                case TotalRegex(sTotal) :: Nil =>
+                    val n = sTotal.toInt
+                    historyCommands.zipWithIndex.filter {tup => tup._2 < n}
+
+                case TotalRegex(sTotal) :: regex :: Nil=>
+                    val n = sTotal.toInt
+                    val subset = historyCommands.zipWithIndex.filter 
+                    {
+                        tup => tup._2 < n
+                    }
+                    filterByRegex(subset, regex)
+
+                case regex :: Nil =>
+                    filterByRegex(historyCommands.zipWithIndex, regex)
+
+                case Nil =>
+                    historyCommands.zipWithIndex
+
+                case _ =>
+                    error("Usage: history [-n] [regex]")
+                    Nil
+            }
+
+        if (toShow.length > 0)
         {
-            show(historyCommands, 1)
+            for ((line, i) <- toShow)
+                printf("%3d: %s\n", i + 1, line)
         }
 
         KeepGoing
@@ -1074,6 +1109,7 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
 {
     val CommandName = "r"
     override val aliases = List("!", "/")
+    override val storeInHistory = false
 
     val history = cmd.history 
     val Help = """Reissue a command, by partial name or number.
@@ -1089,70 +1125,86 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler
                  | r 10  Run the command numbered 10 in the history""".
                stripMargin
 
+    private val CommandNumber = """^([0-9]+)$""".r
+
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
     {
         val lTrimmedArgs = unparsedArgs.ltrim
         val historyBuf = history.get
 
-        if ( ((commandName == "r") && (lTrimmedArgs == "")) ||
-             ((commandName == "!") && (lTrimmedArgs == "!")) )
+        if (historyBuf.length == 0)
         {
-            // Reissue last command from history.
-
-            if (historyBuf.length == 0)
-            {
-                cmd.error("Empty command history.")
-                KeepGoing
-            }
-            else
-            {
-                val command = historyBuf(historyBuf.length - 1)
-                println(command)
-                cmd.handleCommand(Some(command))
-            }
+            cmd.error("Empty command history.")
+            KeepGoing
         }
 
         else
         {
-            assert(lTrimmedArgs != "")
-
-            val commandId = lTrimmedArgs.split("[ \t]+")(0)
-
-            try
-            {
-                val n = commandId.toInt
-                if ( (n < 1) || (n > historyBuf.length) )
-                {
-                    cmd.error("No command has number " + n)
-                    KeepGoing
-                }
+            val commandList =
+                if (lTrimmedArgs == "")
+                    List(commandName)
                 else
-                {
-                    val command = historyBuf(n - 1)
-                    println(command)
-                    cmd.handleCommand(Some(command))
-                }
-            }
+                    List(commandName, lTrimmedArgs)
 
-            catch
+            val command =
+                commandList match
+                {
+                    case "r" :: Nil =>
+                        historyBuf(historyBuf.length - 1)
+         
+                    case "!!" :: Nil =>
+                        historyBuf(historyBuf.length - 1)
+
+                    case "!" :: CommandNumber(sNum) :: Nil =>
+                        getByNum(historyBuf, sNum.toInt)
+
+                    case "!" :: name :: Nil =>
+                        getByPrefix(historyBuf, name)
+
+                    case "r" :: CommandNumber(sNum) :: Nil =>
+                        getByNum(historyBuf, sNum.toInt)
+
+                    case "r" :: name :: Nil =>
+                        getByPrefix(historyBuf, name)
+
+                    case _ =>
+                        cmd.error("Error in command. Try: .help r")
+                        null
+                }
+
+            if (command == null)
+                KeepGoing
+            else
             {
-                case _: NumberFormatException => 
-                    rerunCommandByPrefix(commandId)
+                println(command)
+                cmd.handleCommand(Some(command))
             }
         }
     }
 
-    private def rerunCommandByPrefix(prefix: String): CommandAction =
+    private def getByNum(historyBuf: List[String], num: Int): String =
     {
-        history.get.reverse.filter(_.startsWith(prefix)) match
+        if ( (num < 1) || (num > historyBuf.length) )
+        {
+            cmd.error("No command has number " + num)
+            null
+        }
+        else
+        {
+            historyBuf(num - 1)
+        }
+    }
+
+    private def getByPrefix(historyBuf: List[String], prefix: String): String =
+    {
+        historyBuf.reverse.filter(_.startsWith(prefix)) match
         {
             case Nil => 
                 cmd.error("No command matches \"" + prefix + "\"")
-                KeepGoing
+                null
 
             case line :: rest =>
-                println(line)
-                cmd.handleCommand(Some(line))
+                line
         }
     }
 }
