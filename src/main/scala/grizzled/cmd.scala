@@ -1030,7 +1030,7 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler
         {
             try
             {
-                val re = new Regex(regex)
+                val re = new Regex("(?i)" + regex) // case insensitive
                 commands.filter {tup => re.findFirstIn(tup._1) != None}
             }
             catch
