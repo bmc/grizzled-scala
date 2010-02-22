@@ -97,23 +97,11 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
     }
     .dependsOn(test, doc)
 
-    override def updateAction = task
-    {
-        // updateAction invokes customUpdate directly, instead of depending
-        // on it, because customUpdate must run second. If it runs first,
-        // anything it copies into lib_managed gets wiped by super.updateAction.
-
-        super.updateAction.run
-        customUpdate.run
-    }
+    override def updateAction = customUpdate dependsOn(super.updateAction)
 
     lazy val customUpdate = task { doManualDownloads }
 
-    override def compileAction = task
-    {
-        super.compileAction.run
-        postCompile.run
-    }
+    override def compileAction = postCompile dependsOn(super.compileAction)
 
     lazy val postCompile = task { doPostCompile }
 
@@ -138,7 +126,8 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
 
     val ShowdownJS = "showdown.js"
     val ShowdownURL = "http://attacklab.net/showdown/showdown-v0.9.zip"
-    val ShowdownLocal = "lib_managed" / ShowdownJS
+    val LocalLibDir = "local_lib"
+    val ShowdownLocal = LocalLibDir / ShowdownJS
     val ShowdownClassdir = "target" / "classes" / "grizzled" / ShowdownJS
 
     /* ---------------------------------------------------------------------- *\
@@ -157,6 +146,7 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
 
         import java.net.URL
 
+        FileUtilities.createDirectory(LocalLibDir, log)
         if (! ShowdownLocal.exists)
         {
             FileUtilities.doInTemporaryDirectory[String](log)
@@ -187,8 +177,8 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
     {
         if (ShowdownLocal.exists)
         {
-            log.info("Deleting " + ShowdownLocal)
-            ShowdownLocal.asFile.delete
+            log.info("Deleting " + LocalLibDir);
+            FileUtilities.clean(LocalLibDir, log);
         }
 
         None
