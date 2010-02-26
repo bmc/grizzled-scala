@@ -105,8 +105,8 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
 
     lazy val postCompile = task { doPostCompile }
 
-    override def cleanAction = super.cleanAction dependsOn(localClean)
-    lazy val localClean = task { doLocalClean }
+    override def cleanLibAction = super.cleanLibAction dependsOn(localCleanLib)
+    lazy val localCleanLib = task { doLocalCleanLib }
 
     /* ---------------------------------------------------------------------- *\
                        Managed External Dependencies
@@ -173,7 +173,7 @@ class GrizzledScalaProject(info: ProjectInfo) extends DefaultProject(info)
         noisyCopy(ShowdownLocal, ShowdownClassdir)
     }
 
-    private def doLocalClean: Option[String] =
+    private def doLocalCleanLib: Option[String] =
     {
         if (ShowdownLocal.exists)
         {

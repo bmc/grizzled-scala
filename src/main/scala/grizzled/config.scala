@@ -38,7 +38,7 @@
 /**
  * Classes and objects to aid in the parsing of INI-style configuration
  * files. This package is similar, in concept, to the Python
- * <tt>ConfigParser</tt> module (though its implementation and capabilities
+ * `ConfigParser` module (though its implementation and capabilities
  * differ quite a bit).
  */
 package grizzled.config
@@ -85,16 +85,16 @@ class NoSuchOptionException(sectionName: String, optionName: String)
 /**
  * An INI-style configuration file parser.
  *
- * <p><tt>Configuration</tt> implements an in-memory store for a
- * configuration file whose syntax is reminiscent of classic Windows .INI
- * files, though with many extensions.</p>
+ * `Configuration` implements an in-memory store for a configuration file
+ * whose syntax is reminiscent of classic Windows .INI files, though with
+ * many extensions.
  *
- * <h3>Syntax</h3>
+ * '''Syntax'''
  *
- * <p>A configuration file is broken into sections, and each section is
- * introduced by a section name in brackets. For example:</p>
+ * A configuration file is broken into sections, and each section is
+ * introduced by a section name in brackets. For example:
  *
- * <blockquote><pre>
+ * {{{
  * [main]
  * installation.directory=/usr/local/foo
  * program.directory: /usr/local/foo/programs
@@ -104,154 +104,146 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  *
  * [display]
  * searchFailedMessage=Search failed, sorry.
- * </pre></blockquote>
+ * }}}
  *
- * <p>Notes and caveats:</p>
+ * Notes and caveats:
  *
- * <ul>
- *   <li> At least one section is required.
- *   <li> Sections may be empty.
- *   <li> It is an error to have any variable definitions before the first
- *        section header.
- *   <li> The section names "system" and "env" are reserved. They don't really
- *        exist, but they're used during variable substitution (see below)
- *        to substitute from <tt>System.properties</tt> and the environment,
- *        respectively.
- * </ul>
+ * At least one section is required.
  *
- * <h4>Section Name Syntax</h4>
+ * Sections may be empty.
  *
- * <p>There can be any amount of whitespace before and after the brackets
+ * It is an error to have any variable definitions before the first
+ * section header.
+
+ * The section names "system" and "env" are reserved. They don't really
+ * exist, but they're used during variable substitution (see below)
+ * to substitute from <tt>System.properties</tt> and the environment,
+ * respectively.
+ *
+ * '''Section Name Syntax'''
+ *
+ * There can be any amount of whitespace before and after the brackets
  * in a section name; the whitespace is ignored. Section names may consist
  * of alphanumeric characters and underscores. Anything else is not
- * permitted.</p>
+ * permitted.
  *
- * <h4>Variable Syntax</h4>
+ * '''Variable Syntax'''
  *
- * <p>Each section contains zero or more variable settings. Similar to a
- * Java <tt>Properties</tt> file, the variables are specified as name/value
- * pairs, separated by an equal sign ("=") or a colon (":"). Variable names
- * are case-sensitive by default, though the case-sensitivity (and other
+ * Each section contains zero or more variable settings. Similar to a Java
+ * `Properties` file, the variables are specified as name/value pairs,
+ * separated by an equal sign ("=") or a colon (":"). Variable names are
+ * case-sensitive by default, though the case-sensitivity (and other
  * aspects of the variable name) may be changed by subclassing
- * <tt>Configuration</tt> and providing your own version of the
- * <tt>transformOptionName()</tt> method. Variable names may contain
- * alphanumerics, underscores, and hyphens (-).
- * Variable values may contain
+ * `Configuration` and providing your own version of the
+ * `transformOptionName()` method. Variable names may contain
+ * alphanumerics, underscores, and hyphens (-). Variable values may contain
  * anything at all. The parser ignores whitespace on either side of the "="
  * or ":"; that is, leading whitespace in the value is skipped. The way to
  * include leading whitespace in a value is escape the whitespace
- * characters with backslashes. (See below).</p>
+ * characters with backslashes. (See below).
  *
- * <h4>Continuation Lines</h4>
+ * '''Continuation Lines'''
  *
- * <p>Variable definitions may span multiple lines; each line to be
+ * Variable definitions may span multiple lines; each line to be
  * continued must end with a backslash ("\") character, which escapes the
  * meaning of the newline, causing it to be treated like a space character.
  * The following line is treated as a logical continuation of the first
  * line. Unlike Java properties files, however, leading whitespace is
- * <i>not</i> removed from continued lines.</p>
+ * <i>not</i> removed from continued lines.
  *
- * <p>Only variable definition lines may be continued. Section header
+ * Only variable definition lines may be continued. Section header
  * lines, comment lines (see below) and include directives (see below)
- * cannot span multiple lines.</p>
+ * cannot span multiple lines.
  *
- * <h4>Expansions of Variable Values</h4>
+ * '''Expansions of Variable Values'''
  *
- * <p>The configuration parser preprocesses each variable's value,
- * replacing embedded metacharacter sequences and substituting variable
- * references. You can use backslashes to escape the special characters
- * that the parser uses to recognize metacharacter and variable sequences;
- * you can also use single quotes. See <a href="#RawValues">Suppressing
- * Metacharacter Expansion and Variable Substitution</a>, below, for more
- * details.</p>
+ * The configuration parser preprocesses each variable's value, replacing
+ * embedded metacharacter sequences and substituting variable references.
+ * You can use backslashes to escape the special characters that the parser
+ * uses to recognize metacharacter and variable sequences; you can also use
+ * single quotes. See ''Suppressing Metacharacter Expansion and Variable
+ * Substitution'', below, for more details.
  *
- * <h5>Metacharacters</h5>
+ * '''Metacharacters'''
  *
- * <p>The parser recognizes Java-style ASCII escape sequences <tt>\t</tt>,
- * <tt>\n</tt>, <tt>\r</tt>, <tt>\\</tt>, <tt>\&nbsp;</tt> (a backslash and
- * a space), and <tt>&#92;u</tt><i>xxxx</i> are recognized and converted to
- * single characters. Note that metacharacter expansion is performed
- * <i>before</i> variable substitution.</p>
+ * The parser recognizes Java-style ASCII escape sequences `\t`, `\n`,
+ * `\r`, `\\`, `\&nbsp;` (a backslash and a space), and `\\u`''xxxx'' are
+ * recognized and converted to single characters. Note that metacharacter
+ * expansion is performed ''before'' variable substitution.
  *
- * <h5>Variable Substitution</h5>
+ * '''Variable Substitution'''
  *
- * <p>A variable value can interpolate the values of other variables, using
+ * A variable value can interpolate the values of other variables, using
  * a variable substitution syntax. The general form of a variable reference
- * is <tt>${sectionName.varName}</tt>.</p>
+ * is `${sectionName.varName}`.
  *
- * <ul>
- *   <li><tt>sectionName</tt> is the name of the section containing the
- *       variable to substitute; if omitted, it defaults to the current
- *       section.
- *   <li><tt>varName</tt> is the name of the variable to substitute.
- * </ul>
+ * `sectionName` is the name of the section containing the variable to
+ * substitute; if omitted, it defaults to the current section. `varName` is
+ * the name of the variable to substitute.
  *
- * <p>If a variable reference specifies a section name, the referenced section
+ * If a variable reference specifies a section name, the referenced section
  * must precede the current section. It is not possible to substitute the value
- * of a variable in a section that occurs later in the file.</p>
+ * of a variable in a section that occurs later in the file.
  *
- * <p>The section names "system" and "env" are reserved for special
- * "pseudosections."</p>
+ * The section names "system" and "env" are reserved for special
+ * "pseudosections."
  *
- * <p>The "system" pseudosection is used to interpolate values from
- * <tt>System.properties</tt> For instance, <tt>${system.user.home}</tt>
- * substitutes the value of the <tt>user.home</tt> system property
- * (typically, the home directory of the user running the program).
- * Similarly, <tt>${system.user.name}</tt> substitutes the user's name.</p>
+ * The "system" pseudosection is used to interpolate values from
+ * `System.properties` For instance, `${system.user.home}` substitutes the
+ * value of the `user.home` system property (typically, the home directory
+ * of the user running the program). Similarly, `${system.user.name}`
+ * substitutes the user's name.
  *
- * <p>The "env" pseudosection is used to interpolate values from the
- * environment. On UNIX systems, for instance, <tt>${env.HOME}</tt>
- * substitutes user's home directory (and is, therefore, a synonym for
- * <tt>${system.user.home}</tt>. On some versions of Windows,
- * <tt>${env.USERNAME}</tt> will substitute the name of the user running
- * the program. Note: On UNIX systems, environment variable names are
- * typically case-sensitive; for instance, <tt>${env.USER}</tt> and
- * <tt>${env.user}</tt> refer to different environment variables. On
- * Windows systems, environment variable names are typically
- * case-insensitive; <tt>${env.USERNAME}</tt> and <tt>${env.username}</tt>
- * are equivalent.</p>
+ * The "env" pseudosection is used to interpolate values from the
+ * environment. On UNIX systems, for instance, `${env.HOME}` substitutes
+ * user's home directory (and is, therefore, a synonym for
+ * `${system.user.home}`. On some versions of Windows, `${env.USERNAME}`
+ * will substitute the name of the user running the program. Note: On UNIX
+ * systems, environment variable names are typically case-sensitive; for
+ * instance, `${env.USER}` and `${env.user}` refer to different environment
+ * variables. On Windows systems, environment variable names are typically
+ * case-insensitive; `${env.USERNAME}` and `${env.username}` are
+ * equivalent.
  *
- * <p>Notes and caveats:</p>
+ * '''Notes and caveats:'''
  *
- * <ul>
- *   <li> <tt>Configuration</tt> uses the
- *        <tt>grizzled.string.template.UnixShellVariableSubstituter</tt>
- *        class to do variable substitution, so it honors all the syntax
- *        conventions supported by that class.
+ * `Configuration` uses the
+ * `grizzled.string.template.UnixShellVariableSubstituter`
+ * class to do variable substitution, so it honors all the syntax conventions
+ * supported by that class.
  *
- *   <li> Variable substitutions are only permitted within variable
- *        values. They are ignored in variable names, section names,
- *        include directives and comments.
+ * Variable substitutions are only permitted within variable values. They are
+ * ignored in variable names, section names, include directives and comments.
  *
- *   <li> Variable substitution is performed <i>after</i> metacharacter
- *        expansion (so don't include metacharacter sequences in your variable
- *        names).
+ * Variable substitution is performed ''after'' metacharacter expansion (so
+ * don't include metacharacter sequences in your variable names).
  *
- *   <li> To include a literal "$" character in a variable value, escape
- *        it with a backslash, e.g., "<tt>var=value with \$ dollar sign</tt>"
- * </ul>
+ * To include a literal "$" character in a variable value, escape it with a
+ * backslash, e.g., "`var=value with \$ dollar sign`"
  *
- * <h5><a name="RawValues">Suppressing Metacharacter Expansion and Variable
- * Substitution</a></h5>
+ * '''Suppressing Metacharacter Expansion and Variable Substitution'''
  *
- * <p>To prevent the parser from interpreting metacharacter sequences,
+ * To prevent the parser from interpreting metacharacter sequences,
  * variable substitutions and other special characters, use the "->"
- * assignment operator, instead of ":" or "=".</p>
+ * assignment operator, instead of ":" or "=".
  *
- * <p>For example, suppose you want to set variable "prompt" to the
+ * For example, suppose you want to set variable "prompt" to the
  * literal value "Enter value. To specify a newline, use \n." The following
- * configuration file line will do the trick:</p>
+ * configuration file line will do the trick:
  *
- * <blockquote><pre>prompt -> Enter value. To specify a newline, use \n
- * </pre></blockquote>
+ * {{{
+ * prompt -> Enter value. To specify a newline, use \n
+ * }}}
  *
- * <p>Similarly, to set variable "abc" to the literal string "${foo}"
+ * Similarly, to set variable "abc" to the literal string "${foo}"
  * suppressing the parser's attempts to expand "${foo}" as a variable
- * reference, you could use:</p>
+ * reference, you could use:
  *
- * <blockquote><pre>abc -> ${foo}</pre></blockquote>
+ * {{{
+ * abc -> ${foo}
+ * }}}
  *
- * <p>Note: It's also possible, though hairy, to escape the special meaning
+ * Note: It's also possible, though hairy, to escape the special meaning
  * of special characters via the backslash character. For instance, you can
  * escape the variable substitution lead-in character, '$', with a
  * backslash. e.g., "\$". This technique is not recommended, however,
@@ -266,60 +258,60 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  * go away if the configuration file parser parsed both metacharacter
  * sequences and variable substitutions itself, in one pass. It doesn't
  * currently do that, because it uses the separate
- * <tt>grizzled.string.template.UnixShellStringTemplate</tt> class
- * <tt>grizzled.GrizzledString.translateMetachars()</tt> method to do the
+ * `grizzled.string.template.UnixShellStringTemplate` class
+ * `grizzled.GrizzledString.translateMetachars()` method to do the
  * variable substitution and metacharacter translation. In general, you're
- * better off just sticking with the "->" assignment operator.</p>
+ * better off just sticking with the "->" assignment operator.
  *
- * <h4>Includes</h4>
+ * '''Includes'''
  *
- * <p>A special include directive permits inline inclusion of another
+ * A special include directive permits inline inclusion of another
  * configuration file. The include directive takes two forms:
  *
- * <blockquote><pre>
+ * {{{
  * %include "path"
  * %include "URL"
- * </pre></blockquote>
+ * }}}
  *
- * <p>For example:</p>
+ * For example:
  *
- * <blockquote><pre>
+ * {{{
  * %include "/home/bmc/mytools/common.cfg"
  * %include "http://configs.example.com/mytools/common.cfg"
- * </pre></blockquote>
+ * }}}
  *
- * <p>If the include path is not a URL, and is not an absolute path, its
- * location is relative to the file that's trying to include it.</p>
+ * If the include path is not a URL, and is not an absolute path, its
+ * location is relative to the file that's trying to include it.
  * 
- * <p>The included file may contain any content that is valid for this
+ * The included file may contain any content that is valid for this
  * parser. It may contain just variable definitions (i.e., the contents of
  * a section, without the section header), or it may contain a complete
  * configuration file, with individual sections. Since
- * <tt>Configuration</tt> recognizes a variable syntax that is
+ * `Configuration` recognizes a variable syntax that is
  * essentially identical to Java's properties file syntax, it's also legal
  * to include a properties file, provided it's included within a valid
- * section.</p>
+ * section.
  *
- * <p>Note: Attempting to include a file from itself, either directly or
- * indirectly, will cause the parser to throw an exception.</p>
+ * Note: Attempting to include a file from itself, either directly or
+ * indirectly, will cause the parser to throw an exception.
  *
- * <h4>Comments and Blank Lines</h4>
+ * '''Comments and Blank Lines'''
  *
- * <p>A comment line is a one whose first non-whitespace character is a "#".
+ * A comment line is a one whose first non-whitespace character is a "#".
  * A blank line is a line containing no content, or one containing only
- * white space. Blank lines and comments are ignored.</p>
+ * white space. Blank lines and comments are ignored.
  *
- * <h4>Caller-supplied Predefined Sections</h4>
+ * '''Caller-supplied Predefined Sections'''
  *
- * <p>Calling applications may supply predefined sections and options, in
+ * Calling applications may supply predefined sections and options, in
  * the form of a map. These sections may then be used by other sections,
  * via variable references. The predefined sections are defined in a map of
  * maps. The outer map is keyed by predefined section name. The inner maps
  * consist of options and their values. For instance, to read a
  * configuration file, giving it access to certain command line parameters,
- * you could do something like this:</p>
+ * you could do something like this:
  *
- * <blockquote><pre>
+ * {{{
  * object Foo
  * {
  *     def main(args: Array[String]) =
@@ -334,7 +326,7 @@ class NoSuchOptionException(sectionName: String, optionName: String)
  *         ..
  *     }
  * }
- * </pre></blockquote>
+ * }}}
  *
  * @param predefinedSections  the predefined sections. An empty map means
  *                            there are no predefined sections.
@@ -415,8 +407,8 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      *
      * @param sectionName  the new section's name
      *
-     * @return <tt>true</tt> if the configuration has a section with that name,
-     *         <tt>false</tt> otherwise
+     * @return `true` if the configuration has a section with that name,
+     *         `false` otherwise
      */
     def hasSection(sectionName: String): Boolean =
         sections contains sectionName
@@ -557,9 +549,9 @@ object ConfigurationReader
     /**
      * Read a configuration.
      *
-     * @param source <tt>scala.io.Source</tt> object to read
+     * @param source `scala.io.Source` object to read
      *
-     * @return the <tt>Configuration</tt> object.
+     * @return the `Configuration` object.
      */
     def read(source: Source): Configuration =
         read(source, Map.empty[String, Map[String, String]])
@@ -572,7 +564,7 @@ object ConfigurationReader
      * For instance, to read a configuration file, giving it access to
      * certain command line parameters, you could do something like this:
      *
-     * <blockquote><pre>
+     * {{{
      * object Foo
      * {
      *     def main(args: Array[String]) =
@@ -587,13 +579,13 @@ object ConfigurationReader
      *         ..
      *     }
      * }
-     * </pre></blockquote>
+     * }}}
      *
-     * @param source    <tt>scala.io.Source</tt> object to read
+     * @param source    `scala.io.Source` object to read
      * @param sections  the predefined sections. An empty map means there are
      *                  no predefined sections.
      *
-     * @return the <tt>Configuration</tt> object.
+     * @return the `Configuration` object.
      */
     def read(source: Source,
              sections: Map[String, Map[String, String]]): Configuration =
@@ -688,7 +680,7 @@ object ConfigurationReader
 }
 
 /**
- * Companion object for the <tt>Configuration</tt> class
+ * Companion object for the `Configuration` class
  */
 object Configuration
 {
@@ -697,9 +689,9 @@ object Configuration
     /**
      * Read a configuration file.
      *
-     * @param source <tt>scala.io.Source</tt> object to read
+     * @param source `scala.io.Source` object to read
      *
-     * @return the <tt>Configuration</tt> object.
+     * @return the `Configuration` object.
      */
     def apply(source: Source): Configuration = ConfigurationReader.read(source)
 
@@ -711,7 +703,7 @@ object Configuration
      * For instance, to read a configuration file, giving it access to
      * certain command line parameters, you could do something like this:
      *
-     * <blockquote><pre>
+     * {{{
      * object Foo
      * {
      *     def main(args: Array[String]) =
@@ -726,13 +718,13 @@ object Configuration
      *         ..
      *     }
      * }
-     * </pre></blockquote>
+     * }}}
      *
-     * @param source    <tt>scala.io.Source</tt> object to read
+     * @param source    `scala.io.Source` object to read
      * @param sections  the predefined sections. An empty map means there are
      *                  no predefined sections.
      *
-     * @return the <tt>Configuration</tt> object.
+     * @return the `Configuration` object.
      */
     def apply(source: Source,
               sections: Map[String, Map[String, String]]): Configuration =
