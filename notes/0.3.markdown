@@ -1,0 +1,20 @@
+* Converted to Scala 2.8.0
+* Now must be compiled with [SBT][sbt] version 0.7.0 or better.
+* Fixed tail call optimization problem in `grizzled.io.RichInputStream`.
+  Thanks to Claudio Bley (*cbley /at/ av-test.de*)
+* Added grizzled.parsing.MarkdownParser, for parsing Markdown documents.
+  (Currently uses the [Showdown][showdown] Javascript library, via 
+  [Mozilla Rhino][rhino].)
+* `grizzled.cmd.HelpHandler` now supports a ".help" alias.
+* Added `grizzled.util.withCloseable` control structure.
+* The grizzled.readline API now uses the [Java EditLine][javaeditline]
+  wrapper for the Unix EditLine library, instead of the one in
+  Java-Readline. implementation, instead of the one in Java-Readline.
+  Completion handling is more reliable with the Java Editline
+  implementation.
+* grizzled.cmd now tries to load EditLine first.
+
+[sbt]: http://code.google.com/p/simple-build-tool
+[javaeditline]: http://www.clapper.org/software/java/javaeditline/
+[showdown]: http://attacklab.net/showdown/
+[rhino]: http://www.mozilla.org/rhino/
