@@ -23,7 +23,18 @@ object Foo extends CommandHandler
         completer.complete(token, allTokens, line)
 }
 
-class Block(val cmd: Test) extends CommandHandler with BlockCommandHandler
+class CommentHandler extends HiddenCommandHandler
+{
+    val CommandName = "rem"
+
+    def runCommand(commandName: String, unparsedArgs: String): CommandAction =
+    {
+        println("*** Comment. Ignored.")
+        KeepGoing
+    }
+}
+
+class BlockHandler extends BlockCommandHandler
 {
     val CommandName = "{"
     val EndCommand = """\}""".r
@@ -73,10 +84,13 @@ class Test extends CommandInterpreter("Test")
                         new Prompt(this), 
                         new HistoryHandler(this),
                         new RedoHandler(this),
-                        new Block(this),
+                        new BlockHandler,
+                        new CommentHandler,
                         ExitHandler)
     var prompt = super.primaryPrompt
     override def primaryPrompt = prompt
+
+    override def StartCommandIdentifier = super.StartCommandIdentifier + "-"
 
     override def preLoop =
     {

@@ -358,8 +358,7 @@ abstract class CommandInterpreter(val appName: String,
      * <tt>StartCommandIdentifier</tt> is the list of characters that are
      * permitted as the first character of a white space-delimited,
      * multicharacter command name. All other characters are assumed to
-     * introduce single-character commands. The default value permits
-     * alphanumeric initial characters. Subclasses may override this value
+     * introduce single-character commands. Subclasses may override this value
      * to permit additional, or different, starting characters for
      * multicharacter command names. See the <tt>splitCommandAndArgs()</tt>
      * method for more details.
@@ -1006,7 +1005,7 @@ abstract class CommandInterpreter(val appName: String,
      */
     private def sortedCommandNames(includeAliases: Boolean): List[String] =
     {
-        val namesOnly = allHandlers.map(_.CommandName)
+        val namesOnly = allHandlers.filter(! _.hidden).map(_.CommandName)
         val allNames = 
             if (includeAliases)
                 // Extract the aliases, producing a list of lists of strings.
