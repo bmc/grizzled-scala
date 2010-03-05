@@ -200,17 +200,23 @@ trait CommandHandler
 }
 
 /**
+ * Mixed in to indicate no completions are available.
+ */
+trait NoCompletionsHandler extends CommandHandler
+{
+    override final def commandNameCompletions(prefix: String): List[String] = 
+        Nil
+}
+
+/**
  * The handler trait for a hidden command. Hidden commands don't show up in
  * the help or the history.
  */
-trait HiddenCommandHandler extends CommandHandler
+trait HiddenCommandHandler extends NoCompletionsHandler
 {
     val Help = "<hidden>"
     override val hidden = true
     override val storeInHistory = false
-
-    override final def commandNameCompletions(prefix: String): List[String] = 
-        Nil
 }
 
 /**
@@ -221,14 +227,11 @@ trait HiddenCommandHandler extends CommandHandler
  * stop reading, the command reader just keeps reading until it sees a
  * line matching the `EndCommand` regular expression.
  */
-trait BlockCommandHandler extends CommandHandler
+trait BlockCommandHandler extends NoCompletionsHandler
 {
     val EndCommand: scala.util.matching.Regex
 
     override final def moreInputNeeded(lineSoFar: String): Boolean = false
-
-    override final def commandNameCompletions(prefix: String): List[String] = 
-        Nil
 }
 
 /**

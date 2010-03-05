@@ -34,12 +34,10 @@ class CommentHandler extends HiddenCommandHandler
     }
 }
 
-class BlockHandler extends BlockCommandHandler
+class BlockHandler extends BlockCommandHandler with HiddenCommandHandler
 {
     val CommandName = "{"
     val EndCommand = """\}""".r
-
-    val Help = "{}"
 
     def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
     {
