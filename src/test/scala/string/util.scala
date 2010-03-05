@@ -181,7 +181,7 @@ quam. Vestibulum ante ipsum primis in.""",
             expect(expected, "\"" + input + "\" -> " + expected.toString)
             {
                 val wrapper = new WordWrapper(width, indent, prefix, indentChar)
-                wrapper.wrap(prefix + string)
+                wrapper.wrap(string)
             }
         }
     }

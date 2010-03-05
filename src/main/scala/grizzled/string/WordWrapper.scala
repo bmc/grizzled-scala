@@ -125,14 +125,6 @@ class WordWrapper(val wrapWidth:    Int = 79,
         val prefixIndentChars = indentString * prefixLength
         val indentChars = indentString * indentation
         val buf = new ArrayBuffer[String]
-        var thePrefix = prefix
-
-        def usePrefix =
-        {
-            val result = thePrefix
-            thePrefix = prefixIndentChars
-            result
-        }
 
         def assembleLine(prefix: String, buf: ArrayBuffer[String]): String =
             prefix + indentChars + buf.mkString(" ")
@@ -172,8 +164,7 @@ class WordWrapper(val wrapWidth:    Int = 79,
         }
 
         val lines = s.split("\n")
-        // First prefix is empty.
-        buf += wrapOneLine(lines(0), "")
+        buf += wrapOneLine(lines(0), prefix)
         for (line <- lines.drop(1))
             buf += wrapOneLine(line, prefixIndentChars)
 

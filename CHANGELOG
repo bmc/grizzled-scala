@@ -5,6 +5,7 @@ Version 0.4 (...)
 - Added HiddenCommandHandler to grizzled.cmd, allowing special commands that
   are not displayed in the help.
 - Changed EOF handling in grizzled.cmd slightly.
+- Fixed problem with prefix handling in grizzled.string.WordWrapper.
 - Now uses sbt 0.7.2
 
 ---------------------------------------------------------------------------
