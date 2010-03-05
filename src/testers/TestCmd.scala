@@ -23,6 +23,20 @@ object Foo extends CommandHandler
         completer.complete(token, allTokens, line)
 }
 
+class Block(val cmd: Test) extends CommandHandler with BlockCommandHandler
+{
+    val CommandName = "{"
+    val EndCommand = """\}""".r
+
+    val Help = "{}"
+
+    def runCommand(commandName: String, unparsedArgs: String): CommandAction = 
+    {
+        println("*** commandName: " + commandName + ", args=" + unparsedArgs)
+        KeepGoing
+    }
+}
+
 class Prompt(val cmd: Test) extends CommandHandler
 {
     val CommandName = "prompt"
@@ -59,6 +73,7 @@ class Test extends CommandInterpreter("Test")
                         new Prompt(this), 
                         new HistoryHandler(this),
                         new RedoHandler(this),
+                        new Block(this),
                         ExitHandler)
     var prompt = super.primaryPrompt
     override def primaryPrompt = prompt

@@ -103,6 +103,13 @@ trait CommandHandler
     val storeInHistory = true
 
     /**
+     * Whether or not the command is hidden. Hidden commands don't show up
+     * in the help list or the history. Using the `HiddenCommandHandler`
+     * trait saves a lot of work.
+     */
+    val hidden = false
+
+    /**
      * The help for this command. The help string is written as is to the
      * screen. It is not wrapped, indented, or otherwise reformatted. It
      * may be a single string or a multiline string.
@@ -153,6 +160,8 @@ trait CommandHandler
      * objects can override this method to ensure that the command has a
      * required terminating character (e.g., a ";"), doesn't end with a line
      * continuation character (e.g., "\"), or whatever the syntax requires.
+     *
+     * @param lineSoFar the line read so far
      */
     def moreInputNeeded(lineSoFar: String): Boolean = false
 
@@ -188,6 +197,38 @@ trait CommandHandler
      * Convenience method to retrieve the combined list of names and aliases.
      */
     private[this] def allNames = CommandName :: aliases
+}
+
+/**
+ * The handler trait for a hidden command. Hidden commands don't show up in
+ * the help or the history.
+ */
+trait HiddenCommandHandler extends CommandHandler
+{
+    val Help = "<hidden>"
+    override val hidden = true
+    override val storeInHistory = false
+
+    override final def commandNameCompletions(prefix: String): List[String] = 
+        Nil
+}
+
+/**
+ * A block command is one that consists of multiple input lines between
+ * some sort of start and end indicator. Mixing this trait into a command
+ * handler changes the behavior of the command reader when it see the
+ * command. Instead of calling `moreInputNeeded()` to determine when to
+ * stop reading, the command reader just keeps reading until it sees a
+ * line matching the `EndCommand` regular expression.
+ */
+trait BlockCommandHandler extends CommandHandler
+{
+    val EndCommand: scala.util.matching.Regex
+
+    override final def moreInputNeeded(lineSoFar: String): Boolean = false
+
+    override final def commandNameCompletions(prefix: String): List[String] = 
+        Nil
 }
 
 /**
@@ -814,12 +855,14 @@ abstract class CommandInterpreter(val appName: String,
         {
             assert (readerStack.size > 0)
             val reader = readerStack.top
-            val s = reader(usePrompt)
-            val readlineResult = s match
+            val readlineResult = reader(usePrompt) match
             {
-                case None if (lineSoFar == "") => None
-                case None                      => Some(lineSoFar)
-                case Some(line)                => Some(lineSoFar + line)
+                case None =>
+                    None
+                case Some(line) if (lineSoFar == "") => 
+                    Some((line, line))
+                case Some(line) => 
+                    Some((line, (List(lineSoFar, line) mkString "\n")))
             }
 
             readlineResult match
@@ -834,19 +877,26 @@ abstract class CommandInterpreter(val appName: String,
                         doRead("", primaryPrompt)
                     }
 
-                case Some(line) if ((line == null) || (line.trim == "")) =>
+                case Some((line, fullLine)) if (fullLine.trim == "") =>
                     Some("")
 
-                case Some(line) =>
-                    val (name, args) = splitCommandAndArgs(line)
+                case Some((line, fullLine)) =>
+                    val (name, args) = splitCommandAndArgs(fullLine)
 
                     findCommand(name) match
                     {
                         case None =>
                             Some(line)
 
-                        case Some(handler) =>
-                            if (! handler.moreInputNeeded(line))
+                        case Some(h: BlockCommandHandler) =>
+                            // Keep going until end of block.
+                            if (h.EndCommand.findFirstIn(line) != None)
+                                Some(fullLine)
+                            else
+                                doRead(fullLine, secondaryPrompt)
+
+                        case Some(h) =>
+                            if (! h.moreInputNeeded(line))
                                 Some(line)
                             else
                                 doRead(line + " ", secondaryPrompt)

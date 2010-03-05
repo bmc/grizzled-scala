@@ -1,3 +1,12 @@
+Version 0.4 (...)
+
+- Added BlockCommandHandler to grizzled.cmd, to handle commands consisting
+  of blocks of lines between a start and end line.
+- Added HiddenCommandHandler to grizzled.cmd, allowing special commands that
+  are not displayed in the help.
+- Changed EOF handling in grizzled.cmd slightly.
+
+---------------------------------------------------------------------------
 Version 0.3.1 (2 March, 2010)
 
 - grizzled.cmd changes:
