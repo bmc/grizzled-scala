@@ -212,4 +212,15 @@ final class GrizzledFile(val file: File)
      */
     def walk(topdown: Boolean = true): List[(String, List[String], List[String])] =
         util.walk(file.getPath, topdown)
+
+    /**
+     * Determine whether a directory is empty. Only meaningful for a directory.
+     *
+     * @return true if the directory is empty, false if not
+     */
+    def isEmpty: Boolean =
+    {
+        assert (file.isDirectory)
+        file.listFiles.length == 0
+    }
 }

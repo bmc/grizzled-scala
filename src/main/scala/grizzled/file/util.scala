@@ -38,12 +38,14 @@
 package grizzled.file
 
 import scala.util.matching.Regex
+import scala.annotation.tailrec
 
 import grizzled.io.implicits._
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
 
 import java.io.{File, IOException}
+import java.security.{SecureRandom => Random}
 
 class FileDoesNotExistException(message: String) extends Exception
 
@@ -688,6 +690,111 @@ object util
      */
     def joinPath(pieces: String*): String =
         joinPath(fileSeparator, pieces.toList)
+
+    /**
+     * Determine the temporary directory to use.
+     *
+     * @return the temporary directory
+     */
+    def temporaryDirectory: File =
+    {
+        import grizzled.sys.OperatingSystem._
+
+        def guess: String =
+        {
+            grizzled.sys.os match
+            {
+                case Posix => "/tmp"
+                case Mac   => "/tmp"
+                case (Windows | WindowsCE | OS2 | NetWare) => """C:\TEMP"""
+                case _  => throw new UnsupportedOperationException
+            }
+        }
+
+        val sysProp = System getProperty "java.io.tmpdir"
+        val tempDirName = if (sysProp == null) guess else sysProp
+        new File(tempDirName)
+    }
+
+    private lazy val random = new Random()
+    /**
+     * Create a temporary directory.
+     *
+     * @param prefix    Prefix for directory name
+     * @param maxTries  Maximum number of times to try creating the
+     *                  directory before giving up.
+     *
+     * @return the directory. Throws an IOException if it can't create
+     *         the directory.
+     */
+    def createTemporaryDirectory(prefix: String, maxTries: Int = 3): File =
+    {
+        def createDirectory(dir: File): Option[File] =
+        {
+            if (! dir.exists)
+            {
+                if (! dir.mkdirs())
+                    throw new IOException("Failed to create directory \"" +
+                                          dir.getAbsolutePath + "\"")
+
+                Some(dir)
+            }
+
+            else
+            {
+                None
+            }
+        }
+
+        @tailrec def create(tries: Int): File =
+        {
+            import java.lang.{Integer => JInt}
+            import grizzled.file.implicits._
+
+            if (tries > maxTries)
+                throw new IOException("Failed to create temporary directory " +
+                                      "after " + maxTries + " attempts.")
+
+            val usePrefix = if (prefix == null) "" else prefix
+            val randomName = usePrefix + JInt.toHexString(random.nextInt)
+	    val dir = new File (temporaryDirectory, randomName)
+
+            createDirectory(dir) match
+            {
+                case Some(dir) if (dir.isEmpty) => dir
+                case _                          => create(tries + 1)
+            }
+        }
+
+	create(0)
+    }
+
+    /**
+     * Allow execution of a block of code within the context of a temporary
+     * directory. The temporary directory is cleaned up after the operation
+     * completes.
+     *
+     * @param prefix  file name prefix to use
+     * @param action  action to perform
+     *
+     * @return whatever the action returns
+     */
+    def withTemporaryDirectory[T](prefix: String)(action: File => T) =
+    {
+        import grizzled.file.implicits._
+
+        val temp = createTemporaryDirectory(prefix)
+        temp.deleteOnExit
+        try
+        {
+            action(temp)
+        }
+
+        finally
+        {
+            temp.deleteRecursively
+        }
+    }
 
     /**
      * Copy multiple files to a target directory. Also see the version of this

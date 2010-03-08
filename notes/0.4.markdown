@@ -3,6 +3,10 @@
 * Added `HiddenCommandHandler` to `grizzled.cmd`, allowing special commands 
   that are not displayed in the help.
 * Changed EOF handling in `grizzled.cmd` slightly.
+* Added `createTemporaryDirectory()` and `withTemporaryDirectory()` to
+  `grizzled.file.util` module.
+- Added `isEmpty` to `grizzled.file.GrizzledFile` (which can be implicitly
+  converted to and from `java.io.File`).
 * Fixed problem with prefix handling in `grizzled.string.WordWrapper`.
 * Now uses [SBT][sbt] 0.7.2
 
