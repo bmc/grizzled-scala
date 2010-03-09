@@ -43,7 +43,7 @@ package grizzled.readline.javareadline
 
 import grizzled.readline._
 import grizzled.collection._
-import grizzled.collection.implicits._
+import grizzled.collection.CollectionIterator.Implicits._
 import grizzled.string.implicits._
 
 import org.gnu.readline.{Readline => JavaReadline,

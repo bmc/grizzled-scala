@@ -682,7 +682,7 @@ abstract class CommandInterpreter(val appName: String,
         private def helpHelp =
         {
             import scala.collection.mutable.ArrayBuffer
-            import grizzled.collection.GrizzledSeq._
+            import grizzled.collection.GrizzledLinearSeq.Implicits._
 
             // Help only.
 

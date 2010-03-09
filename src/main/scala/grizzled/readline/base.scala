@@ -460,6 +460,22 @@ trait Readline
     }
 
     /**
+     * Set the maximum number of completions to show, when there are multiple
+     * completions that match a token (if supported by the underlying library).
+     *
+     * @param max  maximum number of completions to show, or 0 for all
+     */
+    def maxShownCompletions_=(max: Int): Unit = ()
+
+    /**
+     * Get the maximum number of completions to show, when there are multiple
+     * completions that match a token (if supported by the underlying library).
+     *
+     * @return  maximum number of completions to show, or 0 for all
+     */
+    def maxShownCompletions: Int = 0
+
+    /**
      * The actual function that does the readline work, provided by the
      * concrete implementing class.
      *

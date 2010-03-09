@@ -3,6 +3,7 @@
 * Added `grizzled.collection.GrizzledSeq.columnarize()`, which takes a
   sequence (e.g., a list), converts its contents to strings, and returns a
   single string with the sequence's contents arranged in columns.
+* `grizzled.editline.EditLine` now shows its completions in columnar format.
 * Added `BlockCommandHandler` to `grizzled`.cmd, to handle commands consisting
   of blocks of lines between a start and end line.
 * Added `HiddenCommandHandler` to `grizzled.cmd`, allowing special commands 

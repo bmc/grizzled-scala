@@ -122,7 +122,44 @@ private[readline] class EditLineImpl(appName: String,
     val self = this
 
     editline.setCompletionHandler(editlineCompleter)
+    editline.setCompletionsDisplayer(editlineCompletionsDisplayer)
     editline.setHistoryUnique(true)
+
+    /**
+     * Set the maximum number of completions to show, when there are multiple
+     * completions that match a token (if supported by the underlying library).
+     *
+     * @param max  maximum number of completions to show, or 0 for all
+     */
+    override def maxShownCompletions_=(max: Int): Unit =
+        editline.setMaxShownCompletions(max)
+
+    /**
+     * Get the maximum number of completions to show, when there are multiple
+     * completions that match a token (if supported by the underlying library).
+     *
+     * @return  maximum number of completions to show, or 0 for all
+     */
+    override def maxShownCompletions: Int = editline.getMaxShownCompletions
+
+    object editlineCompletionsDisplayer 
+        extends EditLine.PossibleCompletionsDisplayer
+    {
+        def showCompletions(tokens: java.lang.Iterable[String]) =
+        {
+            import grizzled.collection.GrizzledIterable.Implicits._
+            import scala.collection.JavaConversions._
+
+            val maxTemp = editline.getMaxShownCompletions
+            val max = if (maxTemp <= 0) java.lang.Integer.MAX_VALUE else maxTemp
+            val all = IterableWrapper(tokens).toList
+            val toShow = all take max
+            println("\nPossible completions:")
+            println(toShow.columnarize(79))
+            if (max < all.length)
+                println("[... " + (all.length - max) + " more ...]")
+        }
+    }
 
     object editlineCompleter 
         extends EditLine.CompletionHandler with CompleterHelper
