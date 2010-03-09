@@ -651,38 +651,6 @@ abstract class CommandInterpreter(val appName: String,
     }
 
     /**
-     * Take a list of strings and print them in columns.
-     *
-     * @param strings  the list of strings
-     * @param width    how wide a virtual screen to use
-     *
-     * @return a possibly multiline string containing the columnar output
-     */
-    def columnarize(strings: List[String], width: Int): String =
-    {
-        import scala.collection.mutable.ArrayBuffer
-        import grizzled.math.util.max
-
-        val buf = new ArrayBuffer[Char] 
-
-        // Lay them out in columns. Simple-minded for now.
-        val colSize = max(strings.map(_.length): _*) + 2
-        val colsPerLine = width / colSize
-        for ((s, i) <- strings.zipWithIndex)
-        {
-            val count = i + 1
-            if ((count % colsPerLine) == 0)
-                buf += '\n'
-
-            val padding = " " * (colSize - s.length)
-            buf ++= (s + padding)
-        }
-
-        buf += '\n'
-        buf mkString ""
-    }
-
-    /**
      * Repeatedly issue a prompt, accept input, parse an initial prefix from
      * the received input, and dispatch to execution handlers.
      */
@@ -714,6 +682,7 @@ abstract class CommandInterpreter(val appName: String,
         private def helpHelp =
         {
             import scala.collection.mutable.ArrayBuffer
+            import grizzled.collection.GrizzledSeq._
 
             // Help only.
 
@@ -722,7 +691,7 @@ abstract class CommandInterpreter(val appName: String,
             println("Help is available for the following commands:")
             println("-" * OutputWidth)
 
-            print(columnarize(commandNames, OutputWidth))
+            print(commandNames.columnarize(OutputWidth))
         }
 
         private def helpCommand(names: List[String])

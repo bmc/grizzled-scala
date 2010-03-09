@@ -1,5 +1,10 @@
 Version 0.4 (...)
 
+- Added grizzled.collection.GrizzledSeq and related implicits, as a place to
+  put additional methods for sequences.
+- Added grizzled.collection.GrizzledSeq.columnarize(), which takes a sequence
+  (e.g., a list), converts its contents to strings, and returns a single string
+  with the sequence's contents arranged in columns.
 - Added BlockCommandHandler to grizzled.cmd, to handle commands consisting
   of blocks of lines between a start and end line.
 - Added HiddenCommandHandler to grizzled.cmd, allowing special commands that

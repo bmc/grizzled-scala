@@ -40,14 +40,15 @@
  */
 package grizzled.collection
 
+import scala.collection.generic._
 import java.util.{Collection, Iterator => JIterator}
 
 /**
  * Useful for converting a collection into an object suitable for use with
  * Scala's <tt>for</tt> loop.
  */
-class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
-{
+class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T] {
+
     /**
      * Alternate constructor that takes a collection.
      *
@@ -62,13 +63,12 @@ class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
 /**
  * An <tt>Iterator</tt> for lists.
  */
-class ListIterator[+T](val list: List[T]) extends Iterator[T]
-{
+class ListIterator[+T](val list: List[T]) extends Iterator[T] {
+
     private var cursor = 0
 
     def hasNext: Boolean = cursor < list.length
-    def next: T =
-    {
+    def next: T = {
         val result = list(cursor)
         cursor += 1
         result
@@ -81,8 +81,8 @@ class ListIterator[+T](val list: List[T]) extends Iterator[T]
  *
  * @param iterators  the iterators to wrap
  */
-class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
-{
+class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
+
     private val iteratorList: List[Iterator[T]] = iterators.toList
     private var cursor = 0
 
@@ -92,16 +92,14 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
      *
      * @return <tt>true</tt> if there's more to read, <tt>false</tt> if not
      */
-    def hasNext: Boolean =
-    {
+    def hasNext: Boolean = {
         if (cursor >= iteratorList.length)
             false
 
         else if (iteratorList(cursor).hasNext)
             true
 
-        else
-        {
+        else {
             cursor += 1
             hasNext
         }
@@ -112,8 +110,7 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
      *
      * @return the next element
      */
-    def next: T =
-    {
+    def next: T = {
         if (! hasNext)
             throw new java.util.NoSuchElementException
 
@@ -121,11 +118,68 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
     }
 }
 
+class GrizzledSeq[+T](seq: Seq[T]) extends SeqForwarder[T] {
+
+    protected def underlying = seq
+
+    def realSeq = seq
+
+    /**
+     * Create a string containing the contents of this sequence, arranged
+     * in columns.
+     *
+     * @param width    total (maximum) columns
+     *
+     * @return a possibly multiline string containing the columnar output.
+     *         The string may have embedded newlines, but it will not end
+     *         with a newline.
+     */
+    def columnarize(width: Int): String = {
+        import scala.collection.mutable.ArrayBuffer
+        import grizzled.math.util.{max => maxnum}
+
+        val buf = new ArrayBuffer[Char] 
+
+        // Lay them out in columns. Simple-minded for now.
+        val strings = seq.map(_.toString).toList
+        val colSize = maxnum(strings.map(_.length): _*) + 2
+        val colsPerLine = width / colSize
+        for ((s, i) <- strings.zipWithIndex) {
+            val count = i + 1
+            if ((count % colsPerLine) == 0)
+                buf += '\n'
+
+            val padding = " " * (colSize - s.length)
+            buf ++= (s + padding)
+        }
+
+        buf mkString ""
+    }
+
+    override def toString = underlying.toString
+}
+
 /**
- * Implicit conversions for this package.
+ * Implicit conversions specific to GrizzledSeq.
  */
-object implicits
-{
+object GrizzledSeq {
+
+    /**
+     * Convert a Scala Seq object to a GrizzledSeq.
+     */
+    implicit def scalaSeqToGrizzledSeq[T](seq: Seq[T]) = new GrizzledSeq[T](seq)
+
+    /**
+     * Convert GrizzledSeq a object to a Scala Seq.
+     */
+    implicit def grizzledSeqToScalaSeq[T](seq: GrizzledSeq[T]) = seq.realSeq
+}
+
+/**
+ * Misc. implicit conversions for this package.
+ */
+object implicits {
+
     /**
      * Convert a Java collection (from <tt>java.util</tt>) into a
      * <tt>CollectionIterator</tt>.

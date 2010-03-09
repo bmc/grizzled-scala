@@ -1,3 +1,8 @@
+* Added `grizzled.collection.GrizzledSeq` and related implicits, as a place
+  to put additional methods for sequences.
+* Added `grizzled.collection.GrizzledSeq.columnarize()`, which takes a
+  sequence (e.g., a list), converts its contents to strings, and returns a
+  single string with the sequence's contents arranged in columns.
 * Added `BlockCommandHandler` to `grizzled`.cmd, to handle commands consisting
   of blocks of lines between a start and end line.
 * Added `HiddenCommandHandler` to `grizzled.cmd`, allowing special commands 
@@ -5,7 +10,7 @@
 * Changed EOF handling in `grizzled.cmd` slightly.
 * Added `createTemporaryDirectory()` and `withTemporaryDirectory()` to
   `grizzled.file.util` module.
-- Added `isEmpty` to `grizzled.file.GrizzledFile` (which can be implicitly
+* Added `isEmpty` to `grizzled.file.GrizzledFile` (which can be implicitly
   converted to and from `java.io.File`).
 * Fixed problem with prefix handling in `grizzled.string.WordWrapper`.
 * Now uses [SBT][sbt] 0.7.2
