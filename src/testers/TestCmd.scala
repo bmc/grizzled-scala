@@ -17,6 +17,9 @@ object Foo extends CommandHandler
         KeepGoing
     }
 
+    override def moreInputNeeded(lineSoFar: String): Boolean =
+        (! lineSoFar.ltrim.endsWith(";"))
+
     override def complete(token: String,
                           allTokens: List[CompletionToken],
                           line: String): List[String] =

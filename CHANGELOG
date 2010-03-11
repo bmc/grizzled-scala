@@ -1,3 +1,8 @@
+Version 0.4.1 (11 March, 2010)
+
+- Fixed inadvertent bug in grizzled.cmd command handling, when commands
+  span multiple lines.
+
 Version 0.4 (11 March, 2010)
 
 - Added grizzled.collection.GrizzledLinearSeq and related implicits, as a place

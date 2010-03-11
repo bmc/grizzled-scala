@@ -857,7 +857,7 @@ abstract class CommandInterpreter(val appName: String,
                     findCommand(name) match
                     {
                         case None =>
-                            Some(line)
+                            Some(fullLine)
 
                         case Some(h: BlockCommandHandler) =>
                             // Keep going until end of block.
@@ -867,10 +867,10 @@ abstract class CommandInterpreter(val appName: String,
                                 doRead(fullLine, secondaryPrompt)
 
                         case Some(h) =>
-                            if (! h.moreInputNeeded(line))
-                                Some(line)
+                            if (! h.moreInputNeeded(fullLine))
+                                Some(fullLine)
                             else
-                                doRead(line + " ", secondaryPrompt)
+                                doRead(fullLine + " ", secondaryPrompt)
                     }
             }
         }
