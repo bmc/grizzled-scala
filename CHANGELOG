@@ -1,10 +1,12 @@
-Version 0.4 (...)
+Version 0.4 (11 March, 2010)
 
-- Added grizzled.collection.GrizzledLinerSeq and related implicits, as a place
+- Added grizzled.collection.GrizzledLinearSeq and related implicits, as a place
   to put additional methods for sequences.
 - Added grizzled.collection.GrizzledLinearSeq.columnarize(), which takes a
   sequence (e.g., a list), converts its contents to strings, and returns a
   single string with the sequence's contents arranged in columns.
+- Rearranged the locations of various implicit functions, so callers can
+  have finer-grained control over which ones are in scope.
 - grizzled.editline.EditLine now shows its completions in columnar format.
 - Added BlockCommandHandler to grizzled.cmd, to handle commands consisting
   of blocks of lines between a start and end line.
@@ -16,7 +18,7 @@ Version 0.4 (...)
 - Added isEmpty() to grizzled.file.GrizzledFile (which can be implicitly
   converted to and from java.io.File).
 - Fixed problem with prefix handling in grizzled.string.WordWrapper.
-- Now uses sbt 0.7.2
+- Now requires sbt 0.7.2 to build from source.
 
 ---------------------------------------------------------------------------
 Version 0.3.1 (2 March, 2010)
