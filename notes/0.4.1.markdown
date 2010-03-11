@@ -1,0 +1,4 @@
+* Fixed inadvertent bug in `grizzled.cmd` command handling, when commands
+  span multiple lines.
+
+[sbt]: http://code.google.com/p/simple-build-tool
