@@ -1,0 +1,3 @@
+* Updated to the released version of [SBT][] 0.7.2.
+
+[SBT]: http://code.google.com/p/simple-build-tool
