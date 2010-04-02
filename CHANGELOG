@@ -1,6 +1,8 @@
 Version 0.4.2 (...)
 
 - Updated to the released version of SBT 0.7.2.
+- Added withDownloadedFile() to grizzled.net.url, to execute a block on
+  a downloaded URL.
 
 ---------------------------------------------------------------------------
 Version 0.4.1 (11 March, 2010)

@@ -127,8 +127,10 @@ object url
      *                 is overwritten. If the file does not exist, it is
      *                 created. If any of the directories in the path do not
      *                 exist, they are created.
+     *
+     * @return the `pathOut` parameter, for convenience
      */
-    def download(url: URL, pathOut: File): Unit =
+    def download(url: URL, pathOut: File): File =
     {
         import java.io.{BufferedInputStream, BufferedOutputStream}
         import java.io.{FileOutputStream}
@@ -158,6 +160,45 @@ object url
         {
             out.close()
             in.close()
+        }
+
+        pathOut
+    }
+
+    /**
+     * Execute a block of code with a downloaded, temporary file.
+     * The specified URL is downloaded to a file, the file is passed
+     * to the block, and when the block exits, the file is removed.
+     *
+     * @param url    the URL
+     * @param block  the block to execute
+     *
+     * @return whatever the block returns
+     */
+    def withDownloadedFile[T](url: String)(block: File => T): T =
+        withDownloadedFile(new URL(url))(block)
+
+    /**
+     * Execute a block of code with a downloaded, temporary file.
+     * The specified URL is downloaded to a file, the file is passed
+     * to the block, and when the block exits, the file is removed.
+     *
+     * @param url    the URL
+     * @param block  the block to execute
+     *
+     * @return whatever the block returns
+     */
+    def withDownloadedFile[T](url: URL)(block: File => T): T =
+    {
+        val file = File.createTempFile("grizzled", ".dat")
+        try
+        {
+            block(download(url, file))
+        }
+
+        finally
+        {
+            file.delete()
         }
     }
 }

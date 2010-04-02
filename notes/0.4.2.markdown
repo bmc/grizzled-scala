@@ -1,3 +1,5 @@
 * Updated to the released version of [SBT][] 0.7.2.
+* Added `withDownloadedFile()` to `grizzled.net.url`, to execute a block on
+  a downloaded URL.
 
 [SBT]: http://code.google.com/p/simple-build-tool
