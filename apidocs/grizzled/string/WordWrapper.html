@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.string.WordWrapper</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">string</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>WordWrapper</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">WordWrapper</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p><p>Wraps strings on word boundaries to fit within a proscribed output
+width. The wrapped string may have a prefix or not; prefixes are useful
+for error messages, for instance. You tell a <tt>WordWrapper</tt> about
+a prefix by passing a non-empty prefix to the constructor.</p></p><p><h2>Examples:</h2></p><p><blockquote><pre>Unable to open file /usr/local/etc/wombat: No such file or directory</pre></blockquote></p><p><p>might appear like this without a prefix:</p></p><p><blockquote><pre>
+Unable to open file /usr/local/etc/wombat: No such file or
+directory
+</pre></blockquote></p><p><p>and like this if the prefix is "myprog:"</p></p><p><blockquote><pre>
+myprog: Unable to open file /usr/local/etc/wombat: No such
+        file or directory
+</pre></blockquote></p><p><p>Alternatively, if the output width is shortened, the same message
+can be made to wrap something like this:</p></p><p><blockquote><pre>
+myprog: Unable to open file
+        /usr/local/etc/wombat:
+        No such file or
+        directory
+</pre></blockquote></p><p><p>Note how the wrapping logic will "tab" past the prefix on wrapped
+lines.</p></p><p><p>This method also supports the notion of an indentation level, which is
+independent of the prefix. A non-zero indentation level causes each line,
+including the first line, to be indented that many characters. Thus,
+initializing a <tt>WordWrapper</tt> object with an indentation value of 4
+will cause each output line to be preceded by 4 blanks. (It's also
+possible to change the indentation character from a blank to any other
+character.</p></p><p><h2>Notes</h2></p><p><ol>
+  <li> The class does not do any special processing of tab characters.
+       Embedded tab characters can have surprising (and unwanted) effects
+       on the rendered output.
+  <li> Wrapping an already wrapped string is an invitation to trouble.
+</ol>
+</p></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="WordWrapper$.html">companion</a>
+            </div>
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      <div class="block">
+              Go to: <a href="WordWrapper$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      <div class="block">
+              Go to: <a href="WordWrapper$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.string.WordWrapper#indentChar">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">indentChar</span><span class="result">: <span class="extype" name="scala.Char">Char</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.string.WordWrapper#indentation">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">indentation</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.string.WordWrapper#prefix">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">prefix</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      <div class="block">
+              Go to: <a href="WordWrapper$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.string.WordWrapper#wrap">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wrap</span><span class="params">(<span name="s">s: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Wrap a string, using the wrap width, prefix, indentation and indentation
+character that were specified to the <tt>WordWrapper</tt> constructor</p><div class="fullcomment">
+      <div class="comment cmt"><p>Wrap a string, using the wrap width, prefix, indentation and indentation
+character that were specified to the <tt>WordWrapper</tt> constructor.
+The resulting string may have embedded newlines in it.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to wrap
+</p></dd><dt>returns</dt><dd class="cmt"><p>the wrapped string</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="WordWrapper$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.string.WordWrapper#wrapWidth">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">wrapWidth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.string.WordWrapper#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">WordWrapper</span><span class="params">(<span name="wrapWidth">wrapWidth: <span class="extype" name="scala.Int">Int</span></span>, <span name="indentation">indentation: <span class="extype" name="scala.Int">Int</span></span>, <span name="prefix">prefix: <span class="extype" name="java.lang.String">String</span></span>, <span name="indentChar">indentChar: <span class="extype" name="scala.Char">Char</span></span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">WordWrapper</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

@@ -1,0 +1,656 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.cmd.CommandInterpreter</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">cmd</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>CommandInterpreter</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">CommandInterpreter</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>Base class for command interpreters.</p><p><p><tt>CommandInterpreter</tt> is the base class of any command
+interpreter.</p> This class and the <tt>CommandHandler</tt> trait
+provide a simple framework for writing line-oriented
+command-interpreters. This framework is conceptually similar to the
+Python <tt>cmd</tt> module and its <tt>Cmd</tt> class, though the
+implementation differs substantially in places.</p></p><p><p>For reading input from the console, <tt>CommandInterpreter</tt> will
+use of any of the readline libraries supported by the
+<tt>grizzled.readline</tt> package. All of those libraries support a
+persistent command history, and most support command completion and
+command editing.</p></p><p><p>A command line consists of an initial command name, followed by a list
+of arguments to that command. The <tt>CommandInterpreter</tt> class's
+command reader automatically separates the command and the remaining
+arguments, via the <tt>splitCommandAndArgs()</tt> method. Parsing the
+arguments is left to the actual command implementation. The rules for how
+the command is split from the remainder of the input line are outlined
+in the documentation for the <tt>splitCommandAndArgs()</tt> method.</p>
+</p></div>
+      
+      <div class="block">
+            attributes: abstract 
+          </div>
+      
+      
+      
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.cmd.CommandInterpreter#DefaultReadlineLibraryList">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">DefaultReadlineLibraryList</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Default list of readline libraries to try, in order</p><div class="fullcomment">
+      <div class="comment cmt"><p>Default list of readline libraries to try, in order.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#OutputWidth">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">OutputWidth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Assumed output width of the screen</p><div class="fullcomment">
+      <div class="comment cmt"><p>Assumed output width of the screen.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#StartCommandIdentifier">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">StartCommandIdentifier</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"><tt>StartCommandIdentifier</tt> is the list of characters that are
+permitted as the first character of a white space-delimited,
+multicharacter command name</p><div class="fullcomment">
+      <div class="comment cmt"><p><tt>StartCommandIdentifier</tt> is the list of characters that are
+permitted as the first character of a white space-delimited,
+multicharacter command name. All other characters are assumed to
+introduce single-character commands. Subclasses may override this value
+to permit additional, or different, starting characters for
+multicharacter command names. See the <tt>splitCommandAndArgs()</tt>
+method for more details.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#appName">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">appName</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#error">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">error</span><span class="params">(<span name="message">message: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Emit an error message in a consistent way</p><div class="fullcomment">
+      <div class="comment cmt"><p>Emit an error message in a consistent way. May be overridden by
+subclasses. The default implementation prints errors in red.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#handleEOF">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">handleEOF</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called when an end-of-file condition is encountered while reading a
+command (On Unix-like systems, with some readline libraries, this
+happens when the user pressed Ctrl-D)</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called when an end-of-file condition is encountered while reading a
+command (On Unix-like systems, with some readline libraries, this
+happens when the user pressed Ctrl-D). prompt. The default version
+of this method simply returns <tt>Stop</tt>, causing the command
+loop to exit.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#handleEmptyCommand">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">handleEmptyCommand</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called when an empty command line is entered in response to the
+prompt</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called when an empty command line is entered in response to the
+prompt. The default version of this method simply returns
+<tt>KeepGoing</tt>.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#handleException">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">handleException</span><span class="params">(<span name="e">e: <span class="extype" name="java.lang.Exception">Exception</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called when an exception occurs during the main loop</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called when an exception occurs during the main loop. This method
+can handle the exception however it wants; it must return either
+<tt>KeepGoing</tt> or <tt>Stop</tt>. The default version
+of this method dumps the exception stack trace and returns
+<tt>Stop</tt>.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">e</dt><dd class="cmt"><p>the exception
+</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
+        or <tt>Stop</tt> to tell the main loop to be done.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#handleUnknownCommand">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">handleUnknownCommand</span><span class="params">(<span name="commandName">commandName: <span class="extype" name="java.lang.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called when a command is entered that isn't recognized</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called when a command is entered that isn't recognized. The default
+version of this method prints an error message and returns
+<tt>KeepGoing</tt>.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">commandName</dt><dd class="cmt"><p>the command name</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the command arguments
+</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
+        or <tt>Stop</tt> to tell the main loop to be done.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#handlers">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">handlers</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">List of handlers</p><div class="fullcomment">
+      <div class="comment cmt"><p>List of handlers. The subclass must define this value to contain a
+list of its handlers. The <tt>allHandlers</tt> property will combine
+this list with the help handler to get the list of all handlers.
+If you define your own help handler, you'll have to override the
+<tt>helpHandler</tt> property to return your help handler, instead of
+the default one.</p></div>
+      
+      <div class="block">
+            attributes: abstract 
+          </div>
+      
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#helpHandler">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">helpHandler</span><span class="result">: <span class="extype" name="grizzled.cmd.CommandInterpreter.HelpHandler">HelpHandler</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the help handler</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the help handler. Override this property if you want to supply
+your own help handler.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#history">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">history</span><span class="result">: <a href="../readline/History.html" class="extype" name="grizzled.readline.History">History</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the history object being used to record command history</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the history object being used to record command history.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#postCommand">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">postCommand</span><span class="params">(<span name="command">command: <span class="extype" name="java.lang.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called after a command line is interpreted</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called after a command line is interpreted. The default implementation
+simply returns <tt>KeepGoing</tt>.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">command</dt><dd class="cmt"><p>the command that invoked this handler</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line
+</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
+        or <tt>Stop</tt> to tell the main loop to be done.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#postLoop">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">postLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called immediately after the main loop (<tt>mainLoop()</tt>) ends
+its command loop, this hook method can be used for cleanup</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called immediately after the main loop (<tt>mainLoop()</tt>) ends
+its command loop, this hook method can be used for cleanup. The
+default implementation does nothing.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#preCommand">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">preCommand</span><span class="params">(<span name="commandLine">commandLine: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called just before a command line is interpreted, this hook method can
+edit the command</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called just before a command line is interpreted, this hook method can
+edit the command.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line
+</p></dd><dt>returns</dt><dd class="cmt"><p>The possibly edited command, Some("") to signal an empty
+        command, or None to signal EOF.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#preLoop">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">preLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Called just before the main loop (<tt>mainLoop()</tt>) begins its
+command loop, this hook method can be used for initialization</p><div class="fullcomment">
+      <div class="comment cmt"><p>Called just before the main loop (<tt>mainLoop()</tt>) begins its
+command loop, this hook method can be used for initialization. The
+default implementation does nothing.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#primaryPrompt">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">primaryPrompt</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The primary prompt string</p><div class="fullcomment">
+      <div class="comment cmt"><p>The primary prompt string.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#pushReader">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">pushReader</span><span class="params">(<span name="reader">reader: (<span class="extype" name="java.lang.String">String</span>) ⇒ <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[(<span class="extype" name="java.lang.String">String</span>) ⇒ <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Push a reader on the reader stack</p><div class="fullcomment">
+      <div class="comment cmt"><p><p>Push a reader on the reader stack. The reader on top of the stack
+is used until it returns <tt>None</tt> (indicating EOF). Then, it is
+removed from the stack, and the next reader is used. When the only
+reader remaining on the stack returns <tt>None</tt>, the command
+interpreter signals an EOF condition to the subclass (by calling
+<tt>handleEOF()</tt>).</p></p><p><p>The reader is a simple function that takes a prompt string (which
+it can choose to ignore) and returns a line of input
+(<tt>Some(input)</tt>) or <tt>None</tt> for EOF. The line of input,
+if returned, should not have a trailing newline.</p>
+</p></div>
+      <dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the reader function</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#readline">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">readline</span><span class="result">: <a href="../readline/Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The readline implementation being used</p><div class="fullcomment">
+      <div class="comment cmt"><p>The readline implementation being used.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#secondaryPrompt">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">secondaryPrompt</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The second prompt string, used when additional input is being
+retrieved</p><div class="fullcomment">
+      <div class="comment cmt"><p>The second prompt string, used when additional input is being
+retrieved.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#splitCommandAndArgs">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">splitCommandAndArgs</span><span class="params">(<span name="line">line: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Split a command from its argument list, returning the command as
+one string and the remaining unparsed argument string as the other
+string</p><div class="fullcomment">
+      <div class="comment cmt"><p>Split a command from its argument list, returning the command as
+one string and the remaining unparsed argument string as the other
+string. The commmand name is parsed from the remaining arguments
+using the following rules:</p><p><ul>
+  <li> If the first non-white character if the input line is in the
+       <tt>StartCommandIdentifier</tt> string, then the command is
+       assumed to be a identifier that is separated from the arguments
+       by white space.
+  <li> If the first character if the input line is not in the
+       <tt>StartCommandIdentifier</tt> string, then the command is
+       assumed to be a single-character command, with the arguments
+       immediately following the single character.
+</ul></p><p><p>The <tt>StartCommandIdentifier</tt> string is an overridable field
+defined by this class, consisting of the characters permitted to start
+a multicharacter command. By default, it consists of alphanumerics.
+Subclasses may override it to permit additional, or different, starting
+characters for multicharacter commands.</p></p><p><p>For example, using the default identifier characters, this function
+will break the following commands into command + arguments as shown:</p></p><p><table border="0" cellpadding="2">
+  <tr valign="top">
+    <td><tt>foo bar baz</tt></td>
+    <td>Command <tt>foo</tt>, argument string <tt>"bar baz"</tt></td>
+  </tr></p><p>  <tr valign="top">
+    <td><tt>!bar</tt></td>
+    <td>Command <tt>!</tt> argument string <tt>"bar baz"</tt></td>
+  </tr></p><p>  <tr valign="top">
+    <td><tt>? one two</tt></td>
+    <td>Command <tt>?</tt> argument string <tt>"one two"</tt></td>
+  </tr>
+</table></p><p><p>Subclasses may override this method to parse commands differently.</p>
+</p></div>
+      <dl class="paramcmts block"><dt class="param">line</dt><dd class="cmt"><p>the input type
+</p></dd><dt>returns</dt><dd class="cmt"><p>A (<i>commandName</i>, <i>argumentString</i>) 2-tuple</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#warning">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">warning</span><span class="params">(<span name="message">message: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Emit a warning message in a consistent way</p><div class="fullcomment">
+      <div class="comment cmt"><p>Emit a warning message in a consistent way. May be overridden by
+subclasses. The default implementation prints the message with the
+prefix "Warning: ".
+</p></div>
+      <dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.cmd.CommandInterpreter#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alternate constructor that tries all known readline implementations,
+in this order:</p><div class="fullcomment">
+      <div class="comment cmt"><p>Alternate constructor that tries all known readline implementations,
+in this order:</p><p><ul>
+  <li> GNU Readline
+  <li> Editline
+  <li> Getline
+  <li> JLine
+  <li> Simple (pure Java)
+</ul>
+</p></div>
+      <dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>, <span name="readline">readline: <span class="extype" name="scala.Enumeration.Value">Value</span></span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alternate constructor taking a single readline implementation</p><div class="fullcomment">
+      <div class="comment cmt"><p>Alternate constructor taking a single readline implementation. Fails
+if that readline implementation cannot be found.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name</p></dd><dt class="param">readline</dt><dd class="cmt"><p>readline implementation</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandInterpreter#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>, <span name="readlineCandidates">readlineCandidates: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">CommandInterpreter</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

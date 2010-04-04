@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.string.GrizzledString</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">string</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>GrizzledString</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">GrizzledString</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>An analog to Scala's <tt>RichString</tt> class, providing some methods
+that neither <tt>RichString</tt> nor <tt>String</tt> provide. By
+importing the implicit conversion functions, you can use the methods in
+this class transparently from a <tt>String</tt> or <tt>RichString</tt>
+object.</p><p><blockquote><pre>
+import grizzled.string.implicits._</p><p>val s = "a  b          c"
+println(s.tokenize) // prints: List(a, b, c)
+</pre></blockquote></p></div>
+      
+      <div class="block">
+            attributes: final 
+          </div>
+      
+      
+      
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.string.GrizzledString#chomp">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">chomp</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Like perl's <tt>chomp()</tt>: Remove any newline at the end of the
+line</p><div class="fullcomment">
+      <div class="comment cmt"><p>Like perl's <tt>chomp()</tt>: Remove any newline at the end of the
+line.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#ltrim">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">ltrim</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Trim white space from the front (left) of a string</p><div class="fullcomment">
+      <div class="comment cmt"><p>Trim white space from the front (left) of a string.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#rtrim">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">rtrim</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Trim white space from the back (right) of a string</p><div class="fullcomment">
+      <div class="comment cmt"><p>Trim white space from the back (right) of a string.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#string">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">string</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#toTokens">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toTokens</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="../parsing/StringToken.html" class="extype" name="grizzled.parsing.StringToken">StringToken</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Tokenize the string on white space, returning <tt>Token</tt>
+objects</p><div class="fullcomment">
+      <div class="comment cmt"><p>Tokenize the string on white space, returning <tt>Token</tt>
+objects. This method is useful when you need to keep track of the
+locations of the tokens within the original string.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#toTokens">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toTokens</span><span class="params">(<span name="delims">delims: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="../parsing/StringToken.html" class="extype" name="grizzled.parsing.StringToken">StringToken</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Tokenize the string on a set of delimiter characters, returning
+<tt>Token</tt> objects</p><div class="fullcomment">
+      <div class="comment cmt"><p>Tokenize the string on a set of delimiter characters, returning
+<tt>Token</tt> objects. This method is useful when you need to keep
+track of the locations of the tokens within the original string.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">delims</dt><dd class="cmt"><p>the delimiter characters
+</p></dd><dt>returns</dt><dd class="cmt"><p>A list of tokens, or <tt>Nil</tt> if there aren't any.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#tokenize">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">tokenize</span><span class="params">(<span name="delims">delims: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Tokenize the string on a set of delimiter characters</p><div class="fullcomment">
+      <div class="comment cmt"><p>Tokenize the string on a set of delimiter characters.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">delims</dt><dd class="cmt"><p>the delimiter characters
+</p></dd><dt>returns</dt><dd class="cmt"><p>A list of tokens, or <tt>Nil</tt> if there aren't any.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#tokenize">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">tokenize</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Tokenize the string on white space</p><div class="fullcomment">
+      <div class="comment cmt"><p>Tokenize the string on white space. An empty string and a string
+with only white space are treated the same. Note that doing a
+<tt>split("""\s+""").toList</tt> on an empty string ("") yields a
+list of one item, an empty string. Doing the same operation on a
+blank string (" ", for example) yields an empty list. This method
+differs from <tt>split("""\s+""").toList</tt>, in that both cases are
+treated the same, returning a <tt>Nil</tt>.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.string.GrizzledString#translateMetachars">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">translateMetachars</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Translate any metacharacters (e</p><div class="fullcomment">
+      <div class="comment cmt"><p>Translate any metacharacters (e.g,. \t, \n, ™) into their real
+characters, and return the translated string. Metacharacter sequences
+that cannot be parsed (because they're unrecognized, because the Unicode
+number isn't four digits, etc.) are passed along unchanged.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.string.GrizzledString#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">GrizzledString</span><span class="params">(<span name="string">string: <span class="extype" name="java.lang.String">String</span></span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">GrizzledString</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

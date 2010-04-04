@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.file.GrizzledFile</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">file</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>GrizzledFile</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">GrizzledFile</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>A wrapper for <tt>java.io.File</tt> that provides additional methods.
+By importing the implicit conversion functions, you can use the methods
+in this class transparently from a <tt>java.io.File</tt> object.</p><p><blockquote><pre>
+import grizzled.file.implicits._</p><p>val file = new File("/tmp/foo/bar")
+println(file.split) // prints: List(/tmp, foo, bar)
+</pre></blockquote></p></div>
+      
+      <div class="block">
+            attributes: final 
+          </div>
+      
+      
+      
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.file.GrizzledFile#basename">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">basename</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the basename (file name only) part of a path</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the basename (file name only) part of a path.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#deleteRecursively">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">deleteRecursively</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Recursively remove the directory specified by this object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Recursively remove the directory specified by this object. This
+method is conceptually equivalent to <tt>rm -r</tt> on a Unix system.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#dirname">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">dirname</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the directory name of the file</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the directory name of the file.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#dirnameBasename">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">dirnameBasename</span><span class="result">: (<span class="extype" name="java.io.File">File</span>, <span class="extype" name="java.io.File">File</span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Split the file's path into directory (dirname) and file (basename)
+components</p><div class="fullcomment">
+      <div class="comment cmt"><p>Split the file's path into directory (dirname) and file (basename)
+components. Analogous to Python's <tt>os.path.pathsplit()</tt> function.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#dirnameBasenameExtension">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">dirnameBasenameExtension</span><span class="result">: (<span class="extype" name="java.io.File">File</span>, <span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Split this file's pathname into the directory name, basename, and
+extension pieces</p><div class="fullcomment">
+      <div class="comment cmt"><p>Split this file's pathname into the directory name, basename, and
+extension pieces.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#file">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">file</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#isEmpty">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">isEmpty</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Determine whether a directory is empty</p><div class="fullcomment">
+      <div class="comment cmt"><p>Determine whether a directory is empty. Only meaningful for a directory.
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#split">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">split</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Split this file's path into its constituent components</p><div class="fullcomment">
+      <div class="comment cmt"><p>Split this file's path into its constituent components. If the path
+is absolute, the first piece will have a file separator in the
+beginning. Examples:</p><p><table border="1">
+  <tr>
+    <th>Input</th>
+    <th>Output</th>
+  </tr>
+  <tr>
+    <td class="code">""</td>
+     <td class="code">List("")</td>
+  </tr>
+  <tr>
+    <td class="code">"/"</td>
+    <td class="code">List("/")
+  </tr>
+  <tr>
+    <td class="code">"foo"</td>
+    <td class="code">List("foo")</td>
+  </tr>
+  <tr>
+    <td class="code">"foo/bar"</td>
+    <td class="code">List("foo", "bar")</td>
+  </tr>
+  <tr>
+    <td class="code">"."</td>
+    <td class="code">List(".")</td>
+  </tr>
+  <tr>
+    <td class="code">"../foo"</td>
+    <td class="code">List("..", "foo")</td>
+  </tr>
+  <tr>
+    <td class="code">"./foo"</td>
+    <td class="code">List(".", "foo")</td>
+  </tr>
+  <tr>
+    <td class="code">"/foo/bar/baz"</td>
+    <td class="code">List("/foo", "bar", "baz")</td>
+  </tr>
+  <tr>
+    <td class="code">"foo/bar/baz"</td>
+    <td class="code">List("foo", "bar", "baz")</td>
+  </tr>
+  <tr>
+    <td class="code">"/foo"</td>
+    <td class="code">List("/foo")</td>
+  </tr>
+</table>
+</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#touch">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">touch</span><span class="params">(<span name="time">time: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment">
+      <div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><p><ul>
+  <li>updates the access and modification time for the path
+      represented by this object
+  <li>creates the path (as a file), if it does not exist
+</ul></p><p>If the file corresponds to an existing directory, this method
+will throw an exception.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
+              time if this parameter is negative.
+</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.file.GrizzledFile#walk">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">walk</span><span class="params">(<span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[(<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>], <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>])]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Directory tree generator, adapted from Python's <tt>os</p><div class="fullcomment">
+      <div class="comment cmt"><p>Directory tree generator, adapted from Python's <tt>os.walk()</tt>
+function.</p><p><p>For each directory in the directory tree rooted at this object
+(including the directory itself, but excluding '.' and '..'), yields
+a 3-tuple</p></p><p><blockquote><pre>dirpath, dirnames, filenames</pre></blockquote></p><p><p><i>dirpath</i> is a string, the path to the directory.
+<i>dirnames</i> is a list of the names of the subdirectories in
+<i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
+of the names of the non-directory files in <i>dirpath</i>. Note that
+the names in the lists are just names, with no path components. To
+get a full path (which begins with this directory) to a file or
+directory in <i>dirpath</i>, use
+<tt>dirpath + java.io.fileSeparator + name</tt>, or use
+<tt>grizzled.file.util.joinPath()</tt>.</p></p><p><p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
+generated before the triples for any of its subdirectories
+(directories are generated top down). If <tt>topdown</tt> is
+<tt>false</tt>, the triple for a directory is generated after the
+triples for all of its subdirectories (directories are generated
+bottom up).</p></p><p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p>
+</p></div>
+      <dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><tt>true</tt> to do a top-down traversal, <tt>false</tt>
+               otherwise.
+</p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.file.GrizzledFile#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">GrizzledFile</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">GrizzledFile</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

@@ -1,0 +1,492 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.config.Configuration</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">config</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>Configuration</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">Configuration</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>An INI-style configuration file parser.</p><p><code>Configuration</code> implements an in-memory store for a configuration file
+whose syntax is reminiscent of classic Windows .INI files, though with
+many extensions.</p><p><b>Syntax</b></p><p>A configuration file is broken into sections, and each section is
+introduced by a section name in brackets. For example:</p><pre>
+[main]
+installation.directory=/usr/local/foo
+program.directory: /usr/local/foo/programs
+
+[search]
+searchCommand: find /usr/local/foo -type f -name '*.class'
+
+[display]
+searchFailedMessage=Search failed, sorry.
+</pre><p>Notes and caveats:</p><p>At least one section is required.</p><p>Sections may be empty.</p><p>It is an error to have any variable definitions before the first
+section header.
+The section names "system" and "env" are reserved. They don't really
+exist, but they're used during variable substitution (see below)
+to substitute from <tt>System.properties</tt> and the environment,
+respectively.</p><p><b>Section Name Syntax</b></p><p>There can be any amount of whitespace before and after the brackets
+in a section name; the whitespace is ignored. Section names may consist
+of alphanumeric characters and underscores. Anything else is not
+permitted.</p><p><b>Variable Syntax</b></p><p>Each section contains zero or more variable settings. Similar to a Java<code>Properties</code> file, the variables are specified as name/value pairs,
+separated by an equal sign ("=") or a colon (":"). Variable names are
+case-sensitive by default, though the case-sensitivity (and other
+aspects of the variable name) may be changed by subclassing<code>Configuration</code> and providing your own version of the<code>transformOptionName()</code> method. Variable names may contain
+alphanumerics, underscores, and hyphens (-). Variable values may contain
+anything at all. The parser ignores whitespace on either side of the "="
+or ":"; that is, leading whitespace in the value is skipped. The way to
+include leading whitespace in a value is escape the whitespace
+characters with backslashes. (See below).</p><p><b>Continuation Lines</b></p><p>Variable definitions may span multiple lines; each line to be
+continued must end with a backslash ("\") character, which escapes the
+meaning of the newline, causing it to be treated like a space character.
+The following line is treated as a logical continuation of the first
+line. Unlike Java properties files, however, leading whitespace is
+<i>not</i> removed from continued lines.</p><p>Only variable definition lines may be continued. Section header
+lines, comment lines (see below) and include directives (see below)
+cannot span multiple lines.</p><p><b>Expansions of Variable Values</b></p><p>The configuration parser preprocesses each variable's value, replacing
+embedded metacharacter sequences and substituting variable references.
+You can use backslashes to escape the special characters that the parser
+uses to recognize metacharacter and variable sequences; you can also use
+single quotes. See <i>Suppressing Metacharacter Expansion and Variable
+Substitution</i>, below, for more details.</p><p><b>Metacharacters</b></p><p>The parser recognizes Java-style ASCII escape sequences <code>\t</code>, <code>\n</code>,<code>\r</code>, <code>\\</code>, <code>\&nbsp;</code> (a backslash and a space), and <code>\\u</code><i>xxxx</i> are
+recognized and converted to single characters. Note that metacharacter
+expansion is performed <i>before</i> variable substitution.</p><p><b>Variable Substitution</b></p><p>A variable value can interpolate the values of other variables, using
+a variable substitution syntax. The general form of a variable reference
+is <code>${sectionName.varName}</code>.</p><p><code>sectionName</code> is the name of the section containing the variable to
+substitute; if omitted, it defaults to the current section. <code>varName</code> is
+the name of the variable to substitute.</p><p>If a variable reference specifies a section name, the referenced section
+must precede the current section. It is not possible to substitute the value
+of a variable in a section that occurs later in the file.</p><p>The section names "system" and "env" are reserved for special
+"pseudosections."</p><p>The "system" pseudosection is used to interpolate values from<code>System.properties</code> For instance, <code>${system.user.home}</code> substitutes the
+value of the <code>user.home</code> system property (typically, the home directory
+of the user running the program). Similarly, <code>${system.user.name}</code>substitutes the user's name.</p><p>The "env" pseudosection is used to interpolate values from the
+environment. On UNIX systems, for instance, <code>${env.HOME}</code> substitutes
+user's home directory (and is, therefore, a synonym for<code>${system.user.home}</code>. On some versions of Windows, <code>${env.USERNAME}</code>will substitute the name of the user running the program. Note: On UNIX
+systems, environment variable names are typically case-sensitive; for
+instance, <code>${env.USER}</code> and <code>${env.user}</code> refer to different environment
+variables. On Windows systems, environment variable names are typically
+case-insensitive; <code>${env.USERNAME}</code> and <code>${env.username}</code> are
+equivalent.</p><p><b>Notes and caveats:</b></p><p><code>Configuration</code> uses the<code>grizzled.string.template.UnixShellVariableSubstituter</code>class to do variable substitution, so it honors all the syntax conventions
+supported by that class.</p><p>Variable substitutions are only permitted within variable values. They are
+ignored in variable names, section names, include directives and comments.</p><p>Variable substitution is performed <i>after</i> metacharacter expansion (so
+don't include metacharacter sequences in your variable names).</p><p>To include a literal "$" character in a variable value, escape it with a
+backslash, e.g., "<code>var=value with \$ dollar sign</code>"</p><p><b>Suppressing Metacharacter Expansion and Variable Substitution</b></p><p>To prevent the parser from interpreting metacharacter sequences,
+variable substitutions and other special characters, use the "->"
+assignment operator, instead of ":" or "=".</p><p>For example, suppose you want to set variable "prompt" to the
+literal value "Enter value. To specify a newline, use \n." The following
+configuration file line will do the trick:</p><pre>
+prompt -> Enter value. To specify a newline, use \n
+</pre><p>Similarly, to set variable "abc" to the literal string "${foo}"
+suppressing the parser's attempts to expand "${foo}" as a variable
+reference, you could use:</p><pre>
+abc -> ${foo}
+</pre><p>Note: It's also possible, though hairy, to escape the special meaning
+of special characters via the backslash character. For instance, you can
+escape the variable substitution lead-in character, '$', with a
+backslash. e.g., "\$". This technique is not recommended, however,
+because you have to double-escape any backslash characters that you want
+to be preserved literally. For instance, to get "\t", you must specify
+"\\\\t". To get a literal backslash, specify "\\\\". (Yes, that's four
+backslashes, just to get a single unescaped one.) This double-escaping
+is a regrettable side effect of how the configuration file parses
+variable values: It makes two separate passes over the value (one for
+metacharacter expansion and another for variable expansion). Each of
+those passes honors and processes backslash escapes. This problem would
+go away if the configuration file parser parsed both metacharacter
+sequences and variable substitutions itself, in one pass. It doesn't
+currently do that, because it uses the separate<code>grizzled.string.template.UnixShellStringTemplate</code> class<code>grizzled.GrizzledString.translateMetachars()</code> method to do the
+variable substitution and metacharacter translation. In general, you're
+better off just sticking with the "->" assignment operator.</p><p><b>Includes</b></p><p>A special include directive permits inline inclusion of another
+configuration file. The include directive takes two forms:</p><pre>
+%include "path"
+%include "URL"
+</pre><p>For example:</p><pre>
+%include "/home/bmc/mytools/common.cfg"
+%include "http://configs.example.com/mytools/common.cfg"
+</pre><p>If the include path is not a URL, and is not an absolute path, its
+location is relative to the file that's trying to include it.</p><p>The included file may contain any content that is valid for this
+parser. It may contain just variable definitions (i.e., the contents of
+a section, without the section header), or it may contain a complete
+configuration file, with individual sections. Since<code>Configuration</code> recognizes a variable syntax that is
+essentially identical to Java's properties file syntax, it's also legal
+to include a properties file, provided it's included within a valid
+section.</p><p>Note: Attempting to include a file from itself, either directly or
+indirectly, will cause the parser to throw an exception.</p><p><b>Comments and Blank Lines</b></p><p>A comment line is a one whose first non-whitespace character is a "#".
+A blank line is a line containing no content, or one containing only
+white space. Blank lines and comments are ignored.</p><p><b>Caller-supplied Predefined Sections</b></p><p>Calling applications may supply predefined sections and options, in
+the form of a map. These sections may then be used by other sections,
+via variable references. The predefined sections are defined in a map of
+maps. The outer map is keyed by predefined section name. The inner maps
+consist of options and their values. For instance, to read a
+configuration file, giving it access to certain command line parameters,
+you could do something like this:</p><pre>
+object Foo
+{
+    def main(args: Array[String]) =
+    {
+        // You'd obviously want to do some real argument checking here.
+        val configFile = args(0)
+        val name = args(1)
+        val ipAddress = args(2)
+        val sections = Map("args" -> Map("name" -> name,
+                                         "ip" -> ipAddress))
+        val config = Configuration(configFile, sections)
+        ..
+    }
+}
+</pre></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.config.Configuration#addOption">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Add an option name and value to a section</p><div class="fullcomment">
+      <div class="comment cmt"><p>Add an option name and value to a section.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name, which will be transformed</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value
+</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#addSection">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Add a section to the configuration</p><div class="fullcomment">
+      <div class="comment cmt"><p>Add a section to the configuration.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
+</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#hasSection">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hasSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Determine whether the configuration contains a named section</p><div class="fullcomment">
+      <div class="comment cmt"><p>Determine whether the configuration contains a named section.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the configuration has a section with that name,
+        <code>false</code> otherwise</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#option">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the value for an option in a section, supplying a default if the
+option or the section doesn't exist</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the value for an option in a section, supplying a default if the
+option or the section doesn't exist.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>default value
+</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value (which may be the default)</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#option">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the value for an option in a section</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the value for an option in a section.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value
+</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#optionNames">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">optionNames</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the list of option names</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the list of option names.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section's name
+</p></dd><dt>returns</dt><dd class="cmt"><p>a list of option names in that section
+</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#options">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">options</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get all options in a section</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get all options in a section.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name
+</p></dd><dt>returns</dt><dd class="cmt"><p>a map of all options and their values for the section
+</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#sectionNames">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">sectionNames</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get the list of section names</p><div class="fullcomment">
+      <div class="comment cmt"><p>Get the list of section names.
+</p></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#transformOptionName">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">transformOptionName</span><span class="params">(<span name="option">option: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Transform an option (key) to a consistent form</p><div class="fullcomment">
+      <div class="comment cmt"><p>Transform an option (key) to a consistent form. The default
+version of this method forces the option name to lower case.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">option</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p>the transformed option name</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.config.Configuration#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">Configuration</span><span class="params">()</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Alternate constructor for use when there are no predefined sections</p><div class="fullcomment">
+      <div class="comment cmt"><p>Alternate constructor for use when there are no predefined sections.</p></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="Configuration$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.config.Configuration#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">Configuration</span><span class="params">(<span name="predefinedSections">predefinedSections: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]]</span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

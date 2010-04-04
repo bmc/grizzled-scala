@@ -1,0 +1,401 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.cmd.RedoHandler</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">cmd</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>RedoHandler</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">RedoHandler</span><span class="result"> extends <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>Simple "redo command" handler.</p><p><p>A simple "redo" command handler that supports re-issuing a numbered
+command from the history or the last command with a given prefix. For
+example, it supports the following syntaxes:</p></p><p><table border="0" cellpadding="2">
+  <tr valign="top">
+    <td><tt>!10</tt>, <tt>! 10</tt>, or <tt>r 10</tt></td>
+    <td>Repeat the 10th command in the history.</td>
+  </tr></p><p>  <tr valign="top">
+    <td><tt>!ec</tt>, <tt>! ec</tt>, or <tt>r ec</tt></td>
+    <td>Repeat the most recent command whose name begins with "ec"</td>
+  </tr></p><p>  <tr valign="top">
+    <td><tt>!!</tt>, <tt>! !</tt>, <tt>r</tt></td>
+    <td>Repeat the last command.</td>
+  </tr>
+</table></p><p><p>This handler is <i>not</i> installed by default. It is provided as a
+convenience, for command interpreters to use if desired.</p></p></div>
+      
+      
+      
+      
+      
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="grizzled.cmd.CommandHandler">CommandHandler</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.cmd.RedoHandler#CommandName">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">CommandName</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The name of the command</p><div class="fullcomment">
+      <div class="comment cmt"><p>The name of the command. This name, or any of the aliases (see below)
+will cause the command to be invoked.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.RedoHandler#Help">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">Help</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The help for this command</p><div class="fullcomment">
+      <div class="comment cmt"><p>The help for this command. The help string is written as is to the
+screen. It is not wrapped, indented, or otherwise reformatted. It
+may be a single string or a multiline string.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.RedoHandler#aliases">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">aliases</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Additional aliases for the command, if any</p><div class="fullcomment">
+      <div class="comment cmt"><p>Additional aliases for the command, if any.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.RedoHandler#cmd">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">cmd</span><span class="result">: <a href="CommandInterpreter.html" class="extype" name="grizzled.cmd.CommandInterpreter">CommandInterpreter</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.cmd.CommandHandler#commandNameCompletions">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">commandNameCompletions</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Compares a prefix string to this command name and its aliases, to
+determine whether the prefix string could possibly be completed by
+the name or aliases</p><div class="fullcomment">
+      <div class="comment cmt"><p>Compares a prefix string to this command name and its aliases, to
+determine whether the prefix string could possibly be completed by
+the name or aliases. This method is obviously used to facilitate
+tab-completion. The default implementation of this method simply
+forces both strings to lower case before performing a substring
+comparison between them. Overridden definitions of this method can
+apply other matching criteria.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>the prefix to compare
+</p></dd><dt>returns</dt><dd class="cmt"><p>a list of the strings (name and/or aliases) that could be
+        completed by <tt>prefix</tt>, or <tt>Nil</tt>.</p></dd></dl>
+      
+      <div class="block">
+            definition classes: <a href="CommandHandler.html">CommandHandler</a>
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandHandler#complete">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">complete</span><span class="params">(<span name="token">token: <span class="extype" name="java.lang.String">String</span></span>, <span name="context">context: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="../readline/CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a>]</span>, <span name="commandLine">commandLine: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Perform completion on the command, returning the possible
+completions</p><div class="fullcomment">
+      <div class="comment cmt"><p>Perform completion on the command, returning the possible
+completions. This method has the exact same interface and use as the
+<tt>complete()</tt> method in <tt>grizzled.readline.Completer</tt>.
+Please see that trait for full documentation.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">token</dt><dd class="cmt"><p>the token being completed</p></dd><dt class="param">context</dt><dd class="cmt"><p>the token context (i.e., list of parsed tokens,
+                with cursor)</p></dd></dl>
+      
+      <div class="block">
+            definition classes: <a href="CommandHandler.html">CommandHandler</a>
+          </div>
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandHandler#hidden">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">hidden</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Whether or not the command is hidden</p><div class="fullcomment">
+      <div class="comment cmt"><p>Whether or not the command is hidden. Hidden commands don't show up
+in the help list or the history. Using the <code>HiddenCommandHandler</code>trait saves a lot of work.</p></div>
+      
+      
+      <div class="block">
+            definition classes: <a href="CommandHandler.html">CommandHandler</a>
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.RedoHandler#history">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">history</span><span class="result">: <a href="../readline/History.html" class="extype" name="grizzled.readline.History">History</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.cmd.CommandHandler#matches">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">matches</span><span class="params">(<span name="candidate">candidate: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Compares a command name (that the user typed in, for instance) to
+this command's name</p><div class="fullcomment">
+      <div class="comment cmt"><p>Compares a command name (that the user typed in, for instance) to
+this command's name. The default implementation of this method simply
+forces both names to lower case before comparing them. Overridden
+definitions of this method can apply other matching criteria.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">candidate</dt><dd class="cmt"><p>the candidate name to be compared with this one
+</p></dd><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if they match, <tt>false</tt> if not</p></dd></dl>
+      
+      <div class="block">
+            definition classes: <a href="CommandHandler.html">CommandHandler</a>
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.CommandHandler#moreInputNeeded">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">moreInputNeeded</span><span class="params">(<span name="lineSoFar">lineSoFar: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is called after a line is read that matches this command,
+to determine whether more lines need to be read to finish the command</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is called after a line is read that matches this command,
+to determine whether more lines need to be read to finish the command.
+The default implementation returns <tt>false</tt>, meaning a single
+input line suffices for the entire command. Implementing classes or
+objects can override this method to ensure that the command has a
+required terminating character (e.g., a ";"), doesn't end with a line
+continuation character (e.g., "\"), or whatever the syntax requires.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">lineSoFar</dt><dd class="cmt"><p>the line read so far</p></dd></dl>
+      
+      <div class="block">
+            definition classes: <a href="CommandHandler.html">CommandHandler</a>
+          </div>
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.RedoHandler#runCommand">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">runCommand</span><span class="params">(<span name="commandName">commandName: <span class="extype" name="java.lang.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Handle the command</p><div class="fullcomment">
+      <div class="comment cmt"><p>Handle the command. The first white space-delimited token in the command
+string is guaranteed to match the name of this command, by the rules of
+the <tt>matches()</tt> method.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line
+</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
+        or <tt>Stop</tt> to tell the main loop to be done.</p></dd></dl>
+      
+      
+      
+      
+    </div>
+    </li><li name="grizzled.cmd.RedoHandler#storeInHistory">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">storeInHistory</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Whether or not the command should be put in the history</p><div class="fullcomment">
+      <div class="comment cmt"><p>Whether or not the command should be put in the history.</p></div>
+      
+      
+      
+      
+      
+    </div>
+    </li><li name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.cmd.RedoHandler#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">RedoHandler</span><span class="params">(<span name="cmd">cmd: <a href="CommandInterpreter.html" class="extype" name="grizzled.cmd.CommandInterpreter">CommandInterpreter</a></span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">RedoHandler</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

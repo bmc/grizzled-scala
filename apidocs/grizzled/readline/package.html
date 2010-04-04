@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.readline</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="value">
+      
+      <p id="owner"><a href="../package.html">grizzled</a></p>
+
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <h1>readline</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">package</span>
+      <span class="symbol">
+        <span class="name">readline</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      
+      
+      
+      
+      
+      
+    </div>
+      
+      <div id="template">
+      
+        
+        
+        <div class="members" id="types">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.readline.Completer">
+      <h4 class="signature"><a href="Completer.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">Completer</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Models a completer: An object that, given a line of input and a token
+within that line, finds possible completions for the token</p>
+    </li><li name="grizzled.readline.CompleterHelper">
+      <h4 class="signature"><a href="CompleterHelper.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">CompleterHelper</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li name="grizzled.readline.CompletionToken">
+      <h4 class="signature"><a href="CompletionToken.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">CompletionToken</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li name="grizzled.readline.History">
+      <h4 class="signature"><a href="History.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">History</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Models a Readline history: an object that holds previously read
+lines</p>
+    </li><li name="grizzled.readline.LineToken">
+      <h4 class="signature"><a href="LineToken.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">LineToken</span><span class="params">(<span name="value">value: String</span>)</span><span class="result"> extends CompletionToken with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li name="grizzled.readline.ListCompleter">
+      <h4 class="signature"><a href="ListCompleter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ListCompleter</span><span class="result"> extends Completer</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A completer that completes from a list of items</p>
+    </li><li name="grizzled.readline.NullCompleter">
+      <h4 class="signature"><a href="NullCompleter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">NullCompleter</span><span class="result"> extends Completer</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A completer that doesn't do anything</p>
+    </li><li name="grizzled.readline.PathnameCompleter">
+      <h4 class="signature"><a href="PathnameCompleter.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">PathnameCompleter</span><span class="result"> extends Completer</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">A completer that completes path names</p>
+    </li><li name="grizzled.readline.Readline">
+      <h4 class="signature"><a href="Readline.html">
+      <span class="kind">trait</span>
+      <span class="symbol">
+        <span class="name">Readline</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Defines the readline-like functionality supported by this API</p>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.readline.Cursor">
+      <h4 class="signature"><a href="Cursor$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Cursor</span><span class="result"> extends CompletionToken with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li name="grizzled.readline.Delim">
+      <h4 class="signature"><a href="Delim$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Delim</span><span class="result"> extends CompletionToken with Product</span>
+      </span>
+      </a></h4>
+      
+    </li><li name="grizzled.readline.Readline">
+      <h4 class="signature"><a href="Readline$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">Readline</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Companion factory object, used to instantiate particular readline
+implementations</p>
+    </li></ol>
+            </div>
+        
+        
+        
+      </div>
+      
+    </body>
+      </html>

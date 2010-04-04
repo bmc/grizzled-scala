@@ -1,0 +1,667 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.collection.ListIterator</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">collection</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>ListIterator</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">ListIterator</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>An <tt>Iterator</tt> for lists.</p></div>
+      
+      
+      
+      
+      
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.collection.Iterator">Iterator</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="scala.collection.Iterator#++">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">++</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="that">that: ⇒ <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#/:">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">/:</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: B</span>)</span><span class="params">(<span name="op">op: (B, T) ⇒ B</span>)</span><span class="result">: B</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#:\">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">:\</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: B</span>)</span><span class="params">(<span name="op">op: (T, B) ⇒ B</span>)</span><span class="result">: B</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#addString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addString</span><span class="params">(<span name="buf">buf: <span class="extype" name="scala.collection.mutable.StringBuilder">StringBuilder</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.StringBuilder">StringBuilder</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#addString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addString</span><span class="params">(<span name="buf">buf: <span class="extype" name="scala.collection.mutable.StringBuilder">StringBuilder</span></span>, <span name="sep">sep: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.StringBuilder">StringBuilder</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#addString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addString</span><span class="params">(<span name="buf">buf: <span class="extype" name="scala.collection.mutable.StringBuilder">StringBuilder</span></span>, <span name="start">start: <span class="extype" name="java.lang.String">String</span></span>, <span name="sep">sep: <span class="extype" name="java.lang.String">String</span></span>, <span name="end">end: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.StringBuilder">StringBuilder</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#append">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">append</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#buffered">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">buffered</span><span class="result">: <span class="extype" name="scala.collection.BufferedIterator">BufferedIterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#collect">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">collect</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#contains">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">contains</span><span class="params">(<span name="elem">elem: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#copyToArray">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#copyToArray">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[B]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#copyToArray">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyToArray</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[B]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>, <span name="len">len: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#copyToBuffer">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyToBuffer</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="dest">dest: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#counted">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">counted</span><span class="result">: <span class="extype" name="scala.CountedIterator">CountedIterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#drop">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">drop</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#dropWhile">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">dropWhile</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#duplicate">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">duplicate</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[T], <span class="extype" name="scala.collection.Iterator">Iterator</span>[T])</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
+      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
+with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
+The default implementations of this method is an <a
+href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:
+  <ul>
+ <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
+ <code>x.equals(x)</code> should return <code>true</code>.</li>
+ <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
+ <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
+ if <code>y.equals(x)</code> returns <code>true</code>.</li>
+ <li>It is transitive: for any instances
+ <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
+ if <code>x.equals(y)</code> returns <code>true</code> and
+ <code>y.equals(z)</code> returns
+ <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
+</ul>
+</p></p><p><p>
+If you override this method, you should verify that
+your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to
+override <code>hashCode</code> to ensure that objects that are
+"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
+hash to the same <a href="Int.html"><code>Int</code></a>
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div>
+      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
+</p></p></dd></dl>
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="scala.collection.Iterator#exists">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">exists</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#filter">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">filter</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#filterNot">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">filterNot</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#find">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">find</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#findIndexOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">findIndexOf</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#flatMap">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">flatMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (T) ⇒ <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#foldLeft">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">foldLeft</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: B</span>)</span><span class="params">(<span name="op">op: (B, T) ⇒ B</span>)</span><span class="result">: B</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#foldRight">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">foldRight</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="z">z: B</span>)</span><span class="params">(<span name="op">op: (T, B) ⇒ B</span>)</span><span class="result">: B</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#forall">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">forall</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#foreach">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">foreach</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="f">f: (T) ⇒ U</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#grouped">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">grouped</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator.GroupedIterator">GroupedIterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.collection.ListIterator#hasNext">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hasNext</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
+The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
+codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
+equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
+degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal
+(<code>o1.equals(o2)</code> returns <code>true</code>) that they
+have identical hash codes
+(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
+overriding this method, be sure to verify that the behavior is
+consistent with the <code>equals</code> method.
+</p></p><p><p></p></div>
+      
+      
+      <div class="block">
+            definition classes: AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="scala.collection.Iterator#indexOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">indexOf</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="elem">elem: B</span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#indexWhere">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">indexWhere</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#length">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">length</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.collection.ListIterator#list">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">list</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#map">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">map</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (T) ⇒ B</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#mkString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">mkString</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#mkString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">mkString</span><span class="params">(<span name="sep">sep: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#mkString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">mkString</span><span class="params">(<span name="start">start: <span class="extype" name="java.lang.String">String</span></span>, <span name="sep">sep: <span class="extype" name="java.lang.String">String</span></span>, <span name="end">end: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.collection.ListIterator#next">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">next</span><span class="params">()</span><span class="result">: T</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#padTo">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">padTo</span><span class="tparams">[<span name="A1">A1 &gt;: T</span>]</span><span class="params">(<span name="len">len: <span class="extype" name="scala.Int">Int</span></span>, <span name="elem">elem: A1</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[A1]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#partialMap">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">partialMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="pf">pf: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[T, B]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#partition">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">partition</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: (<span class="extype" name="scala.collection.Iterator">Iterator</span>[T], <span class="extype" name="scala.collection.Iterator">Iterator</span>[T])</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#patch">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">patch</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="from">from: <span class="extype" name="scala.Int">Int</span></span>, <span name="patchElems">patchElems: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>, <span name="replaced">replaced: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#readInto">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">readInto</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#readInto">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">readInto</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[B]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#readInto">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">readInto</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="xs">xs: <span class="extype" name="scala.Array">Array</span>[B]</span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>, <span name="sz">sz: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#reduceLeft">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">reduceLeft</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="op">op: (B, T) ⇒ B</span>)</span><span class="result">: B</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#reduceLeftOption">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">reduceLeftOption</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="op">op: (B, T) ⇒ B</span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#reduceRight">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">reduceRight</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="op">op: (T, B) ⇒ B</span>)</span><span class="result">: B</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#reduceRightOption">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">reduceRightOption</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="op">op: (T, B) ⇒ B</span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#sameElements">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">sameElements</span><span class="params">(<span name="that">that: Iterator[_]</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#slice">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">slice</span><span class="params">(<span name="from">from: <span class="extype" name="scala.Int">Int</span></span>, <span name="until">until: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#sliding">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">sliding</span><span class="tparams">[<span name="B">B &gt;: T</span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>, <span name="step">step: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator.GroupedIterator">GroupedIterator</span>[B]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#take">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">take</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#takeWhile">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">takeWhile</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#toList">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toList</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#toSeq">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toSeq</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#toStream">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toStream</span><span class="result">: <span class="extype" name="scala.collection.immutable.Stream">Stream</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
+      <div class="comment cmt"><p>Returns a string representation of the object.
+<p>
+The default representation is platform dependent.
+</p></div>
+      
+      
+      <div class="block">
+            definition classes: Iterator ⇐ AnyRef ⇐ Any
+          </div>
+      
+      
+    </div>
+    </li><li name="scala.collection.Iterator#withFilter">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">withFilter</span><span class="params">(<span name="p">p: (T) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[T]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#zip">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">zip</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(T, B)]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#zipAll">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">zipAll</span><span class="tparams">[<span name="B">B</span>, <span name="A1">A1 &gt;: T</span>, <span name="B1">B1 &gt;: B</span>]</span><span class="params">(<span name="that">that: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>, <span name="thisElem">thisElem: A1</span>, <span name="thatElem">thatElem: B1</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(A1, B1)]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.collection.Iterator#zipWithIndex">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">zipWithIndex</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[(T, <span class="extype" name="scala.Int">Int</span>)] {...}</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.collection.ListIterator#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">ListIterator</span><span class="params">(<span name="list">list: <span class="extype" name="scala.collection.immutable.List">List</span>[T]</span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">ListIterator</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>

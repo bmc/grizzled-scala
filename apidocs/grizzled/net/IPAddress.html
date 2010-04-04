@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Scaladoc for grizzled.net.IPAddress</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+          
+		  <style type="text/css">
+		    @import url(../../lib/template.css) screen;
+		  </style>
+		  <script type="text/javascript" src="../../lib/template.js"></script>
+    
+        </head>
+        <body class="type">
+      
+      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">net</a></p>
+
+      <div id="definition">
+        <img src="../../lib/class_big.png" />
+        <h1>IPAddress</h1>
+      </div>
+
+      <h4 class="signature">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">IPAddress</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment" id="comment">
+      <div class="comment cmt"><p>Represents an IP address. This class is similar to the
+<tt>java.net.InetAddress</tt>, but it's designed to be more intuitive
+and easier to use from Scala. This package provides implicit converters
+to make this class compatible with <tt>java.net.InetAddress</tt>. The
+converters ensure that all the (non-static) methods defined in the
+<tt>java.net.InetAddress</tt> class are directly callable from an
+instance of the Scala <tt>IPAddress</tt> class. For instance, the following
+code is perfectly legal:</p><p><blockquote><pre>
+val ip = IPAddress(192, 168, 2, 5)</p><p>// Test if the address is reachable within 1 second.
+println(ip + " is reachable? " + ip.isReachable(1000))</p><p>// Get the canonical host name for (i.e., do a reverse lookup on) the
+// address.
+println(ip + " -> " + ip.getCanonicalHostName)</p><p>// Determine whether it's the loopback address.
+println(ip + " == loopback? " + ip.isLoopbackAddress)
+</pre></blockquote></p><p>Here's an IPv6 example:</p><p><blockquote><pre>
+val ip = IPAddress("fe80::21d:9ff:fea7:53e3")</p><p>// Test if the address is reachable within 1 second.
+println(ip + " is reachable? " + ip.isReachable(1000))</p><p>// Get the canonical host name for (i.e., do a reverse lookup on) the
+// address.
+println(ip + " -> " + ip.getCanonicalHostName)</p><p>// Determine whether it's the loopback address.
+println(ip + " == loopback? " + ip.isLoopbackAddress)
+</pre></blockquote></p></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="IPAddress$.html">companion</a>
+            </div>
+    </div>
+      
+      <div id="template">
+      
+        <div id="mbrsel">
+              <div id="ancestors">
+                <h3>Inherits</h3>
+                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+              </div>
+            </div>
+        
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.net.IPAddress#address">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">address</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="grizzled.net.IPAddress#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Overloaded "==" method to test for equality</p><div class="fullcomment">
+      <div class="comment cmt"><p>Overloaded "==" method to test for equality.
+</p></div>
+      <dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>object against which to test this object
+</p></dd><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if equal, <tt>false</tt> if not</p></dd></dl>
+      
+      
+      
+      <div class="block">
+              Go to: <a href="IPAddress$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.net.IPAddress#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Overloaded hash method: Ensures that two <tt>IPAddress</tt> objects
+that represent the same IP address have the same hash code</p><div class="fullcomment">
+      <div class="comment cmt"><p>Overloaded hash method: Ensures that two <tt>IPAddress</tt> objects
+that represent the same IP address have the same hash code.
+</p></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="IPAddress$.html">companion</a>
+            </div>
+    </div>
+    </li><li name="grizzled.net.IPAddress#toString">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Return a printable version of this IP address</p><div class="fullcomment">
+      <div class="comment cmt"><p>Return a printable version of this IP address.
+</p></div>
+      
+      
+      
+      
+      <div class="block">
+              Go to: <a href="IPAddress$.html">companion</a>
+            </div>
+    </div>
+    </li></ol>
+            </div>
+        
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li name="grizzled.net.IPAddress#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">IPAddress</span><span class="params">(<span name="address">address: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.AnyRef#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">IPAddress</span><span class="params">()</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+        
+      </div>
+      
+    </body>
+      </html>
