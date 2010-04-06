@@ -1,5 +1,11 @@
 * Updated to the released version of [SBT][] 0.7.2.
 * Added `withDownloadedFile()` to `grizzled.net.url`, to execute a block on
   a downloaded URL.
+* The `grizzled.io.implicits` module has been replaced by individual 
+  modules, for more granular scope control (e.g.,
+  `grizzled.io.RichInputStream`, `grizzled.io.RichReader`)
+* The `grizzled.io` package has been split into individual source files.
+* Added new `grizzled.io.SourceReader` class that wraps a `scala.io.Source`
+  inside a `java.io.Reader`.
 
 [SBT]: http://code.google.com/p/simple-build-tool

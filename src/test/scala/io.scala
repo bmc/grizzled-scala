@@ -33,7 +33,8 @@
 \*---------------------------------------------------------------------------*/
 
 import org.scalatest.FunSuite
-import grizzled.io.implicits._
+import grizzled.io.RichReader._
+import grizzled.io.RichInputStream._
 
 /**
  * Tests the grizzled.io functions.

@@ -134,7 +134,7 @@ object url
     {
         import java.io.{BufferedInputStream, BufferedOutputStream}
         import java.io.{FileOutputStream}
-        import grizzled.io.implicits._
+        import grizzled.io.RichInputStream._
 
         if (pathOut.isDirectory)
             throw new IOException("Output file \"" + pathOut + "\" exists " +

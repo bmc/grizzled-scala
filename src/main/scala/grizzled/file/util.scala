@@ -40,7 +40,8 @@ package grizzled.file
 import scala.util.matching.Regex
 import scala.annotation.tailrec
 
-import grizzled.io.implicits._
+import grizzled.io.RichInputStream._
+import grizzled.io.RichReader._
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
 

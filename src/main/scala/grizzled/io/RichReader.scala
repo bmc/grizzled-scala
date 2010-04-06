@@ -55,7 +55,7 @@ import java.io.{Reader, Writer}
  * contains implicit conversions between <tt>RichReader</tt> and
  * <tt>Reader</tt>.
  *
- * @param reader  the input stream to wrap
+ * @param reader  the reader to wrap
  */
 class RichReader(val reader: Reader) extends PartialReader[Char]
 {
