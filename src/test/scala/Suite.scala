@@ -117,4 +117,3 @@ class GrizzledFunSuite extends FunSuite
         }
     }
 }
-

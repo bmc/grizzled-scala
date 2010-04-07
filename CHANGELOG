@@ -1,6 +1,6 @@
-Version 0.4.2 (...)
+Version 0.4.2 (7 April, 2010)
 
-- Updated to the released version of SBT 0.7.2.
+- Updated to SBT version 0.7.3.
 - Added withDownloadedFile() to grizzled.net.url, to execute a block on
   a downloaded URL.
 - The grizzled.io.implicits module has been replaced by individual 

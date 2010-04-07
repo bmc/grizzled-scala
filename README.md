@@ -43,7 +43,7 @@ Add the following lines, to make your project depend on Grizzled:
 
     val orgClapperMavenRepo = "clapper.org Maven Repo" at "http://maven.clapper.org/"
 
-    val grizzled = "org.clapper" % "grizzled-scala" % "0.3.1"
+    val grizzled = "org.clapper" % "grizzled-scala" % "0.4.2"
 
 ### The Development Version
 
