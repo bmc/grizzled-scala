@@ -27,7 +27,7 @@ Currently, the library is broken into a number of modules:
 - `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
 
 The home page for the Grizzled Scala Library is
-<http://www.clapper.org/software/scala/grizzled-scala/>
+<http://bmc.github.com/grizzled-scala/>
 
 ## Getting this Plugin
 
