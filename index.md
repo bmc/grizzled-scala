@@ -39,7 +39,7 @@ your `project/build/` directory):
 
     val orgClapperRepo = "clapper.org Maven Repository" at
         "http://maven.clapper.org"
-    val grizzled = "org.clapper" % "grizzled-scala" % "0.4.1"
+    val grizzled = "org.clapper" % "grizzled-scala" % "0.4.2"
 
 ## Source Code Repository
 
