@@ -50,6 +50,7 @@ import grizzled.string.implicits._
 
 import scala.collection.mutable.{Map => MutableMap}
 import scala.io.Source
+import scala.util.matching.Regex
 
 /**
  * Base class for all configuration exceptions.
@@ -81,6 +82,11 @@ class NoSuchSectionException(sectionName: String)
 class NoSuchOptionException(sectionName: String, optionName: String)
     extends ConfigException("Section \"" + sectionName + "\" does not have " +
                             "an option named \"" + optionName + "\".")
+
+/**
+ * Used as a wrapper to pass a section to callbacks.
+ */
+class Section(val name: String, val options: Map[String, String])
 
 /**
  * An INI-style configuration file parser.
@@ -521,6 +527,19 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      * @return the transformed option name
      */
     def transformOptionName(option: String) = option.toLowerCase
+
+    /**
+     * Invoke a code block on each section whose name matches a regular
+     * expression.
+     *
+     * @param regex  the regular expression to match
+     * @param code   the block of code to invoke with each section
+     */
+    def forMatchingSections(regex: Regex)(code: Section => Unit) =
+    {
+        for (name <- sectionNames; if (regex.findFirstIn(name) != None))
+            code(new Section(name, options(name)))
+    }
 }
 
 /**

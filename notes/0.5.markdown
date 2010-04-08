@@ -1,0 +1,3 @@
+* Enhanced `grizzled.config.Configuration` with a `forMatchingSections()`
+  method that allows simple looping over sections that match a regular
+  expression.
