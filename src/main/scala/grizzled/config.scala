@@ -409,6 +409,30 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     }
 
     /**
+     * Works like `Map.get()`, returning `Some(string)` if the value
+     * is found, `None` if not. Does not throw exceptions.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     *
+     * @return `Some(value)` if the section and option exist, `None` if
+     *         either the section or option cannot be found.
+     */
+    def get(sectionName: String, optionName: String): Option[String] =
+    {
+        try
+        {
+            Some(option(sectionName, optionName))
+        }
+
+        catch
+        {
+            case _: NoSuchOptionException => None
+            case _: NoSuchSectionException => None
+        }
+    }
+
+    /**
      * Determine whether the configuration contains a named section.
      *
      * @param sectionName  the new section's name

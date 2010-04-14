@@ -3,6 +3,9 @@ Version 0.5 (...)
 - Enhanced grizzled.config.Configuration with a forMatchingSections()
   method that allows simple looping over sections that match a regular
   expression.
+- grizzled.config.Configuration now supports an alternative to the option()
+  methods: a get() method that returns Option[String] and does not throw
+  exceptions.
 
 ---------------------------------------------------------------------------
 Version 0.4.2 (7 April, 2010)
