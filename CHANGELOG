@@ -6,6 +6,9 @@ Version 0.5 (...)
 - grizzled.config.Configuration now supports an alternative to the option()
   methods: a get() method that returns Option[String] and does not throw
   exceptions.
+- grizzled.config.Configuration now supports a setOption() method that
+  overwrites an option value, if it exists already, instead of throwing a
+  DuplicateOptionException, as addOption() does.
 
 ---------------------------------------------------------------------------
 Version 0.4.2 (7 April, 2010)

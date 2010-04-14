@@ -391,21 +391,40 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      * @throws DuplicateOptionException if the option already exists in the
      *                                  section
      */
-    def addOption(sectionName: String, optionName: String, value: String)
+    def addOption(sectionName: String,
+                  optionName: String,
+                  value: String): Unit =
     {
-        if (SpecialSections contains sectionName)
-            throw new ConfigException("Can't add an option to read-only " +
-                                      "section \"" + sectionName + "\"")
+        def validate(canonicalOptionName: String,
+                     optionMap: MutableMap[String, String]): Unit =
+        {
+            if (SpecialSections contains sectionName)
+                throw new ConfigException("Can't add an option to read-only " +
+                                          "section \"" + sectionName + "\"")
 
-        if (! hasSection(sectionName))
-            throw new NoSuchSectionException(sectionName)
+            if (optionMap.contains(canonicalOptionName))
+                throw new DuplicateOptionException(sectionName, optionName)
+        }
 
-        val optionMap = sections(sectionName)
-        val canonicalOptionName = transformOptionName(optionName)
-        if (optionMap.contains(canonicalOptionName))
-            throw new DuplicateOptionException(sectionName, optionName)
+        putOption(sectionName, optionName, value, validate)
+    }
 
-        optionMap += (canonicalOptionName -> value)
+    /**
+     * Put an option name and value to a section, overwriting any existing
+     * instance of that option. Unlike `addOption()`, this method will
+     * not throw `DuplicateOptionException`.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name, which will be transformed
+     * @param value        the option's value
+     *
+     * @throws NoSuchSectionException   if the section doesn't exist
+     */
+    def setOption(sectionName: String,
+                  optionName: String,
+                  value: String): Unit =
+    {
+        putOption(sectionName, optionName, value, ((s, m) => ()))
     }
 
     /**
@@ -563,6 +582,23 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     {
         for (name <- sectionNames; if (regex.findFirstIn(name) != None))
             code(new Section(name, options(name)))
+    }
+
+    private def putOption
+        (sectionName: String,
+         optionName: String,
+         value: String,
+         preCheck: (String, MutableMap[String, String]) => Unit): Unit =
+    {
+        if (! hasSection(sectionName))
+            throw new NoSuchSectionException(sectionName)
+
+        val optionMap = sections(sectionName)
+        val canonicalOptionName = transformOptionName(optionName)
+
+        preCheck(canonicalOptionName, optionMap)
+
+        optionMap += (canonicalOptionName -> value)
     }
 }
 
@@ -757,7 +793,7 @@ object Configuration
      *         val ipAddress = args(2)
      *         val sections = Map("args" -> Map("name" -> name,
      *                                          "ip" -> ipAddress))
-     *         val config = Configuration(configFile, sections)
+     *         val config = Configuration(Source.fromFile(new File(configFile)), sections)
      *         ..
      *     }
      * }
