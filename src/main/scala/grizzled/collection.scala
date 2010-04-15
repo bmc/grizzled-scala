@@ -81,7 +81,8 @@ class ListIterator[+T](val list: List[T]) extends Iterator[T]
     private var cursor = 0
 
     def hasNext: Boolean = cursor < list.length
-    def next: T = {
+    def next: T =
+    {
         val result = list(cursor)
         cursor += 1
         result
