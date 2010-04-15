@@ -37,6 +37,8 @@
 
 package grizzled.math
 
+import scala.math
+
 /**
  * Useful math-related utility functions.
  */
@@ -49,7 +51,7 @@ object util
      *
      * @return the maximum
      */
-    def max(args: Int*) = (0 /: args)((a, b) => Math.max(a, b))
+    def max(args: Int*) = (0 /: args)((a, b) => math.max(a, b))
 
     /**
      * A <tt>max</tt> method that works with any number of longs.
@@ -58,7 +60,7 @@ object util
      *
      * @return the maximum
      */
-    def max(args: Long*) = (0L /: args)((a, b) => Math.max(a, b))
+    def max(args: Long*) = (0L /: args)((a, b) => math.max(a, b))
 
     /**
      * A <tt>max</tt> method that works with any number of floats.
@@ -67,7 +69,7 @@ object util
      *
      * @return the maximum
      */
-    def max(args: Float*) = (0.0f /: args)((a, b) => Math.max(a, b))
+    def max(args: Float*) = (0.0f /: args)((a, b) => math.max(a, b))
 
     /**
      * A <tt>max</tt> method that works with any number of doubles.
@@ -76,7 +78,7 @@ object util
      *
      * @return the maximum
      */
-    def max(args: Double*) = (0.0 /: args)((a, b) => Math.max(a, b))
+    def max(args: Double*) = (0.0 /: args)((a, b) => math.max(a, b))
 
     /**
      * A <tt>min</tt> method that works with any number of integers.
@@ -85,7 +87,7 @@ object util
      *
      * @return the minimum
      */
-    def min(args: Int*) = (0 /: args)((a, b) => Math.min(a, b))
+    def min(args: Int*) = (0 /: args)((a, b) => math.min(a, b))
 
     /**
      * A <tt>min</tt> method that works with any number of longs.
@@ -94,7 +96,7 @@ object util
      *
      * @return the minimum
      */
-    def min(args: Long*) = (0L /: args)((a, b) => Math.min(a, b))
+    def min(args: Long*) = (0L /: args)((a, b) => math.min(a, b))
 
     /**
      * A <tt>min</tt> method that works with any number of floats.
@@ -103,7 +105,7 @@ object util
      *
      * @return the minimum
      */
-    def min(args: Float*) = (0.0f /: args)((a, b) => Math.min(a, b))
+    def min(args: Float*) = (0.0f /: args)((a, b) => math.min(a, b))
 
     /**
      * A <tt>min</tt> method that works with any number of doubles.
@@ -112,5 +114,5 @@ object util
      *
      * @return the minimum
      */
-    def min(args: Double*) = (0.0 /: args)((a, b) => Math.min(a, b))
+    def min(args: Double*) = (0.0 /: args)((a, b) => math.min(a, b))
 }

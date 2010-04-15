@@ -1,3 +1,6 @@
+* Updated to Scala 2.8.0.RC1.
+* Replaced uses of now-deprecated `Math` functions with corresponding functions
+  from `scala.math`.
 * Enhanced `grizzled.config.Configuration` with a `forMatchingSections()`
   method that allows simple looping over sections that match a regular
   expression.
