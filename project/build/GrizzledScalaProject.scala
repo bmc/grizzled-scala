@@ -55,6 +55,12 @@ class GrizzledScalaProject(info: ProjectInfo)
 
     override def compileOptions = Unchecked :: super.compileOptions.toList
 
+    // Specialization causes problems with inner classes. Disabling it, for
+    // now, allows the tests to run. It can be re-enabled when compiler
+    // bugs are fixed.
+    override def testCompileOptions = super.testCompileOptions ++
+        Seq(CompileOption("-no-specialization"))
+
     // 2.8 and xsbt: Override documentOptions, because they're for 2.7, not
     // 2.8, and they've changed.
     private val docTitle = projectName + " " + projectVersion + " API"
@@ -132,9 +138,9 @@ class GrizzledScalaProject(info: ProjectInfo)
     val jline = "jline" % "jline" % "0.9.94"
 
     val newReleaseToolsRepository = "Scala Tools Repository" at
-        "http://nexus.scala-tools.org/content/repositories/snapshots/"
+        "http://www.scala-tools.org/repo-snapshots"
     val scalatest = "org.scalatest" % "scalatest" %
-        "1.0.1-for-scala-2.8.0.Beta1-with-test-interfaces-0.3-SNAPSHOT"
+        "1.0.1-for-scala-2.8.0.RC1-SNAPSHOT"
 
     val rhino = "rhino" % "js" % "1.7R2"
 
