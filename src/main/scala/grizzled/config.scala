@@ -48,6 +48,7 @@ import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
 import grizzled.string.implicits._
 
+import scala.annotation.tailrec
 import scala.collection.mutable.{Map => MutableMap}
 import scala.io.Source
 import scala.util.matching.Regex
@@ -82,6 +83,10 @@ class NoSuchSectionException(sectionName: String)
 class NoSuchOptionException(sectionName: String, optionName: String)
     extends ConfigException("Section \"" + sectionName + "\" does not have " +
                             "an option named \"" + optionName + "\".")
+
+class SubstitutionException(sectionName: String, message: String)
+    extends ConfigException("Section \"" + sectionName + "\" has a " +
+                            "substitution error: " + message)
 
 /**
  * Used as a wrapper to pass a section to callbacks.
@@ -339,16 +344,28 @@ class Section(val name: String, val options: Map[String, String])
  */
 class Configuration(predefinedSections: Map[String, Map[String, String]])
 {
-    private val SpecialSections = Set("env", "system")
+    private val SpecialSections  = Set("env", "system")
+    private val SectionName      = """([a-zA-Z0-9_]+)""".r
+    private val ValidSection     = ("""^\s*\[""" +
+                                    SectionName.toString +
+                                    """\]\s*$""").r
+    private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
+    private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
+    private val CommentLine      = """^\s*(#.*)$""".r
+    private val BlankLine        = """^(\s*)$""".r
+    private val VariableName     = """([a-zA-Z0-9_.]+)""".r
+    private val RawAssignment    = ("""^\s*""" +
+                                    VariableName.toString +
+                                    """\s*->\s*(.*)$""").r
+    private val Assignment       = ("""^\s*""" +
+                                    VariableName.toString +
+                                    """\s*[:=]\s*(.*)$""").r
+    private val FullVariableRef  = (SectionName.toString + """\.""" +
+                                    VariableName.toString).r
 
     private val sections = MutableMap.empty[String, MutableMap[String, String]]
 
-    for ((sectionName, optionMap) <- predefinedSections)
-    {
-        addSection(sectionName)
-        for ((optionName, optionValue) <- optionMap)
-            addOption(sectionName, optionName, optionValue)
-    }
+    addSections(predefinedSections)
 
     /**
      * Alternate constructor for use when there are no predefined sections.
@@ -441,13 +458,18 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     {
         try
         {
-            Some(option(sectionName, optionName))
+            option(sectionName, optionName) match
+            {
+                case value if (value != "") => Some(value)
+                case _                      => None
+            }
         }
 
         catch
         {
             case _: NoSuchOptionException => None
             case _: NoSuchSectionException => None
+            case _: SubstitutionException => None
         }
     }
 
@@ -503,7 +525,8 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
 
     /**
      * Get the value for an option in a section, supplying a default if the
-     * option or the section doesn't exist.
+     * option or the section doesn't exist. Exceptions for variable
+     * substitution errors are still thrown.
      *
      * @param sectionName  the section name
      * @param optionName   the option name
@@ -584,7 +607,96 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             code(new Section(name, options(name)))
     }
 
-    private def putOption
+    /**
+     * Load configuration data from the specified source into this object.
+     * Clears the configuration first.
+     *
+     * @param source  `scala.io.Source` object to read
+     * @param safe    Whether an exception should be thrown for bad variable
+     *                substitutions (`false`) or not (`true`).
+     *
+     * @return this object, for convenience
+     */
+    def load(source: Source, safe: Boolean = false): Configuration =
+    {
+        def processLine(line: String,
+                        curSection: Option[String]): Option[String] =
+        {
+            def unsafeResolveVariable(name: String): Option[String] =
+                getVar(curSection.get, name)
+
+            def safeResolveVariable(name: String): Option[String] =
+                safeGetVar(curSection.get, name)
+
+            val resolve = if (safe) safeResolveVariable _
+                          else unsafeResolveVariable _
+
+            line match
+            {
+                case CommentLine(_) =>
+                    curSection
+
+                case BlankLine(_) =>
+                    curSection
+
+                case ValidSection(name) =>
+                    addSection(name)
+                    Some(name)
+
+                case BadSectionFormat(section) =>
+                    throw new ConfigException("Badly formatted section: \"" +
+                                              section + "\"")
+
+                case BadSectionName(name) =>
+                    throw new ConfigException("Bad section name: \"%s\"" + name)
+
+                case Assignment(optionName, value) =>
+                    val template = new UnixShellStringTemplate(resolve,
+                                                               "[a-zA-Z0-9_.]+",
+                                                               safe)
+                    if (curSection == None)
+                        throw new ConfigException("Assignment \"" +
+                                                  optionName + "=" + value +
+                                                  "\" occurs before the " +
+                                                  "first section.")
+                    val newValue = template.substitute(value.translateMetachars)
+                    addOption(curSection.get, optionName, newValue)
+                    curSection
+
+                case RawAssignment(optionName, value) =>
+                    if (curSection == None)
+                        throw new ConfigException("Assignment \"" +
+                                                  optionName + "=" + value +
+                                                  "\" occurs before the " +
+                                                  "first section.")
+                    addOption(curSection.get, optionName, value)
+                    curSection
+
+                case _ =>
+                    throw new ConfigException("Unknown configuration line: \"" +
+                                              line + "\"")
+            }
+        }
+
+        @tailrec def processLines(lines: Iterator[String],
+                                  curSection: Option[String]): Unit =
+        {
+            if (lines.hasNext)
+            {
+                val nextSection = processLine(lines.next, curSection)
+                processLines(lines, nextSection)
+            }
+        }
+
+        processLines(new BackslashContinuedLineIterator(Includer(source)), None)
+        this
+    }
+
+    /**
+     * Puts an option in the configuration, running the specified pre-check
+     * logic first.
+     */
+    protected def putOption
         (sectionName: String,
          optionName: String,
          value: String,
@@ -600,6 +712,65 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
 
         optionMap += (canonicalOptionName -> value)
     }
+
+    private def safeGetVar(curSection: String, 
+                           varName: String): Option[String] =
+    {
+        try
+        {
+            getVar(curSection, varName)
+        }
+
+        catch
+        {
+            case _: NoSuchOptionException => None
+            case _: NoSuchSectionException => None
+            case _: SubstitutionException => None
+        }
+    }
+
+    private def getVar(curSection: String, varName: String): Option[String] =
+    {
+        try
+        {
+            varName match
+            {
+                case FullVariableRef(section, option) =>
+                    Some(this.option(section, option))
+                case VariableName(option) =>
+                    Some(this.option(curSection, option))
+                case _ =>
+                    throw new SubstitutionException(curSection,
+                                                    "Reference to" +
+                                                    "nonexistent section or " +
+                                                    "option: ${ " +
+                                                    varName + "}")
+            }
+        }
+
+        catch
+        {
+            case _: NoSuchOptionException =>
+                throw new SubstitutionException(curSection,
+                                                "Reference to nonexistent " +
+                                                "option in ${" + varName + "}")
+
+            case _: NoSuchSectionException =>
+                throw new SubstitutionException(curSection,
+                                                "Reference to nonexistent " +
+                                                "section in ${" + varName + "}")
+        }
+    }
+
+    private def addSections(newSections: Map[String,Map[String,String]]): Unit =
+    {
+        for ((sectionName, optionMap) <- predefinedSections)
+        {
+            addSection(sectionName)
+            for ((optionName, optionValue) <- optionMap)
+                addOption(sectionName, optionName, optionValue)
+        }
+    }
 }
 
 /**
@@ -608,29 +779,14 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
  */
 object ConfigurationReader
 {
-    private val SectionName      = """([a-zA-Z0-9_]+)""".r
-    private val ValidSection     = ("""^\s*\[""" +
-                                    SectionName.toString +
-                                    """\]\s*$""").r
-    private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
-    private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
-    private val CommentLine      = """^\s*(#.*)$""".r
-    private val BlankLine        = """^(\s*)$""".r
-    private val VariableName     = """([a-zA-Z0-9_.]+)""".r
-    private val RawAssignment    = ("""^\s*""" +
-                                    VariableName.toString +
-                                    """\s*->\s*(.*)$""").r
-    private val Assignment       = ("""^\s*""" +
-                                    VariableName.toString +
-                                    """\s*[:=]\s*(.*)$""").r
-    private val FullVariableRef  = (SectionName.toString + """\.""" +
-                                    VariableName.toString).r
     /**
      * Read a configuration.
      *
      * @param source `scala.io.Source` object to read
      *
      * @return the `Configuration` object.
+     *
+     * @deprecated Use the Configuration object
      */
     def read(source: Source): Configuration =
         read(source, Map.empty[String, Map[String, String]])
@@ -665,96 +821,13 @@ object ConfigurationReader
      *                  no predefined sections.
      *
      * @return the `Configuration` object.
+     *
+     * @deprecated Use the Configuration object
      */
     def read(source: Source,
              sections: Map[String, Map[String, String]]): Configuration =
     {
-        val config             =  new Configuration(sections)
-        var curSection: String = null
-
-        def resolveVariable(varName: String): Option[String] =
-            getVar(config, curSection, varName)
-
-        val template = new UnixShellStringTemplate(resolveVariable,
-                                                   "[a-zA-Z0-9_.]+",
-                                                   true)
-
-        for (line <- new BackslashContinuedLineIterator(Includer(source)))
-        {
-            line match
-            {
-                case CommentLine(_) =>
-
-                case BlankLine(_) =>
-
-                case ValidSection(name) =>
-                    config.addSection(name)
-                    curSection = name
-
-                case BadSectionFormat(section) =>
-                    throw new ConfigException("Badly formatted section: \"" +
-                                              section + "\"")
-
-                case BadSectionName(name) =>
-                    throw new ConfigException("Bad section name: \"%s\"" + name)
-
-                case Assignment(optionName, value) =>
-                    if (curSection == null)
-                        throw new ConfigException("Assignment \"" +
-                                                  optionName + "=" + value +
-                                                  "\" occurs before the " +
-                                                  "first section.")
-                    val newValue = template.substitute(value.translateMetachars)
-                    config.addOption(curSection, optionName, newValue)
-
-                case RawAssignment(optionName, value) =>
-                    if (curSection == null)
-                        throw new ConfigException("Assignment \"" +
-                                                  optionName + "=" + value +
-                                                  "\" occurs before the " +
-                                                  "first section.")
-                    config.addOption(curSection, optionName, value)
-
-                case _ =>
-                    throw new ConfigException("Unknown configuration line: \"" +
-                                              line + "\"")
-            }
-        }
-
-        config
-    }
-
-    private def getVar(config: Configuration,
-                       curSection: String,
-                       varName: String): Option[String] =
-    {
-        try
-        {
-            varName match
-            {
-                case FullVariableRef(section, option) =>
-                    Some(config.option(section, option))
-                case VariableName(option) =>
-                    Some(config.option(curSection, option))
-                case _ =>
-                    throw new ConfigException("Reference to nonexistent " +
-                                              "section or option: ${ " +
-                                              varName + "}")
-            }
-        }
-
-        catch
-        {
-            case _: NoSuchOptionException =>
-                throw new ConfigException("In section [" + curSection +
-                                          "]: Reference to nonexistent " +
-                                          "option in ${" + varName + "}")
-
-            case _: NoSuchSectionException =>
-                throw new ConfigException("In section [" + curSection +
-                                          "]: Reference to nonexistent " +
-                                          "option in ${" + varName + "}")
-        }
+        new Configuration(sections).load(source)
     }
 }
 
@@ -769,10 +842,13 @@ object Configuration
      * Read a configuration file.
      *
      * @param source `scala.io.Source` object to read
+     * @param safe    Whether an exception should be thrown for bad variable
+     *                substitutions (`false`) or not (`true`).
      *
      * @return the `Configuration` object.
      */
-    def apply(source: Source): Configuration = ConfigurationReader.read(source)
+    def apply(source: Source, safe: Boolean = false): Configuration =
+        new Configuration().load(source, safe)
 
     /**
      * Read a configuration file, permitting some predefined sections to be
@@ -807,5 +883,43 @@ object Configuration
      */
     def apply(source: Source,
               sections: Map[String, Map[String, String]]): Configuration =
-        ConfigurationReader.read(source, sections)
+        new Configuration(sections).load(source)
+
+    /**
+     * Read a configuration file, permitting some predefined sections to be
+     * added to the configuration before it is read. The predefined sections
+     * are defined in a map of maps. The outer map is keyed by predefined
+     * section name. The inner maps consist of options and their values.
+     * For instance, to read a configuration file, giving it access to
+     * certain command line parameters, you could do something like this:
+     *
+     * {{{
+     * object Foo
+     * {
+     *     def main(args: Array[String]) =
+     *     {
+     *         // You'd obviously want to do some real argument checking here.
+     *         val configFile = args(0)
+     *         val name = args(1)
+     *         val ipAddress = args(2)
+     *         val sections = Map("args" -> Map("name" -> name,
+     *                                          "ip" -> ipAddress))
+     *         val config = Configuration(Source.fromFile(new File(configFile)), sections)
+     *         ..
+     *     }
+     * }
+     * }}}
+     *
+     * @param source    `scala.io.Source` object to read
+     * @param sections  the predefined sections. An empty map means there are
+     *                  no predefined sections.
+     * @param safe      Whether an exception should be thrown for bad variable
+     *                  substitutions (`false`) or not (`true`).
+     *
+     * @return the `Configuration` object.
+     */
+    def apply(source: Source,
+              sections: Map[String, Map[String, String]],
+              safe: Boolean): Configuration =
+        new Configuration(sections).load(source, safe)
 }

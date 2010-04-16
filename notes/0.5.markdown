@@ -1,13 +1,16 @@
 * Updated to Scala 2.8.0.RC1.
 * Replaced uses of now-deprecated `Math` functions with corresponding functions
   from `scala.math`.
-* Enhanced `grizzled.config.Configuration` with a `forMatchingSections()`
-  method that allows simple looping over sections that match a regular
-  expression.
-* `grizzled.config.Configuration` now supports an alternative to the `option()`
-  methods: a `get()` method that returns `Option[String]` and does not throw
-  exceptions.
-* `grizzled.config.Configuration` now supports a `setOption()` method that
-  overwrites an option value, if it exists already, instead of throwing a
-  `DuplicateOptionException`, as `addOption()` does.
-
+* Enhanced `grizzled.config.Configuration`:
+  - It now has a forMatchingSections() method that allows simple looping over
+    sections that match a regular expression.
+  - It now supports an alternative to the option() methods: a get() method
+    that returns `Option[String]` and does not throw exceptions.
+  - It supports a `setOption()` method that overwrites an option value, if it
+    exists already, instead of throwing a `DuplicateOptionException`, as 
+    `addOption()` does.
+  - `ConfigurationReader` is deprecated, and the logic to read a configuration
+    file has been moved into the `Configuration` class, to permit easier
+    subclassing.
+  - Now supports a "safe load" mode, where exceptions aren't thrown.
+  - Added unit tests for the `Configuration` class.
