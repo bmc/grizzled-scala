@@ -33,7 +33,7 @@
 \*---------------------------------------------------------------------------*/
 
 import org.scalatest.FunSuite
-import grizzled.config.Configuration
+import grizzled.config._
 import scala.io.Source
 
 /**
@@ -43,8 +43,6 @@ class ConfigTest extends GrizzledFunSuite
 {
     test("basic configuration")
     {
-        import java.io.StringReader
-
         val configText = """
 [section1]
 var1 = val1
@@ -64,10 +62,8 @@ var1 = foo bar
         doTest(configText, expected)
     }
 
-    test("variable substitution")
+    test("good variable substitution")
     {
-        import java.io.StringReader
-
         val configText = """
 [vars]
 foo = foobar
@@ -76,7 +72,6 @@ foo = foobar
 home = ${env.HOME}
 home2 = ${system.user.home}
 foo = ${vars.foo}
-bar = ${vars.bar}
 """
         val home = System.getProperty("user.home")
 
@@ -89,6 +84,191 @@ bar = ${vars.bar}
         )
 
         doTest(configText, expected, safe=true)
+    }
+
+    test("bad variable substitution")
+    {
+        val data = List("[section1]\nfoobar = ${vars.foobar}",
+                        "[vars]\nfoo = foobar\n[section1]\nbar: ${vars.bar}")
+
+        for (configString <- data)
+        {
+            try
+            {
+                Configuration(Source.fromString(configString))
+                fail("Did not get expected SubstitutionException")
+            }
+
+            catch
+            {
+                case _: SubstitutionException =>
+            }
+        }
+    }
+
+    test("legal intOption(), no default")
+    {
+        val configText = """
+[section]
+foo: 0
+bar = 1
+baz = 1001801
+"""
+        val data = Map("foo" -> 0,
+                       "bar" -> 1,
+                       "baz" -> 1001801)
+        val config = Configuration(Source.fromString(configText))
+
+        for ((opt, expected) <- data)
+            expect(expected, opt + "=" + expected.toString)
+            {
+                config.intOption("section", opt)
+            }
+
+    }
+
+    test("bad intOption(), no default")
+    {
+        val configText = """
+[section]
+foo: abc
+bar: 100a
+baz: asfdasdfasdf
+"""
+        val config = Configuration(Source.fromString(configText))
+
+        for (opt <- config.optionNames("section"))
+            try
+            {
+                config.intOption("section", opt)
+                fail("Did not get expected ConversionException for " + opt)
+            }
+            catch
+            {
+                case _: ConversionException =>
+            }
+
+    }
+
+    test("no intOption(), with default")
+    {
+        val configText = """
+[section]
+"""
+        val data = Map("foo" -> 0,
+                       "bar" -> 1,
+                       "baz" -> 1001801)
+        val config = Configuration(Source.fromString(configText))
+
+        for ((opt, expected) <- data)
+            expect(expected, opt + "=" + expected.toString)
+            {
+                config.intOption("section", opt, expected)
+            }
+    }
+
+    test("getInt")
+    {
+        val configText = """
+[section]
+foo: 10
+bar: 100
+"""
+        val data = Map("foo" -> Some(10),
+                       "bar" -> Some(100),
+                       "baz" -> None)
+        val config = Configuration(Source.fromString(configText))
+
+        for ((opt, expected) <- data)
+            expect(expected, opt + " -> " + expected)
+            {
+                config.getInt("section", opt)
+            }
+    }
+
+    test("legal booleanOption(), no default")
+    {
+        val configText = """
+[section]
+false0: 0
+true1 = 1
+falseno = no
+trueyes = yes
+falseoff = off
+trueon = on
+false = false
+true = true
+"""
+        val config = Configuration(Source.fromString(configText))
+
+        for (opt <- config.optionNames("section"))
+        {
+            val expected = if (opt.startsWith("false")) false else true
+            expect(expected, opt + "=" + expected)
+            {
+                config.booleanOption("section", opt)
+            }
+
+        }
+    }
+
+    test("bad booleanOption(), no default")
+    {
+        val configText = """
+[section]
+foo: a
+bar: treu
+baz: felse
+"""
+        val config = Configuration(Source.fromString(configText))
+
+        for (opt <- config.optionNames("section"))
+            try
+            {
+                println(config.booleanOption("section", opt))
+                fail("Did not get expected ConversionException for " + opt)
+            }
+            catch
+            {
+                case _: ConversionException =>
+            }
+
+    }
+
+    test("no booleanOption(), with default")
+    {
+        val configText = """
+[section]
+"""
+        val data = Map("foo" -> false,
+                       "bar" -> true,
+                       "baz" -> false)
+        val config = Configuration(Source.fromString(configText))
+
+        for ((opt, expected) <- data)
+            expect(expected, opt + "=" + expected.toString)
+            {
+                config.booleanOption("section", opt, expected)
+            }
+    }
+
+    test("getBoolean")
+    {
+        val configText = """
+[section]
+foo: true
+bar: 0
+"""
+        val data = Map("foo" -> Some(true),
+                       "bar" -> Some(false),
+                       "baz" -> None)
+        val config = Configuration(Source.fromString(configText))
+
+        for ((opt, expected) <- data)
+            expect(expected, opt + " -> " + expected)
+            {
+                config.getBoolean("section", opt)
+            }
     }
 
     private def doTest(configString: String,

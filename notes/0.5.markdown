@@ -14,3 +14,4 @@
     subclassing.
   - Now supports a "safe load" mode, where exceptions aren't thrown.
   - Added unit tests for the `Configuration` class.
+  - Added ability to retrieve converted integer and boolean option values.

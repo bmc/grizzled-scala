@@ -62,31 +62,39 @@ class ConfigException(val message: String) extends Exception(message)
  * Thrown when a duplicate section is encountered.
  */
 class DuplicateSectionException(sectionName: String)
-    extends ConfigException("Duplication section name: \"" + sectionName + "\"")
+extends ConfigException("Duplication section name: \"" + sectionName + "\"")
 
 /**
  * Thrown when a duplicate option is encountered.
  */
 class DuplicateOptionException(sectionName: String, optionName: String)
-    extends ConfigException("Duplicate option \"" + optionName + "\" in " +
+extends ConfigException("Duplicate option \"" + optionName + "\" in " +
                             "section \"" + sectionName + "\"")
 
 /**
  * Thrown when an expected section is not present in the confiruation.
  */
 class NoSuchSectionException(sectionName: String)
-    extends ConfigException("Section \"" + sectionName + "\" does not exist.")
+extends ConfigException("Section \"" + sectionName + "\" does not exist.")
 
 /**
  * Thrown when an expected option is not present in the confiruation.
  */
 class NoSuchOptionException(sectionName: String, optionName: String)
-    extends ConfigException("Section \"" + sectionName + "\" does not have " +
-                            "an option named \"" + optionName + "\".")
+extends ConfigException("Section \"" + sectionName + "\" does not have " +
+                        "an option named \"" + optionName + "\".")
 
 class SubstitutionException(sectionName: String, message: String)
-    extends ConfigException("Section \"" + sectionName + "\" has a " +
-                            "substitution error: " + message)
+extends ConfigException("Section \"" + sectionName + "\" has a " +
+                        "substitution error: " + message)
+
+class ConversionException(sectionName: String,
+                          optionName: String,
+                          value: String,
+                          message: String)
+extends ConfigException("Section \"" + sectionName + "\", option \"" +
+                        optionName + "\": Conversion error for value \"" +
+                        value + "\": " + message)
 
 /**
  * Used as a wrapper to pass a section to callbacks.
@@ -469,7 +477,77 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
         {
             case _: NoSuchOptionException => None
             case _: NoSuchSectionException => None
-            case _: SubstitutionException => None
+        }
+    }
+
+    /**
+     * Get an optional integer option.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     *
+     * @return `Some(integer)` or None.
+     *
+     * @throws ConversionException    if the option has a non-integer value
+     */
+    def getInt(sectionName: String, optionName: String): Option[Int] =
+    {
+        get(sectionName, optionName) match
+        {
+            case Some(value) =>
+                try
+                {
+                    Some(value.toInt)
+                }
+
+                catch
+                {
+                    case _: NumberFormatException =>
+                        throw new ConversionException(sectionName,
+                                                      optionName,
+                                                      value,
+                                                      "not an integer.")
+                }
+
+            case None =>
+                None
+        }
+    }
+
+    /**
+     * Get an optional boolean option.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     *
+     * @return `Some(boolean)` or None.
+     *
+     * @throws ConversionException if the option has a non-boolean value
+     */
+    def getBoolean(sectionName: String, optionName: String): Option[Boolean] =
+    {
+        import grizzled.string.implicits._
+
+        get(sectionName, optionName) match
+        {
+            case Some(value) =>
+                try
+                {
+                    val b: Boolean = value
+                    Some(b)
+                }
+
+                catch
+                {
+                    case _: IllegalArgumentException =>
+                        throw new ConversionException(sectionName,
+                                                      optionName,
+                                                      value,
+                                                      "not a boolean.")
+                }
+
+            case None =>
+                None
         }
     }
 
@@ -565,6 +643,107 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             throw new NoSuchSectionException(sectionName)
 
         Map.empty[String, String] ++ sections(sectionName)
+    }
+
+    /**
+     * Get an integer option.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     *
+     * @return the integer result
+     *
+     * @throws NoSuchSectionException if the section doesn't exist
+     * @throws NoSuchOptionException  if the option doesn't exist
+     * @throws ConversionException    if the option cannot be converted
+     */
+    def intOption(sectionName: String, optionName: String): Int =
+    {
+        val value = option(sectionName, optionName)
+        try
+        {
+            value.toInt
+        }
+
+        catch
+        {
+            case _: NumberFormatException =>
+                throw new ConversionException(sectionName, optionName, value,
+                                              "Not an integer.")
+        }
+    }
+
+    /**
+     * Get an integer option, applying a default if not found.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     * @param default      the default value
+     *
+     * @return the integer result
+     *
+     * @throws ConversionException    if the option cannot be converted
+     */
+    def intOption(sectionName: String, optionName: String, default: Int): Int =
+    {
+        getInt(sectionName, optionName) match
+        {
+            case Some(i) => i
+            case None    => default
+        }
+    }
+
+    /**
+     * Get a boolean option.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     *
+     * @return the integer result
+     *
+     * @throws NoSuchSectionException if the section doesn't exist
+     * @throws NoSuchOptionException  if the option doesn't exist
+     * @throws ConversionException    if the option cannot be converted
+     */
+    def booleanOption(sectionName: String, optionName: String): Boolean =
+    {
+        import grizzled.string.implicits._
+
+        val value = option(sectionName, optionName)
+        try
+        {
+            val b: Boolean = value
+            b
+        }
+
+        catch
+        {
+            case _: IllegalArgumentException =>
+                throw new ConversionException(sectionName, optionName, value,
+                                              "Not a boolean.")
+        }
+    }
+
+    /**
+     * Get a boolean option, applying a default if not found.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     * @param default      the default value
+     *
+     * @return the integer result
+     *
+     * @throws ConversionException    if the option cannot be converted
+     */
+    def booleanOption(sectionName: String,
+                      optionName: String,
+                      default: Boolean): Boolean =
+    {
+        getBoolean(sectionName, optionName) match
+        {
+            case Some(b) => b
+            case None    => default
+        }
     }
 
     /**
@@ -725,7 +904,6 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
         {
             case _: NoSuchOptionException => None
             case _: NoSuchSectionException => None
-            case _: SubstitutionException => None
         }
     }
 
