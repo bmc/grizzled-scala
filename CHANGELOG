@@ -19,6 +19,8 @@ Version 0.5 (...)
   * Added ability to retrieve converted integer and boolean option values.
   * The options() method now returns an empty map if the section doesn't
     exist, instead of throwing an exception.
+  * The option() methods are now deprecated, in favor of get() and
+    getOrElse().
 
 ---------------------------------------------------------------------------
 Version 0.4.2 (7 April, 2010)
