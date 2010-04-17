@@ -100,6 +100,9 @@ extends ConfigException("Section \"" + sectionName + "\", option \"" +
  * Used as a wrapper to pass a section to callbacks.
  */
 class Section(val name: String, val options: Map[String, String])
+{
+    override def toString = "[" + name + "]"
+}
 
 /**
  * An INI-style configuration file parser.
@@ -373,6 +376,8 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
 
     private val sections = MutableMap.empty[String, MutableMap[String, String]]
 
+    private val EmptyOptions = Map.empty[String, String]
+
     addSections(predefinedSections)
 
     /**
@@ -403,6 +408,24 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             throw new DuplicateSectionException(sectionName)
 
         sections(sectionName) = MutableMap.empty[String, String]
+    }
+
+    /**
+     * Get a section. Similar to `Map.get`, this method returns `Some(Section)`
+     * if the section exists, and `None` if it does not.
+     *
+     * @param sectionName  the section to get
+     *
+     * @return `Some(Section)` or `None`
+     */
+    def getSection(sectionName: String): Option[Section] =
+    {
+        sections.get(sectionName) match
+        {
+            case Some(map) => Some(new Section(sectionName,
+                                               EmptyOptions ++ map))
+            case None      => None
+        }
     }
 
     /**
@@ -709,9 +732,9 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      */
     def options(sectionName: String): Map[String, String] =
         if (hasSection(sectionName))
-            Map.empty[String, String] ++ sections(sectionName)
+            EmptyOptions ++ sections(sectionName)
         else
-            Map.empty[String, String]
+            EmptyOptions
 
     /**
      * Get the list of option names.

@@ -319,6 +319,38 @@ foo: bar
         }
     }
 
+    test("getSection")
+    {
+        val configText = """
+[section1]
+foo: bar
+[section2]
+"""
+        val data = Map("section1" -> true,
+                       "section2" -> true,
+                       "section3" -> false)
+
+        val config = Configuration(Source.fromString(configText))
+        for ((sectionName, wantSome) <- data)
+        {
+            config.getSection(sectionName) match
+            {
+                case Some(section) =>
+                    if (! wantSome)
+                        fail("Expected None for section \"" + sectionName +
+                             "\", got: Some(" + section + ")")
+                    if (section.name != sectionName)
+                        fail("Got expected Some(Section), but wanted name \"" +
+                             sectionName + "\", got \"" + section.name + "\"")
+
+                case None =>
+                    if (wantSome)
+                        fail("Expected Some(Section) for section \"" +
+                             sectionName + "\", got: None")
+            }
+        }
+    }
+
     private def doTest(configString: String,
                        data: Map[Option[String],Tuple3[String,String,String]],
                        safe: Boolean = false) =

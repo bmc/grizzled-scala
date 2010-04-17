@@ -20,6 +20,7 @@ Version 0.5 (...)
     exist, instead of throwing an exception.
   * The option() methods are now deprecated, in favor of new get() and
     getOrElse() methods that are modeled after their Map counterparts.
+  * Added a new getSection() method that returns an Option[Section].
 
 ---------------------------------------------------------------------------
 Version 0.4.2 (7 April, 2010)
