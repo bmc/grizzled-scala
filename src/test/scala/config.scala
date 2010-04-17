@@ -106,7 +106,7 @@ foo = ${vars.foo}
         }
     }
 
-    test("legal intOption(), no default")
+    test("legal getInt(), no default")
     {
         val configText = """
 [section]
@@ -114,20 +114,20 @@ foo: 0
 bar = 1
 baz = 1001801
 """
-        val data = Map("foo" -> 0,
-                       "bar" -> 1,
-                       "baz" -> 1001801)
+        val data = Map("foo" -> Some(0),
+                       "bar" -> Some(1),
+                       "baz" -> Some(1001801))
         val config = Configuration(Source.fromString(configText))
 
         for ((opt, expected) <- data)
             expect(expected, opt + "=" + expected.toString)
             {
-                config.intOption("section", opt)
+                config.getInt("section", opt)
             }
 
     }
 
-    test("bad intOption(), no default")
+    test("bad getInt(), no default")
     {
         val configText = """
 [section]
@@ -140,7 +140,7 @@ baz: asfdasdfasdf
         for (opt <- config.optionNames("section"))
             try
             {
-                config.intOption("section", opt)
+                config.getInt("section", opt)
                 fail("Did not get expected ConversionException for " + opt)
             }
             catch
@@ -150,7 +150,7 @@ baz: asfdasdfasdf
 
     }
 
-    test("no intOption(), with default")
+    test("getIntOrElse(), taking default")
     {
         val configText = """
 [section]
@@ -163,7 +163,7 @@ baz: asfdasdfasdf
         for ((opt, expected) <- data)
             expect(expected, opt + "=" + expected.toString)
             {
-                config.intOption("section", opt, expected)
+                config.getIntOrElse("section", opt, expected)
             }
     }
 
@@ -186,7 +186,7 @@ bar: 100
             }
     }
 
-    test("legal booleanOption(), no default")
+    test("legal getBoolean(), no default")
     {
         val configText = """
 [section]
@@ -203,16 +203,17 @@ true = true
 
         for (opt <- config.optionNames("section"))
         {
-            val expected = if (opt.startsWith("false")) false else true
+            val expected = if (opt.startsWith("false")) Some(false) 
+                           else Some(true)
             expect(expected, opt + "=" + expected)
             {
-                config.booleanOption("section", opt)
+                config.getBoolean("section", opt)
             }
 
         }
     }
 
-    test("bad booleanOption(), no default")
+    test("bad getBoolean(), no default")
     {
         val configText = """
 [section]
@@ -225,7 +226,7 @@ baz: felse
         for (opt <- config.optionNames("section"))
             try
             {
-                println(config.booleanOption("section", opt))
+                println(config.getBoolean("section", opt))
                 fail("Did not get expected ConversionException for " + opt)
             }
             catch
@@ -235,7 +236,7 @@ baz: felse
 
     }
 
-    test("no booleanOption(), with default")
+    test("getBooleanOrElse(), taking default")
     {
         val configText = """
 [section]
@@ -248,7 +249,7 @@ baz: felse
         for ((opt, expected) <- data)
             expect(expected, opt + "=" + expected.toString)
             {
-                config.booleanOption("section", opt, expected)
+                config.getBooleanOrElse("section", opt, expected)
             }
     }
 

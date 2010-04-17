@@ -2,8 +2,10 @@
 * Replaced uses of now-deprecated `Math` functions with corresponding functions
   from `scala.math`.
 * Enhanced `grizzled.config.Configuration`:
-  - It now has a forMatchingSections() method that allows simple looping over
+  - It now has a `forMatchingSections()` method that allows simple looping over
     sections that match a regular expression.
+  - The `options()` method now returns an empty map if the section doesn't
+    exist, instead of throwing an exception.
   - It now supports an alternative to the option() methods: a get() method
     that returns `Option[String]` and does not throw exceptions.
   - It supports a `setOption()` method that overwrites an option value, if it
@@ -15,3 +17,5 @@
   - Now supports a "safe load" mode, where exceptions aren't thrown.
   - Added unit tests for the `Configuration` class.
   - Added ability to retrieve converted integer and boolean option values.
+  - The option() methods are now deprecated, in favor of get() and
+    getOrElse().

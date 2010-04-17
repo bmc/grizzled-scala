@@ -464,19 +464,53 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      */
     def get(sectionName: String, optionName: String): Option[String] =
     {
-        try
+        sectionName match
         {
-            option(sectionName, optionName) match
-            {
-                case value if (value != "") => Some(value)
-                case _                      => None
-            }
-        }
+            case "env" =>
+                val value = System.getenv(optionName)
+                if (value == null)
+                    None
+                else
+                    Some(value)
 
-        catch
+            case "system" =>
+                val value = System.getProperties.getProperty(optionName)
+                if (value == null)
+                    None
+                else
+                    Some(value)
+
+            case _ =>
+                if (! hasSection(sectionName))
+                    None
+                else
+                {
+                    val options = sections(sectionName)
+                    val canonicalOptionName = transformOptionName(optionName)
+                    options.get(canonicalOptionName)
+                }
+        }
+    }
+
+    /**
+     * Works like `Map.getOrElse()`, returning an option value or a
+     * default, if the option has no value. Does not throw exceptions.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     * @param default      the default value
+     *
+     * @return The option's value if the section and option exist, the
+     *         default if either the section or option cannot be found.
+     */
+    def getOrElse(sectionName: String,
+                  optionName: String,
+                  default: String): String =
+    {
+        get(sectionName, optionName) match
         {
-            case _: NoSuchOptionException => None
-            case _: NoSuchSectionException => None
+            case Some(value) => value
+            case None        => default
         }
     }
 
@@ -511,6 +545,28 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
 
             case None =>
                 None
+        }
+    }
+
+    /**
+     * Get an integer option, applying a default if not found.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     * @param default      the default value
+     *
+     * @return the integer result
+     *
+     * @throws ConversionException    if the option cannot be converted
+     */
+    def getIntOrElse(sectionName: String,
+                     optionName: String,
+                     default: Int): Int =
+    {
+        getInt(sectionName, optionName) match
+        {
+            case Some(i) => i
+            case None    => default
         }
     }
 
@@ -552,6 +608,28 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     }
 
     /**
+     * Get a boolean option, applying a default if not found.
+     *
+     * @param sectionName  the section name
+     * @param optionName   the option name
+     * @param default      the default value
+     *
+     * @return the integer result
+     *
+     * @throws ConversionException    if the option cannot be converted
+     */
+    def getBooleanOrElse(sectionName: String,
+                         optionName: String,
+                         default: Boolean): Boolean =
+    {
+        getBoolean(sectionName, optionName) match
+        {
+            case Some(b) => b
+            case None    => default
+        }
+    }
+
+    /**
      * Determine whether the configuration contains a named section.
      *
      * @param sectionName  the new section's name
@@ -572,32 +650,21 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      *
      * @throws NoSuchSectionException if the section doesn't exist
      * @throws NoSuchOptionException  if the option doesn't exist
+     *
+     * @deprecated  Use get() or getOrElse(), instead
      */
     def option(sectionName: String, optionName: String): String =
     {
-        sectionName match
+        if ((! SpecialSections.contains(sectionName)) &&
+            (! hasSection(sectionName)))
+            throw new NoSuchSectionException(sectionName)
+
+        get(sectionName, optionName) match
         {
-            case "env" =>
-                val option = System.getenv(optionName)
-                if (option == null)
-                    throw new NoSuchOptionException(sectionName, optionName)
-                option
-
-            case "system" =>
-                val option = System.getProperties.getProperty(optionName)
-                if (option == null)
-                    throw new NoSuchOptionException(sectionName, optionName)
-                option
-
-            case _ =>
-                if (! hasSection(sectionName))
-                    throw new NoSuchSectionException(sectionName)
-
-                val options = sections(sectionName)
-                val canonicalOptionName = transformOptionName(optionName)
-                if (! options.contains(canonicalOptionName))
-                    throw new NoSuchOptionException(sectionName, optionName)
-                options(canonicalOptionName)
+            case None =>
+                throw new NoSuchOptionException(sectionName, optionName)
+            case Some(value) =>
+                value
         }
     }
 
@@ -611,6 +678,8 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      * @param default      default value
      *
      * @return the option's value (which may be the default)
+     *
+     * @deprecated  Use get() or getOrElse(), instead
      */
     def option(sectionName: String,
                optionName: String,
@@ -633,118 +702,16 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      *
      * @param sectionName  the section name
      *
-     * @return a map of all options and their values for the section
+     * @return a map of all options and their values for the section. If
+     *         the section doesn't exist, an empty map is returned.
      *
      * @throws NoSuchSectionException if the section doesn't exist
      */
     def options(sectionName: String): Map[String, String] =
-    {
-        if (! hasSection(sectionName))
-            throw new NoSuchSectionException(sectionName)
-
-        Map.empty[String, String] ++ sections(sectionName)
-    }
-
-    /**
-     * Get an integer option.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     *
-     * @return the integer result
-     *
-     * @throws NoSuchSectionException if the section doesn't exist
-     * @throws NoSuchOptionException  if the option doesn't exist
-     * @throws ConversionException    if the option cannot be converted
-     */
-    def intOption(sectionName: String, optionName: String): Int =
-    {
-        val value = option(sectionName, optionName)
-        try
-        {
-            value.toInt
-        }
-
-        catch
-        {
-            case _: NumberFormatException =>
-                throw new ConversionException(sectionName, optionName, value,
-                                              "Not an integer.")
-        }
-    }
-
-    /**
-     * Get an integer option, applying a default if not found.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     * @param default      the default value
-     *
-     * @return the integer result
-     *
-     * @throws ConversionException    if the option cannot be converted
-     */
-    def intOption(sectionName: String, optionName: String, default: Int): Int =
-    {
-        getInt(sectionName, optionName) match
-        {
-            case Some(i) => i
-            case None    => default
-        }
-    }
-
-    /**
-     * Get a boolean option.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     *
-     * @return the integer result
-     *
-     * @throws NoSuchSectionException if the section doesn't exist
-     * @throws NoSuchOptionException  if the option doesn't exist
-     * @throws ConversionException    if the option cannot be converted
-     */
-    def booleanOption(sectionName: String, optionName: String): Boolean =
-    {
-        import grizzled.string.implicits._
-
-        val value = option(sectionName, optionName)
-        try
-        {
-            val b: Boolean = value
-            b
-        }
-
-        catch
-        {
-            case _: IllegalArgumentException =>
-                throw new ConversionException(sectionName, optionName, value,
-                                              "Not a boolean.")
-        }
-    }
-
-    /**
-     * Get a boolean option, applying a default if not found.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     * @param default      the default value
-     *
-     * @return the integer result
-     *
-     * @throws ConversionException    if the option cannot be converted
-     */
-    def booleanOption(sectionName: String,
-                      optionName: String,
-                      default: Boolean): Boolean =
-    {
-        getBoolean(sectionName, optionName) match
-        {
-            case Some(b) => b
-            case None    => default
-        }
-    }
+        if (hasSection(sectionName))
+            Map.empty[String, String] ++ sections(sectionName)
+        else
+            Map.empty[String, String]
 
     /**
      * Get the list of option names.
