@@ -263,6 +263,7 @@ bar: 0
         val data = Map("foo" -> Some(true),
                        "bar" -> Some(false),
                        "baz" -> None)
+
         val config = Configuration(Source.fromString(configText))
 
         for ((opt, expected) <- data)
@@ -270,6 +271,52 @@ bar: 0
             {
                 config.getBoolean("section", opt)
             }
+    }
+
+    test("matchingSections")
+    {
+        val configText = """
+[section]
+foo: true
+bar: 0
+[section1]
+foo: bar
+[section2]
+foo: bar
+[foo]
+foo: bar
+[foobar]
+foo: bar
+[a1]
+foo: bar
+"""
+        val data = Map(
+            """^section""".r -> Set("section", "section1", "section2"),
+            """^f""".r       -> Set("foo", "foobar"),
+            """[0-9]$""".r   -> Set("a1", "section1", "section2"),
+            """o""".r        -> Set("section", "section1", "section2", "foo",
+                                    "foobar")
+        )
+
+        val config = Configuration(Source.fromString(configText))
+
+        for ((regex, expectedMatches) <- data)
+        {
+            val matches = config.matchingSections(regex).map(_.name).toSet
+            if (matches.size != expectedMatches.size)
+            {
+                fail("For \"" + regex.pattern + "\", expected " +
+                     "matchingSections to return " + expectedMatches.size +
+                     " matches, but got " + matches.size)
+            }
+
+            if ((matches intersect expectedMatches) != expectedMatches)
+            {
+                fail("For \"" + regex.pattern + "\", expected " +
+                     "matchingSections to be " + expectedMatches +
+                     ", but got " + matches)
+            }
+        }
     }
 
     private def doTest(configString: String,

@@ -754,6 +754,18 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     }
 
     /**
+     * Return a sequence of sections whose name match matches a regular
+     * expression.
+     *
+     * @param regex  the regular expression to match
+     */
+    def matchingSections(regex: Regex): Seq[Section] =
+    {
+        for (name <- sectionNames; if (regex.findFirstIn(name) != None))
+            yield new Section(name, options(name))
+    }.toSeq
+
+    /**
      * Load configuration data from the specified source into this object.
      * Clears the configuration first.
      *
