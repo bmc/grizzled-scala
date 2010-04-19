@@ -43,8 +43,8 @@ your `project/build/` directory):
 
 ## Source Code Repository
 
-The source code for Grizzled Library is maintained on [GitHub][]. To clone
-the repository, run this command:
+The source code for the Grizzled Scala Library is maintained on [GitHub][].
+To clone the repository, run this command:
 
     git clone git://github.com/bmc/grizzled-scala.git
 
