@@ -79,6 +79,16 @@ Brian M. Clapper, [bmc@clapper.org][]
 The Grizzled Scala Library is copyright &copy; 2009-2010 Brian M. Clapper
 and is released under a [BSD License][].
 
+## Patches
+
+I gladly accept patches from their original authors. Feel free to email
+patches to me or to fork the [GitHub repository][] and send me a pull
+request. Along with any patch you send:
+
+* Please state that the patch is your original work.
+* Please indicate that you license the work to the Grizzled-Scala project
+  under a [BSD License][].
+
 [BSD License]: license.html
 [Scala]: http://www.scala-lang.org/
 [API Documentation]: apidocs/
