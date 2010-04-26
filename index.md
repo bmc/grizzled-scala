@@ -23,7 +23,7 @@ If you're using [Maven][], you can get Grizzled Scala from the
 
 * Group ID: `clapper.org`
 * Artifact ID: `grizzled-scala`
-* Version: `0.4.1`
+* Version: `0.5`
 * Type: `jar`
 * Repository: `http://maven.clapper.org/`
 
@@ -91,7 +91,7 @@ request. Along with any patch you send:
 
 [BSD License]: license.html
 [Scala]: http://www.scala-lang.org/
-[API Documentation]: apidocs/
+[API Documentation]: api/
 [GitHub repository]: http://github.com/bmc/grizzled-scala
 [GitHub]: http://github.com/bmc/
 [downloads area]: http://github.com/bmc/grizzled-scala/downloads
