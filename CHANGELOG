@@ -1,4 +1,4 @@
-Version 0.5 (...)
+Version 0.5 (26 April, 2010)
 
 - Updated to Scala 2.8.0.RC1.
 - Replaced uses of now-deprecated Math functions with corresponding functions
