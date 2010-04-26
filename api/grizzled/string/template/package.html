@@ -6,43 +6,43 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../../lib/template.js"></script>
+      <link href="../../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
-      <p id="owner"><a href="../../package.html">grizzled</a>.<a href="../package.html">string</a></p>
+
+      <p id="owner"><a href="../../package.html" class="extype" name="grizzled">grizzled</a>.<a href="../package.html" class="extype" name="grizzled.string">string</a></p>
 
       <div id="definition">
         <img src="../../../lib/package_big.png" />
         <h1>template</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">template</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         <div class="members" id="types">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.string.template.StringTemplate">
+              <ol><li visbl="pub" name="grizzled.string.template.StringTemplate">
       <h4 class="signature"><a href="StringTemplate.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -50,16 +50,16 @@
       </span>
       </a></h4>
       <p class="comment cmt">A simple, configurable string template that substitutes variable references
-within a string</p>
-    </li><li name="grizzled.string.template.StringTemplateException">
+within a string .</p>
+    </li><li visbl="pub" name="grizzled.string.template.StringTemplateException">
       <h4 class="signature"><a href="StringTemplateException.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">StringTemplateException</span><span class="result"> extends Exception</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Base class for all <tt>StringTemplate</tt> exceptions</p>
-    </li><li name="grizzled.string.template.UnixShellStringTemplate">
+      <p class="comment cmt">Base class for all <tt>StringTemplate</tt> exceptions .</p>
+    </li><li visbl="pub" name="grizzled.string.template.UnixShellStringTemplate">
       <h4 class="signature"><a href="UnixShellStringTemplate.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -67,39 +67,39 @@ within a string</p>
       </span>
       </a></h4>
       <p class="comment cmt">A string template that uses the Unix shell-like syntax <tt>${varname}</tt>
-(or <tt>$varname</tt>) for variable references</p>
-    </li><li name="grizzled.string.template.Variable">
+(or <tt>$varname</tt>) for variable references .</p>
+    </li><li visbl="pub" name="grizzled.string.template.Variable">
       <h4 class="signature"><a href="Variable.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">Variable</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Information about a parsed variable name</p>
-    </li><li name="grizzled.string.template.VariableNotFoundException">
+      <p class="comment cmt">Information about a parsed variable name .</p>
+    </li><li visbl="pub" name="grizzled.string.template.VariableNotFoundException">
       <h4 class="signature"><a href="VariableNotFoundException.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">VariableNotFoundException</span><span class="result"> extends Exception</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Thrown for non-safe templates when a variable is not found</p>
-    </li><li name="grizzled.string.template.WindowsCmdStringTemplate">
+      <p class="comment cmt">Thrown for non-safe templates when a variable is not found .</p>
+    </li><li visbl="pub" name="grizzled.string.template.WindowsCmdStringTemplate">
       <h4 class="signature"><a href="WindowsCmdStringTemplate.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">WindowsCmdStringTemplate</span><span class="result"> extends StringTemplate</span>
       </span>
       </a></h4>
-      <p class="comment cmt">A string template that uses the cmd Windows</p>
+      <p class="comment cmt">A string template that uses the cmd Windows .</p>
     </li></ol>
             </div>
         
         
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

@@ -6,14 +6,13 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="lib/template.js"></script>
+      <link href="lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="lib/template.js"></script>
+      <script type="text/javascript" src="lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
+
       
 
       <div id="definition">
@@ -21,30 +20,31 @@
         <h1>root package</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">root</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="_root_.grizzled">
+              <ol><li visbl="pub" name="_root_.grizzled">
       <h4 class="signature"><a href="grizzled/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -54,10 +54,10 @@
       
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

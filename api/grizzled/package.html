@@ -6,14 +6,13 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../lib/template.js"></script>
+      <link href="../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
+
       
 
       <div id="definition">
@@ -21,38 +20,39 @@
         <h1>grizzled</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">grizzled</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.binary">
+              <ol><li visbl="pub" name="grizzled.binary">
       <h4 class="signature"><a href="binary$.html">
       <span class="kind">object</span>
       <span class="symbol">
         <span class="name">binary</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Useful binary-related utility functions</p>
-    </li><li name="grizzled.cmd">
+      <p class="comment cmt">Useful binary-related utility functions .</p>
+    </li><li visbl="pub" name="grizzled.cmd">
       <h4 class="signature"><a href="cmd/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -60,7 +60,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.collection">
+    </li><li visbl="pub" name="grizzled.collection">
       <h4 class="signature"><a href="collection/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -68,7 +68,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.config">
+    </li><li visbl="pub" name="grizzled.config">
       <h4 class="signature"><a href="config/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -76,7 +76,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.file">
+    </li><li visbl="pub" name="grizzled.file">
       <h4 class="signature"><a href="file/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -84,7 +84,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.io">
+    </li><li visbl="pub" name="grizzled.io">
       <h4 class="signature"><a href="io/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -92,7 +92,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.math">
+    </li><li visbl="pub" name="grizzled.math">
       <h4 class="signature"><a href="math/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -100,7 +100,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.net">
+    </li><li visbl="pub" name="grizzled.net">
       <h4 class="signature"><a href="net/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -108,7 +108,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.parsing">
+    </li><li visbl="pub" name="grizzled.parsing">
       <h4 class="signature"><a href="parsing/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -116,7 +116,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.readline">
+    </li><li visbl="pub" name="grizzled.readline">
       <h4 class="signature"><a href="readline/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -124,7 +124,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.string">
+    </li><li visbl="pub" name="grizzled.string">
       <h4 class="signature"><a href="string/package.html">
       <span class="kind">package</span>
       <span class="symbol">
@@ -132,7 +132,7 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.sys">
+    </li><li visbl="pub" name="grizzled.sys">
       <h4 class="signature"><a href="sys$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -140,20 +140,20 @@
       </span>
       </a></h4>
       
-    </li><li name="grizzled.util">
+    </li><li visbl="pub" name="grizzled.util">
       <h4 class="signature"><a href="util$.html">
       <span class="kind">object</span>
       <span class="symbol">
         <span class="name">util</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Miscellaneous utility functions and methods not otherwise categorized</p>
+      <p class="comment cmt">Miscellaneous utility functions and methods not otherwise categorized .</p>
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

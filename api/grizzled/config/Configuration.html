@@ -6,29 +6,27 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../lib/template.js"></script>
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="type">
-      
-      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">config</a></p>
+
+      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.config">config</a></p>
 
       <div id="definition">
         <img src="../../lib/class_big.png" />
         <h1>Configuration</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">Configuration</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      <div class="comment cmt"><p>An INI-style configuration file parser.</p><p><code>Configuration</code> implements an in-memory store for a configuration file
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>An INI-style configuration file parser .</p><p><code>Configuration</code> implements an in-memory store for a configuration file
 whose syntax is reminiscent of classic Windows .INI files, though with
 many extensions.</p><p><b>Syntax</b></p><p>A configuration file is broken into sections, and each section is
 introduced by a section name in brackets. For example:</p><pre>
@@ -42,8 +40,7 @@ searchCommand: find /usr/local/foo -type f -name '*.class'
 [display]
 searchFailedMessage=Search failed, sorry.
 </pre><p>Notes and caveats:</p><p>At least one section is required.</p><p>Sections may be empty.</p><p>It is an error to have any variable definitions before the first
-section header.
-The section names "system" and "env" are reserved. They don't really
+section header.</p><p>The section names "system" and "env" are reserved. They don't really
 exist, but they're used during variable substitution (see below)
 to substitute from <tt>System.properties</tt> and the environment,
 respectively.</p><p><b>Section Name Syntax</b></p><p>There can be any amount of whitespace before and after the brackets
@@ -155,327 +152,49 @@ object Foo
         ..
     }
 }
-</pre></div>
-      
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
+</pre></div><div class="block">
+            go to: <a href="Configuration$.html">companion</a>
+          </div>
+            
+            
+            
+            
+          </div>
       
       <div id="template">
-      
+
         <div id="mbrsel">
-              <div id="ancestors">
-                <h3>Inherits</h3>
-                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+          <div id="ancestors">
+                <h3>Inherited</h3>
+                <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
+                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
-            </div>
-        
-        
-        
-        <div class="members" id="values">
-              <h3>Value Members</h3>
-              <ol><li name="grizzled.config.Configuration#addOption">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">addOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Add an option name and value to a section</p><div class="fullcomment">
-      <div class="comment cmt"><p>Add an option name and value to a section.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name, which will be transformed</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value
-</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#addSection">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">addSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Add a section to the configuration</p><div class="fullcomment">
-      <div class="comment cmt"><p>Add a section to the configuration.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
-</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="scala.AnyRef#equals">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
-with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
-      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
-with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
-The default implementations of this method is an <a
-href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
-relation</a>:
-  <ul>
- <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
- <code>x.equals(x)</code> should return <code>true</code>.</li>
- <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
- <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
- if <code>y.equals(x)</code> returns <code>true</code>.</li>
- <li>It is transitive: for any instances
- <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
- if <code>x.equals(y)</code> returns <code>true</code> and
- <code>y.equals(z)</code> returns
- <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
-</ul>
-</p></p><p><p>
-If you override this method, you should verify that
-your implementation remains an equivalence relation.
-Additionally, when overriding this method it is often necessary to
-override <code>hashCode</code> to ensure that objects that are
-"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
-hash to the same <a href="Int.html"><code>Int</code></a>
-(<code>o1.hashCode.equals(o2.hashCode)</code>).
-</p></div>
-      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
-</p></p></dd></dl>
-      
-      <div class="block">
-            definition classes: AnyRef ⇐ Any
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#hasSection">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">hasSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Determine whether the configuration contains a named section</p><div class="fullcomment">
-      <div class="comment cmt"><p>Determine whether the configuration contains a named section.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
-</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the configuration has a section with that name,
-        <code>false</code> otherwise</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="scala.AnyRef#hashCode">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
-      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
-The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
-codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
-equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
-degenerate implementation could always return <code>0</code>.
-However, it is required that if two objects are equal
-(<code>o1.equals(o2)</code> returns <code>true</code>) that they
-have identical hash codes
-(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
-overriding this method, be sure to verify that the behavior is
-consistent with the <code>equals</code> method.
-</p></p><p><p></p></div>
-      
-      
-      <div class="block">
-            definition classes: AnyRef ⇐ Any
-          </div>
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#option">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get the value for an option in a section, supplying a default if the
-option or the section doesn't exist</p><div class="fullcomment">
-      <div class="comment cmt"><p>Get the value for an option in a section, supplying a default if the
-option or the section doesn't exist.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>default value
-</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value (which may be the default)</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#option">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get the value for an option in a section</p><div class="fullcomment">
-      <div class="comment cmt"><p>Get the value for an option in a section.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
-</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value
-</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#optionNames">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">optionNames</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get the list of option names</p><div class="fullcomment">
-      <div class="comment cmt"><p>Get the list of option names.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section's name
-</p></dd><dt>returns</dt><dd class="cmt"><p>a list of option names in that section
-</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#options">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">options</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get all options in a section</p><div class="fullcomment">
-      <div class="comment cmt"><p>Get all options in a section.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name
-</p></dd><dt>returns</dt><dd class="cmt"><p>a map of all options and their values for the section
-</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#sectionNames">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">sectionNames</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get the list of section names</p><div class="fullcomment">
-      <div class="comment cmt"><p>Get the list of section names.
-</p></div>
-      
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="scala.AnyRef#toString">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
-      <div class="comment cmt"><p>Returns a string representation of the object.
-<p>
-The default representation is platform dependent.
-</p></div>
-      
-      
-      <div class="block">
-            definition classes: AnyRef ⇐ Any
-          </div>
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#transformOptionName">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">transformOptionName</span><span class="params">(<span name="option">option: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Transform an option (key) to a consistent form</p><div class="fullcomment">
-      <div class="comment cmt"><p>Transform an option (key) to a consistent form. The default
-version of this method forces the option name to lower case.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">option</dt><dd class="cmt"><p>the option name
-</p></dd><dt>returns</dt><dd class="cmt"><p>the transformed option name</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li></ol>
-            </div>
+        </div>
         
         <div class="members" id="constructors">
               <h3>Instance constructors</h3>
-              <ol><li name="grizzled.config.Configuration#this">
+              <ol><li visbl="pub" name="grizzled.config.Configuration#this">
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
         <span class="name">Configuration</span><span class="params">()</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Alternate constructor for use when there are no predefined sections</p><div class="fullcomment">
-      <div class="comment cmt"><p>Alternate constructor for use when there are no predefined sections.</p></div>
       
-      
-      
-      
-      <div class="block">
-              Go to: <a href="Configuration$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.config.Configuration#this">
+            <p class="shortcomment cmt">Alternate constructor for use when there are no predefined sections .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Alternate constructor for use when there are no predefined sections . 
+</p></div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#this">
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
@@ -484,9 +203,897 @@ version of this method forces the option name to lower case.
       </h4>
       
     </li></ol>
-            </div>
+            </div>        
         
+        
+        
+        <div class="members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="scala.AnyRef#!=">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.Any#!=">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef###">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef → Any
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#$asInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">$asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#$isInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">$isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#==">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.Any#==">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#addOption">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Add an option name and value to a section .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Add an option name and value to a section . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name, which will be transformed</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#addSection">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">addSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Add a section to the configuration .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Add a section to the configuration . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.Any#asInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">This method is used to cast the receiver object to be of type <code>T0</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to cast the receiver object to be of type <code>T0</code>.</p><p>Note that the success of a cast at runtime is modulo Scala's erasure semantics.  Therefore the expression<code>1.asInstanceOf[String]</code> will throw a <code>ClassCastException</code> at runtime, while the expression<code>List(1).asInstanceOf[List[String]]</code> will not.  In the latter example, because the type argument is erased as
+part of compilation it is not possible to check whether the contents of the list are of the requested typed.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object .</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="prt" name="scala.AnyRef#clone">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object .</p><p>The default implementation of the <code>clone</code> method is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object .</p></dd></dl><div class="block">
+          attributes: protected 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#eq">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">This method is used to test whether the argument (<code>arg0</code>) is a reference to the
+receiver object (<code>this</code>).</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the argument (<code>arg0</code>) is a reference to the
+receiver object (<code>this</code>).</p><p>The <code>eq</code> method implements an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence relation] on
+non-null instances of <code>AnyRef</code>:
+ * It is reflexive: for any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(x)</code> returns <code>true</code>.
+ * It is symmetric: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, <code>x.eq(y)</code> returns <code>true</code> if and
+   only if <code>y.eq(x)</code> returns <code>true</code>.
+ * It is transitive: for any non-null instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.eq(y)</code> returns <code>true</code>   and <code>y.eq(z)</code> returns <code>true</code>, then <code>x.eq(z)</code> returns <code>true</code>.</p><p>Additionally, the <code>eq</code> method has three other properties.
+ * It is consistent: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, multiple invocations of
+   <code>x.eq(y)</code> consistently returns <code>true</code> or consistently returns <code>false</code>.
+ * For any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(null)</code> and <code>null.eq(x)</code> returns <code>false</code>.
+ * <code>null.eq(null)</code> returns <code>true</code>.</p><p>When overriding the <code>equals</code> or <code>hashCode</code> methods, it is important to ensure that their behavior is
+consistent with reference equality.  Therefore, if two objects are references to each other (<code>o1 eq o2</code>), they
+should be equal to each other (<code>o1 == o2</code>) and they should hash to the same value (<code>o1.hashCode == o2.hashCode</code>).
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#equals">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p><p>The default implementations of this method is an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence
+relation]:
+ * It is reflexive: for any instance <code>x</code> of type <code>Any</code>, <code>x.equals(x)</code> should return <code>true</code>.
+ * It is symmetric: for any instances <code>x</code> and <code>y</code> of type <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and
+   only if <code>y.equals(x)</code> returns <code>true</code>.
+ * It is transitive: for any instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.equals(y)</code> returns <code>true</code> and
+   <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p><p>If you override this method, you should verify that your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to override <code>hashCode</code> to ensure that objects
+that are "equal" (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
+scala.Int
+(<code>o1.hashCode.equals(o2.hashCode)</code>).
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          definition classes: AnyRef → Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="prt" name="scala.AnyRef#finalize">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">This method is called by the garbage collector on the receiver object when garbage collection determines that
+there are no more references to the object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is called by the garbage collector on the receiver object when garbage collection determines that
+there are no more references to the object .</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
+          attributes: protected 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#forMatchingSections">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">forMatchingSections</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="params">(<span name="code">code: (<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Invoke a code block on each section whose name matches a regular
+expression .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Invoke a code block on each section whose name matches a regular
+expression . 
+</p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match</p></dd><dt class="param">code</dt><dd class="cmt"><p>the block of code to invoke with each section
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#get">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">get</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Works like <code>Map.get()</code>, returning <code>Some(string)</code> if the value
+is found, <code>None</code> if not.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Works like <code>Map.get()</code>, returning <code>Some(string)</code> if the value
+is found, <code>None</code> if not. Does not throw exceptions.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(value)</code> if the section and option exist, <code>None</code> if
+        either the section or option cannot be found.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#getBoolean">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getBoolean</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get an optional boolean option .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get an optional boolean option . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(boolean)</code> or None.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#getBooleanOrElse">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getBooleanOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get a boolean option, applying a default if not found .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get a boolean option, applying a default if not found . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
+</p></dd><dt>returns</dt><dd class="cmt"><p>the integer result
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#getClass">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object .</p><p>The nature of the representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object .</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#getInt">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getInt</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get an optional integer option .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get an optional integer option . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(integer)</code> or None.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#getIntOrElse">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getIntOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get an integer option, applying a default if not found .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get an integer option, applying a default if not found . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
+</p></dd><dt>returns</dt><dd class="cmt"><p>the integer result
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#getOrElse">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Works like <code>Map.getOrElse()</code>, returning an option value or a
+default, if the option has no value.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Works like <code>Map.getOrElse()</code>, returning an option value or a
+default, if the option has no value. Does not throw exceptions.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
+</p></dd><dt>returns</dt><dd class="cmt"><p>The option's value if the section and option exist, the
+        default if either the section or option cannot be found . 
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#getSection">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get a section .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get a section. Similar to <code>Map.get</code>, this method returns <code>Some(Section)</code>if the section exists, and <code>None</code> if it does not.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section to get
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(Section)</code> or <code>None</code></p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#hasSection">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hasSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Determine whether the configuration contains a named section .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Determine whether the configuration contains a named section . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the configuration has a section with that name,
+        <code>false</code> otherwise
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#hashCode">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Returns a hash code value for the object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object .</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
+not be equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal (<code>o1.equals(o2)</code> returns <code>true</code>) that they have
+identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
+to verify that the behavior is consistent with the <code>equals</code> method.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object .</p></dd></dl><div class="block">
+          definition classes: AnyRef → Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.Any#isInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p><p>Note that the test result of the test is modulo Scala's erasure semantics.  Therefore the expression<code>1.isInstanceOf[String]</code> will return <code>false</code>, while the expression <code>List(1).isInstanceOf[List[String]]</code> will
+return <code>true</code>.  In the latter example, because the type argument is erased as part of compilation it is not
+possible to check whether the contents of the list are of the requested typed.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is an instance of erasure of type <code>T0</code>; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#load">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">load</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="safe">safe: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="default">false</span></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Load configuration data from the specified source into this object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Load configuration data from the specified source into this object . 
+Clears the configuration first.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">safe</dt><dd class="cmt"><p>Whether an exception should be thrown for bad variable
+               substitutions (<code>false</code>) or not (<code>true</code>).
+</p></dd><dt>returns</dt><dd class="cmt"><p>this object, for convenience
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#matchingSections">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">matchingSections</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Return a sequence of sections whose name match matches a regular
+expression .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Return a sequence of sections whose name match matches a regular
+expression . 
+</p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#ne">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#notify">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor .</p></div><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#notifyAll">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor .</p></div><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#option">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name deprecated">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get the value for an option in a section, supplying a default if the
+option or the section doesn't exist .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section, supplying a default if the
+option or the section doesn't exist .  Exceptions for variable
+substitution errors are still thrown.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>default value
+</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value (which may be the default)
+</p></dd></dl><div class="block"><ol>deprecated:
+          <li><p>Use get() or getOrElse(), instead
+</p></li>
+        </ol></div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#option">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name deprecated">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get the value for an option in a section .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value
+</p></dd></dl><div class="block"><ol>deprecated:
+          <li><p>Use get() or getOrElse(), instead
+</p></li>
+        </ol></div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#optionNames">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">optionNames</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get the list of option names .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the list of option names . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section's name
+</p></dd><dt>returns</dt><dd class="cmt"><p>a list of option names in that section
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#options">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">options</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get all options in a section .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get all options in a section . 
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name
+</p></dd><dt>returns</dt><dd class="cmt"><p>a map of all options and their values for the section .  If
+        the section doesn't exist, an empty map is returned.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="prt" name="grizzled.config.Configuration#putOption">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">putOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>, <span name="preCheck">preCheck: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Puts an option in the configuration, running the specified pre-check
+logic first .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Puts an option in the configuration, running the specified pre-check
+logic first . 
+</p></div><div class="block">
+          attributes: protected 
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#sectionNames">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">sectionNames</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Get the list of section names .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the list of section names . 
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the section names, in a iterator
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#setOption">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">setOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Put an option name and value to a section, overwriting any existing
+instance of that option .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Put an option name and value to a section, overwriting any existing
+instance of that option. Unlike <code>addOption()</code>, this method will
+not throw <code>DuplicateOptionException</code>.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name, which will be transformed</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#synchronized">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: T0</span>)</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#toString">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Returns a string representation of the object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object .</p><p>The default representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object .</p></dd></dl><div class="block">
+          definition classes: AnyRef → Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.config.Configuration#transformOptionName">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">transformOptionName</span><span class="params">(<span name="option">option: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Transform an option (key) to a consistent form .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Transform an option (key) to a consistent form .  The default
+version of this method forces the option name to lower case.
+</p></div><dl class="paramcmts block"><dt class="param">option</dt><dd class="cmt"><p>the option name
+</p></dd><dt>returns</dt><dd class="cmt"><p>the transformed option name
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#wait">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#wait">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#wait">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li></ol>
+            </div>
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

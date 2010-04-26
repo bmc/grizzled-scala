@@ -2,23 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc: all classes and objects</title>
+          <title>project.name=DefinedValue(Grizzled Scala,false,false) project.version=DefinedValue(0.5,false,false) API</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(lib/index.css) screen;
-		  </style>
-		  <script type="text/javascript" src="lib/index.js"></script>
+      <link href="lib/index.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="lib/index.js"></script>
+      <script type="text/javascript" src="lib/scheduler.js"></script>
     
         </head>
         <body>
+      <div id="library">
+        <img class="class icon" src="lib/class.png" />
+        <img class="trait icon" src="lib/trait.png" />
+        <img class="object icon" src="lib/object.png" />
+        <img class="package icon" src="lib/package.png" />
+      </div>
       <div id="browser">
-        <input accesskey="/" type="text" id="quickflt" />
-        <div id="tpl">
+        <div id="filter"></div>
+        <div class="pack" id="tpl">
               
               <ol class="templates"></ol>
-              <ol class="packages"> <li>
+              <ol class="packages"> <li title="grizzled" class="pack">
               <h3><a href="grizzled/package.html" class="tplshow">grizzled</a></h3>
               <ol class="templates"><li title="grizzled.binary"><a href="grizzled/binary$.html" class="tplshow">
                       binary
@@ -30,7 +35,7 @@
                       util
                       <span class="object">(object)</span>
                     </a></li></ol>
-              <ol class="packages"> <li>
+              <ol class="packages"> <li title="grizzled.cmd" class="pack">
               <h3><a href="grizzled/cmd/package.html" class="tplshow">grizzled.cmd</a></h3>
               <ol class="templates"><li title="grizzled.cmd.BlockCommandHandler"><a href="grizzled/cmd/BlockCommandHandler.html" class="tplshow">
                       BlockCommandHandler
@@ -82,7 +87,7 @@
                       <span class="class">(class)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.collection" class="pack">
               <h3><a href="grizzled/collection/package.html" class="tplshow">grizzled.collection</a></h3>
               <ol class="templates"><li title="grizzled.collection.CollectionIterator"><a href="grizzled/collection/CollectionIterator.html" class="tplshow">
                       CollectionIterator
@@ -110,7 +115,7 @@
                       <span class="class">(class)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.config" class="pack">
               <h3><a href="grizzled/config/package.html" class="tplshow">grizzled.config</a></h3>
               <ol class="templates"><li title="grizzled.config.ConfigException"><a href="grizzled/config/ConfigException.html" class="tplshow">
                       ConfigException
@@ -124,6 +129,9 @@
                     </a></li><li title="grizzled.config.ConfigurationReader"><a href="grizzled/config/ConfigurationReader$.html" class="tplshow">
                       ConfigurationReader
                       <span class="object">(object)</span>
+                    </a></li><li title="grizzled.config.ConversionException"><a href="grizzled/config/ConversionException.html" class="tplshow">
+                      ConversionException
+                      <span class="class">(class)</span>
                     </a></li><li title="grizzled.config.DuplicateOptionException"><a href="grizzled/config/DuplicateOptionException.html" class="tplshow">
                       DuplicateOptionException
                       <span class="class">(class)</span>
@@ -136,9 +144,15 @@
                     </a></li><li title="grizzled.config.NoSuchSectionException"><a href="grizzled/config/NoSuchSectionException.html" class="tplshow">
                       NoSuchSectionException
                       <span class="class">(class)</span>
+                    </a></li><li title="grizzled.config.Section"><a href="grizzled/config/Section.html" class="tplshow">
+                      Section
+                      <span class="class">(class)</span>
+                    </a></li><li title="grizzled.config.SubstitutionException"><a href="grizzled/config/SubstitutionException.html" class="tplshow">
+                      SubstitutionException
+                      <span class="class">(class)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.file" class="pack">
               <h3><a href="grizzled/file/package.html" class="tplshow">grizzled.file</a></h3>
               <ol class="templates"><li title="grizzled.file.FileDoesNotExistException"><a href="grizzled/file/FileDoesNotExistException.html" class="tplshow">
                       FileDoesNotExistException
@@ -159,7 +173,7 @@
                       util
                       <span class="object">(object)</span>
                     </a></li></ol>
-              <ol class="packages"> <li>
+              <ol class="packages"> <li title="grizzled.file.filter" class="pack">
               <h3><a href="grizzled/file/filter/package.html" class="tplshow">grizzled.file.filter</a></h3>
               <ol class="templates"><li title="grizzled.file.filter.BackslashContinuedLineIterator"><a href="grizzled/file/filter/BackslashContinuedLineIterator.html" class="tplshow">
                       BackslashContinuedLineIterator
@@ -167,12 +181,9 @@
                     </a></li></ol>
               <ol class="packages"> </ol>
             </li></ol>
-            </li><li>
+            </li><li title="grizzled.io" class="pack">
               <h3><a href="grizzled/io/package.html" class="tplshow">grizzled.io</a></h3>
-              <ol class="templates"><li title="grizzled.io.implicits"><a href="grizzled/io/implicits$.html" class="tplshow">
-                      implicits
-                      <span class="object">(object)</span>
-                    </a></li><li title="grizzled.io.MultiSource"><a href="grizzled/io/MultiSource.html" class="tplshow">
+              <ol class="templates"><li title="grizzled.io.MultiSource"><a href="grizzled/io/MultiSource.html" class="tplshow">
                       MultiSource
                       <span class="class">(class)</span>
                     </a></li><li title="grizzled.io.PartialReader"><a href="grizzled/io/PartialReader.html" class="tplshow">
@@ -181,22 +192,34 @@
                     </a></li><li title="grizzled.io.RichInputStream"><a href="grizzled/io/RichInputStream.html" class="tplshow">
                       RichInputStream
                       <span class="class">(class)</span>
+                    </a><a href="grizzled/io/RichInputStream$.html" class="tplshow">
+                      
+                      <span class="object">(object)</span>
                     </a></li><li title="grizzled.io.RichReader"><a href="grizzled/io/RichReader.html" class="tplshow">
                       RichReader
                       <span class="class">(class)</span>
+                    </a><a href="grizzled/io/RichReader$.html" class="tplshow">
+                      
+                      <span class="object">(object)</span>
+                    </a></li><li title="grizzled.io.SourceReader"><a href="grizzled/io/SourceReader.html" class="tplshow">
+                      SourceReader
+                      <span class="class">(class)</span>
+                    </a><a href="grizzled/io/SourceReader$.html" class="tplshow">
+                      
+                      <span class="object">(object)</span>
                     </a></li><li title="grizzled.io.util"><a href="grizzled/io/util$.html" class="tplshow">
                       util
                       <span class="object">(object)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.math" class="pack">
               <h3><a href="grizzled/math/package.html" class="tplshow">grizzled.math</a></h3>
               <ol class="templates"><li title="grizzled.math.util"><a href="grizzled/math/util$.html" class="tplshow">
                       util
                       <span class="object">(object)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.net" class="pack">
               <h3><a href="grizzled/net/package.html" class="tplshow">grizzled.net</a></h3>
               <ol class="templates"><li title="grizzled.net.IPAddress"><a href="grizzled/net/IPAddress.html" class="tplshow">
                       IPAddress
@@ -215,7 +238,7 @@
                       <span class="object">(object)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.parsing" class="pack">
               <h3><a href="grizzled/parsing/package.html" class="tplshow">grizzled.parsing</a></h3>
               <ol class="templates"><li title="grizzled.parsing.IteratorStream"><a href="grizzled/parsing/IteratorStream.html" class="tplshow">
                       IteratorStream
@@ -234,7 +257,7 @@
                       <span class="class">(class)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.readline" class="pack">
               <h3><a href="grizzled/readline/package.html" class="tplshow">grizzled.readline</a></h3>
               <ol class="templates"><li title="grizzled.readline.Completer"><a href="grizzled/readline/Completer.html" class="tplshow">
                       Completer
@@ -274,7 +297,7 @@
                       <span class="object">(object)</span>
                     </a></li></ol>
               <ol class="packages"> </ol>
-            </li><li>
+            </li><li title="grizzled.string" class="pack">
               <h3><a href="grizzled/string/package.html" class="tplshow">grizzled.string</a></h3>
               <ol class="templates"><li title="grizzled.string.GrizzledChar"><a href="grizzled/string/GrizzledChar.html" class="tplshow">
                       GrizzledChar
@@ -295,7 +318,7 @@
                       
                       <span class="object">(object)</span>
                     </a></li></ol>
-              <ol class="packages"> <li>
+              <ol class="packages"> <li title="grizzled.string.template" class="pack">
               <h3><a href="grizzled/string/template/package.html" class="tplshow">grizzled.string.template</a></h3>
               <ol class="templates"><li title="grizzled.string.template.StringTemplate"><a href="grizzled/string/template/StringTemplate.html" class="tplshow">
                       StringTemplate
@@ -323,7 +346,7 @@
             </div>
       </div>
 		  <div id="content">
-		  	<iframe src="package.html"></iframe>
+		  	<iframe src="package.html" name="template"></iframe>
 		  </div>
     </body>
       </html>

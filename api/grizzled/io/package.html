@@ -6,59 +6,59 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../lib/template.js"></script>
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
-      <p id="owner"><a href="../package.html">grizzled</a></p>
+
+      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <h1>io</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">io</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         <div class="members" id="types">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.io.MultiSource">
+              <ol><li visbl="pub" name="grizzled.io.MultiSource">
       <h4 class="signature"><a href="MultiSource.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">MultiSource</span><span class="result"> extends Source</span>
       </span>
       </a></h4>
-      <p class="comment cmt">A <tt>MultiSource</tt> contains multiple <tt>scala</p>
-    </li><li name="grizzled.io.PartialReader">
+      <p class="comment cmt">A <tt>MultiSource</tt> contains multiple <tt>scala .</p>
+    </li><li visbl="pub" name="grizzled.io.PartialReader">
       <h4 class="signature"><a href="PartialReader.html">
       <span class="kind">trait</span>
       <span class="symbol">
         <span class="name">PartialReader</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Contains methods that can read part of a stream or reader</p>
-    </li><li name="grizzled.io.RichInputStream">
+      <p class="comment cmt">Contains methods that can read part of a stream or reader .</p>
+    </li><li visbl="pub" name="grizzled.io.RichInputStream">
       <h4 class="signature"><a href="RichInputStream.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -66,8 +66,8 @@
       </span>
       </a></h4>
       <p class="comment cmt">Provides additional methods, over and above those already present in
-the Java <tt>InputStream</tt> class</p>
-    </li><li name="grizzled.io.RichReader">
+the Java <tt>InputStream</tt> class .</p>
+    </li><li visbl="pub" name="grizzled.io.RichReader">
       <h4 class="signature"><a href="RichReader.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -75,35 +75,58 @@ the Java <tt>InputStream</tt> class</p>
       </span>
       </a></h4>
       <p class="comment cmt">Provides additional methods, over and above those already present in
-the Java <tt>Reader</tt> class</p>
+the Java <tt>Reader</tt> class .</p>
+    </li><li visbl="pub" name="grizzled.io.SourceReader">
+      <h4 class="signature"><a href="SourceReader.html">
+      <span class="kind">class</span>
+      <span class="symbol">
+        <span class="name">SourceReader</span><span class="result"> extends Reader</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Provides a <code>java.io.Reader</code> that is backed by a Scala <code>Source</code> object.</p>
     </li></ol>
             </div>
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.io.implicits">
-      <h4 class="signature"><a href="implicits$.html">
+              <ol><li visbl="pub" name="grizzled.io.RichInputStream">
+      <h4 class="signature"><a href="RichInputStream$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">implicits</span><span class="result"> extends AnyRef</span>
+        <span class="name">RichInputStream</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Implicit conversions between <tt>RichInputStream</tt> and
-<tt>InputStream</tt> objects</p>
-    </li><li name="grizzled.io.util">
+      <p class="comment cmt">Companion object to <code>RichInputStream</code> class.</p>
+    </li><li visbl="pub" name="grizzled.io.RichReader">
+      <h4 class="signature"><a href="RichReader$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">RichReader</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      <p class="comment cmt">Companion object to <code>RichReader</code> class.</p>
+    </li><li visbl="pub" name="grizzled.io.SourceReader">
+      <h4 class="signature"><a href="SourceReader$.html">
+      <span class="kind">object</span>
+      <span class="symbol">
+        <span class="name">SourceReader</span><span class="result"> extends AnyRef</span>
+      </span>
+      </a></h4>
+      
+    </li><li visbl="pub" name="grizzled.io.util">
       <h4 class="signature"><a href="util$.html">
       <span class="kind">object</span>
       <span class="symbol">
         <span class="name">util</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Some utility methods</p>
+      <p class="comment cmt">Some utility methods .</p>
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

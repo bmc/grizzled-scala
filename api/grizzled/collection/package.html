@@ -6,43 +6,43 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../lib/template.js"></script>
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
-      <p id="owner"><a href="../package.html">grizzled</a></p>
+
+      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <h1>collection</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">collection</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         <div class="members" id="types">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.collection.CollectionIterator">
+              <ol><li visbl="pub" name="grizzled.collection.CollectionIterator">
       <h4 class="signature"><a href="CollectionIterator.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -50,8 +50,8 @@
       </span>
       </a></h4>
       <p class="comment cmt">Useful for converting a collection into an object suitable for use with
-Scala's <tt>for</tt> loop</p>
-    </li><li name="grizzled.collection.GrizzledIterable">
+Scala's <tt>for</tt> loop .</p>
+    </li><li visbl="pub" name="grizzled.collection.GrizzledIterable">
       <h4 class="signature"><a href="GrizzledIterable.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -59,7 +59,7 @@ Scala's <tt>for</tt> loop</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.collection.GrizzledLinearSeq">
+    </li><li visbl="pub" name="grizzled.collection.GrizzledLinearSeq">
       <h4 class="signature"><a href="GrizzledLinearSeq.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -67,15 +67,15 @@ Scala's <tt>for</tt> loop</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.collection.ListIterator">
+    </li><li visbl="pub" name="grizzled.collection.ListIterator">
       <h4 class="signature"><a href="ListIterator.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">ListIterator</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends Iterator[T]</span>
       </span>
       </a></h4>
-      <p class="comment cmt">An <tt>Iterator</tt> for lists</p>
-    </li><li name="grizzled.collection.MultiIterator">
+      <p class="comment cmt">An <tt>Iterator</tt> for lists .</p>
+    </li><li visbl="pub" name="grizzled.collection.MultiIterator">
       <h4 class="signature"><a href="MultiIterator.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -83,13 +83,13 @@ Scala's <tt>for</tt> loop</p>
       </span>
       </a></h4>
       <p class="comment cmt">An iterator that iterates, serially, over the contents of multiple other
-iterators</p>
+iterators .</p>
     </li></ol>
             </div>
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.collection.CollectionIterator">
+              <ol><li visbl="pub" name="grizzled.collection.CollectionIterator">
       <h4 class="signature"><a href="CollectionIterator$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -97,7 +97,7 @@ iterators</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.collection.GrizzledIterable">
+    </li><li visbl="pub" name="grizzled.collection.GrizzledIterable">
       <h4 class="signature"><a href="GrizzledIterable$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -105,20 +105,20 @@ iterators</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.collection.GrizzledLinearSeq">
+    </li><li visbl="pub" name="grizzled.collection.GrizzledLinearSeq">
       <h4 class="signature"><a href="GrizzledLinearSeq$.html">
       <span class="kind">object</span>
       <span class="symbol">
         <span class="name">GrizzledLinearSeq</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Implicit conversions specific to GrizzledLinearSeq</p>
+      <p class="comment cmt">Implicit conversions specific to GrizzledLinearSeq .</p>
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

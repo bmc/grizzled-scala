@@ -6,33 +6,31 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../lib/template.js"></script>
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="type">
-      
-      <p id="owner"><a href="../package.html">grizzled</a>.<a href="package.html">net</a></p>
+
+      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.net">net</a></p>
 
       <div id="definition">
         <img src="../../lib/trait_big.png" />
         <h1>UDPDatagramSocket</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">trait</span>
       <span class="symbol">
         <span class="name">UDPDatagramSocket</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      <div class="comment cmt"><p><p>A <tt>UDPDatagramSocket</tt> object represents a UDP datagram socket,
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>A <tt>UDPDatagramSocket</tt> object represents a UDP datagram socket,
 providing a simpler interface to sending and receiving UDP packets than
-the one provided by the Java JDK.</p></p><p><h2>Sending UDP Datagrams</h2></p><p><p>The easiest way to explain how to use this API is with some code. So,
+the one provided by the Java JDK .</p><p>Sending UDP Datagrams</p><p>The easiest way to explain how to use this API is with some code. So,
 without further ado, the following example shows how you might send the
-string "foo" to port 2003 on host "foo.example.com".</p></p><p><blockquote><pre>
+string "foo" to port 2003 on host "foo.example.com".</p><p><blockquote>
 // Import the appropriate stuff.
 import grizzled.net._</p><p>// First, create an grizzled.net.IPAddress object for the destination
 // machine.
@@ -45,49 +43,49 @@ val address = IPAddress("foo.example.com")</p><p>// Next, create the socket obje
 val socket = UDPDatagramSocket()</p><p>// Next, use the sendString() method to send the string
 socket.sendString("foo", address, 2003)</p><p>// Finally, close the socket.
 socket.close()
-</pre></blockquote></p><p><p>That's pretty simple. However, using the utility methods provided by the
+</blockquote></p><p>That's pretty simple. However, using the utility methods provided by the
 <tt>UDPDatagramSocket</tt> companion object, we can further simplify the
-above code:</p><p><blockquote><pre>
+above code:</p><p><blockquote>
 // Import the appropriate stuff.
 import grizzled.net._</p><p>UDPDatagramSocket.sendString("foo", IPAddress("foo.example.com"), 2003)
-</pre></blockquote></p><p><p>The <tt>sendString()</tt> method in the companion object takes care
+</blockquote></p><p>The <tt>sendString()</tt> method in the companion object takes care
 of allocating the socket, sending the packet, and closing the socket.
 Obviously, if you're planning on sending multiple packets at once, you'll
 want to use the first example (perhaps in a loop), so you're not constantly
 allocating and deallocating sockets. But sending a one-shot UDP packet
-can be as simple as one line of code, as shown in the second example.</p></p><p><p>Sending binary data is not much more complicated. You have to convert
+can be as simple as one line of code, as shown in the second example.</p><p>Sending binary data is not much more complicated. You have to convert
 the data to a stream of bytes, which the server must then decode. After
 that, however, sending the bytes isn't much more difficult than sending
 a string. Here's an example, which assumes that you have already encoded
-the data to be send into an array of bytes.</p></p><p><blockquote><pre>
+the data to be send into an array of bytes.</p><p><blockquote>
 // Import the appropriate stuff.
 import grizzled.net._</p><p>// Encode the data into bytes. (Not shown.)
 val data: Array[Byte] = encodeTheData()</p><p>// Create the socket object.
 val socket = UDPDatagramSocket()</p><p>// Send the data.
 socket.send(data, IPAddress("foo.example.com"), 2003)</p><p>// Finally, close the socket.
 socket.close()
-</pre></blockquote></p><p><p>Once again, there's a simple utility method that does most of the work
-for you:</p></p><p><blockquote><pre>
+</blockquote></p><p>Once again, there's a simple utility method that does most of the work
+for you:</p><p><blockquote>
 // Import the appropriate stuff.
 import grizzled.net._</p><p>// Encode the data into bytes. (Not shown.)
 val data: Array[Byte] = encodeTheData()</p><p>// Send the data.
 UDPDatagramSocket.send(data, IPAddress("foo.example.com"), 2003)
-</pre></blockquote></p><p><h2>Receiving UDP Datagrams</h2></p><p><p>When receiving UDP datagrams, you must first bind to an incoming
+</blockquote></p><p>Receiving UDP Datagrams</p><p>When receiving UDP datagrams, you must first bind to an incoming
 socket. That is, you must listen on the port to which clients are sending
 their packets. In this example, we create the socket object with the
 receiving port, and we allow the wildcard address to be used on the
-local machine (permitting us to receive packets on any interface).</p></p><p><blockquote><pre>
+local machine (permitting us to receive packets on any interface).</p><p><blockquote>
 // Import the appropriate stuff.
 import grizzled.net._</p><p>// Create the socket object.
 val socket = UDPDatagramSocket(2003)
-</pre></blockquote></p><p><p>Next, we want to receive and process the incoming data. Let's assume
+</blockquote></p><p>Next, we want to receive and process the incoming data. Let's assume
 that we're receiving the "foo" string (or, for that matter, any string)
-being sent by the sample sender, above.</p></p><p><blockquote><pre>
+being sent by the sample sender, above.</p><p><blockquote>
 // Receive and print strings.
 while (true)
     println(socket.receiveString(1024))
-</pre></blockquote></p><p><p>That code says, "Wait for incoming strings, using a 1024-byte buffer.
-Then, decode the strings and print them to standard output.</p></p><p><p>Receiving bytes isn't much more difficult.</p></p><p><blockquote><pre>
+</blockquote></p><p>That code says, "Wait for incoming strings, using a 1024-byte buffer.
+Then, decode the strings and print them to standard output.</p><p>Receiving bytes isn't much more difficult.</p><p><blockquote>
 // Allocate a byte buffer. For efficiency, we'll re-use the same buffer
 // on every incoming message.
 val buf = Array.make[Byte](1024, 0)</p><p>// Receive and process the incoming bytes. The process() method isn't
@@ -97,439 +95,806 @@ while (true)
     val totalRead = socket.receive(buf)
     process(buf, totalRead)
 }
-</pre></blockquote></p><p><p>The above loop can be made even simpler (though a little more obscure),
+</blockquote></p><p>The above loop can be made even simpler (though a little more obscure),
 since the <tt>receive()</tt> method is filling <i>our</i> buffer and
-returning a count of the number of bytes it put into the buffer:</p></p><p><blockquote><pre>
+returning a count of the number of bytes it put into the buffer:</p><p><blockquote>
 while (true)
     process(buf, socket.receive(buf))
-</pre></blockquote></p></div>
-      
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
+</blockquote>
+</p></div><div class="block">
+            go to: <a href="UDPDatagramSocket$.html">companion</a>
+          </div>
+            
+            
+            
+            
+          </div>
       
       <div id="template">
-      
+
         <div id="mbrsel">
-              <div id="ancestors">
-                <h3>Inherits</h3>
-                <ol><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+          <div id="ancestors">
+                <h3>Inherited</h3>
+                <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
+                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
-            </div>
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
+        
+                
         
         
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.net.UDPDatagramSocket#address">
+              <ol><li visbl="pub" name="scala.AnyRef#!=">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.Any#!=">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef###">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef → Any
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#$asInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">$asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#$isInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">$isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#==">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.Any#==">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#address">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">address</span><span class="result">: <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The local address to which the socket is bound</p><div class="fullcomment">
-      <div class="comment cmt"><p>The local address to which the socket is bound.</p></div>
       
-      <div class="block">
-            attributes: abstract 
+            <p class="shortcomment cmt">The local address to which the socket is bound .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>The local address to which the socket is bound . 
+</p></div><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
+          
+    </li><li visbl="pub" name="scala.Any#asInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+      </span>
+      </h4>
       
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#broadcast">
+            <p class="shortcomment cmt">This method is used to cast the receiver object to be of type <code>T0</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to cast the receiver object to be of type <code>T0</code>.</p><p>Note that the success of a cast at runtime is modulo Scala's erasure semantics.  Therefore the expression<code>1.asInstanceOf[String]</code> will throw a <code>ClassCastException</code> at runtime, while the expression<code>List(1).asInstanceOf[List[String]]</code> will not.  In the latter example, because the type argument is erased as
+part of compilation it is not possible to check whether the contents of the list are of the requested typed.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object .</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#broadcast">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">broadcast</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Whether or not the socket's broadcast flag is set</p><div class="fullcomment">
-      <div class="comment cmt"><p>Whether or not the socket's broadcast flag is set. The broadcast
+      
+            <p class="shortcomment cmt">Whether or not the socket's broadcast flag is set .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Whether or not the socket's broadcast flag is set .  The broadcast
 flag corresponds to the <tt>SO_BROADCAST</tt> socket option. When
 this option is enabled, datagram sockets will receive packets sent
 to a broadcast address, and they are permitted to send packets to a
 broadcast address.
-</p></div>
-      
-      <div class="block">
-            attributes: abstract 
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>whether or not the broadcast flag is set
+</p></dd></dl><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#broadcast_=">
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#broadcast_=">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">broadcast_=</span><span class="params">(<span name="enable">enable: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Change the value of the socket's broadcast flag</p><div class="fullcomment">
-      <div class="comment cmt"><p>Change the value of the socket's broadcast flag. The broadcast flag
+      
+            <p class="shortcomment cmt">Change the value of the socket's broadcast flag .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Change the value of the socket's broadcast flag .  The broadcast flag
 corresponds to the <tt>SO_BROADCAST</tt> socket option. When this
 option is enabled, datagram sockets will receive packets sent to a
 broadcast address, and they are permitted to send packets to a
 broadcast address.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">enable</dt><dd class="cmt"><p><tt>true</tt> to enable broadcast, <tt>false</tt>
-              to disable it.</p></dd></dl>
-      <div class="block">
-            attributes: abstract 
+</p></div><dl class="paramcmts block"><dt class="param">enable</dt><dd class="cmt"><p><tt>true</tt> to enable broadcast, <tt>false</tt>
+              to disable it . 
+</p></dd></dl><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
+          
+    </li><li visbl="prt" name="scala.AnyRef#clone">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+      </span>
+      </h4>
       
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#close">
+            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object .</p><p>The default implementation of the <code>clone</code> method is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object .</p></dd></dl><div class="block">
+          attributes: protected 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#close">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">close</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Close the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Close the socket.</p></div>
       
-      <div class="block">
-            attributes: abstract 
+            <p class="shortcomment cmt">Close the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Close the socket . 
+</p></div><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#eq">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
       
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="scala.AnyRef#equals">
+            <p class="shortcomment cmt">This method is used to test whether the argument (<code>arg0</code>) is a reference to the
+receiver object (<code>this</code>).</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the argument (<code>arg0</code>) is a reference to the
+receiver object (<code>this</code>).</p><p>The <code>eq</code> method implements an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence relation] on
+non-null instances of <code>AnyRef</code>:
+ * It is reflexive: for any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(x)</code> returns <code>true</code>.
+ * It is symmetric: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, <code>x.eq(y)</code> returns <code>true</code> if and
+   only if <code>y.eq(x)</code> returns <code>true</code>.
+ * It is transitive: for any non-null instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.eq(y)</code> returns <code>true</code>   and <code>y.eq(z)</code> returns <code>true</code>, then <code>x.eq(z)</code> returns <code>true</code>.</p><p>Additionally, the <code>eq</code> method has three other properties.
+ * It is consistent: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, multiple invocations of
+   <code>x.eq(y)</code> consistently returns <code>true</code> or consistently returns <code>false</code>.
+ * For any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(null)</code> and <code>null.eq(x)</code> returns <code>false</code>.
+ * <code>null.eq(null)</code> returns <code>true</code>.</p><p>When overriding the <code>equals</code> or <code>hashCode</code> methods, it is important to ensure that their behavior is
+consistent with reference equality.  Therefore, if two objects are references to each other (<code>o1 eq o2</code>), they
+should be equal to each other (<code>o1 == o2</code>) and they should hash to the same value (<code>o1.hashCode == o2.hashCode</code>).
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#equals">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>)
-with the argument object (<code>arg0</code>) for equivalence</p><div class="fullcomment">
-      <div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>)
-with the argument object (<code>arg0</code>) for equivalence.</p><p><p>
-The default implementations of this method is an <a
-href="http://en.wikipedia.org/wiki/Equivalence_relation">equivalence
-relation</a>:
-  <ul>
- <li>It is reflexive: for any instance <code>x</code> of type <code>Any</code>,
- <code>x.equals(x)</code> should return <code>true</code>.</li>
- <li>It is symmetric: for any instances <code>x</code> and <code>y</code> of type
- <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and only
- if <code>y.equals(x)</code> returns <code>true</code>.</li>
- <li>It is transitive: for any instances
- <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code>
- if <code>x.equals(y)</code> returns <code>true</code> and
- <code>y.equals(z)</code> returns
- <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</li>
-</ul>
-</p></p><p><p>
-If you override this method, you should verify that
-your implementation remains an equivalence relation.
-Additionally, when overriding this method it is often necessary to
-override <code>hashCode</code> to ensure that objects that are
-"equal" (<code>o1.equals(o2)</code> returns <code>true</code>)
-hash to the same <a href="Int.html"><code>Int</code></a>
+      
+            <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p><p>The default implementations of this method is an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence
+relation]:
+ * It is reflexive: for any instance <code>x</code> of type <code>Any</code>, <code>x.equals(x)</code> should return <code>true</code>.
+ * It is symmetric: for any instances <code>x</code> and <code>y</code> of type <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and
+   only if <code>y.equals(x)</code> returns <code>true</code>.
+ * It is transitive: for any instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.equals(y)</code> returns <code>true</code> and
+   <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p><p>If you override this method, you should verify that your implementation remains an equivalence relation.
+Additionally, when overriding this method it is often necessary to override <code>hashCode</code> to ensure that objects
+that are "equal" (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
+scala.Int
 (<code>o1.hashCode.equals(o2.hashCode)</code>).
-</p></div>
-      <dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.
-</p></p></dd></dl>
-      
-      <div class="block">
-            definition classes: AnyRef ⇐ Any
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          definition classes: AnyRef → Any
+        </div>
+            
+            
+            
+            
           </div>
+          
+    </li><li visbl="prt" name="scala.AnyRef#finalize">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
       
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="scala.AnyRef#hashCode">
+            <p class="shortcomment cmt">This method is called by the garbage collector on the receiver object when garbage collection determines that
+there are no more references to the object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is called by the garbage collector on the receiver object when garbage collection determines that
+there are no more references to the object .</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
+          attributes: protected 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#getClass">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object .</p><p>The nature of the representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object .</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#hashCode">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Returns a hash code value for the object</p><div class="fullcomment">
-      <div class="comment cmt"><p>Returns a hash code value for the object.</p><p><p>
-The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash
-codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet not be
-equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A
-degenerate implementation could always return <code>0</code>.
-However, it is required that if two objects are equal
-(<code>o1.equals(o2)</code> returns <code>true</code>) that they
-have identical hash codes
-(<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when
-overriding this method, be sure to verify that the behavior is
-consistent with the <code>equals</code> method.
-</p></p><p><p></p></div>
       
-      
-      <div class="block">
-            definition classes: AnyRef ⇐ Any
+            <p class="shortcomment cmt">Returns a hash code value for the object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object .</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
+not be equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A degenerate implementation could always return <code>0</code>.
+However, it is required that if two objects are equal (<code>o1.equals(o2)</code> returns <code>true</code>) that they have
+identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
+to verify that the behavior is consistent with the <code>equals</code> method.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object .</p></dd></dl><div class="block">
+          definition classes: AnyRef → Any
+        </div>
+            
+            
+            
+            
           </div>
+          
+    </li><li visbl="pub" name="scala.Any#isInstanceOf">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
       
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#port">
+            <p class="shortcomment cmt">This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p><p>Note that the test result of the test is modulo Scala's erasure semantics.  Therefore the expression<code>1.isInstanceOf[String]</code> will return <code>false</code>, while the expression <code>List(1).isInstanceOf[List[String]]</code> will
+return <code>true</code>.  In the latter example, because the type argument is erased as part of compilation it is not
+possible to check whether the contents of the list are of the requested typed.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is an instance of erasure of type <code>T0</code>; <code>false</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: Any
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#ne">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt"><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#notify">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor .</p></div><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#notifyAll">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor .</p></div><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#port">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">port</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The local port to which the socket is bound</p><div class="fullcomment">
-      <div class="comment cmt"><p>The local port to which the socket is bound.</p></div>
       
-      <div class="block">
-            attributes: abstract 
+            <p class="shortcomment cmt">The local port to which the socket is bound .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>The local port to which the socket is bound . 
+</p></div><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#receive">
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#receive">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">receive</span><span class="params">(<span name="length">length: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: (<span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.Int">Int</span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Receive a buffer of bytes from the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Receive a buffer of bytes from the socket. The buffer is dynamically
+      
+            <p class="shortcomment cmt">Receive a buffer of bytes from the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Receive a buffer of bytes from the socket .  The buffer is dynamically
 allocated and returned. For more efficiency, use the version of
 <tt>receive()</tt> that takes a caller-supplied buffer.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes to receive
+</p></div><dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes to receive
 </p></dd><dt>returns</dt><dd class="cmt"><p>a tuple containing the buffer of data (of size <tt>length</tt>)
-        and the actual number of bytes read. The buffer might be longer
-        than the number of bytes read.</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#receive">
+        and the actual number of bytes read .  The buffer might be longer
+        than the number of bytes read.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#receive">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">receive</span><span class="params">(<span name="buf">buf: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Receive a buffer of bytes from the socket, writing them into a
-caller-supplied fixed-size buffer</p><div class="fullcomment">
-      <div class="comment cmt"><p>Receive a buffer of bytes from the socket, writing them into a
-caller-supplied fixed-size buffer. One simple way to create such
-a buffer:</p><p><blockquote><pre>
+      
+            <p class="shortcomment cmt">Receive a buffer of bytes from the socket, writing them into a
+caller-supplied fixed-size buffer .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Receive a buffer of bytes from the socket, writing them into a
+caller-supplied fixed-size buffer .  One simple way to create such
+a buffer:</p><p><blockquote>
 // Create a 512-byte buffer initialized to zeros.
 val buf = Array.make[Byte](512, 0)
-</pre></blockquote>
-</p></div>
-      <dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data
-</p></dd><dt>returns</dt><dd class="cmt"><p>actual number of bytes read</p></dd></dl>
-      <div class="block">
-            attributes: abstract 
+</blockquote>
+</p></div><dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data
+</p></dd><dt>returns</dt><dd class="cmt"><p>actual number of bytes read
+</p></dd></dl><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#receiveString">
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#receiveString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">receiveString</span><span class="params">(<span name="buf">buf: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Receive a string from the socket, using a caller-supplied receive
-buffer to hold the bytes actually received over the wire</p><div class="fullcomment">
-      <div class="comment cmt"><p>Receive a string from the socket, using a caller-supplied receive
-buffer to hold the bytes actually received over the wire. The string
+      
+            <p class="shortcomment cmt">Receive a string from the socket, using a caller-supplied receive
+buffer to hold the bytes actually received over the wire .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Receive a string from the socket, using a caller-supplied receive
+buffer to hold the bytes actually received over the wire .  The string
 is assumed to have been encoded in UTF-8 for transmission and is
 decoded accordingly.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data
-</p></dd><dt>returns</dt><dd class="cmt"><p>the string</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#receiveString">
+</p></div><dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data
+</p></dd><dt>returns</dt><dd class="cmt"><p>the string
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#receiveString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">receiveString</span><span class="params">(<span name="buf">buf: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>, <span name="encoding">encoding: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Receive a string from the socket, using a caller-supplied receive
-buffer to hold the bytes actually received over the wire</p><div class="fullcomment">
-      <div class="comment cmt"><p>Receive a string from the socket, using a caller-supplied receive
-buffer to hold the bytes actually received over the wire. The string
+      
+            <p class="shortcomment cmt">Receive a string from the socket, using a caller-supplied receive
+buffer to hold the bytes actually received over the wire .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Receive a string from the socket, using a caller-supplied receive
+buffer to hold the bytes actually received over the wire .  The string
 is assumed to have been encoded in the specified encoding and is
 decoded accordingly.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>the encoding to use when decoding the string
-</p></dd><dt>returns</dt><dd class="cmt"><p>the string</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#receiveString">
+</p></div><dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>the encoding to use when decoding the string
+</p></dd><dt>returns</dt><dd class="cmt"><p>the string
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#receiveString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">receiveString</span><span class="params">(<span name="length">length: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Receive a string from the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Receive a string from the socket. The string is assumed to have
+      
+            <p class="shortcomment cmt">Receive a string from the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Receive a string from the socket .  The string is assumed to have
 been encoded in UTF-8 for transmission and is decoded accordingly.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes (not characters) expected
-</p></dd><dt>returns</dt><dd class="cmt"><p>the string</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#receiveString">
+</p></div><dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes (not characters) expected
+</p></dd><dt>returns</dt><dd class="cmt"><p>the string
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#receiveString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">receiveString</span><span class="params">(<span name="length">length: <span class="extype" name="scala.Int">Int</span></span>, <span name="encoding">encoding: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Receive a string from the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Receive a string from the socket. The string is assumed to have
+      
+            <p class="shortcomment cmt">Receive a string from the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Receive a string from the socket .  The string is assumed to have
 been encoded in the specified encoding and is decoded accordingly.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes (not characters) expected</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>the encoding to use when decoding the string
-</p></dd><dt>returns</dt><dd class="cmt"><p>the string</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#send">
+</p></div><dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes (not characters) expected</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>the encoding to use when decoding the string
+</p></dd><dt>returns</dt><dd class="cmt"><p>the string
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#send">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">send</span><span class="params">(<span name="data">data: <span class="extype" name="scala.collection.Seq">Seq</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>, <span name="address">address: <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a></span>, <span name="port">port: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Send data over the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Send data over the socket. Accepts any sequence of bytes (e.g.,
+      
+            <p class="shortcomment cmt">Send data over the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Send data over the socket .  Accepts any sequence of bytes (e.g.,
 <tt>Array[Byte]</tt>, <tt>List[Byte]</tt>).
-</p></div>
-      <dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the bytes to send</p></dd></dl>
-      <div class="block">
-            attributes: abstract 
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the bytes to send
+</p></dd></dl><div class="block">
+          attributes: abstract 
+        </div>
+            
+            
+            
+            
           </div>
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#sendString">
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#sendString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">sendString</span><span class="params">(<span name="data">data: <span class="extype" name="java.lang.String">String</span></span>, <span name="address">address: <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a></span>, <span name="port">port: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Send string data over the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Send string data over the socket. Converts the string to UTF-8
+      
+            <p class="shortcomment cmt">Send string data over the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Send string data over the socket .  Converts the string to UTF-8
 bytes, then sends the bytes.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the string to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>the IP address to receive the string</p></dd><dt class="param">port</dt><dd class="cmt"><p>the destination port on the remote machine</p></dd></dl>
-      
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="grizzled.net.UDPDatagramSocket#sendString">
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the string to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>the IP address to receive the string</p></dd><dt class="param">port</dt><dd class="cmt"><p>the destination port on the remote machine
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#sendString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">sendString</span><span class="params">(<span name="data">data: <span class="extype" name="java.lang.String">String</span></span>, <span name="encoding">encoding: <span class="extype" name="java.lang.String">String</span></span>, <span name="address">address: <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a></span>, <span name="port">port: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Send string data over the socket</p><div class="fullcomment">
-      <div class="comment cmt"><p>Send string data over the socket. The internal UTF-16 strings are
+      
+            <p class="shortcomment cmt">Send string data over the socket .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Send string data over the socket .  The internal UTF-16 strings are
 converted to the specified encoding before being sent.
-</p></div>
-      <dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the string to send</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>the encoding to use</p></dd><dt class="param">address</dt><dd class="cmt"><p>the IP address to receive the string</p></dd><dt class="param">port</dt><dd class="cmt"><p>the destination port on the remote machine</p></dd></dl>
+</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the string to send</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>the encoding to use</p></dd><dt class="param">address</dt><dd class="cmt"><p>the IP address to receive the string</p></dd><dt class="param">port</dt><dd class="cmt"><p>the destination port on the remote machine
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#synchronized">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: T0</span>)</span><span class="result">: T0</span>
+      </span>
+      </h4>
       
-      
-      
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
-    </li><li name="scala.AnyRef#toString">
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#toString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Returns a string representation of the object</p><div class="fullcomment">
-      <div class="comment cmt"><p>Returns a string representation of the object.
-<p>
-The default representation is platform dependent.
-</p></div>
       
-      
-      <div class="block">
-            definition classes: AnyRef ⇐ Any
+            <p class="shortcomment cmt">Returns a string representation of the object .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object .</p><p>The default representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object .</p></dd></dl><div class="block">
+          definition classes: AnyRef → Any
+        </div>
+            
+            
+            
+            
           </div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#wait">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
       
-      <div class="block">
-              Go to: <a href="UDPDatagramSocket$.html">companion</a>
-            </div>
-    </div>
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#wait">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.AnyRef#wait">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          attributes: final 
+        </div><div class="block">
+          definition classes: AnyRef
+        </div></div>
+          
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

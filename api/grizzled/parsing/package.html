@@ -6,43 +6,43 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../lib/template.js"></script>
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
-      <p id="owner"><a href="../package.html">grizzled</a></p>
+
+      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <h1>parsing</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">parsing</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         <div class="members" id="types">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.parsing.IteratorStream">
+              <ol><li visbl="pub" name="grizzled.parsing.IteratorStream">
       <h4 class="signature"><a href="IteratorStream.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -50,8 +50,8 @@
       </span>
       </a></h4>
       <p class="comment cmt"><tt>IteratorStream</tt> places a simple stream on top of an iterator,
-returning <tt>Option</tt>-wrapped instances from the underlying iterator</p>
-    </li><li name="grizzled.parsing.MarkdownParser">
+returning <tt>Option</tt>-wrapped instances from the underlying iterator .</p>
+    </li><li visbl="pub" name="grizzled.parsing.MarkdownParser">
       <h4 class="signature"><a href="MarkdownParser.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -59,8 +59,8 @@ returning <tt>Option</tt>-wrapped instances from the underlying iterator</p>
       </span>
       </a></h4>
       <p class="comment cmt">The <tt>MarkdownParser</tt> class parses the Markdown markup language,
-producing HTML</p>
-    </li><li name="grizzled.parsing.Pushback">
+producing HTML .</p>
+    </li><li visbl="pub" name="grizzled.parsing.Pushback">
       <h4 class="signature"><a href="Pushback.html">
       <span class="kind">trait</span>
       <span class="symbol">
@@ -68,8 +68,8 @@ producing HTML</p>
       </span>
       </a></h4>
       <p class="comment cmt">The <tt>Pushback</tt> trait can be mixed into an <tt>IteratorStream</tt>
-to permit arbitrary pushback</p>
-    </li><li name="grizzled.parsing.StringToken">
+to permit arbitrary pushback .</p>
+    </li><li visbl="pub" name="grizzled.parsing.StringToken">
       <h4 class="signature"><a href="StringToken.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -82,7 +82,7 @@ to permit arbitrary pushback</p>
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.parsing.Markdown">
+              <ol><li visbl="pub" name="grizzled.parsing.Markdown">
       <h4 class="signature"><a href="Markdown$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -90,13 +90,13 @@ to permit arbitrary pushback</p>
       </span>
       </a></h4>
       <p class="comment cmt">Object that simplifies access to instances of the <tt>MarkdownParser</tt>
-class</p>
+class .</p>
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>

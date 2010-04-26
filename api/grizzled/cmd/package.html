@@ -6,43 +6,43 @@
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
-		  <style type="text/css">
-		    @import url(../../lib/template.css) screen;
-		  </style>
-		  <script type="text/javascript" src="../../lib/template.js"></script>
+      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
-      
-      <p id="owner"><a href="../package.html">grizzled</a></p>
+
+      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
       <div id="definition">
         <img src="../../lib/package_big.png" />
         <h1>cmd</h1>
       </div>
 
-      <h4 class="signature">
+      <h4 class="signature" id="signature">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">cmd</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment">
-      
-      
-      
-      
-      
-      
-    </div>
+      <div class="fullcomment" id="comment"></div>
       
       <div id="template">
-      
+
+        <div id="mbrsel">
+          
+          <div id="visbl">
+            <h3>Visibility</h3>
+            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+          </div>
+        </div>
         
+                
         
         <div class="members" id="types">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.cmd.BlockCommandHandler">
+              <ol><li visbl="pub" name="grizzled.cmd.BlockCommandHandler">
       <h4 class="signature"><a href="BlockCommandHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
@@ -50,56 +50,56 @@
       </span>
       </a></h4>
       <p class="comment cmt">A block command is one that consists of multiple input lines between
-some sort of start and end indicator</p>
-    </li><li name="grizzled.cmd.Command">
+some sort of start and end indicator .</p>
+    </li><li visbl="pub" name="grizzled.cmd.Command">
       <h4 class="signature"><a href="Command.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">Command</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Mapped commands</p>
-    </li><li name="grizzled.cmd.CommandAction">
+      <p class="comment cmt">Mapped commands .</p>
+    </li><li visbl="pub" name="grizzled.cmd.CommandAction">
       <h4 class="signature"><a href="CommandAction.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">CommandAction</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Actions returned by handlers</p>
-    </li><li name="grizzled.cmd.CommandHandler">
+      <p class="comment cmt">Actions returned by handlers .</p>
+    </li><li visbl="pub" name="grizzled.cmd.CommandHandler">
       <h4 class="signature"><a href="CommandHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
         <span class="name">CommandHandler</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Trait for an object (or class) that handles a single command</p>
-    </li><li name="grizzled.cmd.CommandInterpreter">
+      <p class="comment cmt">Trait for an object (or class) that handles a single command .</p>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter">
       <h4 class="signature"><a href="CommandInterpreter.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">CommandInterpreter</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Base class for command interpreters</p>
-    </li><li name="grizzled.cmd.HiddenCommandHandler">
+      <p class="comment cmt">Base class for command interpreters .</p>
+    </li><li visbl="pub" name="grizzled.cmd.HiddenCommandHandler">
       <h4 class="signature"><a href="HiddenCommandHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
         <span class="name">HiddenCommandHandler</span><span class="result"> extends NoCompletionsHandler</span>
       </span>
       </a></h4>
-      <p class="comment cmt">The handler trait for a hidden command</p>
-    </li><li name="grizzled.cmd.HistoryHandler">
+      <p class="comment cmt">The handler trait for a hidden command .</p>
+    </li><li visbl="pub" name="grizzled.cmd.HistoryHandler">
       <h4 class="signature"><a href="HistoryHandler.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">HistoryHandler</span><span class="result"> extends CommandHandler</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Simple history command handler</p>
-    </li><li name="grizzled.cmd.KnownCommand">
+      <p class="comment cmt">Simple history command handler .</p>
+    </li><li visbl="pub" name="grizzled.cmd.KnownCommand">
       <h4 class="signature"><a href="KnownCommand.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -107,23 +107,23 @@ some sort of start and end indicator</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.cmd.NoCompletionsHandler">
+    </li><li visbl="pub" name="grizzled.cmd.NoCompletionsHandler">
       <h4 class="signature"><a href="NoCompletionsHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
         <span class="name">NoCompletionsHandler</span><span class="result"> extends CommandHandler</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Mixed in to indicate no completions are available</p>
-    </li><li name="grizzled.cmd.RedoHandler">
+      <p class="comment cmt">Mixed in to indicate no completions are available .</p>
+    </li><li visbl="pub" name="grizzled.cmd.RedoHandler">
       <h4 class="signature"><a href="RedoHandler.html">
       <span class="kind">class</span>
       <span class="symbol">
         <span class="name">RedoHandler</span><span class="result"> extends CommandHandler</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Simple "redo command" handler</p>
-    </li><li name="grizzled.cmd.UnknownCommand">
+      <p class="comment cmt">Simple "redo command" handler .</p>
+    </li><li visbl="pub" name="grizzled.cmd.UnknownCommand">
       <h4 class="signature"><a href="UnknownCommand.html">
       <span class="kind">class</span>
       <span class="symbol">
@@ -136,15 +136,15 @@ some sort of start and end indicator</p>
         
         <div class="members" id="values">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.cmd.CmdUtil">
+              <ol><li visbl="pub" name="grizzled.cmd.CmdUtil">
       <h4 class="signature"><a href="CmdUtil$.html">
       <span class="kind">object</span>
       <span class="symbol">
         <span class="name">CmdUtil</span><span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
-      <p class="comment cmt">Miscellaneous useful utility functions</p>
-    </li><li name="grizzled.cmd.EOFCommand">
+      <p class="comment cmt">Miscellaneous useful utility functions .</p>
+    </li><li visbl="pub" name="grizzled.cmd.EOFCommand">
       <h4 class="signature"><a href="EOFCommand$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -152,7 +152,7 @@ some sort of start and end indicator</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.cmd.EmptyCommand">
+    </li><li visbl="pub" name="grizzled.cmd.EmptyCommand">
       <h4 class="signature"><a href="EmptyCommand$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -160,7 +160,7 @@ some sort of start and end indicator</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.cmd.KeepGoing">
+    </li><li visbl="pub" name="grizzled.cmd.KeepGoing">
       <h4 class="signature"><a href="KeepGoing$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -168,7 +168,7 @@ some sort of start and end indicator</p>
       </span>
       </a></h4>
       
-    </li><li name="grizzled.cmd.Stop">
+    </li><li visbl="pub" name="grizzled.cmd.Stop">
       <h4 class="signature"><a href="Stop$.html">
       <span class="kind">object</span>
       <span class="symbol">
@@ -178,10 +178,10 @@ some sort of start and end indicator</p>
       
     </li></ol>
             </div>
-        
-        
-        
+                
       </div>
+      
+      <div id="tooltip"></div>
       
     </body>
       </html>
