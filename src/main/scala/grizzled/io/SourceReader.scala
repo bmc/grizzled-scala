@@ -38,6 +38,7 @@ package grizzled.io
 
 import scala.io.Source
 import scala.annotation.tailrec
+import scala.math
 
 import java.io.Reader
 
@@ -52,7 +53,7 @@ class SourceReader(_source: Source) extends Reader
 
     def read(buf: Array[Char], offset: Int, length: Int): Int =
     {
-        val total = Math.min(length, buf.length)
+        val total = math.min(length, buf.length)
         val chars = source take(total) toList
         val actual = chars.length
         chars.copyToArray(buf, offset, length)

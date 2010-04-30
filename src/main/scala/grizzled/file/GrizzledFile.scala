@@ -37,6 +37,9 @@
 
 package grizzled.file
 
+import grizzled.generator._
+import scala.util.continuations._
+
 import java.io.File
 
 /**
@@ -177,41 +180,68 @@ final class GrizzledFile(val file: File)
     def touch(time: Long = -1): Unit = util.touch(file.getPath, time)
 
     /**
-     * Directory tree generator, adapted from Python's <tt>os.walk()</tt>
-     * function.
+     * Directory tree lister, adapted from Python's `os.walk()` function.
+     * NOTE: This function generates the entire directory tree in memory,
+     * before returning. If you want a lazy generator, with optional filtering,
+     * use the `listRecursively()` method.
      *
-     * <p>For each directory in the directory tree rooted at this object
+     * For each directory in the directory tree rooted at this object
      * (including the directory itself, but excluding '.' and '..'), yields
-     * a 3-tuple</p>
+     * a 3-tuple.
      *
-     * <blockquote><pre>dirpath, dirnames, filenames</pre></blockquote>
+     * {{{
+     * dirpath, dirnames, filenames
+     * }}}
      *
-     * <p><i>dirpath</i> is a string, the path to the directory.
-     * <i>dirnames</i> is a list of the names of the subdirectories in
-     * <i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
-     * of the names of the non-directory files in <i>dirpath</i>. Note that
-     * the names in the lists are just names, with no path components. To
-     * get a full path (which begins with this directory) to a file or
-     * directory in <i>dirpath</i>, use
-     * <tt>dirpath + java.io.fileSeparator + name</tt>, or use
-     * <tt>grizzled.file.util.joinPath()</tt>.</p>
+     * `dirpath` is a string, the path to the directory. `dirnames`is a
+     * list of the names of the subdirectories in `dirpath` (excluding '.'
+     * and '..'). `filenames` is a list of the names of the non-directory
+     * files in `dirpath`. Note that the names in the lists are just names,
+     * with no path components. To get a full path (which begins with this
+     * directory) to a file or directory in `dirpath`, use `dirpath +
+     * java.io.fileSeparator + name`, or use
+     * `grizzled.file.util.joinPath()`.
      *
-     * <p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
-     * generated before the triples for any of its subdirectories
-     * (directories are generated top down). If <tt>topdown</tt> is
-     * <tt>false</tt>, the triple for a directory is generated after the
-     * triples for all of its subdirectories (directories are generated
-     * bottom up).</p>
+     * If `topdown` is `true`, the triplet for a directory is generated
+     * before the triplets for any of its subdirectories (directories are
+     * generated top down). If `topdown` is `false`, the triplet for a
+     * directory is generated after the triples for all of its
+     * subdirectories (directories are generated bottom up).
      *
-     * <p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p>
+     * **WARNING!** This method does not grok symbolic links!
      *
-     * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>
-     *                otherwise.
+     * @param topdown `true` to do a top-down traversal, `false` otherwise.
      *
      * @return List of triplets, as described above.
      */
     def walk(topdown: Boolean = true): List[(String, List[String], List[String])] =
         util.walk(file.getPath, topdown)
+
+    /**
+     * List a directory recursively, returning `File` objects for each file
+     * (and subdirectory) found. This method does lazy evaluation, instead
+     * of calculating everything up-front, as `walk()` does.
+     *
+     * @return a generator (iterator) of `File` objects for everything under
+     *         the directory.
+     */
+    def listRecursively: Iterator[File] = generator[File]
+    {
+        def doList(list: List[File]): Unit @cps[Iteration[File]] =
+        {
+            list match
+            {
+                case Nil => ()
+
+                case f :: tail =>
+                    generate(f)
+                    doList(if (f.isDirectory) f.listFiles.toList else Nil)
+                    doList(tail)
+            }
+        }
+
+        doList(file.listFiles.toList)
+    }
 
     /**
      * Determine whether a directory is empty. Only meaningful for a directory.
