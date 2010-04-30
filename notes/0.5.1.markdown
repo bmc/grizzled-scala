@@ -3,7 +3,7 @@
 * Added `grizzled.generator`, which can be used to create Python-style
   generators. (It borrows shamelessly from
   [Rich Dougherty's Stack Overflow post][].)
-* Added `listRecursively()` generator functions to `grizzled.file.GrizzledFile`.
+* Added `listRecursively()` generator function to `grizzled.file.GrizzledFile`.
   Via implicits, `GrizzledFile` can be used to extend `java.io.File`.
 
 [Rich Dougherty's Stack Overflow post]: http://stackoverflow.com/questions/2201882/implementing-yield-yield-return-using-scala-continuations/2215182#2215182
