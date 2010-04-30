@@ -240,7 +240,8 @@ final class GrizzledFile(val file: File)
             }
         }
 
-        doList(file.listFiles.toList)
+        if (file.isDirectory)
+            doList(file.listFiles.toList)
     }
 
     /**
