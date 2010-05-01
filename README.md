@@ -29,7 +29,7 @@ Currently, the library is broken into a number of modules:
 The home page for the Grizzled Scala Library is
 <http://bmc.github.com/grizzled-scala/>
 
-## Getting this Plugin
+## Getting the Software
 
 ### The Released Version
 
