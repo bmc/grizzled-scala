@@ -27,56 +27,7 @@ Currently, the library is broken into a number of modules:
 - `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
 
 The home page for the Grizzled Scala Library is
-<http://bmc.github.com/grizzled-scala/>
-
-## Getting the Software
-
-### The Released Version
-
-In your own project, create a project file in `project/build/` file, if you
-haven't already. (See the [SBT Wiki][sbt-wiki] for details on how to configure
-your project with a custom build script.)
-
-[SBT Wiki]: http://code.google.com/p/simple-build-tool/wiki/BuildConfiguration
-
-Add the following lines, to make your project depend on Grizzled:
-
-    val orgClapperMavenRepo = "clapper.org Maven Repo" at "http://maven.clapper.org/"
-
-    val grizzled = "org.clapper" % "grizzled-scala" % "0.4.2"
-
-### The Development Version
-
-You can also use the development version of this plugin (that is, the
-version checked into the [GitHub repository][github-repo]), by building it
-locally.
-
-First, download the plugin's source code by cloning this repository.
-
-    git clone http://github.com/bmc/grizzled-scala.git
-
-Then, within the `markdown` project directory, publish it locally:
-
-    sbt update publish-local
-
-[github-repo]: http://github.com/bmc/grizzled-scala
-
-## Building
-
-Building the Grizzled Scala Library requires [SBT] [sbt] (the Simple Build
-Tool), version 0.7.0 or better. Install SBT 0.7.0, as described in
-the [SBT wiki] [sbt-setup]. Then, run
-
-    sbt update
-
-to pull down the external dependencies. After that step, build the Grizzled
-Scala Library with:
-
-    sbt compile test package
-
-The resulting jar file will be in the top-level `target` directory.
-
-  [sbt]: http://code.google.com/p/simple-build-tool
-  [sbt-setup]: http://code.google.com/p/simple-build-tool/wiki/Setup
+<http://bmc.github.com/grizzled-scala/>. Please see that page for
+complete details, including installation instructions.
 ---
 Copyright &copy; 2009-2010 Brian M. Clapper, <i>bmc@clapper.org</i>
