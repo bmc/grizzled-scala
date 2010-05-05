@@ -135,6 +135,12 @@ private[readline] class EditLineImpl(appName: String,
         editline.setMaxShownCompletions(max)
 
     /**
+     * Cleans up, resetting the terminal to its proper state. The default
+     * implementation does nothing.
+     */
+    override def cleanup: Unit = editline.cleanup
+
+    /**
      * Get the maximum number of completions to show, when there are multiple
      * completions that match a token (if supported by the underlying library).
      *

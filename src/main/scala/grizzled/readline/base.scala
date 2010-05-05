@@ -460,6 +460,12 @@ trait Readline
     }
 
     /**
+     * Cleans up, resetting the terminal to its proper state. The default
+     * implementation does nothing.
+     */
+    def cleanup: Unit = {}
+
+    /**
      * Set the maximum number of completions to show, when there are multiple
      * completions that match a token (if supported by the underlying library).
      *

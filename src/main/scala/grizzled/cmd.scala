@@ -301,6 +301,14 @@ abstract class CommandInterpreter(val appName: String,
     if (readline == null)
         throw new Exception("Unable to load a readline library.")
 
+    // Make sure readline library does its cleanup, no matter what happens.
+    Runtime.getRuntime.addShutdownHook(
+        new Thread
+        {
+            override def run = readline.cleanup
+        }
+    )
+
     readline.completer = CommandCompleter
 
     /**

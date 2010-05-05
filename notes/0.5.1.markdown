@@ -5,5 +5,8 @@
   [Rich Dougherty's Stack Overflow post][].)
 * Added `listRecursively()` generator function to `grizzled.file.GrizzledFile`.
   Via implicits, `GrizzledFile` can be used to extend `java.io.File`.
+* The `grizzled.readline.Readline` trait now contains a `cleanup` method,
+  and the `grizzled.cmd.CommandInterpreter` class now calls it on exit.
+  This change ensures that the terminal isn't left in a weird state.
 
 [Rich Dougherty's Stack Overflow post]: http://stackoverflow.com/questions/2201882/implementing-yield-yield-return-using-scala-continuations/2215182#2215182
