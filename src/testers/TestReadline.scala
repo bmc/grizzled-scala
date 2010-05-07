@@ -11,8 +11,8 @@ import java.io.File
  */
 object TestReadline
 {
-    val types = Map("readline" -> ReadlineType.GNUReadline,
-                    "editline" -> ReadlineType.EditLine,
+    val types = Map("editline" -> ReadlineType.EditLine,
+                    "readline" -> ReadlineType.GNUReadline,
                     "getline"  -> ReadlineType.GetLine,
                     "jline"    -> ReadlineType.JLine,
                     "simple"   -> ReadlineType.Simple)
@@ -21,7 +21,7 @@ object TestReadline
     {
         val t =
             if (args.length == 0)
-                ReadlineType.GNUReadline
+                ReadlineType.EditLine
             else
                 types(args(0))
 
