@@ -23,13 +23,17 @@ If you're using [Maven][], you can get Grizzled Scala from the
 
 * Group ID: `clapper.org`
 * Artifact ID: `grizzled-scala`
-* Version: `0.5`
+* Version: `0.5.1`
 * Type: `jar`
 * Repository: `http://maven.clapper.org/`
 
-Creating the appropriate Maven configuration items is left as an exercise
-for the reader. (One of the things I like about using [SBT][] is that I
-never have to look at Maven XML.)
+Here's a sample Maven POM "dependency" snippet:
+
+    <dependency>
+      <groupId>org.clapper</groupId>
+      <artifactId>grizzled-scala</artifactId>
+      <version>0.5.1</version>
+    </dependency>
 
 ### Using with SBT
 
@@ -39,7 +43,7 @@ your `project/build/` directory):
 
     val orgClapperRepo = "clapper.org Maven Repository" at
         "http://maven.clapper.org"
-    val grizzled = "org.clapper" % "grizzled-scala" % "0.4.2"
+    val grizzled = "org.clapper" % "grizzled-scala" % "0.5.1"
 
 ## Source Code Repository
 
@@ -70,6 +74,10 @@ In addition, you can generate your own version with:
 
     sbt doc
 
+## Change log
+
+The change log for all releases is [here][changelog].
+
 ## Author
 
 Brian M. Clapper, [bmc@clapper.org][]
@@ -99,3 +107,4 @@ request. Along with any patch you send:
 [Maven]: http://maven.apache.org/
 [SBT]: http://code.google.com/p/simple-build-tool
 [bmc@clapper.org]: mailto:bmc@clapper.org
+[changelog]: CHANGELOG.html
