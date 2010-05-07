@@ -82,8 +82,8 @@ trait History
     /**
      * Get the last (i.e., most recent) entry from the buffer.
      *
-     * @return the most recent entry, as an <tt>Option</tt>, or
-     *         <tt>None</tt> if the history buffer is empty
+     * @return the most recent entry, as an `Option`, or
+     *         `None` if the history buffer is empty
      */
     def last: Option[String]
 
@@ -171,17 +171,17 @@ case object Cursor extends CompletionToken;
 trait Completer
 {
     /**
-     * Get all completions for a token. The <tt>context</tt> argument bears
+     * Get all completions for a token. The `context` argument bears
      * some explaining. It's designed to allow the completer to locate the
      * cursor (and the nearest token) via Scala pattern matching, and it
      * consists of a stream of abstract tokens:
      *
      * <ul>
-     *  <li><tt>LineToken</tt> is a token parsed from the line, in an object
-     *      that's similar to <tt>Some</tt>: <tt>LineToken.value</tt> returns
+     *  <li>`LineToken` is a token parsed from the line, in an object
+     *      that's similar to `Some`: `LineToken.value` returns
      *      the token's string.
-     *  <li><tt>Cursor</tt> indicates the location of the cursor
-     *  <li><tt>Delim</tt> indicates the presence of a token delimiter
+     *  <li>`Cursor` indicates the location of the cursor
+     *  <li>`Delim` indicates the presence of a token delimiter
      *      (typically white space)
      * </ul>
      *
@@ -199,38 +199,38 @@ trait Completer
      *   <tr><td colspan="2"><hr></td></tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>^</tt>
-     *     <td><tt>Cursor</tt></td>
+     *     <td>`^`
+     *     <td>`Cursor`</td>
      *   </tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>cm^</tt>
-     *     <td><tt>LineToken("cm") Cursor</tt></td>
+     *     <td>`cm^`
+     *     <td>`LineToken("cm") Cursor`</td>
      *   </tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>cmd ^</tt>
-     *     <td><tt>LineToken("cmd") Delim Cursor</tt></td>
+     *     <td>`cmd ^`
+     *     <td>`LineToken("cmd") Delim Cursor`</td>
      *   </tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>cmd arg1^</tt>
-     *     <td><tt>LineToken("cmd") Delim Token("arg1") Cursor</tt></td>
+     *     <td>`cmd arg1^`
+     *     <td>`LineToken("cmd") Delim Token("arg1") Cursor`</td>
      *   </tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>cmd arg1^</tt>
-     *     <td><tt>LineToken("cmd") Delim Token("arg1") Delim Cursor</tt></td>
+     *     <td>`cmd arg1^`
+     *     <td>`LineToken("cmd") Delim Token("arg1") Delim Cursor`</td>
      *   </tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>cmd^ arg1</tt>
-     *     <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
+     *     <td>`cmd^ arg1`
+     *     <td>`LineToken("cmd") Cursor Delim Token("arg1")`</td>
      *   </tr>
      *
      *   <tr valign="top" align="left">
-     *     <td><tt>cm^d arg1</tt>
-     *     <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
+     *     <td>`cm^d arg1`
+     *     <td>`LineToken("cmd") Cursor Delim Token("arg1")`</td>
      *   </tr>
      * </table>
      * </blockquote>
@@ -252,15 +252,15 @@ trait CompleterHelper
 {
     /**
      * Helper method that takes a set of tokens (of whatever type) and
-     * converts them into <tt>LineToken</tt> objects with <tt>Delim</tt>
-     * objects in between. To get the string to put in the <tt>LineToken</tt>
-     * objects, this method uses the <tt>toString()</tt> method on each passed
+     * converts them into `LineToken` objects with `Delim`
+     * objects in between. To get the string to put in the `LineToken`
+     * objects, this method uses the `toString()` method on each passed
      * token.
      *
      * @param tokens  the tokens to map
      *
-     * @return a list of <tt>CompletionToken</tt> objects consisting of the
-     *         tokens, as strings, with intervening <tt>Delim</tt> characters
+     * @return a list of `CompletionToken` objects consisting of the
+     *         tokens, as strings, with intervening `Delim` characters
      */
     def mapWithDelims(tokens: List[Any]): List[CompletionToken] =
     {
@@ -391,7 +391,7 @@ class ListCompleter(val completions: List[String],
                     val convert: (String) => String) extends Completer
 {
     /**
-     * Version of the constructor that uses a default, no-op <tt>convert()</tt>
+     * Version of the constructor that uses a default, no-op `convert()`
      * function.
      *
      * @param completions  the list of valid completions
@@ -411,7 +411,7 @@ class ListCompleter(val completions: List[String],
 
 /**
  * Defines the readline-like functionality supported by this API. A
- * <tt>Readline</tt> class provides:
+ * `Readline` class provides:
  *
  * <ul>
  *   <li> a means to read lines of input from (presumably) a terminal
@@ -447,8 +447,8 @@ trait Readline
      *
      * @param prompt  the prompt to display before reading.
      *
-     * @return An <tt>Option</tt> containing the line (e.g., <tt>Some(...)</tt>)
-     *         or <tt>None</tt> on EOF.
+     * @return An `Option` containing the line (e.g., `Some(...)`)
+     *         or `None` on EOF.
      */
     def readline(prompt: String): Option[String] =
     {
@@ -487,8 +487,8 @@ trait Readline
      *
      * @param prompt  the prompt to display before reading.
      *
-     * @return An <tt>Option</tt> containing the line (e.g., <tt>Some(...)</tt>)
-     *         or <tt>None</tt> on EOF.
+     * @return An `Option` containing the line (e.g., `Some(...)`)
+     *         or `None` on EOF.
      */
     private[readline] def doReadline(prompt: String): Option[String]
 
@@ -513,25 +513,25 @@ object Readline
      * supported:
      *
      * <ul>
-     *   <li><tt>GNUReadline</tt>: The GNU Readline library. Requires the
+     *   <li>`GNUReadline`: The GNU Readline library. Requires the
      *       JavaReadline jar
      *       (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>)
      *       and the GNU Readline library
      *       (<a href="http://tiswww.case.edu/php/chet/readline/rltop.html">http://tiswww.case.edu/php/chet/readline/rltop.html</a>).
      *
-     *   <li><tt>Editline</tt>: The Editline library, originally from BSD Unix.
+     *   <li>`Editline`: The Editline library, originally from BSD Unix.
      *       Requires the libjavaeditline jar and dynamic library (see
      *       <a href="http://www.clapper.org/software/java/javaeditline/">http://www.clapper.org/software/java/javaeditline/</a>)
      *       and the Editline library
      *       <a href="http://www.thrysoee.dk/editline/">http://www.thrysoee.dk/editline/</a>.
      *
-     *   <li><tt>Getline</tt>: The Getline library. Requires the JavaReadline jar
+     *   <li>`Getline`: The Getline library. Requires the JavaReadline jar
      *       (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>)
      *       and the Getline library.
      *
-     *   <li><tt>JLine</tt>: The JLine library. Requires the JLine jar
+     *   <li>`JLine`: The JLine library. Requires the JLine jar
      *       (<a href="http://jline.sourceforge.net/">http://jline.sourceforge.net/</a>).
-     *   <li><tt>Simple</tt>: A simple, not-editing, pure Java implementation
+     *   <li>`Simple`: A simple, not-editing, pure Java implementation
      * </ul>
      */
     object ReadlineType extends Enumeration
@@ -548,16 +548,16 @@ object Readline
     import ReadlineType._
 
     /**
-     * Get the specified <tt>Readline</tt> implementation.
+     * Get the specified `Readline` implementation.
      *
-     * @param readlineType   the <tt>ReadlineType</tt> to use
+     * @param readlineType   the `ReadlineType` to use
      * @param appName        an arbitrary name of the calling application
      * @param autoAddHistory whether lines read by the function should
      *                       automatically be added to the history. If this
-     *                       parameter is <tt>false</tt>, then the caller
+     *                       parameter is `false`, then the caller
      *                       is responsible for adding lines to the history.
      *
-     * @return the appropriate <tt>Readline</tt> implementation.
+     * @return the appropriate `Readline` implementation.
      *
      * @throws UnsatisfiedLinkError can't find the underlying library
      */
@@ -599,16 +599,58 @@ object Readline
     }
 
     /**
-     * Get the specified <tt>Readline</tt> implementation, with
-     * <tt>autoAddHistory</tt> set to <tt>true</tt>.
+     * Get the specified `Readline` implementation, with
+     * `autoAddHistory` set to `true`.
      *
-     * @param readlineType  the <tt>ReadlineType</tt> to use
+     * @param readlineType  the `ReadlineType` to use
      * @param appName       an arbitrary name of the calling application
      *
-     * @return the appropriate <tt>Readline</tt> implementation.
+     * @return the appropriate `Readline` implementation.
      *
      * @throws UnsatisfiedLinkError can't find the underlying library
      */
     def apply(readlineType: ReadlineType, appName: String): Readline =
         apply(readlineType, appName, true)
+
+    /**
+     * Given a list of `Readline` types, find and return the first one
+     * that loads.
+     *
+     * @param libs           list of readline library types to try, in order
+     * @param appName        an arbitrary name of the calling application
+     * @param autoAddHistory whether lines read by the function should
+     *                       automatically be added to the history. If this
+     *                       parameter is `false`, then the caller
+     *                       is responsible for adding lines to the history.
+     *
+     * @return the loaded implementation, or `None`.
+     */
+    def findReadline(libs: List[ReadlineType],
+                     appName: String,
+                     autoAddHistory: Boolean = true): Option[Readline] =
+    {
+        def find(libs: List[ReadlineType]): Option[Readline] =
+        {
+            if (libs == Nil)
+                None
+
+            else
+            {
+                val lib = libs.head
+                try
+                {
+                    Some(Readline(lib, appName, autoAddHistory))
+                }
+
+                catch
+                {
+                    case _: UnsatisfiedLinkError => find(libs.tail)
+                    case _: ClassNotFoundException => find(libs.tail)
+                    case _: NoClassDefFoundError => find(libs.tail)
+                }
+            }
+        }
+
+        find(libs)
+    }
 }

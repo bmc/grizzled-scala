@@ -292,14 +292,17 @@ abstract class CommandInterpreter(val appName: String,
     /**
      * The readline implementation being used.
      */
-    val readline = readlineCandidates match
+    private val readlineLibs = readlineCandidates match
     {
-        case Nil => findReadline(DefaultReadlineLibraryList)
-        case _   => findReadline(readlineCandidates)
+        case Nil => DefaultReadlineLibraryList
+        case _   => readlineCandidates
     }
 
-    if (readline == null)
-        throw new Exception("Unable to load a readline library.")
+    val readline = Readline.findReadline(readlineLibs, appName, false) match
+    {
+        case None    => throw new Exception("Can't find a readline library.")
+        case Some(r) => r
+    }
 
     // Make sure readline library does its cleanup, no matter what happens.
     Runtime.getRuntime.addShutdownHook(
@@ -924,36 +927,6 @@ abstract class CommandInterpreter(val appName: String,
     {
         if (handleCommand(readCommand) == KeepGoing)
             readAndProcessCommand
-    }
-
-    /**
-     * Given a list of readline implementation types, attempt to load them
-     * one by one, stopping at the one that actually loads. See the
-     * <tt>grizzled.readline</tt> package.
-     *
-     * @param libs  list of readline libraries to try
-     *
-     * @return the one that was found, or null if none were found.
-     */
-    private[this] def findReadline(libs: List[ReadlineType]): Readline =
-    {
-        if (libs == Nil)
-            null
-
-        else
-        {
-            val lib = libs.head
-            try
-            {
-                Readline(lib, appName, /* autoAddHistory */ false)
-            }
-
-            catch
-            {
-                case e: UnsatisfiedLinkError =>
-                    findReadline(libs.tail)
-            }
-        }
     }
 
     /**

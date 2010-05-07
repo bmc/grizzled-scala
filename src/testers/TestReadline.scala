@@ -17,15 +17,24 @@ object TestReadline
                     "jline"    -> ReadlineType.JLine,
                     "simple"   -> ReadlineType.Simple)
 
+    /**
+     * Default list of readline libraries to try, in order.
+     */
+    val DefaultReadlineLibraryList = List(ReadlineType.EditLine,
+                                          ReadlineType.GNUReadline,
+                                          ReadlineType.GetLine,
+                                          ReadlineType.JLine,
+                                          ReadlineType.Simple)
+
     def main(args: Array[String]) =
     {
-        val t =
+        val readlineLibs =
             if (args.length == 0)
-                ReadlineType.EditLine
+                DefaultReadlineLibraryList
             else
-                types(args(0))
+                args.toList.map(types(_))
 
-        val r = Readline(t, "Test", true)
+        val r = loadReadline(readlineLibs)
         println("Using: " + r)
 
         val HistoryPath = "/tmp/readline.hist"
@@ -89,5 +98,14 @@ object TestReadline
 
         println("Saving history to file \"" + HistoryPath + "\"")
         r.history.save(HistoryPath)
+    }
+
+    private def loadReadline(libs: List[ReadlineType]) =
+    {
+        Readline.findReadline(libs, "TestReadline", false) match
+        {
+            case None    => throw new Exception("Can't find readline library.")
+            case Some(r) => r
+        }
     }
 }
