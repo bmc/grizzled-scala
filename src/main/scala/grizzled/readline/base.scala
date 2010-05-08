@@ -37,6 +37,8 @@
 
 package grizzled.readline
 
+import scala.annotation.tailrec
+
 /**
  * Models a Readline history: an object that holds previously read
  * lines.
@@ -629,25 +631,32 @@ object Readline
                      appName: String,
                      autoAddHistory: Boolean = true): Option[Readline] =
     {
-        def find(libs: List[ReadlineType]): Option[Readline] =
+        def load(lib: ReadlineType): Option[Readline] =
         {
-            if (libs == Nil)
-                None
-
-            else
+            try
             {
-                val lib = libs.head
-                try
-                {
-                    Some(Readline(lib, appName, autoAddHistory))
-                }
+                Some(Readline(lib, appName, autoAddHistory))
+            }
 
-                catch
-                {
-                    case _: UnsatisfiedLinkError => find(libs.tail)
-                    case _: ClassNotFoundException => find(libs.tail)
-                    case _: NoClassDefFoundError => find(libs.tail)
-                }
+            catch
+            {
+                case _: UnsatisfiedLinkError   => None
+                case _: ClassNotFoundException => None
+                case _: NoClassDefFoundError   => None
+            }
+        }
+
+        @tailrec def find(libs: List[ReadlineType]): Option[Readline] =
+        {
+            libs match
+            {
+                case Nil => None
+                case lib :: tail =>
+                    load(lib) match
+                    {
+                        case Some(readline) => Some(readline)
+                        case None => find(tail)
+                    }
             }
         }
 
