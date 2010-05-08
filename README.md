@@ -12,7 +12,7 @@ easily use it in multiple projects.
 The home page for the Grizzled Scala Library is
 <http://bmc.github.com/grizzled-scala/>. Please see that page for
 complete details, including installation instructions.
----
+
 Grizzled Scala is copyright &copy; 2009-2010 [Brian M. Clapper][] and
 is released under a new BSD license.
 
