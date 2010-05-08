@@ -8,7 +8,32 @@ layout: withTOC
 The Grizzled Scala Library is a general-purpose [Scala][] library with a
 variety of different modules and packages. It's roughly organized into
 subpackages that group different kinds of utility functions and classes.
-For a sampling of what's available, see the [API documentation][].
+Currently, the library is broken into the following modules:
+
+Currently, the library is broken into a number of modules:
+
+* `grizzled.binary`: Some code that's useful when dealing with binary
+* `grizzled.cmd`: A framework for building command interpreters, similar (in
+  concept) to Python's `cmd` module.
+* `grizzled.collection`: Helpers for Scala collections.
+* `grizzed.config`: An enhanced INI-style configuration parser, with
+  support for include files and variable substitution.
+* `grizzled.file`: File-related utility functions.
+* `grizzled.io`: Some enhanced I/O functions and classes.
+* `grizzled.math`: Some simple math functions.
+* `grizzled.net`: Network-related stuff, mostly Scala wrappers to simplify or
+  extend the Java `java.net` classes.
+* `grizzled.parsing`: Classes that aid in certain kinds of parsing.
+* `grizzled.readline`: Front-end API for various readline-like libraries.
+* `grizzled.string`: Useful string- and text-related functions.
+* `grizzled.string.template`: For substituting variable references within a
+  string. Supports both ${var} (Unix-like) and %var% (Windows-like) syntaxes.
+* `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
+* `grizzled.util`: Miscellaneous utility functions and methods not otherwise
+  categorized.
+
+For a more detailed description of what's available, see the
+[API documentation][].
 
 ## Installation
 
