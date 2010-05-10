@@ -1,3 +1,0 @@
-* Added `findReadline()` convenience method to `grizzled.readline.Readline`.
-  This method attempts to find and load a suitable Readline library.
-

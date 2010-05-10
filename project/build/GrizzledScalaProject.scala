@@ -73,12 +73,6 @@ class GrizzledScalaProject(info: ProjectInfo)
                                                      
     override def parallelExecution = true // why not?
 
-    // Disable cross-paths, since we're only building under one version.
-    // This simplifies publishing and importing. See
-    // http://groups.google.com/group/simple-build-tool/browse_thread/thread/973b5a2956b5ecbe
-
-    override def disableCrossPaths = true
-
     /* ---------------------------------------------------------------------- *\
                                    Tasks
     \* ---------------------------------------------------------------------- */
@@ -152,7 +146,8 @@ class GrizzledScalaProject(info: ProjectInfo)
     val ShowdownURL = "http://attacklab.net/showdown/showdown-v0.9.zip"
     val LocalLibDir = "local_lib"
     val ShowdownLocal = LocalLibDir / ShowdownJS
-    val ShowdownClassdir = "target" / "classes" / "grizzled" / ShowdownJS
+    val ShowdownClassdir = "target" / ("scala_" + buildScalaVersion) /
+                           "classes" / "grizzled" / ShowdownJS
 
     /* ---------------------------------------------------------------------- *\
                           Private Helper Methods

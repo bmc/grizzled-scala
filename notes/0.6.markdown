@@ -1,0 +1,5 @@
+* Added `findReadline()` convenience method to `grizzled.readline.Readline`.
+  This method attempts to find and load a suitable Readline library.
+* Updated to build against Scala 2.8.0.RC2
+* Maven artifact now includes Scala version (e.g., `grizzled-scala_2.8.0.RC1`,
+  instead of `grizzled-scala`).
