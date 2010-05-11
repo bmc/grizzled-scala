@@ -26,8 +26,7 @@
         <span class="name">Readline</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Defines the readline-like functionality supported by this API .  A
-<tt>Readline</tt> class provides:</p><p>   a means to read lines of input from (presumably) a terminal
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Defines the readline-like functionality supported by this API. A<code>Readline</code> class provides:</p><p>   a means to read lines of input from (presumably) a terminal
    a history mechanism
    an optional tab-completion capability</p></div><div class="block">
             go to: <a href="Readline$.html">companion</a>
@@ -42,12 +41,12 @@
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -216,6 +215,24 @@ part of compilation it is not possible to check whether the contents of the list
 </p></div><div class="block">
           attributes: abstract 
         </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.readline.Readline#cleanup">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">cleanup</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Cleans up, resetting the terminal to its proper state .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Cleans up, resetting the terminal to its proper state .  The default
+implementation does nothing.
+</p></div>
             
             
             
@@ -563,8 +580,8 @@ completions that match a token (if supported by the underlying library) .
             <p class="shortcomment cmt">Read a line of input from the console .</p>
             <div class="fullcomment"><div class="comment cmt"><p>Read a line of input from the console . 
 </p></div><dl class="paramcmts block"><dt class="param">prompt</dt><dd class="cmt"><p>the prompt to display before reading . 
-</p></dd><dt>returns</dt><dd class="cmt"><p>An <tt>Option</tt> containing the line (e . g., <tt>Some(...)</tt>)
-        or <tt>None</tt> on EOF.
+</p></dd><dt>returns</dt><dd class="cmt"><p>An <code>Option</code> containing the line (e.g., <code>Some(...)</code>)
+        or <code>None</code> on EOF.
 </p></dd></dl>
             
             

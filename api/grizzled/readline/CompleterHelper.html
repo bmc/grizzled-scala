@@ -32,12 +32,12 @@
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -375,16 +375,13 @@ possible to check whether the contents of the list are of the requested typed.
       </h4>
       
             <p class="shortcomment cmt">Helper method that takes a set of tokens (of whatever type) and
-converts them into <tt>LineToken</tt> objects with <tt>Delim</tt>
-objects in between .</p>
+converts them into <code>LineToken</code> objects with <code>Delim</code>objects in between.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Helper method that takes a set of tokens (of whatever type) and
-converts them into <tt>LineToken</tt> objects with <tt>Delim</tt>
-objects in between .  To get the string to put in the <tt>LineToken</tt>
-objects, this method uses the <tt>toString()</tt> method on each passed
+converts them into <code>LineToken</code> objects with <code>Delim</code>objects in between. To get the string to put in the <code>LineToken</code>objects, this method uses the <code>toString()</code> method on each passed
 token.
 </p></div><dl class="paramcmts block"><dt class="param">tokens</dt><dd class="cmt"><p>the tokens to map
-</p></dd><dt>returns</dt><dd class="cmt"><p>a list of <tt>CompletionToken</tt> objects consisting of the
-        tokens, as strings, with intervening <tt>Delim</tt> characters
+</p></dd><dt>returns</dt><dd class="cmt"><p>a list of <code>CompletionToken</code> objects consisting of the
+        tokens, as strings, with intervening <code>Delim</code> characters
 </p></dd></dl>
             
             

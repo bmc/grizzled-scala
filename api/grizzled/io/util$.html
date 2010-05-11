@@ -38,12 +38,12 @@
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -482,7 +482,7 @@ possible to check whether the contents of the list are of the requested typed.
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">useThenClose</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="closeable">closeable: AnyRef {...}</span>)</span><span class="params">(<span name="block">block: ⇒ T</span>)</span><span class="result">: T</span>
+        <span class="name deprecated">useThenClose</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="closeable">closeable: AnyRef {...}</span>)</span><span class="params">(<span name="block">block: ⇒ T</span>)</span><span class="result">: T</span>
       </span>
       </h4>
       
@@ -501,7 +501,9 @@ useThenClose(in)
 is useless to the block.
 </p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <tt>Closeable</tt></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <tt>Closeable</tt>
 </p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
-</p></dd></dl>
+</p></dd></dl><div class="block"><ol>deprecated:
+          <li><p>Use <code>withCloseable</code></p></li>
+        </ol></div>
             
             
             
@@ -552,6 +554,35 @@ is useless to the block.
         </div><div class="block">
           definition classes: AnyRef
         </div></div>
+          
+    </li><li visbl="pub" name="grizzled.io.util#withCloseable">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">withCloseable</span><span class="tparams">[<span name="C">C</span>, <span name="T">T</span>]</span><span class="params">(<span name="closeable">closeable: C</span>)</span><span class="params">(<span name="block">block: (C) ⇒ T</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: (C) ⇒ AnyRef {...}</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Ensure that a closeable object is closed .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Ensure that a closeable object is closed .  Note that this function
+uses a Scala structural type, rather than a <tt>java.io.Closeable</tt>,
+because there are classes and interfaces (e.g.,
+<tt>java.sql.ResultSet</tt>) that have <tt>close()</tt> methods that do
+not extend or implement <tt>java.io.Closeable</tt>.</p><p>Sample use:</p><p><blockquote>
+withCloseable(new java.io.FileInputStream("/path/to/file"))
+{
+    in => ...
+}
+</blockquote></p><p>The closeable object is not passed into the block, because its type
+is useless to the block.
+</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <tt>Closeable</tt></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <tt>Closeable</tt>
+</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
           
     </li></ol>
             </div>

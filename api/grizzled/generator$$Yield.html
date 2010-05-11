@@ -2,37 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.net.url</title>
+          <title>Scaladoc for grizzled.generator.Yield</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+		      <script type="text/javascript" src="../lib/jquery.js"></script>
           
-      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      <link href="../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="type">
 
-      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.net">net</a></p>
+      <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a>.<a href="generator$.html" class="extype" name="grizzled.generator">generator</a></p>
 
       <div id="definition">
-        <img src="../../lib/object_big.png" />
-        <h1>url</h1>
+        <img src="../lib/class_big.png" />
+        <h1>Yield</h1>
       </div>
 
       <h4 class="signature" id="signature">
-      <span class="kind">object</span>
+      <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">url</span><span class="result"> extends AnyRef</span>
+        <span class="name">Yield</span><span class="tparams">[<span name="T">+T</span>]</span><span class="params">(<span name="result">result: T</span>, <span name="next">next: () ⇒ <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[T]</span>)</span><span class="result"> extends <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[T] with <span class="extype" name="scala.Product">Product</span></span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>URL-related utility methods . 
-</p></div>
-            
-            
-            
-            
-          </div>
+      <div class="fullcomment" id="comment"><div class="block">
+            go to: <a href="generator$$Yield$.html">companion</a>
+          </div></div>
       
       <div id="template">
 
@@ -40,7 +36,7 @@
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol id="linearization"><li class="in" name="scala.Product">Product</li><li class="in" name="scala.Equals">Equals</li><li class="in" name="grizzled.generator.Iteration">Iteration</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -48,7 +44,18 @@
           </div>
         </div>
         
-                
+        <div class="members" id="constructors">
+              <h3>Instance constructors</h3>
+              <ol><li visbl="pub" name="grizzled.generator.Yield#this">
+      <h4 class="signature">
+      <span class="kind">new</span>
+      <span class="symbol">
+        <span class="name">Yield</span><span class="params">(<span name="result">result: T</span>, <span name="next">next: () ⇒ <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[T]</span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>        
         
         
         
@@ -199,6 +206,19 @@ part of compilation it is not possible to check whether the contents of the list
             
           </div>
           
+    </li><li visbl="pub" name="grizzled.generator.Yield#canEqual">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">canEqual</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → Equals
+        </div></div>
+          
     </li><li visbl="prt" name="scala.AnyRef#clone">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -214,111 +234,6 @@ part of compilation it is not possible to check whether the contents of the list
         </div><div class="block">
           definition classes: AnyRef
         </div>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>File to receive the output .  If the file exists, it
-                is overwritten. If the file does not exist, it is
-                created. If any of the directories in the path do not
-                exist, they are created.
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>pathOut</code> parameter, for convenience
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The string containing the URI/URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>File to receive the output .  If the file exists, it
-                is overwritten. If the file does not exist, it is
-                created. If any of the directories in the path do not
-                exist, they are created.
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>Path of file to receive the output .  If the file
-                exists, it is overwritten. If the file does not
-                exist, it is created. If any of the directories in
-                the path do not exist, they are created.
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The string containing the URI/URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>Path of file to receive the output .  If the file
-                exists, it is overwritten. If the file does not
-                exist, it is created. If any of the directories in
-                the path do not exist, they are created.
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file .  The name of the file is
-taken from the URL, if possible, or generated otherwise.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The string containing the URI/URL
-</p></dd><dt>returns</dt><dd class="cmt"><p>the file to which the output was written . 
-</p></dd></dl>
             
             
             
@@ -359,7 +274,7 @@ should be equal to each other (<code>o1 == o2</code>) and they should hash to th
             
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#equals">
+    </li><li visbl="pub" name="grizzled.generator.Yield#equals">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
@@ -380,7 +295,7 @@ that are "equal" (<code>o1.equals(o2)</code> returns <code>true</code>) hash to 
 scala.Int
 (<code>o1.hashCode.equals(o2.hashCode)</code>).
 </p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → Equals → AnyRef → Any
         </div>
             
             
@@ -431,7 +346,7 @@ there are no more references to the object .</p><p>The details of when and if th
             
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#hashCode">
+    </li><li visbl="pub" name="grizzled.generator.Yield#hashCode">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
@@ -446,7 +361,7 @@ However, it is required that if two objects are equal (<code>o1.equals(o2)</code
 identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
 to verify that the behavior is consistent with the <code>equals</code> method.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object .</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → AnyRef → Any
         </div>
             
             
@@ -498,6 +413,14 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
+    </li><li visbl="pub" name="grizzled.generator.Yield#next">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">next</span><span class="result">: () ⇒ <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[T]</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#notify">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -538,6 +461,94 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
+    </li><li visbl="pub" name="grizzled.generator.Yield#productArity">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">productArity</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → Product
+        </div></div>
+          
+    </li><li visbl="pub" name="grizzled.generator.Yield#productElement">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">productElement</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → Product
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.Product#productElementName">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">productElementName</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: Product
+        </div></div>
+          
+    </li><li visbl="pub" name="scala.Product#productElements">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name deprecated">productElements</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.Any">Any</span>]</span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: Product
+        </div><div class="block"><ol>deprecated:
+          <li><p>use productIterator instead</p></li>
+        </ol></div></div>
+          
+    </li><li visbl="pub" name="scala.Product#productIterator">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">productIterator</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.Any">Any</span>]</span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: Product
+        </div></div>
+          
+    </li><li visbl="pub" name="grizzled.generator.Yield#productPrefix">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">productPrefix</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      
+            
+            <div class="fullcomment"><div class="block">
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → Product
+        </div></div>
+          
+    </li><li visbl="pub" name="grizzled.generator.Yield#result">
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">result</span><span class="result">: T</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#synchronized">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -553,7 +564,7 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#toString">
+    </li><li visbl="pub" name="grizzled.generator.Yield#toString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
@@ -564,7 +575,7 @@ possible to check whether the contents of the list are of the requested typed.
             <p class="shortcomment cmt">Returns a string representation of the object .</p>
             <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object .</p><p>The default representation is platform dependent.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object .</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
+          definition classes: <a href="" class="extype" name="grizzled.generator.Yield">Yield</a> → AnyRef → Any
         </div>
             
             
@@ -616,48 +627,6 @@ possible to check whether the contents of the list are of the requested typed.
         </div><div class="block">
           definition classes: AnyRef
         </div></div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#withDownloadedFile">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ T</span>)</span><span class="result">: T</span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Execute a block of code with a downloaded, temporary file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Execute a block of code with a downloaded, temporary file . 
-The specified URL is downloaded to a file, the file is passed
-to the block, and when the block exits, the file is removed.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL</p></dd><dt class="param">block</dt><dd class="cmt"><p>the block to execute
-</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#withDownloadedFile">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ T</span>)</span><span class="result">: T</span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Execute a block of code with a downloaded, temporary file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Execute a block of code with a downloaded, temporary file . 
-The specified URL is downloaded to a file, the file is passed
-to the block, and when the block exits, the file is removed.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL</p></dd><dt class="param">block</dt><dd class="cmt"><p>the block to execute
-</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
           
     </li></ol>
             </div>

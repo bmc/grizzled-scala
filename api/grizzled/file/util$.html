@@ -38,12 +38,12 @@
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -304,6 +304,28 @@ method that takes only one file.
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
+        <span class="name">copyFile</span><span class="params">(<span name="source">source: <span class="extype" name="java.io.File">File</span></span>, <span name="target">target: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Copy a source file to a target file, using binary copying .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Copy a source file to a target file, using binary copying .  The source
+file must be a file. The target path can be a file or a directory; if
+it is a directory, the target file will have the same base name as
+as the source file.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
+</p></dd><dt>returns</dt><dd class="cmt"><p>the full path of the target file
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.file.util#copyFile">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
         <span class="name">copyFile</span><span class="params">(<span name="sourcePath">sourcePath: <span class="extype" name="java.lang.String">String</span></span>, <span name="targetPath">targetPath: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
@@ -315,6 +337,26 @@ it is a directory, the target file will have the same base name as
 as the source file.
 </p></div><dl class="paramcmts block"><dt class="param">sourcePath</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">targetPath</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the full path of the target file
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.file.util#copyTree">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyTree</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.io.File">File</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Recursively copy a source directory and its contents to a target
+directory .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Recursively copy a source directory and its contents to a target
+directory .  Creates the target directory if it does not exist.
+</p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory
 </p></dd></dl>
             
             
@@ -356,6 +398,25 @@ directory .  Creates the target directory if it does not exist.
                  directory before giving up . 
 </p></dd><dt>returns</dt><dd class="cmt"><p>the directory .  Throws an IOException if it can't create
         the directory.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.file.util#deleteTree">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Recursively remove a directory tree .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Recursively remove a directory tree .  This function is conceptually
+equivalent to <tt>rm -r</tt> on a Unix system.
+</p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory
 </p></dd></dl>
             
             
@@ -689,6 +750,28 @@ possible to check whether the contents of the list are of the requested typed.
         </div><div class="block">
           definition classes: Any
         </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.file.util#joinPath">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">joinPath</span><span class="params">(<span name="pieces">pieces: <span class="extype" name="java.io.File">File</span>*</span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Join components of a path together, using the file separator of the
+currently running system
+</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Join components of a path together, using the file separator of the
+currently running system
+</p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces
+</p></dd><dt>returns</dt><dd class="cmt"><p>a composite path
+</p></dd></dl>
             
             
             

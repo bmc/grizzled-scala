@@ -38,12 +38,12 @@
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="grizzled.readline.Completer">Completer</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -58,10 +58,8 @@
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Version of the constructor that uses a default, no-op <tt>convert()</tt>
-function .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Version of the constructor that uses a default, no-op <tt>convert()</tt>
-function . 
+            <p class="shortcomment cmt">Version of the constructor that uses a default, no-op <code>convert()</code>function.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Version of the constructor that uses a default, no-op <code>convert()</code>function.
 </p></div><dl class="paramcmts block"><dt class="param">completions</dt><dd class="cmt"><p>the list of valid completions
 </p></dd></dl>
             
@@ -260,14 +258,14 @@ part of compilation it is not possible to check whether the contents of the list
       </h4>
       
             <p class="shortcomment cmt">Get all completions for a token .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get all completions for a token .  The <tt>context</tt> argument bears
+            <div class="fullcomment"><div class="comment cmt"><p>Get all completions for a token. The <code>context</code> argument bears
 some explaining. It's designed to allow the completer to locate the
 cursor (and the nearest token) via Scala pattern matching, and it
-consists of a stream of abstract tokens:</p><p> <tt>LineToken</tt> is a token parsed from the line, in an object
-     that's similar to <tt>Some</tt>: <tt>LineToken.value</tt> returns
+consists of a stream of abstract tokens:</p><p> <code>LineToken</code> is a token parsed from the line, in an object
+     that's similar to <code>Some</code>: <code>LineToken.value</code> returns
      the token's string.
- <tt>Cursor</tt> indicates the location of the cursor
- <tt>Delim</tt> indicates the presence of a token delimiter
+ <code>Cursor</code> indicates the location of the cursor
+ <code>Delim</code> indicates the presence of a token delimiter
      (typically white space)</p><p>The input line is broken into these tokens, which can then be matched.
 For example, consider the following input lines, with the cursor where
 the caret is:</p><p><blockquote>
@@ -276,30 +274,23 @@ the caret is:</p><p><blockquote>
     <th>Input</th>
     <th>Tokens</th>
   </tr></p><p>  <tr><td colspan="2"><hr></td></tr></p><p>  <tr valign="top" align="left">
-    <td><tt><sup></tt>
-    <td><tt>Cursor</tt></td>
-  </tr></sup></p><p>  <tr valign="top" align="left">
-    <td><tt>cm<sup></tt>
-    <td><tt>LineToken("cm") Cursor</tt></td>
-  </tr></sup></p><p>  <tr valign="top" align="left">
-    <td><tt>cmd <sup></tt>
-    <td><tt>LineToken("cmd") Delim Cursor</tt></td>
-  </tr></sup></p><p>  <tr valign="top" align="left">
-    <td><tt>cmd arg1<sup></tt>
-    <td><tt>LineToken("cmd") Delim Token("arg1") Cursor</tt></td>
-  </tr></sup></p><p>  <tr valign="top" align="left">
-    <td><tt>cmd arg1<sup></tt>
-    <td><tt>LineToken("cmd") Delim Token("arg1") Delim Cursor</tt></td>
-  </tr></sup></p><p>  <tr valign="top" align="left">
-    <td><tt>cmd<sup> arg1</tt>
-    <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
-  </tr></sup></p><p>  <tr valign="top" align="left">
-    <td><tt>cm<sup>d arg1</tt>
-    <td><tt>LineToken("cmd") Cursor Delim Token("arg1")</tt></td>
+    <td><code>^</code>    <td><code>Cursor</code></td>
+  </tr></p><p>  <tr valign="top" align="left">
+    <td><code>cm^</code>    <td><code>LineToken("cm") Cursor</code></td>
+  </tr></p><p>  <tr valign="top" align="left">
+    <td><code>cmd ^</code>    <td><code>LineToken("cmd") Delim Cursor</code></td>
+  </tr></p><p>  <tr valign="top" align="left">
+    <td><code>cmd arg1^</code>    <td><code>LineToken("cmd") Delim Token("arg1") Cursor</code></td>
+  </tr></p><p>  <tr valign="top" align="left">
+    <td><code>cmd arg1^</code>    <td><code>LineToken("cmd") Delim Token("arg1") Delim Cursor</code></td>
+  </tr></p><p>  <tr valign="top" align="left">
+    <td><code>cmd^ arg1</code>    <td><code>LineToken("cmd") Cursor Delim Token("arg1")</code></td>
+  </tr></p><p>  <tr valign="top" align="left">
+    <td><code>cm^d arg1</code>    <td><code>LineToken("cmd") Cursor Delim Token("arg1")</code></td>
   </tr>
 </table>
 </blockquote>
-</sup></p></div><dl class="paramcmts block"><dt class="param">token</dt><dd class="cmt"><p>the token being completed</p></dd><dt class="param">line</dt><dd class="cmt"><p>the current unparsed input line, which includes the
+</p></div><dl class="paramcmts block"><dt class="param">token</dt><dd class="cmt"><p>the token being completed</p></dd><dt class="param">line</dt><dd class="cmt"><p>the current unparsed input line, which includes the
                   token
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of completions, or Nil if there are no matches
 </p></dd></dl><div class="block">

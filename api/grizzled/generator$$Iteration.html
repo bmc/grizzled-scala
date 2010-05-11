@@ -2,37 +2,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.net.url</title>
+          <title>Scaladoc for grizzled.generator.Iteration</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
+		      <script type="text/javascript" src="../lib/jquery.js"></script>
           
-      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      <link href="../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="type">
 
-      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.net">net</a></p>
+      <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a>.<a href="generator$.html" class="extype" name="grizzled.generator">generator</a></p>
 
       <div id="definition">
-        <img src="../../lib/object_big.png" />
-        <h1>url</h1>
+        <img src="../lib/trait_big.png" />
+        <h1>Iteration</h1>
       </div>
 
       <h4 class="signature" id="signature">
-      <span class="kind">object</span>
+      <span class="kind">trait</span>
       <span class="symbol">
-        <span class="name">url</span><span class="result"> extends AnyRef</span>
+        <span class="name">Iteration</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>URL-related utility methods . 
-</p></div>
-            
-            
-            
-            
-          </div>
+      <div class="fullcomment" id="comment"><div class="block">
+          attributes: sealed 
+        </div><div class="block">
+            known subclasses: <a href="generator$$Done$.html" class="extype" name="grizzled.generator.Done">Done</a>, <a href="generator$$Yield.html" class="extype" name="grizzled.generator.Yield">Yield</a>
+          </div></div>
       
       <div id="template">
 
@@ -214,111 +212,6 @@ part of compilation it is not possible to check whether the contents of the list
         </div><div class="block">
           definition classes: AnyRef
         </div>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>File to receive the output .  If the file exists, it
-                is overwritten. If the file does not exist, it is
-                created. If any of the directories in the path do not
-                exist, they are created.
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>pathOut</code> parameter, for convenience
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The string containing the URI/URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>File to receive the output .  If the file exists, it
-                is overwritten. If the file does not exist, it is
-                created. If any of the directories in the path do not
-                exist, they are created.
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>Path of file to receive the output .  If the file
-                exists, it is overwritten. If the file does not
-                exist, it is created. If any of the directories in
-                the path do not exist, they are created.
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file . 
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The string containing the URI/URL</p></dd><dt class="param">pathOut</dt><dd class="cmt"><p>Path of file to receive the output .  If the file
-                exists, it is overwritten. If the file does not
-                exist, it is created. If any of the directories in
-                the path do not exist, they are created.
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#download">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Download the specified URL to a file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file .  The name of the file is
-taken from the URL, if possible, or generated otherwise.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>The string containing the URI/URL
-</p></dd><dt>returns</dt><dd class="cmt"><p>the file to which the output was written . 
-</p></dd></dl>
             
             
             
@@ -616,48 +509,6 @@ possible to check whether the contents of the list are of the requested typed.
         </div><div class="block">
           definition classes: AnyRef
         </div></div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#withDownloadedFile">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ T</span>)</span><span class="result">: T</span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Execute a block of code with a downloaded, temporary file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Execute a block of code with a downloaded, temporary file . 
-The specified URL is downloaded to a file, the file is passed
-to the block, and when the block exits, the file is removed.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL</p></dd><dt class="param">block</dt><dd class="cmt"><p>the block to execute
-</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" name="grizzled.net.url#withDownloadedFile">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ T</span>)</span><span class="result">: T</span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">Execute a block of code with a downloaded, temporary file .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Execute a block of code with a downloaded, temporary file . 
-The specified URL is downloaded to a file, the file is passed
-to the block, and when the block exits, the file is removed.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL</p></dd><dt class="param">block</dt><dd class="cmt"><p>the block to execute
-</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
-</p></dd></dl>
-            
-            
-            
-            
-          </div>
           
     </li></ol>
             </div>

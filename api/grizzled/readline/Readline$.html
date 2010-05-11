@@ -41,12 +41,12 @@ implementations .
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -197,12 +197,10 @@ this API .</p>
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get the specified <tt>Readline</tt> implementation, with
-<tt>autoAddHistory</tt> set to <tt>true</tt> .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the specified <tt>Readline</tt> implementation, with
-<tt>autoAddHistory</tt> set to <tt>true</tt> . 
-</p></div><dl class="paramcmts block"><dt class="param">readlineType</dt><dd class="cmt"><p>the <tt>ReadlineType</tt> to use</p></dd><dt class="param">appName</dt><dd class="cmt"><p>an arbitrary name of the calling application
-</p></dd><dt>returns</dt><dd class="cmt"><p>the appropriate <tt>Readline</tt> implementation . 
+            <p class="shortcomment cmt">Get the specified <code>Readline</code> implementation, with<code>autoAddHistory</code> set to <code>true</code>.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the specified <code>Readline</code> implementation, with<code>autoAddHistory</code> set to <code>true</code>.
+</p></div><dl class="paramcmts block"><dt class="param">readlineType</dt><dd class="cmt"><p>the <code>ReadlineType</code> to use</p></dd><dt class="param">appName</dt><dd class="cmt"><p>an arbitrary name of the calling application
+</p></dd><dt>returns</dt><dd class="cmt"><p>the appropriate <code>Readline</code> implementation.
 </p></dd></dl>
             
             
@@ -218,13 +216,13 @@ this API .</p>
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get the specified <tt>Readline</tt> implementation .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the specified <tt>Readline</tt> implementation . 
-</p></div><dl class="paramcmts block"><dt class="param">readlineType</dt><dd class="cmt"><p>the <tt>ReadlineType</tt> to use</p></dd><dt class="param">appName</dt><dd class="cmt"><p>an arbitrary name of the calling application</p></dd><dt class="param">autoAddHistory</dt><dd class="cmt"><p>whether lines read by the function should
-                      automatically be added to the history .  If this
-                      parameter is <tt>false</tt>, then the caller
+            <p class="shortcomment cmt">Get the specified <code>Readline</code> implementation.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the specified <code>Readline</code> implementation.
+</p></div><dl class="paramcmts block"><dt class="param">readlineType</dt><dd class="cmt"><p>the <code>ReadlineType</code> to use</p></dd><dt class="param">appName</dt><dd class="cmt"><p>an arbitrary name of the calling application</p></dd><dt class="param">autoAddHistory</dt><dd class="cmt"><p>whether lines read by the function should
+                      automatically be added to the history. If this
+                      parameter is <code>false</code>, then the caller
                       is responsible for adding lines to the history.
-</p></dd><dt>returns</dt><dd class="cmt"><p>the appropriate <tt>Readline</tt> implementation . 
+</p></dd><dt>returns</dt><dd class="cmt"><p>the appropriate <code>Readline</code> implementation.
 </p></dd></dl>
             
             
@@ -354,6 +352,30 @@ there are no more references to the object .</p><p>The details of when and if th
         </div><div class="block">
           definition classes: AnyRef
         </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.readline.Readline#findReadline">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">findReadline</span><span class="params">(<span name="libs">libs: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>, <span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>, <span name="autoAddHistory">autoAddHistory: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="default">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Given a list of <code>Readline</code> types, find and return the first one
+that loads.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Given a list of <code>Readline</code> types, find and return the first one
+that loads.
+</p></div><dl class="paramcmts block"><dt class="param">libs</dt><dd class="cmt"><p>list of readline library types to try, in order</p></dd><dt class="param">appName</dt><dd class="cmt"><p>an arbitrary name of the calling application</p></dd><dt class="param">autoAddHistory</dt><dd class="cmt"><p>whether lines read by the function should
+                      automatically be added to the history. If this
+                      parameter is <code>false</code>, then the caller
+                      is responsible for adding lines to the history.
+</p></dd><dt>returns</dt><dd class="cmt"><p>the loaded implementation, or <code>None</code>.
+</p></dd></dl>
             
             
             

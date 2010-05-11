@@ -45,12 +45,12 @@ println(file.split) // prints: List(/tmp, foo, bar)
 
         <div id="mbrsel">
           <div id="ancestors">
-                <h3>Inherited</h3>
+                <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
                 <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <h3>Visibility</h3>
+            <span class="filtertype">Visibility</span>
             <ol><li class="public in">Public</li><li class="all out">All</li></ol>
           </div>
         </div>
@@ -250,6 +250,44 @@ part of compilation it is not possible to check whether the contents of the list
         </div><div class="block">
           definition classes: AnyRef
         </div>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#copyTo">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyTo</span><span class="params">(<span name="target">target: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Copy the file to a target directory or file .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Copy the file to a target directory or file . 
+</p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
+</p></dd><dt>returns</dt><dd class="cmt"><p>the target file
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#copyTo">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">copyTo</span><span class="params">(<span name="target">target: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">Copy the file to a target directory or file .</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Copy the file to a target directory or file . 
+</p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
+</p></dd><dt>returns</dt><dd class="cmt"><p>the target file
+</p></dd></dl>
             
             
             
@@ -510,6 +548,28 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#listRecursively">
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol">
+        <span class="name">listRecursively</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.io.File">File</span>]</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">List a directory recursively, returning <code>File</code> objects for each file
+(and subdirectory) found.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>List a directory recursively, returning <code>File</code> objects for each file
+(and subdirectory) found. This method does lazy evaluation, instead
+of calculating everything up-front, as <code>walk()</code> does.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a generator (iterator) of <code>File</code> objects for everything under
+        the directory.
+</p></dd></dl>
+            
+            
+            
+            
+          </div>
+          
     </li><li visbl="pub" name="scala.AnyRef#ne">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -745,26 +805,26 @@ will throw an exception.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Directory tree generator, adapted from Python's <tt>os .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Directory tree generator, adapted from Python's <tt>os . walk()</tt>
-function.</p><p>For each directory in the directory tree rooted at this object
+            <p class="shortcomment cmt">Directory tree lister, adapted from Python's <code>os.walk()</code> function.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Directory tree lister, adapted from Python's <code>os.walk()</code> function.
+NOTE: This function generates the entire directory tree in memory,
+before returning. If you want a lazy generator, with optional filtering,
+use the <code>listRecursively()</code> method.</p><p>For each directory in the directory tree rooted at this object
 (including the directory itself, but excluding '.' and '..'), yields
-a 3-tuple</p><p><blockquote>dirpath, dirnames, filenames</blockquote></p><p><i>dirpath</i> is a string, the path to the directory.
-<i>dirnames</i> is a list of the names of the subdirectories in
-<i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
-of the names of the non-directory files in <i>dirpath</i>. Note that
-the names in the lists are just names, with no path components. To
-get a full path (which begins with this directory) to a file or
-directory in <i>dirpath</i>, use
-<tt>dirpath + java.io.fileSeparator + name</tt>, or use
-<tt>grizzled.file.util.joinPath()</tt>.</p><p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
-generated before the triples for any of its subdirectories
-(directories are generated top down). If <tt>topdown</tt> is
-<tt>false</tt>, the triple for a directory is generated after the
-triples for all of its subdirectories (directories are generated
-bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!
-</p></div><dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><tt>true</tt> to do a top-down traversal, <tt>false</tt>
-               otherwise . 
+a 3-tuple.</p><pre>
+dirpath, dirnames, filenames
+</pre><p><code>dirpath</code> is a string, the path to the directory. <code>dirnames</code>is a
+list of the names of the subdirectories in <code>dirpath</code> (excluding '.'
+and '..'). <code>filenames</code> is a list of the names of the non-directory
+files in <code>dirpath</code>. Note that the names in the lists are just names,
+with no path components. To get a full path (which begins with this
+directory) to a file or directory in <code>dirpath</code>, use <code>dirpath +
+java.io.fileSeparator + name</code>, or use<code>grizzled.file.util.joinPath()</code>.</p><p>If <code>topdown</code> is <code>true</code>, the triplet for a directory is generated
+before the triplets for any of its subdirectories (directories are
+generated top down). If <code>topdown</code> is <code>false</code>, the triplet for a
+directory is generated after the triples for all of its
+subdirectories (directories are generated bottom up).</p><p>**WARNING!** This method does not grok symbolic links!
+</p></div><dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code> otherwise.
 </p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above . 
 </p></dd></dl>
             
