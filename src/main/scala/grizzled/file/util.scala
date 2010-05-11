@@ -693,6 +693,17 @@ object util
         joinPath(fileSeparator, pieces.toList)
 
     /**
+     * Join components of a path together, using the file separator of the
+     * currently running system
+     *
+     * @param pieces  path pieces
+     *
+     * @return a composite path
+     */
+    def joinPath(pieces: File*): File =
+        new File(joinPath(fileSeparator, pieces.toList.map(_.getName)))
+
+    /**
      * Determine the temporary directory to use.
      *
      * @return the temporary directory
@@ -877,24 +888,38 @@ object util
      * @return the full path of the target file
      */
     def copyFile(sourcePath: String, targetPath: String): String =
+        copyFile(new File(sourcePath), new File(targetPath)).getPath
+
+    /**
+     * Copy a source file to a target file, using binary copying. The source
+     * file must be a file. The target path can be a file or a directory; if
+     * it is a directory, the target file will have the same base name as
+     * as the source file.
+     *
+     * @param sourcePath  path to the source file
+     * @param targetPath  path to the target file or directory
+     *
+     * @return the full path of the target file
+     */
+    def copyFile(source: File, target: File): File =
     {
         import java.io.{InputStream, OutputStream,
                         BufferedInputStream, BufferedOutputStream,
                         FileInputStream, FileOutputStream}
 
-        val target = 
-            if (new File(targetPath).isDirectory())
-                joinPath(targetPath, basename(sourcePath))
+        val targetFile = 
+            if (target.isDirectory())
+                new File(joinPath(target.getPath, basename(source.getName)))
             else
-                targetPath
+                target
 
-        val in = new BufferedInputStream(new FileInputStream(sourcePath))
-        val out = new BufferedOutputStream(new FileOutputStream(target))
+        val in = new BufferedInputStream(new FileInputStream(source))
+        val out = new BufferedOutputStream(new FileOutputStream(targetFile))
 
         try
         {
             in.copyTo(out)
-            target
+            targetFile
         }
 
         finally
@@ -911,28 +936,35 @@ object util
      * @param sourceDir  the source directory
      * @param targetDir  the target directory
      */
-    def copyTree(sourceDir: String, targetDir: String)
+    def copyTree(sourceDir: String, targetDir: String): Unit =
+        copyTree(new File(sourceDir), new File(targetDir))
+
+    /**
+     * Recursively copy a source directory and its contents to a target
+     * directory. Creates the target directory if it does not exist.
+     *
+     * @param sourceDir  the source directory
+     * @param targetDir  the target directory
+     */
+    def copyTree(sourceDir: File, targetDir: File): Unit =
     {
-        val fSource = new File(sourceDir)
+        if (! sourceDir.exists())
+            throw new FileDoesNotExistException(sourceDir.getPath)
 
-        if (! fSource.exists())
-            throw new FileDoesNotExistException(sourceDir)
-
-        if (! fSource.isDirectory)
-            throw new IOException("Source directory \"" + sourceDir +
+        if (! sourceDir.isDirectory)
+            throw new IOException("Source directory \"" + sourceDir.getPath +
                                   "\" is not a directory.")
 
-        val files = fSource.list
-        new File(targetDir).mkdirs
-        for (f <- files)
-        {
-            val sourceFilename = sourceDir + fileSeparator + f
-            val targetFilename = targetDir + fileSeparator + f
+        val files = sourceDir.list.map(f => (new File(sourceDir, f),
+                                             new File(targetDir, f)))
 
-            if (new File(sourceFilename).isDirectory)
-                copyTree(sourceFilename, targetFilename)
+        targetDir.mkdirs
+        for ((src, target) <- files)
+        {
+            if (src.isDirectory)
+                copyTree(src, target)
             else
-                copyFile(sourceFilename, targetFilename)
+                copyFile(src, target)
         }
     }
 
@@ -942,23 +974,28 @@ object util
      *
      * @param dir  The directory
      */
-    def deleteTree(dir: String)
+    def deleteTree(dir: String): Unit = deleteTree(new File(dir))
+
+    /**
+     * Recursively remove a directory tree. This function is conceptually
+     * equivalent to <tt>rm -r</tt> on a Unix system.
+     *
+     * @param dir  The directory
+     */
+    def deleteTree(dir: File): Unit =
     {
-        val fDir = new File(dir)
-        if (! new File(dir).isDirectory)
+        if (! dir.isDirectory)
             throw new IOException("\"" + dir + "\" is not a directory.")
 
-        for (name <- fDir.list)
+        for (f <- dir.listFiles)
         {
-            val fullPath = dir + fileSeparator + name
-            val f = new File(fullPath)
             if (f.isDirectory)
-                deleteTree(fullPath)
+                deleteTree(f)
             else
                 f.delete()
         }
 
-        fDir.delete()
+        dir.delete()
     }
 
     /**

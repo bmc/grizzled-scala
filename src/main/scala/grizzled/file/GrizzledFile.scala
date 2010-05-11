@@ -86,7 +86,7 @@ final class GrizzledFile(val file: File)
      * Recursively remove the directory specified by this object. This
      * method is conceptually equivalent to <tt>rm -r</tt> on a Unix system.
      */
-    def deleteRecursively(): Unit = util.deleteTree(file.getPath)
+    def deleteRecursively(): Unit = util.deleteTree(file)
 
     /**
      * Split this file's pathname into the directory name, basename, and
