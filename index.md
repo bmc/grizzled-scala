@@ -46,7 +46,7 @@ can also get certain build tools to download it for you.
 If you're using [Maven][], you can get Grizzled Scala from the
 [*clapper.org* Maven Repository][]. The relevant pieces of information are:
 
-* Group ID: `clapper.org`
+* Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala`
 * Version: `0.5.1`
 * Type: `jar`
