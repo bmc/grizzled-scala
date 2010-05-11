@@ -47,17 +47,17 @@ If you're using [Maven][], you can get Grizzled Scala from the
 [*clapper.org* Maven Repository][]. The relevant pieces of information are:
 
 * Group ID: `org.clapper`
-* Artifact ID: `grizzled-scala`
-* Version: `0.5.1`
+* Artifact ID: `grizzled-scala`*scala-version*
+* Version: `0.6`
 * Type: `jar`
 * Repository: `http://maven.clapper.org/`
 
-Here's a sample Maven POM "dependency" snippet:
+Substitute either "2.8.0.RC1" or "2.8.0.RC2" for *scala-version*. For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala</artifactId>
-      <version>0.5.1</version>
+      <artifactId>grizzled-scala_2.8.0.RC2</artifactId>
+      <version>0.6</version>
     </dependency>
 
 ### Using with SBT
@@ -68,7 +68,13 @@ your `project/build/` directory):
 
     val orgClapperRepo = "clapper.org Maven Repository" at
         "http://maven.clapper.org"
-    val grizzled = "org.clapper" % "grizzled-scala" % "0.5.1"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "0.6"
+
+**NOTE:** The first doubled percent is *not* a typo. It tells SBT to treat
+Grizzled-SLF4J as a cross-built library and automatically inserts the Scala
+version you're using into the artifact ID. It will *only* work if you are
+building with Scala 2.7.7 or Scala 2.8.0.RC1. See the
+[SBT cross-building][] page for details.
 
 ## Source Code Repository
 
@@ -133,3 +139,4 @@ request. Along with any patch you send:
 [SBT]: http://code.google.com/p/simple-build-tool
 [bmc@clapper.org]: mailto:bmc@clapper.org
 [changelog]: CHANGELOG.html
+[SBT cross-building]: http://code.google.com/p/simple-build-tool/wiki/CrossBuild
