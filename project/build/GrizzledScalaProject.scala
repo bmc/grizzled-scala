@@ -59,13 +59,13 @@ class GrizzledScalaProject(info: ProjectInfo)
     override def compileOptions = Unchecked :: 
         (super.compileOptions ++ compileOptions("-P:continuations:enable"))
 
-    // Specialization causes problems with inner classes. Disabling it, for
-    // now, allows the tests to run. It can be re-enabled when compiler
-    // bugs are fixed.
-/*
+    // Specialization causes problems with inner classes in 2.8.0.RC1.
+    // Disabling it, for now, allows the tests to run under that platform.
+    // It can be re-enabled when support for 2.8.0.RC1 is removed from this
+    // API.
+
     override def testCompileOptions = super.testCompileOptions ++
         Seq(CompileOption("-no-specialization"))
-*/
 
     // 2.8 and xsbt: Override documentOptions, because they're for 2.7, not
     // 2.8, and they've changed.
