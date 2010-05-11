@@ -1,5 +1,9 @@
 * Added `findReadline()` convenience method to `grizzled.readline.Readline`.
   This method attempts to find and load a suitable Readline library.
-* Updated to build against Scala 2.8.0.RC2
+* Updated to build against Scala 2.8.0.RC2, as well as Scala 2.8.0.RC1.
+* Cleaned up `grizzled.file.util.deleteTree` method.
+* Added versions of `grizzled.file.util.copyFile`, 
+  `grizzled.file.util.copyTree`, and `grizzled.file.util.deleteTree` that
+  take `java.io.File` objects.
 * Maven artifact now includes Scala version (e.g., `grizzled-scala_2.8.0.RC1`,
   instead of `grizzled-scala`).
