@@ -138,7 +138,7 @@ class GrizzledScalaProject(info: ProjectInfo)
     val newReleaseToolsRepository = "Scala Tools Repository" at
         "http://www.scala-tools.org/repo-snapshots"
     val scalatest = "org.scalatest" % "scalatest" %
-        "1.0.1-for-scala-2.8.0.RC1-SNAPSHOT"
+        "1.2-for-scala-2.8.0.RC2-SNAPSHOT"
 
     val rhino = "rhino" % "js" % "1.7R2"
 
