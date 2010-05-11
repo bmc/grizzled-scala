@@ -1,3 +1,7 @@
+---
+title: Change log for Grizzled Scala
+layout: default
+---
 
 Version 0.6:
 
