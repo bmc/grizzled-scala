@@ -55,15 +55,17 @@ class GrizzledScalaProject(info: ProjectInfo)
     override def artifactID = "grizzled-scala"
 
     val continuationsPlugin = compilerPlugin("org.scala-lang.plugins" %
-                                             "continuations" % "2.8.0.RC1")
+                                             "continuations" % "2.8.0.RC2")
     override def compileOptions = Unchecked :: 
         (super.compileOptions ++ compileOptions("-P:continuations:enable"))
 
     // Specialization causes problems with inner classes. Disabling it, for
     // now, allows the tests to run. It can be re-enabled when compiler
     // bugs are fixed.
+/*
     override def testCompileOptions = super.testCompileOptions ++
         Seq(CompileOption("-no-specialization"))
+*/
 
     // 2.8 and xsbt: Override documentOptions, because they're for 2.7, not
     // 2.8, and they've changed.
