@@ -118,7 +118,9 @@ class BackslashContinuedLineIterator(val source: Iterator[String])
                 line
             }
 
-        def readNext: String =
+        import scala.annotation.tailrec
+
+        @tailrec def readNext: String =
         {
             val line = source.next.chomp // chomp() is in GrizzledString
 

@@ -360,21 +360,24 @@ object Includer
     {
         import java.io.{File, FileWriter}
 
-        val includer =
+        def sourceFromFile(s: String) = Source.fromFile(new File(s))
+
+        val source = 
             try
             {
-                Includer(Source.fromURI(new URI(pathOrURI)))
+                Source.fromURI(new URI(pathOrURI))
             }
             catch
             {
-                case _: URISyntaxException =>
-                    Includer(Source.fromFile(new File(pathOrURI)))
+                case _: URISyntaxException       => sourceFromFile(pathOrURI)
+                case _: IllegalArgumentException => sourceFromFile(pathOrURI)
             }
+
+        val includer = Includer(source)
         val fileOut = File.createTempFile(tempPrefix, tempSuffix)
         fileOut.deleteOnExit
         val out = new FileWriter(fileOut)
-        for (line <- includer)
-            out.write(line)
+        includer.foreach(s => out.write(s + "\n"))
         out.close
         fileOut.getAbsolutePath
     }

@@ -161,7 +161,7 @@ class IOTest extends GrizzledFunSuite
         }
     }
 
-    test("useThenClose")
+    test("withCloseable")
     {
         import java.io.{FileOutputStream, File}
         import java.nio.channels.Channels
@@ -171,11 +171,10 @@ class IOTest extends GrizzledFunSuite
         temp.deleteOnExit
 
         val fs = new FileOutputStream(temp)
-        val chan = Channels.newChannel(fs)
-        assert(chan.isOpen)
-        expect(false, "useThenClose")
+        expect(false, "withCloseable")
         {
-            useThenClose(chan) {}
+            val chan = Channels.newChannel(fs)
+            withCloseable(chan) { chan => assert(chan.isOpen) }
             chan.isOpen
         }
     }
