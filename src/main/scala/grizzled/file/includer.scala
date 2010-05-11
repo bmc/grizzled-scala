@@ -359,6 +359,7 @@ object Includer
                    tempSuffix: String): String =
     {
         import java.io.{File, FileWriter}
+        import grizzled.io.util.withCloseable
 
         def sourceFromFile(s: String) = Source.fromFile(new File(s))
 
@@ -376,9 +377,12 @@ object Includer
         val includer = Includer(source)
         val fileOut = File.createTempFile(tempPrefix, tempSuffix)
         fileOut.deleteOnExit
-        val out = new FileWriter(fileOut)
-        includer.foreach(s => out.write(s + "\n"))
-        out.close
+        withCloseable(new FileWriter(fileOut))
+        {
+            out =>
+
+            includer.foreach(s => out.write(s + "\n"))
+        }
         fileOut.getAbsolutePath
     }
 }

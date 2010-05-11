@@ -254,4 +254,22 @@ final class GrizzledFile(val file: File)
         assert (file.isDirectory)
         file.listFiles.length == 0
     }
+
+    /**
+     * Copy the file to a target directory or file.
+     *
+     * @param target  path to the target file or directory
+     *
+     * @return the target file
+     */
+    def copyTo(target: String): File = copyTo(new File(target))
+
+    /**
+     * Copy the file to a target directory or file.
+     *
+     * @param target  path to the target file or directory
+     *
+     * @return the target file
+     */
+    def copyTo(target: File): File = util.copyFile(file, target)
 }

@@ -896,8 +896,8 @@ object util
      * it is a directory, the target file will have the same base name as
      * as the source file.
      *
-     * @param sourcePath  path to the source file
-     * @param targetPath  path to the target file or directory
+     * @param source  path to the source file
+     * @param target  path to the target file or directory
      *
      * @return the full path of the target file
      */
