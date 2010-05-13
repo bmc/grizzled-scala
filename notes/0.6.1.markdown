@@ -1,0 +1,8 @@
+* Added `grizzled.io.GrizzledSource`, which extends `scala.io.Source` with
+  mixin methods.
+* Deprecated `grizzled.string.implicits` and `grizzled.file.implicits`
+  modules, in favor of more granular imports. See the
+  `grizzled.file.GrizzledFile`, `grizzled.string.GrizzledString` and
+  `grizzled.string.GrizzledChar` companion objects for details.
+* Deprecated the string-to-boolean implicit function, in favor of the
+  more explicit `grizzled.string.util.stringToBoolean()` method.

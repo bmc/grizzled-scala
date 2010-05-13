@@ -66,7 +66,7 @@ class StringTest extends GrizzledFunSuite
         {
             expect(expected, "\"" + s + "\" -> " + expected.toString) 
             {
-                val b: Boolean = s
+                val b: Boolean = util.stringToBoolean(s)
                 b
             }
         }

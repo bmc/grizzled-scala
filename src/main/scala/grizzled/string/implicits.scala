@@ -42,6 +42,9 @@ import scala.collection.immutable.{StringOps, StringLike}
 
 /**
  * Miscellaneous implicit string conversions.
+ *
+ * @deprecated. Import `grizzled.string.GrizzledChar._` and/or
+ *              `grizzled.string.GrizzledString._`
  */
 object implicits
 {
@@ -64,28 +67,10 @@ object implicits
      * @return a boolean value
      *
      * @throws IllegalArgumentException if <tt>s</tt> cannot be parsed
+     *
+     * @deprecated Use `grizzled.string.util.stringToBoolean()`
      */
-    implicit def bool(s: String): Boolean =
-        s.trim.toLowerCase match
-        {
-            case "true"  => true
-            case "t"     => true
-            case "yes"   => true
-            case "y"     => true
-            case "1"     => true
-            case "on"    => true
-
-            case "false" => false
-            case "f"     => false
-            case "no"    => false
-            case "n"     => false
-            case "0"     => false
-            case "off"   => false
-
-            case _       => 
-                throw new IllegalArgumentException("Can't convert string \"" +
-                                                   s + "\" to boolean.")
-        }
+    implicit def bool(s: String): Boolean = util.stringToBoolean(s)
 
     /**
      * Implicit function to convert from a Java string to a

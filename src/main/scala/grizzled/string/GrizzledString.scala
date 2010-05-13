@@ -271,3 +271,59 @@ final class GrizzledString(val string: String)
         translate mkString ""
     }
 }
+
+/**
+ * Companion object for `GrizzledString`. To get implicit functions that
+ * define automatic conversions between `GrizzledString` and `String`,
+ * import this module:
+ *
+ * {{{
+ * import grizzled.io.GrizzledString._
+ * }}}
+ */
+object GrizzledString
+{
+    import scala.collection.immutable.{StringOps, StringLike}
+
+    /**
+     * Implicit function to convert from a Java string to a
+     * <tt>GrizzledString</tt>.
+     *
+     * @param s  the Java string
+     *
+     * @return the <tt>GrizzledString</tt>
+     */
+    implicit def JavaString_GrizzledString(s: String) = new GrizzledString(s)
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledString</tt> to a
+     * Java string.
+     *
+     * @param gs  the <tt>GrizzledString</tt>
+     *
+     * @return the Java string
+     */
+    implicit def GrizzledString_JavaString(gs: GrizzledString) = gs.string
+
+    /**
+     * Implicit function to convert from a Scala string object to a
+     * <tt>GrizzledString</tt>.
+     *
+     * @param s  a Scala string
+     *
+     * @return the <tt>GrizzledString</tt>
+     */
+    implicit def ScalaString_GrizzledString(rs: StringLike[String]) =
+        new GrizzledString(rs.toString)
+
+    /**
+     * Implicit function to convert from <tt>GrizzledString</tt> to a
+     * Scala <tt>RichString</tt>.
+     *
+     * @param s  the <tt>GrizzledString</tt>
+     *
+     * @return the Scala string
+     */
+    implicit def GrizzledString_ScalaString(gs: GrizzledString) =
+        new StringOps(gs.string)
+}

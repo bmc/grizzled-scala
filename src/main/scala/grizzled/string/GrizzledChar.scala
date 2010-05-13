@@ -86,3 +86,81 @@ final class GrizzledChar(val character: Char)
         }
     }
 }
+
+/**
+ * Companion object for `GrizzledChar`. To get implicit functions that
+ * define automatic conversions between `GrizzledChar` and `Char`,
+ * import this module:
+ *
+ * {{{
+ * import grizzled.io.GrizzledChar._
+ * }}}
+ */
+object GrizzledChar
+{
+    import scala.runtime.RichChar
+
+    /**
+     * Implicit function to convert from a character to a <tt>GrizzledChar</tt>.
+     *
+     * @param s  the character
+     *
+     * @return the <tt>GrizzledChar</tt>
+     */
+    implicit def Char_GrizzledChar(c: Char) = new GrizzledChar(c)
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledChar</tt> to a
+     * character.
+     *
+     * @param gc  the <tt>GrizzledChar</tt>
+     *
+     * @return the character
+     */
+    implicit def GrizzledChar_Char(gc: GrizzledChar) = gc.character
+
+    /**
+     * Implicit function to convert from a Java <tt>Character</tt> object
+     * to a <tt>GrizzledChar</tt>.
+     *
+     * @param s  the <tt>Character</tt> object
+     *
+     * @return the <tt>GrizzledChar</tt>
+     */
+    implicit def JavaCharacter_GrizzledChar(c: java.lang.Character) =
+        new GrizzledChar(c.charValue)
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledChar</tt> to a
+     * Java <tt>Character</tt> object.
+     *
+     * @param gc  the <tt>GrizzledChar</tt>
+     *
+     * @return the <tt>Character</tt> object
+     */
+    implicit def GrizzledChar_JavaCharacter(c: GrizzledChar) =
+        new java.lang.Character(c.character)
+
+
+    /**
+     * Implicit function to convert from a Scala <tt>RichChar</tt> object
+     * to a <tt>GrizzledChar</tt>.
+     *
+     * @param s  the <tt>RichChar</tt> object
+     *
+     * @return the <tt>GrizzledChar</tt>
+     */
+    implicit def RichChar_GrizzledChar(c: RichChar) =
+        new GrizzledChar(c.self.asInstanceOf[Char])
+
+    /**
+     * Implicit function to convert from a <tt>GrizzledChar</tt> to a
+     * Scala <tt>RichChar</tt> object.
+     *
+     * @param gc  the <tt>GrizzledChar</tt>
+     *
+     * @return the <tt>RichChar</tt> object
+     */
+    implicit def GrizzledChar_RichChar(c: GrizzledChar) =
+        new RichChar(c.character)
+}

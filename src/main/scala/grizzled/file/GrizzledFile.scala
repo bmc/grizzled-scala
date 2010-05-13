@@ -43,38 +43,38 @@ import scala.util.continuations._
 import java.io.File
 
 /**
- * A wrapper for <tt>java.io.File</tt> that provides additional methods.
+ * A wrapper for `java.io.File` that provides additional methods.
  * By importing the implicit conversion functions, you can use the methods
- * in this class transparently from a <tt>java.io.File</tt> object.
+ * in this class transparently from a `java.io.File` object.
  *
- * <blockquote><pre>
- * import grizzled.file.implicits._
+ * {{{
+ * import grizzled.file.GrizzledFile._
  *
  * val file = new File("/tmp/foo/bar")
  * println(file.split) // prints: List(/tmp, foo, bar)
- * </pre></blockquote>
+ * }}}
  */
 final class GrizzledFile(val file: File)
 {
     /**
      * Get the directory name of the file.
      *
-     * @return the directory portion, as a <tt>File</tt>.
+     * @return the directory portion, as a `File`.
      */
     def dirname = new File(util.dirname(file.getPath))
 
     /**
      * Get the basename (file name only) part of a path.
      *
-     * @return the file name portion, as a <tt>File</tt>
+     * @return the file name portion, as a `File`
      */
     def basename = new File(util.basename(file.getPath))
 
     /**
      * Split the file's path into directory (dirname) and file (basename)
-     * components. Analogous to Python's <tt>os.path.pathsplit()</tt> function.
+     * components. Analogous to Python's `os.path.pathsplit()` function.
      *
-     * @return a (dirname, basename) tuple of <tt>File</tt> objects.
+     * @return a (dirname, basename) tuple of `File` objects.
      */
     def dirnameBasename: (File, File) =
     {
@@ -84,7 +84,7 @@ final class GrizzledFile(val file: File)
 
     /**
      * Recursively remove the directory specified by this object. This
-     * method is conceptually equivalent to <tt>rm -r</tt> on a Unix system.
+     * method is conceptually equivalent to `rm -r` on a Unix system.
      */
     def deleteRecursively(): Unit = util.deleteTree(file)
 
@@ -272,4 +272,21 @@ final class GrizzledFile(val file: File)
      * @return the target file
      */
     def copyTo(target: File): File = util.copyFile(file, target)
+}
+
+/**
+ * Companion object for `GrizzledFile`. To get implicit functions that
+ * define automatic conversions between `GrizzledFile` and `java.io.File`,
+ * import this module:
+ *
+ * {{{
+ * import grizzled.file.GrizzledFile._
+ * }}}
+ */
+object GrizzledFile
+{
+    implicit def javaIoFileToGrizzledFile(f: File): GrizzledFile =
+        new GrizzledFile(f)
+
+    implicit def grizzledFileToJavaIoFile(gf: GrizzledFile): File = gf.file
 }

@@ -1,10 +1,8 @@
-/*
-  ---------------------------------------------------------------------------
+/*---------------------------------------------------------------------------*\
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009, Brian M. Clapper
-  All rights reserved.
+  Copyright (c) 2009-2010 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -32,22 +30,51 @@
   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  ---------------------------------------------------------------------------
-*/
+\*---------------------------------------------------------------------------*/
 
-package grizzled.file
-
-import java.io.File
+import org.scalatest.FunSuite
+import grizzled.io.GrizzledSource._
+import scala.io.Source
 
 /**
- * Miscellaneous implicit file conversions.
- *
- * @deprecated Please import `grizzled.file.GrizzledFile._`, instead.
+ * Tests the grizzled.file.GrizzledSource functions.
  */
-object implicits
+class GrizzledSourceTest extends GrizzledFunSuite
 {
-    implicit def javaIoFileToGrizzledFile(f: File): GrizzledFile =
-        new GrizzledFile(f)
+    test("First nonblank line")
+    {
+        val data = List(("\n\n\n\nfoo\n\n\n", Some("foo")),
+                        ("\n\n\n\n\n\n\n\n", None),
+                        ("", None),
+                        ("foobar", Some("foobar")) )
 
-    implicit def grizzledFileToJavaIoFile(gf: GrizzledFile): File = gf.file
+        for((input, expected) <- data)
+            expect(expected, 
+                   "firstNonblankLine(\"" + input + "\")")
+            { 
+                val source = Source.fromString(input)
+                source.firstNonblankLine
+            }
+    }
+
+    test("linesBetween")
+    {
+        val data = List(
+            ("{{\na\n}}\n", "{{", "}}", List("a")),
+            ("*\nfoo\nbar\nbaz\n*\n", "*", "*", List("foo", "bar", "baz")),
+            ("{{\n}}\n", "{{", "}}", Nil),
+            ("{{\n\n}}\n", "{{", "}}", List("")),
+            ("{{\n", "{{", "}}", Nil),
+            ("\n\n\n", "{{", "}}", Nil),
+            ("\n\n\n}}", "{{", "}}", Nil)
+        )
+
+        for((input, start, end, expected) <- data)
+            expect(expected, 
+                   "linesBetween(\"" + input + "\")")
+            { 
+                val source = Source.fromString(input)
+                source.linesBetween(start, end).toList
+            }
+    }
 }

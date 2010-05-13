@@ -44,6 +44,49 @@ import scala.annotation.tailrec
  */
 object util
 {
+    /**
+     * An implicit conversion that handles creating a Boolean from a string
+     * value. This implicit definition, when in scope, allows code like
+     * the following:
+     *
+     * <blockquote><pre>
+     * val flag: Boolean = "true" // implicitly converts "true" to <tt>true</tt>
+     * </pre></blockquote>
+     *
+     * This method currently understands the following strings (in any mixture
+     * of upper and lower case). It is currently English-specific.
+     *
+     * <blockquote>true, t, yes, y, 1<br>false, f, no, n, 0</blockquote>
+     *
+     * @param s  the string to convert
+     *
+     * @return a boolean value
+     *
+     * @throws IllegalArgumentException if <tt>s</tt> cannot be parsed
+
+     */
+    def stringToBoolean(s: String): Boolean =
+        s.trim.toLowerCase match
+        {
+            case "true"  => true
+            case "t"     => true
+            case "yes"   => true
+            case "y"     => true
+            case "1"     => true
+            case "on"    => true
+
+            case "false" => false
+            case "f"     => false
+            case "no"    => false
+            case "n"     => false
+            case "0"     => false
+            case "off"   => false
+
+            case _       => 
+                throw new IllegalArgumentException("Can't convert string \"" +
+                                                   s + "\" to boolean.")
+        }
+
     private lazy val QUOTED_REGEX = """(["'])(?:\\?+.)*?\1""".r
     private lazy val WHITE_SPACE_REGEX = """\s+""".r
     private lazy val QUOTE_SET = Set('\'', '"')

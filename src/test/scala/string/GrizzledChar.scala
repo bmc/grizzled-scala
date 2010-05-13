@@ -30,7 +30,7 @@
 \*---------------------------------------------------------------------------*/
 
 import org.scalatest.FunSuite
-import grizzled.string.implicits._
+import grizzled.string.GrizzledChar._
 
 /**
  * Tests the GrizzledChar class.
