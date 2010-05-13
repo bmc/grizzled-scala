@@ -46,7 +46,7 @@ package grizzled.config
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
-import grizzled.string.implicits._
+import grizzled.string.GrizzledString._
 
 import scala.annotation.tailrec
 import scala.collection.mutable.{Map => MutableMap}
@@ -605,14 +605,14 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      */
     def getBoolean(sectionName: String, optionName: String): Option[Boolean] =
     {
-        import grizzled.string.implicits._
+        import grizzled.string.util._
 
         get(sectionName, optionName) match
         {
             case Some(value) =>
                 try
                 {
-                    val b: Boolean = value
+                    val b: Boolean = stringToBoolean(value)
                     Some(b)
                 }
 

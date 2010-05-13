@@ -153,7 +153,7 @@ private[readline] class EditLineImpl(appName: String,
     {
         def showCompletions(tokens: java.lang.Iterable[String]) =
         {
-            import grizzled.collection.GrizzledIterable.Implicits._
+            import grizzled.collection.GrizzledIterable._
             import scala.collection.JavaConversions._
 
             val maxTemp = editline.getMaxShownCompletions
@@ -173,7 +173,7 @@ private[readline] class EditLineImpl(appName: String,
         def complete(token: String, line: String, cursor: Int): Array[String] =
         {
             import grizzled.parsing.StringToken
-            import grizzled.string.implicits._
+            import grizzled.string.GrizzledString._
             import scala.collection.mutable.ArrayBuffer
 
             val completions = ArrayBuffer.empty[String]

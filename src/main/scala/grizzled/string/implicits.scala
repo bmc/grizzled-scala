@@ -42,10 +42,8 @@ import scala.collection.immutable.{StringOps, StringLike}
 
 /**
  * Miscellaneous implicit string conversions.
- *
- * @deprecated. Import `grizzled.string.GrizzledChar._` and/or
- *              `grizzled.string.GrizzledString._`
  */
+@deprecated("Use GrizzledChar._ or GrizzledString._")
 object implicits
 {
     /**
@@ -67,9 +65,8 @@ object implicits
      * @return a boolean value
      *
      * @throws IllegalArgumentException if <tt>s</tt> cannot be parsed
-     *
-     * @deprecated Use `grizzled.string.util.stringToBoolean()`
      */
+    @deprecated("Use grizzled.string.util.stringToBoolean(), instead")
     implicit def bool(s: String): Boolean = util.stringToBoolean(s)
 
     /**

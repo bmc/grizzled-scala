@@ -207,7 +207,7 @@ final class GrizzledString(val string: String)
     def translateMetachars: String =
     {
         import grizzled.parsing.{IteratorStream, Pushback}
-        import grizzled.string.implicits._
+        import grizzled.string.GrizzledChar._
 
         val stream = new IteratorStream[Char](string) with Pushback[Char]
 

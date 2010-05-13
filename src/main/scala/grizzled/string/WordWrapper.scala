@@ -119,7 +119,7 @@ class WordWrapper(val wrapWidth:    Int = 79,
     def wrap(s: String): String =
     {
         import scala.collection.mutable.ArrayBuffer
-        import implicits._
+        import GrizzledString._
 
         val indentString = indentChar.toString
         val prefixIndentChars = indentString * prefixLength

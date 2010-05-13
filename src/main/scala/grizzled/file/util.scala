@@ -40,6 +40,7 @@ package grizzled.file
 import scala.util.matching.Regex
 import scala.annotation.tailrec
 
+import grizzled.file.GrizzledFile._
 import grizzled.io.RichInputStream._
 import grizzled.io.RichReader._
 import grizzled.sys.os
@@ -761,7 +762,6 @@ object util
         @tailrec def create(tries: Int): File =
         {
             import java.lang.{Integer => JInt}
-            import grizzled.file.implicits._
 
             if (tries > maxTries)
                 throw new IOException("Failed to create temporary directory " +
@@ -793,8 +793,6 @@ object util
      */
     def withTemporaryDirectory[T](prefix: String)(action: File => T) =
     {
-        import grizzled.file.implicits._
-
         val temp = createTemporaryDirectory(prefix)
         temp.deleteOnExit
         try

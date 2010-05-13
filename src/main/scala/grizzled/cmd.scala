@@ -53,7 +53,7 @@ import grizzled.readline.{Readline,
                           Cursor,
                           History}
 
-import grizzled.string.implicits._
+import grizzled.string.GrizzledString._
 
 import scala.collection.mutable.Stack
 import scala.annotation.tailrec
@@ -693,7 +693,7 @@ abstract class CommandInterpreter(val appName: String,
         private def helpHelp =
         {
             import scala.collection.mutable.ArrayBuffer
-            import grizzled.collection.GrizzledLinearSeq.Implicits._
+            import grizzled.collection.GrizzledLinearSeq._
 
             // Help only.
 

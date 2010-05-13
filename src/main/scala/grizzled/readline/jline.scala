@@ -145,7 +145,7 @@ private[readline] class JLineImpl(appName: String,
         def complete(buf: String, cursor: Int, completions: JList): Int =
         {
             import grizzled.parsing.StringToken
-            import grizzled.string.implicits._
+            import grizzled.string.GrizzledString._
 
             def save(scalaCompletions: List[String]) =
             {

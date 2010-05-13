@@ -41,9 +41,8 @@ import java.io.File
 
 /**
  * Miscellaneous implicit file conversions.
- *
- * @deprecated Please import `grizzled.file.GrizzledFile._`, instead.
  */
+@deprecated("Please import grizzled.file.GrizzledFile._, instead.")
 object implicits
 {
     implicit def javaIoFileToGrizzledFile(f: File): GrizzledFile =

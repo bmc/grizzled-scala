@@ -63,9 +63,13 @@ class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
 
 object CollectionIterator
 {
+    implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
+        new CollectionIterator[T](c)
+
     /**
      * Implicit conversions specific to CollectionIterator
      */
+    @deprecated("Just import CollectionIterator._")
     object Implicits
     {
         implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
@@ -148,17 +152,23 @@ class GrizzledIterable[+T](protected val underlying: Iterable[T])
 
 object GrizzledIterable
 {
+    /**
+     * Convert a Scala Iterable object to a GrizzledIterable.
+     */
+    implicit def IterableToGrizzledIterable[T](it: Iterable[T]) =
+        new GrizzledIterable[T](it)
+
+    /**
+     * Convert GrizzledIterator a object to a Scala Iterable.
+     */
+    implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
+        it.realIterable
+
+    @deprecated("Just import GrizzledIterable._")
     object Implicits
     {
-        /**
-         * Convert a Scala Iterable object to a GrizzledIterable.
-         */
         implicit def IterableToGrizzledIterable[T](it: Iterable[T]) =
             new GrizzledIterable[T](it)
-
-        /**
-         * Convert GrizzledIterator a object to a Scala Iterable.
-         */
         implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
             it.realIterable
     }
@@ -209,23 +219,31 @@ class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T])
  */
 object GrizzledLinearSeq
 {
+    /**
+     * Convert a Scala Seq object to a GrizzledLinearSeq.
+     */
+    implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]) =
+        new GrizzledLinearSeq[T](seq)
+
+    /**
+     * Convert a Scala List object to a GrizzledLinearSeq.
+     */
+    implicit def listToGrizzledLinearSeq[T](list: List[T]) =
+        new GrizzledLinearSeq[T](list)
+
+    /**
+     * Convert GrizzledLinearSeq a object to a Scala Seq.
+     */
+    implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
+        seq.realSeq
+
+    @deprecated("Just import GrizzledLinearSeq._")
     object Implicits
     {
-        /**
-         * Convert a Scala Seq object to a GrizzledLinearSeq.
-         */
         implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]) =
             new GrizzledLinearSeq[T](seq)
-
-        /**
-         * Convert a Scala List object to a GrizzledLinearSeq.
-         */
         implicit def listToGrizzledLinearSeq[T](list: List[T]) =
             new GrizzledLinearSeq[T](list)
-
-        /**
-         * Convert GrizzledLinearSeq a object to a Scala Seq.
-         */
         implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
             seq.realSeq
     }
