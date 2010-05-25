@@ -86,7 +86,7 @@ class StringTest extends GrizzledFunSuite
         {
             intercept[IllegalArgumentException]
             {
-                val b: Boolean = s
+                val b: Boolean = util.stringToBoolean(s)
                 b
             }
         }

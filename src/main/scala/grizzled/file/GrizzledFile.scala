@@ -3,7 +3,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009, Brian M. Clapper
+  Copyright (c) 2009-2010, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -222,10 +222,19 @@ final class GrizzledFile(val file: File)
      * (and subdirectory) found. This method does lazy evaluation, instead
      * of calculating everything up-front, as `walk()` does.
      *
+     * If `topdown` is `true`, a directory is generated before the entries
+     * for any of its subdirectories (directories are generated top down).
+     * If `topdown` is `false`, a directory directory is generated after
+     * the entries for all of its subdirectories (directories are generated
+     * bottom up).
+     *
+     * @param topdown `true` to do a top-down traversal, `false` otherwise.
+     *
      * @return a generator (iterator) of `File` objects for everything under
      *         the directory.
      */
-    def listRecursively: Iterator[File] = generator[File]
+    def listRecursively(topdown: Boolean = true): Iterator[File] =
+    generator[File]
     {
         def doList(list: List[File]): Unit @cps[Iteration[File]] =
         {
@@ -234,8 +243,17 @@ final class GrizzledFile(val file: File)
                 case Nil => ()
 
                 case f :: tail =>
-                    generate(f)
-                    doList(if (f.isDirectory) f.listFiles.toList else Nil)
+                    if (topdown)
+                    {
+                        generate(f)
+                        doList(if (f.isDirectory) f.listFiles.toList else Nil)
+                    }
+                    else
+                    {
+                        doList(if (f.isDirectory) f.listFiles.toList else Nil)
+                        generate(f)
+                    }
+
                     doList(tail)
             }
         }

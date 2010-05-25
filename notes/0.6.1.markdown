@@ -6,3 +6,6 @@
   `grizzled.string.GrizzledChar` companion objects for details.
 * Deprecated the string-to-boolean implicit function, in favor of the
   more explicit `grizzled.string.util.stringToBoolean()` method.
+* Changed `GrizzledFile.listRecursively` to take an optional
+  `topdown` flag, indicating whether directory traversal should be top-down
+  or bottom-up.
