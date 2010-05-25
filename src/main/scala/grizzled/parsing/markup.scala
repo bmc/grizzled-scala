@@ -215,11 +215,11 @@ class TextileParser extends MarkupParser
      * does not contain HTML or BODY tags, so it is suitable for embedding in
      * existing HTML documents.
      *
-     * @param markdownSource  The <tt>Source</tt> from which to read the
-     *                        lines of Markdown
+     * @param source  source from which to read the lines of Textile
+     *
      * @return the formatted HTML
      */
-    def parseToHTML(markdownSource: Source): String =
+    def parseToHTML(source: Source): String =
     {
         val buf = new StringWriter
         val builder = new HtmlDocumentBuilder(buf)
@@ -228,7 +228,7 @@ class TextileParser extends MarkupParser
 
         val parser = new WTParser(new TextileLanguage)
         parser.setBuilder(builder)
-        parser.parse(markdownSource.getLines() mkString "\n")
+        parser.parse(source.getLines() mkString "\n")
         buf.toString
     }
 }
@@ -253,6 +253,6 @@ class MarkdownParser extends MarkupParser
     def parseToHTML(source: Source): String =
     {
         import com.tristanhunt.knockoff.DefaultDiscounter._
-        toXHTML(knockoff(source.getLines() mkString "\n")).toString
+        toXHTML(knockoff(source mkString "")).toString
     }
 }

@@ -51,7 +51,7 @@ class MarkdownTest extends GrizzledFunSuite
             ("__Test__",           "<p><strong>Test</strong></p>"),
             ("___Test___",         "<p><strong><em>Test</em></strong></p>"),
             ("***Test***",         "<p><strong><em>Test</em></strong></p>"),
-            ("abc\n===\n\ntest\n", "<h1>abc</h1><p>test</p>")
+            ("abc\n===\n\ntest",   "<h1>abc</h1><p>test</p>")
         )
 
         val parser = MarkupParser.getParser(MarkupType.Markdown)
