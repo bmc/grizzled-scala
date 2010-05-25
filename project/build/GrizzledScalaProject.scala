@@ -80,41 +80,8 @@ class GrizzledScalaProject(info: ProjectInfo)
     \* ---------------------------------------------------------------------- */
 
     // Override the default "package" action to make it dependent on "test"
-    // and "doc". Also, temporarily copy the showdown.js file into the
-    // resources directory.
-    override def packageAction = task
-    {
-        val resourceDir = mainResourcesPath / "grizzled"
-        val copiedShowdown = resourceDir / ShowdownJS
-
-        FileUtilities.createDirectory(resourceDir, log)
-        try
-        {
-            noisyCopy(ShowdownLocal, copiedShowdown)
-            super.packageAction.run
-        }
-
-        finally
-        {
-            for (path <- List(copiedShowdown, resourceDir, mainResourcesPath))
-            {
-                log.info("Deleting " + path.asFile)
-                path.asFile.delete
-            }
-        }
-    }
-    .dependsOn(test, doc)
-
-    override def updateAction = customUpdate dependsOn(super.updateAction)
-
-    lazy val customUpdate = task { doManualDownloads }
-
-    override def compileAction = postCompile dependsOn(super.compileAction)
-
-    lazy val postCompile = task { doPostCompile }
-
-    override def cleanLibAction = super.cleanLibAction dependsOn(localCleanLib)
-    lazy val localCleanLib = task { doLocalCleanLib }
+    // and "doc".
+    override def packageAction = super.packageAction.dependsOn(test, doc)
 
     /* ---------------------------------------------------------------------- *\
                                 Publishing
@@ -142,66 +109,16 @@ class GrizzledScalaProject(info: ProjectInfo)
     val scalatest = "org.scalatest" % "scalatest" %
         "1.2-for-scala-2.8.0.RC2-SNAPSHOT"
 
-    val rhino = "rhino" % "js" % "1.7R2"
+    val wikitext = "org.eclipse.mylyn.wikitext" % "wikitext.textile" %
+                   "0.9.4.I20090220-1600-e3x"
 
-    val ShowdownJS = "showdown.js"
-    val ShowdownURL = "http://attacklab.net/showdown/showdown-v0.9.zip"
-    val LocalLibDir = "local_lib"
-    val ShowdownLocal = LocalLibDir / ShowdownJS
-    val ShowdownClassdir = "target" / ("scala_" + buildScalaVersion) /
-                           "classes" / "grizzled" / ShowdownJS
+    val t_repo = "t_repo" at
+        "http://tristanhunt.com:8081/content/groups/public/"
+
+    val knockoff = "com.tristanhunt" %% "knockoff" % "0.7.1-11"
 
     /* ---------------------------------------------------------------------- *\
                           Private Helper Methods
     \* ---------------------------------------------------------------------- */
 
-    private def noisyCopy(source: Path, target: Path) =
-    {
-        log.info("Copying " + source + " to " + target)
-        FileUtilities.copyFile(source, target, log)
-    }
-
-    private def doManualDownloads: Option[String] =
-    {
-        // Download, unpack, and save the Showdown package.
-
-        import java.net.URL
-
-        FileUtilities.createDirectory(LocalLibDir, log)
-        if (! ShowdownLocal.exists)
-        {
-            FileUtilities.doInTemporaryDirectory[String](log)
-            {
-                tempDir: File =>
-
-                log.info("Downloading and unpacking: " + ShowdownURL)
-                FileUtilities.unzip(new URL(ShowdownURL),
-                                    Path.fromFile(tempDir),
-                                    log)
-
-                val js = Path.fromFile(tempDir) / "src" / ShowdownJS
-                noisyCopy(js, ShowdownLocal)
-
-                Right("")
-            }
-        }
-
-        None
-    }
-
-    private def doPostCompile: Option[String] =
-    {
-        noisyCopy(ShowdownLocal, ShowdownClassdir)
-    }
-
-    private def doLocalCleanLib: Option[String] =
-    {
-        if (ShowdownLocal.exists)
-        {
-            log.info("Deleting " + LocalLibDir);
-            FileUtilities.clean(LocalLibDir, log);
-        }
-
-        None
-    }
 }

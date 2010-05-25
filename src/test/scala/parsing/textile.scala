@@ -36,28 +36,35 @@ import org.scalatest.FunSuite
 import grizzled.parsing.markup._
 
 /**
- * Tests the grizzled.parsing.markup Markdown functions.
+ * Tests the grizzled.parsing.markup Textile functions.
  */
-class MarkdownTest extends GrizzledFunSuite
+class TextileTest extends GrizzledFunSuite
 {
-    test("MarkdownParser.parseToHTML")
+    test("TextileParser.parseToHTML")
     {
         import scala.io.Source
 
         val data = List(
-            ("*Test*",             "<p><em>Test</em></p>"),
+            ("*Test*",             "<p><strong>Test</strong></p>"),
             ("_Test_",             "<p><em>Test</em></p>"),
-            ("**Test**",           "<p><strong>Test</strong></p>"),
-            ("__Test__",           "<p><strong>Test</strong></p>"),
-            ("___Test___",         "<p><strong><em>Test</em></strong></p>"),
-            ("***Test***",         "<p><strong><em>Test</em></strong></p>"),
-            ("abc\n===\n\ntest\n", "<h1>abc</h1><p>test</p>")
+            ("**Test**",           "<p><b>Test</b></p>"),
+            ("__Test__",           "<p><i>Test</i></p>"),
+            ("-Test-",             "<p><del>Test</del></p>"),
+            ("^Test^",             "<p><sup>Test</sup></p>"),
+            ("~Test~",             "<p><sub>Test</sub></p>"),
+            ("@code block@",       "<p><code>code block</code></p>"),
+            ("h1. Test Header",    "<h1 id=\"TestHeader\">Test Header</h1>"),
+            ("\"link\":#link",     "<p><a href=\"#link\">link</a></p>"),
+            ("Trademark(tm)",      "<p>Trademark&#8482;</p>"),
+            ("Registered(r)",      "<p>Registered&#174;</p>"),
+            ("Copyright(c)",       "<p>Copyright&#169;</p>"),
+            ("bc. foo",            "<pre><code>foo\n</code></pre>")
         )
 
-        val parser = MarkupParser.getParser(MarkupType.Markdown)
+        val parser = MarkupParser.getParser(MarkupType.Textile)
         for((input, expected) <- data)
         {
-            expect(expected, "MarkdownParser.parseToHTML() on: " + input)
+            expect(expected, "TextileParser.parseToHTML() on: " + input)
             {
                 parser.parseToHTML(input)
             }

@@ -1,0 +1,24 @@
+* Added `grizzled.io.GrizzledSource`, which extends `scala.io.Source` with
+  mixin methods.
+* Deprecated `grizzled.string.implicits` and `grizzled.file.implicits`
+  modules, in favor of more granular imports. See the
+  `grizzled.file.GrizzledFile`, `grizzled.string.GrizzledString` and
+  `grizzled.string.GrizzledChar` companion objects for details.
+* Deprecated the string-to-boolean implicit function, in favor of the
+  more explicit `grizzled.string.util.stringToBoolean()` method.
+* Changed `GrizzledFile.listRecursively` to take an optional
+  `topdown` flag, indicating whether directory traversal should be top-down
+  or bottom-up.
+* Deprecated `grizzled.parsing.Markdown` in favor of new
+  `grizzled.parsing.markup` module, which supports both [Markdown][] and
+  [Textile][].
+  - Textile is supported via the Eclipse [WikiText][] library.
+  - Markdown is now supported via Tristan Juricek's [Knockoff][] library,
+    instead of by running the [Showdown][] JavaScript parser through [Rhino][].
+
+[Rhino]: http://www.mozilla.org/rhino/
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
+[Showdown]: http://attacklab.net/showdown/
+[Markdown]: http://daringfireball.net/projects/markdown/
+[Textile]: http://textile.thresholdstate.com/
+[WikiText]: http://help.eclipse.org/ganymede/index.jsp?topic=/org.eclipse.mylyn.wikitext.help.ui/help/devguide/WikiText%20Developer%20Guide.html

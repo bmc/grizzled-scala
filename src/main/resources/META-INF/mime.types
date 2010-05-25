@@ -1,0 +1,8 @@
+# Additional MIME types.
+# ---------------------------------------------------------------------------
+
+# Markdown
+text/markdown md markdown
+
+# Textile
+text/textile textile

@@ -37,6 +37,8 @@
 
 package grizzled.parsing
 
+import grizzled.parsing.markup._
+
 import scala.io.Source
 
 /**
@@ -47,48 +49,10 @@ import scala.io.Source
  * parser. Consequently, it will not work if you do not have Rhino installed
  * and in your classpath. This software was tested with Rhino 1.7R2.
  */
+@deprecated("Use the grizzled.parsing.markup package instead.")
 class MarkdownParser
 {
-    import java.io.InputStreamReader
-    import org.mozilla.javascript.{Context, Function}
-
-    // Initialization: Load Rhino and prepare a Javascript context.
-
-    private val context = Context.enter
-    private val scope = context.initStandardObjects
-
-    // Load the Showdown Javascript package.
-
-    private val classLoader = getClass.getClassLoader
-    private val showdownURL = classLoader.getResource("grizzled/showdown.js")
-    private val showdown = new InputStreamReader(showdownURL.openStream)
-
-    context.evaluateReader(scope, showdown, "showdown", 1, null)
-
-    // Instantiate a new Showdown converter.
-
-    private val converterCtor = context.evaluateString(
-                                    scope, "Showdown.converter", "converter", 
-                                    1, null
-                                )
-                               .asInstanceOf[Function]
-    private val markdownConverter = converterCtor.construct(
-                                        context, scope, null
-                                    )
-
-    // Get the function to call.
-
-    private val makeHTML = markdownConverter.get("makeHtml", markdownConverter)
-                           .asInstanceOf[Function]
-
-    /**
-     * Cleans up the Rhino environment.
-     */
-    override protected def finalize: Unit =
-    {
-        Context.exit
-        super.finalize
-    }
+    val parser = MarkupParser.getParser(MarkupType.Markdown)
 
     /**
      * Parse a Markdown document, producing HTML. The generated HTML markup
@@ -99,10 +63,9 @@ class MarkdownParser
      *                        lines of Markdown
      * @return the formatted HTML
      */
+    @deprecated("Use the grizzled.parsing.markup package instead.")
     def markdownToHTML(markdownSource: Source): String =
-    {
-        runMarkdown(markdownSource.getLines())
-    }
+        parser.parseToHTML(markdownSource)
 
     /**
      * Parse a Markdown document, producing HTML. The generated HTML markup
@@ -113,8 +76,9 @@ class MarkdownParser
      *
      * @return the formatted HTML
      */
+    @deprecated("Use the grizzled.parsing.markup package instead.")
     def markdownToHTML(markdown: String): String =
-        markdownToHTML(Source.fromString(markdown))
+        parser.parseToHTML(markdown)
 
     /**
      * Simple wrapper function that produces an XHTML-compliant document,
@@ -129,42 +93,17 @@ class MarkdownParser
      *
      * @return the formatted HTML document.
      */
+    @deprecated("Use the grizzled.parsing.markup package instead.")
     def markdownToHTMLDocument(markdownSource: Source, 
                                cssSource: Source = null,
                                encoding: String  = "UTF-8"): String =
     {
-        import scala.xml.parsing.XhtmlParser
-
-        val css =
-            if (cssSource == null)
-                ""
-            else
-                cssSource.getLines() mkString "\n"
         val markdown = markdownSource.getLines().toList
         val title = if (markdown.length == 0) "" else markdown.head
+        val cssOpt = if (cssSource == null) None else Some(cssSource)
 
-        // Inserting raw HTML in the body will cause it to be escaped. So,
-        // parse the HTML into a NodeSeq first. Note the the whole thing
-        // has to be wrapped in a single element, so it might as well
-        // be the <body> element.
-
-        val htmlBody = "<body>" + runMarkdown(markdown.iterator) + "</body>"
-        val htmlBodyNode = XhtmlParser(Source.fromString(htmlBody))
-
-        val contentType = "text/html; charset=" + encoding
-        val htmlTemplate =
-<html>
-<head>
-<title>{title}</title>
-<style type="text/css">
-{css}
-</style>
-<meta http-equiv="Content-Type" content={contentType}/>
-</head>
-{htmlBodyNode}
-</html>
-
-        htmlTemplate.toString
+        parser.parseToHTMLDocument(Source.fromString(markdown mkString "\n"),
+                                   title, cssOpt, encoding)
     }
 
     /**
@@ -193,25 +132,16 @@ class MarkdownParser
      */
     def markdownToHTMLDocument(markdown: String): String =
         markdownToHTMLDocument(markdown, "UTF-8")
-
-    /*----------------------------------------------------------------------*\
-                            * Private Functions
-    \*----------------------------------------------------------------------*/
-
-    private def runMarkdown(markdownLines: Iterator[String]): String =
-    {
-        makeHTML.call(context, scope, markdownConverter,
-                      Array[Object](markdownLines mkString "\n")).toString
-    }
 }
 
 /**
  * Object that simplifies access to instances of the <tt>MarkdownParser</tt>
  * class.
  */
+@deprecated("Use the grizzled.parsing.markup package instead.")
 object Markdown
 {
-    private lazy val parser = new MarkdownParser
+    private lazy val parser = MarkupParser.getParser(MarkupType.Markdown)
 
     /**
      * Parse a Markdown document, producing HTML. The generated HTML markup
@@ -223,7 +153,7 @@ object Markdown
      * @return the formatted HTML
      */
     def toHTML(markdownSource: Source): String =
-        parser.markdownToHTML(markdownSource)
+        parser.parseToHTML(markdownSource)
 
     /**
      * Parse a Markdown document, producing HTML. The generated HTML markup
@@ -234,7 +164,8 @@ object Markdown
      *
      * @return the formatted HTML
      */
-    def toHTML(markdown: String): String = parser.markdownToHTML(markdown)
+    def toHTML(markdown: String): String =
+        parser.parseToHTML(markdown)
     
     /**
      * Simple wrapper function that produces an XHTML-compliant document,
@@ -252,7 +183,14 @@ object Markdown
     def toHTMLDocument(markdownSource: Source, 
                        cssSource: Source = null,
                        encoding: String  = "UTF-8"): String =
-        parser.markdownToHTMLDocument(markdownSource, cssSource, encoding)
+    {
+        val markdown = markdownSource.getLines().toList
+        val title = if (markdown.length == 0) "" else markdown.head
+        val cssOpt = if (cssSource == null) None else Some(cssSource)
+
+        parser.parseToHTMLDocument(Source.fromString(markdown mkString "\n"),
+                                   title, cssOpt, encoding)
+    }
 
     /**
      * Simple wrapper function that produces an XHTML-compliant document,
@@ -266,7 +204,7 @@ object Markdown
      * @return the formatted HTML document.
      */
     def toHTMLDocument(markdown: String, encoding: String): String =
-        parser.markdownToHTMLDocument(markdown, encoding)
+        toHTMLDocument(Source.fromString(markdown), null, encoding)
 
     /**
      * Simple wrapper function that produces an XHTML-compliant document,
@@ -279,5 +217,5 @@ object Markdown
      * @return the formatted HTML document.
      */
     def toHTMLDocument(markdown: String): String =
-        parser.markdownToHTMLDocument(markdown)
+        toHTMLDocument(Source.fromString(markdown))
 }
