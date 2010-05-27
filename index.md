@@ -48,16 +48,16 @@ If you're using [Maven][], you can get Grizzled Scala from the
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala`*scala-version*
-* Version: `0.6`
+* Version: `0.7`
 * Type: `jar`
 * Repository: `http://maven.clapper.org/`
 
-Substitute either "2.8.0.RC1" or "2.8.0.RC2" for *scala-version*. For example:
+Substitute either "2.8.0.RC2" or "2.8.0.RC3" for *scala-version*. For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.8.0.RC2</artifactId>
-      <version>0.6</version>
+      <artifactId>grizzled-scala_2.8.0.RC3</artifactId>
+      <version>0.7</version>
     </dependency>
 
 ### Using with SBT
@@ -68,12 +68,12 @@ your `project/build/` directory):
 
     val orgClapperRepo = "clapper.org Maven Repository" at
         "http://maven.clapper.org"
-    val grizzled = "org.clapper" %% "grizzled-scala" % "0.6"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "0.7"
 
 **NOTE:** The first doubled percent is *not* a typo. It tells SBT to treat
-Grizzled-SLF4J as a cross-built library and automatically inserts the Scala
+Grizzled Scala as a cross-built library and automatically inserts the Scala
 version you're using into the artifact ID. It will *only* work if you are
-building with Scala 2.7.7 or Scala 2.8.0.RC1. See the
+building with Scala 2.8.0.RC2 or Scala 2.8.0.RC3. See the
 [SBT cross-building][] page for details.
 
 ## Source Code Repository
