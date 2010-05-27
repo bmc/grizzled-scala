@@ -10,11 +10,13 @@
   `topdown` flag, indicating whether directory traversal should be top-down
   or bottom-up.
 * Deprecated `grizzled.parsing.Markdown` in favor of new
-  `grizzled.parsing.markup` module, which supports both [Markdown][] and
-  [Textile][].
-  - Textile is supported via the Eclipse [WikiText][] library.
-  - Markdown is now supported via Tristan Juricek's [Knockoff][] library,
-    instead of by running the [Showdown][] JavaScript parser through [Rhino][].
+  `grizzled.parsing.markup` module.
+* Add [Textile][] support to `grizzled.parsing.markup`, via the Eclipse
+  [WikiText][] library.
+* Changed `grizzled.parsing.markup` to use Tristan Juricek's [Knockoff][]
+  library for [Markdown][], rather than invoking the [Showdown][]
+  JavaScript parser via [Rhino][].
+* Now compiles under Scala 2.8.0.RC3 and RC2. Dropped support for RC1.
 
 [Rhino]: http://www.mozilla.org/rhino/
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
