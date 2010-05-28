@@ -26,7 +26,7 @@
         <span class="name">Configuration</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>An INI-style configuration file parser .</p><p><code>Configuration</code> implements an in-memory store for a configuration file
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>An INI-style configuration file parser.</p><p><code>Configuration</code> implements an in-memory store for a configuration file
 whose syntax is reminiscent of classic Windows .INI files, though with
 many extensions.</p><p><b>Syntax</b></p><p>A configuration file is broken into sections, and each section is
 introduced by a section name in brackets. For example:</p><pre>
@@ -40,33 +40,32 @@ searchCommand: find /usr/local/foo -type f -name '*.class'
 [display]
 searchFailedMessage=Search failed, sorry.
 </pre><p>Notes and caveats:</p><p>At least one section is required.</p><p>Sections may be empty.</p><p>It is an error to have any variable definitions before the first
-section header.</p><p>The section names "system" and "env" are reserved. They don't really
+section header.</p><p>The section names &quot;system&quot; and &quot;env&quot; are reserved. They don't really
 exist, but they're used during variable substitution (see below)
 to substitute from <tt>System.properties</tt> and the environment,
 respectively.</p><p><b>Section Name Syntax</b></p><p>There can be any amount of whitespace before and after the brackets
 in a section name; the whitespace is ignored. Section names may consist
 of alphanumeric characters and underscores. Anything else is not
 permitted.</p><p><b>Variable Syntax</b></p><p>Each section contains zero or more variable settings. Similar to a Java<code>Properties</code> file, the variables are specified as name/value pairs,
-separated by an equal sign ("=") or a colon (":"). Variable names are
+separated by an equal sign (&quot;=&quot;) or a colon (&quot;:&quot;). Variable names are
 case-sensitive by default, though the case-sensitivity (and other
 aspects of the variable name) may be changed by subclassing<code>Configuration</code> and providing your own version of the<code>transformOptionName()</code> method. Variable names may contain
 alphanumerics, underscores, and hyphens (-). Variable values may contain
-anything at all. The parser ignores whitespace on either side of the "="
-or ":"; that is, leading whitespace in the value is skipped. The way to
+anything at all. The parser ignores whitespace on either side of the &quot;=&quot;
+or &quot;:&quot;; that is, leading whitespace in the value is skipped. The way to
 include leading whitespace in a value is escape the whitespace
 characters with backslashes. (See below).</p><p><b>Continuation Lines</b></p><p>Variable definitions may span multiple lines; each line to be
-continued must end with a backslash ("\") character, which escapes the
+continued must end with a backslash (&quot;\&quot;) character, which escapes the
 meaning of the newline, causing it to be treated like a space character.
 The following line is treated as a logical continuation of the first
-line. Unlike Java properties files, however, leading whitespace is
-<i>not</i> removed from continued lines.</p><p>Only variable definition lines may be continued. Section header
+line. Unlike Java properties files, however, leading whitespace is<i>not</i> removed from continued lines.</p><p>Only variable definition lines may be continued. Section header
 lines, comment lines (see below) and include directives (see below)
 cannot span multiple lines.</p><p><b>Expansions of Variable Values</b></p><p>The configuration parser preprocesses each variable's value, replacing
 embedded metacharacter sequences and substituting variable references.
 You can use backslashes to escape the special characters that the parser
 uses to recognize metacharacter and variable sequences; you can also use
 single quotes. See <i>Suppressing Metacharacter Expansion and Variable
-Substitution</i>, below, for more details.</p><p><b>Metacharacters</b></p><p>The parser recognizes Java-style ASCII escape sequences <code>\t</code>, <code>\n</code>,<code>\r</code>, <code>\\</code>, <code>\&nbsp;</code> (a backslash and a space), and <code>\\u</code><i>xxxx</i> are
+Substitution</i>, below, for more details.</p><p><b>Metacharacters</b></p><p>The parser recognizes Java-style ASCII escape sequences <code>\t</code>, <code>\n</code>,<code>\r</code>, <code>\\</code>, <code>\&amp;nbsp;</code> (a backslash and a space), and <code>\\u</code><i>xxxx</i> are
 recognized and converted to single characters. Note that metacharacter
 expansion is performed <i>before</i> variable substitution.</p><p><b>Variable Substitution</b></p><p>A variable value can interpolate the values of other variables, using
 a variable substitution syntax. The general form of a variable reference
@@ -74,10 +73,10 @@ is <code>${sectionName.varName}</code>.</p><p><code>sectionName</code> is the na
 substitute; if omitted, it defaults to the current section. <code>varName</code> is
 the name of the variable to substitute.</p><p>If a variable reference specifies a section name, the referenced section
 must precede the current section. It is not possible to substitute the value
-of a variable in a section that occurs later in the file.</p><p>The section names "system" and "env" are reserved for special
-"pseudosections."</p><p>The "system" pseudosection is used to interpolate values from<code>System.properties</code> For instance, <code>${system.user.home}</code> substitutes the
+of a variable in a section that occurs later in the file.</p><p>The section names &quot;system&quot; and &quot;env&quot; are reserved for special
+&quot;pseudosections.&quot;</p><p>The &quot;system&quot; pseudosection is used to interpolate values from<code>System.properties</code> For instance, <code>${system.user.home}</code> substitutes the
 value of the <code>user.home</code> system property (typically, the home directory
-of the user running the program). Similarly, <code>${system.user.name}</code>substitutes the user's name.</p><p>The "env" pseudosection is used to interpolate values from the
+of the user running the program). Similarly, <code>${system.user.name}</code>substitutes the user's name.</p><p>The &quot;env&quot; pseudosection is used to interpolate values from the
 environment. On UNIX systems, for instance, <code>${env.HOME}</code> substitutes
 user's home directory (and is, therefore, a synonym for<code>${system.user.home}</code>. On some versions of Windows, <code>${env.USERNAME}</code>will substitute the name of the user running the program. Note: On UNIX
 systems, environment variable names are typically case-sensitive; for
@@ -87,24 +86,24 @@ case-insensitive; <code>${env.USERNAME}</code> and <code>${env.username}</code> 
 equivalent.</p><p><b>Notes and caveats:</b></p><p><code>Configuration</code> uses the<code>grizzled.string.template.UnixShellVariableSubstituter</code>class to do variable substitution, so it honors all the syntax conventions
 supported by that class.</p><p>Variable substitutions are only permitted within variable values. They are
 ignored in variable names, section names, include directives and comments.</p><p>Variable substitution is performed <i>after</i> metacharacter expansion (so
-don't include metacharacter sequences in your variable names).</p><p>To include a literal "$" character in a variable value, escape it with a
-backslash, e.g., "<code>var=value with \$ dollar sign</code>"</p><p><b>Suppressing Metacharacter Expansion and Variable Substitution</b></p><p>To prevent the parser from interpreting metacharacter sequences,
-variable substitutions and other special characters, use the "->"
-assignment operator, instead of ":" or "=".</p><p>For example, suppose you want to set variable "prompt" to the
-literal value "Enter value. To specify a newline, use \n." The following
+don't include metacharacter sequences in your variable names).</p><p>To include a literal &quot;$&quot; character in a variable value, escape it with a
+backslash, e.g., &quot;<code>var=value with \$ dollar sign</code>&quot;</p><p><b>Suppressing Metacharacter Expansion and Variable Substitution</b></p><p>To prevent the parser from interpreting metacharacter sequences,
+variable substitutions and other special characters, use the &quot;-&gt;&quot;
+assignment operator, instead of &quot;:&quot; or &quot;=&quot;.</p><p>For example, suppose you want to set variable &quot;prompt&quot; to the
+literal value &quot;Enter value. To specify a newline, use \n.&quot; The following
 configuration file line will do the trick:</p><pre>
-prompt -> Enter value. To specify a newline, use \n
-</pre><p>Similarly, to set variable "abc" to the literal string "${foo}"
-suppressing the parser's attempts to expand "${foo}" as a variable
+prompt -&gt; Enter value. To specify a newline, use \n
+</pre><p>Similarly, to set variable &quot;abc&quot; to the literal string &quot;${foo}&quot;
+suppressing the parser's attempts to expand &quot;${foo}&quot; as a variable
 reference, you could use:</p><pre>
-abc -> ${foo}
+abc -&gt; ${foo}
 </pre><p>Note: It's also possible, though hairy, to escape the special meaning
 of special characters via the backslash character. For instance, you can
 escape the variable substitution lead-in character, '$', with a
-backslash. e.g., "\$". This technique is not recommended, however,
+backslash. e.g., &quot;\$&quot;. This technique is not recommended, however,
 because you have to double-escape any backslash characters that you want
-to be preserved literally. For instance, to get "\t", you must specify
-"\\\\t". To get a literal backslash, specify "\\\\". (Yes, that's four
+to be preserved literally. For instance, to get &quot;\t&quot;, you must specify
+&quot;\\\\t&quot;. To get a literal backslash, specify &quot;\\\\&quot;. (Yes, that's four
 backslashes, just to get a single unescaped one.) This double-escaping
 is a regrettable side effect of how the configuration file parses
 variable values: It makes two separate passes over the value (one for
@@ -114,13 +113,13 @@ go away if the configuration file parser parsed both metacharacter
 sequences and variable substitutions itself, in one pass. It doesn't
 currently do that, because it uses the separate<code>grizzled.string.template.UnixShellStringTemplate</code> class<code>grizzled.GrizzledString.translateMetachars()</code> method to do the
 variable substitution and metacharacter translation. In general, you're
-better off just sticking with the "->" assignment operator.</p><p><b>Includes</b></p><p>A special include directive permits inline inclusion of another
+better off just sticking with the &quot;-&gt;&quot; assignment operator.</p><p><b>Includes</b></p><p>A special include directive permits inline inclusion of another
 configuration file. The include directive takes two forms:</p><pre>
-%include "path"
-%include "URL"
+%include &quot;path&quot;
+%include &quot;URL&quot;
 </pre><p>For example:</p><pre>
-%include "/home/bmc/mytools/common.cfg"
-%include "http://configs.example.com/mytools/common.cfg"
+%include &quot;/home/bmc/mytools/common.cfg&quot;
+%include &quot;http://configs.example.com/mytools/common.cfg&quot;
 </pre><p>If the include path is not a URL, and is not an absolute path, its
 location is relative to the file that's trying to include it.</p><p>The included file may contain any content that is valid for this
 parser. It may contain just variable definitions (i.e., the contents of
@@ -129,7 +128,7 @@ configuration file, with individual sections. Since<code>Configuration</code> re
 essentially identical to Java's properties file syntax, it's also legal
 to include a properties file, provided it's included within a valid
 section.</p><p>Note: Attempting to include a file from itself, either directly or
-indirectly, will cause the parser to throw an exception.</p><p><b>Comments and Blank Lines</b></p><p>A comment line is a one whose first non-whitespace character is a "#".
+indirectly, will cause the parser to throw an exception.</p><p><b>Comments and Blank Lines</b></p><p>A comment line is a one whose first non-whitespace character is a &quot;#&quot;.
 A blank line is a line containing no content, or one containing only
 white space. Blank lines and comments are ignored.</p><p><b>Caller-supplied Predefined Sections</b></p><p>Calling applications may supply predefined sections and options, in
 the form of a map. These sections may then be used by other sections,
@@ -146,8 +145,8 @@ object Foo
         val configFile = args(0)
         val name = args(1)
         val ipAddress = args(2)
-        val sections = Map("args" -> Map("name" -> name,
-                                         "ip" -> ipAddress))
+        val sections = Map(&quot;args&quot; -&gt; Map(&quot;name&quot; -&gt; name,
+                                         &quot;ip&quot; -&gt; ipAddress))
         val config = Configuration(configFile, sections)
         ..
     }
@@ -185,8 +184,8 @@ object Foo
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Alternate constructor for use when there are no predefined sections .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Alternate constructor for use when there are no predefined sections . 
+            <p class="shortcomment cmt">Alternate constructor for use when there are no predefined sections.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Alternate constructor for use when there are no predefined sections.
 </p></div>
             
             
@@ -234,7 +233,7 @@ object Foo
       
             <p class="shortcomment cmt"><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: Any
@@ -300,7 +299,7 @@ object Foo
       
             <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -321,7 +320,7 @@ object Foo
       
             <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: Any
@@ -340,8 +339,8 @@ object Foo
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Add an option name and value to a section .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Add an option name and value to a section . 
+            <p class="shortcomment cmt">Add an option name and value to a section.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Add an option name and value to a section.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name, which will be transformed</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value
 </p></dd></dl>
             
@@ -358,8 +357,8 @@ object Foo
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Add a section to the configuration .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Add a section to the configuration . 
+            <p class="shortcomment cmt">Add a section to the configuration.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Add a section to the configuration.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
 </p></dd></dl>
             
@@ -379,7 +378,7 @@ object Foo
             <p class="shortcomment cmt">This method is used to cast the receiver object to be of type <code>T0</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p>This method is used to cast the receiver object to be of type <code>T0</code>.</p><p>Note that the success of a cast at runtime is modulo Scala's erasure semantics.  Therefore the expression<code>1.asInstanceOf[String]</code> will throw a <code>ClassCastException</code> at runtime, while the expression<code>List(1).asInstanceOf[List[String]]</code> will not.  In the latter example, because the type argument is erased as
 part of compilation it is not possible to check whether the contents of the list are of the requested typed.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object .</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: Any
@@ -398,9 +397,9 @@ part of compilation it is not possible to check whether the contents of the list
       </span>
       </h4>
       
-            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object .</p><p>The default implementation of the <code>clone</code> method is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object .</p></dd></dl><div class="block">
+            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object.</p><p>The default implementation of the <code>clone</code> method is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object.</p></dd></dl><div class="block">
           attributes: protected 
         </div><div class="block">
           definition classes: AnyRef
@@ -434,7 +433,7 @@ non-null instances of <code>AnyRef</code>:
  * <code>null.eq(null)</code> returns <code>true</code>.</p><p>When overriding the <code>equals</code> or <code>hashCode</code> methods, it is important to ensure that their behavior is
 consistent with reference equality.  Therefore, if two objects are references to each other (<code>o1 eq o2</code>), they
 should be equal to each other (<code>o1 == o2</code>) and they should hash to the same value (<code>o1.hashCode == o2.hashCode</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -462,10 +461,10 @@ relation]:
  * It is transitive: for any instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.equals(y)</code> returns <code>true</code> and
    <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p><p>If you override this method, you should verify that your implementation remains an equivalence relation.
 Additionally, when overriding this method it is often necessary to override <code>hashCode</code> to ensure that objects
-that are "equal" (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
+that are &quot;equal&quot; (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
 scala.Int
 (<code>o1.hashCode.equals(o2.hashCode)</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
           definition classes: AnyRef → Any
         </div>
             
@@ -483,9 +482,9 @@ scala.Int
       </h4>
       
             <p class="shortcomment cmt">This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object .</p>
+there are no more references to the object.</p>
             <div class="fullcomment"><div class="comment cmt"><p>This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object .</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
+there are no more references to the object.</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
           attributes: protected 
         </div><div class="block">
           definition classes: AnyRef
@@ -505,9 +504,9 @@ there are no more references to the object .</p><p>The details of when and if th
       </h4>
       
             <p class="shortcomment cmt">Invoke a code block on each section whose name matches a regular
-expression .</p>
+expression.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Invoke a code block on each section whose name matches a regular
-expression . 
+expression.
 </p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match</p></dd><dt class="param">code</dt><dd class="cmt"><p>the block of code to invoke with each section
 </p></dd></dl>
             
@@ -546,8 +545,8 @@ is found, <code>None</code> if not. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get an optional boolean option .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get an optional boolean option . 
+            <p class="shortcomment cmt">Get an optional boolean option.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get an optional boolean option.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(boolean)</code> or None.
 </p></dd></dl>
@@ -565,8 +564,8 @@ is found, <code>None</code> if not. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get a boolean option, applying a default if not found .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get a boolean option, applying a default if not found . 
+            <p class="shortcomment cmt">Get a boolean option, applying a default if not found.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get a boolean option, applying a default if not found.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
 </p></dd><dt>returns</dt><dd class="cmt"><p>the integer result
 </p></dd></dl>
@@ -584,9 +583,9 @@ is found, <code>None</code> if not. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object .</p><p>The nature of the representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object .</p></dd></dl><div class="block">
+            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object.</p><p>The nature of the representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -605,8 +604,8 @@ is found, <code>None</code> if not. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get an optional integer option .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get an optional integer option . 
+            <p class="shortcomment cmt">Get an optional integer option.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get an optional integer option.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(integer)</code> or None.
 </p></dd></dl>
@@ -624,8 +623,8 @@ is found, <code>None</code> if not. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get an integer option, applying a default if not found .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get an integer option, applying a default if not found . 
+            <p class="shortcomment cmt">Get an integer option, applying a default if not found.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get an integer option, applying a default if not found.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
 </p></dd><dt>returns</dt><dd class="cmt"><p>the integer result
 </p></dd></dl>
@@ -649,7 +648,7 @@ default, if the option has no value.</p>
 default, if the option has no value. Does not throw exceptions.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
 </p></dd><dt>returns</dt><dd class="cmt"><p>The option's value if the section and option exist, the
-        default if either the section or option cannot be found . 
+        default if either the section or option cannot be found.
 </p></dd></dl>
             
             
@@ -665,7 +664,7 @@ default, if the option has no value. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get a section .</p>
+            <p class="shortcomment cmt">Get a section.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Get a section. Similar to <code>Map.get</code>, this method returns <code>Some(Section)</code>if the section exists, and <code>None</code> if it does not.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section to get
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(Section)</code> or <code>None</code></p></dd></dl>
@@ -683,8 +682,8 @@ default, if the option has no value. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Determine whether the configuration contains a named section .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Determine whether the configuration contains a named section . 
+            <p class="shortcomment cmt">Determine whether the configuration contains a named section.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Determine whether the configuration contains a named section.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the configuration has a section with that name,
         <code>false</code> otherwise
@@ -703,13 +702,13 @@ default, if the option has no value. Does not throw exceptions.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Returns a hash code value for the object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object .</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
+            <p class="shortcomment cmt">Returns a hash code value for the object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object.</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
 not be equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A degenerate implementation could always return <code>0</code>.
 However, it is required that if two objects are equal (<code>o1.equals(o2)</code> returns <code>true</code>) that they have
 identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
 to verify that the behavior is consistent with the <code>equals</code> method.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object .</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object.</p></dd></dl><div class="block">
           definition classes: AnyRef → Any
         </div>
             
@@ -749,8 +748,8 @@ possible to check whether the contents of the list are of the requested typed.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Load configuration data from the specified source into this object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Load configuration data from the specified source into this object . 
+            <p class="shortcomment cmt">Load configuration data from the specified source into this object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Load configuration data from the specified source into this object.
 Clears the configuration first.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">safe</dt><dd class="cmt"><p>Whether an exception should be thrown for bad variable
                substitutions (<code>false</code>) or not (<code>true</code>).
@@ -771,9 +770,9 @@ Clears the configuration first.
       </h4>
       
             <p class="shortcomment cmt">Return a sequence of sections whose name match matches a regular
-expression .</p>
+expression.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Return a sequence of sections whose name match matches a regular
-expression . 
+expression.
 </p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match
 </p></dd></dl>
             
@@ -792,7 +791,7 @@ expression .
       
             <p class="shortcomment cmt"><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -811,8 +810,8 @@ expression .
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor .</p></div><div class="block">
+            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor.</p></div><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -831,8 +830,8 @@ expression .
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor .</p></div><div class="block">
+            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor.</p></div><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -852,9 +851,9 @@ expression .
       </h4>
       
             <p class="shortcomment cmt">Get the value for an option in a section, supplying a default if the
-option or the section doesn't exist .</p>
+option or the section doesn't exist.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section, supplying a default if the
-option or the section doesn't exist .  Exceptions for variable
+option or the section doesn't exist. Exceptions for variable
 substitution errors are still thrown.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>default value
 </p></dd><dt>returns</dt><dd class="cmt"><p>the option's value (which may be the default)
@@ -876,8 +875,8 @@ substitution errors are still thrown.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get the value for an option in a section .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section . 
+            <p class="shortcomment cmt">Get the value for an option in a section.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
 </p></dd><dt>returns</dt><dd class="cmt"><p>the option's value
 </p></dd></dl><div class="block"><ol>deprecated:
@@ -898,8 +897,8 @@ substitution errors are still thrown.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get the list of option names .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the list of option names . 
+            <p class="shortcomment cmt">Get the list of option names.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the list of option names.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section's name
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of option names in that section
 </p></dd></dl>
@@ -917,10 +916,10 @@ substitution errors are still thrown.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get all options in a section .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get all options in a section . 
+            <p class="shortcomment cmt">Get all options in a section.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get all options in a section.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name
-</p></dd><dt>returns</dt><dd class="cmt"><p>a map of all options and their values for the section .  If
+</p></dd><dt>returns</dt><dd class="cmt"><p>a map of all options and their values for the section. If
         the section doesn't exist, an empty map is returned.
 </p></dd></dl>
             
@@ -938,9 +937,9 @@ substitution errors are still thrown.
       </h4>
       
             <p class="shortcomment cmt">Puts an option in the configuration, running the specified pre-check
-logic first .</p>
+logic first.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Puts an option in the configuration, running the specified pre-check
-logic first . 
+logic first.
 </p></div><div class="block">
           attributes: protected 
         </div>
@@ -958,8 +957,8 @@ logic first .
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Get the list of section names .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the list of section names . 
+            <p class="shortcomment cmt">Get the list of section names.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Get the list of section names.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the section names, in a iterator
 </p></dd></dl>
             
@@ -977,7 +976,7 @@ logic first .
       </h4>
       
             <p class="shortcomment cmt">Put an option name and value to a section, overwriting any existing
-instance of that option .</p>
+instance of that option.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Put an option name and value to a section, overwriting any existing
 instance of that option. Unlike <code>addOption()</code>, this method will
 not throw <code>DuplicateOptionException</code>.
@@ -1012,9 +1011,9 @@ not throw <code>DuplicateOptionException</code>.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Returns a string representation of the object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object .</p><p>The default representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object .</p></dd></dl><div class="block">
+            <p class="shortcomment cmt">Returns a string representation of the object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object.</p><p>The default representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object.</p></dd></dl><div class="block">
           definition classes: AnyRef → Any
         </div>
             
@@ -1031,8 +1030,8 @@ not throw <code>DuplicateOptionException</code>.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Transform an option (key) to a consistent form .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Transform an option (key) to a consistent form .  The default
+            <p class="shortcomment cmt">Transform an option (key) to a consistent form.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Transform an option (key) to a consistent form. The default
 version of this method forces the option name to lower case.
 </p></div><dl class="paramcmts block"><dt class="param">option</dt><dd class="cmt"><p>the option name
 </p></dd><dt>returns</dt><dd class="cmt"><p>the transformed option name

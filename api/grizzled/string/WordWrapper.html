@@ -27,31 +27,24 @@
       </span>
       </h4>
       <div class="fullcomment" id="comment"><div class="comment cmt"><p>Wraps strings on word boundaries to fit within a proscribed output
-width .  The wrapped string may have a prefix or not; prefixes are useful
+width. The wrapped string may have a prefix or not; prefixes are useful
 for error messages, for instance. You tell a <tt>WordWrapper</tt> about
-a prefix by passing a non-empty prefix to the constructor.</p><p>Examples:</p><p><blockquote>Unable to open file /usr/local/etc/wombat: No such file or directory</blockquote></p><p>might appear like this without a prefix:</p><p><blockquote>
-Unable to open file /usr/local/etc/wombat: No such file or
-directory
-</blockquote></p><p>and like this if the prefix is "myprog:"</p><p><blockquote>
-myprog: Unable to open file /usr/local/etc/wombat: No such
-        file or directory
-</blockquote></p><p>Alternatively, if the output width is shortened, the same message
-can be made to wrap something like this:</p><p><blockquote>
-myprog: Unable to open file
+a prefix by passing a non-empty prefix to the constructor.</p><h4> Examples: </h4><p><blockquote><pre>Unable to open file /usr/local/etc/wombat: No such file or directory</pre></blockquote></p><p>might appear like this without a prefix:</p><p><blockquote><pre>Unable to open file /usr/local/etc/wombat: No such file or
+directory</pre></blockquote></p><p>and like this if the prefix is &quot;myprog:&quot;</p><p><blockquote><pre>myprog: Unable to open file /usr/local/etc/wombat: No such
+        file or directory</pre></blockquote></p><p>Alternatively, if the output width is shortened, the same message
+can be made to wrap something like this:</p><p><blockquote><pre>myprog: Unable to open file
         /usr/local/etc/wombat:
         No such file or
-        directory
-</blockquote></p><p>Note how the wrapping logic will "tab" past the prefix on wrapped
+        directory</pre></blockquote></p><p>Note how the wrapping logic will &quot;tab&quot; past the prefix on wrapped
 lines.</p><p>This method also supports the notion of an indentation level, which is
 independent of the prefix. A non-zero indentation level causes each line,
 including the first line, to be indented that many characters. Thus,
 initializing a <tt>WordWrapper</tt> object with an indentation value of 4
 will cause each output line to be preceded by 4 blanks. (It's also
 possible to change the indentation character from a blank to any other
-character.</p><p>Notes</p><p>   The class does not do any special processing of tab characters.
+character.</p><h4> Notes </h4><ul><li> The class does not do any special processing of tab characters.
        Embedded tab characters can have surprising (and unwanted) effects
-       on the rendered output.
-   Wrapping an already wrapped string is an invitation to trouble.</p></div><div class="block">
+       on the rendered output.</li><li> Wrapping an already wrapped string is an invitation to trouble.</li></ul></div><div class="block">
             go to: <a href="WordWrapper$.html">companion</a>
           </div>
             
@@ -116,7 +109,7 @@ character.</p><p>Notes</p><p>   The class does not do any special processing of 
       
             <p class="shortcomment cmt"><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: Any
@@ -182,7 +175,7 @@ character.</p><p>Notes</p><p>   The class does not do any special processing of 
       
             <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -203,7 +196,7 @@ character.</p><p>Notes</p><p>   The class does not do any special processing of 
       
             <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: Any
@@ -225,7 +218,7 @@ character.</p><p>Notes</p><p>   The class does not do any special processing of 
             <p class="shortcomment cmt">This method is used to cast the receiver object to be of type <code>T0</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p>This method is used to cast the receiver object to be of type <code>T0</code>.</p><p>Note that the success of a cast at runtime is modulo Scala's erasure semantics.  Therefore the expression<code>1.asInstanceOf[String]</code> will throw a <code>ClassCastException</code> at runtime, while the expression<code>List(1).asInstanceOf[List[String]]</code> will not.  In the latter example, because the type argument is erased as
 part of compilation it is not possible to check whether the contents of the list are of the requested typed.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object .</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: Any
@@ -244,9 +237,9 @@ part of compilation it is not possible to check whether the contents of the list
       </span>
       </h4>
       
-            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object .</p><p>The default implementation of the <code>clone</code> method is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object .</p></dd></dl><div class="block">
+            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object.</p><p>The default implementation of the <code>clone</code> method is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object.</p></dd></dl><div class="block">
           attributes: protected 
         </div><div class="block">
           definition classes: AnyRef
@@ -280,7 +273,7 @@ non-null instances of <code>AnyRef</code>:
  * <code>null.eq(null)</code> returns <code>true</code>.</p><p>When overriding the <code>equals</code> or <code>hashCode</code> methods, it is important to ensure that their behavior is
 consistent with reference equality.  Therefore, if two objects are references to each other (<code>o1 eq o2</code>), they
 should be equal to each other (<code>o1 == o2</code>) and they should hash to the same value (<code>o1.hashCode == o2.hashCode</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -308,10 +301,10 @@ relation]:
  * It is transitive: for any instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.equals(y)</code> returns <code>true</code> and
    <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p><p>If you override this method, you should verify that your implementation remains an equivalence relation.
 Additionally, when overriding this method it is often necessary to override <code>hashCode</code> to ensure that objects
-that are "equal" (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
+that are &quot;equal&quot; (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
 scala.Int
 (<code>o1.hashCode.equals(o2.hashCode)</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
           definition classes: AnyRef → Any
         </div>
             
@@ -329,9 +322,9 @@ scala.Int
       </h4>
       
             <p class="shortcomment cmt">This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object .</p>
+there are no more references to the object.</p>
             <div class="fullcomment"><div class="comment cmt"><p>This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object .</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
+there are no more references to the object.</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
           attributes: protected 
         </div><div class="block">
           definition classes: AnyRef
@@ -350,9 +343,9 @@ there are no more references to the object .</p><p>The details of when and if th
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object .</p><p>The nature of the representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object .</p></dd></dl><div class="block">
+            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object.</p><p>The nature of the representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -371,13 +364,13 @@ there are no more references to the object .</p><p>The details of when and if th
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Returns a hash code value for the object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object .</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
+            <p class="shortcomment cmt">Returns a hash code value for the object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object.</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
 not be equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A degenerate implementation could always return <code>0</code>.
 However, it is required that if two objects are equal (<code>o1.equals(o2)</code> returns <code>true</code>) that they have
 identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
 to verify that the behavior is consistent with the <code>equals</code> method.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object .</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object.</p></dd></dl><div class="block">
           definition classes: AnyRef → Any
         </div>
             
@@ -435,7 +428,7 @@ possible to check whether the contents of the list are of the requested typed.
       
             <p class="shortcomment cmt"><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.</p>
             <div class="fullcomment"><div class="comment cmt"><p><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality .</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
+</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -454,8 +447,8 @@ possible to check whether the contents of the list are of the requested typed.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor .</p></div><div class="block">
+            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor.</p></div><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -474,8 +467,8 @@ possible to check whether the contents of the list are of the requested typed.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor .</p></div><div class="block">
+            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor.</p></div><div class="block">
           attributes: final 
         </div><div class="block">
           definition classes: AnyRef
@@ -517,9 +510,9 @@ possible to check whether the contents of the list are of the requested typed.
       </span>
       </h4>
       
-            <p class="shortcomment cmt">Returns a string representation of the object .</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object .</p><p>The default representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object .</p></dd></dl><div class="block">
+            <p class="shortcomment cmt">Returns a string representation of the object.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object.</p><p>The default representation is platform dependent.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object.</p></dd></dl><div class="block">
           definition classes: AnyRef → Any
         </div>
             
@@ -582,9 +575,9 @@ possible to check whether the contents of the list are of the requested typed.
       </h4>
       
             <p class="shortcomment cmt">Wrap a string, using the wrap width, prefix, indentation and indentation
-character that were specified to the <tt>WordWrapper</tt> constructor .</p>
+character that were specified to the <tt>WordWrapper</tt> constructor.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Wrap a string, using the wrap width, prefix, indentation and indentation
-character that were specified to the <tt>WordWrapper</tt> constructor . 
+character that were specified to the <tt>WordWrapper</tt> constructor.
 The resulting string may have embedded newlines in it.
 </p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to wrap
 </p></dd><dt>returns</dt><dd class="cmt"><p>the wrapped string
