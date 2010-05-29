@@ -71,6 +71,16 @@ final class GrizzledFile(val file: File)
     def basename = new File(util.basename(file.getPath))
 
     /**
+     * Get the path of this file, relative to some other file.
+     *
+     * @param relativeTo  the other file
+     *
+     * @return the path of this file, relative to the other file.
+     */
+    def relativePath(relativeTo: File): String =
+        util.relativePath(this, relativeTo)
+
+    /**
      * Split the file's path into directory (dirname) and file (basename)
      * components. Analogous to Python's `os.path.pathsplit()` function.
      *

@@ -61,6 +61,10 @@ object util
     val fileSeparator = File.separator
     val fileSeparatorChar = fileSeparator(0)
 
+    /* ---------------------------------------------------------------------- *\
+                              Public Methods
+    \* ---------------------------------------------------------------------- */
+
     /**
      * Get the directory name of a pathname.
      *
@@ -195,6 +199,26 @@ object util
      * @return the current working directory
      */
     def pwd: String = new File(".").getCanonicalPath
+
+    /**
+     * Calculate the relative path between two files.
+     *
+     * @param from  the starting file
+     * @param to    the file to be converted to a relative path
+     *
+     * @return the (String) relative path
+     */
+    def relativePath(from: File, to: File): String =
+    {
+        val fromPath = toPathArray(from)
+	val toPath = toPathArray(to)
+	val commonLength = commonPrefix(fromPath, toPath)
+	val relativeTo = toPath.drop(commonLength)
+	val commonParentsTotal = (fromPath.length - commonLength - 1)
+        require(commonParentsTotal >= 0)
+	val up = (".." + fileSeparator) * commonParentsTotal
+	relativeTo.mkString(up, fileSeparator, "")
+    }
 
     /**
      * Return a list of paths matching a pathname pattern. The pattern may
@@ -372,6 +396,44 @@ object util
         val matches = doGlob(pieces.toList, directory)
 
         matches map (normalizePath _)
+    }
+
+    /* ---------------------------------------------------------------------- *\
+                              Private Methods
+    \* ---------------------------------------------------------------------- */
+
+    /**
+     * Convert a file into a path array. Borrowed from SBT source code.
+     */
+    private def toPathArray(file: File): Array[String] =
+    {
+	@tailrec def toPathList(f: File, current: List[String]): List[String] =
+	{
+	    if(f == null)
+		current
+	    else
+		toPathList(f.getParentFile, f.getName :: current)
+	}
+
+	toPathList(file.getCanonicalFile, Nil).toArray
+    }
+
+    /**
+     * Get the length of the common prefix between two arrays.
+     */
+    private def commonPrefix[T](a: Array[T], b: Array[T]): Int =
+    {
+	@tailrec def common(count: Int): Int =
+	{
+	    if ((count >= a.length) || 
+                (count >= b.length) || 
+                (a(count) != b(count)))
+		count
+	    else
+		common(count + 1)
+	}
+
+	common(0)
     }
 
     /**
