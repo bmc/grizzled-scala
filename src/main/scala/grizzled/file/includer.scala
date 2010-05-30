@@ -100,9 +100,7 @@ import java.net.{URI, URISyntaxException}
  * {{{
  * import grizzled.file.Includer
  * 
- * val inc = Includer(path)
- * for (line <- inc.getLines)
- *     println(line)
+ * Includer(path).foreach(println(_))
  * }}}
  * 
  * Use an include-enabled file with a Scala `scala.io.Source`
