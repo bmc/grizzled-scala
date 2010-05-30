@@ -44,78 +44,78 @@ import scala.util.matching.Regex
 import java.net.{URI, URISyntaxException}
 
 /**
- * Process <i>include</i> directives in files, returning an iterator over
+ * Process "include" directives in files, returning an iterator over
  * lines from the flattened files.
  *
- * <p>The <tt>grizzled.file.Includer</tt> class can be used to process
- * <i>includes</i> within a text file, returning a file-like object. It
- * also contains some utility functions that permit using include-enabled
- * files in other contexts.</p>
+ * The `grizzled.file.Includer` class can be used to process "include"
+ * directives within a text file, returning a file-like object. It also
+ * contains some utility functions that permit using include-enabled files
+ * in other contexts.
  * 
  * <h3>Syntax</h3>
  *
- * <p>The <i>include</i> syntax is defined by a regular expression; any
+ * The <i>include</i> syntax is defined by a regular expression; any
  * line that matches the regular expression is treated as an <i>include</i>
- * directive. The default regular expression, <tt>^%include\s"([^"]+)"$</tt>
- * matches include directives like this:</p>
+ * directive. The default regular expression, `^%include\s"([^"]+)"$`
+ * matches include directives like this:
  *
- * <blockquote><pre>
+ * {{{
  * %include "/absolute/path/to/file"
  * %include "../relative/path/to/file"
  * %include "local_reference"
  * %include "http://localhost/path/to/my.config"
- * </pre></blockquote>
+ * }}}
  * 
- * <p>Relative and local file references are relative to the including file
- * or URL. That is, if an <tt>Includer</tt> is processing file
+ * Relative and local file references are relative to the including file
+ * or URL. That is, if an `Includer` is processing file
  * "/home/bmc/foo.txt" and encounters an attempt to include file "bar.txt",
- * it will assume "bar.txt" is to be found in "/home/bmc".</p>
+ * it will assume "bar.txt" is to be found in "/home/bmc".
  *
- * <p>Similarly, if an <tt>Includer</tt> is processing URL
+ * Similarly, if an `Includer` is processing URL
  * "http://localhost/bmc/foo.txt" and encounters an attempt to include file
  * "bar.txt", it will assume "bar.txt" is to be found at
- * "http://localhost/bmc/bar.txt".</p>
+ * "http://localhost/bmc/bar.txt".
  *
- * <p>Nested includes are permitted; that is, an included file may, itself,
+ * Nested includes are permitted; that is, an included file may, itself,
  * include other files. The maximum recursion level is configurable and
- * defaults to 100.</p>
+ * defaults to 100.
  * 
- * <p>The include syntax can be changed by passing a different regular
- * expression to the <tt>Includer</tt> constructor.</p>
+ * The include syntax can be changed by passing a different regular
+ * expression to the `Includer` constructor.
  * 
  * <h3>Usage</h3>
  *
- * <p>This package provides an <tt>Includer</tt> class, which processes
- * include directives in a file and behaves somewhat like a Scala
- * <tt>Source</tt>. See the class documentation for more details.</p>
+ * This package provides an `Includer` class, which processes include
+ * directives in a file and behaves somewhat like a Scala `Source`. See the
+ * class documentation for more details.
  * 
- * <p>The package also provides a <tt>preprocess()</tt> convenience
- * function, via a companion object, that can be used to preprocess a file;
- * it returns the path to the resulting preprocessed file.</p>
+ * The package also provides a `preprocess()` convenience function, via a
+ * companion object, that can be used to preprocess a file; it returns the
+ * path to the resulting preprocessed file.
  * 
  * <h3>Examples</h3>
  * 
- * <p>Preprocess a file containing include directives, then read the result:</p>
+ * Preprocess a file containing include directives, then read the result:
  * 
- * <blockquote><pre>
- * import grizzled.file.includer.Includer
+ * {{{
+ * import grizzled.file.Includer
  * 
  * val inc = Includer(path)
  * for (line <- inc.getLines)
  *     println(line)
- * </pre></blockquote>
+ * }}}
  * 
- * <p>Use an include-enabled file with a Scala <tt>scala.io.Source</tt>
- * object:</p>
+ * Use an include-enabled file with a Scala `scala.io.Source`
+ * object:
  * 
- * <blockquote><pre>
+ * {{{
  * import grizzled.file.includer.Includer
  * import scala.io.Source
  * 
  * val source = Source.fromFile(Includer.preprocess("/path/to/file"))
- * </pre></blockquote>
+ * }}}
  *
- * @param source       the <tt>Source</tt> to read
+ * @param source       the `Source` to read
  * @param includeRegex the regular expression that defines an include directive.
  *                     Must contain a group that surrounds the file or URL part.
  * @param maxNesting   the maximum nesting level
@@ -146,8 +146,8 @@ class Includer(val source: Source,
      * Determine whether there are any more input lines to be read from the
      * includer.
      *
-     * @return <tt>true</tt> if at least one more line is available,
-     *         <tt>false</tt> otherwise
+     * @return `true` if at least one more line is available,
+     *         `false` otherwise
      */
     def hasNext: Boolean =
     {
@@ -165,7 +165,7 @@ class Includer(val source: Source,
     }
 
     /**
-     * Get the next input line. You should call <tt>hasNext</tt> before calling
+     * Get the next input line. You should call `hasNext` before calling
      * this method, to ensure that there are input lines remaining.
      *
      * @return the next input line
@@ -224,8 +224,8 @@ class Includer(val source: Source,
 }
 
 /**
- * Companion object for the <tt>Includer</tt> class. Also contains some
- * utility methods, such as the <tt>preprocess()</tt> method.
+ * Companion object for the `Includer` class. Also contains some
+ * utility methods, such as the `preprocess()` method.
  */
 object Includer
 {
@@ -242,7 +242,7 @@ object Includer
     /**
      * Allocate an includer.
      *
-     * @param source       the <tt>Source</tt> to read
+     * @param source       the `Source` to read
      * @param includeRegex the regular expression that defines an include
      *                     directive. Must contain a group that surrounds the
      *                     file or URL part.
@@ -253,9 +253,9 @@ object Includer
 
     /**
      * Allocate an includer, using the default value for the
-     * <tt>maxNesting</tt> parameter.
+     * `maxNesting` parameter.
      *
-     * @param source       the <tt>Source</tt> to read
+     * @param source       the `Source` to read
      * @param includeRegex the regular expression that defines an include
      *                     directive. Must contain a group that surrounds the
      *                     file or URL part.
@@ -265,9 +265,9 @@ object Includer
 
     /**
      * Allocate an includer, using the default values for the
-     * <tt>maxNesting</tt> and <tt>includeRegex</tt> parameters.
+     * `maxNesting` and `includeRegex` parameters.
      *
-     * @param source       the <tt>Source</tt> to read
+     * @param source       the `Source` to read
      */
     def apply(source: Source): Includer = 
         apply(source, DefaultIncludeRegex, DefaultMaxNesting)
@@ -317,10 +317,10 @@ object Includer
 
     /**
      * Allocate an includer, using the default value for the
-     * <tt>maxNesting</tt> parameter.
+     * `maxNesting` parameter.
      *
      * @param pathOrURI    the path or URI string to read
-     * @param source       the <tt>Source</tt> to read
+     * @param source       the `Source` to read
      * @param includeRegex the regular expression that defines an include
      *                     directive. Must contain a group that surrounds the
      *                     file or URL part.
@@ -330,7 +330,7 @@ object Includer
 
     /**
      * Allocate an includer, using the default values for the
-     * <tt>maxNesting</tt> and <tt>includeRegex</tt> parameters.
+     * `maxNesting` and `includeRegex` parameters.
      *
      * @param pathOrURI    the path or URI string to read
      */
@@ -347,10 +347,10 @@ object Includer
      * @param pathOrURI   the path or URI string to read
      * @param tempPrefix  temporary file prefix, with the same meaning as the
      *                    temporary file prefix used by
-     *                    <tt>java.io.File.createTempFile()</tt>
+     *                    `java.io.File.createTempFile()`
      * @param tempSuffix  temporary file suffix, with the same meaning as the
      *                    temporary file suffix used by
-     *                    <tt>java.io.File.createTempFile()</tt>
+     *                    `java.io.File.createTempFile()`
      *
      * @return the path to the temporary file
      */
