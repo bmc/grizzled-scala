@@ -1,5 +1,7 @@
 * Bumped to [SBT][] version 0.7.4.
 * Added `relativePath` method to `GrizzledFile`.
+* Added ability to "parse" (i.e., emit) plain text and HTML/XHTML to the
+  `grizzled.parsing.markup` package.
 * Updated to [Knockoff][] version 0.7.1-12, which corrects some Markdown
   translation bugs.
 
