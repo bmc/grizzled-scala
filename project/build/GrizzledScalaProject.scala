@@ -115,8 +115,8 @@ class GrizzledScalaProject(info: ProjectInfo)
     val t_repo = "t_repo" at
         "http://tristanhunt.com:8081/content/groups/public/"
 
-    val knockoff = "com.tristanhunt" % "knockoff_2.8.0.RC2" % "0.7.1-11"
-    //val knockoff = "com.tristanhunt" %% "knockoff" % "0.7.1-11"
+    //val knockoff = "com.tristanhunt" % "knockoff_2.8.0.RC2" % "0.7.1-12"
+    val knockoff = "com.tristanhunt" %% "knockoff" % "0.7.1-12"
 
     /* ---------------------------------------------------------------------- *\
                           Private Helper Methods

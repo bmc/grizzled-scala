@@ -1,4 +1,7 @@
 * Bumped to [SBT][] version 0.7.4.
 * Added `relativePath` method to `GrizzledFile`.
+* Updated to [Knockoff][] version 0.7.1-12, which corrects some Markdown
+  translation bugs.
 
 [SBT]: http://code.google.com/p/simple-build-tool
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
