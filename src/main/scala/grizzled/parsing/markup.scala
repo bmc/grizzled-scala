@@ -131,8 +131,33 @@ sealed abstract class MarkupType(val name: String, val mimeType: String)
 
 object MarkupType
 {
+    /**
+     * Markup type for Markdown. Text is transformed to HTML via Markdown
+     * parser.
+     */
     case object Markdown extends MarkupType("markdown", "text/markdown")
+
+    /**
+     * Markup type for Textile. Text is transformed to HTML via Textile
+     * parser.
+     */
     case object Textile extends MarkupType("textile", "text/textile")
+
+    /**
+     * Markup type for HTML. Text is emitted as-is.
+     */
+    case object HTML extends MarkupType("html", "text/html")
+
+    /**
+     * Markup type for XHTML. Text is emitted as-is.
+     */
+    case object XHTML extends MarkupType("xhtml", "text/xhtml")
+
+    /**
+     * Markup type for plain text. Text is wrapped in "pre" tags
+     * and emitted as-is.
+     */
+    case object PlainText extends MarkupType("plaintext", "text/plain")
 }
 
 /**
@@ -147,8 +172,11 @@ object MarkupParser
     /**
      * MIME type to MarkupType mapping.
      */
-    val MimeTypes = Map(MarkupType.Markdown.mimeType -> MarkupType.Markdown,
-                        MarkupType.Textile.mimeType -> MarkupType.Textile)
+    val MimeTypes = Map(MarkupType.Markdown.mimeType  -> MarkupType.Markdown,
+                        MarkupType.Textile.mimeType   -> MarkupType.Textile,
+                        MarkupType.HTML.mimeType      -> MarkupType.HTML,
+                        MarkupType.XHTML.mimeType     -> MarkupType.XHTML,
+                        MarkupType.PlainText.mimeType -> MarkupType.PlainText)
 
     /**
      * Parser type to instantiated parser map.
@@ -163,8 +191,11 @@ object MarkupParser
      */
     def getParser(parserType: MarkupType): MarkupParser = parserType match
     {
-        case MarkupType.Markdown => new MarkdownParser
-        case MarkupType.Textile  => new TextileParser
+        case MarkupType.Markdown  => new MarkdownParser
+        case MarkupType.Textile   => new TextileParser
+        case MarkupType.HTML      => new VerbatimHandler
+        case MarkupType.XHTML     => new VerbatimHandler
+        case MarkupType.PlainText => new PreWrapHandler
     }
 
     /**
@@ -240,7 +271,6 @@ class TextileParser extends MarkupParser
  */
 class MarkdownParser extends MarkupParser
 {
-
     /**
      * Parse a Markdown document, producing HTML. The generated HTML markup
      * does not contain HTML or BODY tags, so it is suitable for embedding in
@@ -255,4 +285,36 @@ class MarkdownParser extends MarkupParser
         import com.tristanhunt.knockoff.DefaultDiscounter._
         toXHTML(knockoff(source mkString "")).toString
     }
+}
+
+/**
+ * The `VerbatimHandler` type handles a file that is already HTML.
+ */
+private[markup] class VerbatimHandler extends MarkupParser
+{
+    /**
+     * "Parse" a document that is assumed to be HTML already.
+     *
+     * @param source  The `Source` from which to read the lines of HTML
+     *
+     * @return the HTML
+     */
+    def parseToHTML(source: Source): String = source.getLines().mkString("\n")
+}
+
+/**
+ * The `PreWrapHandler` type handles a file that is presumed to be plain text.
+ * The text is wrapped in "pre" tags and emitted as-is.
+ */
+private[markup] class PreWrapHandler extends MarkupParser
+{
+    /**
+     * "Parse" a document that is assumed to be plain text.
+     *
+     * @param source  The `Source` from which to read the lines of text
+     *
+     * @return the HTML
+     */
+    def parseToHTML(source: Source): String =
+        "<pre>" + source.getLines().mkString("\n") + "</pre>"
 }
