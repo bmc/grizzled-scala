@@ -210,14 +210,20 @@ object util
      */
     def relativePath(from: File, to: File): String =
     {
-        val fromPath = toPathArray(from)
-	val toPath = toPathArray(to)
-	val commonLength = commonPrefix(fromPath, toPath)
-	val relativeTo = toPath.drop(commonLength)
-	val commonParentsTotal = (fromPath.length - commonLength - 1)
-        require(commonParentsTotal >= 0)
-	val up = (".." + fileSeparator) * commonParentsTotal
-	relativeTo.mkString(up, fileSeparator, "")
+        if (from.getAbsolutePath == to.getAbsolutePath)
+            basename(from.getPath)
+
+        else
+        {
+            val fromPath = toPathArray(from)
+            val toPath = toPathArray(to)
+            val commonLength = commonPrefix(fromPath, toPath)
+            val relativeTo = toPath.drop(commonLength)
+            val commonParentsTotal = (fromPath.length - commonLength - 1)
+            require(commonParentsTotal >= 0)
+            val up = (".." + fileSeparator) * commonParentsTotal
+            relativeTo.mkString(up, fileSeparator, "")
+        }
     }
 
     /**
@@ -407,15 +413,15 @@ object util
      */
     private def toPathArray(file: File): Array[String] =
     {
-	@tailrec def toPathList(f: File, current: List[String]): List[String] =
-	{
-	    if(f == null)
-		current
-	    else
-		toPathList(f.getParentFile, f.getName :: current)
-	}
+        @tailrec def toPathList(f: File, current: List[String]): List[String] =
+        {
+            if (f == null)
+                current
+            else
+                toPathList(f.getParentFile, f.getName :: current)
+        }
 
-	toPathList(file.getCanonicalFile, Nil).toArray
+        toPathList(file.getCanonicalFile, Nil).toArray
     }
 
     /**
@@ -423,17 +429,17 @@ object util
      */
     private def commonPrefix[T](a: Array[T], b: Array[T]): Int =
     {
-	@tailrec def common(count: Int): Int =
-	{
-	    if ((count >= a.length) || 
+        @tailrec def common(count: Int): Int =
+        {
+            if ((count >= a.length) || 
                 (count >= b.length) || 
                 (a(count) != b(count)))
-		count
-	    else
-		common(count + 1)
-	}
+                count
+            else
+                common(count + 1)
+        }
 
-	common(0)
+        common(0)
     }
 
     /**
@@ -831,7 +837,7 @@ object util
 
             val usePrefix = if (prefix == null) "" else prefix
             val randomName = usePrefix + JInt.toHexString(random.nextInt)
-	    val dir = new File (temporaryDirectory, randomName)
+            val dir = new File (temporaryDirectory, randomName)
 
             createDirectory(dir) match
             {
@@ -840,7 +846,7 @@ object util
             }
         }
 
-	create(0)
+        create(0)
     }
 
     /**
