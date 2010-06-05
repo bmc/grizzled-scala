@@ -219,10 +219,16 @@ object util
             val toPath = toPathArray(to)
             val commonLength = commonPrefix(fromPath, toPath)
             val relativeTo = toPath.drop(commonLength)
-            val commonParentsTotal = (fromPath.length - commonLength - 1)
-            require(commonParentsTotal >= 0)
-            val up = (".." + fileSeparator) * commonParentsTotal
-            relativeTo.mkString(up, fileSeparator, "")
+            if (fromPath.length == commonLength)
+                // It's right under the from path.
+                relativeTo mkString fileSeparator
+            else
+            {
+                val commonParentsTotal = (fromPath.length - commonLength - 1)
+                require(commonParentsTotal >= 0)
+                val up = (".." + fileSeparator) * commonParentsTotal
+                relativeTo.mkString(up, fileSeparator, "")
+            }
         }
     }
 

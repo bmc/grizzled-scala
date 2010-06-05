@@ -4,6 +4,11 @@
   `grizzled.parsing.markup` package.
 * Updated to [Knockoff][] version 0.7.1-12, which corrects some Markdown
   translation bugs.
+* Fixed `grizzled-scala` artifact publishing bug ([issue #1][]).
+* Removed support for Scala 2.8.0.RC2.
+* Changed SBT publishing to use an SSH key file, to eliminate the Ivy
+  Swing prompt.
 
 [SBT]: http://code.google.com/p/simple-build-tool
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
+[issue #1]: http://github.com/bmc/grizzled-scala/issues/issue/1
