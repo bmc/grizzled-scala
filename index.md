@@ -47,17 +47,17 @@ If you're using [Maven][], you can get Grizzled Scala from the
 [*clapper.org* Maven Repository][]. The relevant pieces of information are:
 
 * Group ID: `org.clapper`
-* Artifact ID: `grizzled-scala`*scala-version*
-* Version: `0.7`
+* Artifact ID: `grizzled-scala_2.8.0.RC3`
+* Version: `0.7.1`
 * Type: `jar`
 * Repository: `http://maven.clapper.org/`
 
-Substitute either "2.8.0.RC2" or "2.8.0.RC3" for *scala-version*. For example:
+For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.8.0.RC3</artifactId>
-      <version>0.7</version>
+      <version>0.7.1</version>
     </dependency>
 
 ### Using with SBT
@@ -66,15 +66,30 @@ If you're using [SBT][] (the Simple Build Tool) to compile your code, you
 can place the following lines in your project file (i.e., the Scala file in
 your `project/build/` directory):
 
+    val t_repo = "t_repo" at
+        "http://tristanhunt.com:8081/content/groups/public/"
+    val newReleaseToolsRepository = ScalaToolsSnapshots
     val orgClapperRepo = "clapper.org Maven Repository" at
         "http://maven.clapper.org"
-    val grizzled = "org.clapper" %% "grizzled-scala" % "0.7"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "0.7.1"
 
-**NOTE:** The first doubled percent is *not* a typo. It tells SBT to treat
-Grizzled Scala as a cross-built library and automatically inserts the Scala
-version you're using into the artifact ID. It will *only* work if you are
-building with Scala 2.8.0.RC2 or Scala 2.8.0.RC3. See the
-[SBT cross-building][] page for details.
+**NOTES**
+
+1. The first doubled percent is *not* a typo. It tells SBT to treat
+   Grizzled Scala as a cross-built library and automatically inserts the
+   Scala version you're using into the artifact ID. It will *only* work if
+   you are building with Scala 2.8.0.RC2 or Scala 2.8.0.RC3. See the
+   [SBT cross-building][] page for details.
+   
+2. You *must* specify the `tristanhunt.com` and `ScalaToolsSnapshots`
+   repositories, in addition to the `maven.clapper.org` repository. Even
+   though those additional repositories are in the published Grizzled Scala
+   Maven `pom.xml`, SBT will not read them. Under the covers, SBT uses
+   [Apache Ivy][] for dependency management, and Ivy doesn't extract
+   repositories from Maven POM files. If you don't explicitly specify the
+   additional repositories listed above, `sbt update` will fail. See
+   [Library Management Maven/Ivy section][] in the [SBT Manual][] for details.
+   Also see this [email thread][SBT-repo-email-thread].
 
 ## Source Code Repository
 
@@ -140,3 +155,7 @@ request. Along with any patch you send:
 [bmc@clapper.org]: mailto:bmc@clapper.org
 [changelog]: CHANGELOG.html
 [SBT cross-building]: http://code.google.com/p/simple-build-tool/wiki/CrossBuild
+[Apache Ivy]: http://ant.apache.org/ivy/
+[Library Management Maven/Ivy section]: http://code.google.com/p/simple-build-tool/wiki/LibraryManagement#Maven/Ivy
+[SBT Manual]: http://code.google.com/p/simple-build-tool/wiki/DocumentationHome
+[SBT-repo-email-thread]: http://groups.google.com/group/simple-build-tool/browse_thread/thread/470bba921252a167
