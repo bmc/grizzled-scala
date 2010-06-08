@@ -1,0 +1,5 @@
+* Updated to [Knockoff][] version 0.7.2-13, which corrects some Markdown
+  translation bugs.
+
+[SBT]: http://code.google.com/p/simple-build-tool
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
