@@ -107,7 +107,7 @@ class GrizzledScalaProject(info: ProjectInfo)
     val jline = "jline" % "jline" % "0.9.94"
 
     val scalatest = "org.scalatest" % "scalatest" %
-        "1.2-for-scala-2.8.0.RC3-SNAPSHOT"
+        "1.2-for-scala-2.8.0.RC5-SNAPSHOT"
 
     val wikitext = "org.eclipse.mylyn.wikitext" % "wikitext.textile" %
                    "0.9.4.I20090220-1600-e3x"
