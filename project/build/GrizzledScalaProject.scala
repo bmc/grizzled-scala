@@ -52,17 +52,15 @@ class GrizzledScalaProject(info: ProjectInfo)
     \* ---------------------------------------------------------------------- */
 
     val continuationsPlugin = compilerPlugin("org.scala-lang.plugins" %
-                                             "continuations" % "2.8.0.RC3")
+                                             "continuations" %
+                                             buildScalaVersion)
     override def compileOptions = Unchecked :: 
         (super.compileOptions ++ compileOptions("-P:continuations:enable"))
 
-    // Specialization causes problems with inner classes in 2.8.0.RC1.
-    // Disabling it, for now, allows the tests to run under that platform.
-    // It can be re-enabled when support for 2.8.0.RC1 is removed from this
-    // API.
-
+/*
     override def testCompileOptions = super.testCompileOptions ++
         Seq(CompileOption("-no-specialization"))
+*/
 
     // 2.8 and xsbt: Override documentOptions, because they're for 2.7, not
     // 2.8, and they've changed.
@@ -84,8 +82,6 @@ class GrizzledScalaProject(info: ProjectInfo)
                                 Publishing
     \* ---------------------------------------------------------------------- */
 
-    // "publish" will prompt (via a Swing pop-up) for the username and
-    // password.
     lazy val home = Path.fileProperty("user.home")
     lazy val publishTo = Resolver.sftp("clapper.org Maven Repo",
                                        "maven.clapper.org",
@@ -107,7 +103,7 @@ class GrizzledScalaProject(info: ProjectInfo)
     val jline = "jline" % "jline" % "0.9.94"
 
     val scalatest = "org.scalatest" % "scalatest" %
-        "1.2-for-scala-2.8.0.RC5-SNAPSHOT"
+        ("1.2-for-scala-" + buildScalaVersion + "-SNAPSHOT")
 
     val wikitext = "org.eclipse.mylyn.wikitext" % "wikitext.textile" %
                    "0.9.4.I20090220-1600-e3x"
