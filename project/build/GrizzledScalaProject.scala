@@ -102,8 +102,14 @@ class GrizzledScalaProject(info: ProjectInfo)
     // Artifacts
     val jline = "jline" % "jline" % "0.9.94"
 
+/*
+    val ScalaTestVersion = buildScalaVersion
+*/
+    // Until a new build of ScalaTest is released.
+    val ScalaTestVersion = "2.8.0.RC7"
+
     val scalatest = "org.scalatest" % "scalatest" %
-        ("1.2-for-scala-" + buildScalaVersion + "-SNAPSHOT")
+        ("1.2-for-scala-" + ScalaTestVersion + "-SNAPSHOT")
 
     val wikitext = "org.eclipse.mylyn.wikitext" % "wikitext.textile" %
                    "0.9.4.I20090220-1600-e3x"
