@@ -781,20 +781,22 @@ there are no more references to the object.</p><p>The details of when and if the
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getLine</span><span class="params">(<span name="line">line: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name deprecated">getLine</span><span class="params">(<span name="line">line: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
             
             <div class="fullcomment"><div class="block">
           definition classes: Source
-        </div></div>
+        </div><div class="block"><ol>deprecated:
+          <li><p>Use a collections method such as getLines().toIndexedSeq for random access.</p></li>
+        </ol></div></div>
           
     </li><li visbl="pub" name="scala.io.Source#getLines">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getLines</span><span class="params">(<span name="separator">separator: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getLines</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
       </h4>
       
@@ -1623,7 +1625,7 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: TraversableOnce
         </div></div>
           
-    </li><li visbl="pub" name="scala.collection.TraversableOnce#toStream">
+    </li><li visbl="pub" name="scala.collection.Iterator#toStream">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
@@ -1633,7 +1635,7 @@ possible to check whether the contents of the list are of the requested typed.
       
             
             <div class="fullcomment"><div class="block">
-          definition classes: TraversableOnce
+          definition classes: Iterator → TraversableOnce
         </div></div>
           
     </li><li visbl="pub" name="scala.collection.Iterator#toString">

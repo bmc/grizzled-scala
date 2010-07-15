@@ -26,29 +26,39 @@
         <span class="name">Includer</span><span class="result"> extends <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Process <i>include</i> directives in files, returning an iterator over
-lines from the flattened files.</p><p>The <tt>grizzled.file.Includer</tt> class can be used to process<i>includes</i> within a text file, returning a file-like object. It
-also contains some utility functions that permit using include-enabled
-files in other contexts.</p><h5> Syntax </h5><p>The <i>include</i> syntax is defined by a regular expression; any
-line that matches the regular expression is treated as an <i>include</i>directive. The default regular expression, <tt><sup>%include\s&quot;([</sup>&quot;]+)&quot;$</tt>matches include directives like this:</p><p><blockquote><pre>%include &quot;/absolute/path/to/file&quot;
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Process &quot;include&quot; directives in files, returning an iterator over
+lines from the flattened files.</p><p>The <code>grizzled.file.Includer</code> class can be used to process &quot;include&quot;
+directives within a text file, returning a file-like object. It also
+contains some utility functions that permit using include-enabled files
+in other contexts.</p><h5> Syntax </h5><p>The <i>include</i> syntax is defined by a regular expression; any
+line that matches the regular expression is treated as an <i>include</i>directive. The default regular expression, <code>^%include\s&quot;([^&quot;]+)&quot;$</code>matches include directives like this:</p><pre>
+%include &quot;/absolute/path/to/file&quot;
 %include &quot;../relative/path/to/file&quot;
 %include &quot;local_reference&quot;
-%include &quot;http://localhost/path/to/my.config&quot;</pre></blockquote></p><p>Relative and local file references are relative to the including file
-or URL. That is, if an <tt>Includer</tt> is processing file
+%include &quot;http://localhost/path/to/my.config&quot;
+</pre><p>Relative and local file references are relative to the including file
+or URL. That is, if an <code>Includer</code> is processing file
 &quot;/home/bmc/foo.txt&quot; and encounters an attempt to include file &quot;bar.txt&quot;,
-it will assume &quot;bar.txt&quot; is to be found in &quot;/home/bmc&quot;.</p><p>Similarly, if an <tt>Includer</tt> is processing URL
+it will assume &quot;bar.txt&quot; is to be found in &quot;/home/bmc&quot;.</p><p>Similarly, if an <code>Includer</code> is processing URL
 &quot;http://localhost/bmc/foo.txt&quot; and encounters an attempt to include file
 &quot;bar.txt&quot;, it will assume &quot;bar.txt&quot; is to be found at
 &quot;http://localhost/bmc/bar.txt&quot;.</p><p>Nested includes are permitted; that is, an included file may, itself,
 include other files. The maximum recursion level is configurable and
 defaults to 100.</p><p>The include syntax can be changed by passing a different regular
-expression to the <tt>Includer</tt> constructor.</p><h5> Usage </h5><p>This package provides an <tt>Includer</tt> class, which processes
-include directives in a file and behaves somewhat like a Scala<tt>Source</tt>. See the class documentation for more details.</p><p>The package also provides a <tt>preprocess()</tt> convenience
-function, via a companion object, that can be used to preprocess a file;
-it returns the path to the resulting preprocessed file.</p><h5> Examples </h5><p>Preprocess a file containing include directives, then read the result:</p><p><blockquote><pre>import grizzled.file.includer.Includer</p><p>val inc = Includer(path)
-for (line &lt;- inc.getLines)
-    println(line)</pre></blockquote></p><p>Use an include-enabled file with a Scala <tt>scala.io.Source</tt>object:</p><p><blockquote><pre>import grizzled.file.includer.Includer
-import scala.io.Source</p><p>val source = Source.fromFile(Includer.preprocess(&quot;/path/to/file&quot;))</pre></blockquote></p></div><div class="block">
+expression to the <code>Includer</code> constructor.</p><h5> Usage </h5><p>This package provides an <code>Includer</code> class, which processes include
+directives in a file and behaves somewhat like a Scala <code>Source</code>. See the
+class documentation for more details.</p><p>The package also provides a <code>preprocess()</code> convenience function, via a
+companion object, that can be used to preprocess a file; it returns the
+path to the resulting preprocessed file.</p><h5> Examples </h5><p>Preprocess a file containing include directives, then read the result:</p><pre>
+import grizzled.file.Includer
+
+Includer(path).foreach(println(_))
+</pre><p>Use an include-enabled file with a Scala <code>scala.io.Source</code>object:</p><pre>
+import grizzled.file.includer.Includer
+import scala.io.Source
+
+val source = Source.fromFile(Includer.preprocess(&quot;/path/to/file&quot;))
+</pre></div><div class="block">
             go to: <a href="Includer$.html">companion</a>
           </div>
             
@@ -781,8 +791,8 @@ there are no more references to the object.</p><p>The details of when and if the
 includer.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Determine whether there are any more input lines to be read from the
 includer.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if at least one more line is available,
-        <tt>false</tt> otherwise
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if at least one more line is available,
+        <code>false</code> otherwise
 </p></dd></dl><div class="block">
           definition classes: <a href="" class="extype" name="grizzled.file.Includer">Includer</a> → Iterator
         </div>
@@ -1027,7 +1037,7 @@ possible to check whether the contents of the list are of the requested typed.
       </h4>
       
             <p class="shortcomment cmt">Get the next input line.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the next input line. You should call <tt>hasNext</tt> before calling
+            <div class="fullcomment"><div class="comment cmt"><p>Get the next input line. You should call <code>hasNext</code> before calling
 this method, to ensure that there are input lines remaining.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the next input line
 </p></dd></dl><div class="block">
@@ -1487,7 +1497,7 @@ this method, to ensure that there are input lines remaining.
           definition classes: TraversableOnce
         </div></div>
           
-    </li><li visbl="pub" name="scala.collection.TraversableOnce#toStream">
+    </li><li visbl="pub" name="scala.collection.Iterator#toStream">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
@@ -1497,7 +1507,7 @@ this method, to ensure that there are input lines remaining.
       
             
             <div class="fullcomment"><div class="block">
-          definition classes: TraversableOnce
+          definition classes: Iterator → TraversableOnce
         </div></div>
           
     </li><li visbl="pub" name="scala.collection.Iterator#toString">
