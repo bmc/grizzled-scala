@@ -25,6 +25,7 @@ Currently, the library is broken into a number of modules:
   extend the Java `java.net` classes.
 * `grizzled.parsing`: Classes that aid in certain kinds of parsing.
 * `grizzled.readline`: Front-end API for various readline-like libraries.
+* `grizzled.reflect`: Some utility functions to help with Scala reflection.
 * `grizzled.string`: Useful string- and text-related functions.
 * `grizzled.string.template`: For substituting variable references within a
   string. Supports both ${var} (Unix-like) and %var% (Windows-like) syntaxes.
