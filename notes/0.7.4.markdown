@@ -1,3 +1,17 @@
+* Added `grizzled.reflect` module and `grizzled.reflect.isOfType()` method,
+  which uses `scala.reflect.Manifest` to simplify erasure-proof type tests.
+  e.g.:
+
+        def test(v: Any) =
+        {
+            import grizzled.reflect._
+            if (isOfType[List[Int]](v))
+                ...
+            else if (isOfType[List[Char]](v))
+                ...
+            ...
+        }
+
 * Updated to released 1.2 version of [ScalaTest][].
 
 [ScalaTest]: http://scalatest.org/
