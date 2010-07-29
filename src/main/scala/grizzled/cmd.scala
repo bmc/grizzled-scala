@@ -298,11 +298,11 @@ abstract class CommandInterpreter(val appName: String,
         case _   => readlineCandidates
     }
 
-    val readline = Readline.findReadline(readlineLibs, appName, false) match
-    {
-        case None    => throw new Exception("Can't find a readline library.")
-        case Some(r) => r
-    }
+    private val NoReadlineLibrary =
+        throw new Exception("Can't find a readline library.")
+
+    val readline = Readline.findReadline(readlineLibs, appName, false).
+                   getOrElse(NoReadlineLibrary)
 
     // Make sure readline library does its cleanup, no matter what happens.
     Runtime.getRuntime.addShutdownHook(
@@ -626,12 +626,7 @@ abstract class CommandInterpreter(val appName: String,
     {
         try
         {
-            val commandLine2 = commandLine match
-            {
-                case None       => None
-                case Some(line) => preCommand(line)
-            }
-
+            val commandLine2 = commandLine.flatMap(preCommand(line))
             mapCommandLine(commandLine2) match
             {
                 case EOFCommand  => 

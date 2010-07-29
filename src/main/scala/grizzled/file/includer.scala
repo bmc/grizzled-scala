@@ -191,6 +191,10 @@ class Includer(val source: Source,
         @tailrec def doNext: String =
         {
             val line = nextFromStack
+
+            // NOTE: Could use flatMap(), et al, on the return from
+            // findFirstMatchIn(), but this seems more readable.
+
             includeRegex.findFirstMatchIn(line) match
             {
                 case None =>

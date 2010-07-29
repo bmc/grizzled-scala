@@ -48,11 +48,7 @@ import scala.io.Source
  * import grizzled.io.GrizzledSource._
  *
  * val source = Source.fromFile(new java.io.File("/tmp/foo/bar"))
- * source.firstNonblankLine match
- * {
- *     case None => ...
- *     case Some(line) => ...
- * }
+ * source.firstNonblankLine.getOrElse("")
  * }}}
  */
 final class GrizzledSource(val source: Source)

@@ -205,11 +205,13 @@ object MarkupParser
      * @throws IllegalArgumentException unsupported MIME type
      */
     def getParser(mimeType: String): MarkupParser =
-    MimeTypes.get(mimeType) match
     {
-        case None => throw new IllegalArgumentException("Unknown MIME type: " +
-                                                        mimeType)
-        case Some(parserType) => getParser(parserType)
+        def BadMimeType = 
+            throw new IllegalArgumentException("Unknown MIME type: " + mimeType)
+
+        MimeTypes.get(mimeType).
+                  flatMap(p => Some(getParser(p))).
+                  getOrElse(BadMimeType)
     }
 
     /**
