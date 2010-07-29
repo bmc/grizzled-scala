@@ -626,7 +626,7 @@ abstract class CommandInterpreter(val appName: String,
     {
         try
         {
-            val commandLine2 = commandLine.flatMap(preCommand(line))
+            val commandLine2 = commandLine.flatMap(preCommand _)
             mapCommandLine(commandLine2) match
             {
                 case EOFCommand  => 
