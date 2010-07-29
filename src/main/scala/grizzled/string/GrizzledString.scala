@@ -40,6 +40,7 @@ package grizzled.string
 import grizzled.parsing.StringToken
 
 import scala.util.matching.Regex
+import scala.util.matching.Regex.Match
 
 /**
  * An analog to Scala's <tt>RichString</tt> class, providing some methods
@@ -68,11 +69,9 @@ final class GrizzledString(val string: String)
      */
     def ltrim: String =
     {
-        LTrimRegex.findFirstMatchIn(string) match
-        {
-            case Some(m) => m.group(1)
-            case None    => string
-        }
+        LTrimRegex.findFirstMatchIn(string).
+                   flatMap(m => Some(m.group(1))).
+                   getOrElse(string)
     }
 
     private lazy val RTrimRegex = """\s*$""".r
@@ -164,24 +163,23 @@ final class GrizzledString(val string: String)
     {
         val delimRe = ("([^" + delims + "]+)").r
 
-        def find(substring: String, offset: Int): List[StringToken] =
+        def find(substr: String, offset: Int): List[StringToken] =
         {
-            delimRe.findFirstMatchIn(substring) match
+            def handleMatch(m: Match): List[StringToken] =
             {
-                case None => 
-                    Nil
-
-                case Some(m) =>
-                    val start = m.start
-                    val end = m.end
-                    val absStart = start + offset
-                    val token = StringToken(m.toString, start + offset)
-                    if (end >= (substring.length - 1))
-                        List(token)
-                    else
-                        token :: find(substring.substring(end + 1),
-                                                          end + 1 + offset)
+                val start = m.start
+                val end = m.end
+                val absStart = start + offset
+                val token = StringToken(m.toString, start + offset)
+                if (end >= (substr.length - 1))
+                    List(token)
+                else
+                    token :: find(substr.substring(end + 1), end + 1 + offset)
             }
+
+            delimRe.findFirstMatchIn(substr).
+                    flatMap(m => Some(handleMatch(m))).
+                    getOrElse(Nil)
         }
 
         find(this.string, 0)
@@ -206,6 +204,9 @@ final class GrizzledString(val string: String)
      */
     def translateMetachars: String =
     {
+        // NOTE: Direct matching against Some/None is done here, because it's
+        // actually more readable than the (generally preferred) alternatives.
+
         import grizzled.parsing.{IteratorStream, Pushback}
         import grizzled.string.GrizzledChar._
 
