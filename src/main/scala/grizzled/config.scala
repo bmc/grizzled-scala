@@ -420,12 +420,9 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      */
     def getSection(sectionName: String): Option[Section] =
     {
-        sections.get(sectionName) match
-        {
-            case Some(map) => Some(new Section(sectionName,
-                                               EmptyOptions ++ map))
-            case None      => None
-        }
+        sections.get(sectionName).
+                 flatMap(map => Some(new Section(sectionName, 
+                                                 EmptyOptions ++ map)))
     }
 
     /**
@@ -518,6 +515,10 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     /**
      * Works like `Map.getOrElse()`, returning an option value or a
      * default, if the option has no value. Does not throw exceptions.
+     * Calling this function is the same as:
+     * {{{
+     * get(sectionName, optionName).getOrElse(default)
+     * }}}
      *
      * @param sectionName  the section name
      * @param optionName   the option name
@@ -530,11 +531,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
                   optionName: String,
                   default: String): String =
     {
-        get(sectionName, optionName) match
-        {
-            case Some(value) => value
-            case None        => default
-        }
+        get(sectionName, optionName).getOrElse(default)
     }
 
     /**
@@ -549,26 +546,24 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      */
     def getInt(sectionName: String, optionName: String): Option[Int] =
     {
-        get(sectionName, optionName) match
+        def makeInt(value: String): Option[Int] =
         {
-            case Some(value) =>
-                try
-                {
-                    Some(value.toInt)
-                }
+            try
+            {
+                Some(value.toInt)
+            }
 
-                catch
-                {
-                    case _: NumberFormatException =>
-                        throw new ConversionException(sectionName,
-                                                      optionName,
-                                                      value,
-                                                      "not an integer.")
-                }
-
-            case None =>
-                None
+            catch
+            {
+                case _: NumberFormatException =>
+                    throw new ConversionException(sectionName,
+                                                  optionName,
+                                                  value,
+                                                  "not an integer.")
+            }
         }
+
+        get(sectionName, optionName).flatMap(makeInt _)
     }
 
     /**
@@ -586,11 +581,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
                      optionName: String,
                      default: Int): Int =
     {
-        getInt(sectionName, optionName) match
-        {
-            case Some(i) => i
-            case None    => default
-        }
+        getInt(sectionName, optionName).getOrElse(default)
     }
 
     /**
@@ -607,27 +598,25 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     {
         import grizzled.string.util._
 
-        get(sectionName, optionName) match
+        def makeBoolean(value: String): Option[Boolean] =
         {
-            case Some(value) =>
-                try
-                {
-                    val b: Boolean = stringToBoolean(value)
-                    Some(b)
-                }
+            try
+            {
+                Some(stringToBoolean(value))
+            }
 
-                catch
-                {
-                    case _: IllegalArgumentException =>
-                        throw new ConversionException(sectionName,
-                                                      optionName,
-                                                      value,
-                                                      "not a boolean.")
-                }
-
-            case None =>
-                None
+            catch
+            {
+                case _: IllegalArgumentException =>
+                    throw new ConversionException(sectionName,
+                                                  optionName,
+                                                  value,
+                                                  "not a boolean.")
+            }
         }
+
+        get(sectionName, optionName).flatMap(makeBoolean _)
+
     }
 
     /**
@@ -645,11 +634,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
                          optionName: String,
                          default: Boolean): Boolean =
     {
-        getBoolean(sectionName, optionName) match
-        {
-            case Some(b) => b
-            case None    => default
-        }
+        getBoolean(sectionName, optionName).getOrElse(default)
     }
 
     /**
@@ -682,13 +667,10 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             (! hasSection(sectionName)))
             throw new NoSuchSectionException(sectionName)
 
-        get(sectionName, optionName) match
-        {
-            case None =>
-                throw new NoSuchOptionException(sectionName, optionName)
-            case Some(value) =>
-                value
-        }
+        def noSuchOption =
+            throw new NoSuchOptionException(sectionName, optionName)
+
+        get(sectionName, optionName) getOrElse noSuchOption
     }
 
     /**
