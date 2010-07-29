@@ -365,6 +365,14 @@ class PathnameCompleter extends Completer
         {
             val fDir = new File(directory)
             val files = fDir.list.filter(s => (! s.startsWith(".")))
+
+            // The match, below, could also be expressed as:
+            //
+            // filename.flatMap(fl => Some(fl.filter(s => s.startsWith(f)))).
+            //          getOrElse(files)
+            //
+            // I happen to find the explicit match more readable in this case.
+
             val matches = filename match
             {
                 case Some(f) =>
