@@ -38,6 +38,7 @@
 package grizzled.string.template
 
 import scala.util.matching.Regex
+import scala.util.matching.Regex.Match
 import scala.annotation.tailrec
 
 /**
@@ -97,21 +98,26 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
      */
     def substitute(s: String): String =
     {
-        @tailrec def doSub(s2: String): String =
+        def doSub(s2: String): String =
         {
-            findVariableReference(s2) match
+            def subVariable(variable: Variable): Option[String] =
             {
-                case None =>
-                    s2
-
-                case Some(variable) =>
-                    var endString = if (variable.end == s2.length) ""
-                                    else s2.substring(variable.end)
-                    val transformed = s2.substring(0, variable.start) +
-                                      getVar(variable.name, variable.default) +
-                                      endString
-                    doSub(transformed)
+                var endString = if (variable.end == s2.length) ""
+                                else s2.substring(variable.end)
+                val transformed = s2.substring(0, variable.start) +
+                                  getVar(variable.name, variable.default) +
+                                  endString
+                Some(doSub(transformed))
             }
+
+            // Note to self:
+            // 
+            // - findVariableReferences() returns an Option[Variable].
+            // - flatMap() on an option invokes the supplied function on the
+            //   option's value, if it's not None; otherwise, it returns None.
+            // - The getOrElse() is invoked on the result.
+
+            findVariableReference(s2) flatMap(v => subVariable(v)) getOrElse s2
         }
 
         doSub(s)
@@ -141,19 +147,17 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
      */
     private def getVar(name: String, default: Option[String]): String =
     {
-        resolveVar(name) match
+        def handleDefault: String =
         {
-            case None =>
-                if (default != None)
-                    default.get
-                else if (safe)
-                    ""
-                else
-                    throw new VariableNotFoundException(name)
-
-            case Some(value) =>
-                value.toString
+            if (default != None)
+                default.get
+            else if (safe)
+                ""
+            else
+                throw new VariableNotFoundException(name)
         }
+
+        resolveVar(name) getOrElse handleDefault
     }
 }
 
@@ -249,24 +253,31 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
 
         def preSub(s: String): List[String] =
         {
-            val opt = EscapedDollar.findFirstMatchIn(s)
-            opt match
+            def handleMatch(m: Match): List[String] =
             {
-                case None =>
-                    List(s)
-
-                case Some(m) if ((m.group(1).length % 2) == 0) =>
+                if ((m.group(1).length % 2) == 0)
+                {
                     // Odd number of backslashes before "$", including
                     // the one with the dollar token (group 2). Valid escape.
                     List(s.substring(0, m.start(2)), RealEscapeToken) :::
                     preSub(s.substring(m.end(2)))
+                }
 
-                case Some(m) =>
+                else
+                {
                     // Even number of backslashes before "$", including
                     // the one with the dollar token (group 2). Not an escape.
                     List(s.substring(0, m.start(2)), NonEscapeToken) :::
                     preSub(s.substring(m.end(2)))
+                }
             }
+
+            // findFirstMatchIn() returns an Option[Match]. Use flatMap() to
+            // invoke handleMatch on the result.
+
+            EscapedDollar.findFirstMatchIn(s).
+                          flatMap(m => Some(handleMatch(m))).
+                          getOrElse(List(s))
         }
 
         val s2 = super.substitute(preSub(s) mkString "")
@@ -284,35 +295,37 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
      */
     protected def findVariableReference(s: String): Option[Variable] =
     {
-        LongFormVariable.findFirstMatchIn(s) match
+        def handleMatch(m: Match): Option[Variable] =
         {
-            case Some(m1) =>
-                val name = m1.group(1)
-                val default = m1.group(2) match
-                {
-                    case null      =>
-                        None
-                    case s: String =>
-                        // Pull off the "?". Can't do Some(s drop 1),
-                        // because that yields a RichString, not a String.
-                        // Casting doesn't work, either. But assigning to a
-                        // temporary string does.
-                        val realDefault: String = s drop 1
-                        Some(realDefault)
-                }
+            val name = m.group(1)
+            val default = m.group(2) match
+            {
+                case null      =>
+                    None
+                case s: String =>
+                    // Pull off the "?". Can't do Some(s drop 1),
+                    // because that yields a StringOps, not a String.
+                    // Casting doesn't work, either. But assigning to a
+                    // temporary string does.
+                    val realDefault: String = s drop 1
+                    Some(realDefault)
+            }
 
-                Some(new Variable(m1.start, m1.end, name, default))
-
-            case None =>
-                ShortFormVariable.findFirstMatchIn(s) match
-                {
-                    case Some(m2) =>
-                        Some(new Variable(m2.start, m2.end, 
-                                          m2.group(1), None))
-                    case None =>
-                        None
-                }
+            Some(new Variable(m.start, m.end, name, default))
         }
+
+        def handleNoMatch: Option[Variable] =
+        {
+            ShortFormVariable.findFirstMatchIn(s).
+                              flatMap(m => Some(new Variable(m.start,
+                                                             m.end,
+                                                             m.group(1),
+                                                             None)))
+        }
+
+        LongFormVariable.findFirstMatchIn(s).
+                         flatMap(m => handleMatch(m)).
+                         orElse(handleNoMatch)
     }
 }
 
@@ -397,14 +410,12 @@ class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
      */
     protected def findVariableReference(s: String): Option[Variable] =
     {
-        Variable.findFirstMatchIn(s) match
+        def handleMatch(m: Match): Option[Variable] =
         {
-            case Some(m) =>
-                val name = m.group(1)
-                Some(new Variable(m.start, m.end, name, None))
-
-            case None =>
-                None
+            val name = m.group(1)
+            Some(new Variable(m.start, m.end, name, None))
         }
+
+        Variable.findFirstMatchIn(s).flatMap(m => handleMatch(m))
     }
 }

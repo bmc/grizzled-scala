@@ -1,3 +1,6 @@
+* Removed most explicit matches against `Some` and `None`, making better
+  use of the Scala API.
+
 * Added `grizzled.reflect` module and `grizzled.reflect.isOfType()` method,
   which uses `scala.reflect.Manifest` to simplify erasure-proof type tests.
   e.g.:
