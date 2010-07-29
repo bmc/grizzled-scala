@@ -93,11 +93,8 @@ trait MarkupParser
     {
         import scala.xml.parsing.XhtmlParser
 
-        val css = cssSource match
-        {
-            case None      => ""
-            case Some(src) => src.getLines() mkString "\n"
-        }
+        val css = cssSource.flatMap(src => Some(src.getLines() mkString "\n")).
+                            getOrElse("")
 
         // Inserting raw HTML in the body will cause it to be escaped. So,
         // parse the HTML into a NodeSeq first. Note the the whole thing
