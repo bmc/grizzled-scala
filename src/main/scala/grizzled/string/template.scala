@@ -272,11 +272,11 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
                 }
             }
 
-            // findFirstMatchIn() returns an Option[Match]. Use flatMap() to
+            // findFirstMatchIn() returns an Option[Match]. Use map() to
             // invoke handleMatch on the result.
 
             EscapedDollar.findFirstMatchIn(s).
-                          flatMap(m => Some(handleMatch(m))).
+                          map(m => handleMatch(m)).
                           getOrElse(List(s))
         }
 
@@ -317,10 +317,10 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
         def handleNoMatch: Option[Variable] =
         {
             ShortFormVariable.findFirstMatchIn(s).
-                              flatMap(m => Some(new Variable(m.start,
-                                                             m.end,
-                                                             m.group(1),
-                                                             None)))
+                              map(m => new Variable(m.start,
+                                                    m.end,
+                                                    m.group(1),
+                                                    None))
         }
 
         LongFormVariable.findFirstMatchIn(s).

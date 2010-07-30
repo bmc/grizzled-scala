@@ -368,7 +368,7 @@ class PathnameCompleter extends Completer
 
             // The match, below, could also be expressed as:
             //
-            // filename.flatMap(fl => Some(fl.filter(s => s.startsWith(f)))).
+            // filename.map(l => l.filter(s => s.startsWith(f))).
             //          getOrElse(files)
             //
             // I happen to find the explicit match more readable in this case.

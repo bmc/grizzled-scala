@@ -421,8 +421,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     def getSection(sectionName: String): Option[Section] =
     {
         sections.get(sectionName).
-                 flatMap(map => Some(new Section(sectionName, 
-                                                 EmptyOptions ++ map)))
+                 map(m => new Section(sectionName, EmptyOptions ++ m))
     }
 
     /**
@@ -546,11 +545,11 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
      */
     def getInt(sectionName: String, optionName: String): Option[Int] =
     {
-        def makeInt(value: String): Option[Int] =
+        def makeInt(value: String): Int =
         {
             try
             {
-                Some(value.toInt)
+                value.toInt
             }
 
             catch
@@ -563,7 +562,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             }
         }
 
-        get(sectionName, optionName).flatMap(makeInt _)
+        get(sectionName, optionName).map(makeInt _)
     }
 
     /**
@@ -598,11 +597,11 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     {
         import grizzled.string.util._
 
-        def makeBoolean(value: String): Option[Boolean] =
+        def makeBoolean(value: String): Boolean =
         {
             try
             {
-                Some(stringToBoolean(value))
+                stringToBoolean(value)
             }
 
             catch
@@ -615,7 +614,7 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             }
         }
 
-        get(sectionName, optionName).flatMap(makeBoolean _)
+        get(sectionName, optionName).map(makeBoolean _)
 
     }
 

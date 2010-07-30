@@ -93,7 +93,7 @@ trait MarkupParser
     {
         import scala.xml.parsing.XhtmlParser
 
-        val css = cssSource.flatMap(src => Some(src.getLines() mkString "\n")).
+        val css = cssSource.map(src => src.getLines() mkString "\n").
                             getOrElse("")
 
         // Inserting raw HTML in the body will cause it to be escaped. So,
@@ -209,9 +209,7 @@ object MarkupParser
         def BadMimeType = 
             throw new IllegalArgumentException("Unknown MIME type: " + mimeType)
 
-        MimeTypes.get(mimeType).
-                  flatMap(p => Some(getParser(p))).
-                  getOrElse(BadMimeType)
+        MimeTypes.get(mimeType).map(p => getParser(p)).getOrElse(BadMimeType)
     }
 
     /**

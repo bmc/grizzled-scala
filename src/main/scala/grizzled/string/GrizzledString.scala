@@ -70,7 +70,7 @@ final class GrizzledString(val string: String)
     def ltrim: String =
     {
         LTrimRegex.findFirstMatchIn(string).
-                   flatMap(m => Some(m.group(1))).
+                   map(m => m.group(1)).
                    getOrElse(string)
     }
 
@@ -178,7 +178,7 @@ final class GrizzledString(val string: String)
             }
 
             delimRe.findFirstMatchIn(substr).
-                    flatMap(m => Some(handleMatch(m))).
+                    map(m => handleMatch(m)).
                     getOrElse(Nil)
         }
 
