@@ -32,11 +32,7 @@ in this class transparently from a <code>java.io.File</code> object.</p><pre>
 import grizzled.io.GrizzledSource._
 
 val source = Source.fromFile(new java.io.File(&quot;/tmp/foo/bar&quot;))
-source.firstNonblankLine match
-{
-    case None =&gt; ...
-    case Some(line) =&gt; ...
-}
+source.firstNonblankLine.getOrElse(&quot;&quot;)
 </pre></div><div class="block">
           attributes: final 
         </div><div class="block">

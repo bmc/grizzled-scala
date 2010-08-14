@@ -646,7 +646,9 @@ is found, <code>None</code> if not. Does not throw exceptions.
 default, if the option has no value.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Works like <code>Map.getOrElse()</code>, returning an option value or a
 default, if the option has no value. Does not throw exceptions.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
+Calling this function is the same as:</p><pre>
+get(sectionName, optionName).getOrElse(default)
+</pre></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value
 </p></dd><dt>returns</dt><dd class="cmt"><p>The option's value if the section and option exist, the
         default if either the section or option cannot be found.
 </p></dd></dl>

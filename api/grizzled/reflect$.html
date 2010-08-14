@@ -2,31 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.parsing.markup.MarkupType.HTML</title>
+          <title>Scaladoc for grizzled.reflect</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../../lib/jquery.js"></script>
+		      <script type="text/javascript" src="../lib/jquery.js"></script>
           
-      <link href="../../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
-      <script type="text/javascript" src="../../../lib/template.js"></script>
-      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      <link href="../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
     
         </head>
         <body class="value">
 
-      <p id="owner"><a href="../../package.html" class="extype" name="grizzled">grizzled</a>.<a href="../package.html" class="extype" name="grizzled.parsing">parsing</a>.<a href="package.html" class="extype" name="grizzled.parsing.markup">markup</a>.<a href="MarkupType$.html" class="extype" name="grizzled.parsing.markup.MarkupType">MarkupType</a></p>
+      <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a></p>
 
       <div id="definition">
-        <img src="../../../lib/object_big.png" />
-        <h1>HTML</h1>
+        <img src="../lib/object_big.png" />
+        <h1>reflect</h1>
       </div>
 
       <h4 class="signature" id="signature">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">HTML</span><span class="result"> extends <a href="MarkupType.html" class="extype" name="grizzled.parsing.markup.MarkupType">MarkupType</a> with <span class="extype" name="scala.Product">Product</span></span>
+        <span class="name">reflect</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Markup type for HTML. Text is emitted as-is.
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Some reflection-related utility methods and classes.
 </p></div>
             
             
@@ -40,7 +40,7 @@
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="scala.Product">Product</li><li class="in" name="scala.Equals">Equals</li><li class="in" name="grizzled.parsing.markup.MarkupType">MarkupType</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -198,19 +198,6 @@ part of compilation it is not possible to check whether the contents of the list
             
             
           </div>
-          
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType.HTML#canEqual">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">canEqual</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          definition classes: <a href="" class="extype" name="grizzled.parsing.markup.MarkupType.HTML">HTML</a> → Equals
-        </div></div>
           
     </li><li visbl="prt" name="scala.AnyRef#clone">
       <h4 class="signature">
@@ -385,31 +372,35 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType#mimeType">
+    </li><li visbl="pub" name="grizzled.reflect#isOfType">
       <h4 class="signature">
-      <span class="kind">val</span>
+      <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">mimeType</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">isOfType</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="o">o: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="man">man: <span class="extype" name="scala.reflect.Manifest">Manifest</span>[T]</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
+            <p class="shortcomment cmt">Determine whether an object is of a particular type.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>Determine whether an object is of a particular type. Example
+of use:</p><pre>
+def foo(obj: Any) =
+{
+    // Is this object of type Seq[Int] or just Int?
+    if (isOfType[Int](obj))
+        ...
+    else if (isOfType[Seq[Int]](obj))
+        ...
+    else
+        ...
+}
+</pre></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type to test against
+</p></dd><dt class="param">o</dt><dd class="cmt"><p>the object to test</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if <code>o</code> is of type <code>T</code>, <code>false</code> if not.
+</p></dd></dl>
             
-            <div class="fullcomment"><div class="block">
-          definition classes: <a href="MarkupType.html" class="extype" name="grizzled.parsing.markup.MarkupType">MarkupType</a>
-        </div></div>
-          
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType#name">
-      <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol">
-        <span class="name">name</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
             
-            <div class="fullcomment"><div class="block">
-          definition classes: <a href="MarkupType.html" class="extype" name="grizzled.parsing.markup.MarkupType">MarkupType</a>
-        </div></div>
+            
+            
+          </div>
           
     </li><li visbl="pub" name="scala.AnyRef#ne">
       <h4 class="signature">
@@ -472,86 +463,6 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType.HTML#productArity">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">productArity</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          definition classes: <a href="" class="extype" name="grizzled.parsing.markup.MarkupType.HTML">HTML</a> → Product
-        </div></div>
-          
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType.HTML#productElement">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">productElement</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          definition classes: <a href="" class="extype" name="grizzled.parsing.markup.MarkupType.HTML">HTML</a> → Product
-        </div></div>
-          
-    </li><li visbl="pub" name="scala.Product#productElements">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name deprecated">productElements</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.Any">Any</span>]</span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          definition classes: Product
-        </div><div class="block"><ol>deprecated:
-          <li><p>use productIterator instead</p></li>
-        </ol></div></div>
-          
-    </li><li visbl="pub" name="scala.Product#productIterator">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">productIterator</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.Any">Any</span>]</span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          definition classes: Product
-        </div></div>
-          
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType.HTML#productPrefix">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">productPrefix</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          definition classes: <a href="" class="extype" name="grizzled.parsing.markup.MarkupType.HTML">HTML</a> → Product
-        </div></div>
-          
-    </li><li visbl="prt" name="grizzled.parsing.markup.MarkupType.HTML#readResolve">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">readResolve</span><span class="params">()</span><span class="result">: AnyRef</span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: protected 
-        </div></div>
-          
     </li><li visbl="pub" name="scala.AnyRef#synchronized">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -567,7 +478,7 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="grizzled.parsing.markup.MarkupType.HTML#toString">
+    </li><li visbl="pub" name="scala.AnyRef#toString">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
@@ -578,9 +489,7 @@ possible to check whether the contents of the list are of the requested typed.
             <p class="shortcomment cmt">Returns a string representation of the object.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object.</p><p>The default representation is platform dependent.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: <a href="" class="extype" name="grizzled.parsing.markup.MarkupType.HTML">HTML</a> → AnyRef → Any
+          definition classes: AnyRef → Any
         </div>
             
             

@@ -49,7 +49,7 @@ If you're using [Maven][], you can get Grizzled Scala from the
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.8.0`
-* Version: `0.7.3`
+* Version: `0.7.4`
 * Type: `jar`
 * Repository: `http://maven.clapper.org/`
 
@@ -58,7 +58,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.8.0</artifactId>
-      <version>0.7.2</version>
+      <version>0.7.4</version>
     </dependency>
 
 ### Using with SBT
@@ -67,30 +67,17 @@ If you're using [SBT][] (the Simple Build Tool) to compile your code, you
 can place the following lines in your project file (i.e., the Scala file in
 your `project/build/` directory):
 
-    val t_repo = "t_repo" at
-        "http://tristanhunt.com:8081/content/groups/public/"
-    val newReleaseToolsRepository = ScalaToolsSnapshots
     val orgClapperRepo = "clapper.org Maven Repository" at
         "http://maven.clapper.org"
-    val grizzled = "org.clapper" %% "grizzled-scala" % "0.7.2"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "0.7.4"
 
-**NOTES**
+**NOTE**
 
 1. The first doubled percent is *not* a typo. It tells SBT to treat
    Grizzled Scala as a cross-built library and automatically inserts the
    Scala version you're using into the artifact ID. It will *only* work if
    you are building with Scala 2.8.0. See the [SBT cross-building][] page
    for details.
-   
-2. You *must* specify the `tristanhunt.com` and `ScalaToolsSnapshots`
-   repositories, in addition to the `maven.clapper.org` repository. Even
-   though those additional repositories are in the published Grizzled Scala
-   Maven `pom.xml`, SBT will not read them. Under the covers, SBT uses
-   [Apache Ivy][] for dependency management, and Ivy doesn't extract
-   repositories from Maven POM files. If you don't explicitly specify the
-   additional repositories listed above, `sbt update` will fail. See
-   [Library Management Maven/Ivy section][] in the [SBT Manual][] for details.
-   Also see this [email thread][SBT-repo-email-thread].
 
 ## Source Code Repository
 
