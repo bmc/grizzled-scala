@@ -1,6 +1,3 @@
-* Removed most explicit matches against `Some` and `None`, making better
-  use of the Scala API.
-
 * Added `grizzled.reflect` module and `grizzled.reflect.isOfType()` method,
   which uses `scala.reflect.Manifest` to simplify erasure-proof type tests.
   e.g.:
@@ -15,6 +12,13 @@
             ...
         }
 
+* Moved `grizzled.parsing.markup` to the new, separate [MarkWrap][]
+  library. Among other things, this move keeps the Grizzled Scala library
+  more focused and reduces transitive dependencies.
+* Removed most explicit matches against `Some` and `None`, making better
+  use of the Scala API.
 * Updated to released 1.2 version of [ScalaTest][].
+* Changed dependency on [ScalaTest][] to be a test-only dependency.
 
 [ScalaTest]: http://scalatest.org/
+[MarkWrap]: http://bmc.github.com/markwrap/

@@ -96,18 +96,11 @@ class GrizzledScalaProject(info: ProjectInfo)
 
     // Repositories
     val newReleaseToolsRepository = ScalaToolsSnapshots
-    val t_repo = "t_repo" at
-        "http://tristanhunt.com:8081/content/groups/public/"
 
     // Artifacts
     val jline = "jline" % "jline" % "0.9.94"
 
-    val scalatest = "org.scalatest" % "scalatest" % "1.2"
-
-    val wikitext = "org.eclipse.mylyn.wikitext" % "wikitext.textile" %
-                   "0.9.4.I20090220-1600-e3x"
-
-    val knockoff = "com.tristanhunt" %% "knockoff" % "0.7.2-13"
+    val scalatest = "org.scalatest" % "scalatest" % "1.2" % "test"
 
     /* ---------------------------------------------------------------------- *\
                           Private Helper Methods
