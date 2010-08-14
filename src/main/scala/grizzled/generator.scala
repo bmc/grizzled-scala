@@ -80,7 +80,7 @@ object generator
     sealed trait Iteration[+T]
 
     case class Yield[+T](result: T, next: () => Iteration[T])
-         extends Iteration[T]
+        extends Iteration[T]
 
     case object Done extends Iteration[Nothing]
 
@@ -110,8 +110,7 @@ object generator
      * to yield values. The result of a generator, from the caller's
      * perspective, is a typed iterator.
      */
-    def generator[T](body: => Unit @cps[Iteration[T]]):
-        Iterator[T] =
+    def generator[T](body: => Unit @cps[Iteration[T]]): Iterator[T] =
     {
         trampoline
         {
