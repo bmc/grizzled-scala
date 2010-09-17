@@ -1,7 +1,99 @@
----
-title: Change log for Grizzled Scala
-layout: default
----
+
+Version 1.0:
+
+* Now published to the [Scala Tools Nexus][] repository, so it's no
+  longer necessary to specify a custom repository to find this artifact.
+
+[Scala Tools Nexus]: http://nexus.scala-tools.org/content/repositories/releases
+
+Version 0.7.4:
+
+* Added `grizzled.reflect` module and `grizzled.reflect.isOfType()` method,
+  which uses `scala.reflect.Manifest` to simplify erasure-proof type tests.
+  e.g.:
+
+        def test(v: Any) =
+        {
+            import grizzled.reflect._
+            if (isOfType[List[Int]](v))
+                ...
+            else if (isOfType[List[Char]](v))
+                ...
+            ...
+        }
+
+* Moved `grizzled.parsing.markup` to the new, separate [MarkWrap][]
+  library. Among other things, this move keeps the Grizzled Scala library
+  more focused and reduces transitive dependencies.
+* Removed most explicit matches against `Some` and `None`, making better
+  use of the Scala API.
+* Updated to released 1.2 version of [ScalaTest][].
+* Changed dependency on [ScalaTest][] to be a test-only dependency.
+
+[ScalaTest]: http://scalatest.org/
+[MarkWrap]: http://bmc.github.com/markwrap/
+
+Version 0.7.3:
+
+* Updated to build with Scala 2.8.0.final *only*.
+
+[SBT]: http://code.google.com/p/simple-build-tool
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
+
+Version 0.7.2:
+
+* Updated to [Knockoff][] version 0.7.2-13, which corrects some Markdown
+  translation bugs.
+* Updated to Scala 2.8.0.RC5. Now builds against RC3 and RC5 only.
+
+[SBT]: http://code.google.com/p/simple-build-tool
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
+
+Version 0.7.1:
+
+* Bumped to [SBT][] version 0.7.4.
+* Added `relativePath` method to `GrizzledFile`.
+* Added ability to "parse" (i.e., emit) plain text and HTML/XHTML to the
+  `grizzled.parsing.markup` package.
+* Updated to [Knockoff][] version 0.7.1-12, which corrects some Markdown
+  translation bugs.
+* Fixed `grizzled-scala` artifact publishing bug ([issue #1][]).
+* Removed support for Scala 2.8.0.RC2.
+* Changed SBT publishing to use an SSH key file, to eliminate the Ivy
+  Swing prompt.
+
+[SBT]: http://code.google.com/p/simple-build-tool
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
+[issue #1]: http://github.com/bmc/grizzled-scala/issues/issue/1
+
+Version 0.7:
+
+* Added `grizzled.io.GrizzledSource`, which extends `scala.io.Source` with
+  mixin methods.
+* Deprecated `grizzled.string.implicits` and `grizzled.file.implicits`
+  modules, in favor of more granular imports. See the
+  `grizzled.file.GrizzledFile`, `grizzled.string.GrizzledString` and
+  `grizzled.string.GrizzledChar` companion objects for details.
+* Deprecated the string-to-boolean implicit function, in favor of the
+  more explicit `grizzled.string.util.stringToBoolean()` method.
+* Changed `GrizzledFile.listRecursively` to take an optional
+  `topdown` flag, indicating whether directory traversal should be top-down
+  or bottom-up.
+* Deprecated `grizzled.parsing.Markdown` in favor of new
+  `grizzled.parsing.markup` module.
+* Add [Textile][] support to `grizzled.parsing.markup`, via the Eclipse
+  [WikiText][] library.
+* Changed `grizzled.parsing.markup` to use Tristan Juricek's [Knockoff][]
+  library for [Markdown][], rather than invoking the [Showdown][]
+  JavaScript parser via [Rhino][].
+* Now compiles under Scala 2.8.0.RC3 and RC2. Dropped support for RC1.
+
+[Rhino]: http://www.mozilla.org/rhino/
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
+[Showdown]: http://attacklab.net/showdown/
+[Markdown]: http://daringfireball.net/projects/markdown/
+[Textile]: http://textile.thresholdstate.com/
+[WikiText]: http://help.eclipse.org/ganymede/index.jsp?topic=/org.eclipse.mylyn.wikitext.help.ui/help/devguide/WikiText%20Developer%20Guide.html
 
 Version 0.6:
 
