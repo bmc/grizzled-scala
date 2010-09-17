@@ -1,0 +1,4 @@
+* Now published to the [Scala Tools Nexus][] repository, so it's no
+  longer necessary to specify a custom repository to find this artifact.
+
+[Scala Tools Nexus]: http://nexus.scala-tools.org/content/repositories/releases
