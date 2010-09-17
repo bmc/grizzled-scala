@@ -1,3 +1,7 @@
+---
+title: The Grizzled Scala Utility Library
+layout: default
+---
 
 Version 1.0:
 
