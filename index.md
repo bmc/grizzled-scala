@@ -39,27 +39,39 @@ For a more detailed description of what's available, see the
 ## Installation
 
 The easiest way to install the Grizzled Scala library is to download a
-pre-compiled jar from the [*clapper.org* Maven repository][]. However, you
-can also get certain build tools to download it for you.
+pre-compiled jar from the [Scala Tools Maven repository][]. However, you
+can also get certain build tools to download it for you automatically.
 
 ### Installing for Maven
 
-If you're using [Maven][], you can get Grizzled Scala from the
-[*clapper.org* Maven Repository][]. The relevant pieces of information are:
+If you're using [Maven][], you can simply tell Maven to get Grizzled Scala
+from the [Scala Tools Maven repository][]. The relevant pieces of
+information are:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.8.0`
-* Version: `0.7.4`
+* Version: `1.0`
 * Type: `jar`
-* Repository: `http://maven.clapper.org/`
+* Repository: `http://www.scala-tools.org/repo-releases/`
 
 For example:
+
+    <repositories>
+      <repository>
+        <id>scala-tools.org</id>
+          <name>Scala-tools Maven2 Repository</name>
+          <url>http://scala-tools.org/repo-releases</url>
+      </repository>
+    </repositories>
 
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.8.0</artifactId>
-      <version>0.7.4</version>
+      <version>1.0</version>
     </dependency>
+
+For more information on using Maven and Scala, see Josh Suereth's
+[Scala Maven Guide][].
 
 ### Using with SBT
 
@@ -67,17 +79,19 @@ If you're using [SBT][] (the Simple Build Tool) to compile your code, you
 can place the following lines in your project file (i.e., the Scala file in
 your `project/build/` directory):
 
-    val orgClapperRepo = "clapper.org Maven Repository" at
-        "http://maven.clapper.org"
-    val grizzled = "org.clapper" %% "grizzled-scala" % "0.7.4"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0"
 
-**NOTE**
+**NOTES**
 
 1. The first doubled percent is *not* a typo. It tells SBT to treat
    Grizzled Scala as a cross-built library and automatically inserts the
    Scala version you're using into the artifact ID. It will *only* work if
    you are building with Scala 2.8.0. See the [SBT cross-building][] page
    for details.
+2. Prior to Grizzled Scala, version 1.0, you also had to specify the location
+   of a custom Maven repository. With version 1.0, however, Grizzled Scala
+   is now being published to the [Scala Tools Maven repository][], which
+   SBT automatically searches.
 
 ## Source Code Repository
 
@@ -137,7 +151,8 @@ request. Along with any patch you send:
 [GitHub repository]: http://github.com/bmc/grizzled-scala
 [GitHub]: http://github.com/bmc/
 [downloads area]: http://github.com/bmc/grizzled-scala/downloads
-[*clapper.org* Maven repository]: http://maven.clapper.org/org/clapper/
+[Scala Tools Maven repository]: http://www.scala-tools.org/repo-releases/
+[Scala Maven Guide]: http://www.scala-lang.org/node/345
 [Maven]: http://maven.apache.org/
 [SBT]: http://code.google.com/p/simple-build-tool
 [bmc@clapper.org]: mailto:bmc@clapper.org
