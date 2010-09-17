@@ -156,7 +156,7 @@ request. Along with any patch you send:
 [Maven]: http://maven.apache.org/
 [SBT]: http://code.google.com/p/simple-build-tool
 [bmc@clapper.org]: mailto:bmc@clapper.org
-[changelog]: CHANGELOG.html
+[changelog]: changelog.html
 [SBT cross-building]: http://code.google.com/p/simple-build-tool/wiki/CrossBuild
 [Apache Ivy]: http://ant.apache.org/ivy/
 [Library Management Maven/Ivy section]: http://code.google.com/p/simple-build-tool/wiki/LibraryManagement#Maven/Ivy
