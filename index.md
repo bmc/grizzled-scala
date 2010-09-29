@@ -50,7 +50,7 @@ information are:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.8.0`
-* Version: `1.0`
+* Version: `1.0.1`
 * Type: `jar`
 * Repository: `http://www.scala-tools.org/repo-releases/`
 
