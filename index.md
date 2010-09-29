@@ -81,7 +81,7 @@ If you're using [SBT][] (the Simple Build Tool) to compile your code, you
 can place the following lines in your project file (i.e., the Scala file in
 your `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.1"
 
 **NOTES**
 
