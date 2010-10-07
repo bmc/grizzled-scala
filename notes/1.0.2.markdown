@@ -1,4 +1,6 @@
 * Scaladoc documentation is now generated with a proper title.
+* Fixed problem where `grizzled.cmd` failed to find a Readline library,
+  because of an inadvertent change of a constant from a `def` to a `val`.
 * Now compiles against [Scala][] 2.8.1 RC2, as well as 2.8.0.
 
 [Scala]: http://www.scala-lang.org/

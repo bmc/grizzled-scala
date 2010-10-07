@@ -298,7 +298,7 @@ abstract class CommandInterpreter(val appName: String,
         case _   => readlineCandidates
     }
 
-    private val NoReadlineLibrary =
+    private def NoReadlineLibrary =
         throw new Exception("Can't find a readline library.")
 
     val readline = Readline.findReadline(readlineLibs, appName, false).
