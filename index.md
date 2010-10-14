@@ -71,6 +71,8 @@ For example:
       <version>1.0.2</version>
     </dependency>
 
+Scala 2.8.1.RC1 is also supported in version 1.0.1.
+
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
 
