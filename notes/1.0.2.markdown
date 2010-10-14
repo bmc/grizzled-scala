@@ -1,3 +1,6 @@
+* Added the `grizzled.math.stats` module, which contains some common
+  statistics functions (`geometricMean()`, `harmonicMean()`, `mean()`,
+  `median()`, `mode()`, `variance()` and `stddev()`, for instance).
 * Scaladoc documentation is now generated with a proper title.
 * Fixed problem where `grizzled.cmd` failed to find a Readline library,
   because of an inadvertent change of a constant from a `def` to a `val`.
