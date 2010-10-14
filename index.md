@@ -20,7 +20,8 @@ Currently, the library is broken into a number of modules:
   support for include files and variable substitution.
 * `grizzled.file`: File-related utility functions.
 * `grizzled.io`: Some enhanced I/O functions and classes.
-* `grizzled.math`: Some simple math functions.
+* `grizzled.math`: Some simple math functions, including some common statistics
+  functions.
 * `grizzled.net`: Network-related stuff, mostly Scala wrappers to simplify or
   extend the Java `java.net` classes.
 * `grizzled.parsing`: Classes that aid in certain kinds of parsing.
@@ -50,7 +51,7 @@ information are:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.8.0`
-* Version: `1.0`
+* Version: `1.0.2`
 * Type: `jar`
 * Repository: `http://www.scala-tools.org/repo-releases/`
 
@@ -67,7 +68,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.8.0</artifactId>
-      <version>1.0</version>
+      <version>1.0.2</version>
     </dependency>
 
 For more information on using Maven and Scala, see Josh Suereth's
@@ -79,15 +80,15 @@ If you're using [SBT][] (the Simple Build Tool) to compile your code, you
 can place the following lines in your project file (i.e., the Scala file in
 your `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.2"
 
 **NOTES**
 
 1. The first doubled percent is *not* a typo. It tells SBT to treat
    Grizzled Scala as a cross-built library and automatically inserts the
    Scala version you're using into the artifact ID. It will *only* work if
-   you are building with Scala 2.8.0. See the [SBT cross-building][] page
-   for details.
+   you are building with Scala 2.8.0 or 2.8.1.RC2.
+   See the [SBT cross-building][] page for details.
 2. Prior to Grizzled Scala, version 1.0, you also had to specify the location
    of a custom Maven repository. With version 1.0, however, Grizzled Scala
    is now being published to the [Scala Tools Maven repository][], which
