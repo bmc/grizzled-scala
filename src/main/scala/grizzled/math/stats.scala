@@ -40,8 +40,12 @@ package grizzled.math
 import scala.math
 
 /**
- * Miscellaneous statistics-related functions. You must import
- * `scala.math.Numeric` for these functions to work.
+ * Miscellaneous statistics-related functions. Many of these functions were
+ * adapted from Gary Strangman's `stats.py` Python module. See his
+ * <a href="http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html">Python Modules</a>
+ * page for details.
+ *
+ * Note: You must import `scala.math.Numeric` for these functions to work.
  */
 object stats
 {
@@ -192,23 +196,23 @@ object stats
      * Calculate the variance of the specified values, using N-1 for the
      * denominator. Useful for estimating population variance.
      *
-     * @param n the numbers on which to operate
+     * @param items  the numbers on which to operate
      *
      * @return the variance
      */
-    def variance[T](n: T*)(implicit x: Numeric[T]): Double =
-    {
-        def sumOfSquares(dList: List[Double]): Double =
-            (0.0 /: dList) ((sum, d) => sum + (d * d))
+    def populationVariance[T](items: T*)(implicit x: Numeric[T]): Double =
+        calculateVariance(items.length -1, items.toList)
 
-        val nList = n.toList
-        val len = nList.length
-        require (len > 1)
-
-        val mn = mean(nList: _*)
-        val deviations = nList map (x.toDouble(_) - mn)
-        sumOfSquares(deviations) / ((len - 1).toDouble)
-    }
+    /**
+     * Calculate the variance of the specified values, using N for the
+     * denominator. Useful for describing the sample variance only.
+     *
+     * @param items  the numbers on which to operate
+     *
+     * @return the variance
+     */
+    def sampleVariance[T](items: T*)(implicit x: Numeric[T]): Double =
+        calculateVariance(items.length, items.toList)
 
     /**
      * Calculate the standard deviation of the specified values, using N-1
@@ -219,6 +223,50 @@ object stats
      *
      * @return the standard deviation
      */
-    def stddev[T](n: T*)(implicit x: Numeric[T]): Double =
-        java.lang.Math.sqrt(variance(n.toList: _*))
+    def populationStandardDeviation[T](n: T*)(implicit x: Numeric[T]): Double =
+        java.lang.Math.sqrt(populationVariance(n.toList: _*))
+
+    /**
+     * Shorter synonym for `populationStandardDeviation`.
+     *
+     * @see #populationStandardDeviation
+     */
+    def popStdDev[T](n: T*)(implicit x: Numeric[T]): Double =
+        java.lang.Math.sqrt(populationVariance(n.toList: _*))
+
+    /**
+     * Calculate the standard deviation of the specified values, using N
+     * for the denominator. Useful for describing sample standard
+     * deviation only.
+     *
+     * @param n the numbers on which to operate
+     *
+     * @return the standard deviation
+     */
+    def sampleStandardDeviation[T](n: T*)(implicit x: Numeric[T]): Double =
+        java.lang.Math.sqrt(sampleVariance(n.toList: _*))
+
+    /**
+     * Shorter synonym for `sampleStandardDeviation`.
+     *
+     * @see #populationStandardDeviation
+     */
+    def sampleStdDev[T](n: T*)(implicit x: Numeric[T]): Double =
+        java.lang.Math.sqrt(sampleVariance(n.toList: _*))
+
+
+    private def calculateVariance[T](denominator: Int, items: List[T])
+                                    (implicit x: Numeric[T]): Double =
+    {
+        def sumOfSquares(dList: List[Double]): Double =
+            (0.0 /: dList) ((sum, d) => sum + (d * d))
+
+        val itemList = items.toList
+        val len = itemList.length
+        require (len > 1)
+
+        val mn = mean(itemList: _*)
+        val deviations = itemList map (x.toDouble(_) - mn)
+        sumOfSquares(deviations) / denominator.toDouble
+    }
 }

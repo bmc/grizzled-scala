@@ -141,12 +141,13 @@ class StatsTest extends GrizzledFunSuite
         }
     }
 
-    test("variance")
+    test("population variance")
     {
         val Data = List(
             (50.0,               dList(10, 20)),
             (1866.5,             dList(1, 10, 3, 1, 100)),
             (1.0,                dList(1, 2, 3, 1, 3)),
+            (100.0,              dList(10.5, 20.5, 30.5)),
             (212937.125,         dList(1, 2, 3, 1, 3, 1000, 1000, 9))
         )
 
@@ -154,12 +155,12 @@ class StatsTest extends GrizzledFunSuite
         {
             expect(expected, "variance of " + values)
             {
-                variance(values: _*)
+                populationVariance(values: _*)
             }
         }
     }
 
-    test("standard deviation")
+    test("population standard deviation")
     {
         val Data = List(
             (7.0710678118654755, dList(10, 20)),
@@ -172,7 +173,45 @@ class StatsTest extends GrizzledFunSuite
         {
             expect(expected, "standard deviation " + values)
             {
-                stddev(values: _*)
+                populationStandardDeviation(values: _*)
+            }
+        }
+    }
+
+    test("sample variance")
+    {
+        val Data = List(
+            (25.0,             dList(10, 20)),
+            (25.0,             dList(10.5, 20.5)),
+            (1493.2,           dList(1, 10, 3, 1, 100)),
+            (0.8,              dList(1, 2, 3, 1, 3)),
+            (186319.984375,    dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+        )
+
+        for ((expected, values) <- Data)
+        {
+            expect(expected, "variance of " + values)
+            {
+                sampleVariance(values: _*)
+            }
+        }
+    }
+
+    test("sample standard deviation")
+    {
+        val Data = List(
+            (5,                  dList(10, 20)),
+            (5.0,                dList(10.5, 20.5)),
+            (38.64194612076364,  dList(1, 10, 3, 1, 100)),
+            (0.8944271909999159, dList(1, 2, 3, 1, 3)),
+            (431.64798664536823, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+        )
+
+        for ((expected, values) <- Data)
+        {
+            expect(expected, "standard deviation " + values)
+            {
+                sampleStandardDeviation(values: _*)
             }
         }
     }

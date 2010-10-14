@@ -1,9 +1,13 @@
 * Added the `grizzled.math.stats` module, which contains some common
-  statistics functions (`geometricMean()`, `harmonicMean()`, `mean()`,
-  `median()`, `mode()`, `variance()` and `stddev()`, for instance).
+  statistics functions, including: `geometricMean()`, `harmonicMean()`,
+  `mean()`, `median()`, `mode()`, `populationVariance()`
+  `populationStandardDeviation()`. Most were adapted from
+  Gary Strangman's `stats.py` Python module. (See
+  [http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html][].)
 * Scaladoc documentation is now generated with a proper title.
 * Fixed problem where `grizzled.cmd` failed to find a Readline library,
   because of an inadvertent change of a constant from a `def` to a `val`.
 * Now compiles against [Scala][] 2.8.1 RC2, as well as 2.8.0.
 
 [Scala]: http://www.scala-lang.org/
+[http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html]: http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html
