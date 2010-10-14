@@ -36,7 +36,7 @@
 
 import org.scalatest.FunSuite
 import grizzled.math.stats._
-import scala.math.Numeric
+import Numeric._
 import java.lang.Math.sqrt
 
 /**

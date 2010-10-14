@@ -40,12 +40,18 @@ package grizzled.math
 import scala.math
 
 /**
- * Miscellaneous statistics-related functions. Many of these functions were
- * adapted from Gary Strangman's `stats.py` Python module. See his
- * <a href="http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html">Python Modules</a>
- * page for details.
+ * Miscellaneous statistics-related functions.
  *
- * Note: You must import `scala.math.Numeric` for these functions to work.
+ * Note: You must import `scala.math.Numeric` (or just `Numeric._`) for these
+ * functions to work. For example:
+ *
+ * {{{
+ * import Numeric._
+ * import grizzled.math.stats._
+ *
+ * val l = List[Double]( ... )
+ * println(median(l))
+ * }}}
  */
 object stats
 {
@@ -53,7 +59,13 @@ object stats
 
     /**
      * Calculates the geometric mean of the values of the passed-in
-     * numbers, namely, the n-th root of (x1 * x2 * ... * xn).
+     * numbers, namely, the n-th root of (x1 * x2 * ... * xn). Note that
+     * all numbers used in the calculation of a geometric mean must be
+     * positive.
+     *
+     * For a discussion of when a geometric mean is more suitable than an
+     * arithmetic mean, see
+     * <a href="http://www.math.toronto.edu/mathnet/questionCorner/geomean.html">http://www.math.toronto.edu/mathnet/questionCorner/geomean.html</a>.
      *
      * @param items the numbers on which to operate
      *
@@ -64,6 +76,7 @@ object stats
         val itemList = items.toList
         val len = itemList.length
         require (len > 0)
+        require (! itemList.exists(n.toDouble(_) <= 0))
 
         len match
         {
@@ -108,7 +121,7 @@ object stats
      *
      * @return the arithmetic mean
      */
-    def mean[T](items: T*)(implicit n: Numeric[T]): Double =
+    def arithmeticMean[T](items: T*)(implicit n: Numeric[T]): Double =
     {
         val itemList = items.toList
         val len = itemList.length
@@ -123,6 +136,15 @@ object stats
                 ((0.0 /: itemList) ((a, b) => a + n.toDouble(b))) / len
         }
     }
+
+    /**
+     * Synonym for `arithmeticMean`.
+     *
+     * @see arithmeticMean
+     */
+    def mean[T](items: T*)(implicit n: Numeric[T]): Double =
+        arithmeticMean(items.toList: _*)
+        
 
     /**
      * Calculates the median of the values of the passed-in numbers.
@@ -198,15 +220,11 @@ object stats
      *
      * {{{
      *
-     *      N
-     * 1    --              2
-     * - *  >  (x[i] - mean)
-     * N    --
-     *      i=1
+     * 1                               2
+     * - *  SUM(i=1, N) { (x[i] - mean)  }
+     * N 
      *
      * }}}
-     *
-     * (Yes, that's a cheesy attempt at a summation symbol.)
      *
      * See:
      *
@@ -228,15 +246,12 @@ object stats
      *
      * {{{
      *
-     *           N
-     *   1       --                    2
-     * ----- *   >  (x[i] - sampleMean)
-     * N - 1     --
-     *           i=1
+     *           
+     *   1                                        2
+     * ----- *   SUM(i=1, N) { (x[i] - sampleMean)  }
+     * N - 1
      *
      * }}}
-     *
-     * (Yes, that's another cheesy attempt at a summation symbol.)
      *
      * See:
      *
@@ -272,7 +287,7 @@ object stats
     /**
      * Shorter synonym for `populationStandardDeviation`.
      *
-     * @see #populationStandardDeviation
+     * @see populationStandardDeviation
      */
     def popStdDev[T](items: T*)(implicit n: Numeric[T]): Double =
         java.lang.Math.sqrt(populationVariance(items.toList: _*))
@@ -296,7 +311,7 @@ object stats
     /**
      * Shorter synonym for `sampleStandardDeviation`.
      *
-     * @see #populationStandardDeviation
+     * @see populationStandardDeviation
      */
     def sampleStdDev[T](items: T*)(implicit n: Numeric[T]): Double =
         java.lang.Math.sqrt(sampleVariance(items.toList: _*))
