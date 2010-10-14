@@ -55,24 +55,24 @@ object stats
      * Calculates the geometric mean of the values of the passed-in
      * numbers, namely, the n-th root of (x1 * x2 * ... * xn).
      *
-     * @param n the numbers on which to operate
+     * @param items the numbers on which to operate
      *
      * @return the geometric mean
      */
-    def geometricMean[T](n: T*)(implicit x: Numeric[T]): Double =
+    def geometricMean[T](items: T*)(implicit n: Numeric[T]): Double =
     {
-        val nList = n.toList
-        val len = nList.length
+        val itemList = items.toList
+        val len = itemList.length
         require (len > 0)
 
         len match
         {
             case 1 =>
-                x.toDouble(nList(0))
+                n.toDouble(itemList(0))
 
             case _ =>
                 val recip = 1.0 / len.toDouble
-                (1.0 /: nList) ((m, n) => m * math.pow(x.toDouble(n), recip))
+                (1.0 /: itemList) ((a, b) => a * math.pow(n.toDouble(b), recip))
         }
     }
 
@@ -80,23 +80,23 @@ object stats
      * Calculates the harmonic mean of the values of the passed-in
      * numbers, namely: n / (1/x1 + 1/x2 + ... + 1/xn).
      *
-     * @param n the numbers on which to operate
+     * @param items the numbers on which to operate
      *
      * @return the harmonic mean
      */
-    def harmonicMean[T](n: T*)(implicit x: Numeric[T]): Double =
+    def harmonicMean[T](items: T*)(implicit n: Numeric[T]): Double =
     {
-        val nList = n.toList
-        val len = nList.length
+        val itemList = items.toList
+        val len = itemList.length
         require (len > 0)
 
         len match
         {
             case 1 =>
-                x.toDouble(nList(0))
+                n.toDouble(itemList(0))
 
             case _ =>
-                len / ((0.0 /: nList) ((m, n) => m + (1.0 / x.toDouble(n))))
+                len / ((0.0 /: itemList) ((a, b) => a + (1.0 / n.toDouble(b))))
         }
     }
 
@@ -104,55 +104,55 @@ object stats
      * Calculates the arithmetic mean of the values of the passed-in
      * numbers.
      *
-     * @param n the numbers on which to operate
+     * @param items the numbers on which to operate
      *
      * @return the arithmetic mean
      */
-    def mean[T](n: T*)(implicit x: Numeric[T]): Double =
+    def mean[T](items: T*)(implicit n: Numeric[T]): Double =
     {
-        val nList = n.toList
-        val len = nList.length
+        val itemList = items.toList
+        val len = itemList.length
         require (len > 0)
 
         len match
         {
             case 1 =>
-                x.toDouble(nList(0))
+                n.toDouble(itemList(0))
 
             case _ =>
-                ((0.0 /: nList) ((m, n) => m + x.toDouble(n))) / len
+                ((0.0 /: itemList) ((a, b) => a + n.toDouble(b))) / len
         }
     }
 
     /**
      * Calculates the median of the values of the passed-in numbers.
      *
-     * @param n the numbers on which to operate
+     * @param items the numbers on which to operate
      *
      * @return the median
      */
-    def median[T](n: T*)(implicit x: Numeric[T]): Double =
+    def median[T](items: T*)(implicit n: Numeric[T]): Double =
     {
-        val nList = n.toList
-        val len = nList.length
+        val itemList = items.toList
+        val len = itemList.length
         require (len > 0)
 
         if (len == 1)
-            x.toDouble(nList(0))
+            n.toDouble(itemList(0))
 
         else
         {
-            val sorted = nList sortWith (x.compare(_, _) < 0)
+            val sorted = itemList sortWith (n.compare(_, _) < 0)
             val midpoint = sorted.length / 2
             len % 2 match
             {
                 case 0 => // even
-                    mean(x.toDouble(sorted(midpoint)),
-                         x.toDouble(sorted(midpoint - 1)))
+                    mean(n.toDouble(sorted(midpoint)),
+                         n.toDouble(sorted(midpoint - 1)))
 
 
                 case 1 => // odd
-                    x.toDouble(sorted(midpoint))
+                    n.toDouble(sorted(midpoint))
             }
         }
     }
@@ -162,18 +162,18 @@ object stats
      * passed-in numbers. If there are multiple common values, they're all
      * returned.
      *
-     * @param n the numbers on which to operate
+     * @param items the numbers on which to operate
      *
      * @return list of modal values
      */
-    def mode[T](n: T*)(implicit x: Numeric[T]): List[T] =
+    def mode[T](items: T*)(implicit n: Numeric[T]): List[T] =
     {
-        val nList = n.toList
-        val len = nList.length
+        val itemList = items.toList
+        val len = itemList.length
         require (len > 0)
 
         if (len == 1)
-            nList take 1
+            itemList take 1
 
         else
         {
@@ -182,7 +182,7 @@ object stats
             val m = MutableMap.empty[T, Int]
 
             // Count the occurrences of each value.
-            n.toList.foreach(t => m += t -> (m.getOrElse(t, 0) + 1))
+            itemList.foreach(t => m += t -> (m.getOrElse(t, 0) + 1))
 
             // Find the maximum count.
             val max = (0 /: m.values) (scala.math.max(_, _))
@@ -193,70 +193,117 @@ object stats
     }
 
     /**
-     * Calculate the variance of the specified values, using N-1 for the
-     * denominator. Useful for estimating population variance.
+     * Calculate the population variance of the finite population defined
+     * by the `items` arguments. The population variance is defined as:
+     *
+     * {{{
+     *
+     *      N
+     * 1    --              2
+     * - *  >  (x[i] - mean)
+     * N    --
+     *      i=1
+     *
+     * }}}
+     *
+     * (Yes, that's a cheesy attempt at a summation symbol.)
+     *
+     * See:
+     *
+     * <ul>
+     *   <li><a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
+     *   <li><a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a>
+     * </ul>
      *
      * @param items  the numbers on which to operate
      *
      * @return the variance
      */
-    def populationVariance[T](items: T*)(implicit x: Numeric[T]): Double =
-        calculateVariance(items.length -1, items.toList)
-
-    /**
-     * Calculate the variance of the specified values, using N for the
-     * denominator. Useful for describing the sample variance only.
-     *
-     * @param items  the numbers on which to operate
-     *
-     * @return the variance
-     */
-    def sampleVariance[T](items: T*)(implicit x: Numeric[T]): Double =
+    def populationVariance[T](items: T*)(implicit n: Numeric[T]): Double =
         calculateVariance(items.length, items.toList)
 
     /**
-     * Calculate the standard deviation of the specified values, using N-1
-     * for the denominator. Useful for estimating population standard
-     * deviation.
+     * Calculate the unbiased sample variance of the finite sample defined
+     * by the `items` arguments. The sample variance is defined as:
      *
-     * @param n the numbers on which to operate
+     * {{{
+     *
+     *           N
+     *   1       --                    2
+     * ----- *   >  (x[i] - sampleMean)
+     * N - 1     --
+     *           i=1
+     *
+     * }}}
+     *
+     * (Yes, that's another cheesy attempt at a summation symbol.)
+     *
+     * See:
+     *
+     * <ul>
+     *   <li><a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
+     *   <li><a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a>
+     * </ul>
+     *
+     * @param items  the numbers on which to operate
+     *
+     * @return the variance
+     */
+    def sampleVariance[T](items: T*)(implicit n: Numeric[T]): Double =
+        calculateVariance(items.length - 1, items.toList)
+
+    /**
+     * Calculate the population standard deviation of the specified values.
+     * The population standard deviation is merely the square root of the
+     * population variance. Thus, this function is just shorthand for:
+     *
+     * {{{
+     * java.lang.Math.sqrt(populationVariance(items))
+     * }}}
+     *
+     * @param items the numbers on which to operate
      *
      * @return the standard deviation
      */
-    def populationStandardDeviation[T](n: T*)(implicit x: Numeric[T]): Double =
-        java.lang.Math.sqrt(populationVariance(n.toList: _*))
+    def populationStandardDeviation[T](items: T*)
+                                      (implicit n: Numeric[T]): Double =
+        java.lang.Math.sqrt(populationVariance(items.toList: _*))
 
     /**
      * Shorter synonym for `populationStandardDeviation`.
      *
      * @see #populationStandardDeviation
      */
-    def popStdDev[T](n: T*)(implicit x: Numeric[T]): Double =
-        java.lang.Math.sqrt(populationVariance(n.toList: _*))
+    def popStdDev[T](items: T*)(implicit n: Numeric[T]): Double =
+        java.lang.Math.sqrt(populationVariance(items.toList: _*))
 
     /**
-     * Calculate the standard deviation of the specified values, using N
-     * for the denominator. Useful for describing sample standard
-     * deviation only.
+     * Calculate the sample standard deviation of the specified values.
+     * The sample standard deviation is merely the square root of the
+     * sample variance. Thus, this function is just shorthand for:
      *
-     * @param n the numbers on which to operate
+     * {{{
+     * java.lang.Math.sqrt(sampleVariance(items))
+     * }}}
+     *
+     * @param items the numbers on which to operate
      *
      * @return the standard deviation
      */
-    def sampleStandardDeviation[T](n: T*)(implicit x: Numeric[T]): Double =
-        java.lang.Math.sqrt(sampleVariance(n.toList: _*))
+    def sampleStandardDeviation[T](items: T*)(implicit n: Numeric[T]): Double =
+        java.lang.Math.sqrt(sampleVariance(items.toList: _*))
 
     /**
      * Shorter synonym for `sampleStandardDeviation`.
      *
      * @see #populationStandardDeviation
      */
-    def sampleStdDev[T](n: T*)(implicit x: Numeric[T]): Double =
-        java.lang.Math.sqrt(sampleVariance(n.toList: _*))
+    def sampleStdDev[T](items: T*)(implicit n: Numeric[T]): Double =
+        java.lang.Math.sqrt(sampleVariance(items.toList: _*))
 
 
     private def calculateVariance[T](denominator: Int, items: List[T])
-                                    (implicit x: Numeric[T]): Double =
+                                    (implicit n: Numeric[T]): Double =
     {
         def sumOfSquares(dList: List[Double]): Double =
             (0.0 /: dList) ((sum, d) => sum + (d * d))
@@ -266,7 +313,7 @@ object stats
         require (len > 1)
 
         val mn = mean(itemList: _*)
-        val deviations = itemList map (x.toDouble(_) - mn)
+        val deviations = itemList map (n.toDouble(_) - mn)
         sumOfSquares(deviations) / denominator.toDouble
     }
 }

@@ -37,6 +37,7 @@
 import org.scalatest.FunSuite
 import grizzled.math.stats._
 import scala.math.Numeric
+import java.lang.Math.sqrt
 
 /**
  * Tests the grizzled.file functions.
@@ -141,7 +142,7 @@ class StatsTest extends GrizzledFunSuite
         }
     }
 
-    test("population variance")
+    test("sample variance")
     {
         val Data = List(
             (50.0,               dList(10, 20)),
@@ -149,43 +150,6 @@ class StatsTest extends GrizzledFunSuite
             (1.0,                dList(1, 2, 3, 1, 3)),
             (100.0,              dList(10.5, 20.5, 30.5)),
             (212937.125,         dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "variance of " + values)
-            {
-                populationVariance(values: _*)
-            }
-        }
-    }
-
-    test("population standard deviation")
-    {
-        val Data = List(
-            (7.0710678118654755, dList(10, 20)),
-            (43.2030091544559,   dList(1, 10, 3, 1, 100)),
-            (1.0,                dList(1, 2, 3, 1, 3)),
-            (461.45110791935474, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "standard deviation " + values)
-            {
-                populationStandardDeviation(values: _*)
-            }
-        }
-    }
-
-    test("sample variance")
-    {
-        val Data = List(
-            (25.0,             dList(10, 20)),
-            (25.0,             dList(10.5, 20.5)),
-            (1493.2,           dList(1, 10, 3, 1, 100)),
-            (0.8,              dList(1, 2, 3, 1, 3)),
-            (186319.984375,    dList(1, 2, 3, 1, 3, 1000, 1000, 9))
         )
 
         for ((expected, values) <- Data)
@@ -200,6 +164,50 @@ class StatsTest extends GrizzledFunSuite
     test("sample standard deviation")
     {
         val Data = List(
+            (7.0710678118654755, dList(10, 20)),
+            (43.2030091544559,   dList(1, 10, 3, 1, 100)),
+            (1.0,                dList(1, 2, 3, 1, 3)),
+            (461.45110791935474, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+        )
+
+        for ((expected, values) <- Data)
+        {
+            val stddev = sampleStandardDeviation(values: _*)
+            expect(expected, "standard deviation " + values)
+            {
+                stddev
+            }
+
+            val variance = sampleVariance(values: _*)
+            expect(sqrt(variance), "standard deviation = sqrt(variance)")
+            {
+                stddev
+            }
+        }
+    }
+
+    test("population variance")
+    {
+        val Data = List(
+            (25.0,             dList(10, 20)),
+            (25.0,             dList(10.5, 20.5)),
+            (1493.2,           dList(1, 10, 3, 1, 100)),
+            (0.8,              dList(1, 2, 3, 1, 3)),
+            (186319.984375,    dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+        )
+
+        for ((expected, values) <- Data)
+        {
+            expect(expected, "variance of " + values)
+            {
+                populationVariance(values: _*)
+            }
+        }
+    }
+
+    test("population standard deviation")
+    {
+        val Data = List(
             (5,                  dList(10, 20)),
             (5.0,                dList(10.5, 20.5)),
             (38.64194612076364,  dList(1, 10, 3, 1, 100)),
@@ -209,9 +217,16 @@ class StatsTest extends GrizzledFunSuite
 
         for ((expected, values) <- Data)
         {
+            val stddev = populationStandardDeviation(values: _*)
             expect(expected, "standard deviation " + values)
             {
-                sampleStandardDeviation(values: _*)
+                stddev
+            }
+
+            val variance = populationVariance(values: _*)
+            expect(sqrt(variance), "standard deviation = sqrt(variance)")
+            {
+                stddev
             }
         }
     }
