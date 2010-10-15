@@ -325,16 +325,15 @@ object stats
      *
      * @return the range
      */
-    def range[T](items: T*)(implicit n: Numeric[T]): Double =
+    def range[T](items: T*)(implicit n: Numeric[T]): T =
     {
         // Fold left, generating a (min, max) tuple along the way.
 
         val (min, max) =
-            ((Double.MaxValue, 0.0) /: items)((tuple, i) =>
-                (math.min(tuple._1, n.toDouble(i)),
-                 math.max(tuple._2, n.toDouble(i)))
+            ((n.fromInt(Int.MaxValue), n.fromInt(0)) /: items)((tuple, i) =>
+                (n.min(tuple._1, i), n.max(tuple._1, i))
              )
-        max - min
+        n.minus(max, min)
     }
 
     private def calculateVariance[T](denominator: Int, items: List[T])
