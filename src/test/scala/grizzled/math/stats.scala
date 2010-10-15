@@ -230,4 +230,21 @@ class StatsTest extends GrizzledFunSuite
             }
         }
     }
+
+    test("range")
+    {
+        val Data = List(
+            (29.0,            dList((1 to 30): _*)),
+            (100.0,           dList(1, 100, 30, 28.8, 101)),
+            (999.0,           dList((1 to 1000): _*))
+        )
+
+        for ((expected, values) <- Data)
+        {
+            expect(expected, "range " + values)
+            {
+                range(values: _*)
+            }
+        }
+    }
 }

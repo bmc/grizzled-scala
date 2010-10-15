@@ -1,0 +1,3 @@
+* Added `range()` function to the `grizzled.math.stats` module.
+
+[Scala]: http://www.scala-lang.org/

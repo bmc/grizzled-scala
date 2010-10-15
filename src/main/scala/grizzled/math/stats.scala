@@ -317,6 +317,26 @@ object stats
         java.lang.Math.sqrt(sampleVariance(items.toList: _*))
 
 
+    /**
+     * Calculate the range of a data set. This function does a single
+     * linear pass over the data set.
+     *
+     * @param items the numbers on which to operate
+     *
+     * @return the range
+     */
+    def range[T](items: T*)(implicit n: Numeric[T]): Double =
+    {
+        // Fold left, generating a (min, max) tuple along the way.
+
+        val (min, max) =
+            ((Double.MaxValue, 0.0) /: items)((tuple, i) =>
+                (math.min(tuple._1, n.toDouble(i)),
+                 math.max(tuple._2, n.toDouble(i)))
+             )
+        max - min
+    }
+
     private def calculateVariance[T](denominator: Int, items: List[T])
                                     (implicit n: Numeric[T]): Double =
     {
