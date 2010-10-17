@@ -233,13 +233,27 @@ class StatsTest extends GrizzledFunSuite
 
     test("range")
     {
-        val Data = List(
+        // Must be all the same type
+        val Data1 = List[(Double, List[Double])](
             (29.0,            dList((1 to 30): _*)),
             (100.0,           dList(1, 100, 30, 28.8, 101)),
             (999.0,           dList((1 to 1000): _*))
         )
+        val Data2 = List[(Int, List[Int])](
+            (29,            (1 to 30).toList),
+            (100,           List(1, 100, 30, 28, 101)),
+            (999,           (1 to 1000).toList)
+        )
 
-        for ((expected, values) <- Data)
+        for ((expected, values) <- Data1)
+        {
+            expect(expected, "range " + values)
+            {
+                range(values: _*)
+            }
+        }
+
+        for ((expected, values) <- Data2)
         {
             expect(expected, "range " + values)
             {
