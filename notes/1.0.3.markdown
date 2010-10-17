@@ -1,3 +1,9 @@
 * Added `range()` function to the `grizzled.math.stats` module.
+* Enhanced `grizzled.readline` module to permit the caller-supplied
+  `Completer` object to specify the delimiters to use when tokenizing an
+  input line for tab completion.
+* Enhanced `grizzled.cmd` module to allow the caller to instantiate the
+  `CommandInterpreter` class with the set of delimiters to use when tokenizing
+  an input line for tab completion.
 
 [Scala]: http://www.scala-lang.org/

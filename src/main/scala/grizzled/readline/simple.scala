@@ -133,9 +133,8 @@ private[simple] class SimpleHistory extends History
 /**
  * Simple implementation of the Readline trait.
  */
-private[readline] class SimpleImpl(appName: String,
-                                   val autoAddHistory: Boolean)
-    extends Readline
+private[readline] class SimpleImpl(appName: String, val autoAddHistory: Boolean)
+extends Readline
 {
     import java.io.{InputStreamReader, LineNumberReader}
 

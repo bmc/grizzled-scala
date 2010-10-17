@@ -245,9 +245,17 @@ trait Completer
      *
      * @return a list of completions, or Nil if there are no matches
      */
-    def complete(token: String, 
-                 allTokens: List[CompletionToken], 
+    def complete(token: String,
+                 allTokens: List[CompletionToken],
                  line: String): List[String]
+
+    /**
+     * Get the delimiters that should be used to break a line into tokens.
+     * The default is white space.
+     *
+     * @return the delimiters
+     */
+    def tokenDelimiters: String = """ \t"""
 }
 
 trait CompleterHelper
@@ -279,7 +287,7 @@ trait CompleterHelper
      *
      * @return the token preceding the cursor, or None if the cursor is first.
      */
-    def tokenBeforeCursor(tokens: List[CompletionToken]): 
+    def tokenBeforeCursor(tokens: List[CompletionToken]):
         Option[CompletionToken] =
     {
         tokens match
@@ -307,8 +315,8 @@ trait CompleterHelper
  */
 class NullCompleter extends Completer
 {
-    def complete(token: String, 
-                 context: List[CompletionToken], 
+    def complete(token: String,
+                 context: List[CompletionToken],
                  line: String): List[String] = Nil
 }
 
@@ -318,8 +326,8 @@ class NullCompleter extends Completer
  */
 class PathnameCompleter extends Completer
 {
-    def complete(token: String, 
-                 context: List[CompletionToken], 
+    def complete(token: String,
+                 context: List[CompletionToken],
                  line: String): List[String] =
     {
         import grizzled.file.{util => FileUtil}
@@ -330,7 +338,7 @@ class PathnameCompleter extends Completer
             if (strippedToken.startsWith("~"))
             {
                 val userHome = System.getProperty("user.home")
-                if ((strippedToken.length > 1) && 
+                if ((strippedToken.length > 1) &&
                     (strippedToken(1) != File.separatorChar))
                     // Can't expand ~user
                     strippedToken
@@ -408,8 +416,8 @@ class ListCompleter(val completions: List[String],
      */
     def this(completions: List[String]) = this(completions, (s: String) => s)
 
-    def complete(token: String, 
-                 context: List[CompletionToken], 
+    def complete(token: String,
+                 context: List[CompletionToken],
                  line: String): List[String] =
     {
         if (token == "")
@@ -465,7 +473,7 @@ trait Readline
         val line = doReadline(prompt)
         if ((line != None) && autoAddHistory)
             history += line.get
-            
+
         line
     }
 

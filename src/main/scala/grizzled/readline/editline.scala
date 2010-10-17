@@ -239,7 +239,11 @@ private[readline] class EditLineImpl(appName: String,
                 }
             }
 
-            val tokens = mapTokens(line.toTokens)
+            // toTokens() comes from GrizzledString. self.completer is the
+            // caller-supplied completer object.
+
+            val delims = self.completer.tokenDelimiters
+            val tokens = mapTokens(line.toTokens(delims))
             assert (tokens contains Cursor)
             val tokenToComplete = findToken(tokens)
             self.completer.complete(tokenToComplete, tokens, line).toArray

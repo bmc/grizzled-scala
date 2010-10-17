@@ -264,12 +264,15 @@ trait BlockCommandHandler extends NoCompletionsHandler
  *                            order. The <tt>ReadlineType</tt> values are
  *                            defined by the <tt>grizzled.readline</tt>
  *                            package.
- * @param useAnsiColors       <tt>true</tt> to use ANSI terminal colors in
- *                            some output, <tt>false</tt> to avoid them.
+ * @param tokenDelimiters     delimiters to use when tokenizing a line for
+ *                            tab-completion.
  */
 abstract class CommandInterpreter(val appName: String,
-                                  readlineCandidates: List[ReadlineType])
+                                  readlineCandidates: List[ReadlineType],
+                                  val tokenDelimiters: String = """ \t""")
 {
+    private val interpreter = this
+
     /**
      * Assumed output width of the screen.
      */
@@ -769,6 +772,8 @@ abstract class CommandInterpreter(val appName: String,
     private object CommandCompleter extends Completer
     {
         import grizzled.readline.{Cursor, Delim, LineToken}
+
+        override def tokenDelimiters = interpreter.tokenDelimiters
 
         def complete(token: String, 
                      allTokens: List[CompletionToken],

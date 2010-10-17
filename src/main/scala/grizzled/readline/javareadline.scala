@@ -145,11 +145,12 @@ private[javareadline] class ReadlineHistory extends History
 /**
  * JavaReadline implementation of the Readline trait.
  */
-private[readline] abstract class JavaReadlineImpl(appName: String,
-                                                  readlineName: String,
-                                                  val autoAddHistory: Boolean,
-                                                  library: JavaReadlineLibrary)
-    extends Readline
+private[readline] abstract class JavaReadlineImpl(
+    appName: String,
+    readlineName: String,
+    val autoAddHistory: Boolean,
+    library: JavaReadlineLibrary)
+extends Readline
 {
     val name = readlineName
     val history = new ReadlineHistory
@@ -186,12 +187,12 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
             // will fail under certain circumstances, but that's the best
             // we can do.
 
-            def getTokens(line: String): List[CompletionToken] =
+            def getTokens(line: String, delims: String): List[CompletionToken] =
             {
                 // Split the token list around the first occurrence of a
                 // match for the token (which, because the list is reversed,
                 // i really the last occurrence of such a  match).
-                val revTokens = line.tokenize.reverse
+                val revTokens = line.toTokens(delims).map(_.string).reverse
                 val (a, b) = revTokens.span(x => !x.startsWith(token))
                 val lastIsWhite = Character.isWhitespace(line.last)
 
@@ -257,7 +258,8 @@ private[readline] abstract class JavaReadlineImpl(appName: String,
                     iterator = Nil.iterator
                 else
                 {
-                    val tokens = getTokens(line)
+                    // self.completer is the caller-supplied completer
+                    val tokens = getTokens(line, self.completer.tokenDelimiters)
                     val matches = self.completer.complete(token, tokens, line)
                     iterator = matches.iterator
                 }

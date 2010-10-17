@@ -120,9 +120,8 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
 /**
  * JLine implementation of the Readline trait.
  */
-private[readline] class JLineImpl(appName: String,
-                                  val autoAddHistory: Boolean)
-    extends Readline
+private[readline] class JLineImpl(appName: String, val autoAddHistory: Boolean)
+extends Readline
 {
     val name = "JLine"
     val reader = new ConsoleReader
@@ -218,8 +217,11 @@ private[readline] class JLineImpl(appName: String,
                 }
             }
 
+            // self.completer is the caller-supplied completer object.
+
             val line = if (buf == null) "" else buf
-            val tokens = mapTokens(line.toTokens)
+            val delims = self.completer.tokenDelimiters
+            val tokens = mapTokens(line.toTokens(delims))
             assert (tokens contains Cursor)
             val tokenToComplete = findToken(tokens)
             save(self.completer.complete(tokenToComplete, tokens, line))
