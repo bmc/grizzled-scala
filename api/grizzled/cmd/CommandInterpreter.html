@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.cmd.CommandInterpreter</title>
+          <title>grizzled.cmd.CommandInterpreter</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
       <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="type">
+        <body class="type" onload="windowTitle();">
 
       <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.cmd">cmd</a></p>
 
@@ -23,7 +24,10 @@
       <h4 class="signature" id="signature">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">CommandInterpreter</span><span class="result"> extends AnyRef</span>
+        <span class="name">CommandInterpreter</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <div class="fullcomment" id="comment"><div class="comment cmt"><p>Base class for command interpreters.</p><p><tt>CommandInterpreter</tt> is the base class of any command
@@ -43,34 +47,50 @@ the command is split from the remainder of the input line are outlined
 in the documentation for the <tt>splitCommandAndArgs()</tt> method.
 </p></div><div class="block">
           attributes: abstract 
-        </div>
-            
+        </div><div class="block">
+            go to: <a href="CommandInterpreter$.html">companion</a>
+          </div><div class="block">
+            linear super types: AnyRef, <span class="extype" name="scala.Any">Any</span>
+          </div>
             
             
             
           </div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          <div id="order">
+                <span class="filtertype">Ordering</span>
+                <ol><li class="alpha in">Alphabetic</li><li class="inherit out">By inheritance</li></ol>
+              </div>
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol id="linearization"><li class="in" name="grizzled.cmd.CommandInterpreter">CommandInterpreter</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
-        
+
         <div class="members" id="constructors">
               <h3>Instance constructors</h3>
-              <ol><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#this">
+      <a id="this:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
-        <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>)</span>
+        <span class="name">CommandInterpreter</span>
+        
+        <span class="params">(<span name="appName">appName: String</span>)</span>
+        
       </span>
       </h4>
       
@@ -82,14 +102,17 @@ in this order:</p><ul><li> GNU Readline</li><li> Editline</li><li> Getline</li><
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#this">
+      <a id="this:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
-        <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>, <span name="readline">readline: <span class="extype" name="scala.Enumeration.Value">Value</span></span>)</span>
+        <span class="name">CommandInterpreter</span>
+        
+        <span class="params">(<span name="appName">appName: String</span>, <span name="readline">readline: ReadlineType</span>)</span>
+        
       </span>
       </h4>
       
@@ -101,29 +124,48 @@ if that readline implementation cannot be found.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#this">
+      <a id="this:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
-        <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="java.lang.String">String</span></span>, <span name="readlineCandidates">readlineCandidates: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>)</span>
+        <span class="name">CommandInterpreter</span>
+        
+        <span class="params">(<span name="appName">appName: String</span>, <span name="readlineCandidates">readlineCandidates: List[ReadlineType]</span>, <span name="tokenDelimiters">tokenDelimiters: String =<span class="symbol"></span></span>)</span>
+        
       </span>
       </h4>
       
+            <p class="shortcomment cmt"></p>
+            <div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>the application name, used by some readline
+                           libraries for key-binding</p></dd><dt class="param">readlineCandidates</dt><dd class="cmt"><p>list of readline libraries to try to load, in
+                           order. The <tt>ReadlineType</tt> values are
+                           defined by the <tt>grizzled.readline</tt>                           package.</p></dd><dt class="param">tokenDelimiters</dt><dd class="cmt"><p>delimiters to use when tokenizing a line for
+                           tab-completion.
+</p></dd></dl>
+            
+            
+            
+          </div>
+          
     </li></ol>
-            </div>        
+            </div>
+
         
-        
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="scala.AnyRef#!=">
+              <ol><li visbl="pub" data-isabs="false" name="scala.AnyRef#!=">
+      <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -134,11 +176,15 @@ if that readline implementation cannot be found.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.Any#!=">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#!=">
+      <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -152,14 +198,17 @@ if that readline implementation cannot be found.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef###">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef###">
+      <a id="##():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">##</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -170,11 +219,15 @@ if that readline implementation cannot be found.
           definition classes: AnyRef → Any
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$asInstanceOf">
+      <a id="$asInstanceOf[T0]():T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: T0</span>
+        <span class="name">$asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -185,11 +238,15 @@ if that readline implementation cannot be found.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$isInstanceOf">
+      <a id="$isInstanceOf[T0]():Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">$isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -200,11 +257,15 @@ if that readline implementation cannot be found.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#==">
+      <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -218,14 +279,17 @@ if that readline implementation cannot be found.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#==">
+      <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -239,14 +303,17 @@ if that readline implementation cannot be found.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#DefaultReadlineLibraryList">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#DefaultReadlineLibraryList">
+      <a id="DefaultReadlineLibraryList:List[Value]"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">DefaultReadlineLibraryList</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
+        <span class="name">DefaultReadlineLibraryList</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
       </span>
       </h4>
       
@@ -256,14 +323,17 @@ if that readline implementation cannot be found.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#OutputWidth">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#OutputWidth">
+      <a id="OutputWidth:Int"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">OutputWidth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">OutputWidth</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -273,14 +343,17 @@ if that readline implementation cannot be found.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#StartCommandIdentifier">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#StartCommandIdentifier">
+      <a id="StartCommandIdentifier:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">StartCommandIdentifier</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">StartCommandIdentifier</span>
+        
+        
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -297,14 +370,17 @@ multicharacter command names. See the <tt>splitCommandAndArgs()</tt>method for m
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#allHandlers">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#allHandlers">
+      <a id="allHandlers:List[CommandHandler]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">allHandlers</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
+        <span class="name">allHandlers</span>
+        
+        
+        <span class="result">: List[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
       </span>
       </h4>
       
@@ -318,22 +394,38 @@ help handler, instead of the default one.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#appName">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#appName">
+      <a id="appName:String"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">appName</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">appName</span>
+        
+        
+        <span class="result">: String</span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="scala.Any#asInstanceOf">
+            <p class="shortcomment cmt">the application name, used by some readline
+                           libraries for key-binding</p>
+            <div class="fullcomment"><div class="comment cmt"><p>the application name, used by some readline
+                           libraries for key-binding</p></div>
+            
+            
+            
+          </div>
+          
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#asInstanceOf">
+      <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+        <span class="name">asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -348,14 +440,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.AnyRef#clone">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#clone">
+      <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+        <span class="name">clone</span>
+        
+        <span class="params">()</span>
+        <span class="result">: AnyRef</span>
       </span>
       </h4>
       
@@ -369,14 +464,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#eq">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#eq">
+      <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">eq</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -403,14 +501,17 @@ should be equal to each other (<code>o1 == o2</code>) and they should hash to th
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#equals">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#equals">
+      <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">equals</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -432,14 +533,17 @@ scala.Int
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#error">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#error">
+      <a id="error(String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">error</span><span class="params">(<span name="message">message: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">error</span>
+        
+        <span class="params">(<span name="message">message: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -451,14 +555,17 @@ subclasses. The default implementation prints errors in red.
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.AnyRef#finalize">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#finalize">
+      <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">finalize</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -473,14 +580,17 @@ there are no more references to the object.</p><p>The details of when and if the
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#getClass">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#getClass">
+      <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+        <span class="name">getClass</span>
+        
+        <span class="params">()</span>
+        <span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
       
@@ -494,14 +604,17 @@ there are no more references to the object.</p><p>The details of when and if the
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleCommand">
+      <a id="handleCommand(Option[String]):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">handleCommand</span><span class="params">(<span name="commandLine">commandLine: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="name">handleCommand</span>
+        
+        <span class="params">(<span name="commandLine">commandLine: <span class="extype" name="scala.Option">Option</span>[String]</span>)</span>
+        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
       </h4>
       
@@ -518,14 +631,17 @@ prompt.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleEOF">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleEOF">
+      <a id="handleEOF:CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">handleEOF</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="name">handleEOF</span>
+        
+        
+        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
       </h4>
       
@@ -543,14 +659,17 @@ loop to exit.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleEmptyCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleEmptyCommand">
+      <a id="handleEmptyCommand:CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">handleEmptyCommand</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="name">handleEmptyCommand</span>
+        
+        
+        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
       </h4>
       
@@ -564,14 +683,17 @@ prompt. The default version of this method simply returns<tt>KeepGoing</tt>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleException">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleException">
+      <a id="handleException(Exception):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">handleException</span><span class="params">(<span name="e">e: <span class="extype" name="java.lang.Exception">Exception</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="name">handleException</span>
+        
+        <span class="params">(<span name="e">e: Exception</span>)</span>
+        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
       </h4>
       
@@ -586,14 +708,17 @@ of this method dumps the exception stack trace and returns<tt>Stop</tt>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleUnknownCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleUnknownCommand">
+      <a id="handleUnknownCommand(String,String):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">handleUnknownCommand</span><span class="params">(<span name="commandName">commandName: <span class="extype" name="java.lang.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="name">handleUnknownCommand</span>
+        
+        <span class="params">(<span name="commandName">commandName: String</span>, <span name="unparsedArgs">unparsedArgs: String</span>)</span>
+        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
       </h4>
       
@@ -607,14 +732,17 @@ version of this method prints an error message and returns<tt>KeepGoing</tt>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handlers">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.CommandInterpreter#handlers">
+      <a id="handlers:List[CommandHandler]"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">handlers</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
+        <span class="name">handlers</span>
+        
+        
+        <span class="result">: List[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
       </span>
       </h4>
       
@@ -630,14 +758,17 @@ the default one.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#hashCode">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#hashCode">
+      <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">hashCode</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -653,14 +784,17 @@ to verify that the behavior is consistent with the <code>equals</code> method.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#helpHandler">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#helpHandler">
+      <a id="helpHandler:HelpHandler"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">helpHandler</span><span class="result">: <span class="extype" name="grizzled.cmd.CommandInterpreter.HelpHandler">HelpHandler</span></span>
+        <span class="name">helpHandler</span>
+        
+        
+        <span class="result">: <span class="extype" name="grizzled.cmd.CommandInterpreter.HelpHandler">HelpHandler</span></span>
       </span>
       </h4>
       
@@ -671,14 +805,17 @@ your own help handler.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#history">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#history">
+      <a id="history:History"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">history</span><span class="result">: <a href="../readline/History.html" class="extype" name="grizzled.readline.History">History</a></span>
+        <span class="name">history</span>
+        
+        
+        <span class="result">: <a href="../readline/History.html" class="extype" name="grizzled.readline.History">History</a></span>
       </span>
       </h4>
       
@@ -689,14 +826,17 @@ your own help handler.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#isInstanceOf">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -712,14 +852,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#mainLoop">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#mainLoop">
+      <a id="mainLoop:Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">mainLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">mainLoop</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -733,14 +876,17 @@ the received input, and dispatch to execution handlers.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#ne">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#ne">
+      <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">ne</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -754,14 +900,17 @@ the received input, and dispatch to execution handlers.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notify">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notify">
+      <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notify</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -774,14 +923,17 @@ the received input, and dispatch to execution handlers.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notifyAll">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notifyAll">
+      <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notifyAll</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -794,14 +946,17 @@ the received input, and dispatch to execution handlers.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#postCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#postCommand">
+      <a id="postCommand(String,String):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">postCommand</span><span class="params">(<span name="command">command: <span class="extype" name="java.lang.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="name">postCommand</span>
+        
+        <span class="params">(<span name="command">command: String</span>, <span name="unparsedArgs">unparsedArgs: String</span>)</span>
+        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
       </h4>
       
@@ -815,14 +970,17 @@ simply returns <tt>KeepGoing</tt>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#postLoop">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#postLoop">
+      <a id="postLoop:Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">postLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">postLoop</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -835,14 +993,17 @@ default implementation does nothing.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#preCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#preCommand">
+      <a id="preCommand(String):Option[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">preCommand</span><span class="params">(<span name="commandLine">commandLine: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">preCommand</span>
+        
+        <span class="params">(<span name="commandLine">commandLine: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Option">Option</span>[String]</span>
       </span>
       </h4>
       
@@ -857,14 +1018,17 @@ edit the command.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#preLoop">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#preLoop">
+      <a id="preLoop:Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">preLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">preLoop</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -877,14 +1041,17 @@ default implementation does nothing.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#primaryPrompt">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#primaryPrompt">
+      <a id="primaryPrompt:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">primaryPrompt</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">primaryPrompt</span>
+        
+        
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -894,14 +1061,17 @@ default implementation does nothing.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#pushReader">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#pushReader">
+      <a id="pushReader((String) ⇒ Option[String]):Stack[(String) ⇒ Option[String]]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">pushReader</span><span class="params">(<span name="reader">reader: (<span class="extype" name="java.lang.String">String</span>) ⇒ <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[(<span class="extype" name="java.lang.String">String</span>) ⇒ <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]]</span>
+        <span class="name">pushReader</span>
+        
+        <span class="params">(<span name="reader">reader: (String) ⇒ <span class="extype" name="scala.Option">Option</span>[String]</span>)</span>
+        <span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[(String) ⇒ <span class="extype" name="scala.Option">Option</span>[String]]</span>
       </span>
       </h4>
       
@@ -919,22 +1089,29 @@ if returned, should not have a trailing newline.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#readline">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#readline">
+      <a id="readline:Readline"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">readline</span><span class="result">: <a href="../readline/Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
+        <span class="name">readline</span>
+        
+        
+        <span class="result">: <a href="../readline/Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#secondaryPrompt">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#secondaryPrompt">
+      <a id="secondaryPrompt:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">secondaryPrompt</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">secondaryPrompt</span>
+        
+        
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -946,14 +1123,17 @@ retrieved.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#splitCommandAndArgs">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#splitCommandAndArgs">
+      <a id="splitCommandAndArgs(String):(String, String)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">splitCommandAndArgs</span><span class="params">(<span name="line">line: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)</span>
+        <span class="name">splitCommandAndArgs</span>
+        
+        <span class="params">(<span name="line">line: String</span>)</span>
+        <span class="result">: (String, String)</span>
       </span>
       </h4>
       
@@ -981,14 +1161,17 @@ will break the following commands into command + arguments as shown:</p><p><tabl
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#synchronized">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#synchronized">
+      <a id="synchronized[T0](T0):T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: T0</span>)</span><span class="result">: T0</span>
+        <span class="name">synchronized</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">(<span name="arg0">arg0: T0</span>)</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -999,11 +1182,15 @@ will break the following commands into command + arguments as shown:</p><p><tabl
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#toString">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#toString">
+      <a id="toString():String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">toString</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -1015,14 +1202,39 @@ will break the following commands into command + arguments as shown:</p><p><tabl
             
             
             
+          </div>
+          
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#tokenDelimiters">
+      <a id="tokenDelimiters:String"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol">
+        <span class="name">tokenDelimiters</span>
+        
+        
+        <span class="result">: String</span>
+      </span>
+      </h4>
+      
+            <p class="shortcomment cmt">delimiters to use when tokenizing a line for
+                           tab-completion.</p>
+            <div class="fullcomment"><div class="comment cmt"><p>delimiters to use when tokenizing a line for
+                           tab-completion.
+</p></div>
+            
+            
             
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1033,11 +1245,15 @@ will break the following commands into command + arguments as shown:</p><p><tabl
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1048,11 +1264,15 @@ will break the following commands into command + arguments as shown:</p><p><tabl
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1063,11 +1283,15 @@ will break the following commands into command + arguments as shown:</p><p><tabl
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#warning">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#warning">
+      <a id="warning(String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">warning</span><span class="params">(<span name="message">message: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">warning</span>
+        
+        <span class="params">(<span name="message">message: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1080,12 +1304,17 @@ prefix &quot;Warning: &quot;.
             
             
             
-            
           </div>
           
     </li></ol>
             </div>
-                
+
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from AnyRef</h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+
       </div>
       
       <div id="tooltip"></div>
