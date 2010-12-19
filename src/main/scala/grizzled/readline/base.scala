@@ -539,7 +539,7 @@ object Readline
      *
      *   <li>`Editline`: The Editline library, originally from BSD Unix.
      *       Requires the libjavaeditline jar and dynamic library (see
-     *       <a href="http://www.clapper.org/software/java/javaeditline/">http://www.clapper.org/software/java/javaeditline/</a>)
+     *       <a href="http://software.clapper.org/java/javaeditline/">http://software.clapper.org/java/javaeditline/</a>)
      *       and the Editline library
      *       <a href="http://www.thrysoee.dk/editline/">http://www.thrysoee.dk/editline/</a>.
      *

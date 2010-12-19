@@ -38,7 +38,7 @@
 /**
  * EditLine implementation of the traits defined in the base readline package.
  * Assumes the Java Editline implementation at
- * http://www.clapper.org/software/java/javaeditline/
+ * http://software.clapper.org/java/javaeditline/
  */
 package grizzled.readline.editline
 
