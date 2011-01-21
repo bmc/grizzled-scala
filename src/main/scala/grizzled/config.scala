@@ -806,37 +806,42 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
                     Some(name)
 
                 case BadSectionFormat(section) =>
-                    throw new ConfigException("Badly formatted section: \"" +
-                                              section + "\"")
+                    throw new ConfigException(
+                        "Badly formatted section: \"%s\"".format(section)
+                    )
 
                 case BadSectionName(name) =>
-                    throw new ConfigException("Bad section name: \"%s\"" + name)
+                    throw new ConfigException(
+                        "Bad section name: \"%s\"".format(name))
 
                 case Assignment(optionName, value) =>
                     val template = new UnixShellStringTemplate(resolve,
                                                                "[a-zA-Z0-9_.]+",
                                                                safe)
                     if (curSection == None)
-                        throw new ConfigException("Assignment \"" +
-                                                  optionName + "=" + value +
-                                                  "\" occurs before the " +
-                                                  "first section.")
+                        throw new ConfigException(
+                            "Assignment \"%s=%s\" occurs before the first " +
+                            "section.".format(optionName, value)
+                        )
+
                     val newValue = template.substitute(value.translateMetachars)
                     addOption(curSection.get, optionName, newValue)
                     curSection
 
                 case RawAssignment(optionName, value) =>
                     if (curSection == None)
-                        throw new ConfigException("Assignment \"" +
-                                                  optionName + "=" + value +
-                                                  "\" occurs before the " +
-                                                  "first section.")
+                        throw new ConfigException(
+                            "Assignment \"%s=%s\" occurs before the first " +
+                            "section.".format(optionName, value)
+                        )
+
                     addOption(curSection.get, optionName, value)
                     curSection
 
                 case _ =>
-                    throw new ConfigException("Unknown configuration line: \"" +
-                                              line + "\"")
+                    throw new ConfigException(
+                        "Unknown configuration line: \"%s\"".format(line)
+                    )
             }
         }
 
