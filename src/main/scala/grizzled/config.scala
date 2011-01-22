@@ -3,7 +3,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009, Brian M. Clapper
+  Copyright (c) 2009-2011, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -395,34 +395,28 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
     /**
      * Add a section to the configuration.
      *
-     * @param sectionName  the new section's name
+     * @param name  the new section's name
      *
      * @throws DuplicateSectionException if the section already exists
      */
-    def addSection(sectionName: String): Unit =
+    def addSection(name: String): Unit =
     {
-        if (sections contains sectionName)
-            throw new DuplicateSectionException(sectionName)
+        if ((sections contains name) || (SpecialSections contains name))
+            throw new DuplicateSectionException(name)
 
-        if (SpecialSections contains sectionName)
-            throw new DuplicateSectionException(sectionName)
-
-        sections(sectionName) = MutableMap.empty[String, String]
+        sections(name) = MutableMap.empty[String, String]
     }
 
     /**
      * Get a section. Similar to `Map.get`, this method returns `Some(Section)`
      * if the section exists, and `None` if it does not.
      *
-     * @param sectionName  the section to get
+     * @param name  the section to get
      *
      * @return `Some(Section)` or `None`
      */
-    def getSection(sectionName: String): Option[Section] =
-    {
-        sections.get(sectionName).
-                 map(m => new Section(sectionName, EmptyOptions ++ m))
-    }
+    def getSection(name: String): Option[Section] =
+        sections.get(name).map(m => new Section(name, EmptyOptions ++ m))
 
     /**
      * Add an option name and value to a section.
@@ -493,21 +487,13 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
                     Some(value)
 
             case "system" =>
-                val value = System.getProperties.getProperty(optionName)
-                if (value == null)
-                    None
-                else
-                    Some(value)
+                Option(System.getProperties.getProperty(optionName))
+
+            case _ if (! hasSection(sectionName)) =>
+                None
 
             case _ =>
-                if (! hasSection(sectionName))
-                    None
-                else
-                {
-                    val options = sections(sectionName)
-                    val canonicalOptionName = transformOptionName(optionName)
-                    options.get(canonicalOptionName)
-                }
+                sections(sectionName).get(transformOptionName(optionName))
         }
     }
 
@@ -555,10 +541,9 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             catch
             {
                 case _: NumberFormatException =>
-                    throw new ConversionException(sectionName,
-                                                  optionName,
-                                                  value,
-                                                  "not an integer.")
+                    throw new ConversionException(
+                        sectionName, optionName, value, "not an integer."
+                    )
             }
         }
 
@@ -607,10 +592,9 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
             catch
             {
                 case _: IllegalArgumentException =>
-                    throw new ConversionException(sectionName,
-                                                  optionName,
-                                                  value,
-                                                  "not a boolean.")
+                    throw new ConversionException(
+                        sectionName, optionName, value, "not a boolean."
+                    )
             }
         }
 
@@ -696,8 +680,8 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
 
         catch
         {
-            case _: NoSuchOptionException => default
-            case _: NoSuchSectionException => default
+            case _: NoSuchOptionException | _: NoSuchSectionException =>
+                default
         }
     }
 
@@ -890,8 +874,8 @@ class Configuration(predefinedSections: Map[String, Map[String, String]])
 
         catch
         {
-            case _: NoSuchOptionException => None
-            case _: NoSuchSectionException => None
+            case (_: NoSuchOptionException | _: NoSuchSectionException) =>
+                None
         }
     }
 
