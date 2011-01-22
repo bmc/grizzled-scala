@@ -1,2 +1,3 @@
-* Miscellaneous internal cleanup of `Configuration` code.
+* Miscellaneous internal cleanup of `Configuration` and `grizzled.readline`
+  code.
 

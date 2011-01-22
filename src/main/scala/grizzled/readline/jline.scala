@@ -47,7 +47,7 @@ import _root_.jline.{Completor => JLineCompleter, ConsoleReader}
  * History implementation that wraps the JLine history API.
  */
 private[jline] class JLineHistory(val reader: ConsoleReader)
-    extends History
+    extends History with Util
 {
     val history = reader.getHistory
     max = Integer.MAX_VALUE
@@ -79,14 +79,7 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
      * @return the most recent entry, as an <tt>Option</tt>, or
      *         <tt>None</tt> if the history buffer is empty
      */
-    def last: Option[String] =
-    {
-        val s = history.current
-        if ((s == null) || (s.length == 0)) 
-            None 
-        else
-            Some(s)
-    }
+    def last: Option[String] = str2opt(history.current)
 
     /**
      * Get the current number of entries in the history buffer.
@@ -121,7 +114,7 @@ private[jline] class JLineHistory(val reader: ConsoleReader)
  * JLine implementation of the Readline trait.
  */
 private[readline] class JLineImpl(appName: String, val autoAddHistory: Boolean)
-extends Readline
+extends Readline with Util
 {
     val name = "JLine"
     val reader = new ConsoleReader
@@ -239,11 +232,7 @@ extends Readline
         try
         {
             print(prompt)
-            val s = reader.readLine
-            if (s == null)
-                None
-            else
-                Some(s)
+            str2opt(reader.readLine)
         }
 
         catch

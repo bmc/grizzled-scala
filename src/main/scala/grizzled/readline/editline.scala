@@ -49,7 +49,7 @@ import org.clapper.editline._
  * History implementation that wraps the EditLine history API.
  */
 private[editline] class EditLineHistory(val editline: EditLine)
-    extends History
+    extends History with Util
 {
     max = Integer.MAX_VALUE
 
@@ -71,14 +71,7 @@ private[editline] class EditLineHistory(val editline: EditLine)
      * @return the most recent entry, as an <tt>Option</tt>, or
      *         <tt>None</tt> if the history buffer is empty
      */
-    def last: Option[String] =
-    {
-        val s = editline.currentHistoryLine
-        if ((s == null) || (s.length == 0)) 
-            None 
-        else
-            Some(s)
-    }
+    def last: Option[String] = str2opt(editline.currentHistoryLine)
 
     /**
      * Get the current number of entries in the history buffer.
@@ -114,7 +107,7 @@ private[editline] class EditLineHistory(val editline: EditLine)
  */
 private[readline] class EditLineImpl(appName: String,
                                      val autoAddHistory: Boolean)
-    extends Readline
+    extends Readline with Util
 {
     val name = "Java EditLine"
     val editline = EditLine.init(appName)
@@ -255,11 +248,7 @@ private[readline] class EditLineImpl(appName: String,
         try
         {
             editline.setPrompt(prompt);
-            val s = editline.getLine
-            if (s == null)
-                None
-            else
-                Some(s)
+            str2opt(editline.getLine)
         }
 
         catch

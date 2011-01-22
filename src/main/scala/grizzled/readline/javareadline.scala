@@ -150,7 +150,7 @@ private[readline] abstract class JavaReadlineImpl(
     readlineName: String,
     val autoAddHistory: Boolean,
     library: JavaReadlineLibrary)
-extends Readline
+extends Readline with Util
 {
     val name = readlineName
     val history = new ReadlineHistory
@@ -276,11 +276,7 @@ extends Readline
     {
         try
         {
-            val s = JavaReadline.readline(prompt, /* add to history */ false)
-            if (s == null)
-                Some("")
-            else
-                Some(s)
+            str2opt(JavaReadline.readline(prompt, /* add to history */ false))
         }
 
         catch

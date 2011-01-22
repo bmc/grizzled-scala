@@ -383,10 +383,8 @@ class PathnameCompleter extends Completer
 
             val matches = filename match
             {
-                case Some(f) =>
-                    files.filter(s => s.startsWith(f))
-                case None =>
-                    files
+                case Some(f) => files.filter(s => s.startsWith(f))
+                case None    => files
             }
 
             if (includeDirectory)
@@ -424,6 +422,25 @@ class ListCompleter(val completions: List[String],
             completions
         else
             completions.filter((s) => convert(s).startsWith(convert(token)))
+    }
+}
+
+/**
+ * Utility stuff to mix in.
+ */
+private[readline] trait Util
+{
+    /**
+     * Common string-to-option method. Handles nulls and blank lines.
+     */
+    def str2opt(string: String): Option[String] =
+    {
+        string match
+        {
+            case null                              => None
+            case s: String if (s.trim.length == 0) => None
+            case s: String                         => Some(s)
+        }
     }
 }
 
@@ -662,17 +679,12 @@ object Readline
             }
         }
 
-        @tailrec def find(libs: List[ReadlineType]): Option[Readline] =
+        def find(libs: List[ReadlineType]): Option[Readline] =
         {
             libs match
             {
-                case Nil => None
-                case lib :: tail =>
-                    load(lib) match
-                    {
-                        case Some(readline) => Some(readline)
-                        case None => find(tail)
-                    }
+                case Nil         => None
+                case lib :: tail => load(lib).orElse(find(tail))
             }
         }
 

@@ -134,7 +134,7 @@ private[simple] class SimpleHistory extends History
  * Simple implementation of the Readline trait.
  */
 private[readline] class SimpleImpl(appName: String, val autoAddHistory: Boolean)
-extends Readline
+extends Readline with Util
 {
     import java.io.{InputStreamReader, LineNumberReader}
 
@@ -147,11 +147,7 @@ extends Readline
         try
         {
             print(prompt)
-            val s = input.readLine
-            if (s == null)
-                None
-            else
-                Some(s)
+            str2opt(input.readLine)
         }
 
         catch
