@@ -1,3 +1,6 @@
 * Miscellaneous internal cleanup of `Configuration` and `grizzled.readline`
   code.
+* Updated to version 1.3 of [ScalaTest][].
+
+[ScalaTest]: http://www.scalatest.org/
 

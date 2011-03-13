@@ -103,7 +103,7 @@ class GrizzledScalaProject(info: ProjectInfo)
     // Artifacts
     val jline = "jline" % "jline" % "0.9.94"
 
-    val scalatest = "org.scalatest" % "scalatest" % "1.2" % "test"
+    val scalatest = "org.scalatest" % "scalatest" % "1.3" % "test"
 
     /* ---------------------------------------------------------------------- *\
                           Private Helper Methods
