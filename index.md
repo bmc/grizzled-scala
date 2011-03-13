@@ -6,9 +6,10 @@ layout: withTOC
 ## Introduction
 
 The Grizzled Scala Library is a general-purpose [Scala][] library with a
-variety of different modules and packages. It's roughly organized into
-subpackages that group different kinds of utility functions and classes.
-Currently, the library is broken into the following modules:
+variety of different modules and packages. It's similar to the clapper.org
+[Grizzled Python][] Library, only for Scala. (Duh.) It's roughly organized
+into subpackages that group different kinds of utility functions and
+classes. Currently, the library is broken into the following modules:
 
 Currently, the library is broken into a number of modules:
 
@@ -165,3 +166,4 @@ request. Along with any patch you send:
 [Library Management Maven/Ivy section]: http://code.google.com/p/simple-build-tool/wiki/LibraryManagement#Maven/Ivy
 [SBT Manual]: http://code.google.com/p/simple-build-tool/wiki/DocumentationHome
 [SBT-repo-email-thread]: http://groups.google.com/group/simple-build-tool/browse_thread/thread/470bba921252a167
+[Grizzled Python]: http://software.clapper.org/grizzled-python/
