@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.cmd</title>
+          <title>grizzled.cmd</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
       <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="value" onload="windowTitle();">
 
       <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
@@ -24,161 +25,236 @@
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">cmd</span>
+        
+        
+        
       </span>
       </h4>
       <div class="fullcomment" id="comment"></div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          
           
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
+
         
-                
-        
-        <div class="members" id="types">
+
+        <div class="types members" id="types">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="grizzled.cmd.BlockCommandHandler">
+              <ol><li visbl="pub" data-isabs="true" name="grizzled.cmd.BlockCommandHandler">
+      <a id="BlockCommandHandler:BlockCommandHandler"></a>
       <h4 class="signature"><a href="BlockCommandHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
-        <span class="name">BlockCommandHandler</span><span class="result"> extends NoCompletionsHandler</span>
+        <span class="name">BlockCommandHandler</span>
+        
+        
+        <span class="result"> extends NoCompletionsHandler</span>
       </span>
       </a></h4>
       <p class="comment cmt">A block command is one that consists of multiple input lines between
 some sort of start and end indicator.</p>
-    </li><li visbl="pub" name="grizzled.cmd.Command">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.Command">
+      <a id="Command:Command"></a>
       <h4 class="signature"><a href="Command.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">Command</span><span class="result"> extends AnyRef</span>
+        <span class="name">Command</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Mapped commands.</p>
-    </li><li visbl="pub" name="grizzled.cmd.CommandAction">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.CommandAction">
+      <a id="CommandAction:CommandAction"></a>
       <h4 class="signature"><a href="CommandAction.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">CommandAction</span><span class="result"> extends AnyRef</span>
+        <span class="name">CommandAction</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Actions returned by handlers.</p>
-    </li><li visbl="pub" name="grizzled.cmd.CommandHandler">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.CommandHandler">
+      <a id="CommandHandler:CommandHandler"></a>
       <h4 class="signature"><a href="CommandHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
-        <span class="name">CommandHandler</span><span class="result"> extends AnyRef</span>
+        <span class="name">CommandHandler</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Trait for an object (or class) that handles a single command.</p>
-    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.CommandInterpreter">
+      <a id="CommandInterpreter:CommandInterpreter"></a>
       <h4 class="signature"><a href="CommandInterpreter.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">CommandInterpreter</span><span class="result"> extends AnyRef</span>
+        <span class="name">CommandInterpreter</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Base class for command interpreters.</p>
-    </li><li visbl="pub" name="grizzled.cmd.HiddenCommandHandler">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.HiddenCommandHandler">
+      <a id="HiddenCommandHandler:HiddenCommandHandler"></a>
       <h4 class="signature"><a href="HiddenCommandHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
-        <span class="name">HiddenCommandHandler</span><span class="result"> extends NoCompletionsHandler</span>
+        <span class="name">HiddenCommandHandler</span>
+        
+        
+        <span class="result"> extends NoCompletionsHandler</span>
       </span>
       </a></h4>
       <p class="comment cmt">The handler trait for a hidden command.</p>
-    </li><li visbl="pub" name="grizzled.cmd.HistoryHandler">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.HistoryHandler">
+      <a id="HistoryHandler:HistoryHandler"></a>
       <h4 class="signature"><a href="HistoryHandler.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">HistoryHandler</span><span class="result"> extends CommandHandler</span>
+        <span class="name">HistoryHandler</span>
+        
+        
+        <span class="result"> extends CommandHandler</span>
       </span>
       </a></h4>
       <p class="comment cmt">Simple history command handler.</p>
-    </li><li visbl="pub" name="grizzled.cmd.KnownCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.KnownCommand">
+      <a id="KnownCommand:KnownCommand"></a>
       <h4 class="signature"><a href="KnownCommand.html">
-      <span class="kind">class</span>
+      <span class="kind">case class</span>
       <span class="symbol">
-        <span class="name">KnownCommand</span><span class="params">(<span name="handler">handler: CommandHandler</span>, <span name="fullInputLine">fullInputLine: String</span>, <span name="name">name: String</span>, <span name="args">args: String</span>)</span><span class="result"> extends Command with Product</span>
+        <span class="name">KnownCommand</span>
+        
+        <span class="params">(<span name="handler">handler: CommandHandler</span>, <span name="fullInputLine">fullInputLine: String</span>, <span name="name">name: String</span>, <span name="args">args: String</span>)</span>
+        <span class="result"> extends Command with Product</span>
       </span>
       </a></h4>
       
-    </li><li visbl="pub" name="grizzled.cmd.NoCompletionsHandler">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.NoCompletionsHandler">
+      <a id="NoCompletionsHandler:NoCompletionsHandler"></a>
       <h4 class="signature"><a href="NoCompletionsHandler.html">
       <span class="kind">trait</span>
       <span class="symbol">
-        <span class="name">NoCompletionsHandler</span><span class="result"> extends CommandHandler</span>
+        <span class="name">NoCompletionsHandler</span>
+        
+        
+        <span class="result"> extends CommandHandler</span>
       </span>
       </a></h4>
       <p class="comment cmt">Mixed in to indicate no completions are available.</p>
-    </li><li visbl="pub" name="grizzled.cmd.RedoHandler">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.RedoHandler">
+      <a id="RedoHandler:RedoHandler"></a>
       <h4 class="signature"><a href="RedoHandler.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">RedoHandler</span><span class="result"> extends CommandHandler</span>
+        <span class="name">RedoHandler</span>
+        
+        
+        <span class="result"> extends CommandHandler</span>
       </span>
       </a></h4>
       <p class="comment cmt">Simple &quot;redo command&quot; handler.</p>
-    </li><li visbl="pub" name="grizzled.cmd.UnknownCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.UnknownCommand">
+      <a id="UnknownCommand:UnknownCommand"></a>
       <h4 class="signature"><a href="UnknownCommand.html">
-      <span class="kind">class</span>
+      <span class="kind">case class</span>
       <span class="symbol">
-        <span class="name">UnknownCommand</span><span class="params">(<span name="fullInputLine">fullInputLine: String</span>, <span name="name">name: String</span>, <span name="args">args: String</span>)</span><span class="result"> extends Command with Product</span>
+        <span class="name">UnknownCommand</span>
+        
+        <span class="params">(<span name="fullInputLine">fullInputLine: String</span>, <span name="name">name: String</span>, <span name="args">args: String</span>)</span>
+        <span class="result"> extends Command with Product</span>
       </span>
       </a></h4>
       
     </li></ol>
             </div>
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="grizzled.cmd.CmdUtil">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.cmd.CmdUtil">
+      <a id="CmdUtil:CmdUtil"></a>
       <h4 class="signature"><a href="CmdUtil$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">CmdUtil</span><span class="result"> extends AnyRef</span>
+        <span class="name">CmdUtil</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Miscellaneous useful utility functions.</p>
-    </li><li visbl="pub" name="grizzled.cmd.EOFCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.EOFCommand">
+      <a id="EOFCommand:EOFCommand"></a>
       <h4 class="signature"><a href="EOFCommand$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">EOFCommand</span><span class="result"> extends Command with Product</span>
+        <span class="name">EOFCommand</span>
+        
+        
+        <span class="result"> extends Command with Product</span>
       </span>
       </a></h4>
       
-    </li><li visbl="pub" name="grizzled.cmd.EmptyCommand">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.EmptyCommand">
+      <a id="EmptyCommand:EmptyCommand"></a>
       <h4 class="signature"><a href="EmptyCommand$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">EmptyCommand</span><span class="result"> extends Command with Product</span>
+        <span class="name">EmptyCommand</span>
+        
+        
+        <span class="result"> extends Command with Product</span>
       </span>
       </a></h4>
       
-    </li><li visbl="pub" name="grizzled.cmd.KeepGoing">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.KeepGoing">
+      <a id="KeepGoing:KeepGoing"></a>
       <h4 class="signature"><a href="KeepGoing$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">KeepGoing</span><span class="result"> extends CommandAction with Product</span>
+        <span class="name">KeepGoing</span>
+        
+        
+        <span class="result"> extends CommandAction with Product</span>
       </span>
       </a></h4>
       
-    </li><li visbl="pub" name="grizzled.cmd.Stop">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.Stop">
+      <a id="Stop:Stop"></a>
       <h4 class="signature"><a href="Stop$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">Stop</span><span class="result"> extends CommandAction with Product</span>
+        <span class="name">Stop</span>
+        
+        
+        <span class="result"> extends CommandAction with Product</span>
       </span>
       </a></h4>
       
     </li></ol>
             </div>
-                
+
+        
+
       </div>
       
       <div id="tooltip"></div>

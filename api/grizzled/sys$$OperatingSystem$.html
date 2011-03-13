@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.sys.OperatingSystem</title>
+          <title>grizzled.sys.OperatingSystem</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../lib/jquery.js"></script>
           
       <link href="../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../lib/jquery.js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../lib/template.js"></script>
       <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="value" onload="windowTitle();">
 
       <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a>.<a href="sys$.html" class="extype" name="grizzled.sys">sys</a></p>
 
@@ -23,41 +24,58 @@
       <h4 class="signature" id="signature">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">OperatingSystem</span><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+        <span class="name">OperatingSystem</span>
+        
+        
+        <span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Indicator of current operating system.</p><ul><li>VMS - OpenVMS</li><li>Windows - Microsoft Windows, other than Windows CE</li><li>WindowsCE - Microsoft Windows CE</li><li>OS2 - OS2</li><li>NetWare - NetWare</li><li>Mac - Mac OS, prior to Mac OS X</li><li>Posix - Anything Unix-like, including Mac OS X</li></ul></div>
-            
+      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Indicator of current operating system.</p><ul><li>VMS - OpenVMS</li><li>Windows - Microsoft Windows, other than Windows CE</li><li>WindowsCE - Microsoft Windows CE</li><li>OS2 - OS2</li><li>NetWare - NetWare</li><li>Mac - Mac OS, prior to Mac OS X</li><li>Posix - Anything Unix-like, including Mac OS X</li></ul></div><div class="block">
+            linear super types: <span class="extype" name="scala.Enumeration">Enumeration</span>, AnyRef, <span class="extype" name="scala.Any">Any</span>
+          </div>
             
             
             
           </div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          <div id="order">
+                <span class="filtertype">Ordering</span>
+                <ol><li class="alpha in">Alphabetic</li><li class="inherit out">By inheritance</li></ol>
+              </div>
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="scala.Enumeration">Enumeration</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol id="linearization"><li class="in" name="grizzled.sys.OperatingSystem">OperatingSystem</li><li class="in" name="scala.Enumeration">Enumeration</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
+
         
-                
+
         
-        
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="scala.AnyRef#!=">
+              <ol><li visbl="pub" data-isabs="false" name="scala.AnyRef#!=">
+      <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -68,11 +86,15 @@
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.Any#!=">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#!=">
+      <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -86,14 +108,17 @@
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef###">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef###">
+      <a id="##():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">##</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -104,11 +129,15 @@
           definition classes: AnyRef → Any
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$asInstanceOf">
+      <a id="$asInstanceOf[T0]():T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: T0</span>
+        <span class="name">$asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -119,11 +148,15 @@
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$isInstanceOf">
+      <a id="$isInstanceOf[T0]():Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">$isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -134,11 +167,15 @@
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#==">
+      <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -152,14 +189,17 @@
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#==">
+      <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -173,54 +213,77 @@
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#Mac">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#Mac">
+      <a id="Mac:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">Mac</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Mac</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#NetWare">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#NetWare">
+      <a id="NetWare:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">NetWare</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">NetWare</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#OS2">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#OS2">
+      <a id="OS2:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">OS2</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">OS2</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#Posix">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#Posix">
+      <a id="Posix:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">Posix</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Posix</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#VMS">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#VMS">
+      <a id="VMS:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">VMS</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">VMS</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="prt" name="scala.Enumeration#Value">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#Value">
+      <a id="Value(Int,String):Value"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>, <span name="name">name: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Value</span>
+        
+        <span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>, <span name="name">name: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
@@ -231,11 +294,15 @@
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="prt" name="scala.Enumeration#Value">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#Value">
+      <a id="Value(String):Value"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">Value</span><span class="params">(<span name="name">name: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Value</span>
+        
+        <span class="params">(<span name="name">name: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
@@ -246,11 +313,15 @@
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="prt" name="scala.Enumeration#Value">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#Value">
+      <a id="Value(Int):Value"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Value</span>
+        
+        <span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
@@ -261,11 +332,15 @@
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="prt" name="scala.Enumeration#Value">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#Value">
+      <a id="Value:Value"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">Value</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Value</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
@@ -276,27 +351,39 @@
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#Windows">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#Windows">
+      <a id="Windows:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">Windows</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">Windows</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.sys.OperatingSystem#WindowsCE">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.sys.OperatingSystem#WindowsCE">
+      <a id="WindowsCE:Value"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">WindowsCE</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">WindowsCE</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="scala.Enumeration#apply">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#apply">
+      <a id="apply(Int):Value"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">apply</span>
+        
+        <span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
@@ -307,11 +394,15 @@
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="pub" name="scala.Any#asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#asInstanceOf">
+      <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+        <span class="name">asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -326,14 +417,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.AnyRef#clone">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#clone">
+      <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+        <span class="name">clone</span>
+        
+        <span class="params">()</span>
+        <span class="result">: AnyRef</span>
       </span>
       </h4>
       
@@ -347,14 +441,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#eq">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#eq">
+      <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">eq</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -381,14 +478,17 @@ should be equal to each other (<code>o1 == o2</code>) and they should hash to th
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#equals">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#equals">
+      <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">equals</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -410,14 +510,17 @@ scala.Int
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Enumeration#exists">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#exists">
+      <a id="exists((Value) ⇒ Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">exists</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name deprecated">exists</span>
+        
+        <span class="params">(<span name="p">p: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -428,11 +531,15 @@ scala.Int
           <li><p>use values.exists instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#filter">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#filter">
+      <a id="filter((Value) ⇒ Boolean):Iterator[Value]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">filter</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
+        <span class="name deprecated">filter</span>
+        
+        <span class="params">(<span name="p">p: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span>
+        <span class="result">: Iterator[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
       </span>
       </h4>
       
@@ -443,11 +550,15 @@ scala.Int
           <li><p>use values.filter instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="prt" name="scala.AnyRef#finalize">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#finalize">
+      <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">finalize</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -462,14 +573,17 @@ there are no more references to the object.</p><p>The details of when and if the
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Enumeration#flatMap">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#flatMap">
+      <a id="flatMap[B]((Value) ⇒ Iterator[B]):Iterator[B]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">flatMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+        <span class="name deprecated">flatMap</span>
+        <span class="tparams">[<span name="B">B</span>]</span>
+        <span class="params">(<span name="f">f: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ Iterator[B]</span>)</span>
+        <span class="result">: Iterator[B]</span>
       </span>
       </h4>
       
@@ -480,11 +594,15 @@ there are no more references to the object.</p><p>The details of when and if the
           <li><p>use values.flatMap instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#forall">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#forall">
+      <a id="forall((Value) ⇒ Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">forall</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name deprecated">forall</span>
+        
+        <span class="params">(<span name="p">p: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -495,11 +613,15 @@ there are no more references to the object.</p><p>The details of when and if the
           <li><p>use values.forall instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#foreach">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#foreach">
+      <a id="foreach((Value) ⇒ Unit):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">foreach</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name deprecated">foreach</span>
+        
+        <span class="params">(<span name="f">f: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -510,11 +632,15 @@ there are no more references to the object.</p><p>The details of when and if the
           <li><p>use values.foreach instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#getClass">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#getClass">
+      <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+        <span class="name">getClass</span>
+        
+        <span class="params">()</span>
+        <span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
       
@@ -528,14 +654,17 @@ there are no more references to the object.</p><p>The details of when and if the
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#hashCode">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#hashCode">
+      <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">hashCode</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -551,14 +680,17 @@ to verify that the behavior is consistent with the <code>equals</code> method.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#isInstanceOf">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -574,14 +706,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Enumeration#iterator">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#iterator">
+      <a id="iterator:Iterator[Value]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">iterator</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
+        <span class="name deprecated">iterator</span>
+        
+        
+        <span class="result">: Iterator[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
       </span>
       </h4>
       
@@ -594,11 +729,15 @@ possible to check whether the contents of the list are of the requested typed.
           <li><p>use values.iterator instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#map">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#map">
+      <a id="map[B]((Value) ⇒ B):Iterator[B]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">map</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ B</span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[B]</span>
+        <span class="name deprecated">map</span>
+        <span class="tparams">[<span name="B">B</span>]</span>
+        <span class="params">(<span name="f">f: (<span class="extype" name="scala.Enumeration.Value">Value</span>) ⇒ B</span>)</span>
+        <span class="result">: Iterator[B]</span>
       </span>
       </h4>
       
@@ -609,11 +748,15 @@ possible to check whether the contents of the list are of the requested typed.
           <li><p>use values.map instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#maxId">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#maxId">
+      <a id="maxId:Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">maxId</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">maxId</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -624,11 +767,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#name">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#name">
+      <a id="name:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">name</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name deprecated">name</span>
+        
+        
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -639,11 +786,15 @@ possible to check whether the contents of the list are of the requested typed.
           <li><p>use toString instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#ne">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#ne">
+      <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">ne</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -657,14 +808,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.Enumeration#nextId">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#nextId">
+      <a id="nextId:Int"></a>
       <h4 class="signature">
       <span class="kind">var</span>
       <span class="symbol">
-        <span class="name">nextId</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">nextId</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -675,11 +829,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="prt" name="scala.Enumeration#nextName">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#nextName">
+      <a id="nextName:Iterator[String]"></a>
       <h4 class="signature">
       <span class="kind">var</span>
       <span class="symbol">
-        <span class="name">nextName</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">nextName</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[String]</span>
       </span>
       </h4>
       
@@ -690,11 +848,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notify">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notify">
+      <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notify</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -707,14 +869,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notifyAll">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notifyAll">
+      <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notifyAll</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -727,14 +892,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.Enumeration#readResolve">
+    </li><li visbl="prt" data-isabs="false" name="scala.Enumeration#readResolve">
+      <a id="readResolve():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">readResolve</span><span class="params">()</span><span class="result">: AnyRef</span>
+        <span class="name">readResolve</span>
+        
+        <span class="params">()</span>
+        <span class="result">: AnyRef</span>
       </span>
       </h4>
       
@@ -745,11 +913,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#synchronized">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#synchronized">
+      <a id="synchronized[T0](T0):T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: T0</span>)</span><span class="result">: T0</span>
+        <span class="name">synchronized</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">(<span name="arg0">arg0: T0</span>)</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -760,11 +932,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#toString">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#toString">
+      <a id="toString():String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">toString</span>
+        
+        <span class="params">()</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -776,14 +952,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Enumeration#valueOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#valueOf">
+      <a id="valueOf(String):Option[Value]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">valueOf</span><span class="params">(<span name="s">s: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
+        <span class="name deprecated">valueOf</span>
+        
+        <span class="params">(<span name="s">s: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
       </span>
       </h4>
       
@@ -794,11 +973,15 @@ possible to check whether the contents of the list are of the requested typed.
           <li><p>use withName instead</p></li>
         </ol></div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#values">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#values">
+      <a id="values:ValueSet"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">values</span><span class="result">: <span class="extype" name="scala.Enumeration.ValueSet">ValueSet</span></span>
+        <span class="name">values</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Enumeration.ValueSet">ValueSet</span></span>
       </span>
       </h4>
       
@@ -807,11 +990,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: Enumeration
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -822,11 +1009,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -837,11 +1028,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -852,11 +1047,15 @@ possible to check whether the contents of the list are of the requested typed.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.Enumeration#withName">
+    </li><li visbl="pub" data-isabs="false" name="scala.Enumeration#withName">
+      <a id="withName(String):Value"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">withName</span><span class="params">(<span name="s">s: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
+        <span class="name">withName</span>
+        
+        <span class="params">(<span name="s">s: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Enumeration.Value">Value</span></span>
       </span>
       </h4>
       
@@ -869,7 +1068,15 @@ possible to check whether the contents of the list are of the requested typed.
           
     </li></ol>
             </div>
-                
+
+        <div class="parent" name="scala.Enumeration">
+              <h3>Inherited from <span class="extype" name="scala.Enumeration">Enumeration</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from AnyRef</h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+
       </div>
       
       <div id="tooltip"></div>

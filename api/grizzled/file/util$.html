@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.file.util</title>
+          <title>grizzled.file.util</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
       <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="value" onload="windowTitle();">
 
       <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.file">file</a></p>
 
@@ -23,42 +24,59 @@
       <h4 class="signature" id="signature">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">util</span><span class="result"> extends AnyRef</span>
+        <span class="name">util</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <div class="fullcomment" id="comment"><div class="comment cmt"><p>Useful file-related utility functions.
-</p></div>
-            
+</p></div><div class="block">
+            linear super types: AnyRef, <span class="extype" name="scala.Any">Any</span>
+          </div>
             
             
             
           </div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          <div id="order">
+                <span class="filtertype">Ordering</span>
+                <ol><li class="alpha in">Alphabetic</li><li class="inherit out">By inheritance</li></ol>
+              </div>
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol id="linearization"><li class="in" name="grizzled.file.util">util</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
+
         
-                
+
         
-        
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="scala.AnyRef#!=">
+              <ol><li visbl="pub" data-isabs="false" name="scala.AnyRef#!=">
+      <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -69,11 +87,15 @@
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.Any#!=">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#!=">
+      <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -87,14 +109,17 @@
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef###">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef###">
+      <a id="##():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">##</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -105,11 +130,15 @@
           definition classes: AnyRef → Any
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$asInstanceOf">
+      <a id="$asInstanceOf[T0]():T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: T0</span>
+        <span class="name">$asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -120,11 +149,15 @@
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$isInstanceOf">
+      <a id="$isInstanceOf[T0]():Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">$isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -135,11 +168,15 @@
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#==">
+      <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -153,14 +190,17 @@
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#==">
+      <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -174,14 +214,17 @@
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#asInstanceOf">
+      <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+        <span class="name">asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -196,14 +239,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#basename">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#basename">
+      <a id="basename(String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">basename</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="java.lang.String">String</span> = <span class="default">util.this.fileSeparator</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">basename</span>
+        
+        <span class="params">(<span name="path">path: String</span>, <span name="fileSep">fileSep: String =<span class="defval" name='<span class="name"><a href="#fileSeparator:String">fileSeparator</a></span>'> ...</span></span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -216,14 +262,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.AnyRef#clone">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#clone">
+      <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+        <span class="name">clone</span>
+        
+        <span class="params">()</span>
+        <span class="result">: AnyRef</span>
       </span>
       </h4>
       
@@ -237,14 +286,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copy">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copy">
+      <a id="copy(String,String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copy</span><span class="params">(<span name="file">file: <span class="extype" name="java.lang.String">String</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copy</span>
+        
+        <span class="params">(<span name="file">file: String</span>, <span name="targetDir">targetDir: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -256,14 +308,17 @@ it is created.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copy">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copy">
+      <a id="copy(String,String,Boolean):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copy</span><span class="params">(<span name="file">file: <span class="extype" name="java.lang.String">String</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.lang.String">String</span></span>, <span name="createTarget">createTarget: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copy</span>
+        
+        <span class="params">(<span name="file">file: String</span>, <span name="targetDir">targetDir: String</span>, <span name="createTarget">createTarget: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -276,14 +331,17 @@ it is created.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copy">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copy">
+      <a id="copy(Iterable[String],String,Boolean):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copy</span><span class="params">(<span name="files">files: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="java.lang.String">String</span>]</span>, <span name="targetDir">targetDir: <span class="extype" name="java.lang.String">String</span></span>, <span name="createTarget">createTarget: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="default">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copy</span>
+        
+        <span class="params">(<span name="files">files: Iterable[String]</span>, <span name="targetDir">targetDir: String</span>, <span name="createTarget">createTarget: <span class="extype" name="scala.Boolean">Boolean</span> =<span class="symbol">true</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -297,14 +355,17 @@ method that takes only one file.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copyFile">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copyFile">
+      <a id="copyFile(File,File):File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copyFile</span><span class="params">(<span name="source">source: <span class="extype" name="java.io.File">File</span></span>, <span name="target">target: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">copyFile</span>
+        
+        <span class="params">(<span name="source">source: <span class="extype" name="java.io.File">File</span></span>, <span name="target">target: <span class="extype" name="java.io.File">File</span></span>)</span>
+        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
       </h4>
       
@@ -319,14 +380,17 @@ as the source file.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copyFile">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copyFile">
+      <a id="copyFile(String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copyFile</span><span class="params">(<span name="sourcePath">sourcePath: <span class="extype" name="java.lang.String">String</span></span>, <span name="targetPath">targetPath: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">copyFile</span>
+        
+        <span class="params">(<span name="sourcePath">sourcePath: String</span>, <span name="targetPath">targetPath: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -341,14 +405,17 @@ as the source file.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copyTree">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copyTree">
+      <a id="copyTree(File,File):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copyTree</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.io.File">File</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copyTree</span>
+        
+        <span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.io.File">File</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.io.File">File</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -361,14 +428,17 @@ directory. Creates the target directory if it does not exist.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#copyTree">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#copyTree">
+      <a id="copyTree(String,String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">copyTree</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.lang.String">String</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">copyTree</span>
+        
+        <span class="params">(<span name="sourceDir">sourceDir: String</span>, <span name="targetDir">targetDir: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -381,14 +451,17 @@ directory. Creates the target directory if it does not exist.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#createTemporaryDirectory">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#createTemporaryDirectory">
+      <a id="createTemporaryDirectory(String,Int):File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">createTemporaryDirectory</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="java.lang.String">String</span></span>, <span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span> = <span class="default">3</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">createTemporaryDirectory</span>
+        
+        <span class="params">(<span name="prefix">prefix: String</span>, <span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span> =<span class="symbol">3</span></span>)</span>
+        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
       </h4>
       
@@ -402,14 +475,17 @@ directory. Creates the target directory if it does not exist.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#deleteTree">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#deleteTree">
+      <a id="deleteTree(File):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">deleteTree</span>
+        
+        <span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -421,14 +497,17 @@ equivalent to <tt>rm -r</tt> on a Unix system.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#deleteTree">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#deleteTree">
+      <a id="deleteTree(String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">deleteTree</span>
+        
+        <span class="params">(<span name="dir">dir: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -440,14 +519,17 @@ equivalent to <tt>rm -r</tt> on a Unix system.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#dirname">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#dirname">
+      <a id="dirname(String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">dirname</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="java.lang.String">String</span> = <span class="default">util.this.fileSeparator</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">dirname</span>
+        
+        <span class="params">(<span name="path">path: String</span>, <span name="fileSep">fileSep: String =<span class="defval" name='<span class="name"><a href="#fileSeparator:String">fileSeparator</a></span>'> ...</span></span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -460,14 +542,17 @@ equivalent to <tt>rm -r</tt> on a Unix system.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#dirnameBasename">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#dirnameBasename">
+      <a id="dirnameBasename(String,String):(String, String)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">dirnameBasename</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="java.lang.String">String</span> = <span class="default">util.this.fileSeparator</span></span>)</span><span class="result">: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)</span>
+        <span class="name">dirnameBasename</span>
+        
+        <span class="params">(<span name="path">path: String</span>, <span name="fileSep">fileSep: String =<span class="defval" name='<span class="name"><a href="#fileSeparator:String">fileSeparator</a></span>'> ...</span></span>)</span>
+        <span class="result">: (String, String)</span>
       </span>
       </h4>
       
@@ -481,14 +566,17 @@ Analogous to Python's <tt>os.path.pathsplit()</tt> function.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#dirnameBasenameExtension">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#dirnameBasenameExtension">
+      <a id="dirnameBasenameExtension(String,String):(String, String, String)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">dirnameBasenameExtension</span><span class="params">(<span name="pathname">pathname: <span class="extype" name="java.lang.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="java.lang.String">String</span> = <span class="default">util.this.fileSeparator</span></span>)</span><span class="result">: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)</span>
+        <span class="name">dirnameBasenameExtension</span>
+        
+        <span class="params">(<span name="pathname">pathname: String</span>, <span name="fileSep">fileSep: String =<span class="defval" name='<span class="name"><a href="#fileSeparator:String">fileSeparator</a></span>'> ...</span></span>)</span>
+        <span class="result">: (String, String, String)</span>
       </span>
       </h4>
       
@@ -503,14 +591,17 @@ pieces.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#eglob">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#eglob">
+      <a id="eglob(String):List[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">eglob</span><span class="params">(<span name="pattern">pattern: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">eglob</span>
+        
+        <span class="params">(<span name="pattern">pattern: String</span>)</span>
+        <span class="result">: List[String]</span>
       </span>
       </h4>
       
@@ -525,14 +616,17 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#eq">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#eq">
+      <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">eq</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -559,14 +653,17 @@ should be equal to each other (<code>o1 == o2</code>) and they should hash to th
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#equals">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#equals">
+      <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">equals</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -588,30 +685,41 @@ scala.Int
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#fileSeparator">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#fileSeparator">
+      <a id="fileSeparator:String"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">fileSeparator</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">fileSeparator</span>
+        
+        
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.file.util#fileSeparatorChar">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#fileSeparatorChar">
+      <a id="fileSeparatorChar:Char"></a>
       <h4 class="signature">
       <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">fileSeparatorChar</span><span class="result">: <span class="extype" name="scala.Char">Char</span></span>
+        <span class="name">fileSeparatorChar</span>
+        
+        
+        <span class="result">: <span class="extype" name="scala.Char">Char</span></span>
       </span>
       </h4>
       
-    </li><li visbl="prt" name="scala.AnyRef#finalize">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#finalize">
+      <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">finalize</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -626,14 +734,17 @@ there are no more references to the object.</p><p>The details of when and if the
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#fnmatch">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#fnmatch">
+      <a id="fnmatch(String,String):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">fnmatch</span><span class="params">(<span name="name">name: <span class="extype" name="java.lang.String">String</span></span>, <span name="pattern">pattern: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">fnmatch</span>
+        
+        <span class="params">(<span name="name">name: String</span>, <span name="pattern">pattern: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -648,14 +759,17 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#getClass">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#getClass">
+      <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+        <span class="name">getClass</span>
+        
+        <span class="params">()</span>
+        <span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
       
@@ -669,14 +783,17 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#glob">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#glob">
+      <a id="glob(String):List[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">glob</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">glob</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: List[String]</span>
       </span>
       </h4>
       
@@ -689,14 +806,17 @@ contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#hashCode">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#hashCode">
+      <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">hashCode</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -712,14 +832,17 @@ to verify that the behavior is consistent with the <code>equals</code> method.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#isInstanceOf">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -735,14 +858,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#joinPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#joinPath">
+      <a id="joinPath(File*):File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">joinPath</span><span class="params">(<span name="pieces">pieces: <span class="extype" name="java.io.File">File</span>*</span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">joinPath</span>
+        
+        <span class="params">(<span name="pieces">pieces: <span class="extype" name="java.io.File">File</span>*</span>)</span>
+        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
       </h4>
       
@@ -757,14 +883,17 @@ currently running system
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#joinPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#joinPath">
+      <a id="joinPath(String*):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">joinPath</span><span class="params">(<span name="pieces">pieces: <span class="extype" name="java.lang.String">String</span>*</span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">joinPath</span>
+        
+        <span class="params">(<span name="pieces">pieces: String*</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -779,14 +908,17 @@ currently running system
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#joinPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#joinPath">
+      <a id="joinPath(String,List[String]):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">joinPath</span><span class="params">(<span name="fileSep">fileSep: <span class="extype" name="java.lang.String">String</span></span>, <span name="pieces">pieces: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">joinPath</span>
+        
+        <span class="params">(<span name="fileSep">fileSep: String</span>, <span name="pieces">pieces: List[String]</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -798,14 +930,17 @@ currently running system
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#nativePath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#nativePath">
+      <a id="nativePath(String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">nativePath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">nativePath</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -822,14 +957,17 @@ returns the <tt>path</tt> parameter unmodified.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#ne">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#ne">
+      <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">ne</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -843,14 +981,17 @@ returns the <tt>path</tt> parameter unmodified.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#normalizePath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#normalizePath">
+      <a id="normalizePath(String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">normalizePath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">normalizePath</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -865,14 +1006,17 @@ Windows and Posix operating systems.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#normalizePosixPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#normalizePosixPath">
+      <a id="normalizePosixPath(String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">normalizePosixPath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">normalizePosixPath</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -884,14 +1028,17 @@ Windows and Posix operating systems.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#normalizeWindowsPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#normalizeWindowsPath">
+      <a id="normalizeWindowsPath(String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">normalizeWindowsPath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">normalizeWindowsPath</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -904,14 +1051,17 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notify">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notify">
+      <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notify</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -924,14 +1074,17 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notifyAll">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notifyAll">
+      <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notifyAll</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -944,14 +1097,17 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#pwd">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#pwd">
+      <a id="pwd:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">pwd</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">pwd</span>
+        
+        
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -962,14 +1118,17 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#relativePath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#relativePath">
+      <a id="relativePath(File,File):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">relativePath</span><span class="params">(<span name="from">from: <span class="extype" name="java.io.File">File</span></span>, <span name="to">to: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">relativePath</span>
+        
+        <span class="params">(<span name="from">from: <span class="extype" name="java.io.File">File</span></span>, <span name="to">to: <span class="extype" name="java.io.File">File</span></span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -981,14 +1140,17 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#splitDrivePath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#splitDrivePath">
+      <a id="splitDrivePath(String):(String, String)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">splitDrivePath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)</span>
+        <span class="name">splitDrivePath</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: (String, String)</span>
       </span>
       </h4>
       
@@ -1001,14 +1163,17 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#splitPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#splitPath">
+      <a id="splitPath(String,String):List[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">splitPath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="java.lang.String">String</span> = <span class="default">util.this.fileSeparator</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">splitPath</span>
+        
+        <span class="params">(<span name="path">path: String</span>, <span name="fileSep">fileSep: String =<span class="defval" name='<span class="name"><a href="#fileSeparator:String">fileSeparator</a></span>'> ...</span></span>)</span>
+        <span class="result">: List[String]</span>
       </span>
       </h4>
       
@@ -1023,14 +1188,17 @@ beginning. Examples:</p><p><table border="1">  <tr>    <th>Input</th>    <th>Out
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#synchronized">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#synchronized">
+      <a id="synchronized[T0](T0):T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: T0</span>)</span><span class="result">: T0</span>
+        <span class="name">synchronized</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">(<span name="arg0">arg0: T0</span>)</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -1041,11 +1209,15 @@ beginning. Examples:</p><p><table border="1">  <tr>    <th>Input</th>    <th>Out
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="grizzled.file.util#temporaryDirectory">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#temporaryDirectory">
+      <a id="temporaryDirectory:File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">temporaryDirectory</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">temporaryDirectory</span>
+        
+        
+        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
       </h4>
       
@@ -1056,14 +1228,17 @@ beginning. Examples:</p><p><table border="1">  <tr>    <th>Input</th>    <th>Out
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#toString">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#toString">
+      <a id="toString():String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">toString</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -1075,14 +1250,17 @@ beginning. Examples:</p><p><table border="1">  <tr>    <th>Input</th>    <th>Out
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#touch">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#touch">
+      <a id="touch(String,Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="default">-1</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">touch</span>
+        
+        <span class="params">(<span name="path">path: String</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> =<span class="symbol">-1</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1094,14 +1272,17 @@ beginning. Examples:</p><p><table border="1">  <tr>    <th>Input</th>    <th>Out
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#touchMany">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#touchMany">
+      <a id="touchMany(Iterable[String],Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="java.lang.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="default">-1</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">touchMany</span>
+        
+        <span class="params">(<span name="files">files: Iterable[String]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> =<span class="symbol">-1</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1115,14 +1296,17 @@ exception.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#universalPath">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#universalPath">
+      <a id="universalPath(String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">universalPath</span><span class="params">(<span name="path">path: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">universalPath</span>
+        
+        <span class="params">(<span name="path">path: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -1139,14 +1323,17 @@ this function simply returns the <tt>path</tt> parameter unmodified.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1157,11 +1344,15 @@ this function simply returns the <tt>path</tt> parameter unmodified.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1172,11 +1363,15 @@ this function simply returns the <tt>path</tt> parameter unmodified.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1187,11 +1382,15 @@ this function simply returns the <tt>path</tt> parameter unmodified.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="grizzled.file.util#walk">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#walk">
+      <a id="walk(String,Boolean):List[(String, List[String], List[String])]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">walk</span><span class="params">(<span name="top">top: <span class="extype" name="java.lang.String">String</span></span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="default">true</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[(<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>], <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="java.lang.String">String</span>])]</span>
+        <span class="name">walk</span>
+        
+        <span class="params">(<span name="top">top: String</span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> =<span class="symbol">true</span></span>)</span>
+        <span class="result">: List[(String, List[String], List[String])]</span>
       </span>
       </h4>
       
@@ -1212,14 +1411,17 @@ bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic link
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.file.util#withTemporaryDirectory">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util#withTemporaryDirectory">
+      <a id="withTemporaryDirectory[T](String)((File) ⇒ T):T"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">withTemporaryDirectory</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="params">(<span name="action">action: (<span class="extype" name="java.io.File">File</span>) ⇒ T</span>)</span><span class="result">: T</span>
+        <span class="name">withTemporaryDirectory</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="prefix">prefix: String</span>)</span><span class="params">(<span name="action">action: (<span class="extype" name="java.io.File">File</span>) ⇒ T</span>)</span>
+        <span class="result">: T</span>
       </span>
       </h4>
       
@@ -1234,12 +1436,17 @@ completes.
             
             
             
-            
           </div>
           
     </li></ol>
             </div>
-                
+
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from AnyRef</h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+
       </div>
       
       <div id="tooltip"></div>

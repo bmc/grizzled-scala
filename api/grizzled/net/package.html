@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.net</title>
+          <title>grizzled.net</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
       <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="value" onload="windowTitle();">
 
       <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
@@ -24,37 +25,54 @@
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">net</span>
+        
+        
+        
       </span>
       </h4>
       <div class="fullcomment" id="comment"></div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          
           
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
+
         
-                
-        
-        <div class="members" id="types">
+
+        <div class="types members" id="types">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="grizzled.net.IPAddress">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.net.IPAddress">
+      <a id="IPAddress:IPAddress"></a>
       <h4 class="signature"><a href="IPAddress.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">IPAddress</span><span class="result"> extends AnyRef</span>
+        <span class="name">IPAddress</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Represents an IP address.</p>
-    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket">
+    </li><li visbl="pub" data-isabs="true" name="grizzled.net.UDPDatagramSocket">
+      <a id="UDPDatagramSocket:UDPDatagramSocket"></a>
       <h4 class="signature"><a href="UDPDatagramSocket.html">
       <span class="kind">trait</span>
       <span class="symbol">
-        <span class="name">UDPDatagramSocket</span><span class="result"> extends AnyRef</span>
+        <span class="name">UDPDatagramSocket</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">A <tt>UDPDatagramSocket</tt> object represents a UDP datagram socket,
@@ -62,38 +80,52 @@ providing a simpler interface to sending and receiving UDP packets than
 the one provided by the Java JDK.</p>
     </li></ol>
             </div>
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="grizzled.net.IPAddress">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.net.IPAddress">
+      <a id="IPAddress:IPAddress"></a>
       <h4 class="signature"><a href="IPAddress$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">IPAddress</span><span class="result"> extends AnyRef</span>
+        <span class="name">IPAddress</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Companion object to <tt>IPAddress</tt> class.</p>
-    </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.net.UDPDatagramSocket">
+      <a id="UDPDatagramSocket:UDPDatagramSocket"></a>
       <h4 class="signature"><a href="UDPDatagramSocket$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">UDPDatagramSocket</span><span class="result"> extends AnyRef</span>
+        <span class="name">UDPDatagramSocket</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Companion object for the <tt>UDPDatagramSocket</tt> trait, containing
 methods to simplify creation of <tt>UDPDatagramSocket</tt> objects, as
 well as some useful utility methods.</p>
-    </li><li visbl="pub" name="grizzled.net.url">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.net.url">
+      <a id="url:url"></a>
       <h4 class="signature"><a href="url$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">url</span><span class="result"> extends AnyRef</span>
+        <span class="name">url</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">URL-related utility methods.</p>
     </li></ol>
             </div>
-                
+
+        
+
       </div>
       
       <div id="tooltip"></div>

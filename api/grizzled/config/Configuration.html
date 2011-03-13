@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.config.Configuration</title>
+          <title>grizzled.config.Configuration</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
       <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="type">
+        <body class="type" onload="windowTitle();">
 
       <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.config">config</a></p>
 
@@ -23,7 +24,10 @@
       <h4 class="signature" id="signature">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">Configuration</span><span class="result"> extends AnyRef</span>
+        <span class="name">Configuration</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <div class="fullcomment" id="comment"><div class="comment cmt"><p>An INI-style configuration file parser.</p><p><code>Configuration</code> implements an in-memory store for a configuration file
@@ -153,34 +157,48 @@ object Foo
 }
 </pre></div><div class="block">
             go to: <a href="Configuration$.html">companion</a>
+          </div><div class="block">
+            linear super types: AnyRef, <span class="extype" name="scala.Any">Any</span>
           </div>
             
             
             
-            
           </div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          <div id="order">
+                <span class="filtertype">Ordering</span>
+                <ol><li class="alpha in">Alphabetic</li><li class="inherit out">By inheritance</li></ol>
+              </div>
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
                 <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol id="linearization"><li class="in" name="grizzled.config.Configuration">Configuration</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
               </div>
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
-        
+
         <div class="members" id="constructors">
               <h3>Instance constructors</h3>
-              <ol><li visbl="pub" name="grizzled.config.Configuration#this">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#this">
+      <a id="this:Configuration"></a>
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
-        <span class="name">Configuration</span><span class="params">()</span>
+        <span class="name">Configuration</span>
+        
+        <span class="params">()</span>
+        
       </span>
       </h4>
       
@@ -190,29 +208,45 @@ object Foo
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#this">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#this">
+      <a id="this:Configuration"></a>
       <h4 class="signature">
       <span class="kind">new</span>
       <span class="symbol">
-        <span class="name">Configuration</span><span class="params">(<span name="predefinedSections">predefinedSections: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]]</span>)</span>
+        <span class="name">Configuration</span>
+        
+        <span class="params">(<span name="predefinedSections">predefinedSections: Map[String, Map[String, String]]</span>)</span>
+        
       </span>
       </h4>
       
+            <p class="shortcomment cmt"></p>
+            <div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">predefinedSections</dt><dd class="cmt"><p>the predefined sections. An empty map means
+                           there are no predefined sections.
+</p></dd></dl>
+            
+            
+            
+          </div>
+          
     </li></ol>
-            </div>        
+            </div>
+
         
-        
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="scala.AnyRef#!=">
+              <ol><li visbl="pub" data-isabs="false" name="scala.AnyRef#!=">
+      <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -223,11 +257,15 @@ object Foo
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.Any#!=">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#!=">
+      <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -241,14 +279,17 @@ object Foo
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef###">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef###">
+      <a id="##():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">##</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -259,11 +300,15 @@ object Foo
           definition classes: AnyRef → Any
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$asInstanceOf">
+      <a id="$asInstanceOf[T0]():T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: T0</span>
+        <span class="name">$asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -274,11 +319,15 @@ object Foo
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#$isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$isInstanceOf">
+      <a id="$isInstanceOf[T0]():Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">$isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">$isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -289,11 +338,15 @@ object Foo
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#==">
+      <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -307,14 +360,17 @@ object Foo
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#==">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#==">
+      <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -328,14 +384,17 @@ object Foo
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#addOption">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#addOption">
+      <a id="addOption(String,String,String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">addOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">addOption</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="value">value: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -346,14 +405,17 @@ object Foo
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#addSection">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#addSection">
+      <a id="addSection(String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">addSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">addSection</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -364,14 +426,17 @@ object Foo
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#asInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#asInstanceOf">
+      <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+        <span class="name">asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -386,14 +451,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.AnyRef#clone">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#clone">
+      <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+        <span class="name">clone</span>
+        
+        <span class="params">()</span>
+        <span class="result">: AnyRef</span>
       </span>
       </h4>
       
@@ -407,14 +475,17 @@ part of compilation it is not possible to check whether the contents of the list
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#eq">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#eq">
+      <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">eq</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -441,14 +512,17 @@ should be equal to each other (<code>o1 == o2</code>) and they should hash to th
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#equals">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#equals">
+      <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">equals</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -470,14 +544,17 @@ scala.Int
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="scala.AnyRef#finalize">
+    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#finalize">
+      <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">finalize</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -492,14 +569,17 @@ there are no more references to the object.</p><p>The details of when and if the
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#forMatchingSections">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#forMatchingSections">
+      <a id="forMatchingSections(Regex)((Section) ⇒ Unit):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">forMatchingSections</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="params">(<span name="code">code: (<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">forMatchingSections</span>
+        
+        <span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="params">(<span name="code">code: (<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -512,14 +592,17 @@ expression.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#get">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#get">
+      <a id="get(String,String):Option[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">get</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">get</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Option">Option</span>[String]</span>
       </span>
       </h4>
       
@@ -534,14 +617,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#getBoolean">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#getBoolean">
+      <a id="getBoolean(String,String):Option[Boolean]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getBoolean</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+        <span class="name">getBoolean</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4>
       
@@ -553,14 +639,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#getBooleanOrElse">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#getBooleanOrElse">
+      <a id="getBooleanOrElse(String,String,Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getBooleanOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">getBooleanOrElse</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="default">default: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -572,14 +661,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#getClass">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#getClass">
+      <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+        <span class="name">getClass</span>
+        
+        <span class="params">()</span>
+        <span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
       
@@ -593,14 +685,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#getInt">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#getInt">
+      <a id="getInt(String,String):Option[Int]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getInt</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+        <span class="name">getInt</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
       </h4>
       
@@ -612,14 +707,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#getIntOrElse">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#getIntOrElse">
+      <a id="getIntOrElse(String,String,Int):Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getIntOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">getIntOrElse</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="default">default: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -631,14 +729,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#getOrElse">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#getOrElse">
+      <a id="getOrElse(String,String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">getOrElse</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="default">default: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -655,14 +756,17 @@ get(sectionName, optionName).getOrElse(default)
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#getSection">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#getSection">
+      <a id="getSection(String):Option[Section]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">getSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
+        <span class="name">getSection</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
       </span>
       </h4>
       
@@ -673,14 +777,17 @@ get(sectionName, optionName).getOrElse(default)
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#hasSection">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#hasSection">
+      <a id="hasSection(String):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">hasSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">hasSection</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -693,14 +800,17 @@ get(sectionName, optionName).getOrElse(default)
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#hashCode">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#hashCode">
+      <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">hashCode</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       
@@ -716,14 +826,17 @@ to verify that the behavior is consistent with the <code>equals</code> method.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.Any#isInstanceOf">
+    </li><li visbl="pub" data-isabs="false" name="scala.Any#isInstanceOf">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -739,14 +852,17 @@ possible to check whether the contents of the list are of the requested typed.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#load">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#load">
+      <a id="load(Source,Boolean):Configuration"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">load</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="safe">safe: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="default">false</span></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+        <span class="name">load</span>
+        
+        <span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="safe">safe: <span class="extype" name="scala.Boolean">Boolean</span> =<span class="symbol">false</span></span>)</span>
+        <span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
       </span>
       </h4>
       
@@ -760,14 +876,17 @@ Clears the configuration first.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#matchingSections">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#matchingSections">
+      <a id="matchingSections(Regex):Seq[Section]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">matchingSections</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
+        <span class="name">matchingSections</span>
+        
+        <span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span>
+        <span class="result">: Seq[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
       </span>
       </h4>
       
@@ -780,14 +899,17 @@ expression.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#ne">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#ne">
+      <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">ne</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
       
@@ -801,14 +923,17 @@ expression.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notify">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notify">
+      <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notify</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -821,14 +946,17 @@ expression.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#notifyAll">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notifyAll">
+      <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notifyAll</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -841,14 +969,17 @@ expression.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#option">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#option">
+      <a id="option(String,String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="default">default: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name deprecated">option</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="default">default: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -866,14 +997,17 @@ substitution errors are still thrown.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#option">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#option">
+      <a id="option(String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name deprecated">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name deprecated">option</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>)</span>
+        <span class="result">: String</span>
       </span>
       </h4>
       
@@ -888,14 +1022,17 @@ substitution errors are still thrown.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#optionNames">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#optionNames">
+      <a id="optionNames(String):Iterator[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">optionNames</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">optionNames</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="result">: Iterator[String]</span>
       </span>
       </h4>
       
@@ -907,14 +1044,17 @@ substitution errors are still thrown.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#options">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#options">
+      <a id="options(String):Map[String, String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">options</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">options</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="result">: Map[String, String]</span>
       </span>
       </h4>
       
@@ -927,14 +1067,17 @@ substitution errors are still thrown.
             
             
             
-            
           </div>
           
-    </li><li visbl="prt" name="grizzled.config.Configuration#putOption">
+    </li><li visbl="prt" data-isabs="false" name="grizzled.config.Configuration#putOption">
+      <a id="putOption(String,String,String,(String, Map[String, String]) ⇒ Unit):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">putOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>, <span name="preCheck">preCheck: (<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">putOption</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="value">value: String</span>, <span name="preCheck">preCheck: (String, <span class="extype" name="scala.collection.mutable.Map">Map</span>[String, String]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -948,14 +1091,17 @@ logic first.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#sectionNames">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#sectionNames">
+      <a id="sectionNames:Iterator[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">sectionNames</span><span class="result">: <span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">sectionNames</span>
+        
+        
+        <span class="result">: Iterator[String]</span>
       </span>
       </h4>
       
@@ -966,14 +1112,17 @@ logic first.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#setOption">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#setOption">
+      <a id="setOption(String,String,String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">setOption</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="java.lang.String">String</span></span>, <span name="value">value: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">setOption</span>
+        
+        <span class="params">(<span name="sectionName">sectionName: String</span>, <span name="optionName">optionName: String</span>, <span name="value">value: String</span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -987,14 +1136,17 @@ not throw <code>DuplicateOptionException</code>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#synchronized">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#synchronized">
+      <a id="synchronized[T0](T0):T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: T0</span>)</span><span class="result">: T0</span>
+        <span class="name">synchronized</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">(<span name="arg0">arg0: T0</span>)</span>
+        <span class="result">: T0</span>
       </span>
       </h4>
       
@@ -1005,11 +1157,15 @@ not throw <code>DuplicateOptionException</code>.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#toString">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#toString">
+      <a id="toString():String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">toString</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -1021,14 +1177,17 @@ not throw <code>DuplicateOptionException</code>.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="grizzled.config.Configuration#transformOptionName">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration#transformOptionName">
+      <a id="transformOptionName(String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">transformOptionName</span><span class="params">(<span name="option">option: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">transformOptionName</span>
+        
+        <span class="params">(<span name="option">option: String</span>)</span>
+        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
       
@@ -1041,14 +1200,17 @@ version of this method forces the option name to lower case.
             
             
             
-            
           </div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">()</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1059,11 +1221,15 @@ version of this method forces the option name to lower case.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1074,11 +1240,15 @@ version of this method forces the option name to lower case.
           definition classes: AnyRef
         </div></div>
           
-    </li><li visbl="pub" name="scala.AnyRef#wait">
+    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span>
+        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
@@ -1091,7 +1261,13 @@ version of this method forces the option name to lower case.
           
     </li></ol>
             </div>
-                
+
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from AnyRef</h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+
       </div>
       
       <div id="tooltip"></div>

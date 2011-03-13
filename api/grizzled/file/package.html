@@ -2,16 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for grizzled.file</title>
+          <title>grizzled.file</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		      <script type="text/javascript" src="../../lib/jquery.js"></script>
           
       <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body class="value" onload="windowTitle();">
 
       <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
 
@@ -24,97 +25,140 @@
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">file</span>
+        
+        
+        
       </span>
       </h4>
       <div class="fullcomment" id="comment"></div>
-      
+
       <div id="template">
 
         <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          
           
           <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-          </div>
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
+            </div>
+          <div id="impl">
+              <span class="filtertype">Impl.</span>
+              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+            </div>
         </div>
+
         
-                
-        
-        <div class="members" id="types">
+
+        <div class="types members" id="types">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="grizzled.file.FileDoesNotExistException">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.file.FileDoesNotExistException">
+      <a id="FileDoesNotExistException:FileDoesNotExistException"></a>
       <h4 class="signature"><a href="FileDoesNotExistException.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">FileDoesNotExistException</span><span class="result"> extends Exception</span>
+        <span class="name">FileDoesNotExistException</span>
+        
+        
+        <span class="result"> extends Exception</span>
       </span>
       </a></h4>
       
-    </li><li visbl="pub" name="grizzled.file.GrizzledFile">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile">
+      <a id="GrizzledFile:GrizzledFile"></a>
       <h4 class="signature"><a href="GrizzledFile.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">GrizzledFile</span><span class="result"> extends AnyRef</span>
+        <span class="name">GrizzledFile</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">A wrapper for <code>java.io.File</code> that provides additional methods.</p>
-    </li><li visbl="pub" name="grizzled.file.Includer">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.Includer">
+      <a id="Includer:Includer"></a>
       <h4 class="signature"><a href="Includer.html">
       <span class="kind">class</span>
       <span class="symbol">
-        <span class="name">Includer</span><span class="result"> extends Iterator[String]</span>
+        <span class="name">Includer</span>
+        
+        
+        <span class="result"> extends Iterator[String]</span>
       </span>
       </a></h4>
       <p class="comment cmt">Process &quot;include&quot; directives in files, returning an iterator over
 lines from the flattened files.</p>
     </li></ol>
             </div>
-        
-        <div class="members" id="values">
+
+        <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="grizzled.file.GrizzledFile">
+              <ol><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile">
+      <a id="GrizzledFile:GrizzledFile"></a>
       <h4 class="signature"><a href="GrizzledFile$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">GrizzledFile</span><span class="result"> extends AnyRef</span>
+        <span class="name">GrizzledFile</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Companion object for <code>GrizzledFile</code>.</p>
-    </li><li visbl="pub" name="grizzled.file.Includer">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.Includer">
+      <a id="Includer:Includer"></a>
       <h4 class="signature"><a href="Includer$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">Includer</span><span class="result"> extends AnyRef</span>
+        <span class="name">Includer</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Companion object for the <code>Includer</code> class.</p>
-    </li><li visbl="pub" name="grizzled.file.filter">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.filter">
+      <a id="filter:filter"></a>
       <h4 class="signature"><a href="filter/package.html">
       <span class="kind">package</span>
       <span class="symbol">
         <span class="name">filter</span>
+        
+        
+        
       </span>
       </a></h4>
       
-    </li><li visbl="pub" name="grizzled.file.implicits">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.implicits">
+      <a id="implicits:implicits"></a>
       <h4 class="signature"><a href="implicits$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name deprecated">implicits</span><span class="result"> extends AnyRef</span>
+        <span class="name deprecated">implicits</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Miscellaneous implicit file conversions.</p>
-    </li><li visbl="pub" name="grizzled.file.util">
+    </li><li visbl="pub" data-isabs="false" name="grizzled.file.util">
+      <a id="util:util"></a>
       <h4 class="signature"><a href="util$.html">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">util</span><span class="result"> extends AnyRef</span>
+        <span class="name">util</span>
+        
+        
+        <span class="result"> extends AnyRef</span>
       </span>
       </a></h4>
       <p class="comment cmt">Useful file-related utility functions.</p>
     </li></ol>
             </div>
-                
+
+        
+
       </div>
       
       <div id="tooltip"></div>

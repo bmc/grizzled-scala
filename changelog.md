@@ -35,7 +35,7 @@ Version 0.7.4:
 * Changed dependency on [ScalaTest][] to be a test-only dependency.
 
 [ScalaTest]: http://scalatest.org/
-[MarkWrap]: http://bmc.github.com/markwrap/
+[MarkWrap]: http://software.clapper.org/markwrap/
 
 Version 0.7.3:
 
@@ -239,7 +239,7 @@ Version 0.3:
 * grizzled.cmd now tries to load EditLine first.
 
 [sbt]: http://code.google.com/p/simple-build-tool
-[javaeditline]: http://www.clapper.org/software/java/javaeditline/
+[javaeditline]: http://software.clapper.org/java/javaeditline/
 [showdown]: http://attacklab.net/showdown/
 [rhino]: http://www.mozilla.org/rhino/
 
