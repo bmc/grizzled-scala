@@ -68,11 +68,11 @@ For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.8.1</artifactId>
-      <version>1.0.3</version>
+      <artifactId>grizzled-scala_2.9.0</artifactId>
+      <version>1.0.6</version>
     </dependency>
 
-Scala 2.8.0 and Scala 2.8.1 are both supported in version 1.0.3.
+Scala 2.8.0, Scala 2.8.1 and Scala 2.9.0 are supported in version 1.0.6.
 
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
@@ -83,14 +83,14 @@ If you're using [SBT][] (the Simple Build Tool) to compile your code, you
 can place the following lines in your project file (i.e., the Scala file in
 your `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.3"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.6"
 
 **NOTES**
 
 1. The first doubled percent is *not* a typo. It tells SBT to treat
    Grizzled Scala as a cross-built library and automatically inserts the
    Scala version you're using into the artifact ID. It will *only* work if
-   you are building with Scala 2.8.0 or 2.8.1.
+   you are building with Scala 2.8.0, 2.8.1 or 2.9.0.
    See the [SBT cross-building][] page for details.
 2. Prior to Grizzled Scala, version 1.0, you also had to specify the location
    of a custom Maven repository. With version 1.0, however, Grizzled Scala
