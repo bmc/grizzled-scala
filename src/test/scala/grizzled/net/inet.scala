@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   Copyright (c) 2009-2010 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -27,7 +28,8 @@
   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
 import org.scalatest.FunSuite
 import grizzled.net._
@@ -35,7 +37,7 @@ import grizzled.net._
 /**
  * Tests the grizzled.net functions in inet.scala
  */
-class IPAddressTest extends GrizzledFunSuite
+class IPAddressTest extends FunSuite
 {
     def byte(thing: Int): Byte = thing toByte
     def bytes(data: Int*): List[Byte] = data map (_ toByte) toList

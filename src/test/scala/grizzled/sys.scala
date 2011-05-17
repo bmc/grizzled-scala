@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
@@ -30,7 +31,8 @@
   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
 import org.scalatest.FunSuite
 import grizzled.sys._
@@ -38,7 +40,7 @@ import grizzled.sys._
 /**
  * Tests the grizzled.file functions.
  */
-class SysTest extends GrizzledFunSuite
+class SysTest extends FunSuite
 {
     test("system properties")
     {

@@ -1,8 +1,9 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009-2010 Brian M. Clapper. All rights reserved.
+  Copyright (c) 2009-2011 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -30,7 +31,8 @@
   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
 import org.scalatest.FunSuite
 import grizzled.io.GrizzledSource._
@@ -39,7 +41,7 @@ import scala.io.Source
 /**
  * Tests the grizzled.file.GrizzledSource functions.
  */
-class GrizzledSourceTest extends GrizzledFunSuite
+class GrizzledSourceTest extends FunSuite
 {
     test("First nonblank line")
     {

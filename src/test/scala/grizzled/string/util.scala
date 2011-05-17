@@ -1,5 +1,6 @@
-/*---------------------------------------------------------------------------*\
-  Copyright (c) 2009-2010 Brian M. Clapper. All rights reserved.
+/*
+ ---------------------------------------------------------------------------
+  Copyright (c) 2009-2011 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -27,17 +28,18 @@
   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  --------------------------------------------------------------------------
+*/
 
 import org.scalatest.FunSuite
 import grizzled.string._
 import grizzled.string.util._
-import grizzled.string.implicits._
+import grizzled.string.GrizzledString._
 
 /**
  * Tests the grizzled.string functions.
  */
-class StringTest extends GrizzledFunSuite
+class StringTest extends FunSuite
 {
     test("string to boolean conversions that should succeed")
     {

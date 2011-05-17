@@ -65,16 +65,6 @@ object CollectionIterator
 {
     implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
         new CollectionIterator[T](c)
-
-    /**
-     * Implicit conversions specific to CollectionIterator
-     */
-    @deprecated("Just import CollectionIterator._")
-    object Implicits
-    {
-        implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
-            new CollectionIterator[T](c)
-    }
 }
 
 /**
@@ -163,15 +153,6 @@ object GrizzledIterable
      */
     implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
         it.realIterable
-
-    @deprecated("Just import GrizzledIterable._")
-    object Implicits
-    {
-        implicit def IterableToGrizzledIterable[T](it: Iterable[T]) =
-            new GrizzledIterable[T](it)
-        implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
-            it.realIterable
-    }
 }
 
 class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T])
@@ -236,15 +217,4 @@ object GrizzledLinearSeq
      */
     implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
         seq.realSeq
-
-    @deprecated("Just import GrizzledLinearSeq._")
-    object Implicits
-    {
-        implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]) =
-            new GrizzledLinearSeq[T](seq)
-        implicit def listToGrizzledLinearSeq[T](list: List[T]) =
-            new GrizzledLinearSeq[T](list)
-        implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
-            seq.realSeq
-    }
 }

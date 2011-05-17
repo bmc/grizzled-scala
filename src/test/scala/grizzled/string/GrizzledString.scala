@@ -37,7 +37,7 @@ import grizzled.string.GrizzledString._
 /**
  * Tests the GrizzledString class.
  */
-class GrizzledStringTest extends GrizzledFunSuite
+class GrizzledStringTest extends FunSuite
 {
     test("ltrim")
     {

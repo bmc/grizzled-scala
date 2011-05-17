@@ -1,4 +1,5 @@
-/*---------------------------------------------------------------------------*\
+/*
+  ---------------------------------------------------------------------------
   Copyright (c) 2009-2010 Brian M. Clapper. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -27,7 +28,8 @@
   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-\*---------------------------------------------------------------------------*/
+  ---------------------------------------------------------------------------
+*/
 
 import org.scalatest.FunSuite
 import grizzled.string.GrizzledChar._
@@ -35,7 +37,7 @@ import grizzled.string.GrizzledChar._
 /**
  * Tests the GrizzledChar class.
  */
-class GrizzledCharTest extends GrizzledFunSuite
+class GrizzledCharTest extends FunSuite
 {
     test("isHexDigit")
     {

@@ -42,7 +42,7 @@ import java.lang.Math.sqrt
 /**
  * Tests the grizzled.file functions.
  */
-class StatsTest extends GrizzledFunSuite
+class StatsTest extends FunSuite
 {
     private def dList[T](l: T*)(implicit x: Numeric[T]): List[Double] =
         l map (x.toDouble(_)) toList
@@ -137,7 +137,7 @@ class StatsTest extends GrizzledFunSuite
         {
             expect(expected, "mode of " + values)
             {
-                mode(values: _*)
+                mode(values: _*).sortWith(_ < _)
             }
         }
     }

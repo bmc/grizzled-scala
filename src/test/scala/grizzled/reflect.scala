@@ -41,7 +41,7 @@ import scala.reflect.Manifest
 /**
  * Tests the grizzled.file functions.
  */
-class ReflectionTest extends GrizzledFunSuite
+class ReflectionTest extends FunSuite
 {
     private def isOfTypeTest[T](expected: Boolean, v: Any)
                                (implicit m: Manifest[T]): Unit =

@@ -40,7 +40,7 @@ import grizzled.binary._
 /**
  * Tests the grizzled.binary functions.
  */
-class BinaryTest extends GrizzledFunSuite
+class BinaryTest extends FunSuite
 {
     test("bitCount")
     {

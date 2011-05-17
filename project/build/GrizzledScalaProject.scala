@@ -103,7 +103,15 @@ class GrizzledScalaProject(info: ProjectInfo)
     // Artifacts
     val jline = "jline" % "jline" % "0.9.94"
 
-    val scalatest = "org.scalatest" % "scalatest" % "1.3" % "test"
+    val (scalatestArtifact, scalatestVersion) = buildScalaVersion match
+    {
+        case "2.8.0"           => ("scalatest", "1.3")
+        case "2.8.1"           => ("scalatest", "1.3")
+        case "2.9.0"           => ("scalatest_2.9.0", "1.4.1")
+        case n                 => error("Unsupported Scala version " + n)
+    }
+
+    val scalatest = "org.scalatest" % scalatestArtifact % scalatestVersion % "test"
 
     /* ---------------------------------------------------------------------- *\
                           Private Helper Methods

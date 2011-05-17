@@ -37,7 +37,7 @@ import grizzled.string.template._
 /**
  * Tests the grizzled.string.StringTemplate functions.
  */
-class StringTemplateTest extends GrizzledFunSuite
+class StringTemplateTest extends FunSuite
 {
     test("UnixShellStringTemplate: safe=true")
     {
