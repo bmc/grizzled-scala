@@ -51,8 +51,8 @@ from the [Scala Tools Maven repository][]. The relevant pieces of
 information are:
 
 * Group ID: `org.clapper`
-* Artifact ID: `grizzled-scala_2.8.1`
-* Version: `1.0.3`
+* Artifact ID: `grizzled-scala_2.9.0`
+* Version: `1.0.6`
 * Type: `jar`
 * Repository: `http://www.scala-tools.org/repo-releases/`
 
