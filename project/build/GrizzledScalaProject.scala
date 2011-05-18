@@ -73,8 +73,7 @@ class GrizzledScalaProject(info: ProjectInfo)
     \* ---------------------------------------------------------------------- */
 
     // Override the default "package" action to make it dependent on "test"
-    // and "doc".
-    override def packageAction = super.packageAction.dependsOn(test, doc)
+    override def packageAction = super.packageAction.dependsOn(test)
 
     /* ---------------------------------------------------------------------- *\
                                 Publishing

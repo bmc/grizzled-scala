@@ -77,7 +77,7 @@ object reflect
                   isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
         def isClass: Boolean =
-            man.erasure.isInstance(o)
+            man.erasure.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
         man.toString match
         {
