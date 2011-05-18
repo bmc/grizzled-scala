@@ -1,7 +1,65 @@
 ---
-title: The Grizzled Scala Utility Library
+title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
+
+Version 1.0.6:
+
+* Now builds against Scala 2.9.0, as well as Scala 2.8.0 and 2.8.1.
+* Updated to version 1.4.1 of [ScalaTest][] for Scala 2.9.0. (Still uses
+  ScalaTest 1.3, for Scala 2.8).
+* Updated to use [SBT][] 0.7.7.
+* Removed various deprecated methods.
+* Corrected implementation of `grizzled.reflect.isOfType` for non-primitives.
+
+[ScalaTest]: http://www.scalatest.org/
+[SBT]: http://code.google.com/p/simple-build-tool/
+
+
+Version 1.0.5:
+
+* Miscellaneous internal cleanup of `Configuration` and `grizzled.readline`
+  code.
+* Updated to version 1.3 of [ScalaTest][].
+
+[ScalaTest]: http://www.scalatest.org/
+
+
+Version 1.0.4:
+
+* Fixed some error messages in the `Configuration` class, per an email from
+  *brian.ewins /at/ gmail.com*.
+
+Version 1.0.3:
+
+* Now builds against [Scala][] 2.8.1 and 2.8.0.
+* Added `range()` function to the `grizzled.math.stats` module.
+* Enhanced `grizzled.readline` module to permit the caller-supplied
+  `Completer` object to specify the delimiters to use when tokenizing an
+  input line for tab completion.
+* Enhanced `grizzled.cmd` module to allow the caller to instantiate the
+  `CommandInterpreter` class with the set of delimiters to use when tokenizing
+  an input line for tab completion.
+
+[Scala]: http://www.scala-lang.org/
+
+Version 1.0.2:
+
+* Added the `grizzled.math.stats` module, which contains some common
+  statistics functions.
+* Scaladoc documentation is now generated with a proper title.
+* Fixed problem where `grizzled.cmd` failed to find a Readline library,
+  because of an inadvertent change of a constant from a `def` to a `val`.
+* Now compiles against [Scala][] 2.8.1 RC2, as well as 2.8.0.
+
+[Scala]: http://www.scala-lang.org/
+[http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html]: http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html
+
+Version 1.0.1:
+
+* Now compiles against [Scala][] 2.8.1 RC1, as well as 2.8.0
+
+[Scala]: http://www.scala-lang.org/
 
 Version 1.0:
 
@@ -35,7 +93,7 @@ Version 0.7.4:
 * Changed dependency on [ScalaTest][] to be a test-only dependency.
 
 [ScalaTest]: http://scalatest.org/
-[MarkWrap]: http://software.clapper.org/markwrap/
+[MarkWrap]: http://bmc.github.com/markwrap/
 
 Version 0.7.3:
 
@@ -239,7 +297,7 @@ Version 0.3:
 * grizzled.cmd now tries to load EditLine first.
 
 [sbt]: http://code.google.com/p/simple-build-tool
-[javaeditline]: http://software.clapper.org/java/javaeditline/
+[javaeditline]: http://www.clapper.org/software/java/javaeditline/
 [showdown]: http://attacklab.net/showdown/
 [rhino]: http://www.mozilla.org/rhino/
 
