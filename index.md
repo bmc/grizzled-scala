@@ -51,8 +51,8 @@ from the [Scala Tools Maven repository][]. The relevant pieces of
 information are:
 
 * Group ID: `org.clapper`
-* Artifact ID: `grizzled-scala_2.9.0`
-* Version: `1.0.6`
+* Artifact ID: `grizzled-scala_2.9.0-1`
+* Version: `1.0.7`
 * Type: `jar`
 * Repository: `http://www.scala-tools.org/repo-releases/`
 
@@ -68,34 +68,34 @@ For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.9.0</artifactId>
-      <version>1.0.6</version>
+      <artifactId>grizzled-scala_2.9.0-1</artifactId>
+      <version>1.0.7</version>
     </dependency>
 
-Scala 2.8.0, Scala 2.8.1 and Scala 2.9.0 are supported in version 1.0.6.
+Scala 2.8.0, Scala 2.8.1, Scala 2.9.0 and Scala 2.9.0-1 are supported in
+version 1.0.7.
 
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
 
 ### Using with SBT
 
-If you're using [SBT][] (the Simple Build Tool) to compile your code, you
-can place the following lines in your project file (i.e., the Scala file in
-your `project/build/` directory):
+#### 0.7.x
+
+If you're using [SBT][] 0.7.x to compile your code, you can place the
+following line in your project file (i.e., the Scala file in your
+`project/build/` directory):
 
     val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.6"
 
-**NOTES**
+#### 0.10.x
 
-1. The first doubled percent is *not* a typo. It tells SBT to treat
-   Grizzled Scala as a cross-built library and automatically inserts the
-   Scala version you're using into the artifact ID. It will *only* work if
-   you are building with Scala 2.8.0, 2.8.1 or 2.9.0.
-   See the [SBT cross-building][] page for details.
-2. Prior to Grizzled Scala, version 1.0, you also had to specify the location
-   of a custom Maven repository. With version 1.0, however, Grizzled Scala
-   is now being published to the [Scala Tools Maven repository][], which
-   SBT automatically searches.
+If you're using [SBT][] 0.10.x to compile your code, you can use the
+following line in your `build.sbt` file (for Quick Configuration). If
+you're using an SBT 0.10.x Full Configuration, you're obviously smart
+enough to figure out what to do, on your own.
+
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.7"
 
 ## Source Code Repository
 
@@ -106,18 +106,13 @@ To clone the repository, run this command:
 
 ## Building from Source
 
-Building the Grizzled Scala Library requires [SBT][]. Install SBT, as
-described at the SBT web site. Then, assuming you have an `sbt` shell script
-(or .BAT file, for Windows), run:
-
-    sbt update
-
-That command will pull down the external jars on which the Grizzled Scala
-Library depends. After that step, build the library with:
+Building the Grizzled Scala Library requires [SBT][] 0.10.1 or better.
+Install SBT, as described at the SBT web site. Then, assuming you have an
+`sbt` shell script (or .BAT file, for Windows), run:
 
     sbt compile test package
 
-The resulting jar file will be in the top-level `target` directory.
+The resulting jar file will be under the top-level `target` directory.
 
 ## API Documentation
 
@@ -136,7 +131,7 @@ Brian M. Clapper, [bmc@clapper.org][]
 
 ## Copyright and License
 
-The Grizzled Scala Library is copyright &copy; 2009-2010 Brian M. Clapper
+The Grizzled Scala Library is copyright &copy; 2009-2011 Brian M. Clapper
 and is released under a [BSD License][].
 
 ## Patches

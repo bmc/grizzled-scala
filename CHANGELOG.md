@@ -3,6 +3,11 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.0.7:
+
+* Now builds against Scala 2.9.0.1, as well as Scala 2.9.0, 2.8.1 and 2.8.0.
+* Converted to build with [SBT][] 0.10.1
+
 Version 1.0.6:
 
 * Now builds against Scala 2.9.0, as well as Scala 2.8.0 and 2.8.1.
