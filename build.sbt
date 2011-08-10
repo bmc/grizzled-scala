@@ -58,10 +58,9 @@ libraryDependencies += "jline" % "jline" % "0.9.94"
 // Publishing criteria
 
 publishTo <<= version {(v: String) =>
-    if (v endsWith "-SNAPSHOT")
-        Some(ScalaToolsSnapshots)
-    else
-        Some(ScalaToolsReleases)
+    val nexus = "http://nexus.scala-tools.org/content/repositories/"
+    if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "snapshots/") 
+    else                             Some("releases"  at nexus + "releases/")
 }
 
 publishMavenStyle := true
