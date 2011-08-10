@@ -72,13 +72,13 @@ object CollectionIterator
  */
 class ListIterator[+T](val list: List[T]) extends Iterator[T]
 {
-    private var cursor = 0
+    private[this] var current = list
 
-    def hasNext: Boolean = cursor < list.length
+    def hasNext: Boolean = current.tail != Nil
     def next: T =
     {
-        val result = list(cursor)
-        cursor += 1
+        val result = current.head
+        current = current.tail
         result
     }
 }
@@ -91,8 +91,9 @@ class ListIterator[+T](val list: List[T]) extends Iterator[T]
  */
 class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
 {
-    private val iteratorList: List[Iterator[T]] = iterators.toList
-    private var cursor = 0
+    private[this] val iteratorList: List[Iterator[T]] = iterators.toList
+    private[this] var current = iteratorList.head
+    private[this] var nextIterators = iteratorList.tail
 
     /**
      * Determines whether the iterator is empty. A <tt>MultiIterator</tt>
@@ -102,15 +103,16 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
      */
     def hasNext: Boolean =
     {
-        if (cursor >= iteratorList.length)
-            false
-
-        else if (iteratorList(cursor).hasNext)
+        if( current.hasNext )
             true
+
+        else if( nextIterators == Nil )
+            false
 
         else
         {
-            cursor += 1
+            current = nextIterators.head
+            nextIterators = nextIterators.tail
             hasNext
         }
     }
@@ -125,7 +127,7 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
         if (! hasNext)
             throw new java.util.NoSuchElementException
 
-        iteratorList(cursor).next
+        current.next
     }
 }
 
