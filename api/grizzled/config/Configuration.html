@@ -414,14 +414,14 @@ object Foo
       <span class="symbol">
         <span class="name">addSection</span>
         
-        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="params">(<span name="name">name: String</span>)</span>
         <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       
             <p class="shortcomment cmt">Add a section to the configuration.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Add a section to the configuration.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the new section's name
 </p></dd></dl>
             
             
@@ -765,14 +765,14 @@ get(sectionName, optionName).getOrElse(default)
       <span class="symbol">
         <span class="name">getSection</span>
         
-        <span class="params">(<span name="sectionName">sectionName: String</span>)</span>
+        <span class="params">(<span name="name">name: String</span>)</span>
         <span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
       </span>
       </h4>
       
             <p class="shortcomment cmt">Get a section.</p>
             <div class="fullcomment"><div class="comment cmt"><p>Get a section. Similar to <code>Map.get</code>, this method returns <code>Some(Section)</code>if the section exists, and <code>None</code> if it does not.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section to get
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the section to get
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(Section)</code> or <code>None</code></p></dd></dl>
             
             
