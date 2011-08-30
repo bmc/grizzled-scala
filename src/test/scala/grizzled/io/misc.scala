@@ -41,143 +41,129 @@ import grizzled.io.RichInputStream._
 /**
  * Tests the grizzled.io functions.
  */
-class IOTest extends FunSuite
-{
-    test("RichReader.readSome")
-    {
-        import java.io.StringReader
+class IOTest extends FunSuite {
+  test("RichReader.readSome") {
+    import java.io.StringReader
 
-        val data = List(
-            ("12345678901234567890", 10, "1234567890"),
-            ("12345678901234567890", 30, "12345678901234567890"),
-            ("12345678901234567890", 20, "12345678901234567890")
-        )
+    val data = List(
+      ("12345678901234567890", 10, "1234567890"),
+      ("12345678901234567890", 30, "12345678901234567890"),
+      ("12345678901234567890", 20, "12345678901234567890")
+    )
 
-        for((input, max, expected) <- data)
-            expect(expected, "RichReader.readSome(" + max + ") on: " + input)
-            {
-                val r = new StringReader(input)
-                r.readSome(max) mkString ""
-            }
+    for((input, max, expected) <- data) {
+      expect(expected, "RichReader.readSome(" + max + ") on: " + input) {
+        val r = new StringReader(input)
+        r.readSome(max) mkString ""
+      }
     }
+  }
 
-    test("RichInputStream.readSome")
-    {
-        import java.io.ByteArrayInputStream
+  test("RichInputStream.readSome") {
+    import java.io.ByteArrayInputStream
 
-        val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
-                               11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-        val inputArray = input.toArray
-        val data = List(
-            (10, input.slice(0, 10)),
-            (20, input),
-            (30, input)
-        )
+    val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
+                           11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+    val inputArray = input.toArray
+    val data = List(
+      (10, input.slice(0, 10)),
+      (20, input),
+      (30, input)
+    )
 
-        for((max, expected) <- data)
-            expect(expected, 
-                   "RichInputStream.readSome(" + max + ") on: " + inputArray)
-            {
-                val is = new ByteArrayInputStream(inputArray)
-                is.readSome(max)
-            }
+    for((max, expected) <- data) {
+      expect(expected, 
+             "RichInputStream.readSome(%d) on: %s" format (max, inputArray)) {
+        val is = new ByteArrayInputStream(inputArray)
+        is.readSome(max)
+      }
     }
+  }
 
-    test("RichReader.copyTo")
-    {
-        import java.io.{StringReader, StringWriter}
+  test("RichReader.copyTo") {
+    import java.io.{StringReader, StringWriter}
 
-        val data = List("12345678901234567890",
-                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                        "a",
-                        "")
+    val data = List("12345678901234567890",
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                    "a",
+                    "")
 
-        for(s <- data)
-            expect(s, "RichReader.copyTo() on: " + s)
-            {
-                val r = new StringReader(s)
-                val w = new StringWriter
-                r.copyTo(w)
-                w.toString
-            }
+    for(s <- data) {
+      expect(s, "RichReader.copyTo() on: " + s) {
+        val r = new StringReader(s)
+        val w = new StringWriter
+        r.copyTo(w)
+        w.toString
+      }
     }
+  }
 
-    test("RichInputStream.copyTo")
-    {
-        import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
+  test("RichInputStream.copyTo") {
+    import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 
-        val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
-                               11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-        val data = List(input.slice(0, 10),
-                        input,
-                        input.slice(0, 1)
-        )
+    val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
+                           11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+    val data = List(input.slice(0, 10),
+                    input,
+                    input.slice(0, 1))
 
-        for(bytes <- data)
-            expect(bytes, "RichInputStream.copyTo() on: " + bytes)
-            {
-                val is = new ByteArrayInputStream(bytes.toArray)
-                val os = new ByteArrayOutputStream
-                is.copyTo(os)
-                os.toByteArray.toList
-            }
+    for(bytes <- data) {
+      expect(bytes, "RichInputStream.copyTo() on: " + bytes) {
+        val is = new ByteArrayInputStream(bytes.toArray)
+        val os = new ByteArrayOutputStream
+        is.copyTo(os)
+        os.toByteArray.toList
+      }
     }
+  }
 
-    test("RichInputStream.copyTo with big input")
-    {
-        // will fail with java.lang.StackOverflowError if copyTo was
-        // not tail-call optimized
+  test("RichInputStream.copyTo with big input") {
+    // will fail with java.lang.StackOverflowError if copyTo was
+    // not tail-call optimized
 
-        import java.io.{InputStream, OutputStream}
-        import java.util.Random
+    import java.io.{InputStream, OutputStream}
+    import java.util.Random
 
-        val rnd = new Random()
-        val inp = new InputStream
-        {
-            var countDown = 5000
+    val rnd = new Random()
+    val inp = new InputStream {
+      var countDown = 5000
 
-            override def read(): Int =
-            {
-                if (countDown > 0)
-                {
-                    countDown -= 1
-                    rnd.nextInt(256)
-                }
-                else
-                    -1
-            }
+      override def read(): Int = {
+        if (countDown > 0) {
+          countDown -= 1
+          rnd.nextInt(256)
         }
-        val nul = new OutputStream
-        {
-            override def write(b: Int) = {}
-        }
-
-        try
-        {
-            inp.copyTo(nul)
-        }
-        catch
-        {
-            case e: StackOverflowError =>
-                fail("StackOverflowError - copyTo not tail-call optimized?")
-        }
+        else
+          -1
+      }
     }
 
-    test("withCloseable")
-    {
-        import java.io.{FileOutputStream, File}
-        import java.nio.channels.Channels
-        import grizzled.io.util._
-
-        val temp = File.createTempFile("test", ".dat")
-        temp.deleteOnExit
-
-        val fs = new FileOutputStream(temp)
-        expect(false, "withCloseable")
-        {
-            val chan = Channels.newChannel(fs)
-            withCloseable(chan) { chan => assert(chan.isOpen) }
-            chan.isOpen
-        }
+    val nul = new OutputStream {
+      override def write(b: Int) = {}
     }
+
+    try {
+      inp.copyTo(nul)
+    }
+    catch {
+      case e: StackOverflowError =>
+        fail("StackOverflowError - copyTo not tail-call optimized?")
+    }
+  }
+
+  test("withCloseable") {
+    import java.io.{FileOutputStream, File}
+    import java.nio.channels.Channels
+    import grizzled.io.util._
+
+    val temp = File.createTempFile("test", ".dat")
+    temp.deleteOnExit
+
+    val fs = new FileOutputStream(temp)
+    expect(false, "withCloseable") {
+      val chan = Channels.newChannel(fs)
+      withCloseable(chan) { chan => assert(chan.isOpen) }
+      chan.isOpen
+    }
+  }
 }

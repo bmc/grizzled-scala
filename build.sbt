@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.0.7"
+version := "1.0.8"
 
 organization := "org.clapper"
 
@@ -24,6 +24,7 @@ crossScalaVersions := Seq("2.8.1", "2.9.0", "2.9.0-1", "2.8.0")
 
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
+
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
     // Select ScalaTest version based on Scala version
     val scalatestVersionMap = Map("2.8.0"   -> ("scalatest", "1.3"),

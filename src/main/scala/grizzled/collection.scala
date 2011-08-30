@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -35,188 +35,171 @@
   ---------------------------------------------------------------------------
 */
 
-/**
- * Some collection-related helpers.
- */
+/** Some collection-related helpers.
+  */
 package grizzled.collection
 
 import scala.collection.generic._
 import scala.collection.immutable.LinearSeq
 import java.util.{Collection, Iterator => JIterator}
 
-/**
- * Useful for converting a collection into an object suitable for use with
- * Scala's <tt>for</tt> loop.
- */
-class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T]
-{
-    /**
-     * Alternate constructor that takes a collection.
-     *
-     * @param collection  the collection
-     */
-    def this(collection: Collection[T]) = this(collection.iterator)
+/** Useful for converting a collection into an object suitable for use with
+  * Scala's `for` loop.
+  */
+class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T] {
 
-    def hasNext: Boolean = iterator.hasNext
-    def next: T = iterator.next
+  /** Alternate constructor that takes a collection.
+    *
+    * @param collection  the collection
+    */
+  def this(collection: Collection[T]) = this(collection.iterator)
+
+  def hasNext: Boolean = iterator.hasNext
+  def next: T = iterator.next
 }
 
-object CollectionIterator
-{
-    implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
-        new CollectionIterator[T](c)
+object CollectionIterator {
+  implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
+    new CollectionIterator[T](c)
 }
 
-/**
- * An <tt>Iterator</tt> for lists.
- */
-class ListIterator[+T](val list: List[T]) extends Iterator[T]
-{
-    private[this] var current = list
+/** An `Iterator` for lists.
+  */
+class ListIterator[+T](val list: List[T]) extends Iterator[T] {
+  private[this] var current = list
 
-    def hasNext: Boolean = current.tail != Nil
-    def next: T =
-    {
-        val result = current.head
-        current = current.tail
-        result
+  def hasNext: Boolean = {
+    current match {
+      case Nil => false
+      case _   => true
     }
+  }
+
+  def next: T = {
+    current match {
+      case Nil =>
+        throw new IllegalStateException("Unexpected empty list")
+      case h :: t => {
+        current = t
+        h
+      }
+    }
+  }
 }
 
-/**
- * An iterator that iterates, serially, over the contents of multiple other
- * iterators.
- *
- * @param iterators  the iterators to wrap
- */
-class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T]
-{
-    private[this] val iteratorList: List[Iterator[T]] = iterators.toList
-    private[this] var current = iteratorList.head
-    private[this] var nextIterators = iteratorList.tail
+/** An iterator that iterates, serially, over the contents of multiple other
+  * iterators.
+  *
+  * @param iterators  the iterators to wrap
+  */
+class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
+  private[this] val iteratorList: List[Iterator[T]] = iterators.toList
+  private[this] var current = iteratorList.head
+  private[this] var nextIterators = iteratorList.tail
 
-    /**
-     * Determines whether the iterator is empty. A <tt>MultiIterator</tt>
-     * is empty when all contained iterators have been exhausted.
-     *
-     * @return <tt>true</tt> if there's more to read, <tt>false</tt> if not
-     */
-    def hasNext: Boolean =
-    {
-        if( current.hasNext )
-            true
+  /** Determines whether the iterator is empty. A `MultiIterator`
+    * is empty when all contained iterators have been exhausted.
+    *
+    * @return `true` if there's more to read, `false` if not
+    */
+  def hasNext: Boolean = {
+    if( current.hasNext )
+      true
 
-        else if( nextIterators == Nil )
-            false
+    else if( nextIterators == Nil )
+      false
 
-        else
-        {
-            current = nextIterators.head
-            nextIterators = nextIterators.tail
-            hasNext
-        }
+    else {
+      current = nextIterators.head
+      nextIterators = nextIterators.tail
+      hasNext
     }
+  }
 
-    /**
-     * Get the next element.
-     *
-     * @return the next element
-     */
-    def next: T =
-    {
-        if (! hasNext)
-            throw new java.util.NoSuchElementException
+  /** Get the next element.
+    *
+    * @return the next element
+    */
+  def next: T = {
+    if (! hasNext)
+      throw new java.util.NoSuchElementException
 
-        current.next
-    }
+    current.next
+  }
 }
 
 class GrizzledIterable[+T](protected val underlying: Iterable[T])
-    extends IterableForwarder[T]
-{
-    def realIterable = underlying
+extends IterableForwarder[T] {
+  def realIterable = underlying
 
-    def columnarize(width: Int): String =
-    {
-        new GrizzledLinearSeq(underlying.toList).columnarize(width)
-    }
+  def columnarize(width: Int): String = {
+    new GrizzledLinearSeq(underlying.toList).columnarize(width)
+  }
 }
 
-object GrizzledIterable
-{
-    /**
-     * Convert a Scala Iterable object to a GrizzledIterable.
-     */
-    implicit def IterableToGrizzledIterable[T](it: Iterable[T]) =
-        new GrizzledIterable[T](it)
+object GrizzledIterable {
+  /** Convert a Scala Iterable object to a GrizzledIterable.
+    */
+  implicit def IterableToGrizzledIterable[T](it: Iterable[T]) =
+    new GrizzledIterable[T](it)
 
-    /**
-     * Convert GrizzledIterator a object to a Scala Iterable.
-     */
-    implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
-        it.realIterable
+  /** Convert GrizzledIterator a object to a Scala Iterable.
+    */
+  implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
+    it.realIterable
 }
 
-class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T])
-{
-    def realSeq = underlying
+class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T]) {
+  def realSeq = underlying
 
-    /**
-     * Create a string containing the contents of this sequence, arranged
-     * in columns.
-     *
-     * @param width    total (maximum) columns
-     *
-     * @return a possibly multiline string containing the columnar output.
-     *         The string may have embedded newlines, but it will not end
-     *         with a newline.
-     */
-    def columnarize(width: Int): String =
-    {
-        import scala.collection.mutable.ArrayBuffer
-        import grizzled.math.util.{max => maxnum}
+  /** Create a string containing the contents of this sequence, arranged
+    * in columns.
+    *
+    * @param width    total (maximum) columns
+    *
+    * @return a possibly multiline string containing the columnar output.
+    *         The string may have embedded newlines, but it will not end
+    *         with a newline.
+    */
+  def columnarize(width: Int): String = {
+    import scala.collection.mutable.ArrayBuffer
+    import grizzled.math.util.{max => maxnum}
 
-        val buf = new ArrayBuffer[Char] 
+    val buf = new ArrayBuffer[Char] 
 
-        // Lay them out in columns. Simple-minded for now.
-        val strings = underlying.map(_.toString).toList
-        val colSize = maxnum(strings.map(_.length): _*) + 2
-        val colsPerLine = width / colSize
-        for ((s, i) <- strings.zipWithIndex)
-        {
-            val count = i + 1
-            val padding = " " * (colSize - s.length)
-            buf ++= (s + padding)
-            if ((count % colsPerLine) == 0)
-                buf += '\n'
-        }
-
-        buf mkString ""
+    // Lay them out in columns. Simple-minded for now.
+    val strings = underlying.map(_.toString).toList
+    val colSize = maxnum(strings.map(_.length): _*) + 2
+    val colsPerLine = width / colSize
+    for ((s, i) <- strings.zipWithIndex) {
+      val count = i + 1
+      val padding = " " * (colSize - s.length)
+      buf ++= (s + padding)
+      if ((count % colsPerLine) == 0)
+        buf += '\n'
     }
 
-    override def toString = underlying.toString
+    buf mkString ""
+  }
+
+  override def toString = underlying.toString
 }
 
-/**
- * Implicit conversions specific to GrizzledLinearSeq.
- */
-object GrizzledLinearSeq
-{
-    /**
-     * Convert a Scala Seq object to a GrizzledLinearSeq.
-     */
-    implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]) =
-        new GrizzledLinearSeq[T](seq)
+/** Implicit conversions specific to GrizzledLinearSeq.
+  */
+object GrizzledLinearSeq {
+  /** Convert a Scala Seq object to a GrizzledLinearSeq.
+    */
+  implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]) =
+    new GrizzledLinearSeq[T](seq)
 
-    /**
-     * Convert a Scala List object to a GrizzledLinearSeq.
-     */
-    implicit def listToGrizzledLinearSeq[T](list: List[T]) =
-        new GrizzledLinearSeq[T](list)
+  /** Convert a Scala List object to a GrizzledLinearSeq.
+    */
+  implicit def listToGrizzledLinearSeq[T](list: List[T]) =
+    new GrizzledLinearSeq[T](list)
 
-    /**
-     * Convert GrizzledLinearSeq a object to a Scala Seq.
-     */
-    implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
-        seq.realSeq
+  /** Convert GrizzledLinearSeq a object to a Scala Seq.
+    */
+  implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
+    seq.realSeq
 }

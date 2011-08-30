@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -35,13 +35,11 @@
   ---------------------------------------------------------------------------
 */
 
-/**
- * I/O-related classes and utilities. This package is distinguished from
- * the <tt>grizzled.file</tt> package in that this package operates on
- * already-open Java <tt>InputStream<tt>, <tt>OutputStream</tt>,
- * <tt>Reader</tt> and <tt>Writer</tt> objects, and on Scala
- * <tt>Source</tt> objects.
- */
+/** I/O-related classes and utilities. This package is distinguished from
+  * the `grizzled.file` package in that this package operates on
+  * already-open Java `InputStream`, `OutputStream`, `Reader` and `Writer`
+  * objects, and on Scala `Source` objects.
+  */
 package grizzled.io
 
 import scala.io.Source
@@ -49,49 +47,40 @@ import scala.annotation.tailrec
 
 import java.io.{Reader, Writer}
 
-/**
- * Provides additional methods, over and above those already present in
- * the Java <tt>Reader</tt> class. The <tt>implicits</tt> object
- * contains implicit conversions between <tt>RichReader</tt> and
- * <tt>Reader</tt>.
- *
- * @param reader  the reader to wrap
- */
-class RichReader(val reader: Reader) extends PartialReader[Char]
-{
-    protected def convert(b: Int) = b.asInstanceOf[Char]
+/** Provides additional methods, over and above those already present in
+  * the Java `Reader` class. The `implicits` object contains implicit
+  * conversions between `RichReader` and `Reader`.
+  *
+  * @param reader  the reader to wrap
+  */
+class RichReader(val reader: Reader) extends PartialReader[Char] {
+  protected def convert(b: Int) = b.asInstanceOf[Char]
 
-    /**
-     * Copy the reader to a writer, stopping on EOF. This method does no
-     * buffering. If you want buffering, make sure you use a
-     * <tt>java.io.BufferedReader</tt> and a <tt>java.io.BufferedWriter.
-     * This method does not close either object.
-     *
-     * @param out  the output stream
-     */
-    def copyTo(out: Writer): Unit =
-    {
-        @tailrec def doCopyTo: Unit =
-        {
-            val c: Int = reader.read()
-            if (c != -1)
-            {
-                out.write(c)
-                // Tail recursion means never having to use a var.
-                doCopyTo
-            }
-        }
-
+  /** Copy the reader to a writer, stopping on EOF. This method does no
+    * buffering. If you want buffering, make sure you use a
+    * `java.io.BufferedReader` and a `java.io.BufferedWriter. This method
+    * does not close either object.
+    *
+    * @param out  the output stream
+    */
+  def copyTo(out: Writer): Unit = {
+    @tailrec def doCopyTo: Unit = {
+      val c: Int = reader.read()
+      if (c != -1) {
+        out.write(c)
+        // Tail recursion means never having to use a var.
         doCopyTo
+      }
     }
+
+    doCopyTo
+  }
 }
 
-/**
- * Companion object to `RichReader` class. Importing this object brings the
- * implicit conversations into scope.
- */
-object RichReader
-{
-    implicit def readerToRichReader(reader: Reader) = new RichReader(reader)
-    implicit def richReaderToReader(richReader: RichReader) = richReader.reader
+/** Companion object to `RichReader` class. Importing this object brings the
+  * implicit conversations into scope.
+  */
+object RichReader {
+  implicit def readerToRichReader(reader: Reader) = new RichReader(reader)
+  implicit def richReaderToReader(richReader: RichReader) = richReader.reader
 }

@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -39,274 +39,248 @@ package grizzled.net
 
 import java.net.InetAddress
 
-/**
- * Represents an IP address. This class is similar to the
- * <tt>java.net.InetAddress</tt>, but it's designed to be more intuitive
- * and easier to use from Scala. This package provides implicit converters
- * to make this class compatible with <tt>java.net.InetAddress</tt>. The
- * converters ensure that all the (non-static) methods defined in the
- * <tt>java.net.InetAddress</tt> class are directly callable from an
- * instance of the Scala <tt>IPAddress</tt> class. For instance, the following
- * code is perfectly legal:
- *
- * <blockquote><pre>
- * val ip = IPAddress(192, 168, 2, 5)
- *
- * // Test if the address is reachable within 1 second.
- * println(ip + " is reachable? " + ip.isReachable(1000))
- *
- * // Get the canonical host name for (i.e., do a reverse lookup on) the
- * // address.
- * println(ip + " -> " + ip.getCanonicalHostName)
- *
- * // Determine whether it's the loopback address.
- * println(ip + " == loopback? " + ip.isLoopbackAddress)
- * </pre></blockquote>
- *
- * Here's an IPv6 example:
- *
- * <blockquote><pre>
- * val ip = IPAddress("fe80::21d:9ff:fea7:53e3")
- *
- * // Test if the address is reachable within 1 second.
- * println(ip + " is reachable? " + ip.isReachable(1000))
- *
- * // Get the canonical host name for (i.e., do a reverse lookup on) the
- * // address.
- * println(ip + " -> " + ip.getCanonicalHostName)
- *
- * // Determine whether it's the loopback address.
- * println(ip + " == loopback? " + ip.isLoopbackAddress)
- * </pre></blockquote>
- */
-class IPAddress(val address: Array[Byte])
-{
-    require((address.length == 4) || (address.length == 16))
+/** Represents an IP address. This class is similar to `java.net.InetAddress`,
+  * but it's designed to be more intuitive and easier to use from Scala.
+  * This package provides implicit converters to make this class compatible
+  * with `java.net.InetAddress`. The converters ensure that all the
+  * (non-static) methods defined in the `java.net.InetAddress` class are
+  * directly callable from an instance of the Scala `IPAddress` class. For
+  * instance, the following code is perfectly legal:
+  *
+  * {{{
+  * val ip = IPAddress(192, 168, 2, 5)
+  *
+  * // Test if the address is reachable within 1 second.
+  * println(ip + " is reachable? " + ip.isReachable(1000))
+  *
+  * // Get the canonical host name for (i.e., do a reverse lookup on) the
+  * // address.
+  * println(ip + " -> " + ip.getCanonicalHostName)
+  *
+  * // Determine whether it's the loopback address.
+  * println(ip + " == loopback? " + ip.isLoopbackAddress)
+  * }}}
+  *
+  * Here's an IPv6 example:
+  *
+  * {{{
+  * val ip = IPAddress("fe80::21d:9ff:fea7:53e3")
+  *
+  * // Test if the address is reachable within 1 second.
+  * println(ip + " is reachable? " + ip.isReachable(1000))
+  *
+  * // Get the canonical host name for (i.e., do a reverse lookup on) the
+  * // address.
+  * println(ip + " -> " + ip.getCanonicalHostName)
+  *
+  * // Determine whether it's the loopback address.
+  * println(ip + " == loopback? " + ip.isLoopbackAddress)
+  * }}}
+  *
+  * @param address the IPv4 or IPv6 address, as bytes
+  */
+class IPAddress(val address: Array[Byte]) {
+  require((address.length == 4) || (address.length == 16))
 
-    /**
-     * Return a printable version of this IP address.
-     *
-     * @return the printable version
-     */
-    override val toString: String =
-    {
-        val j: InetAddress = this
-        j.getHostAddress
+  /** Return a printable version of this IP address.
+    *
+    * @return the printable version
+    */
+  override val toString: String = {
+    val j: InetAddress = this
+    j.getHostAddress
+  }
+
+  /** Overloaded "==" method to test for equality.
+    *
+    * @param other  object against which to test this object
+    *
+    * @return `true` if equal, `false` if not
+    */
+  override def equals(other: Any): Boolean =
+    other match {
+      case that: IPAddress =>
+        that.address.toList == this.address.toList
+      case _ =>
+        false
     }
 
-    /**
-     * Overloaded "==" method to test for equality.
-     *
-     * @param other  object against which to test this object
-     *
-     * @return <tt>true</tt> if equal, <tt>false</tt> if not
-     */
-    override def equals(other: Any): Boolean =
-        other match
-        {
-            case that: IPAddress =>
-                that.address.toList == this.address.toList
-            case _ =>
-                false
-        }
-
-    /**
-     * Overloaded hash method: Ensures that two <tt>IPAddress</tt> objects
-     * that represent the same IP address have the same hash code.
-     *
-     * @return the hash code
-     */
-    override def hashCode: Int = address.toList.hashCode
+  /** Overloaded hash method: Ensures that two `IPAddress` objects
+    * that represent the same IP address have the same hash code.
+    *
+    * @return the hash code
+    */
+  override def hashCode: Int = address.toList.hashCode
 }
 
-/**
- * Companion object to <tt>IPAddress</tt> class.
- */
-object IPAddress
-{
-    /**
-     * Singleton <tt>IPAddress</tt> for the local loop address.
-     */
-    final val Localhost = IPAddress(Array(127, 0, 0, 1))
+/** Companion object to `IPAddress` class.
+  */
+object IPAddress {
+  /** Singleton `IPAddress` for the local loop address.
+    */
+  final val Localhost = IPAddress(Array(127, 0, 0, 1))
 
-    /**
-     * Create an <tt>IPAddress</tt>, given an array of bytes representing
-     * the address. The array must contain between 1 and 16 byte values.
-     *
-     * <ul>
-     *   <li>If the array has fewer than four values, it is assumed to be
-     *       an IPv4 address, and it will be padded with 0s to 4 bytes.
-     *   <li>If the array has between four and 16 values, it is assumed to be
-     *       an IPv6 address, and it will be padded with 0s to 16 bytes.
-     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
-     *       to be thrown.
-     * </ul>
-     *
-     * @param addr  the address
-     *
-     * @return the <tt>IPAddress</tt>
-     */
-    def apply(addr: Array[Byte]): IPAddress =
-        IPAddress(addr toList)
+  /** Create an `IPAddress`, given an array of bytes representing
+    * the address. The array must contain between 1 and 16 byte values.
+    *
+    * - If the array has fewer than four values, it is assumed to be
+    *   an IPv4 address, and it will be padded with 0s to 4 bytes.
+    * - If the array has between four and 16 values, it is assumed to be
+    *   an IPv6 address, and it will be padded with 0s to 16 bytes.
+    * - Anything else will cause an `IllegalArgumentException` to be thrown.
+    *
+    * @param addr  the address
+    *
+    * @return the `IPAddress`
+    */
+  def apply(addr: Array[Byte]): IPAddress =
+    IPAddress(addr toList)
 
-    /**
-     * Create an <tt>IPAddress</tt>, given an array of integers representing
-     * the address. The array must contain between 1 and 16 integer values.
-     * The integers will be truncated to 8-bit bytes.
-     *
-     * <ul>
-     *   <li>If the array has fewer than four values, it is assumed to be
-     *       an IPv4 address, and it will be padded with 0s to 4 bytes.
-     *   <li>If the array has between four and 16 values, it is assumed to be
-     *       an IPv6 address, and it will be padded with 0s to 16 bytes.
-     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
-     *       to be thrown.
-     * </ul>
-     *
-     * Example of use:
-     *
-     * <blockquote>
-     * <pre>val ip = IPAddress(Array(192, 168, 1, 100))</pre>
-     * </blockquote>
-     *
-     * @param addr  the address
-     *
-     * @return the corresponding <tt>IPAddress</tt> object.
-     */
-    def apply(addr: Array[Int]): IPAddress = 
-        IPAddress(addr map (_ toByte))
+  /** Create an `IPAddress`, given an array of integers representing
+    * the address. The array must contain between 1 and 16 integer values.
+    * The integers will be truncated to 8-bit bytes.
+    *
+    * - If the array has fewer than four values, it is assumed to be
+    *   an IPv4 address, and it will be padded with 0s to 4 bytes.
+    * - If the array has between four and 16 values, it is assumed to be
+    *   an IPv6 address, and it will be padded with 0s to 16 bytes.
+    * - Anything else will cause an `IllegalArgumentException` to be thrown.
+    *
+    * Example of use:
+    *
+    * {{{
+    * val ip = IPAddress(Array(192, 168, 1, 100))
+    * }}}
+    *
+    * @param addr  the address
+    *
+    * @return the corresponding `IPAddress` object.
+    */
+  def apply(addr: Array[Int]): IPAddress = 
+    IPAddress(addr map (_ toByte))
 
-    /**
-     * Create an <tt>IPAddress</tt>, given 1 to 16 integer arguments.
-     * The integers will be truncated to 8-bit bytes.
-     *
-     * <ul>
-     *   <li>If the argument list has fewer than four values, it is assumed
-     *       to be an IPv4 address, and it will be padded with 0s to 4 bytes.
-     *   <li>If the argument list has between four and 16 values, it is
-     *       assumed to be an IPv6 address, and it will be padded with 0s to
-     *       16 bytes.
-     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
-     *       to be thrown.
-     * </ul>
-     *
-     * Example of use:
-     *
-     * <blockquote>
-     * <pre>val ip = IPAddress(Array(192, 168, 1, 100))</pre>
-     * </blockquote>
-     *
-     * @param addr  the bytes (as integers) of the address
-     *
-     * @return the <tt>IPAddress</tt>
-     */
-    def apply(addr: Int*): IPAddress =
-        IPAddress(addr map (_ toByte) toList)
+  /** Create an `IPAddress`, given 1 to 16 integer arguments.
+    * The integers will be truncated to 8-bit bytes.
+    *
+    * - If the array has fewer than four values, it is assumed to be
+    *   an IPv4 address, and it will be padded with 0s to 4 bytes.
+    * - If the array has between four and 16 values, it is assumed to be
+    *   an IPv6 address, and it will be padded with 0s to 16 bytes.
+    * - Anything else will cause an `IllegalArgumentException` to be thrown.
+    *
+    * Example of use:
+    *
+    * {{{
+    * val ip = IPAddress(Array(192, 168, 1, 100))
+    * }}}
+    *
+    * @param addr  the bytes (as integers) of the address
+    *
+    * @return the `IPAddress`
+    */
+  def apply(addr: Int*): IPAddress =
+    IPAddress(addr map (_ toByte) toList)
 
-    /**
-     * Create an <tt>IPAddress</tt>, given a list of bytes representing the
-     * address
-     *
-     * <ul>
-     *   <li>If the list has fewer than four values, it is assumed to be an
-     *       IPv4 address, and it will be padded with 0s to 4 bytes.
-     *   <li>If the list has between four and 16 values, it is assumed to be
-     *       an IPv6 address, and it will be padded with 0s to 16 bytes.
-     *   <li>Anything else will cause an <tt>IllegalArgumentException</tt>
-     *       to be thrown.
-     * </ul>
-     *
-     * @param address  the list of address values
-     *
-     * @return the <tt>IPAddress</tt>
-     */
-    def apply(address: List[Byte]): IPAddress =
-    {
-        val zeroByte = 0 toByte
+  /** Create an `IPAddress`, given a list of bytes representing the
+    * address
+    *
+    * - If the array has fewer than four values, it is assumed to be
+    *   an IPv4 address, and it will be padded with 0s to 4 bytes.
+    * - If the array has between four and 16 values, it is assumed to be
+    *   an IPv6 address, and it will be padded with 0s to 16 bytes.
+    * - Anything else will cause an `IllegalArgumentException` to be thrown.
+    * Example of use:
+    *
+    * {{{
+    * val ip = IPAddress(List(192, 168, 1, 100))
+    * }}}
+    *
+    * @param address  the list of address values
+    *
+    * @return the `IPAddress`
+    */
+  def apply(address: List[Byte]): IPAddress = {
+    val zeroByte = 0 toByte
 
-        val fullAddress: List[Byte] = address.length match
-        {
-            case 4 =>
-                address
+    val fullAddress: List[Byte] = address.length match {
+      case 4 =>
+        address
 
-            case 16 =>
-                address
+      case 16 =>
+        address
 
-            case 0 =>
-                throw new IllegalArgumentException("Empty IP address.")
+      case 0 =>
+        throw new IllegalArgumentException("Empty IP address.")
 
-            case n if (n > 16) =>
-                throw new IllegalArgumentException("IP address (" +
-                                                   address.mkString(",") +
-                                                   ") is too long.")
+      case n if (n > 16) =>
+        throw new IllegalArgumentException("IP address (" +
+                                           address.mkString(",") +
+                                           ") is too long.")
 
-            case n =>
-                val upper = if (n < 4) 4 else 16
-                address ++ (n until upper map (i => zeroByte))
-        }
-
-        new IPAddress(fullAddress toArray)
+      case n => {
+        val upper = if (n < 4) 4 else 16
+        address ++ (n until upper map (i => zeroByte))
+      }
     }
 
-    /**
-     * Create an <tt>IPAddress</tt>, given a host name.
-     *
-     * @param host  the host name
-     *
-     * @return the corresponding <tt>IPAddress</tt> object.
-     *
-     * @throws java.net.UnknownHostException unknown host
-     */
-    def apply(host: String): IPAddress =
-        IPAddress(InetAddress.getByName(host).getAddress)
+    new IPAddress(fullAddress toArray)
+  }
 
-    /**
-     * <p>Get a list of all <tt>IPAddress</tt> objects for a given host
-     * name, based on whatever name service is configured for the running
-     * system.</p>
-     *
-     * <p>The host name can either be a machine name, such as
-     * "www.clapper.org", or a textual representation of its IP address. If
-     * a literal IP address is supplied, only the validity of the address
-     * format is checked.</p>
-     *
-     * <p>If the host is null, then this method return an <tt>IPAddress</tt>
-     * representing an address of the loopback interfaced. See RFC 3330
-     * section 2 and RFC 2373 section 2.5.3.</p>
-     *
-     * <p>This method corresponds to the <tt>getAllByName()</tt> method in
-     * the <tt>java.net.InetAddress</tt> class.</p>
-     *
-     * @param hostname  the host name
-     *
-     * @return the list of matching <tt>IPAddress</tt> objects
-     *
-     * @throws UnknownHostException unknown host
-     */
-    def allForName(hostname: String): List[IPAddress] =
-        InetAddress.getAllByName(hostname)
-                   .map((x: InetAddress) => IPAddress(x.getAddress))
-                   .toList
+  /** Create an `IPAddress`, given a host name.
+    *
+    * @param host  the host name
+    *
+    * @return the corresponding `IPAddress` object.
+    *
+    * @throws java.net.UnknownHostException unknown host
+    */
+  def apply(host: String): IPAddress =
+    IPAddress(InetAddress.getByName(host).getAddress)
 
-    /**
-     * Implicitly converts a <tt>java.net.InetAddress</tt> to an
-     * <tt>IPAddress</tt>.
-     *
-     * @param addr  the <tt>java.net.InetAddress</tt>
-     *
-     * @return the corresponding <tt>IPAddress</tt>
-     */
-    implicit def inetToIPAddress(addr: InetAddress): IPAddress =
-        IPAddress(addr.getAddress)
+  /** Get a list of all `IPAddress` objects for a given host
+    * name, based on whatever name service is configured for the running
+    * system.
+    *
+    * The host name can either be a machine name, such as
+    * "www.clapper.org", or a textual representation of its IP address. If
+    * a literal IP address is supplied, only the validity of the address
+    * format is checked.
+    *
+    * If the host is null, then this method return an `IPAddress`
+    * representing an address of the loopback interfaced. See RFC 3330
+    * section 2 and RFC 2373 section 2.5.3.
+    *
+    * This method corresponds to the `getAllByName()` method in
+    * the `java.net.InetAddress` class.
+    *
+    * @param hostname  the host name
+    *
+    * @return the list of matching `IPAddress` objects
+    *
+    * @throws UnknownHostException unknown host
+    */
+  def allForName(hostname: String): List[IPAddress] =
+    InetAddress.getAllByName(hostname)
+  .map((x: InetAddress) => IPAddress(x.getAddress))
+  .toList
 
-    /**
-     * Implicitly converts an <tt>IPAddress</tt> to a
-     * <tt>java.net.InetAddress</tt>.
-     *
-     * @param ipAddr  the <tt>IPAddress</tt>
-     *
-     * @return the corresponding <tt>java.net.InetAddress</tt>
-     */
-    implicit def ipToInetAddress(ipAddr: IPAddress): InetAddress =
-        InetAddress.getByAddress(ipAddr.address)
+  /** Implicitly converts a `java.net.InetAddress` to an
+    * `IPAddress`.
+    *
+    * @param addr  the `java.net.InetAddress`
+    *
+    * @return the corresponding `IPAddress`
+    */
+  implicit def inetToIPAddress(addr: InetAddress): IPAddress =
+    IPAddress(addr.getAddress)
+
+  /** Implicitly converts an `IPAddress` to a
+    * `java.net.InetAddress`.
+    *
+    * @param ipAddr  the `IPAddress`
+    *
+    * @return the corresponding `java.net.InetAddress`
+    */
+  implicit def ipToInetAddress(ipAddr: IPAddress): InetAddress =
+    InetAddress.getByAddress(ipAddr.address)
 }

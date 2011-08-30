@@ -121,270 +121,252 @@ import java.net.{URI, URISyntaxException}
 class Includer(val source: Source,
                val includeRegex: Regex,
                val maxNesting: Int)
-    extends Iterator[String]
-{
-    import scala.collection.mutable.Stack
+extends Iterator[String] {
+  import scala.collection.mutable.Stack
 
-    /**
-     * Used to maintain the stack of sources being read.
-     */
-    private class IncludeSource(val source: Source)
-    {
-        val iterator = source.getLines()
+  /**
+   * Used to maintain the stack of sources being read.
+   */
+  private class IncludeSource(val source: Source) {
+    val iterator = source.getLines()
+  }
+
+  /**
+   * The stack of sources being read.
+   */
+  private val sourceStack = new Stack[IncludeSource]
+
+  sourceStack.push(new IncludeSource(source))
+
+  /**
+   * Determine whether there are any more input lines to be read from the
+   * includer.
+   *
+   * @return `true` if at least one more line is available,
+   *         `false` otherwise
+   */
+  def hasNext: Boolean = {
+    @tailrec def somethingHasNext(stack: List[IncludeSource]): Boolean = {
+      if (stack.length == 0)
+        false
+      else if (stack.head.iterator.hasNext)
+        true
+      else
+        somethingHasNext(stack.tail)
     }
 
-    /**
-     * The stack of sources being read.
-     */
-    private val sourceStack = new Stack[IncludeSource]
+    somethingHasNext(sourceStack.toList.reverse)
+  }
 
-    sourceStack.push(new IncludeSource(source))
+  /**
+   * Get the next input line. You should call `hasNext` before calling
+   * this method, to ensure that there are input lines remaining.
+   *
+   * @return the next input line
+   *
+   * @throws IllegalStateException no more input lines
+   */
+  def next: String = {
+    @tailrec def nextFromStack: String = {
+      if (sourceStack.length == 0)
+        throw new IllegalStateException("No more data")
 
-    /**
-     * Determine whether there are any more input lines to be read from the
-     * includer.
-     *
-     * @return `true` if at least one more line is available,
-     *         `false` otherwise
-     */
-    def hasNext: Boolean =
-    {
-        @tailrec def somethingHasNext(stack: List[IncludeSource]): Boolean =
-        {
-            if (stack.length == 0)
-                false
-            else if (stack.head.iterator.hasNext)
-                true
-            else
-                somethingHasNext(stack.tail)
-        }
-
-        somethingHasNext(sourceStack.toList.reverse)
+      if (sourceStack.top.iterator.hasNext)
+        sourceStack.top.iterator.next
+      else {
+        sourceStack.pop
+        nextFromStack
+      }
     }
 
-    /**
-     * Get the next input line. You should call `hasNext` before calling
-     * this method, to ensure that there are input lines remaining.
-     *
-     * @return the next input line
-     *
-     * @throws IllegalStateException no more input lines
-     */
-    def next: String =
-    {
-        @tailrec def nextFromStack: String =
-        {
-            if (sourceStack.length == 0)
-                throw new IllegalStateException("No more data")
+    import grizzled.file.{util => futil}
 
-            if (sourceStack.top.iterator.hasNext)
-                sourceStack.top.iterator.next
-            else
-            {
-                sourceStack.pop
-                nextFromStack
-            }
+    @tailrec def doNext: String = {
+      val line = nextFromStack
+
+      // NOTE: Could use flatMap(), et al, on the return from
+      // findFirstMatchIn(), but this seems more readable.
+
+      includeRegex.findFirstMatchIn(line) match {
+        case None =>
+          if (line.endsWith("\n"))
+            line.substring(0, line.length - 1)
+          else
+            line
+
+        case Some(incMatch) => {
+          if (sourceStack.length >= maxNesting)
+            throw new IllegalStateException("Max nesting level (" +
+                                            maxNesting + ") " +
+                                            "exceeded.")
+
+          val curURI =  new URI(sourceStack.top.source.descr)
+          val path = futil.joinPath(futil.dirname(curURI.getPath),
+                                    incMatch.group(1))
+          val newURI = new URI(curURI.getScheme,
+                               curURI.getHost,
+                               path,
+                               curURI.getFragment)
+          sourceStack.push(new IncludeSource(Source.fromURI(newURI)))
+          doNext
         }
-
-        import grizzled.file.{util => futil}
-
-        @tailrec def doNext: String =
-        {
-            val line = nextFromStack
-
-            // NOTE: Could use flatMap(), et al, on the return from
-            // findFirstMatchIn(), but this seems more readable.
-
-            includeRegex.findFirstMatchIn(line) match
-            {
-                case None =>
-                    if (line.endsWith("\n"))
-                        line.substring(0, line.length - 1)
-                    else
-                        line
-
-                case Some(incMatch) =>
-                    if (sourceStack.length >= maxNesting)
-                        throw new IllegalStateException("Max nesting level (" +
-                                                        maxNesting + ") " +
-                                                        "exceeded.")
-
-                    val curURI =  new URI(sourceStack.top.source.descr)
-                    val path = futil.joinPath(futil.dirname(curURI.getPath),
-                                              incMatch.group(1))
-                    val newURI = new URI(curURI.getScheme,
-                                         curURI.getHost,
-                                         path,
-                                         curURI.getFragment)
-                    sourceStack.push(new IncludeSource(Source.fromURI(newURI)))
-                    doNext
-            }
-        }
-
-        doNext
+      }
     }
+
+    doNext
+  }
 }
 
 /**
  * Companion object for the `Includer` class. Also contains some
  * utility methods, such as the `preprocess()` method.
  */
-object Includer
-{
-    /**
-     * The default regular expression for matching include directives.
-     */
-    val DefaultIncludeRegex = "^%include\\s\"([^\"]+)\"$".r
+object Includer {
+  /**
+   * The default regular expression for matching include directives.
+   */
+  val DefaultIncludeRegex = "^%include\\s\"([^\"]+)\"$".r
 
-    /**
-     * The default maximum nesting level for includes.
-     */
-    val DefaultMaxNesting   = 100
+  /**
+   * The default maximum nesting level for includes.
+   */
+  val DefaultMaxNesting   = 100
 
-    /**
-     * Allocate an includer.
-     *
-     * @param source       the `Source` to read
-     * @param includeRegex the regular expression that defines an include
-     *                     directive. Must contain a group that surrounds the
-     *                     file or URL part.
-     * @param maxNesting   the maximum nesting level
-     */
-    def apply(source: Source, includeRegex: Regex, maxNesting: Int): Includer =
-        new Includer(source, includeRegex, maxNesting)
+  /**
+   * Allocate an includer.
+   *
+   * @param source       the `Source` to read
+   * @param includeRegex the regular expression that defines an include
+   *                     directive. Must contain a group that surrounds the
+   *                     file or URL part.
+   * @param maxNesting   the maximum nesting level
+   */
+  def apply(source: Source, includeRegex: Regex, maxNesting: Int): Includer =
+    new Includer(source, includeRegex, maxNesting)
 
-    /**
-     * Allocate an includer, using the default value for the
-     * `maxNesting` parameter.
-     *
-     * @param source       the `Source` to read
-     * @param includeRegex the regular expression that defines an include
-     *                     directive. Must contain a group that surrounds the
-     *                     file or URL part.
-     */
-    def apply(source: Source, includeRegex: Regex): Includer = 
-        apply(source, includeRegex, DefaultMaxNesting)
+  /**
+   * Allocate an includer, using the default value for the
+   * `maxNesting` parameter.
+   *
+   * @param source       the `Source` to read
+   * @param includeRegex the regular expression that defines an include
+   *                     directive. Must contain a group that surrounds the
+   *                     file or URL part.
+   */
+  def apply(source: Source, includeRegex: Regex): Includer = 
+    apply(source, includeRegex, DefaultMaxNesting)
 
-    /**
-     * Allocate an includer, using the default values for the
-     * `maxNesting` and `includeRegex` parameters.
-     *
-     * @param source       the `Source` to read
-     */
-    def apply(source: Source): Includer = 
-        apply(source, DefaultIncludeRegex, DefaultMaxNesting)
+  /**
+   * Allocate an includer, using the default values for the
+   * `maxNesting` and `includeRegex` parameters.
+   *
+   * @param source       the `Source` to read
+   */
+  def apply(source: Source): Includer = 
+    apply(source, DefaultIncludeRegex, DefaultMaxNesting)
 
-    /**
-     * Allocate an includer.
-     *
-     * @param pathOrURI    the path or URI string to read
-     * @param includeRegex the regular expression that defines an include
-     *                     directive. Must contain a group that surrounds the
-     *                     file or URL part.
-     * @param maxNesting   the maximum nesting level
-     */
-    def apply(pathOrURI: String, 
-              includeRegex: Regex, 
-              maxNesting: Int): Includer =
-    {
-        import grizzled.file.{util => futil}
-        import java.io.File
-        import java.net.URISyntaxException
+  /**
+   * Allocate an includer.
+   *
+   * @param pathOrURI    the path or URI string to read
+   * @param includeRegex the regular expression that defines an include
+   *                     directive. Must contain a group that surrounds the
+   *                     file or URL part.
+   * @param maxNesting   the maximum nesting level
+   */
+  def apply(pathOrURI: String, 
+            includeRegex: Regex, 
+            maxNesting: Int): Includer = {
+    import grizzled.file.{util => futil}
+    import java.io.File
+    import java.net.URISyntaxException
 
-        def getURI: URI =
-        {
-            if (pathOrURI.startsWith(futil.fileSeparator))
-                new File(pathOrURI).toURI
+    def getURI: URI = {
+      if (pathOrURI.startsWith(futil.fileSeparator))
+        new File(pathOrURI).toURI
 
-            else
-            {
-                // Windows paths (with backslashes) will cause a 
-                // URISyntaxException, so we can use that behavior to check
-                // for them.
+      else {
+        // Windows paths (with backslashes) will cause a 
+        // URISyntaxException, so we can use that behavior to check
+        // for them.
 
-                try
-                {
-                    new URI(pathOrURI)
-                }
-
-                catch
-                {
-                    case _: URISyntaxException => new File(pathOrURI).toURI
-                }
-            }
+        try {
+          new URI(pathOrURI)
         }
 
-        Includer(Source.fromURI(getURI), includeRegex, maxNesting)
-    }
-
-    /**
-     * Allocate an includer, using the default value for the
-     * `maxNesting` parameter.
-     *
-     * @param pathOrURI    the path or URI string to read
-     * @param source       the `Source` to read
-     * @param includeRegex the regular expression that defines an include
-     *                     directive. Must contain a group that surrounds the
-     *                     file or URL part.
-     */
-    def apply(pathOrURI: String, includeRegex: Regex): Includer = 
-        apply(pathOrURI, includeRegex, DefaultMaxNesting)
-
-    /**
-     * Allocate an includer, using the default values for the
-     * `maxNesting` and `includeRegex` parameters.
-     *
-     * @param pathOrURI    the path or URI string to read
-     */
-    def apply(pathOrURI: String): Includer = 
-        apply(pathOrURI, DefaultIncludeRegex, DefaultMaxNesting)
-
-    /**
-     * Process all include directives in the specified file, returning a
-     * path to a temporary file that contains the results of the expansion.
-     * The temporary file is automatically removed when the program exits,
-     * though the caller is free to remove it whenever it is no longer
-     * needed.
-     *
-     * @param pathOrURI   the path or URI string to read
-     * @param tempPrefix  temporary file prefix, with the same meaning as the
-     *                    temporary file prefix used by
-     *                    `java.io.File.createTempFile()`
-     * @param tempSuffix  temporary file suffix, with the same meaning as the
-     *                    temporary file suffix used by
-     *                    `java.io.File.createTempFile()`
-     *
-     * @return the path to the temporary file
-     */
-    def preprocess(pathOrURI:  String, 
-                   tempPrefix: String, 
-                   tempSuffix: String): String =
-    {
-        import java.io.{File, FileWriter}
-        import grizzled.io.util.withCloseable
-
-        def sourceFromFile(s: String) = Source.fromFile(new File(s))
-
-        val source = 
-            try
-            {
-                Source.fromURI(new URI(pathOrURI))
-            }
-            catch
-            {
-                case _: URISyntaxException       => sourceFromFile(pathOrURI)
-                case _: IllegalArgumentException => sourceFromFile(pathOrURI)
-            }
-
-        val includer = Includer(source)
-        val fileOut = File.createTempFile(tempPrefix, tempSuffix)
-        fileOut.deleteOnExit
-        withCloseable(new FileWriter(fileOut))
-        {
-            out =>
-
-            includer.foreach(s => out.write(s + "\n"))
+        catch {
+          case _: URISyntaxException => new File(pathOrURI).toURI
         }
-        fileOut.getAbsolutePath
+      }
     }
+
+    Includer(Source.fromURI(getURI), includeRegex, maxNesting)
+  }
+
+  /**
+   * Allocate an includer, using the default value for the
+   * `maxNesting` parameter.
+   *
+   * @param pathOrURI    the path or URI string to read
+   * @param source       the `Source` to read
+   * @param includeRegex the regular expression that defines an include
+   *                     directive. Must contain a group that surrounds the
+   *                     file or URL part.
+   */
+  def apply(pathOrURI: String, includeRegex: Regex): Includer = 
+    apply(pathOrURI, includeRegex, DefaultMaxNesting)
+
+  /**
+   * Allocate an includer, using the default values for the
+   * `maxNesting` and `includeRegex` parameters.
+   *
+   * @param pathOrURI    the path or URI string to read
+   */
+  def apply(pathOrURI: String): Includer = 
+    apply(pathOrURI, DefaultIncludeRegex, DefaultMaxNesting)
+
+  /**
+   * Process all include directives in the specified file, returning a
+   * path to a temporary file that contains the results of the expansion.
+   * The temporary file is automatically removed when the program exits,
+   * though the caller is free to remove it whenever it is no longer
+   * needed.
+   *
+   * @param pathOrURI   the path or URI string to read
+   * @param tempPrefix  temporary file prefix, with the same meaning as the
+   *                    temporary file prefix used by
+   *                    `java.io.File.createTempFile()`
+   * @param tempSuffix  temporary file suffix, with the same meaning as the
+   *                    temporary file suffix used by
+   *                    `java.io.File.createTempFile()`
+   *
+   * @return the path to the temporary file
+   */
+  def preprocess(pathOrURI:  String, 
+                 tempPrefix: String, 
+                 tempSuffix: String): String = {
+    import java.io.{File, FileWriter}
+    import grizzled.io.util.withCloseable
+
+    def sourceFromFile(s: String) = Source.fromFile(new File(s))
+
+    val source = 
+      try {
+        Source.fromURI(new URI(pathOrURI))
+      }
+      catch {
+        case _: URISyntaxException       => sourceFromFile(pathOrURI)
+        case _: IllegalArgumentException => sourceFromFile(pathOrURI)
+      }
+
+    val includer = Includer(source)
+    val fileOut = File.createTempFile(tempPrefix, tempSuffix)
+    fileOut.deleteOnExit
+
+    withCloseable(new FileWriter(fileOut)) {out =>
+     includer.foreach(s => out.write(s + "\n"))
+    }
+
+    fileOut.getAbsolutePath
+  }
 }

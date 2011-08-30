@@ -43,27 +43,22 @@ import scala.math
 import java.io.Reader
 
 /**
- * Provides a `java.io.Reader` that is backed by a Scala `Source` object.
- *
- * @param source  the source to wrap
- */
-class SourceReader(_source: Source) extends Reader
-{
-    val source = _source
+  * Provides a `java.io.Reader` that is backed by a Scala `Source` object.
+  *
+  * @param source  the source to wrap
+  */
+class SourceReader(val source: Source) extends Reader {
+  def read(buf: Array[Char], offset: Int, length: Int): Int = {
+    val total = math.min(length, buf.length)
+    val chars = source take(total) toList
+    val actual = chars.length
+    chars.copyToArray(buf, offset, length)
+    actual
+  }
 
-    def read(buf: Array[Char], offset: Int, length: Int): Int =
-    {
-        val total = math.min(length, buf.length)
-        val chars = source take(total) toList
-        val actual = chars.length
-        chars.copyToArray(buf, offset, length)
-        actual
-    }
-
-    def close(): Unit = source.close()
+  def close(): Unit = source.close()
 }
 
-object SourceReader
-{
-    def apply(source: Source): SourceReader = new SourceReader(source)
+object SourceReader {
+  def apply(source: Source): SourceReader = new SourceReader(source)
 }

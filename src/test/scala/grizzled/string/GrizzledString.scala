@@ -37,83 +37,70 @@ import grizzled.string.GrizzledString._
 /**
  * Tests the GrizzledString class.
  */
-class GrizzledStringTest extends FunSuite
-{
-    test("ltrim")
-    {
-        val data = Map(
-            "a b c"                        -> "a b c",
-            "                     a"       -> "a",
-            "                     a  "     -> "a  ",
-            "                      "       -> "",
-            ""                             -> ""
-        )
+class GrizzledStringTest extends FunSuite {
+  test("ltrim") {
+    val data = Map(
+      "a b c"                        -> "a b c",
+      "                     a"       -> "a",
+      "                     a  "     -> "a  ",
+      "                      "       -> "",
+      ""                             -> ""
+    )
 
-        for((input, expected) <- data)
-        {
-            expect(expected, "\"" + input + "\" -> " + expected.toString)
-            {
-                input.ltrim
-            }
-        }
+    for((input, expected) <- data) {
+      expect(expected, "\"" + input + "\" -> " + expected.toString) {
+        input.ltrim
+      }
     }
+  }
 
-    test("rtrim")
-    {
-        val data = Map(
-            "a b c"                        -> "a b c",
-            "a                     "       -> "a",
-            "  a                     "     -> "  a",
-            "                      "       -> "",
-            ""                             -> ""
-        )
+  test("rtrim") {
+    val data = Map(
+      "a b c"                        -> "a b c",
+      "a                     "       -> "a",
+      "  a                     "     -> "  a",
+      "                      "       -> "",
+      ""                             -> ""
+    )
 
-        for((input, expected) <- data)
-        {
-            expect(expected, "\"" + input + "\" -> " + expected.toString)
-            {
-                input.rtrim
-            }
-        }
+    for((input, expected) <- data) {
+      expect(expected, "\"" + input + "\" -> " + expected.toString) {
+        input.rtrim
+      }
     }
+  }
 
-    test("tokenize")
-    {
-        val data = Map(
-            ""                       -> Nil,
-            " "                      -> Nil,
-            "      "                 -> Nil,
-            "\t  "                   -> Nil,
-            "   a b    c"            -> List("a", "b", "c"),
-            "one  two   three four " -> List("one", "two", "three", "four")
-        )
+  test("tokenize") {
+    val data = Map(
+      ""                       -> Nil,
+      " "                      -> Nil,
+      "      "                 -> Nil,
+      "\t  "                   -> Nil,
+      "   a b    c"            -> List("a", "b", "c"),
+      "one  two   three four " -> List("one", "two", "three", "four")
+    )
 
-        for((input, expected) <- data)
-        {
-            expect(expected, "\"" + input + "\" -> " + expected.toString)
-            {
-                input.tokenize
-            }
-        }
+    for((input, expected) <- data) {
+      expect(expected, "\"" + input + "\" -> " + expected.toString) {
+        input.tokenize
+      }
     }
+  }
 
-    test("translateMetachars")
-    {
-        val data = Map(
-            "a b c"                        -> "a b c",
-            "\\u2122"                      -> "\u2122",
-            "\\t\\n\\afooness"             -> "\t\n\\afooness",
-            "\\u212a"                      -> "\u212a",
-            "\\u212x"                      -> "\\u212x",
-            "\\\\t"                        -> "\\t"
-        )
+  test("translateMetachars") {
+    val data = Map(
+      "a b c"                        -> "a b c",
+      "\\u2122"                      -> "\u2122",
+      "\\t\\n\\afooness"             -> "\t\n\\afooness",
+      "\\u212a"                      -> "\u212a",
+      "\\u212x"                      -> "\\u212x",
+      "\\\\t"                        -> "\\t"
+    )
 
-        for ((input, expected) <- data)
-        {
-            expect(expected, "\"" + input + "\" -> " + expected.toString)
-            {
-                input.translateMetachars
-            }
-        }
+    for ((input, expected) <- data) {
+      expect(expected, "\"" + input + "\" -> " + expected.toString) {
+        input.translateMetachars
+      }
     }
+  }
 }

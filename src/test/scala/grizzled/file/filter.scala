@@ -38,35 +38,32 @@ import org.scalatest.FunSuite
 import grizzled.file.filter._
 
 /**
- * Tests the grizzled.file.filter functions.
- */
-class FileFilterTest extends FunSuite
-{
-    test("BackslashContinuedLineIterator")
-    {
-        val data = List[(List[String], List[String])](
-            (List("Lorem ipsum dolor sit amet, consectetur \\",
-                  "adipiscing elit.",
-                  "In congue tincidunt fringilla. \\",
-                  "Sed interdum nibh vitae \\",
-                  "libero",
-                  "fermentum id dictum risus facilisis."),
-             List("Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                  "In congue tincidunt fringilla. Sed interdum nibh vitae libero",
-                  "fermentum id dictum risus facilisis."))
-        )
+  * Tests the grizzled.file.filter functions.
+  */
+class FileFilterTest extends FunSuite {
+  test("BackslashContinuedLineIterator") {
+    val data = List[(List[String], List[String])](
+      (List("Lorem ipsum dolor sit amet, consectetur \\",
+            "adipiscing elit.",
+            "In congue tincidunt fringilla. \\",
+            "Sed interdum nibh vitae \\",
+            "libero",
+            "fermentum id dictum risus facilisis."),
 
-        for((input, expected) <- data)
-            expect(expected, 
-                   "BackslashContinuedLineIterator(\"" + input + "\")")
-            { 
-                import grizzled.collection.ListIterator
-                val iterator = new ListIterator[String](input)
-                val result = 
-                    {for (line <- new BackslashContinuedLineIterator(iterator))
-                         yield line}.toList
-                result
-            }
-    }
+       List("Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "In congue tincidunt fringilla. Sed interdum nibh vitae libero",
+            "fermentum id dictum risus facilisis."))
+    )
 
+    for((input, expected) <- data)
+      expect(expected, "BackslashContinuedLineIterator(\"" + input + "\")") {
+        import grizzled.collection.ListIterator
+        val iterator = new ListIterator[String](input)
+        val result = {
+          for (line <- new BackslashContinuedLineIterator(iterator))
+            yield line
+        }.toList
+        result
+      }
+  }
 }

@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -39,80 +39,71 @@ package grizzled.math
 
 import scala.math
 
-/**
- * Useful math-related utility functions.
- */
-object util
-{
-    /**
-     * A <tt>max</tt> method that works with any number of integers.
-     *
-     * @param args  integers from which to find the max
-     *
-     * @return the maximum
-     */
-    def max(args: Int*) = (0 /: args)((a, b) => math.max(a, b))
+/** Useful math-related utility functions.
+  */
+object util {
 
-    /**
-     * A <tt>max</tt> method that works with any number of longs.
-     *
-     * @param args  longs from which to find the max
-     *
-     * @return the maximum
-     */
-    def max(args: Long*) = (0L /: args)((a, b) => math.max(a, b))
+  /** A `max` method that works with any number of integers.
+    *
+    * @param args  integers from which to find the max
+    *
+    * @return the maximum
+    */
+  def max(args: Int*) = (0 /: args)((a, b) => math.max(a, b))
 
-    /**
-     * A <tt>max</tt> method that works with any number of floats.
-     *
-     * @param args  floats from which to find the max
-     *
-     * @return the maximum
-     */
-    def max(args: Float*) = (0.0f /: args)((a, b) => math.max(a, b))
+  /** A `max` method that works with any number of longs.
+    *
+    * @param args  longs from which to find the max
+    *
+    * @return the maximum
+    */
+  def max(args: Long*) = (0L /: args)((a, b) => math.max(a, b))
 
-    /**
-     * A <tt>max</tt> method that works with any number of doubles.
-     *
-     * @param args  doubles from which to find the max
-     *
-     * @return the maximum
-     */
-    def max(args: Double*) = (0.0 /: args)((a, b) => math.max(a, b))
+  /** A `max` method that works with any number of floats.
+    *
+    * @param args  floats from which to find the max
+    *
+    * @return the maximum
+    */
+  def max(args: Float*) = (0.0f /: args)((a, b) => math.max(a, b))
 
-    /**
-     * A <tt>min</tt> method that works with any number of integers.
-     *
-     * @param args  integers from which to find the min
-     *
-     * @return the minimum
-     */
-    def min(args: Int*) = (0 /: args)((a, b) => math.min(a, b))
+  /** A `max` method that works with any number of doubles.
+    *
+    * @param args  doubles from which to find the max
+    *
+    * @return the maximum
+    */
+  def max(args: Double*) = (0.0 /: args)((a, b) => math.max(a, b))
 
-    /**
-     * A <tt>min</tt> method that works with any number of longs.
-     *
-     * @param args  longs from which to find the min
-     *
-     * @return the minimum
-     */
-    def min(args: Long*) = (0L /: args)((a, b) => math.min(a, b))
+  /** A `min` method that works with any number of integers.
+    *
+    * @param args  integers from which to find the min
+    *
+    * @return the minimum
+    */
+  def min(args: Int*) = (0 /: args)((a, b) => math.min(a, b))
 
-    /**
-     * A <tt>min</tt> method that works with any number of floats.
-     *
-     * @param args  floats from which to find the min
-     *
-     * @return the minimum
-     */
-    def min(args: Float*) = (0.0f /: args)((a, b) => math.min(a, b))
+  /** A `min` method that works with any number of longs.
+    *
+    * @param args  longs from which to find the min
+    *
+    * @return the minimum
+    */
+  def min(args: Long*) = (0L /: args)((a, b) => math.min(a, b))
 
-    /**
-     * A <tt>min</tt> method that works with any number of doubles.
-     *
-     * @param args  doubles from which to find the min
-     *
-     * @return the minimum
-     */
-    def min(args: Double*) = (0.0 /: args)((a, b) => math.min(a, b))
+  /** A `min` method that works with any number of floats.
+    *
+    * @param args  floats from which to find the min
+    *
+    * @return the minimum
+    */
+  def min(args: Float*) = (0.0f /: args)((a, b) => math.min(a, b))
+
+  /** A `min` method that works with any number of doubles.
+    *
+    * @param args  doubles from which to find the min
+    *
+    * @return the minimum
+    */
+  def min(args: Double*) = (0.0 /: args)((a, b) => math.min(a, b))
 }

@@ -42,223 +42,188 @@ import java.lang.Math.sqrt
 /**
  * Tests the grizzled.file functions.
  */
-class StatsTest extends FunSuite
-{
-    private def dList[T](l: T*)(implicit x: Numeric[T]): List[Double] =
-        l map (x.toDouble(_)) toList
+class StatsTest extends FunSuite {
+  private def dList[T](l: T*)(implicit x: Numeric[T]): List[Double] =
+    l map (x.toDouble(_)) toList
 
-    test("geometric mean")
-    {
-        val Data = List(
-            (8.15193109605923,   dList(1, 10, 30, 10, 12)),
-            (5.78182338862232,   dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-            (12.044497038131643, dList((1 to 30): _*)),
-            (100.0,              List(100.0))
-        )
+  test("geometric mean") {
+    val Data = List(
+      (8.15193109605923,   dList(1, 10, 30, 10, 12)),
+      (5.78182338862232,   dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
+      (12.044497038131643, dList((1 to 30): _*)),
+      (100.0,              List(100.0))
+    )
 
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "Geometric mean of " + values)
-            {
-                geometricMean(values: _*)
-            }
-        }
+    for ((expected, values) <- Data) {
+      expect(expected, "Geometric mean of " + values) {
+        geometricMean(values: _*)
+      }
+    }
+  }
+
+  test("harmonic mean") {
+    val Data = List(
+      (3.797468354430379,  dList(1, 10, 30, 10, 12)),
+      (3.2558139534883717, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
+      (7.509410923456069,  dList((1 to 30): _*)),
+      (100.0,              List(100.0))
+    )
+
+    for ((expected, values) <- Data) {
+      expect(expected, "Harmonic mean of " + values) {
+        harmonicMean(values: _*)
+      }
+    }
+  }
+
+  test("arithmetic mean") {
+    val Data = List(
+      (12.6,              dList(1, 10, 30, 10, 12)),
+      (9.714285714285714, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
+      (15.5,              dList((1 to 30): _*)),
+      (100.0,             dList(100, 150, 50)),
+      (100.0,             List(100.0))
+    )
+
+    for ((expected, values) <- Data) {
+      expect(expected, "Arithmetic mean of " + values) {
+        mean(values: _*)
+      }
+    }
+  }
+
+  test("median") {
+    val Data = List(
+      (10.0,              dList(1, 10, 30, 10, 12)),
+      (10.0,              dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
+      (15.5,              dList((1 to 30): _*)),
+      (100.0,             dList(100, 150, 50)),
+      (2.0,               dList(1, 1, 1, 2, 10, 30, 1000)),
+      (16.0,              dList(2, 2, 2, 2, 2, 30, 30, 30, 30, 30))
+      
+    )
+
+    for ((expected, values) <- Data) {
+      expect(expected, "median of " + values) {
+        median(values: _*)
+      }
+    }
+  }
+
+  test("mode") {
+    val Data = List(
+      (dList(10),          dList(1, 10, 30, 10, 12)),
+      (dList(1),           dList(1, 10, 3, 1, 100)),
+      (dList(1, 3),        dList(1, 2, 3, 1, 3)),
+      (dList(1, 3, 1000),  dList(1, 2, 3, 1, 3, 1000, 1000, 9)),
+      (dList(1),           dList(1))
+    )
+
+    for ((expected, values) <- Data) {
+      expect(expected, "mode of " + values) {
+        mode(values: _*).sortWith(_ < _)
+      }
+    }
+  }
+
+  test("sample variance") {
+    val Data = List(
+      (50.0,               dList(10, 20)),
+      (1866.5,             dList(1, 10, 3, 1, 100)),
+      (1.0,                dList(1, 2, 3, 1, 3)),
+      (100.0,              dList(10.5, 20.5, 30.5)),
+      (212937.125,         dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+    )
+
+    for ((expected, values) <- Data) {
+      expect(expected, "variance of " + values) {
+        sampleVariance(values: _*)
+      }
+    }
+  }
+
+  test("sample standard deviation") {
+    val Data = List(
+      (7.0710678118654755, dList(10, 20)),
+      (43.2030091544559,   dList(1, 10, 3, 1, 100)),
+      (1.0,                dList(1, 2, 3, 1, 3)),
+      (461.45110791935474, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+    )
+
+    for ((expected, values) <- Data) {
+      val stddev = sampleStandardDeviation(values: _*)
+      expect(expected, "standard deviation " + values) {
+        stddev
+      }
+
+      val variance = sampleVariance(values: _*)
+      expect(sqrt(variance), "standard deviation = sqrt(variance)") {
+        stddev
+      }
+    }
+  }
+
+  test("population variance") {
+    val Data = List(
+      (25.0,             dList(10, 20)),
+      (25.0,             dList(10.5, 20.5)),
+      (1493.2,           dList(1, 10, 3, 1, 100)),
+      (0.8,              dList(1, 2, 3, 1, 3)),
+      (186319.984375,    dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+    )
+
+    for ((expected, values) <- Data) {
+      expect(expected, "variance of " + values) {
+        populationVariance(values: _*)
+      }
+    }
+  }
+
+  test("population standard deviation") {
+    val Data = List(
+      (5,                  dList(10, 20)),
+      (5.0,                dList(10.5, 20.5)),
+      (38.64194612076364,  dList(1, 10, 3, 1, 100)),
+      (0.8944271909999159, dList(1, 2, 3, 1, 3)),
+      (431.64798664536823, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+    )
+
+    for ((expected, values) <- Data) {
+      val stddev = populationStandardDeviation(values: _*)
+      expect(expected, "standard deviation " + values) {
+        stddev
+      }
+
+      val variance = populationVariance(values: _*)
+      expect(sqrt(variance), "standard deviation = sqrt(variance)") {
+        stddev
+      }
+    }
+  }
+
+  test("range") {
+    // Must be all the same type
+    val Data1 = List[(Double, List[Double])](
+      (29.0,            dList((1 to 30): _*)),
+      (100.0,           dList(1, 100, 30, 28.8, 101)),
+      (999.0,           dList((1 to 1000): _*))
+    )
+    val Data2 = List[(Int, List[Int])](
+      (29,            (1 to 30).toList),
+      (100,           List(1, 100, 30, 28, 101)),
+      (999,           (1 to 1000).toList)
+    )
+
+    for ((expected, values) <- Data1) {
+      expect(expected, "range " + values) {
+        range(values: _*)
+      }
     }
 
-    test("harmonic mean")
-    {
-        val Data = List(
-            (3.797468354430379,  dList(1, 10, 30, 10, 12)),
-            (3.2558139534883717, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-            (7.509410923456069,  dList((1 to 30): _*)),
-            (100.0,              List(100.0))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "Harmonic mean of " + values)
-            {
-                harmonicMean(values: _*)
-            }
-        }
+    for ((expected, values) <- Data2) {
+      expect(expected, "range " + values) {
+        range(values: _*)
+      }
     }
-
-    test("arithmetic mean")
-    {
-        val Data = List(
-            (12.6,              dList(1, 10, 30, 10, 12)),
-            (9.714285714285714, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-            (15.5,              dList((1 to 30): _*)),
-            (100.0,             dList(100, 150, 50)),
-            (100.0,             List(100.0))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "Arithmetic mean of " + values)
-            {
-                mean(values: _*)
-            }
-        }
-    }
-
-    test("median")
-    {
-        val Data = List(
-            (10.0,              dList(1, 10, 30, 10, 12)),
-            (10.0,              dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-            (15.5,              dList((1 to 30): _*)),
-            (100.0,             dList(100, 150, 50)),
-            (2.0,               dList(1, 1, 1, 2, 10, 30, 1000)),
-            (16.0,              dList(2, 2, 2, 2, 2, 30, 30, 30, 30, 30))
-            
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "median of " + values)
-            {
-                median(values: _*)
-            }
-        }
-    }
-
-    test("mode")
-    {
-        val Data = List(
-            (dList(10),          dList(1, 10, 30, 10, 12)),
-            (dList(1),           dList(1, 10, 3, 1, 100)),
-            (dList(1, 3),        dList(1, 2, 3, 1, 3)),
-            (dList(1, 3, 1000),  dList(1, 2, 3, 1, 3, 1000, 1000, 9)),
-            (dList(1),           dList(1))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "mode of " + values)
-            {
-                mode(values: _*).sortWith(_ < _)
-            }
-        }
-    }
-
-    test("sample variance")
-    {
-        val Data = List(
-            (50.0,               dList(10, 20)),
-            (1866.5,             dList(1, 10, 3, 1, 100)),
-            (1.0,                dList(1, 2, 3, 1, 3)),
-            (100.0,              dList(10.5, 20.5, 30.5)),
-            (212937.125,         dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "variance of " + values)
-            {
-                sampleVariance(values: _*)
-            }
-        }
-    }
-
-    test("sample standard deviation")
-    {
-        val Data = List(
-            (7.0710678118654755, dList(10, 20)),
-            (43.2030091544559,   dList(1, 10, 3, 1, 100)),
-            (1.0,                dList(1, 2, 3, 1, 3)),
-            (461.45110791935474, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            val stddev = sampleStandardDeviation(values: _*)
-            expect(expected, "standard deviation " + values)
-            {
-                stddev
-            }
-
-            val variance = sampleVariance(values: _*)
-            expect(sqrt(variance), "standard deviation = sqrt(variance)")
-            {
-                stddev
-            }
-        }
-    }
-
-    test("population variance")
-    {
-        val Data = List(
-            (25.0,             dList(10, 20)),
-            (25.0,             dList(10.5, 20.5)),
-            (1493.2,           dList(1, 10, 3, 1, 100)),
-            (0.8,              dList(1, 2, 3, 1, 3)),
-            (186319.984375,    dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            expect(expected, "variance of " + values)
-            {
-                populationVariance(values: _*)
-            }
-        }
-    }
-
-    test("population standard deviation")
-    {
-        val Data = List(
-            (5,                  dList(10, 20)),
-            (5.0,                dList(10.5, 20.5)),
-            (38.64194612076364,  dList(1, 10, 3, 1, 100)),
-            (0.8944271909999159, dList(1, 2, 3, 1, 3)),
-            (431.64798664536823, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-        )
-
-        for ((expected, values) <- Data)
-        {
-            val stddev = populationStandardDeviation(values: _*)
-            expect(expected, "standard deviation " + values)
-            {
-                stddev
-            }
-
-            val variance = populationVariance(values: _*)
-            expect(sqrt(variance), "standard deviation = sqrt(variance)")
-            {
-                stddev
-            }
-        }
-    }
-
-    test("range")
-    {
-        // Must be all the same type
-        val Data1 = List[(Double, List[Double])](
-            (29.0,            dList((1 to 30): _*)),
-            (100.0,           dList(1, 100, 30, 28.8, 101)),
-            (999.0,           dList((1 to 1000): _*))
-        )
-        val Data2 = List[(Int, List[Int])](
-            (29,            (1 to 30).toList),
-            (100,           List(1, 100, 30, 28, 101)),
-            (999,           (1 to 1000).toList)
-        )
-
-        for ((expected, values) <- Data1)
-        {
-            expect(expected, "range " + values)
-            {
-                range(values: _*)
-            }
-        }
-
-        for ((expected, values) <- Data2)
-        {
-            expect(expected, "range " + values)
-            {
-                range(values: _*)
-            }
-        }
-    }
+  }
 }

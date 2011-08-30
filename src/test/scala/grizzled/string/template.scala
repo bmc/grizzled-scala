@@ -37,152 +37,139 @@ import grizzled.string.template._
 /**
  * Tests the grizzled.string.StringTemplate functions.
  */
-class StringTemplateTest extends FunSuite
-{
-    test("UnixShellStringTemplate: safe=true")
-    {
-        val data = Map(
+class StringTemplateTest extends FunSuite {
+  test("UnixShellStringTemplate: safe=true") {
+    val data = Map(
 
-            ("$foo bar $bar ${baz} $",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
+      ("$foo bar $bar ${baz} $",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
 
-            ("$foo bar $bar ${baz} $_",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
+      ("$foo bar $bar ${baz} $_",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
 
-            ("$foo bar $bar ${baz} $frodo$",
-             Map("foo" -> "FOO",
-                 "bar" -> "$foo",
-                 "baz" -> "YAWN")) -> "FOO bar FOO YAWN $",
+      ("$foo bar $bar ${baz} $frodo$",
+       Map("foo" -> "FOO",
+           "bar" -> "$foo",
+           "baz" -> "YAWN")) -> "FOO bar FOO YAWN $",
 
-            ("""$foo bar $bar ${baz} \$""",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
+      ("""$foo bar $bar ${baz} \$""",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
 
-            ("""$foo ${foobar?blitz}""",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO blitz"
-        )
+      ("""$foo ${foobar?blitz}""",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO blitz"
+    )
 
-        for {(input, expected) <- data
-             val (str, vars) = (input._1, input._2)}
-        {
-            expect(expected, "\"" + str + "\" -> " + expected.toString) 
-            {
-                new UnixShellStringTemplate(vars.get, true).substitute(str)
-            }
-        }
+    for {(input, expected) <- data
+         val (str, vars) = (input._1, input._2)} {
+      expect(expected, "\"" + str + "\" -> " + expected.toString)  {
+        new UnixShellStringTemplate(vars.get, true).substitute(str)
+      }
     }
+  }
 
-    test("UnixShellStringTemplate: safe=false")
-    {
-        val data = Map(
+  test("UnixShellStringTemplate: safe=false") {
+    val data = Map(
 
-            ("$foo bar $bar ${baz} $$ $x",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $ ",
+      ("$foo bar $bar ${baz} $$ $x",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $ ",
 
-            ("$foo bar $bar ${baz} $_",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
+      ("$foo bar $bar ${baz} $_",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
 
-            ("$foo bar $bar ${baz} $frodo$",
-             Map("foo" -> "FOO",
-                 "bar" -> "$foo",
-                 "baz" -> "YAWN")) -> "FOO FOO BARSKI YAWN $",
+      ("$foo bar $bar ${baz} $frodo$",
+       Map("foo" -> "FOO",
+           "bar" -> "$foo",
+           "baz" -> "YAWN")) -> "FOO FOO BARSKI YAWN $",
 
-            ("$foo bar $bar ${baz} $y",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $$"
-        )
+      ("$foo bar $bar ${baz} $y",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $$"
+    )
 
-        for {(input, expected) <- data
-             val (str, vars) = (input._1, input._2)}
-        {
-            intercept[VariableNotFoundException]
-            {
-                new UnixShellStringTemplate(vars.get, false).substitute(str)
-            }
-        }
+    for {(input, expected) <- data
+         val (str, vars) = (input._1, input._2)} {
+           intercept[VariableNotFoundException] {
+             new UnixShellStringTemplate(vars.get, false).substitute(str)
+           }
+         }
+  }
+
+  test("WindowsCmdStringTemplate: safe=true") {
+    val data = Map(
+
+      ("%foo% bar %bar% %baz% %",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
+
+      ("%foo% bar %bar% %baz% %_%",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
+
+      ("%foo% bar %bar% %baz% %frodo%x",
+       Map("foo" -> "FOO",
+           "bar" -> "%foo%",
+           "baz" -> "YAWN")) -> "FOO bar FOO YAWN x",
+
+      ("%foo% bar %bar% %baz% %%",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %"
+    )
+
+    for {(input, expected) <- data
+         val (str, vars) = (input._1, input._2)} {
+      expect(expected, "\"" + str + "\" -> " + expected.toString)  {
+        new WindowsCmdStringTemplate(vars.get, true).substitute(str)
+      }
     }
+  }
 
-    test("WindowsCmdStringTemplate: safe=true")
-    {
-        val data = Map(
+  test("WindowsCmdStringTemplate: safe=false") {
+    val data = Map(
 
-            ("%foo% bar %bar% %baz% %",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
+      ("%foo% bar %bar% ${baz} %% %x%",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
 
-            ("%foo% bar %bar% %baz% %_%",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
+      ("%foo% bar %bar% %baz% %_%",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
 
-            ("%foo% bar %bar% %baz% %frodo%x",
-             Map("foo" -> "FOO",
-                 "bar" -> "%foo%",
-                 "baz" -> "YAWN")) -> "FOO bar FOO YAWN x",
+      ("%foo% bar %bar% ${baz} %frodo%x",
+       Map("foo" -> "FOO",
+           "bar" -> "%foo%",
+           "baz" -> "YAWN")) -> "FOO FOO BARSKI YAWN x",
 
-            ("%foo% bar %bar% %baz% %%",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %"
-        )
+      ("%foo% bar %bar% %baz% %y%",
+       Map("foo" -> "FOO",
+           "bar" -> "BARSKI",
+           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN "
+    )
 
-        for {(input, expected) <- data
-             val (str, vars) = (input._1, input._2)}
-        {
-            expect(expected, "\"" + str + "\" -> " + expected.toString) 
-            {
-                new WindowsCmdStringTemplate(vars.get, true).substitute(str)
-            }
-        }
+    for {(input, expected) <- data
+         val (str, vars) = (input._1, input._2)} {
+      intercept[VariableNotFoundException] {
+        new WindowsCmdStringTemplate(vars.get, false).substitute(str)
+      }
     }
-
-    test("WindowsCmdStringTemplate: safe=false")
-    {
-        val data = Map(
-
-            ("%foo% bar %bar% ${baz} %% %x%",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
-
-            ("%foo% bar %bar% %baz% %_%",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
-
-            ("%foo% bar %bar% ${baz} %frodo%x",
-             Map("foo" -> "FOO",
-                 "bar" -> "%foo%",
-                 "baz" -> "YAWN")) -> "FOO FOO BARSKI YAWN x",
-
-            ("%foo% bar %bar% %baz% %y%",
-             Map("foo" -> "FOO",
-                 "bar" -> "BARSKI",
-                 "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN "
-        )
-
-        for {(input, expected) <- data
-             val (str, vars) = (input._1, input._2)}
-        {
-            intercept[VariableNotFoundException]
-            {
-                new WindowsCmdStringTemplate(vars.get, false).substitute(str)
-            }
-        }
-    }
+  }
 }
 
 

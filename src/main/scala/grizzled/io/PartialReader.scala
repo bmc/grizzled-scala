@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -35,54 +35,46 @@
   ---------------------------------------------------------------------------
 */
 
-/**
- * I/O-related classes and utilities. This package is distinguished from
- * the <tt>grizzled.file</tt> package in that this package operates on
- * already-open Java <tt>InputStream<tt>, <tt>OutputStream</tt>,
- * <tt>Reader</tt> and <tt>Writer</tt> objects, and on Scala
- * <tt>Source</tt> objects.
- */
+/** I/O-related classes and utilities. This package is distinguished from
+  * the `grizzled.file` package in that this package operates on
+  * already-open Java `InputStream`, `OutputStream`, `Reader` and `Writer`
+  * objects, and on Scala `Source` objects.
+  */
 package grizzled.io
 
 import scala.io.Source
 import scala.annotation.tailrec
 
-/**
- * Contains methods that can read part of a stream or reader.
- */
-trait PartialReader[T]
-{
-    val reader: {def read(): Int}
+/** Contains methods that can read part of a stream or reader.
+  */
+trait PartialReader[T] {
+  val reader: {def read(): Int}
 
-    protected def convert(b: Int): T
+  protected def convert(b: Int): T
 
-    /**
-     * Read up to <tt>max</tt> items from the reader.
-     *
-     * @param max  maximum number of items to read
-     *
-     * @return a list of the items
-     */
-    def readSome(max: Int): List[T] =
-    {
-        @tailrec def doRead(partialList: List[T], cur: Int): List[T] =
-        {
-            if (cur >= max)
-                partialList
+  /** Read up to `max` items from the reader.
+    *
+    * @param max  maximum number of items to read
+    *
+    * @return a list of the items
+    */
+  def readSome(max: Int): List[T] = {
+    @tailrec def doRead(partialList: List[T], cur: Int): List[T] = {
+      if (cur >= max)
+        partialList
 
-            else
-            {
-                val b = reader.read()
-                if (b == -1)
-                    partialList
-                else
-                    doRead(partialList :+ convert(b), cur + 1)
-            }
-        }
-
-        if (reader == null)
-            Nil
+      else {
+        val b = reader.read()
+        if (b == -1)
+          partialList
         else
-            doRead(List.empty[T], 0)
+          doRead(partialList :+ convert(b), cur + 1)
+      }
     }
+
+    if (reader == null)
+      Nil
+    else
+      doRead(List.empty[T], 0)
+  }
 }

@@ -1,0 +1,2 @@
+* Fixed an off-by-one error in `grizzled.collection.ListIterator`
+* Converted code to confirm with standard Scala coding style.

@@ -51,48 +51,45 @@ import scala.io.Source
  * source.firstNonblankLine.getOrElse("")
  * }}}
  */
-final class GrizzledSource(val source: Source)
-{
-    /**
-     * Find the lines between two marker lines in the source. For instance,
-     * to get all lines between the next occurrence of "{{{" (on a line by
-     * itself and "}}}" (or end of file), use:
-     *
-     * {{{
-     * import grizzled.io.GrizzledSource._
-     * import scala.io.Source
-     * import java.io.File
-     *
-     * val path = "/path/to/some/file"
-     * val lines = Source.fromFile(new File(path)).linesBetween("{{{", "}}}")
-     * }}}
-     *
-     * This method uses `Source.getLines()`, which may or may not start
-     * at the beginning of the source, depending on the source's state.
-     *
-     * @param start  the starting line marker
-     * @param finish    the ending line marker
-     *
-     * @return a iterator of lines, or an empty iterator if none found
-     */
-    def linesBetween(start: String, finish: String): Iterator[String] =
-        source.getLines().dropWhile(_ != start).drop(1).takeWhile(_ != finish)
+final class GrizzledSource(val source: Source) {
+  /**
+   * Find the lines between two marker lines in the source. For instance,
+   * to get all lines between the next occurrence of "{{{" (on a line by
+   * itself and "}}}" (or end of file), use:
+   *
+   * {{{
+   * import grizzled.io.GrizzledSource._
+   * import scala.io.Source
+   * import java.io.File
+   *
+   * val path = "/path/to/some/file"
+   * val lines = Source.fromFile(new File(path)).linesBetween("{{{", "}}}")
+   * }}}
+   *
+   * This method uses `Source.getLines()`, which may or may not start
+   * at the beginning of the source, depending on the source's state.
+   *
+   * @param start  the starting line marker
+   * @param finish    the ending line marker
+   *
+   * @return a iterator of lines, or an empty iterator if none found
+   */
+  def linesBetween(start: String, finish: String): Iterator[String] =
+    source.getLines().dropWhile(_ != start).drop(1).takeWhile(_ != finish)
 
-    /**
-     * Find and return the first non-blank line (without trailing newline)
-     * in the source. Uses `Source.getLines()`, which may or may not start
-     * at the beginning of the source, depending on the source's state.
-     *
-     * @return `None` if there is no nonblank line, `Some(line)` if there is.
-     */
-    def firstNonblankLine: Option[String] =
-    {
-        source.getLines().dropWhile(_.trim.length == 0).take(1).toList match
-        {
-            case Nil          => None
-            case line :: tail => Some(line)
-        }
+  /**
+   * Find and return the first non-blank line (without trailing newline)
+   * in the source. Uses `Source.getLines()`, which may or may not start
+   * at the beginning of the source, depending on the source's state.
+   *
+   * @return `None` if there is no nonblank line, `Some(line)` if there is.
+   */
+  def firstNonblankLine: Option[String] = {
+    source.getLines().dropWhile(_.trim.length == 0).take(1).toList match {
+      case Nil          => None
+      case line :: tail => Some(line)
     }
+  }
 }
 
 /**
@@ -104,10 +101,9 @@ final class GrizzledSource(val source: Source)
  * import grizzled.io.GrizzledSource._
  * }}}
  */
-object GrizzledSource
-{
-    implicit def sourceToGrizzledSource(s: Source): GrizzledSource =
-        new GrizzledSource(s)
+object GrizzledSource {
+  implicit def sourceToGrizzledSource(s: Source): GrizzledSource =
+    new GrizzledSource(s)
 
-    implicit def grizzledSourceToSource(gs: GrizzledSource): Source = gs.source
+  implicit def grizzledSourceToSource(gs: GrizzledSource): Source = gs.source
 }

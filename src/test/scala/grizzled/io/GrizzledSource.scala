@@ -39,44 +39,39 @@ import grizzled.io.GrizzledSource._
 import scala.io.Source
 
 /**
- * Tests the grizzled.file.GrizzledSource functions.
- */
-class GrizzledSourceTest extends FunSuite
-{
-    test("First nonblank line")
-    {
-        val data = List(("\n\n\n\nfoo\n\n\n", Some("foo")),
-                        ("\n\n\n\n\n\n\n\n", None),
-                        ("", None),
-                        ("foobar", Some("foobar")) )
+  * Tests the grizzled.file.GrizzledSource functions.
+  */
+class GrizzledSourceTest extends FunSuite {
+  test("First nonblank line") {
+    val data = List(("\n\n\n\nfoo\n\n\n", Some("foo")),
+                    ("\n\n\n\n\n\n\n\n", None),
+                    ("", None),
+                    ("foobar", Some("foobar")) )
 
-        for((input, expected) <- data)
-            expect(expected, 
-                   "firstNonblankLine(\"" + input + "\")")
-            { 
-                val source = Source.fromString(input)
-                source.firstNonblankLine
-            }
+    for((input, expected) <- data) {
+      expect(expected, "firstNonblankLine(\"" + input + "\")") { 
+        val source = Source.fromString(input)
+        source.firstNonblankLine
+      }
     }
+  }
 
-    test("linesBetween")
-    {
-        val data = List(
-            ("{{\na\n}}\n", "{{", "}}", List("a")),
-            ("*\nfoo\nbar\nbaz\n*\n", "*", "*", List("foo", "bar", "baz")),
-            ("{{\n}}\n", "{{", "}}", Nil),
-            ("{{\n\n}}\n", "{{", "}}", List("")),
-            ("{{\n", "{{", "}}", Nil),
-            ("\n\n\n", "{{", "}}", Nil),
-            ("\n\n\n}}", "{{", "}}", Nil)
-        )
+  test("linesBetween") {
+    val data = List(
+      ("{{\na\n}}\n", "{{", "}}", List("a")),
+      ("*\nfoo\nbar\nbaz\n*\n", "*", "*", List("foo", "bar", "baz")),
+      ("{{\n}}\n", "{{", "}}", Nil),
+      ("{{\n\n}}\n", "{{", "}}", List("")),
+      ("{{\n", "{{", "}}", Nil),
+      ("\n\n\n", "{{", "}}", Nil),
+      ("\n\n\n}}", "{{", "}}", Nil)
+    )
 
-        for((input, start, end, expected) <- data)
-            expect(expected, 
-                   "linesBetween(\"" + input + "\")")
-            { 
-                val source = Source.fromString(input)
-                source.linesBetween(start, end).toList
-            }
+    for((input, start, end, expected) <- data) {
+      expect(expected, "linesBetween(\"" + input + "\")") { 
+        val source = Source.fromString(input)
+        source.linesBetween(start, end).toList
+      }
     }
+  }
 }

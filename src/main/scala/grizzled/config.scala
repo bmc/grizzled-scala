@@ -99,9 +99,8 @@ extends ConfigException("Section \"" + sectionName + "\", option \"" +
 /**
  * Used as a wrapper to pass a section to callbacks.
  */
-class Section(val name: String, val options: Map[String, String])
-{
-    override def toString = "[" + name + "]"
+class Section(val name: String, val options: Map[String, String]) {
+  override def toString = "[" + name + "]"
 }
 
 /**
@@ -353,723 +352,671 @@ class Section(val name: String, val options: Map[String, String])
  * @param predefinedSections  the predefined sections. An empty map means
  *                            there are no predefined sections.
  */
-class Configuration(predefinedSections: Map[String, Map[String, String]])
-{
-    private val SpecialSections  = Set("env", "system")
-    private val SectionName      = """([a-zA-Z0-9_]+)""".r
-    private val ValidSection     = ("""^\s*\[""" +
-                                    SectionName.toString +
-                                    """\]\s*$""").r
-    private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
-    private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
-    private val CommentLine      = """^\s*(#.*)$""".r
-    private val BlankLine        = """^(\s*)$""".r
-    private val VariableName     = """([a-zA-Z0-9_.]+)""".r
-    private val RawAssignment    = ("""^\s*""" +
-                                    VariableName.toString +
-                                    """\s*->\s*(.*)$""").r
-    private val Assignment       = ("""^\s*""" +
-                                    VariableName.toString +
-                                    """\s*[:=]\s*(.*)$""").r
-    private val FullVariableRef  = (SectionName.toString + """\.""" +
-                                    VariableName.toString).r
+class Configuration(predefinedSections: Map[String, Map[String, String]]) {
+  private val SpecialSections  = Set("env", "system")
+  private val SectionName      = """([a-zA-Z0-9_]+)""".r
+  private val ValidSection     = ("""^\s*\[""" +
+                                  SectionName.toString +
+                                  """\]\s*$""").r
+  private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
+  private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
+  private val CommentLine      = """^\s*(#.*)$""".r
+  private val BlankLine        = """^(\s*)$""".r
+  private val VariableName     = """([a-zA-Z0-9_.]+)""".r
+  private val RawAssignment    = ("""^\s*""" +
+                                  VariableName.toString +
+                                  """\s*->\s*(.*)$""").r
+  private val Assignment       = ("""^\s*""" +
+                                  VariableName.toString +
+                                  """\s*[:=]\s*(.*)$""").r
+  private val FullVariableRef  = (SectionName.toString + """\.""" +
+                                  VariableName.toString).r
 
-    private val sections = MutableMap.empty[String, MutableMap[String, String]]
+  private val sections = MutableMap.empty[String, MutableMap[String, String]]
 
-    private val EmptyOptions = Map.empty[String, String]
+  private val EmptyOptions = Map.empty[String, String]
 
-    addSections(predefinedSections)
+  addSections(predefinedSections)
 
-    /**
-     * Alternate constructor for use when there are no predefined sections.
-     */
-    def this() = this(Map.empty[String, Map[String, String]])
+  /**
+   * Alternate constructor for use when there are no predefined sections.
+   */
+  def this() = this(Map.empty[String, Map[String, String]])
 
-    /**
-     * Get the list of section names.
-     *
-     * @return the section names, in a iterator
-     */
-    def sectionNames: Iterator[String] = sections.keysIterator
+  /**
+   * Get the list of section names.
+   *
+   * @return the section names, in a iterator
+   */
+  def sectionNames: Iterator[String] = sections.keysIterator
 
-    /**
-     * Add a section to the configuration.
-     *
-     * @param name  the new section's name
-     *
-     * @throws DuplicateSectionException if the section already exists
-     */
-    def addSection(name: String): Unit =
-    {
-        if ((sections contains name) || (SpecialSections contains name))
-            throw new DuplicateSectionException(name)
+  /**
+   * Add a section to the configuration.
+   *
+   * @param name  the new section's name
+   *
+   * @throws DuplicateSectionException if the section already exists
+   */
+  def addSection(name: String): Unit = {
+    if ((sections contains name) || (SpecialSections contains name))
+      throw new DuplicateSectionException(name)
 
-        sections(name) = MutableMap.empty[String, String]
+    sections(name) = MutableMap.empty[String, String]
+  }
+
+  /**
+   * Get a section. Similar to `Map.get`, this method returns `Some(Section)`
+   * if the section exists, and `None` if it does not.
+   *
+   * @param name  the section to get
+   *
+   * @return `Some(Section)` or `None`
+   */
+  def getSection(name: String): Option[Section] =
+    sections.get(name).map(m => new Section(name, EmptyOptions ++ m))
+
+  /**
+   * Add an option name and value to a section.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name, which will be transformed
+   * @param value        the option's value
+   *
+   * @throws NoSuchSectionException   if the section doesn't exist
+   * @throws DuplicateOptionException if the option already exists in the
+   *                                  section
+   */
+  def addOption(sectionName: String,
+                optionName: String,
+                value: String): Unit = {
+    def validate(canonicalOptionName: String,
+                 optionMap: MutableMap[String, String]): Unit = {
+
+      if (SpecialSections contains sectionName)
+        throw new ConfigException("Can't add an option to read-only " +
+                                  "section \"" + sectionName + "\"")
+
+      if (optionMap.contains(canonicalOptionName))
+        throw new DuplicateOptionException(sectionName, optionName)
     }
 
-    /**
-     * Get a section. Similar to `Map.get`, this method returns `Some(Section)`
-     * if the section exists, and `None` if it does not.
-     *
-     * @param name  the section to get
-     *
-     * @return `Some(Section)` or `None`
-     */
-    def getSection(name: String): Option[Section] =
-        sections.get(name).map(m => new Section(name, EmptyOptions ++ m))
+    putOption(sectionName, optionName, value, validate)
+  }
 
-    /**
-     * Add an option name and value to a section.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name, which will be transformed
-     * @param value        the option's value
-     *
-     * @throws NoSuchSectionException   if the section doesn't exist
-     * @throws DuplicateOptionException if the option already exists in the
-     *                                  section
-     */
-    def addOption(sectionName: String,
-                  optionName: String,
-                  value: String): Unit =
-    {
-        def validate(canonicalOptionName: String,
-                     optionMap: MutableMap[String, String]): Unit =
-        {
-            if (SpecialSections contains sectionName)
-                throw new ConfigException("Can't add an option to read-only " +
-                                          "section \"" + sectionName + "\"")
+  /**
+   * Put an option name and value to a section, overwriting any existing
+   * instance of that option. Unlike `addOption()`, this method will
+   * not throw `DuplicateOptionException`.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name, which will be transformed
+   * @param value        the option's value
+   *
+   * @throws NoSuchSectionException   if the section doesn't exist
+   */
+  def setOption(sectionName: String,
+                optionName: String,
+                value: String): Unit = {
+    putOption(sectionName, optionName, value, ((s, m) => ()))
+  }
 
-            if (optionMap.contains(canonicalOptionName))
-                throw new DuplicateOptionException(sectionName, optionName)
-        }
+  /**
+   * Works like `Map.get()`, returning `Some(string)` if the value
+   * is found, `None` if not. Does not throw exceptions.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   *
+   * @return `Some(value)` if the section and option exist, `None` if
+   *         either the section or option cannot be found.
+   */
+  def get(sectionName: String, optionName: String): Option[String] = {
+    sectionName match {
+      case "env" =>
+        val value = System.getenv(optionName)
+      if (value == null)
+        None
+      else
+        Some(value)
 
-        putOption(sectionName, optionName, value, validate)
+      case "system" =>
+        Option(System.getProperties.getProperty(optionName))
+
+      case _ if (! hasSection(sectionName)) =>
+        None
+
+      case _ =>
+        sections(sectionName).get(transformOptionName(optionName))
+    }
+  }
+
+  /**
+   * Works like `Map.getOrElse()`, returning an option value or a
+   * default, if the option has no value. Does not throw exceptions.
+   * Calling this function is the same as:
+   * {{{
+   * get(sectionName, optionName).getOrElse(default)
+   * }}}
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   * @param default      the default value
+   *
+   * @return The option's value if the section and option exist, the
+   *         default if either the section or option cannot be found.
+   */
+  def getOrElse(sectionName: String,
+                optionName: String,
+                default: String): String = {
+    get(sectionName, optionName).getOrElse(default)
+  }
+
+  /**
+   * Get an optional integer option.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   *
+   * @return `Some(integer)` or None.
+   *
+   * @throws ConversionException    if the option has a non-integer value
+   */
+  def getInt(sectionName: String, optionName: String): Option[Int] = {
+    def makeInt(value: String): Int = {
+      try {
+        value.toInt
+      }
+
+      catch {
+        case _: NumberFormatException =>
+          throw new ConversionException(
+            sectionName, optionName, value, "not an integer."
+          )
+      }
     }
 
-    /**
-     * Put an option name and value to a section, overwriting any existing
-     * instance of that option. Unlike `addOption()`, this method will
-     * not throw `DuplicateOptionException`.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name, which will be transformed
-     * @param value        the option's value
-     *
-     * @throws NoSuchSectionException   if the section doesn't exist
-     */
-    def setOption(sectionName: String,
-                  optionName: String,
-                  value: String): Unit =
-    {
-        putOption(sectionName, optionName, value, ((s, m) => ()))
+    get(sectionName, optionName).map(makeInt _)
+  }
+
+  /**
+   * Get an integer option, applying a default if not found.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   * @param default      the default value
+   *
+   * @return the integer result
+   *
+   * @throws ConversionException    if the option cannot be converted
+   */
+  def getIntOrElse(sectionName: String,
+                   optionName: String,
+                   default: Int): Int = {
+    getInt(sectionName, optionName).getOrElse(default)
+  }
+
+  /**
+   * Get an optional boolean option.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   *
+   * @return `Some(boolean)` or None.
+   *
+   * @throws ConversionException if the option has a non-boolean value
+   */
+  def getBoolean(sectionName: String, optionName: String): Option[Boolean] = {
+    import grizzled.string.util._
+
+    def makeBoolean(value: String): Boolean = {
+      try {
+        stringToBoolean(value)
+      }
+
+      catch {
+        case _: IllegalArgumentException =>
+          throw new ConversionException(
+            sectionName, optionName, value, "not a boolean."
+          )
+      }
     }
 
-    /**
-     * Works like `Map.get()`, returning `Some(string)` if the value
-     * is found, `None` if not. Does not throw exceptions.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     *
-     * @return `Some(value)` if the section and option exist, `None` if
-     *         either the section or option cannot be found.
-     */
-    def get(sectionName: String, optionName: String): Option[String] =
-    {
-        sectionName match
-        {
-            case "env" =>
-                val value = System.getenv(optionName)
-                if (value == null)
-                    None
-                else
-                    Some(value)
+    get(sectionName, optionName).map(makeBoolean _)
 
-            case "system" =>
-                Option(System.getProperties.getProperty(optionName))
+  }
 
-            case _ if (! hasSection(sectionName)) =>
-                None
+  /**
+   * Get a boolean option, applying a default if not found.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   * @param default      the default value
+   *
+   * @return the integer result
+   *
+   * @throws ConversionException    if the option cannot be converted
+   */
+  def getBooleanOrElse(sectionName: String,
+                       optionName: String,
+                       default: Boolean): Boolean = {
+    getBoolean(sectionName, optionName).getOrElse(default)
+  }
 
-            case _ =>
-                sections(sectionName).get(transformOptionName(optionName))
-        }
+  /**
+   * Determine whether the configuration contains a named section.
+   *
+   * @param sectionName  the new section's name
+   *
+   * @return `true` if the configuration has a section with that name,
+   *         `false` otherwise
+   */
+  def hasSection(sectionName: String): Boolean =
+    sections contains sectionName
+
+  /**
+   * Get the value for an option in a section.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   *
+   * @return the option's value
+   *
+   * @throws NoSuchSectionException if the section doesn't exist
+   * @throws NoSuchOptionException  if the option doesn't exist
+   *
+   * @deprecated  Use get() or getOrElse(), instead
+   */
+  def option(sectionName: String, optionName: String): String = {
+    if ((! SpecialSections.contains(sectionName)) &&
+        (! hasSection(sectionName)))
+      throw new NoSuchSectionException(sectionName)
+
+    def noSuchOption =
+      throw new NoSuchOptionException(sectionName, optionName)
+
+    get(sectionName, optionName) getOrElse noSuchOption
+  }
+
+  /**
+   * Get the value for an option in a section, supplying a default if the
+   * option or the section doesn't exist. Exceptions for variable
+   * substitution errors are still thrown.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   * @param default      default value
+   *
+   * @return the option's value (which may be the default)
+   *
+   * @deprecated  Use get() or getOrElse(), instead
+   */
+  def option(sectionName: String,
+             optionName: String,
+             default: String): String = {
+    try {
+      option(sectionName, optionName)
     }
 
-    /**
-     * Works like `Map.getOrElse()`, returning an option value or a
-     * default, if the option has no value. Does not throw exceptions.
-     * Calling this function is the same as:
-     * {{{
-     * get(sectionName, optionName).getOrElse(default)
-     * }}}
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     * @param default      the default value
-     *
-     * @return The option's value if the section and option exist, the
-     *         default if either the section or option cannot be found.
-     */
-    def getOrElse(sectionName: String,
-                  optionName: String,
-                  default: String): String =
-    {
-        get(sectionName, optionName).getOrElse(default)
+    catch {
+      case _: NoSuchOptionException | _: NoSuchSectionException =>
+        default
+    }
+  }
+
+  /**
+   * Get all options in a section.
+   *
+   * @param sectionName  the section name
+   *
+   * @return a map of all options and their values for the section. If
+   *         the section doesn't exist, an empty map is returned.
+   *
+   * @throws NoSuchSectionException if the section doesn't exist
+   */
+  def options(sectionName: String): Map[String, String] =
+    if (hasSection(sectionName))
+      EmptyOptions ++ sections(sectionName)
+    else
+      EmptyOptions
+
+  /**
+   * Get the list of option names.
+   *
+   * @param sectionName the section's name
+   *
+   * @return a list of option names in that section
+   *
+   * @throws NoSuchSectionException if the section doesn't exist
+   */
+  def optionNames(sectionName: String): Iterator[String] = {
+    if (! hasSection(sectionName))
+      throw new NoSuchSectionException(sectionName)
+
+    sections(sectionName).keysIterator
+  }
+
+  /**
+   * Transform an option (key) to a consistent form. The default
+   * version of this method forces the option name to lower case.
+   *
+   * @param option  the option name
+   *
+   * @return the transformed option name
+   */
+  def transformOptionName(option: String) = option.toLowerCase
+
+  /**
+   * Invoke a code block on each section whose name matches a regular
+   * expression.
+   *
+   * @param regex  the regular expression to match
+   * @param code   the block of code to invoke with each section
+   */
+  def forMatchingSections(regex: Regex)(code: Section => Unit) = {
+    for (name <- sectionNames; if (regex.findFirstIn(name) != None))
+      code(new Section(name, options(name)))
+  }
+
+  /**
+   * Return a sequence of sections whose name match matches a regular
+   * expression.
+   *
+   * @param regex  the regular expression to match
+   */
+  def matchingSections(regex: Regex): Seq[Section] = {
+    for (name <- sectionNames; if (regex.findFirstIn(name) != None))
+    yield new Section(name, options(name))
+  }.toSeq
+
+  /**
+   * Load configuration data from the specified source into this object.
+   * Clears the configuration first.
+   *
+   * @param source  `scala.io.Source` object to read
+   * @param safe    Whether an exception should be thrown for bad variable
+   *                substitutions (`false`) or not (`true`).
+   *
+   * @return this object, for convenience
+   */
+  def load(source: Source, safe: Boolean = false): Configuration = {
+    def processLine(line: String,
+                    curSection: Option[String]): Option[String] = {
+
+      def unsafeResolveVariable(name: String): Option[String] =
+        getVar(curSection.get, name)
+
+      def safeResolveVariable(name: String): Option[String] =
+        safeGetVar(curSection.get, name)
+
+      val resolve = if (safe) safeResolveVariable _
+                    else unsafeResolveVariable _
+
+      line match {
+        case CommentLine(_) =>
+          curSection
+
+        case BlankLine(_) =>
+          curSection
+
+        case ValidSection(name) =>
+          addSection(name)
+        Some(name)
+
+        case BadSectionFormat(section) =>
+          throw new ConfigException(
+            "Badly formatted section: \"%s\"".format(section)
+          )
+
+        case BadSectionName(name) =>
+          throw new ConfigException(
+            "Bad section name: \"%s\"".format(name))
+
+        case Assignment(optionName, value) =>
+          val template = new UnixShellStringTemplate(resolve,
+                                                     "[a-zA-Z0-9_.]+",
+                                                     safe)
+          if (curSection == None)
+            throw new ConfigException(
+              "Assignment \"%s=%s\" occurs before the first " +
+              "section.".format(optionName, value)
+            )
+
+          val newValue = template.substitute(value.translateMetachars)
+          addOption(curSection.get, optionName, newValue)
+          curSection
+
+        case RawAssignment(optionName, value) =>
+          if (curSection == None)
+            throw new ConfigException(
+              "Assignment \"%s=%s\" occurs before the first " +
+              "section.".format(optionName, value)
+            )
+
+          addOption(curSection.get, optionName, value)
+          curSection
+
+        case _ =>
+          throw new ConfigException(
+            "Unknown configuration line: \"%s\"".format(line)
+          )
+      }
     }
 
-    /**
-     * Get an optional integer option.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     *
-     * @return `Some(integer)` or None.
-     *
-     * @throws ConversionException    if the option has a non-integer value
-     */
-    def getInt(sectionName: String, optionName: String): Option[Int] =
-    {
-        def makeInt(value: String): Int =
-        {
-            try
-            {
-                value.toInt
-            }
-
-            catch
-            {
-                case _: NumberFormatException =>
-                    throw new ConversionException(
-                        sectionName, optionName, value, "not an integer."
-                    )
-            }
-        }
-
-        get(sectionName, optionName).map(makeInt _)
+    @tailrec def processLines(lines: Iterator[String],
+                              curSection: Option[String]): Unit = {
+      if (lines.hasNext) {
+        val nextSection = processLine(lines.next, curSection)
+        processLines(lines, nextSection)
+      }
     }
 
-    /**
-     * Get an integer option, applying a default if not found.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     * @param default      the default value
-     *
-     * @return the integer result
-     *
-     * @throws ConversionException    if the option cannot be converted
-     */
-    def getIntOrElse(sectionName: String,
-                     optionName: String,
-                     default: Int): Int =
-    {
-        getInt(sectionName, optionName).getOrElse(default)
+    processLines(new BackslashContinuedLineIterator(Includer(source)), None)
+    this
+  }
+
+  /**
+   * Puts an option in the configuration, running the specified pre-check
+   * logic first.
+   */
+  protected def putOption(
+    sectionName: String, optionName: String, value: String,
+    preCheck: (String, MutableMap[String, String]) => Unit): Unit = {
+
+      if (! hasSection(sectionName))
+        throw new NoSuchSectionException(sectionName)
+
+      val optionMap = sections(sectionName)
+      val canonicalOptionName = transformOptionName(optionName)
+
+      preCheck(canonicalOptionName, optionMap)
+
+      optionMap += (canonicalOptionName -> value)
     }
 
-    /**
-     * Get an optional boolean option.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     *
-     * @return `Some(boolean)` or None.
-     *
-     * @throws ConversionException if the option has a non-boolean value
-     */
-    def getBoolean(sectionName: String, optionName: String): Option[Boolean] =
-    {
-        import grizzled.string.util._
-
-        def makeBoolean(value: String): Boolean =
-        {
-            try
-            {
-                stringToBoolean(value)
-            }
-
-            catch
-            {
-                case _: IllegalArgumentException =>
-                    throw new ConversionException(
-                        sectionName, optionName, value, "not a boolean."
-                    )
-            }
-        }
-
-        get(sectionName, optionName).map(makeBoolean _)
-
+  private def safeGetVar(curSection: String, 
+                         varName: String): Option[String] = {
+    try {
+      getVar(curSection, varName)
     }
 
-    /**
-     * Get a boolean option, applying a default if not found.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     * @param default      the default value
-     *
-     * @return the integer result
-     *
-     * @throws ConversionException    if the option cannot be converted
-     */
-    def getBooleanOrElse(sectionName: String,
-                         optionName: String,
-                         default: Boolean): Boolean =
-    {
-        getBoolean(sectionName, optionName).getOrElse(default)
+    catch {
+      case (_: NoSuchOptionException | _: NoSuchSectionException) =>
+        None
+    }
+  }
+
+  private def getVar(curSection: String, varName: String): Option[String] = {
+    try {
+      varName match {
+        case FullVariableRef(section, option) =>
+          Some(this.option(section, option))
+        case VariableName(option) =>
+          Some(this.option(curSection, option))
+        case _ =>
+          throw new SubstitutionException(
+            curSection,
+            "Reference to nonexistent section or option: ${ " + varName + "}"
+          )
+      }
     }
 
-    /**
-     * Determine whether the configuration contains a named section.
-     *
-     * @param sectionName  the new section's name
-     *
-     * @return `true` if the configuration has a section with that name,
-     *         `false` otherwise
-     */
-    def hasSection(sectionName: String): Boolean =
-        sections contains sectionName
+    catch {
+      case _: NoSuchOptionException =>
+        throw new SubstitutionException(
+          curSection, "Reference to nonexistent option in ${" + varName + "}"
+        )
 
-    /**
-     * Get the value for an option in a section.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     *
-     * @return the option's value
-     *
-     * @throws NoSuchSectionException if the section doesn't exist
-     * @throws NoSuchOptionException  if the option doesn't exist
-     *
-     * @deprecated  Use get() or getOrElse(), instead
-     */
-    def option(sectionName: String, optionName: String): String =
-    {
-        if ((! SpecialSections.contains(sectionName)) &&
-            (! hasSection(sectionName)))
-            throw new NoSuchSectionException(sectionName)
-
-        def noSuchOption =
-            throw new NoSuchOptionException(sectionName, optionName)
-
-        get(sectionName, optionName) getOrElse noSuchOption
+      case _: NoSuchSectionException =>
+        throw new SubstitutionException(
+          curSection, "Reference to nonexistent section in ${" + varName + "}"
+        )
     }
+  }
 
-    /**
-     * Get the value for an option in a section, supplying a default if the
-     * option or the section doesn't exist. Exceptions for variable
-     * substitution errors are still thrown.
-     *
-     * @param sectionName  the section name
-     * @param optionName   the option name
-     * @param default      default value
-     *
-     * @return the option's value (which may be the default)
-     *
-     * @deprecated  Use get() or getOrElse(), instead
-     */
-    def option(sectionName: String,
-               optionName: String,
-               default: String): String =
-    {
-        try
-        {
-            option(sectionName, optionName)
-        }
-
-        catch
-        {
-            case _: NoSuchOptionException | _: NoSuchSectionException =>
-                default
-        }
+  private def addSections(newSections: Map[String,Map[String,String]]): Unit = {
+    for ((sectionName, optionMap) <- predefinedSections) {
+      addSection(sectionName)
+      for ((optionName, optionValue) <- optionMap)
+        addOption(sectionName, optionName, optionValue)
     }
-
-    /**
-     * Get all options in a section.
-     *
-     * @param sectionName  the section name
-     *
-     * @return a map of all options and their values for the section. If
-     *         the section doesn't exist, an empty map is returned.
-     *
-     * @throws NoSuchSectionException if the section doesn't exist
-     */
-    def options(sectionName: String): Map[String, String] =
-        if (hasSection(sectionName))
-            EmptyOptions ++ sections(sectionName)
-        else
-            EmptyOptions
-
-    /**
-     * Get the list of option names.
-     *
-     * @param sectionName the section's name
-     *
-     * @return a list of option names in that section
-     *
-     * @throws NoSuchSectionException if the section doesn't exist
-     */
-    def optionNames(sectionName: String): Iterator[String] =
-    {
-        if (! hasSection(sectionName))
-            throw new NoSuchSectionException(sectionName)
-
-        sections(sectionName).keysIterator
-    }
-
-    /**
-     * Transform an option (key) to a consistent form. The default
-     * version of this method forces the option name to lower case.
-     *
-     * @param option  the option name
-     *
-     * @return the transformed option name
-     */
-    def transformOptionName(option: String) = option.toLowerCase
-
-    /**
-     * Invoke a code block on each section whose name matches a regular
-     * expression.
-     *
-     * @param regex  the regular expression to match
-     * @param code   the block of code to invoke with each section
-     */
-    def forMatchingSections(regex: Regex)(code: Section => Unit) =
-    {
-        for (name <- sectionNames; if (regex.findFirstIn(name) != None))
-            code(new Section(name, options(name)))
-    }
-
-    /**
-     * Return a sequence of sections whose name match matches a regular
-     * expression.
-     *
-     * @param regex  the regular expression to match
-     */
-    def matchingSections(regex: Regex): Seq[Section] =
-    {
-        for (name <- sectionNames; if (regex.findFirstIn(name) != None))
-            yield new Section(name, options(name))
-    }.toSeq
-
-    /**
-     * Load configuration data from the specified source into this object.
-     * Clears the configuration first.
-     *
-     * @param source  `scala.io.Source` object to read
-     * @param safe    Whether an exception should be thrown for bad variable
-     *                substitutions (`false`) or not (`true`).
-     *
-     * @return this object, for convenience
-     */
-    def load(source: Source, safe: Boolean = false): Configuration =
-    {
-        def processLine(line: String,
-                        curSection: Option[String]): Option[String] =
-        {
-            def unsafeResolveVariable(name: String): Option[String] =
-                getVar(curSection.get, name)
-
-            def safeResolveVariable(name: String): Option[String] =
-                safeGetVar(curSection.get, name)
-
-            val resolve = if (safe) safeResolveVariable _
-                          else unsafeResolveVariable _
-
-            line match
-            {
-                case CommentLine(_) =>
-                    curSection
-
-                case BlankLine(_) =>
-                    curSection
-
-                case ValidSection(name) =>
-                    addSection(name)
-                    Some(name)
-
-                case BadSectionFormat(section) =>
-                    throw new ConfigException(
-                        "Badly formatted section: \"%s\"".format(section)
-                    )
-
-                case BadSectionName(name) =>
-                    throw new ConfigException(
-                        "Bad section name: \"%s\"".format(name))
-
-                case Assignment(optionName, value) =>
-                    val template = new UnixShellStringTemplate(resolve,
-                                                               "[a-zA-Z0-9_.]+",
-                                                               safe)
-                    if (curSection == None)
-                        throw new ConfigException(
-                            "Assignment \"%s=%s\" occurs before the first " +
-                            "section.".format(optionName, value)
-                        )
-
-                    val newValue = template.substitute(value.translateMetachars)
-                    addOption(curSection.get, optionName, newValue)
-                    curSection
-
-                case RawAssignment(optionName, value) =>
-                    if (curSection == None)
-                        throw new ConfigException(
-                            "Assignment \"%s=%s\" occurs before the first " +
-                            "section.".format(optionName, value)
-                        )
-
-                    addOption(curSection.get, optionName, value)
-                    curSection
-
-                case _ =>
-                    throw new ConfigException(
-                        "Unknown configuration line: \"%s\"".format(line)
-                    )
-            }
-        }
-
-        @tailrec def processLines(lines: Iterator[String],
-                                  curSection: Option[String]): Unit =
-        {
-            if (lines.hasNext)
-            {
-                val nextSection = processLine(lines.next, curSection)
-                processLines(lines, nextSection)
-            }
-        }
-
-        processLines(new BackslashContinuedLineIterator(Includer(source)), None)
-        this
-    }
-
-    /**
-     * Puts an option in the configuration, running the specified pre-check
-     * logic first.
-     */
-    protected def putOption
-        (sectionName: String,
-         optionName: String,
-         value: String,
-         preCheck: (String, MutableMap[String, String]) => Unit): Unit =
-    {
-        if (! hasSection(sectionName))
-            throw new NoSuchSectionException(sectionName)
-
-        val optionMap = sections(sectionName)
-        val canonicalOptionName = transformOptionName(optionName)
-
-        preCheck(canonicalOptionName, optionMap)
-
-        optionMap += (canonicalOptionName -> value)
-    }
-
-    private def safeGetVar(curSection: String, 
-                           varName: String): Option[String] =
-    {
-        try
-        {
-            getVar(curSection, varName)
-        }
-
-        catch
-        {
-            case (_: NoSuchOptionException | _: NoSuchSectionException) =>
-                None
-        }
-    }
-
-    private def getVar(curSection: String, varName: String): Option[String] =
-    {
-        try
-        {
-            varName match
-            {
-                case FullVariableRef(section, option) =>
-                    Some(this.option(section, option))
-                case VariableName(option) =>
-                    Some(this.option(curSection, option))
-                case _ =>
-                    throw new SubstitutionException(curSection,
-                                                    "Reference to" +
-                                                    "nonexistent section or " +
-                                                    "option: ${ " +
-                                                    varName + "}")
-            }
-        }
-
-        catch
-        {
-            case _: NoSuchOptionException =>
-                throw new SubstitutionException(curSection,
-                                                "Reference to nonexistent " +
-                                                "option in ${" + varName + "}")
-
-            case _: NoSuchSectionException =>
-                throw new SubstitutionException(curSection,
-                                                "Reference to nonexistent " +
-                                                "section in ${" + varName + "}")
-        }
-    }
-
-    private def addSections(newSections: Map[String,Map[String,String]]): Unit =
-    {
-        for ((sectionName, optionMap) <- predefinedSections)
-        {
-            addSection(sectionName)
-            for ((optionName, optionValue) <- optionMap)
-                addOption(sectionName, optionName, optionValue)
-        }
-    }
+  }
 }
 
 /**
  * A configuration reader: Reads a source and produces a parsed
  * configuration.
  */
-object ConfigurationReader
-{
-    /**
-     * Read a configuration.
-     *
-     * @param source `scala.io.Source` object to read
-     *
-     * @return the `Configuration` object.
-     *
-     * @deprecated Use the Configuration object
-     */
-    def read(source: Source): Configuration =
-        read(source, Map.empty[String, Map[String, String]])
+object ConfigurationReader {
+  /**
+   * Read a configuration.
+   *
+   * @param source `scala.io.Source` object to read
+   *
+   * @return the `Configuration` object.
+   *
+   * @deprecated Use the Configuration object
+   */
+  def read(source: Source): Configuration =
+    read(source, Map.empty[String, Map[String, String]])
 
-    /**
-     * Read a configuration file, permitting some predefined sections to be
-     * added to the configuration before it is read. The predefined sections
-     * are defined in a map of maps. The outer map is keyed by predefined
-     * section name. The inner maps consist of options and their values.
-     * For instance, to read a configuration file, giving it access to
-     * certain command line parameters, you could do something like this:
-     *
-     * {{{
-     * object Foo
-     * {
-     *     def main(args: Array[String]) =
-     *     {
-     *         // You'd obviously want to do some real argument checking here.
-     *         val configFile = args(0)
-     *         val name = args(1)
-     *         val ipAddress = args(2)
-     *         val sections = Map("args" -> Map("name" -> name,
-     *                                          "ip" -> ipAddress))
-     *         val config = Configuration(configFile, sections)
-     *         ..
-     *     }
-     * }
-     * }}}
-     *
-     * @param source    `scala.io.Source` object to read
-     * @param sections  the predefined sections. An empty map means there are
-     *                  no predefined sections.
-     *
-     * @return the `Configuration` object.
-     *
-     * @deprecated Use the Configuration object
-     */
-    def read(source: Source,
-             sections: Map[String, Map[String, String]]): Configuration =
-    {
-        new Configuration(sections).load(source)
-    }
+  /**
+   * Read a configuration file, permitting some predefined sections to be
+   * added to the configuration before it is read. The predefined sections
+   * are defined in a map of maps. The outer map is keyed by predefined
+   * section name. The inner maps consist of options and their values.
+   * For instance, to read a configuration file, giving it access to
+   * certain command line parameters, you could do something like this:
+   *
+   * {{{
+   * object Foo {
+   *   def main(args: Array[String]) = {
+   *     // You'd obviously want to do some real argument checking here.
+   *     val configFile = args(0)
+   *     val name = args(1)
+   *     val ipAddress = args(2)
+   *     val sections = Map("args" -> Map("name" -> name, "ip" -> ipAddress))
+   *     val config = Configuration(configFile, sections)
+   *     ...
+   *   }
+   * }
+   * }}}
+   *
+   * @param source    `scala.io.Source` object to read
+   * @param sections  the predefined sections. An empty map means there are
+   *                  no predefined sections.
+   *
+   * @return the `Configuration` object.
+   *
+   * @deprecated Use the Configuration object
+   */
+  def read(source: Source,
+           sections: Map[String, Map[String, String]]): Configuration = {
+    new Configuration(sections).load(source)
+  }
 }
 
 /**
  * Companion object for the `Configuration` class
  */
-object Configuration
-{
-    import java.io.File
+object Configuration {
+  import java.io.File
 
-    /**
-     * Read a configuration file.
-     *
-     * @param source `scala.io.Source` object to read
-     * @param safe    Whether an exception should be thrown for bad variable
-     *                substitutions (`false`) or not (`true`).
-     *
-     * @return the `Configuration` object.
-     */
-    def apply(source: Source, safe: Boolean = false): Configuration =
-        new Configuration().load(source, safe)
+  /**
+   * Read a configuration file.
+   *
+   * @param source `scala.io.Source` object to read
+   * @param safe    Whether an exception should be thrown for bad variable
+   *                substitutions (`false`) or not (`true`).
+   *
+   * @return the `Configuration` object.
+   */
+  def apply(source: Source, safe: Boolean = false): Configuration =
+    new Configuration().load(source, safe)
 
-    /**
-     * Read a configuration file, permitting some predefined sections to be
-     * added to the configuration before it is read. The predefined sections
-     * are defined in a map of maps. The outer map is keyed by predefined
-     * section name. The inner maps consist of options and their values.
-     * For instance, to read a configuration file, giving it access to
-     * certain command line parameters, you could do something like this:
-     *
-     * {{{
-     * object Foo
-     * {
-     *     def main(args: Array[String]) =
-     *     {
-     *         // You'd obviously want to do some real argument checking here.
-     *         val configFile = args(0)
-     *         val name = args(1)
-     *         val ipAddress = args(2)
-     *         val sections = Map("args" -> Map("name" -> name,
-     *                                          "ip" -> ipAddress))
-     *         val config = Configuration(Source.fromFile(new File(configFile)), sections)
-     *         ..
-     *     }
-     * }
-     * }}}
-     *
-     * @param source    `scala.io.Source` object to read
-     * @param sections  the predefined sections. An empty map means there are
-     *                  no predefined sections.
-     *
-     * @return the `Configuration` object.
-     */
-    def apply(source: Source,
-              sections: Map[String, Map[String, String]]): Configuration =
-        new Configuration(sections).load(source)
+  /**
+   * Read a configuration file, permitting some predefined sections to be
+   * added to the configuration before it is read. The predefined sections
+   * are defined in a map of maps. The outer map is keyed by predefined
+   * section name. The inner maps consist of options and their values.
+   * For instance, to read a configuration file, giving it access to
+   * certain command line parameters, you could do something like this:
+   *
+   * {{{
+   * object Foo {
+   *   def main(args: Array[String]) = {
+   *     // You'd obviously want to do some real argument checking here.
+   *     val configFile = args(0)
+   *     val name = args(1)
+   *     val ipAddress = args(2)
+   *     val sections = Map("args" -> Map("name" -> name, "ip" -> ipAddress))
+   *     val config = Configuration(Source.fromFile(new File(configFile)), sections)
+   *     ...
+   *   }
+   * }
+   * }}}
+   *
+   * @param source    `scala.io.Source` object to read
+   * @param sections  the predefined sections. An empty map means there are
+   *                  no predefined sections.
+   *
+   * @return the `Configuration` object.
+   */
+  def apply(source: Source,
+            sections: Map[String, Map[String, String]]): Configuration =
+              new Configuration(sections).load(source)
 
-    /**
-     * Read a configuration file, permitting some predefined sections to be
-     * added to the configuration before it is read. The predefined sections
-     * are defined in a map of maps. The outer map is keyed by predefined
-     * section name. The inner maps consist of options and their values.
-     * For instance, to read a configuration file, giving it access to
-     * certain command line parameters, you could do something like this:
-     *
-     * {{{
-     * object Foo
-     * {
-     *     def main(args: Array[String]) =
-     *     {
-     *         // You'd obviously want to do some real argument checking here.
-     *         val configFile = args(0)
-     *         val name = args(1)
-     *         val ipAddress = args(2)
-     *         val sections = Map("args" -> Map("name" -> name,
-     *                                          "ip" -> ipAddress))
-     *         val config = Configuration(Source.fromFile(new File(configFile)), sections)
-     *         ..
-     *     }
-     * }
-     * }}}
-     *
-     * @param source    `scala.io.Source` object to read
-     * @param sections  the predefined sections. An empty map means there are
-     *                  no predefined sections.
-     * @param safe      Whether an exception should be thrown for bad variable
-     *                  substitutions (`false`) or not (`true`).
-     *
-     * @return the `Configuration` object.
-     */
-    def apply(source: Source,
-              sections: Map[String, Map[String, String]],
-              safe: Boolean): Configuration =
-        new Configuration(sections).load(source, safe)
+  /**
+   * Read a configuration file, permitting some predefined sections to be
+   * added to the configuration before it is read. The predefined sections
+   * are defined in a map of maps. The outer map is keyed by predefined
+   * section name. The inner maps consist of options and their values.
+   * For instance, to read a configuration file, giving it access to
+   * certain command line parameters, you could do something like this:
+   *
+   * {{{
+   * object Foo {
+   *   def main(args: Array[String]) = {
+   *     // You'd obviously want to do some real argument checking here.
+   *     val configFile = args(0)
+   *     val name = args(1)
+   *     val ipAddress = args(2)
+   *     val sections = Map("args" -> Map("name" -> name, "ip" -> ipAddress))
+   *     val config = Configuration(Source.fromFile(new File(configFile)), sections)
+   *     ...
+   *   }
+   * }
+   * }}}
+   *
+   * @param source    `scala.io.Source` object to read
+   * @param sections  the predefined sections. An empty map means there are
+   *                  no predefined sections.
+   * @param safe      Whether an exception should be thrown for bad variable
+   *                  substitutions (`false`) or not (`true`).
+   *
+   * @return the `Configuration` object.
+   */
+  def apply(source: Source,
+            sections: Map[String, Map[String, String]],
+            safe: Boolean): Configuration =
+              new Configuration(sections).load(source, safe)
 }

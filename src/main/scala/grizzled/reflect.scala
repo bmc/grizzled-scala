@@ -40,8 +40,7 @@ package grizzled
 /**
  * Some reflection-related utility methods and classes.
  */
-object reflect
-{
+object reflect {
     import scala.reflect.Manifest
 
     /**
@@ -49,15 +48,14 @@ object reflect
      * of use:
      *
      * {{{
-     * def foo(obj: Any) =
-     * {
-     *     // Is this object of type Seq[Int] or just Int?
-     *     if (isOfType[Int](obj))
-     *         ...
-     *     else if (isOfType[Seq[Int]](obj))
-     *         ...
-     *     else
-     *         ...
+     * def foo(obj: Any) = {
+     *   // Is this object of type Seq[Int] or just Int?
+     *   if (isOfType[Int](obj))
+     *     ...
+     *   else if (isOfType[Seq[Int]](obj))
+     *     ...
+     *   else
+     *     ...
      * }
      * }}}
      *
@@ -66,8 +64,7 @@ object reflect
      *
      * @return `true` if `o` is of type `T`, `false` if not.
      */
-    def isOfType[T](o: Any)(implicit man: Manifest[T]): Boolean =
-    {
+    def isOfType[T](o: Any)(implicit man: Manifest[T]): Boolean = {
         // The following is nice, but fails on "primitives" (e.g., Int).
         /*
         man >:> Manifest.classType(v.asInstanceOf[AnyRef].getClass)
@@ -79,8 +76,7 @@ object reflect
         def isClass: Boolean =
             man.erasure.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
-        man.toString match
-        {
+        man.toString match {
             case "Int"    => isPrimitive[java.lang.Integer]
             case "Short"  => isPrimitive[java.lang.Short]
             case "Long"   => isPrimitive[java.lang.Long]

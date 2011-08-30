@@ -38,14 +38,12 @@
 package grizzled.parsing
 
 /**
- * A simple string token class, consisting of:
- * <ul>
- *   <li>a string token
- *   <li>the starting position of the token in the original string from which
- *       the token was parsed
- * </ul>
- */
-case class StringToken(val string: String, val start: Int)
-{
-    override def toString = string
+  * A simple string token class, consisting of:
+  *
+  * - a string token
+  * - the starting position of the token in the original string from which
+  *   the token was parsed
+  */
+case class StringToken(val string: String, val start: Int) {
+  override def toString = string
 }

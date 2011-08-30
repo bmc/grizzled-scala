@@ -37,46 +37,42 @@ import grizzled.string.GrizzledChar._
 /**
  * Tests the GrizzledChar class.
  */
-class GrizzledCharTest extends FunSuite
-{
-    test("isHexDigit")
-    {
-        val data = Map('0' -> true,
-                       '1' -> true,
-                       '2' -> true,
-                       '3' -> true,
-                       '4' -> true,
-                       '5' -> true,
-                       '6' -> true,
-                       '7' -> true,
-                       '8' -> true,
-                       '9' -> true,
-                       'a' -> true,
-                       'A' -> true,
-                       'b' -> true,
-                       'B' -> true,
-                       'c' -> true,
-                       'C' -> true,
-                       'd' -> true,
-                       'D' -> true,
-                       'e' -> true,
-                       'E' -> true,
-                       'f' -> true,
-                       'F' -> true,
-                       'g' -> false,
-                       'G' -> false,
-                       '!' -> false,
-                       ':' -> false,
-                       '+' -> false,
-                       '-' -> false,
-                       '.' -> false)
+class GrizzledCharTest extends FunSuite {
+  test("isHexDigit") {
+    val data = Map('0' -> true,
+                   '1' -> true,
+                   '2' -> true,
+                   '3' -> true,
+                   '4' -> true,
+                   '5' -> true,
+                   '6' -> true,
+                   '7' -> true,
+                   '8' -> true,
+                   '9' -> true,
+                   'a' -> true,
+                   'A' -> true,
+                   'b' -> true,
+                   'B' -> true,
+                   'c' -> true,
+                   'C' -> true,
+                   'd' -> true,
+                   'D' -> true,
+                   'e' -> true,
+                   'E' -> true,
+                   'f' -> true,
+                   'F' -> true,
+                   'g' -> false,
+                   'G' -> false,
+                   '!' -> false,
+                   ':' -> false,
+                   '+' -> false,
+                   '-' -> false,
+                   '.' -> false)
 
-        for((c, expected) <- data)
-        {
-            expect(expected, "'" + c + "' -> " + expected.toString)
-            {
-                c.isHexDigit
-            }
-        }
+    for((c, expected) <- data) {
+      expect(expected, "'" + c + "' -> " + expected.toString) {
+        c.isHexDigit
+      }
     }
+  }
 }

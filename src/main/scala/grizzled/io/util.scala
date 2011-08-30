@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -35,98 +35,87 @@
   ---------------------------------------------------------------------------
 */
 
-/**
- * I/O-related classes and utilities. This package is distinguished from
- * the <tt>grizzled.file</tt> package in that this package operates on
- * already-open Java <tt>InputStream<tt>, <tt>OutputStream</tt>,
- * <tt>Reader</tt> and <tt>Writer</tt> objects, and on Scala
- * <tt>Source</tt> objects.
- */
+/** I/O-related classes and utilities. This package is distinguished from
+  * the `grizzled.file` package in that this package operates on
+  * already-open Java `InputStream`, `OutputStream`, `Reader` and `Writer`
+  * objects, and on Scala `Source` objects.
+  */
 package grizzled.io
 
 import scala.io.Source
 
-/**
- * Some utility methods.
- */
-object util
-{
-    type Closeable = {def close(): Unit}
+/** Some utility methods.
+  */
+object util {
+  type Closeable = {def close(): Unit}
 
-    /**
-     * <p>Ensure that a closeable object is closed. Note that this function
-     * uses a Scala structural type, rather than a <tt>java.io.Closeable</tt>,
-     * because there are classes and interfaces (e.g.,
-     * <tt>java.sql.ResultSet</tt>) that have <tt>close()</tt> methods that do
-     * not extend or implement <tt>java.io.Closeable</tt>.</p>
-     *
-     * Sample use:
-     *
-     * <blockquote><pre>
-     * val in = new java.io.FileInputStream("/path/to/file")
-     * useThenClose(in)
-     * {
-     *     ...
-     * }
-     * </pre></blockquote>
-     *
-     * The closeable object is not passed into the block, because its type
-     * is useless to the block.
-     *
-     * @param closeable  the object that implements <tt>Closeable</tt>
-     * @param block      the code block to execute with the <tt>Closeable</tt>
-     *
-     * @return whatever the block returns
-     *
-     * @deprecated Use `withCloseable`
-     */
-    def useThenClose[T](closeable: Closeable)(block: => T) =
-    {
-        try
-        {
-            block
-        }
-
-        finally
-        {
-            closeable.close
-        }
+  /** Ensure that a closeable object is closed. Note that this function
+    * uses a Scala structural type, rather than a `java.io.Closeable`,
+    * because there are classes and interfaces (e.g.,
+    * `java.sql.ResultSet`) that have `close()` methods that do
+    * not extend or implement `java.io.Closeable`.
+    *
+    * Sample use:
+    *
+    * {{{
+    * val in = new java.io.FileInputStream("/path/to/file")
+    * useThenClose(in)
+    * {
+    *     ...
+    * }
+    * }}}
+    *
+    * The closeable object is not passed into the block, because its type
+    * is useless to the block.
+    *
+    * @param closeable  the object that implements `Closeable`
+    * @param block      the code block to execute with the `Closeable`
+    *
+    * @return whatever the block returns
+    *
+    * @deprecated Use `withCloseable`
+    */
+  def useThenClose[T](closeable: Closeable)(block: => T) = {
+    try {
+      block
     }
 
-    /**
-     * <p>Ensure that a closeable object is closed. Note that this function
-     * uses a Scala structural type, rather than a <tt>java.io.Closeable</tt>,
-     * because there are classes and interfaces (e.g.,
-     * <tt>java.sql.ResultSet</tt>) that have <tt>close()</tt> methods that do
-     * not extend or implement <tt>java.io.Closeable</tt>.</p>
-     *
-     * Sample use:
-     *
-     * <blockquote><pre>
-     * withCloseable(new java.io.FileInputStream("/path/to/file"))
-     * {
-     *     in => ...
-     * }
-     * </pre></blockquote>
-     *
-     * The closeable object is not passed into the block, because its type
-     * is useless to the block.
-     *
-     * @param closeable  the object that implements <tt>Closeable</tt>
-     * @param block      the code block to execute with the <tt>Closeable</tt>
-     *
-     * @return whatever the block returns
-     */
-    def withCloseable[C <% Closeable, T](closeable: C)(block: C => T) =
-    {
-        try
-        {
-            block(closeable)
-        }
-
-        finally
-        {
-            closeable.close
-        }
+    finally {
+      closeable.close
     }
+  }
+
+  /** Ensure that a closeable object is closed. Note that this function
+    * uses a Scala structural type, rather than a `java.io.Closeable`,
+    * because there are classes and interfaces (e.g., `java.sql.ResultSet`)
+    * that have `close()` methods that do not extend or implement
+    * `java.io.Closeable`.
+    *
+    * Sample use:
+    *
+    * {{{
+    * withCloseable(new java.io.FileInputStream("/path/to/file"))
+    * {
+    *     in => ...
+    * }
+    * }}}
+    *
+    * The closeable object is not passed into the block, because its type
+    * is useless to the block.
+    *
+    * @param closeable  the object that implements `Closeable`
+    * @param block      the code block to execute with the `Closeable`
+    *
+    * @return whatever the block returns
+    */
+  def withCloseable[C <% Closeable, T](closeable: C)(block: C => T) = {
+    try {
+      block(closeable)
+    }
+
+    finally {
+      closeable.close
+    }
+  }
 }
+                                     

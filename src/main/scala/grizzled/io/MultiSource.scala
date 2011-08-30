@@ -10,14 +10,14 @@
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright
+   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -35,44 +35,37 @@
   ---------------------------------------------------------------------------
 */
 
-/**
- * I/O-related classes and utilities. This package is distinguished from
- * the <tt>grizzled.file</tt> package in that this package operates on
- * already-open Java <tt>InputStream<tt>, <tt>OutputStream</tt>,
- * <tt>Reader</tt> and <tt>Writer</tt> objects, and on Scala
- * <tt>Source</tt> objects.
- */
+/** I/O-related classes and utilities. This package is distinguished from
+  * the `grizzled.file` package in that this package operates on
+  * already-open Java `InputStream`, `OutputStream`, `Reader` and `Writer`
+  * objects, and on Scala `Source` objects.
+  */
 package grizzled.io
 
 import scala.io.Source
 
-/**
- * A <tt>MultiSource</tt> contains multiple <tt>scala.io.Source</tt>
- * objects and satisfies reads from them serially. Once composed, a
- * <tt>MultiSource</tt> ahcan be used anywhere a <tt>Source</tt> is used.
- *
- * @param sources  the sources to wrap
- */
-class MultiSource(sources: List[Source]) extends Source
-{
-    import grizzled.collection.MultiIterator
+/** A `MultiSource` contains multiple `scala.io.Source`
+  * objects and satisfies reads from them serially. Once composed, a
+  * `MultiSource` ahcan be used anywhere a `Source` is used.
+  *
+  * @param sources  the sources to wrap
+  */
+class MultiSource(sources: List[Source]) extends Source {
+  import grizzled.collection.MultiIterator
 
-    private val sourceList = sources.toList
+  private val sourceList = sources.toList
 
-    /**
-     * Version of constructor that takes multiple arguments, instead of a list.
-     *
-     * @param sources  the sources to wrap
-     */
-    def this(sources: Source*) = this(sources.toList)
+  /** Version of constructor that takes multiple arguments, instead of a list.
+    *
+    * @param sources  the sources to wrap
+    */
+  def this(sources: Source*) = this(sources.toList)
 
-    /**
-     * The actual iterator.
-     */
-    protected val iter: Iterator[Char] = new MultiIterator[Char](sourceList: _*)
+  /** The actual iterator.
+    */
+  protected val iter: Iterator[Char] = new MultiIterator[Char](sourceList: _*)
 
-    /**
-     * Reset, returning a new source.
-     */
-    override def reset: Source = new MultiSource(sourceList)
+  /** Reset, returning a new source.
+    */
+  override def reset: Source = new MultiSource(sourceList)
 }
