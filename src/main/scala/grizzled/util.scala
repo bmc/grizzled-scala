@@ -62,7 +62,7 @@ object util {
     * withCloseable(closeableObject) { closeable =>
     *   doSomethingWith(closeable)
     * }
-    * </pre></blockquote>
+    * }}}
     *
     * @param thing   the closeable object
     * @param code    the block of code, which will take the closeable object
