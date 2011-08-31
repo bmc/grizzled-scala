@@ -5,38 +5,37 @@
           <title>grizzled.cmd.CommandInterpreter</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <link type="text/css" media="screen" rel="stylesheet" href="../../lib/template.css" />
       <script type="text/javascript" src="../../lib/jquery.js"></script>
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="type" onload="windowTitle();">
-
-      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.cmd">cmd</a></p>
-
+        <body class="type">
       <div id="definition">
         <img src="../../lib/class_big.png" />
+        <p id="owner"><a name="grizzled" class="extype" href="../package.html">grizzled</a>.<a name="grizzled.cmd" class="extype" href="package.html">cmd</a></p>
         <h1>CommandInterpreter</h1>
       </div>
 
       <h4 class="signature" id="signature">
       <span class="kind">class</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">CommandInterpreter</span>
-        
         
         <span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>Base class for command interpreters.</p><p><tt>CommandInterpreter</tt> is the base class of any command
+      
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Base class for command interpreters.</p><p><tt>CommandInterpreter</tt> is the base class of any command
 interpreter. This class and the <tt>CommandHandler</tt> trait
 provide a simple framework for writing line-oriented
 command-interpreters. This framework is conceptually similar to the
 Python <tt>cmd</tt> module and its <tt>Cmd</tt> class, though the
 implementation differs substantially in places.</p><p>For reading input from the console, <tt>CommandInterpreter</tt> will
-use of any of the readline libraries supported by the<tt>grizzled.readline</tt> package. All of those libraries support a
+use of any of the readline libraries supported by the
+<tt>grizzled.readline</tt> package. All of those libraries support a
 persistent command history, and most support command completion and
 command editing.</p><p>A command line consists of an initial command name, followed by a list
 of arguments to that command. The <tt>CommandInterpreter</tt> class's
@@ -45,17 +44,11 @@ arguments, via the <tt>splitCommandAndArgs()</tt> method. Parsing the
 arguments is left to the actual command implementation. The rules for how
 the command is split from the remainder of the input line are outlined
 in the documentation for the <tt>splitCommandAndArgs()</tt> method.
-</p></div><div class="block">
-          attributes: abstract 
-        </div><div class="block">
-            go to: <a href="CommandInterpreter$.html">companion</a>
-          </div><div class="block">
-            linear super types: AnyRef, <span class="extype" name="scala.Any">Any</span>
-          </div>
-            
-            
-            
-          </div>
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+        </div></div>
+        
 
       <div id="template">
 
@@ -63,1084 +56,623 @@ in the documentation for the <tt>splitCommandAndArgs()</tt> method.
           <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
           <div id="order">
                 <span class="filtertype">Ordering</span>
-                <ol><li class="alpha in">Alphabetic</li><li class="inherit out">By inheritance</li></ol>
+                <ol><li class="alpha in"><span>Alphabetic</span></li><li class="inherit out"><span>By inheritance</span></li></ol>
               </div>
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
-                <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="grizzled.cmd.CommandInterpreter">CommandInterpreter</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol><li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show all</span></li></ol>
+                <ol id="linearization"><li name="grizzled.cmd.CommandInterpreter" class="in"><span>CommandInterpreter</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
               </div>
           <div id="visbl">
               <span class="filtertype">Visibility</span>
-              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-            </div>
-          <div id="impl">
-              <span class="filtertype">Impl.</span>
-              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
             </div>
         </div>
 
         <div class="members" id="constructors">
-              <h3>Instance constructors</h3>
-              <ol><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#this">
+              <h3>Instance Constructors</h3>
+              <ol><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this" data-isabs="false">
       <a id="this:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="kind">new</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">CommandInterpreter</span>
         
         <span class="params">(<span name="appName">appName: String</span>)</span>
-        
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Alternate constructor that tries all known readline implementations,
-in this order:</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that tries all known readline implementations,
+      <p class="shortcomment cmt">Alternate constructor that tries all known readline implementations,
+in this order:</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that tries all known readline implementations,
 in this order:</p><ul><li> GNU Readline</li><li> Editline</li><li> Getline</li><li> JLine</li><li> Simple (pure Java)</li></ul></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#this">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this" data-isabs="false">
       <a id="this:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="kind">new</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">CommandInterpreter</span>
         
         <span class="params">(<span name="appName">appName: String</span>, <span name="readline">readline: ReadlineType</span>)</span>
-        
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Alternate constructor taking a single readline implementation.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Alternate constructor taking a single readline implementation. Fails
+      <p class="shortcomment cmt">Alternate constructor taking a single readline implementation.</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor taking a single readline implementation. Fails
 if that readline implementation cannot be found.
 </p></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name</p></dd><dt class="param">readline</dt><dd class="cmt"><p>readline implementation
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#this">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this" data-isabs="false">
       <a id="this:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="kind">new</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">CommandInterpreter</span>
         
-        <span class="params">(<span name="appName">appName: String</span>, <span name="readlineCandidates">readlineCandidates: List[ReadlineType]</span>, <span name="tokenDelimiters">tokenDelimiters: String =<span class="symbol"></span></span>)</span>
-        
+        <span class="params">(<span name="appName">appName: String</span>, <span name="readlineCandidates">readlineCandidates: List[ReadlineType]</span>, <span name="tokenDelimiters">tokenDelimiters: String</span>)</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"></p>
-            <div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>the application name, used by some readline
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>the application name, used by some readline
                            libraries for key-binding</p></dd><dt class="param">readlineCandidates</dt><dd class="cmt"><p>list of readline libraries to try to load, in
                            order. The <tt>ReadlineType</tt> values are
-                           defined by the <tt>grizzled.readline</tt>                           package.</p></dd><dt class="param">tokenDelimiters</dt><dd class="cmt"><p>delimiters to use when tokenizing a line for
+                           defined by the <tt>grizzled.readline</tt>
+                           package.</p></dd><dt class="param">tokenDelimiters</dt><dd class="cmt"><p>delimiters to use when tokenizing a line for
                            tab-completion.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
+</p></dd></dl></div>
     </li></ol>
             </div>
 
         
+        
+        <div class="values members" id="values">
+              <h3>Abstract Value Members</h3>
+              <ol><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handlers" data-isabs="true">
+      <a id="handlers:List[CommandHandler]"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">handlers</span>
+        
+        <span class="result">: List[<a name="grizzled.cmd.CommandHandler" class="extype" href="CommandHandler.html">CommandHandler</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">List of handlers.</p><div class="fullcomment"><div class="comment cmt"><p>List of handlers. The subclass must define this value to contain a
+list of its handlers. The <tt>allHandlers</tt> property will combine
+this list with the help handler to get the list of all handlers.
+If you define your own help handler, you'll have to override the
+<tt>helpHandler</tt> property to return your help handler, instead of
+the default one.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl></div>
+    </li></ol>
+            </div>
 
         <div class="values members" id="values">
-              <h3>Value Members</h3>
-              <ol><li visbl="pub" data-isabs="false" name="scala.AnyRef#!=">
+              <h3>Concrete Value Members</h3>
+              <ol><li visbl="pub" name="scala.AnyRef#!=" data-isabs="false">
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">!=</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#!=">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#!=" data-isabs="false">
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">!=</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef###">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef###" data-isabs="false">
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">##</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef → Any
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$asInstanceOf">
-      <a id="$asInstanceOf[T0]():T0"></a>
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">$asInstanceOf</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">()</span>
-        <span class="result">: T0</span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$isInstanceOf">
-      <a id="$isInstanceOf[T0]():Boolean"></a>
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">$isInstanceOf</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#==">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#==" data-isabs="false">
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">==</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#==">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#==" data-isabs="false">
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">==</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#DefaultReadlineLibraryList">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#DefaultReadlineLibraryList" data-isabs="false">
       <a id="DefaultReadlineLibraryList:List[Value]"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">DefaultReadlineLibraryList</span>
         
-        
-        <span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>]</span>
+        <span class="result">: <span name="scala.collection.immutable.List" class="extype">List</span>[<span name="scala.Enumeration.Value" class="extype">Value</span>]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Default list of readline libraries to try, in order.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Default list of readline libraries to try, in order.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#OutputWidth">
+      <p class="shortcomment cmt">Default list of readline libraries to try, in order.</p>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#OutputWidth" data-isabs="false">
       <a id="OutputWidth:Int"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">OutputWidth</span>
         
-        
-        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Assumed output width of the screen.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Assumed output width of the screen.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#StartCommandIdentifier">
+      <p class="shortcomment cmt">Assumed output width of the screen.</p>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#StartCommandIdentifier" data-isabs="false">
       <a id="StartCommandIdentifier:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">StartCommandIdentifier</span>
         
-        
-        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><tt>StartCommandIdentifier</tt> is the list of characters that are
+      <p class="shortcomment cmt"><tt>StartCommandIdentifier</tt> is the list of characters that are
 permitted as the first character of a white space-delimited,
-multicharacter command name.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><tt>StartCommandIdentifier</tt> is the list of characters that are
+multicharacter command name.</p><div class="fullcomment"><div class="comment cmt"><p><tt>StartCommandIdentifier</tt> is the list of characters that are
 permitted as the first character of a white space-delimited,
 multicharacter command name. All other characters are assumed to
 introduce single-character commands. Subclasses may override this value
 to permit additional, or different, starting characters for
-multicharacter command names. See the <tt>splitCommandAndArgs()</tt>method for more details.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#allHandlers">
+multicharacter command names. See the <tt>splitCommandAndArgs()</tt>
+method for more details.
+</p></div></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#allHandlers" data-isabs="false">
       <a id="allHandlers:List[CommandHandler]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">allHandlers</span>
         
-        
-        <span class="result">: List[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
+        <span class="result">: List[<a name="grizzled.cmd.CommandHandler" class="extype" href="CommandHandler.html">CommandHandler</a>]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Get all handlers.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get all handlers. By default, this property combines the<tt>handlers</tt> value with the default help handler,<tt>HelpHandler</tt>. If you define your own help handler, you'll
+      <p class="shortcomment cmt">Get all handlers.</p><div class="fullcomment"><div class="comment cmt"><p>Get all handlers. By default, this property combines the
+<tt>handlers</tt> value with the default help handler,
+<tt>HelpHandler</tt>. If you define your own help handler, you'll
 have to override the <tt>helpHandler</tt> property to return your
 help handler, instead of the default one.
-</p></div><div class="block">
-          attributes: final 
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#appName">
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#appName" data-isabs="false">
       <a id="appName:String"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">appName</span>
-        
         
         <span class="result">: String</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">the application name, used by some readline
+      <p class="shortcomment cmt">the application name, used by some readline
                            libraries for key-binding</p>
-            <div class="fullcomment"><div class="comment cmt"><p>the application name, used by some readline
-                           libraries for key-binding</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#asInstanceOf">
+    </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">asInstanceOf</span>
         <span class="tparams">[<span name="T0">T0</span>]</span>
-        
         <span class="result">: T0</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to cast the receiver object to be of type <code>T0</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to cast the receiver object to be of type <code>T0</code>.</p><p>Note that the success of a cast at runtime is modulo Scala's erasure semantics.  Therefore the expression<code>1.asInstanceOf[String]</code> will throw a <code>ClassCastException</code> at runtime, while the expression<code>List(1).asInstanceOf[List[String]]</code> will not.  In the latter example, because the type argument is erased as
-part of compilation it is not possible to check whether the contents of the list are of the requested typed.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#clone">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="prt" name="scala.AnyRef#clone" data-isabs="false">
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">clone</span>
         
-        <span class="params">()</span>
-        <span class="result">: AnyRef</span>
+        <span class="params">()</span><span class="result">: AnyRef</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object.</p><p>The default implementation of the <code>clone</code> method is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object.</p></dd></dl><div class="block">
-          attributes: protected 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#eq">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#eq" data-isabs="false">
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">eq</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to test whether the argument (<code>arg0</code>) is a reference to the
-receiver object (<code>this</code>).</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the argument (<code>arg0</code>) is a reference to the
-receiver object (<code>this</code>).</p><p>The <code>eq</code> method implements an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence relation] on
-non-null instances of <code>AnyRef</code>:
- * It is reflexive: for any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(x)</code> returns <code>true</code>.
- * It is symmetric: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, <code>x.eq(y)</code> returns <code>true</code> if and
-   only if <code>y.eq(x)</code> returns <code>true</code>.
- * It is transitive: for any non-null instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.eq(y)</code> returns <code>true</code>   and <code>y.eq(z)</code> returns <code>true</code>, then <code>x.eq(z)</code> returns <code>true</code>.</p><p>Additionally, the <code>eq</code> method has three other properties.
- * It is consistent: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, multiple invocations of
-   <code>x.eq(y)</code> consistently returns <code>true</code> or consistently returns <code>false</code>.
- * For any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(null)</code> and <code>null.eq(x)</code> returns <code>false</code>.
- * <code>null.eq(null)</code> returns <code>true</code>.</p><p>When overriding the <code>equals</code> or <code>hashCode</code> methods, it is important to ensure that their behavior is
-consistent with reference equality.  Therefore, if two objects are references to each other (<code>o1 eq o2</code>), they
-should be equal to each other (<code>o1 == o2</code>) and they should hash to the same value (<code>o1.hashCode == o2.hashCode</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#equals">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#equals" data-isabs="false">
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">equals</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p><p>The default implementations of this method is an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence
-relation]:
- * It is reflexive: for any instance <code>x</code> of type <code>Any</code>, <code>x.equals(x)</code> should return <code>true</code>.
- * It is symmetric: for any instances <code>x</code> and <code>y</code> of type <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and
-   only if <code>y.equals(x)</code> returns <code>true</code>.
- * It is transitive: for any instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.equals(y)</code> returns <code>true</code> and
-   <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p><p>If you override this method, you should verify that your implementation remains an equivalence relation.
-Additionally, when overriding this method it is often necessary to override <code>hashCode</code> to ensure that objects
-that are &quot;equal&quot; (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
-scala.Int
-(<code>o1.hashCode.equals(o2.hashCode)</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#error">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#error" data-isabs="false">
       <a id="error(String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">error</span>
         
-        <span class="params">(<span name="message">message: String</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="message">message: String</span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Emit an error message in a consistent way.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Emit an error message in a consistent way. May be overridden by
+      <p class="shortcomment cmt">Emit an error message in a consistent way.</p><div class="fullcomment"><div class="comment cmt"><p>Emit an error message in a consistent way. May be overridden by
 subclasses. The default implementation prints errors in red.
 </p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#finalize">
+</p></dd></dl></div>
+    </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">finalize</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object.</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
-          attributes: protected 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#getClass">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
       <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">getClass</span>
         
-        <span class="params">()</span>
-        <span class="result">: java.lang.Class[_]</span>
+        <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object.</p><p>The nature of the representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleCommand">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleCommand" data-isabs="false">
       <a id="handleCommand(Option[String]):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">handleCommand</span>
         
-        <span class="params">(<span name="commandLine">commandLine: <span class="extype" name="scala.Option">Option</span>[String]</span>)</span>
-        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="params">(<span name="commandLine">commandLine: <span name="scala.Option" class="extype">Option</span>[String]</span>)</span><span class="result">: <a name="grizzled.cmd.CommandAction" class="extype" href="CommandAction.html">CommandAction</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Handles a command line, just as if it had been typed directly at the
-prompt.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Handles a command line, just as if it had been typed directly at the
+      <p class="shortcomment cmt">Handles a command line, just as if it had been typed directly at the
+prompt.</p><div class="fullcomment"><div class="comment cmt"><p>Handles a command line, just as if it had been typed directly at the
 prompt.
 </p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line
 </p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
         or <tt>Stop</tt> to tell the main loop to be done.
-</p></dd></dl><div class="block">
-          attributes: final 
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleEOF">
+</p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleEOF" data-isabs="false">
       <a id="handleEOF:CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">handleEOF</span>
         
-        
-        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="result">: <a name="grizzled.cmd.CommandAction" class="extype" href="CommandAction.html">CommandAction</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called when an end-of-file condition is encountered while reading a
+      <p class="shortcomment cmt">Called when an end-of-file condition is encountered while reading a
 command (On Unix-like systems, with some readline libraries, this
-happens when the user pressed Ctrl-D).</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called when an end-of-file condition is encountered while reading a
+happens when the user pressed Ctrl-D).</p><div class="fullcomment"><div class="comment cmt"><p>Called when an end-of-file condition is encountered while reading a
 command (On Unix-like systems, with some readline libraries, this
 happens when the user pressed Ctrl-D). prompt. The default version
 of this method simply returns <tt>Stop</tt>, causing the command
 loop to exit.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
         or <tt>Stop</tt> to tell the main loop to be done.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleEmptyCommand">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleEmptyCommand" data-isabs="false">
       <a id="handleEmptyCommand:CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">handleEmptyCommand</span>
         
-        
-        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="result">: <a name="grizzled.cmd.CommandAction" class="extype" href="CommandAction.html">CommandAction</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called when an empty command line is entered in response to the
-prompt.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called when an empty command line is entered in response to the
-prompt. The default version of this method simply returns<tt>KeepGoing</tt>.
+      <p class="shortcomment cmt">Called when an empty command line is entered in response to the
+prompt.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an empty command line is entered in response to the
+prompt. The default version of this method simply returns
+<tt>KeepGoing</tt>.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
         or <tt>Stop</tt> to tell the main loop to be done.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleException">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleException" data-isabs="false">
       <a id="handleException(Exception):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">handleException</span>
         
-        <span class="params">(<span name="e">e: Exception</span>)</span>
-        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="params">(<span name="e">e: Exception</span>)</span><span class="result">: <a name="grizzled.cmd.CommandAction" class="extype" href="CommandAction.html">CommandAction</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called when an exception occurs during the main loop.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called when an exception occurs during the main loop. This method
-can handle the exception however it wants; it must return either<tt>KeepGoing</tt> or <tt>Stop</tt>. The default version
-of this method dumps the exception stack trace and returns<tt>Stop</tt>.
+      <p class="shortcomment cmt">Called when an exception occurs during the main loop.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an exception occurs during the main loop. This method
+can handle the exception however it wants; it must return either
+<tt>KeepGoing</tt> or <tt>Stop</tt>. The default version
+of this method dumps the exception stack trace and returns
+<tt>Stop</tt>.
 </p></div><dl class="paramcmts block"><dt class="param">e</dt><dd class="cmt"><p>the exception
 </p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
         or <tt>Stop</tt> to tell the main loop to be done.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#handleUnknownCommand">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleUnknownCommand" data-isabs="false">
       <a id="handleUnknownCommand(String,String):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">handleUnknownCommand</span>
         
-        <span class="params">(<span name="commandName">commandName: String</span>, <span name="unparsedArgs">unparsedArgs: String</span>)</span>
-        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="params">(<span name="commandName">commandName: String</span>, <span name="unparsedArgs">unparsedArgs: String</span>)</span><span class="result">: <a name="grizzled.cmd.CommandAction" class="extype" href="CommandAction.html">CommandAction</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called when a command is entered that isn't recognized.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called when a command is entered that isn't recognized. The default
-version of this method prints an error message and returns<tt>KeepGoing</tt>.
+      <p class="shortcomment cmt">Called when a command is entered that isn't recognized.</p><div class="fullcomment"><div class="comment cmt"><p>Called when a command is entered that isn't recognized. The default
+version of this method prints an error message and returns
+<tt>KeepGoing</tt>.
 </p></div><dl class="paramcmts block"><dt class="param">commandName</dt><dd class="cmt"><p>the command name</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the command arguments
 </p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
         or <tt>Stop</tt> to tell the main loop to be done.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="true" name="grizzled.cmd.CommandInterpreter#handlers">
-      <a id="handlers:List[CommandHandler]"></a>
-      <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol">
-        <span class="name">handlers</span>
-        
-        
-        <span class="result">: List[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
-      </span>
-      </h4>
-      
-            <p class="shortcomment cmt">List of handlers.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>List of handlers. The subclass must define this value to contain a
-list of its handlers. The <tt>allHandlers</tt> property will combine
-this list with the help handler to get the list of all handlers.
-If you define your own help handler, you'll have to override the<tt>helpHandler</tt> property to return your help handler, instead of
-the default one.
-</p></div><div class="block">
-          attributes: abstract 
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#hashCode">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">hashCode</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Returns a hash code value for the object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object.</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
-not be equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A degenerate implementation could always return <code>0</code>.
-However, it is required that if two objects are equal (<code>o1.equals(o2)</code> returns <code>true</code>) that they have
-identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
-to verify that the behavior is consistent with the <code>equals</code> method.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#helpHandler">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#helpHandler" data-isabs="false">
       <a id="helpHandler:HelpHandler"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">helpHandler</span>
         
-        
-        <span class="result">: <span class="extype" name="grizzled.cmd.CommandInterpreter.HelpHandler">HelpHandler</span></span>
+        <span class="result">: <span name="grizzled.cmd.CommandInterpreter.HelpHandler" class="extype">HelpHandler</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Get the help handler.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the help handler. Override this property if you want to supply
+      <p class="shortcomment cmt">Get the help handler.</p><div class="fullcomment"><div class="comment cmt"><p>Get the help handler. Override this property if you want to supply
 your own help handler.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#history">
+</p></div></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#history" data-isabs="false">
       <a id="history:History"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">history</span>
         
-        
-        <span class="result">: <a href="../readline/History.html" class="extype" name="grizzled.readline.History">History</a></span>
+        <span class="result">: <a name="grizzled.readline.History" class="extype" href="../readline/History.html">History</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Get the history object being used to record command history.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the history object being used to record command history.
+      <p class="shortcomment cmt">Get the history object being used to record command history.</p><div class="fullcomment"><div class="comment cmt"><p>Get the history object being used to record command history.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <tt>grizzled.readline.History</tt> object
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#isInstanceOf">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">isInstanceOf</span>
         <span class="tparams">[<span name="T0">T0</span>]</span>
-        
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p><p>Note that the test result of the test is modulo Scala's erasure semantics.  Therefore the expression<code>1.isInstanceOf[String]</code> will return <code>false</code>, while the expression <code>List(1).isInstanceOf[List[String]]</code> will
-return <code>true</code>.  In the latter example, because the type argument is erased as part of compilation it is not
-possible to check whether the contents of the list are of the requested typed.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is an instance of erasure of type <code>T0</code>; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#mainLoop">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#mainLoop" data-isabs="false">
       <a id="mainLoop:Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">mainLoop</span>
         
-        
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Repeatedly issue a prompt, accept input, parse an initial prefix from
-the received input, and dispatch to execution handlers.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Repeatedly issue a prompt, accept input, parse an initial prefix from
+      <p class="shortcomment cmt">Repeatedly issue a prompt, accept input, parse an initial prefix from
+the received input, and dispatch to execution handlers.</p><div class="fullcomment"><div class="comment cmt"><p>Repeatedly issue a prompt, accept input, parse an initial prefix from
 the received input, and dispatch to execution handlers.
-</p></div><div class="block">
-          attributes: final 
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#ne">
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">ne</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notify">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">notify</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor.</p></div><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notifyAll">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notifyAll" data-isabs="false">
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">notifyAll</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor.</p></div><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#postCommand">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#postCommand" data-isabs="false">
       <a id="postCommand(String,String):CommandAction"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">postCommand</span>
         
-        <span class="params">(<span name="command">command: String</span>, <span name="unparsedArgs">unparsedArgs: String</span>)</span>
-        <span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
+        <span class="params">(<span name="command">command: String</span>, <span name="unparsedArgs">unparsedArgs: String</span>)</span><span class="result">: <a name="grizzled.cmd.CommandAction" class="extype" href="CommandAction.html">CommandAction</a></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called after a command line is interpreted.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called after a command line is interpreted. The default implementation
+      <p class="shortcomment cmt">Called after a command line is interpreted.</p><div class="fullcomment"><div class="comment cmt"><p>Called after a command line is interpreted. The default implementation
 simply returns <tt>KeepGoing</tt>.
 </p></div><dl class="paramcmts block"><dt class="param">command</dt><dd class="cmt"><p>the command that invoked this handler</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line
 </p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
         or <tt>Stop</tt> to tell the main loop to be done.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#postLoop">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#postLoop" data-isabs="false">
       <a id="postLoop:Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">postLoop</span>
         
-        
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called immediately after the main loop (<tt>mainLoop()</tt>) ends
-its command loop, this hook method can be used for cleanup.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called immediately after the main loop (<tt>mainLoop()</tt>) ends
+      <p class="shortcomment cmt">Called immediately after the main loop (<tt>mainLoop()</tt>) ends
+its command loop, this hook method can be used for cleanup.</p><div class="fullcomment"><div class="comment cmt"><p>Called immediately after the main loop (<tt>mainLoop()</tt>) ends
 its command loop, this hook method can be used for cleanup. The
 default implementation does nothing.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#preCommand">
+</p></div></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#preCommand" data-isabs="false">
       <a id="preCommand(String):Option[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">preCommand</span>
         
-        <span class="params">(<span name="commandLine">commandLine: String</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Option">Option</span>[String]</span>
+        <span class="params">(<span name="commandLine">commandLine: String</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[String]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called just before a command line is interpreted, this hook method can
-edit the command.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called just before a command line is interpreted, this hook method can
+      <p class="shortcomment cmt">Called just before a command line is interpreted, this hook method can
+edit the command.</p><div class="fullcomment"><div class="comment cmt"><p>Called just before a command line is interpreted, this hook method can
 edit the command.
 </p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line
 </p></dd><dt>returns</dt><dd class="cmt"><p>The possibly edited command, Some(&quot;&quot;) to signal an empty
         command, or None to signal EOF.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#preLoop">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#preLoop" data-isabs="false">
       <a id="preLoop:Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">preLoop</span>
         
-        
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Called just before the main loop (<tt>mainLoop()</tt>) begins its
-command loop, this hook method can be used for initialization.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Called just before the main loop (<tt>mainLoop()</tt>) begins its
+      <p class="shortcomment cmt">Called just before the main loop (<tt>mainLoop()</tt>) begins its
+command loop, this hook method can be used for initialization.</p><div class="fullcomment"><div class="comment cmt"><p>Called just before the main loop (<tt>mainLoop()</tt>) begins its
 command loop, this hook method can be used for initialization. The
 default implementation does nothing.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#primaryPrompt">
+</p></div></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#primaryPrompt" data-isabs="false">
       <a id="primaryPrompt:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">primaryPrompt</span>
         
-        
-        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">The primary prompt string.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>The primary prompt string.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#pushReader">
+      <p class="shortcomment cmt">The primary prompt string.</p>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#pushReader" data-isabs="false">
       <a id="pushReader((String) ⇒ Option[String]):Stack[(String) ⇒ Option[String]]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">pushReader</span>
         
-        <span class="params">(<span name="reader">reader: (String) ⇒ <span class="extype" name="scala.Option">Option</span>[String]</span>)</span>
-        <span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[(String) ⇒ <span class="extype" name="scala.Option">Option</span>[String]]</span>
+        <span class="params">(<span name="reader">reader: (String) ⇒ <span name="scala.Option" class="extype">Option</span>[String]</span>)</span><span class="result">: <span name="scala.collection.mutable.Stack" class="extype">Stack</span>[(String) ⇒ <span name="scala.Option" class="extype">Option</span>[String]]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Push a reader on the reader stack.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Push a reader on the reader stack. The reader on top of the stack
+      <p class="shortcomment cmt">Push a reader on the reader stack.</p><div class="fullcomment"><div class="comment cmt"><p>Push a reader on the reader stack. The reader on top of the stack
 is used until it returns <tt>None</tt> (indicating EOF). Then, it is
 removed from the stack, and the next reader is used. When the only
 reader remaining on the stack returns <tt>None</tt>, the command
-interpreter signals an EOF condition to the subclass (by calling<tt>handleEOF()</tt>).</p><p>The reader is a simple function that takes a prompt string (which
+interpreter signals an EOF condition to the subclass (by calling
+<tt>handleEOF()</tt>).</p><p>The reader is a simple function that takes a prompt string (which
 it can choose to ignore) and returns a line of input
 (<tt>Some(input)</tt>) or <tt>None</tt> for EOF. The line of input,
 if returned, should not have a trailing newline.
 </p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the reader function
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#readline">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#readline" data-isabs="false">
       <a id="readline:Readline"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">readline</span>
         
-        
-        <span class="result">: <a href="../readline/Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
+        <span class="result">: <a name="grizzled.readline.Readline" class="extype" href="../readline/Readline.html">Readline</a></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#secondaryPrompt">
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#secondaryPrompt" data-isabs="false">
       <a id="secondaryPrompt:String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">secondaryPrompt</span>
         
-        
-        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">The second prompt string, used when additional input is being
+      <p class="shortcomment cmt">The second prompt string, used when additional input is being
 retrieved.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>The second prompt string, used when additional input is being
-retrieved.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#splitCommandAndArgs">
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#splitCommandAndArgs" data-isabs="false">
       <a id="splitCommandAndArgs(String):(String, String)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">splitCommandAndArgs</span>
         
-        <span class="params">(<span name="line">line: String</span>)</span>
-        <span class="result">: (String, String)</span>
+        <span class="params">(<span name="line">line: String</span>)</span><span class="result">: (String, String)</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Split a command from its argument list, returning the command as
+      <p class="shortcomment cmt">Split a command from its argument list, returning the command as
 one string and the remaining unparsed argument string as the other
-string.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Split a command from its argument list, returning the command as
+string.</p><div class="fullcomment"><div class="comment cmt"><p>Split a command from its argument list, returning the command as
 one string and the remaining unparsed argument string as the other
 string. The commmand name is parsed from the remaining arguments
 using the following rules:</p><ul><li> If the first non-white character if the input line is in the
@@ -1154,165 +686,119 @@ defined by this class, consisting of the characters permitted to start
 a multicharacter command. By default, it consists of alphanumerics.
 Subclasses may override it to permit additional, or different, starting
 characters for multicharacter commands.</p><p>For example, using the default identifier characters, this function
-will break the following commands into command + arguments as shown:</p><p><table border="0" cellpadding="2">  <tr valign="top">    <td><tt>foo bar baz</tt></td>    <td>Command <tt>foo</tt>, argument string <tt>&quot;bar baz&quot;</tt></td>  </tr></p><p>  <tr valign="top">    <td><tt>!bar</tt></td>    <td>Command <tt>!</tt> argument string <tt>&quot;bar baz&quot;</tt></td>  </tr></p><p>  <tr valign="top">    <td><tt>? one two</tt></td>    <td>Command <tt>?</tt> argument string <tt>&quot;one two&quot;</tt></td>  </tr></table></p><p>Subclasses may override this method to parse commands differently.
+will break the following commands into command + arguments as shown:</p><p><table border="0" cellpadding="2">
+  <tr valign="top">
+    <td><tt>foo bar baz</tt></td>
+    <td>Command <tt>foo</tt>, argument string <tt>"bar baz"</tt></td>
+  </tr></p><p>  <tr valign="top">
+    <td><tt>!bar</tt></td>
+    <td>Command <tt>!</tt> argument string <tt>"bar baz"</tt></td>
+  </tr></p><p>  <tr valign="top">
+    <td><tt>? one two</tt></td>
+    <td>Command <tt>?</tt> argument string <tt>"one two"</tt></td>
+  </tr>
+</table></p><p>Subclasses may override this method to parse commands differently.
 </p></div><dl class="paramcmts block"><dt class="param">line</dt><dd class="cmt"><p>the input type
 </p></dd><dt>returns</dt><dd class="cmt"><p>A (<i>commandName</i>, <i>argumentString</i>) 2-tuple
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#synchronized">
-      <a id="synchronized[T0](T0):T0"></a>
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
+      <a id="synchronized[T0](⇒ T0):T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">synchronized</span>
         <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">(<span name="arg0">arg0: T0</span>)</span>
-        <span class="result">: T0</span>
+        <span class="params">(<span name="arg0">arg0: ⇒ T0</span>)</span><span class="result">: T0</span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#toString">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#toString" data-isabs="false">
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">toString</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="params">()</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Returns a string representation of the object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object.</p><p>The default representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#tokenDelimiters">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#tokenDelimiters" data-isabs="false">
       <a id="tokenDelimiters:String"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">tokenDelimiters</span>
-        
         
         <span class="result">: String</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">delimiters to use when tokenizing a line for
+      <p class="shortcomment cmt">delimiters to use when tokenizing a line for
                            tab-completion.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>delimiters to use when tokenizing a line for
-                           tab-completion.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">wait</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">wait</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>, <span name="arg1">arg1: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">wait</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.cmd.CommandInterpreter#warning">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#warning" data-isabs="false">
       <a id="warning(String):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">warning</span>
         
-        <span class="params">(<span name="message">message: String</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="message">message: String</span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Emit a warning message in a consistent way.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Emit a warning message in a consistent way. May be overridden by
+      <p class="shortcomment cmt">Emit a warning message in a consistent way.</p><div class="fullcomment"><div class="comment cmt"><p>Emit a warning message in a consistent way. May be overridden by
 subclasses. The default implementation prints the message with the
 prefix &quot;Warning: &quot;.
 </p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
+</p></dd></dl></div>
     </li></ol>
             </div>
 
-        <div class="parent" name="scala.AnyRef">
+        <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>
-            </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div><div name="scala.Any" class="parent">
+              <h3>Inherited from <span name="scala.Any" class="extype">Any</span></h3>
             </div>
 
       </div>

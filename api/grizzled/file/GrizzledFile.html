@@ -5,49 +5,41 @@
           <title>grizzled.file.GrizzledFile</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <link type="text/css" media="screen" rel="stylesheet" href="../../lib/template.css" />
       <script type="text/javascript" src="../../lib/jquery.js"></script>
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="type" onload="windowTitle();">
-
-      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.file">file</a></p>
-
+        <body class="type">
       <div id="definition">
-        <img src="../../lib/class_big.png" />
-        <h1>GrizzledFile</h1>
+        <a title="Go to companion" href="GrizzledFile$.html"><img src="../../lib/class_to_object_big.png" /></a>
+        <p id="owner"><a name="grizzled" class="extype" href="../package.html">grizzled</a>.<a name="grizzled.file" class="extype" href="package.html">file</a></p>
+        <h1><a title="Go to companion" href="GrizzledFile$.html">GrizzledFile</a></h1>
       </div>
 
       <h4 class="signature" id="signature">
       <span class="kind">class</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">GrizzledFile</span>
-        
         
         <span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment" id="comment"><div class="comment cmt"><p>A wrapper for <code>java.io.File</code> that provides additional methods.
+      
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>A wrapper for <code>java.io.File</code> that provides additional methods.
 By importing the implicit conversion functions, you can use the methods
 in this class transparently from a <code>java.io.File</code> object.</p><pre>
 import grizzled.file.GrizzledFile._
 
 val file = new File(&quot;/tmp/foo/bar&quot;)
 println(file.split) // prints: List(/tmp, foo, bar)
-</pre></div><div class="block">
-          attributes: final 
-        </div><div class="block">
-            go to: <a href="GrizzledFile$.html">companion</a>
-          </div><div class="block">
-            linear super types: AnyRef, <span class="extype" name="scala.Any">Any</span>
-          </div>
-            
-            
-            
-          </div>
+</pre></div><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+        </div></div>
+        
 
       <div id="template">
 
@@ -55,34 +47,30 @@ println(file.split) // prints: List(/tmp, foo, bar)
           <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
           <div id="order">
                 <span class="filtertype">Ordering</span>
-                <ol><li class="alpha in">Alphabetic</li><li class="inherit out">By inheritance</li></ol>
+                <ol><li class="alpha in"><span>Alphabetic</span></li><li class="inherit out"><span>By inheritance</span></li></ol>
               </div>
           <div id="ancestors">
                 <span class="filtertype">Inherited</span>
-                <ol><li class="hideall">Hide All</li><li class="showall">Show all</li></ol>
-                <ol id="linearization"><li class="in" name="grizzled.file.GrizzledFile">GrizzledFile</li><li class="in" name="scala.AnyRef">AnyRef</li><li class="in" name="scala.Any">Any</li></ol>
+                <ol><li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show all</span></li></ol>
+                <ol id="linearization"><li name="grizzled.file.GrizzledFile" class="in"><span>GrizzledFile</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
               </div>
           <div id="visbl">
               <span class="filtertype">Visibility</span>
-              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-            </div>
-          <div id="impl">
-              <span class="filtertype">Impl.</span>
-              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
             </div>
         </div>
 
         <div class="members" id="constructors">
-              <h3>Instance constructors</h3>
-              <ol><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#this">
+              <h3>Instance Constructors</h3>
+              <ol><li visbl="pub" name="grizzled.file.GrizzledFile#this" data-isabs="false">
       <a id="this:GrizzledFile"></a>
       <h4 class="signature">
       <span class="kind">new</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">GrizzledFile</span>
         
-        <span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span>
-        
+        <span class="params">(<span name="file">file: <span name="java.io.File" class="extype">File</span></span>)</span>
       </span>
       </h4>
       
@@ -90,576 +78,293 @@ println(file.split) // prints: List(/tmp, foo, bar)
             </div>
 
         
+        
+        
 
         <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" data-isabs="false" name="scala.AnyRef#!=">
+              <ol><li visbl="pub" name="scala.AnyRef#!=" data-isabs="false">
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">!=</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#!=">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#!=" data-isabs="false">
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">!=</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o != arg0</code> is the same as <code>!(o == (arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the receiver object is equivalent to the argument; <code>true</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef###">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef###" data-isabs="false">
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">##</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef → Any
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$asInstanceOf">
-      <a id="$asInstanceOf[T0]():T0"></a>
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">$asInstanceOf</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">()</span>
-        <span class="result">: T0</span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#$isInstanceOf">
-      <a id="$isInstanceOf[T0]():Boolean"></a>
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">$isInstanceOf</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#==">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#==" data-isabs="false">
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">==</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>if (o eq null) arg0 eq null else o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#==">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#==" data-isabs="false">
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">==</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o == arg0</code> is the same as <code>o.equals(arg0)</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#asInstanceOf">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">asInstanceOf</span>
         <span class="tparams">[<span name="T0">T0</span>]</span>
-        
         <span class="result">: T0</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to cast the receiver object to be of type <code>T0</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to cast the receiver object to be of type <code>T0</code>.</p><p>Note that the success of a cast at runtime is modulo Scala's erasure semantics.  Therefore the expression<code>1.asInstanceOf[String]</code> will throw a <code>ClassCastException</code> at runtime, while the expression<code>List(1).asInstanceOf[List[String]]</code> will not.  In the latter example, because the type argument is erased as
-part of compilation it is not possible to check whether the contents of the list are of the requested typed.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the receiver object.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#basename">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#basename" data-isabs="false">
       <a id="basename:File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">basename</span>
         
-        
-        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="result">: <span name="java.io.File" class="extype">File</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Get the basename (file name only) part of a path.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the basename (file name only) part of a path.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the file name portion, as a <code>File</code></p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#clone">
+      <p class="shortcomment cmt">Get the basename (file name only) part of a path.</p><div class="fullcomment"><div class="comment cmt"><p>Get the basename (file name only) part of a path.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the file name portion, as a <code>File</code>
+</p></dd></dl></div>
+    </li><li visbl="prt" name="scala.AnyRef#clone" data-isabs="false">
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">clone</span>
         
-        <span class="params">()</span>
-        <span class="result">: AnyRef</span>
+        <span class="params">()</span><span class="result">: AnyRef</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method creates and returns a copy of the receiver object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method creates and returns a copy of the receiver object.</p><p>The default implementation of the <code>clone</code> method is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a copy of the receiver object.</p></dd></dl><div class="block">
-          attributes: protected 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#copyTo">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#copyTo" data-isabs="false">
       <a id="copyTo(File):File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">copyTo</span>
         
-        <span class="params">(<span name="target">target: <span class="extype" name="java.io.File">File</span></span>)</span>
-        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="params">(<span name="target">target: <span name="java.io.File" class="extype">File</span></span>)</span><span class="result">: <span name="java.io.File" class="extype">File</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Copy the file to a target directory or file.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Copy the file to a target directory or file.
+      <p class="shortcomment cmt">Copy the file to a target directory or file.</p><div class="fullcomment"><div class="comment cmt"><p>Copy the file to a target directory or file.
 </p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the target file
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#copyTo">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#copyTo" data-isabs="false">
       <a id="copyTo(String):File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">copyTo</span>
         
-        <span class="params">(<span name="target">target: String</span>)</span>
-        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="params">(<span name="target">target: String</span>)</span><span class="result">: <span name="java.io.File" class="extype">File</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Copy the file to a target directory or file.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Copy the file to a target directory or file.
+      <p class="shortcomment cmt">Copy the file to a target directory or file.</p><div class="fullcomment"><div class="comment cmt"><p>Copy the file to a target directory or file.
 </p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the target file
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#deleteRecursively">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#deleteRecursively" data-isabs="false">
       <a id="deleteRecursively():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">deleteRecursively</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Recursively remove the directory specified by this object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Recursively remove the directory specified by this object. This
+      <p class="shortcomment cmt">Recursively remove the directory specified by this object.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively remove the directory specified by this object. This
 method is conceptually equivalent to <code>rm -r</code> on a Unix system.
-</p></div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#dirname">
+</p></div></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#dirname" data-isabs="false">
       <a id="dirname:File"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">dirname</span>
         
-        
-        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="result">: <span name="java.io.File" class="extype">File</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Get the directory name of the file.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the directory name of the file.
+      <p class="shortcomment cmt">Get the directory name of the file.</p><div class="fullcomment"><div class="comment cmt"><p>Get the directory name of the file.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the directory portion, as a <code>File</code>.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#dirnameBasename">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#dirnameBasename" data-isabs="false">
       <a id="dirnameBasename:(File, File)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">dirnameBasename</span>
         
-        
-        <span class="result">: (<span class="extype" name="java.io.File">File</span>, <span class="extype" name="java.io.File">File</span>)</span>
+        <span class="result">: (<span name="java.io.File" class="extype">File</span>, <span name="java.io.File" class="extype">File</span>)</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Split the file's path into directory (dirname) and file (basename)
-components.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Split the file's path into directory (dirname) and file (basename)
+      <p class="shortcomment cmt">Split the file's path into directory (dirname) and file (basename)
+components.</p><div class="fullcomment"><div class="comment cmt"><p>Split the file's path into directory (dirname) and file (basename)
 components. Analogous to Python's <code>os.path.pathsplit()</code> function.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a (dirname, basename) tuple of <code>File</code> objects.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#dirnameBasenameExtension">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#dirnameBasenameExtension" data-isabs="false">
       <a id="dirnameBasenameExtension:(File, String, String)"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">dirnameBasenameExtension</span>
         
-        
-        <span class="result">: (<span class="extype" name="java.io.File">File</span>, String, String)</span>
+        <span class="result">: (<span name="java.io.File" class="extype">File</span>, String, String)</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Split this file's pathname into the directory name, basename, and
-extension pieces.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Split this file's pathname into the directory name, basename, and
+      <p class="shortcomment cmt">Split this file's pathname into the directory name, basename, and
+extension pieces.</p><div class="fullcomment"><div class="comment cmt"><p>Split this file's pathname into the directory name, basename, and
 extension pieces.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a 3-tuple of (dirname, basename, extension)
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#eq">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#eq" data-isabs="false">
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">eq</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to test whether the argument (<code>arg0</code>) is a reference to the
-receiver object (<code>this</code>).</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the argument (<code>arg0</code>) is a reference to the
-receiver object (<code>this</code>).</p><p>The <code>eq</code> method implements an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence relation] on
-non-null instances of <code>AnyRef</code>:
- * It is reflexive: for any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(x)</code> returns <code>true</code>.
- * It is symmetric: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, <code>x.eq(y)</code> returns <code>true</code> if and
-   only if <code>y.eq(x)</code> returns <code>true</code>.
- * It is transitive: for any non-null instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.eq(y)</code> returns <code>true</code>   and <code>y.eq(z)</code> returns <code>true</code>, then <code>x.eq(z)</code> returns <code>true</code>.</p><p>Additionally, the <code>eq</code> method has three other properties.
- * It is consistent: for any non-null instances <code>x</code> and <code>y</code> of type <code>AnyRef</code>, multiple invocations of
-   <code>x.eq(y)</code> consistently returns <code>true</code> or consistently returns <code>false</code>.
- * For any non-null instance <code>x</code> of type <code>AnyRef</code>, <code>x.eq(null)</code> and <code>null.eq(x)</code> returns <code>false</code>.
- * <code>null.eq(null)</code> returns <code>true</code>.</p><p>When overriding the <code>equals</code> or <code>hashCode</code> methods, it is important to ensure that their behavior is
-consistent with reference equality.  Therefore, if two objects are references to each other (<code>o1 eq o2</code>), they
-should be equal to each other (<code>o1 == o2</code>) and they should hash to the same value (<code>o1.hashCode == o2.hashCode</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the argument is a reference to the receiver object; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#equals">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#equals" data-isabs="false">
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">equals</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to compare the receiver object (<code>this</code>) with the argument object (<code>arg0</code>) for equivalence.</p><p>The default implementations of this method is an [http://en.wikipedia.org/wiki/Equivalence_relation equivalence
-relation]:
- * It is reflexive: for any instance <code>x</code> of type <code>Any</code>, <code>x.equals(x)</code> should return <code>true</code>.
- * It is symmetric: for any instances <code>x</code> and <code>y</code> of type <code>Any</code>, <code>x.equals(y)</code> should return <code>true</code> if and
-   only if <code>y.equals(x)</code> returns <code>true</code>.
- * It is transitive: for any instances <code>x</code>, <code>y</code>, and <code>z</code> of type <code>AnyRef</code> if <code>x.equals(y)</code> returns <code>true</code> and
-   <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p><p>If you override this method, you should verify that your implementation remains an equivalence relation.
-Additionally, when overriding this method it is often necessary to override <code>hashCode</code> to ensure that objects
-that are &quot;equal&quot; (<code>o1.equals(o2)</code> returns <code>true</code>) hash to the same 
-scala.Int
-(<code>o1.hashCode.equals(o2.hashCode)</code>).
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is equivalent to the argument; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#file">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#file" data-isabs="false">
       <a id="file:File"></a>
       <h4 class="signature">
       <span class="kind">val</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">file</span>
         
-        
-        <span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="result">: <span name="java.io.File" class="extype">File</span></span>
       </span>
       </h4>
       
-    </li><li visbl="prt" data-isabs="false" name="scala.AnyRef#finalize">
+    </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">finalize</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is called by the garbage collector on the receiver object when garbage collection determines that
-there are no more references to the object.</p><p>The details of when and if the <code>finalize</code> method are invoked, as well as the interaction between <code>finalize</code>and non-local returns and exceptions, are all platform dependent.</p></div><div class="block">
-          attributes: protected 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#getClass">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
       <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">getClass</span>
         
-        <span class="params">()</span>
-        <span class="result">: java.lang.Class[_]</span>
+        <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Returns a representation that corresponds to the dynamic class of the receiver object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a representation that corresponds to the dynamic class of the receiver object.</p><p>The nature of the representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a representation that corresponds to the dynamic class of the receiver object.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#hashCode">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">hashCode</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Returns a hash code value for the object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a hash code value for the object.</p><p>The default hashing algorithm is platform dependent.</p><p>Note that it is allowed for two objects to have identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>) yet
-not be equal (<code>o1.equals(o2)</code> returns <code>false</code>).  A degenerate implementation could always return <code>0</code>.
-However, it is required that if two objects are equal (<code>o1.equals(o2)</code> returns <code>true</code>) that they have
-identical hash codes (<code>o1.hashCode.equals(o2.hashCode)</code>).  Therefore, when overriding this method, be sure
-to verify that the behavior is consistent with the <code>equals</code> method.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the hash code value for the object.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#isEmpty">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#isEmpty" data-isabs="false">
       <a id="isEmpty:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">isEmpty</span>
         
-        
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Determine whether a directory is empty.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Determine whether a directory is empty. Only meaningful for a directory.
+      <p class="shortcomment cmt">Determine whether a directory is empty.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether a directory is empty. Only meaningful for a directory.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>true if the directory is empty, false if not
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.Any#isInstanceOf">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">isInstanceOf</span>
         <span class="tparams">[<span name="T0">T0</span>]</span>
-        
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>This method is used to test whether the dynamic type of the receiver object is <code>T0</code>.</p><p>Note that the test result of the test is modulo Scala's erasure semantics.  Therefore the expression<code>1.isInstanceOf[String]</code> will return <code>false</code>, while the expression <code>List(1).isInstanceOf[List[String]]</code> will
-return <code>true</code>.  In the latter example, because the type argument is erased as part of compilation it is not
-possible to check whether the contents of the list are of the requested typed.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if the receiver object is an instance of erasure of type <code>T0</code>; <code>false</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#listRecursively">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#listRecursively" data-isabs="false">
       <a id="listRecursively(Boolean):Iterator[File]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">listRecursively</span>
         
-        <span class="params">(<span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> =<span class="symbol">true</span></span>)</span>
-        <span class="result">: Iterator[<span class="extype" name="java.io.File">File</span>]</span>
+        <span class="params">(<span name="topdown">topdown: <span name="scala.Boolean" class="extype">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: Iterator[<span name="java.io.File" class="extype">File</span>]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">List a directory recursively, returning <code>File</code> objects for each file
-(and subdirectory) found.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>List a directory recursively, returning <code>File</code> objects for each file
+      <p class="shortcomment cmt">List a directory recursively, returning <code>File</code> objects for each file
+(and subdirectory) found.</p><div class="fullcomment"><div class="comment cmt"><p>List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found. This method does lazy evaluation, instead
 of calculating everything up-front, as <code>walk()</code> does.</p><p>If <code>topdown</code> is <code>true</code>, a directory is generated before the entries
 for any of its subdirectories (directories are generated top down).
@@ -669,263 +374,205 @@ bottom up).
 </p></div><dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code> otherwise.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a generator (iterator) of <code>File</code> objects for everything under
         the directory.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#ne">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">ne</span>
         
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span>
-        <span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt"><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.</p>
-            <div class="fullcomment"><div class="comment cmt"><p><code>o.ne(arg0)</code> is the same as <code>!(o.eq(arg0))</code>.
-</p></div><dl class="paramcmts block"><dt class="param">arg0</dt><dd class="cmt"><p>the object to compare against this object for reference dis-equality.</p></dd><dt>returns</dt><dd class="cmt"><p><code>false</code> if the argument is not a reference to the receiver object; <code>true</code> otherwise.</p></dd></dl><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notify">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">notify</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Wakes up a single thread that is waiting on the receiver object's monitor.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up a single thread that is waiting on the receiver object's monitor.</p></div><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#notifyAll">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notifyAll" data-isabs="false">
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">notifyAll</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Wakes up all threads that are waiting on the receiver object's monitor.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Wakes up all threads that are waiting on the receiver object's monitor.</p></div><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#relativePath">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#relativePath" data-isabs="false">
       <a id="relativePath(File):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">relativePath</span>
         
-        <span class="params">(<span name="relativeTo">relativeTo: <span class="extype" name="java.io.File">File</span></span>)</span>
-        <span class="result">: String</span>
+        <span class="params">(<span name="relativeTo">relativeTo: <span name="java.io.File" class="extype">File</span></span>)</span><span class="result">: String</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Get the path of this file, relative to some other file.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Get the path of this file, relative to some other file.
+      <p class="shortcomment cmt">Get the path of this file, relative to some other file.</p><div class="fullcomment"><div class="comment cmt"><p>Get the path of this file, relative to some other file.
 </p></div><dl class="paramcmts block"><dt class="param">relativeTo</dt><dd class="cmt"><p>the other file
 </p></dd><dt>returns</dt><dd class="cmt"><p>the path of this file, relative to the other file.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#split">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#split" data-isabs="false">
       <a id="split:List[String]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">split</span>
-        
         
         <span class="result">: List[String]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Split this file's path into its constituent components.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Split this file's path into its constituent components. If the path
+      <p class="shortcomment cmt">Split this file's path into its constituent components.</p><div class="fullcomment"><div class="comment cmt"><p>Split this file's path into its constituent components. If the path
 is absolute, the first piece will have a file separator in the
-beginning. Examples:</p><p><table border="1">  <tr>    <th>Input</th>    <th>Output</th>  </tr>  <tr>    <td class="code">&quot;&quot;</td>     <td class="code">List(&quot;&quot;)</td>  </tr>  <tr>    <td class="code">&quot;/&quot;</td>    <td class="code">List(&quot;/&quot;)
-  </tr>  <tr>    <td class="code">&quot;foo&quot;</td>    <td class="code">List(&quot;foo&quot;)</td>  </tr>  <tr>    <td class="code">&quot;foo/bar&quot;</td>    <td class="code">List(&quot;foo&quot;, &quot;bar&quot;)</td>  </tr>  <tr>    <td class="code">&quot;.&quot;</td>    <td class="code">List(&quot;.&quot;)</td>  </tr>  <tr>    <td class="code">&quot;../foo&quot;</td>    <td class="code">List(&quot;..&quot;, &quot;foo&quot;)</td>  </tr>  <tr>    <td class="code">&quot;./foo&quot;</td>    <td class="code">List(&quot;.&quot;, &quot;foo&quot;)</td>  </tr>  <tr>    <td class="code">&quot;/foo/bar/baz&quot;</td>    <td class="code">List(&quot;/foo&quot;, &quot;bar&quot;, &quot;baz&quot;)</td>  </tr>  <tr>    <td class="code">&quot;foo/bar/baz&quot;</td>    <td class="code">List(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;)</td>  </tr>  <tr>    <td class="code">&quot;/foo&quot;</td>    <td class="code">List(&quot;/foo&quot;)</td>  </tr></table></p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the component pieces.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#synchronized">
-      <a id="synchronized[T0](T0):T0"></a>
+beginning. Examples:</p><p><table border="1">
+  <tr>
+    <th>Input</th>
+    <th>Output</th>
+  </tr>
+  <tr>
+    <td class="code">""</td>
+     <td class="code">List("")</td>
+  </tr>
+  <tr>
+    <td class="code">"/"</td>
+    <td class="code">List("/")
+  </tr>
+  <tr>
+    <td class="code">"foo"</td>
+    <td class="code">List("foo")</td>
+  </tr>
+  <tr>
+    <td class="code">"foo/bar"</td>
+    <td class="code">List("foo", "bar")</td>
+  </tr>
+  <tr>
+    <td class="code">"."</td>
+    <td class="code">List(".")</td>
+  </tr>
+  <tr>
+    <td class="code">"../foo"</td>
+    <td class="code">List("..", "foo")</td>
+  </tr>
+  <tr>
+    <td class="code">"./foo"</td>
+    <td class="code">List(".", "foo")</td>
+  </tr>
+  <tr>
+    <td class="code">"/foo/bar/baz"</td>
+    <td class="code">List("/foo", "bar", "baz")</td>
+  </tr>
+  <tr>
+    <td class="code">"foo/bar/baz"</td>
+    <td class="code">List("foo", "bar", "baz")</td>
+  </tr>
+  <tr>
+    <td class="code">"/foo"</td>
+    <td class="code">List("/foo")</td>
+  </tr>
+</table>
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the component pieces.
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
+      <a id="synchronized[T0](⇒ T0):T0"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">synchronized</span>
         <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">(<span name="arg0">arg0: T0</span>)</span>
-        <span class="result">: T0</span>
+        <span class="params">(<span name="arg0">arg0: ⇒ T0</span>)</span><span class="result">: T0</span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#toString">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#toString" data-isabs="false">
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">toString</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="params">()</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Returns a string representation of the object.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of the object.</p><p>The default representation is platform dependent.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a string representation of the object.</p></dd></dl><div class="block">
-          definition classes: AnyRef → Any
-        </div>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#touch">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#touch" data-isabs="false">
       <a id="touch(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">touch</span>
         
-        <span class="params">(<span name="time">time: <span class="extype" name="scala.Long">Long</span> =<span class="symbol">-1</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="time">time: <span name="scala.Long" class="extype">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification time for the path
+      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification time for the path
       represented by this object</li><li>creates the path (as a file), if it does not exist</li></ul><p>If the file corresponds to an existing directory, this method
 will throw an exception.
 </p></div><dl class="paramcmts block"><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
               time if this parameter is negative.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+</p></dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">wait</span>
         
-        <span class="params">()</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">wait</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>, <span name="arg1">arg1: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="scala.AnyRef#wait">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">wait</span>
         
-        <span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span>
-        <span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      
-            
-            <div class="fullcomment"><div class="block">
-          attributes: final 
-        </div><div class="block">
-          definition classes: AnyRef
-        </div></div>
-          
-    </li><li visbl="pub" data-isabs="false" name="grizzled.file.GrizzledFile#walk">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="grizzled.file.GrizzledFile#walk" data-isabs="false">
       <a id="walk(Boolean):List[(String, List[String], List[String])]"></a>
       <h4 class="signature">
       <span class="kind">def</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">walk</span>
         
-        <span class="params">(<span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> =<span class="symbol">true</span></span>)</span>
-        <span class="result">: List[(String, List[String], List[String])]</span>
+        <span class="params">(<span name="topdown">topdown: <span name="scala.Boolean" class="extype">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: List[(String, List[String], List[String])]</span>
       </span>
       </h4>
-      
-            <p class="shortcomment cmt">Directory tree lister, adapted from Python's <code>os.walk()</code> function.</p>
-            <div class="fullcomment"><div class="comment cmt"><p>Directory tree lister, adapted from Python's <code>os.walk()</code> function.
+      <p class="shortcomment cmt">Directory tree lister, adapted from Python's <code>os.walk()</code> function.</p><div class="fullcomment"><div class="comment cmt"><p>Directory tree lister, adapted from Python's <code>os.walk()</code> function.
 NOTE: This function generates the entire directory tree in memory,
 before returning. If you want a lazy generator, with optional filtering,
 use the <code>listRecursively()</code> method.</p><p>For each directory in the directory tree rooted at this object
@@ -938,26 +585,22 @@ and '..'). <code>filenames</code> is a list of the names of the non-directory
 files in <code>dirpath</code>. Note that the names in the lists are just names,
 with no path components. To get a full path (which begins with this
 directory) to a file or directory in <code>dirpath</code>, use <code>dirpath +
-java.io.fileSeparator + name</code>, or use<code>grizzled.file.util.joinPath()</code>.</p><p>If <code>topdown</code> is <code>true</code>, the triplet for a directory is generated
+java.io.fileSeparator + name</code>, or use
+<code>grizzled.file.util.joinPath()</code>.</p><p>If <code>topdown</code> is <code>true</code>, the triplet for a directory is generated
 before the triplets for any of its subdirectories (directories are
 generated top down). If <code>topdown</code> is <code>false</code>, the triplet for a
 directory is generated after the triples for all of its
 subdirectories (directories are generated bottom up).</p><p>**WARNING!** This method does not grok symbolic links!
 </p></div><dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code> otherwise.
 </p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.
-</p></dd></dl>
-            
-            
-            
-          </div>
-          
+</p></dd></dl></div>
     </li></ol>
             </div>
 
-        <div class="parent" name="scala.AnyRef">
+        <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>
-            </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div><div name="scala.Any" class="parent">
+              <h3>Inherited from <span name="scala.Any" class="extype">Any</span></h3>
             </div>
 
       </div>

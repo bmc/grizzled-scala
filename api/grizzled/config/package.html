@@ -5,32 +5,31 @@
           <title>grizzled.config</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../lib/template.css" rel="stylesheet" type="text/css" media="screen" />
+      <link type="text/css" media="screen" rel="stylesheet" href="../../lib/template.css" />
       <script type="text/javascript" src="../../lib/jquery.js"></script>
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value" onload="windowTitle();">
-
-      <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
-
+        <body class="value">
       <div id="definition">
         <img src="../../lib/package_big.png" />
+        <p id="owner"><a name="grizzled" class="extype" href="../package.html">grizzled</a></p>
         <h1>config</h1>
       </div>
 
       <h4 class="signature" id="signature">
       <span class="kind">package</span>
-      <span class="symbol">
+      <span class="symbol"> 
         <span class="name">config</span>
-        
         
         
       </span>
       </h4>
-      <div class="fullcomment" id="comment"></div>
+      
+          <div class="fullcommenttop" id="comment"></div>
+        
 
       <div id="template">
 
@@ -40,11 +39,7 @@
           
           <div id="visbl">
               <span class="filtertype">Visibility</span>
-              <ol><li class="public in">Public</li><li class="all out">All</li></ol>
-            </div>
-          <div id="impl">
-              <span class="filtertype">Impl.</span>
-              <ol><li class="concrete in">Concrete</li><li class="abstract in">Abstract</li></ol>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
             </div>
         </div>
 
@@ -52,143 +47,134 @@
 
         <div class="types members" id="types">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" data-isabs="false" name="grizzled.config.ConfigException">
+              <ol><li visbl="pub" name="grizzled.config.ConfigException" data-isabs="false">
       <a id="ConfigException:ConfigException"></a>
-      <h4 class="signature"><a href="ConfigException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">ConfigException</span>
-        
+      <span class="symbol"> 
+        <a href="ConfigException.html"><span class="name">ConfigException</span></a>
         
         <span class="result"> extends Exception</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Base class for all configuration exceptions.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration">
+    </li><li visbl="pub" name="grizzled.config.Configuration" data-isabs="false">
       <a id="Configuration:Configuration"></a>
-      <h4 class="signature"><a href="Configuration.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">Configuration</span>
-        
+      <span class="symbol"> 
+        <a href="Configuration.html"><span class="name">Configuration</span></a>
         
         <span class="result"> extends AnyRef</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">An INI-style configuration file parser.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.ConversionException">
+    </li><li visbl="pub" name="grizzled.config.ConversionException" data-isabs="false">
       <a id="ConversionException:ConversionException"></a>
-      <h4 class="signature"><a href="ConversionException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">ConversionException</span>
-        
+      <span class="symbol"> 
+        <a href="ConversionException.html"><span class="name">ConversionException</span></a>
         
         <span class="result"> extends ConfigException</span>
       </span>
-      </a></h4>
+      </h4>
       
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.DuplicateOptionException">
+    </li><li visbl="pub" name="grizzled.config.DuplicateOptionException" data-isabs="false">
       <a id="DuplicateOptionException:DuplicateOptionException"></a>
-      <h4 class="signature"><a href="DuplicateOptionException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">DuplicateOptionException</span>
-        
+      <span class="symbol"> 
+        <a href="DuplicateOptionException.html"><span class="name">DuplicateOptionException</span></a>
         
         <span class="result"> extends ConfigException</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Thrown when a duplicate option is encountered.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.DuplicateSectionException">
+    </li><li visbl="pub" name="grizzled.config.DuplicateSectionException" data-isabs="false">
       <a id="DuplicateSectionException:DuplicateSectionException"></a>
-      <h4 class="signature"><a href="DuplicateSectionException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">DuplicateSectionException</span>
-        
+      <span class="symbol"> 
+        <a href="DuplicateSectionException.html"><span class="name">DuplicateSectionException</span></a>
         
         <span class="result"> extends ConfigException</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Thrown when a duplicate section is encountered.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.NoSuchOptionException">
+    </li><li visbl="pub" name="grizzled.config.NoSuchOptionException" data-isabs="false">
       <a id="NoSuchOptionException:NoSuchOptionException"></a>
-      <h4 class="signature"><a href="NoSuchOptionException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">NoSuchOptionException</span>
-        
+      <span class="symbol"> 
+        <a href="NoSuchOptionException.html"><span class="name">NoSuchOptionException</span></a>
         
         <span class="result"> extends ConfigException</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Thrown when an expected option is not present in the confiruation.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.NoSuchSectionException">
+    </li><li visbl="pub" name="grizzled.config.NoSuchSectionException" data-isabs="false">
       <a id="NoSuchSectionException:NoSuchSectionException"></a>
-      <h4 class="signature"><a href="NoSuchSectionException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">NoSuchSectionException</span>
-        
+      <span class="symbol"> 
+        <a href="NoSuchSectionException.html"><span class="name">NoSuchSectionException</span></a>
         
         <span class="result"> extends ConfigException</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Thrown when an expected section is not present in the confiruation.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.Section">
+    </li><li visbl="pub" name="grizzled.config.Section" data-isabs="false">
       <a id="Section:Section"></a>
-      <h4 class="signature"><a href="Section.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">Section</span>
-        
+      <span class="symbol"> 
+        <a href="Section.html"><span class="name">Section</span></a>
         
         <span class="result"> extends AnyRef</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Used as a wrapper to pass a section to callbacks.</p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.SubstitutionException">
+    </li><li visbl="pub" name="grizzled.config.SubstitutionException" data-isabs="false">
       <a id="SubstitutionException:SubstitutionException"></a>
-      <h4 class="signature"><a href="SubstitutionException.html">
+      <h4 class="signature">
       <span class="kind">class</span>
-      <span class="symbol">
-        <span class="name">SubstitutionException</span>
-        
+      <span class="symbol"> 
+        <a href="SubstitutionException.html"><span class="name">SubstitutionException</span></a>
         
         <span class="result"> extends ConfigException</span>
       </span>
-      </a></h4>
+      </h4>
       
     </li></ol>
             </div>
+        
+        
 
         <div class="values members" id="values">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" data-isabs="false" name="grizzled.config.Configuration">
+              <ol><li visbl="pub" name="grizzled.config.Configuration" data-isabs="false">
       <a id="Configuration:Configuration"></a>
-      <h4 class="signature"><a href="Configuration$.html">
+      <h4 class="signature">
       <span class="kind">object</span>
-      <span class="symbol">
-        <span class="name">Configuration</span>
-        
+      <span class="symbol"> 
+        <a href="Configuration$.html"><span class="name">Configuration</span></a>
         
         <span class="result"> extends AnyRef</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">Companion object for the <code>Configuration</code> class
 </p>
-    </li><li visbl="pub" data-isabs="false" name="grizzled.config.ConfigurationReader">
+    </li><li visbl="pub" name="grizzled.config.ConfigurationReader" data-isabs="false">
       <a id="ConfigurationReader:ConfigurationReader"></a>
-      <h4 class="signature"><a href="ConfigurationReader$.html">
+      <h4 class="signature">
       <span class="kind">object</span>
-      <span class="symbol">
-        <span class="name">ConfigurationReader</span>
-        
+      <span class="symbol"> 
+        <a href="ConfigurationReader$.html"><span class="name">ConfigurationReader</span></a>
         
         <span class="result"> extends AnyRef</span>
       </span>
-      </a></h4>
+      </h4>
       <p class="comment cmt">A configuration reader: Reads a source and produces a parsed
 configuration.</p>
     </li></ol>
