@@ -46,7 +46,7 @@ import scala.io.Source
 
 /** A `MultiSource` contains multiple `scala.io.Source`
   * objects and satisfies reads from them serially. Once composed, a
-  * `MultiSource` ahcan be used anywhere a `Source` is used.
+  * `MultiSource` can be used anywhere a `Source` is used.
   *
   * @param sources  the sources to wrap
   */

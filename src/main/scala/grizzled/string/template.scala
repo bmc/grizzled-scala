@@ -145,15 +145,15 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
   }
 }
 
-/** A string template that uses the Unix shell-like syntax `${varname}`
-  * (or `$varname`) for variable references. A variable's name may consist
+/** A string template that uses the Unix shell-like syntax `\${varname}`
+  * (or `\$varname`) for variable references. A variable's name may consist
   * of alphanumerics and underscores. To include a literal "$" in a string,
   * escape it with a backslash.
   *
   * For this class, the general form of a variable reference is:
   *
   * {{{
-  * ${varname?default
+  * \${varname?default}
   * }}}}
   *
   * The `?default` suffix is optional and specifies a default value
@@ -162,7 +162,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
   * A shorthand form of a variable reference is:
   *
   * {{{
-  * $varname
+  * \$varname
   * }}}
   *
   * The ''default'' capability is not available in the shorthand form.

@@ -188,7 +188,7 @@ class Section(val name: String, val options: Map[String, String]) {
  * '''Metacharacters'''
  *
  * The parser recognizes Java-style ASCII escape sequences `\t`, `\n`,
- * `\r`, `\\`, `\&nbsp;` (a backslash and a space), and `\\u`''xxxx'' are
+ * `\r`, `\\`, `\ ` (a backslash and a space), and `\``u`''xxxx'' are
  * recognized and converted to single characters. Note that metacharacter
  * expansion is performed ''before'' variable substitution.
  *
@@ -196,7 +196,7 @@ class Section(val name: String, val options: Map[String, String]) {
  *
  * A variable value can interpolate the values of other variables, using
  * a variable substitution syntax. The general form of a variable reference
- * is `${sectionName.varName}`.
+ * is `\${sectionName.varName}`.
  *
  * `sectionName` is the name of the section containing the variable to
  * substitute; if omitted, it defaults to the current section. `varName` is
@@ -210,20 +210,20 @@ class Section(val name: String, val options: Map[String, String]) {
  * "pseudosections."
  *
  * The "system" pseudosection is used to interpolate values from
- * `System.properties` For instance, `${system.user.home}` substitutes the
+ * `System.properties` For instance, `\${system.user.home}` substitutes the
  * value of the `user.home` system property (typically, the home directory
- * of the user running the program). Similarly, `${system.user.name}`
+ * of the user running the program). Similarly, `\${system.user.name}`
  * substitutes the user's name.
  *
  * The "env" pseudosection is used to interpolate values from the
- * environment. On UNIX systems, for instance, `${env.HOME}` substitutes
+ * environment. On UNIX systems, for instance, `\${env.HOME}` substitutes
  * user's home directory (and is, therefore, a synonym for
- * `${system.user.home}`. On some versions of Windows, `${env.USERNAME}`
+ * `\${system.user.home}`. On some versions of Windows, `\${env.USERNAME}`
  * will substitute the name of the user running the program. Note: On UNIX
  * systems, environment variable names are typically case-sensitive; for
- * instance, `${env.USER}` and `${env.user}` refer to different environment
+ * instance, `\${env.USER}` and `\${env.user}` refer to different environment
  * variables. On Windows systems, environment variable names are typically
- * case-insensitive; `${env.USERNAME}` and `${env.username}` are
+ * case-insensitive; `\${env.USERNAME}` and `\${env.username}` are
  * equivalent.
  *
  * '''Notes and caveats:'''
@@ -239,8 +239,8 @@ class Section(val name: String, val options: Map[String, String]) {
  * Variable substitution is performed ''after'' metacharacter expansion (so
  * don't include metacharacter sequences in your variable names).
  *
- * To include a literal "$" character in a variable value, escape it with a
- * backslash, e.g., "`var=value with \$ dollar sign`"
+ * To include a literal "\$" character in a variable value, escape it with a
+ * backslash, e.g., "`var=value with \\$ dollar sign`"
  *
  * '''Suppressing Metacharacter Expansion and Variable Substitution'''
  *
@@ -256,18 +256,18 @@ class Section(val name: String, val options: Map[String, String]) {
  * prompt -> Enter value. To specify a newline, use \n
  * }}}
  *
- * Similarly, to set variable "abc" to the literal string "${foo}"
- * suppressing the parser's attempts to expand "${foo}" as a variable
+ * Similarly, to set variable "abc" to the literal string "\${foo}"
+ * suppressing the parser's attempts to expand "\${foo}" as a variable
  * reference, you could use:
  *
  * {{{
- * abc -> ${foo}
+ * abc -> \${foo}
  * }}}
  *
  * Note: It's also possible, though hairy, to escape the special meaning
  * of special characters via the backslash character. For instance, you can
- * escape the variable substitution lead-in character, '$', with a
- * backslash. e.g., "\$". This technique is not recommended, however,
+ * escape the variable substitution lead-in character, '\$', with a
+ * backslash. e.g., "\\$". This technique is not recommended, however,
  * because you have to double-escape any backslash characters that you want
  * to be preserved literally. For instance, to get "\t", you must specify
  * "\\\\t". To get a literal backslash, specify "\\\\". (Yes, that's four
