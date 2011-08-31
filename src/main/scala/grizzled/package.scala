@@ -35,56 +35,12 @@
   ---------------------------------------------------------------------------
 */
 
-package grizzled.io
-
-import scala.io.Source
-import scala.annotation.tailrec
-
-import java.io.{InputStream, OutputStream}
-
-/** Provides additional methods, over and above those already present in
-  * the Java `InputStream` class. The `implicits` object contains implicit
-  * conversions between `RichInputStream` and `InputStream`.
+/** The Grizzled Scala Library contains a variety of miscellaneous,
+  * general purpose utility classes and objects.
   *
-  * @param inputStream  the input stream to wrap
+  * The home page for the Grizzled Scala Library is
+  * [[http://software.clapper.org/grizzled-scala/]]. Please see that page for
+  * complete details, including installation instructions.
   */
-class RichInputStream(val inputStream: InputStream)
-extends PartialReader[Byte] {
-  val reader = inputStream
-
-  protected def convert(b: Int) = b.asInstanceOf[Byte]
-
-  /** Copy the input stream to an output stream, stopping on EOF. This
-    * method does no buffering. If you want buffering, make sure you use a
-    * `java.io.BufferedInputStream` and a `java.io.BufferedOutputStream`.
-    * This method does not close either stream.
-    *
-    * @param out  the output stream
-    */
-  def copyTo(out: OutputStream): Unit =
-    {
-      @tailrec def doCopyTo: Unit =
-        {
-          val c: Int = inputStream.read()
-          if (c != -1)
-            {
-              out.write(c)
-              // Tail recursion means never having to use a var.
-              doCopyTo
-            }
-        }
-
-      doCopyTo
-    }
-}
-
-/** Companion object to `RichInputStream` class. Importing this object brings
-  * the implicit conversations into scope.
-  */
-object RichInputStream {
-  implicit def inputStreamToRichInputStream(inputStream: InputStream) =
-    new RichInputStream(inputStream)
-
-  implicit def richInputStreamInputStream(richInputStream: RichInputStream) =
-    richInputStream.inputStream
+package object grizzled {
 }

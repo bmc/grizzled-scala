@@ -41,7 +41,10 @@ import scala.util.matching.Regex
 
 import java.io.File
 
+/** System-related utility functions and definitions.
+  */
 object sys {
+
   /** Indicator of current operating system.
     *
     * - VMS - OpenVMS

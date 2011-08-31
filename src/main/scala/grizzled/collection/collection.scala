@@ -35,8 +35,6 @@
   ---------------------------------------------------------------------------
 */
 
-/** Some collection-related helpers.
-  */
 package grizzled.collection
 
 import scala.collection.generic._

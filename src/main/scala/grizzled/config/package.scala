@@ -3,21 +3,21 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009-2010 Brian M. Clapper
+  Copyright (c) 2009-2011, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-   * Redistributions of source code must retain the above copyright notice,
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
 
-   * Redistributions in binary form must reproduce the above copyright
+  * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
-   * Neither the names "clapper.org", "Grizzled Scala Library", nor the
+  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
     names of its contributors may be used to endorse or promote products
     derived from this software without specific prior written permission.
 
@@ -35,32 +35,13 @@
   ---------------------------------------------------------------------------
 */
 
-package grizzled.io
+package grizzled
 
-import scala.io.Source
-
-/** A `MultiSource` contains multiple `scala.io.Source`
-  * objects and satisfies reads from them serially. Once composed, a
-  * `MultiSource` can be used anywhere a `Source` is used.
-  *
-  * @param sources  the sources to wrap
-  */
-class MultiSource(sources: List[Source]) extends Source {
-  import grizzled.collection.MultiIterator
-
-  private val sourceList = sources.toList
-
-  /** Version of constructor that takes multiple arguments, instead of a list.
-    *
-    * @param sources  the sources to wrap
-    */
-  def this(sources: Source*) = this(sources.toList)
-
-  /** The actual iterator.
-    */
-  protected val iter: Iterator[Char] = new MultiIterator[Char](sourceList: _*)
-
-  /** Reset, returning a new source.
-    */
-  override def reset: Source = new MultiSource(sourceList)
+/**
+ * Classes and objects to aid in the parsing of INI-style configuration
+ * files. This package is similar, in concept, to the Python
+ * `ConfigParser` module (though its implementation and capabilities
+ * differ quite a bit).
+ */
+package object config {
 }

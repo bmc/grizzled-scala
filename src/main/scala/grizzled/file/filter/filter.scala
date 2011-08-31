@@ -34,9 +34,6 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   ---------------------------------------------------------------------------
 */
-
-/** Contains various file- and I/O-related filter classes.
-  */
 package grizzled.file.filter
 
 import grizzled.string.GrizzledString._

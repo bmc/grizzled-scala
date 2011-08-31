@@ -40,6 +40,7 @@ package grizzled
 /** Useful binary-related utility functions.
   */
 object binary {
+
   /** Count the number of bits in a numeric (integer or long) value. This
     * method is adapted from the Hamming Weight algorithm. It works for
     * up to 64 bits.
