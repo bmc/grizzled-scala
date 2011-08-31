@@ -20,7 +20,7 @@ libraryDependencies <<= (scalaVersion, libraryDependencies) { (ver, deps) =>
     deps :+ compilerPlugin("org.scala-lang.plugins" % "continuations" % ver)
 }
 
-crossScalaVersions := Seq("2.8.1", "2.9.0", "2.9.0-1", "2.8.0")
+crossScalaVersions := Seq("2.9.1", "2.9.0-1", "2.9.0", "2.8.1", "2.8.0")
 
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
@@ -30,9 +30,10 @@ libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
     val scalatestVersionMap = Map("2.8.0"   -> ("scalatest", "1.3"),
                                   "2.8.1"   -> ("scalatest_2.8.1", "1.5.1"),
                                   "2.9.0"   -> ("scalatest_2.9.0", "1.6.1"),
-                                  "2.9.0-1" -> ("scalatest_2.9.0-1", "1.6.1"))
+                                  "2.9.0-1" -> ("scalatest_2.9.0-1", "1.6.1"),
+                                  "2.9.1"   -> ("scalatest_2.9.0-1", "1.6.1"))
     val (scalatestArtifact, scalatestVersion) = scalatestVersionMap.getOrElse(
-        sv, error("Unsupported Scala version: " + scalaVersion)
+        sv, error("Unsupported Scala version for ScalaTest: " + scalaVersion)
     )
     deps :+ "org.scalatest" % scalatestArtifact % scalatestVersion % "test"
 }
