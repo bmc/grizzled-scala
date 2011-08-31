@@ -29,27 +29,22 @@
       </h4>
       
           <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Assemble input lines, honoring backslash escapes for line continuation.
-<tt>BackslashContinuedLineIterator</tt> takes an iterator over lines of
+<code>BackslashContinuedLineIterator</code> takes an iterator over lines of
 input, looks for lines containing trailing backslashes, and treats them
 as continuation lines, to be concatenated with subsequent lines in the
-input. Thus, when a <tt>BackslashContinuedLineIterator</tt> filters this
-input:</p><p><blockquote>
-<pre>
+input. Thus, when a <code>BackslashContinuedLineIterator</code> filters this
+input:</p><pre>
 Lorem ipsum dolor sit amet, consectetur \
 adipiscing elit.
 In congue tincidunt fringilla. \
 Sed interdum nibh vitae \
 libero
 fermentum id dictum risus facilisis.
-</pre>
-</blockquote></p><p>it produces these lines:</p><p><blockquote>
-<pre>
+</pre><p>it produces these lines:</p><pre>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 In congue tincidunt fringilla. Sed interdum nibh vitae libero
 fermentum id dictum risus facilisis.
-</pre>
-</blockquote>
-</p></div><div class="toggleContainer block">
+</pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span name="scala.collection.Iterator" class="extype">Iterator</span>[String], <span name="scala.collection.TraversableOnce" class="extype">TraversableOnce</span>[String], <span name="scala.collection.GenTraversableOnce" class="extype">GenTraversableOnce</span>[String], AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
@@ -87,7 +82,7 @@ fermentum id dictum risus facilisis.
         <span class="params">(<span name="source">source: <span name="scala.io.Source" class="extype">Source</span></span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Alternate constructor that takes a <tt>Source</tt> object.</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that takes a <tt>Source</tt> object.
+      <p class="shortcomment cmt">Alternate constructor that takes a <code>Source</code> object.</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that takes a <code>Source</code> object.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>source from which to read lines
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.file.filter.BackslashContinuedLineIterator#this" data-isabs="false">
@@ -100,8 +95,8 @@ fermentum id dictum risus facilisis.
         <span class="params">(<span name="source">source: Iterator[String]</span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>an iterator that produces lines of input. Any trailing newlines
-              are stripped.
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>an iterator that produces lines of input. Any trailing
+              newlines are stripped.
 </p></dd></dl></div>
     </li></ol>
             </div>
@@ -571,7 +566,7 @@ fermentum id dictum risus facilisis.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.collection.Iterator#grouped" data-isabs="false">
       <a id="grouped[B&gt;:String](Int):GroupedIterator[B]"></a>
       <h4 class="signature">
@@ -605,7 +600,7 @@ fermentum id dictum risus facilisis.
       </span>
       </h4>
       <p class="shortcomment cmt">Determine whether there's any input remaining.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether there's any input remaining.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if input remains, <tt>false</tt> if not
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if input remains, <code>false</code> if not
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="grizzled.file.filter.BackslashContinuedLineIterator" class="extype" href="">BackslashContinuedLineIterator</a> → Iterator</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
@@ -1039,8 +1034,8 @@ of physical input lines. Any trailing newlines are stripped.
         <span class="result">: Iterator[String]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">an iterator that produces lines of input.</p><div class="fullcomment"><div class="comment cmt"><p>an iterator that produces lines of input. Any trailing newlines
-              are stripped.
+      <p class="shortcomment cmt">an iterator that produces lines of input.</p><div class="fullcomment"><div class="comment cmt"><p>an iterator that produces lines of input. Any trailing
+              newlines are stripped.
 </p></div></div>
     </li><li visbl="pub" name="scala.collection.Iterator#span" data-isabs="false">
       <a id="span((String) ⇒ Boolean):(Iterator[String], Iterator[String])"></a>
@@ -1315,7 +1310,12 @@ of physical input lines. Any trailing newlines are stripped.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li visbl="pub" name="scala.collection.Iterator#append" data-isabs="false">
+    </li></ol>
+            </div>
+
+        <div class="values members" id="values">
+              <h3>Deprecated Value Members</h3>
+              <ol><li visbl="pub" name="scala.collection.Iterator#append" data-isabs="false">
       <a id="append[B&gt;:String](Iterator[B]):Iterator[B]"></a>
       <h4 class="signature">
       <span class="kind">def</span>

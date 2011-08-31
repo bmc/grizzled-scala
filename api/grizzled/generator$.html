@@ -30,28 +30,25 @@
       
           <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Functions that can be used to simulate Python-style generators.
 Adapted liberally from Rich Dougherty's solution, as outlined in
-Stack Overflow:
-http://stackoverflow.com/questions/2201882/implementing-yield-yield-return-using-scala-continuations/2215182#2215182</p><p>Example usage:</p><pre>
+Stack Overflow: <a href="http://stackoverflow.com/questions/2201882#2215182">http://stackoverflow.com/questions/2201882#2215182</a></p><p>Example usage:</p><pre>
 import grizzled.generator._
 import scala.util.continuations._
 import java.io.File
 
-def recursivelyListFiles(dir: File): Iterator[File] = generator[File]
-{
-    def handleList(list: List[File]): Unit @cps[GeneratorIteration[File]] =
-    {
-        list match
-        {
-            case Nil =&gt; ()
+def recursivelyListFiles(dir: File): Iterator[File] = generator[File] {
+  def handleList(list: List[File]): Unit @cps[GeneratorIteration[File]] = {
+    list match {
+      case Nil =&gt; ()
 
-            case f :: tail =&gt;
-                generate(f)
-                doList(if (f.isDirectory) f.listFiles.toList else Nil)
-                doList(tail)
-        }
+      case f :: tail =&gt; {
+        generate(f)
+        doList(if (f.isDirectory) f.listFiles.toList else Nil)
+        doList(tail)
+      }
     }
+  }
 
-    handleList(dir.listFiles.toList)
+  handleList(dir.listFiles.toList)
 }
 </pre><p>This package uses the Scala compilers continuations plug-in. The above
 example must be compiled with tha plug-in enabled. Use the
@@ -280,7 +277,7 @@ perspective, is a typed iterator.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -415,6 +412,8 @@ perspective, is a typed iterator.
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

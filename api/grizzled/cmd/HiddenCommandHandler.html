@@ -87,10 +87,10 @@ will cause the command to be invoked.
       </h4>
       <p class="shortcomment cmt">Handle the command.</p><div class="fullcomment"><div class="comment cmt"><p>Handle the command. The first white space-delimited token in the command
 string is guaranteed to match the name of this command, by the rules of
-the <tt>matches()</tt> method.
+the <code>matches()</code> method.
 </p></div><dl class="paramcmts block"><dt class="param">command</dt><dd class="cmt"><p>the command that invoked this handler</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd><dt>Definition Classes</dt><dd><a name="grizzled.cmd.CommandHandler" class="extype" href="CommandHandler.html">CommandHandler</a></dd></dl></div>
     </li></ol>
             </div>
@@ -224,7 +224,7 @@ comparison between them. Overridden definitions of this method can
 apply other matching criteria.
 </p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>the prefix to compare
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of the strings (name and/or aliases) that could be
-        completed by <tt>prefix</tt>, or <tt>Nil</tt>.
+        completed by <code>prefix</code>, or <code>Nil</code>.
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd><a name="grizzled.cmd.NoCompletionsHandler" class="extype" href="NoCompletionsHandler.html">NoCompletionsHandler</a> → <a name="grizzled.cmd.CommandHandler" class="extype" href="CommandHandler.html">CommandHandler</a></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandHandler#complete" data-isabs="false">
       <a id="complete(String,List[CompletionToken],String):List[String]"></a>
@@ -239,7 +239,7 @@ apply other matching criteria.
       <p class="shortcomment cmt">Perform completion on the command, returning the possible
 completions.</p><div class="fullcomment"><div class="comment cmt"><p>Perform completion on the command, returning the possible
 completions. This method has the exact same interface and use as the
-<tt>complete()</tt> method in <tt>grizzled.readline.Completer</tt>.
+<code>complete()</code> method in <code>grizzled.readline.Completer</code>.
 Please see that trait for full documentation.
 </p></div><dl class="paramcmts block"><dt class="param">token</dt><dd class="cmt"><p>the token being completed</p></dd><dt class="param">context</dt><dd class="cmt"><p>the token context (i.e., list of parsed tokens,
                 with cursor)</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="grizzled.cmd.CommandHandler" class="extype" href="CommandHandler.html">CommandHandler</a></dd></dl></div>
@@ -289,7 +289,7 @@ Please see that trait for full documentation.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -342,7 +342,7 @@ this command's name. The default implementation of this method simply
 forces both names to lower case before comparing them. Overridden
 definitions of this method can apply other matching criteria.
 </p></div><dl class="paramcmts block"><dt class="param">candidate</dt><dd class="cmt"><p>the candidate name to be compared with this one
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if they match, <tt>false</tt> if not
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if they match, <code>false</code> if not
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="grizzled.cmd.CommandHandler" class="extype" href="CommandHandler.html">CommandHandler</a></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandHandler#moreInputNeeded" data-isabs="false">
       <a id="moreInputNeeded(String):Boolean"></a>
@@ -357,7 +357,7 @@ definitions of this method can apply other matching criteria.
       <p class="shortcomment cmt">This method is called after a line is read that matches this command,
 to determine whether more lines need to be read to finish the command.</p><div class="fullcomment"><div class="comment cmt"><p>This method is called after a line is read that matches this command,
 to determine whether more lines need to be read to finish the command.
-The default implementation returns <tt>false</tt>, meaning a single
+The default implementation returns <code>false</code>, meaning a single
 input line suffices for the entire command. Implementing classes or
 objects can override this method to ensure that the command has a
 required terminating character (e.g., a &quot;;&quot;), doesn't end with a line
@@ -475,6 +475,8 @@ continuation character (e.g., &quot;\&quot;), or whatever the syntax requires.
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="grizzled.cmd.NoCompletionsHandler" class="parent">
               <h3>Inherited from <a name="grizzled.cmd.NoCompletionsHandler" class="extype" href="NoCompletionsHandler.html">NoCompletionsHandler</a></h3>

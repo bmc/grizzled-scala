@@ -28,22 +28,20 @@
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Base class for command interpreters.</p><p><tt>CommandInterpreter</tt> is the base class of any command
-interpreter. This class and the <tt>CommandHandler</tt> trait
-provide a simple framework for writing line-oriented
-command-interpreters. This framework is conceptually similar to the
-Python <tt>cmd</tt> module and its <tt>Cmd</tt> class, though the
-implementation differs substantially in places.</p><p>For reading input from the console, <tt>CommandInterpreter</tt> will
-use of any of the readline libraries supported by the
-<tt>grizzled.readline</tt> package. All of those libraries support a
-persistent command history, and most support command completion and
-command editing.</p><p>A command line consists of an initial command name, followed by a list
-of arguments to that command. The <tt>CommandInterpreter</tt> class's
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Base class for command interpreters.</p><p><code>CommandInterpreter</code> is the base class of any command interpreter. This
+class and the <code>CommandHandler</code> trait provide a simple framework for
+writing line-oriented command-interpreters. This framework is
+conceptually similar to the Python <code>cmd</code> module and its <code>Cmd</code> class,
+though the implementation differs substantially in places.</p><p>For reading input from the console, <code>CommandInterpreter</code> will use of
+any of the readline libraries supported by the <code>grizzled.readline</code>
+package. All of those libraries support a persistent command history,
+and most support command completion and command editing.</p><p>A command line consists of an initial command name, followed by a list
+of arguments to that command. The <code>CommandInterpreter</code> class's
 command reader automatically separates the command and the remaining
-arguments, via the <tt>splitCommandAndArgs()</tt> method. Parsing the
+arguments, via the <code>splitCommandAndArgs()</code> method. Parsing the
 arguments is left to the actual command implementation. The rules for how
 the command is split from the remainder of the input line are outlined
-in the documentation for the <tt>splitCommandAndArgs()</tt> method.
+in the documentation for the <code>splitCommandAndArgs()</code> method.
 </p></div><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
@@ -84,7 +82,12 @@ in the documentation for the <tt>splitCommandAndArgs()</tt> method.
       </h4>
       <p class="shortcomment cmt">Alternate constructor that tries all known readline implementations,
 in this order:</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that tries all known readline implementations,
-in this order:</p><ul><li> GNU Readline</li><li> Editline</li><li> Getline</li><li> JLine</li><li> Simple (pure Java)</li></ul></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name
+in this order:</p><p>-  GNU Readline
+-  Editline
+-  Getline
+-  JLine
+-  Simple (pure Java)
+</p></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#this" data-isabs="false">
       <a id="this:CommandInterpreter"></a>
@@ -112,8 +115,8 @@ if that readline implementation cannot be found.
       </h4>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>the application name, used by some readline
                            libraries for key-binding</p></dd><dt class="param">readlineCandidates</dt><dd class="cmt"><p>list of readline libraries to try to load, in
-                           order. The <tt>ReadlineType</tt> values are
-                           defined by the <tt>grizzled.readline</tt>
+                           order. The <code>ReadlineType</code> values are
+                           defined by the <code>grizzled.readline</code>
                            package.</p></dd><dt class="param">tokenDelimiters</dt><dd class="cmt"><p>delimiters to use when tokenizing a line for
                            tab-completion.
 </p></dd></dl></div>
@@ -135,10 +138,10 @@ if that readline implementation cannot be found.
       </span>
       </h4>
       <p class="shortcomment cmt">List of handlers.</p><div class="fullcomment"><div class="comment cmt"><p>List of handlers. The subclass must define this value to contain a
-list of its handlers. The <tt>allHandlers</tt> property will combine
+list of its handlers. The <code>allHandlers</code> property will combine
 this list with the help handler to get the list of all handlers.
 If you define your own help handler, you'll have to override the
-<tt>helpHandler</tt> property to return your help handler, instead of
+<code>helpHandler</code> property to return your help handler, instead of
 the default one.
 </p></div><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl></div>
     </li></ol>
@@ -233,14 +236,14 @@ the default one.
         <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt"><tt>StartCommandIdentifier</tt> is the list of characters that are
+      <p class="shortcomment cmt"><code>StartCommandIdentifier</code> is the list of characters that are
 permitted as the first character of a white space-delimited,
-multicharacter command name.</p><div class="fullcomment"><div class="comment cmt"><p><tt>StartCommandIdentifier</tt> is the list of characters that are
+multicharacter command name.</p><div class="fullcomment"><div class="comment cmt"><p><code>StartCommandIdentifier</code> is the list of characters that are
 permitted as the first character of a white space-delimited,
 multicharacter command name. All other characters are assumed to
 introduce single-character commands. Subclasses may override this value
 to permit additional, or different, starting characters for
-multicharacter command names. See the <tt>splitCommandAndArgs()</tt>
+multicharacter command names. See the <code>splitCommandAndArgs()</code>
 method for more details.
 </p></div></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#allHandlers" data-isabs="false">
@@ -254,9 +257,9 @@ method for more details.
       </span>
       </h4>
       <p class="shortcomment cmt">Get all handlers.</p><div class="fullcomment"><div class="comment cmt"><p>Get all handlers. By default, this property combines the
-<tt>handlers</tt> value with the default help handler,
-<tt>HelpHandler</tt>. If you define your own help handler, you'll
-have to override the <tt>helpHandler</tt> property to return your
+<code>handlers</code> value with the default help handler,
+<code>HelpHandler</code>. If you define your own help handler, you'll
+have to override the <code>helpHandler</code> property to return your
 help handler, instead of the default one.
 </p></div><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#appName" data-isabs="false">
@@ -356,7 +359,7 @@ subclasses. The default implementation prints errors in red.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleCommand" data-isabs="false">
       <a id="handleCommand(Option[String]):CommandAction"></a>
       <h4 class="signature">
@@ -371,8 +374,8 @@ subclasses. The default implementation prints errors in red.
 prompt.</p><div class="fullcomment"><div class="comment cmt"><p>Handles a command line, just as if it had been typed directly at the
 prompt.
 </p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleEOF" data-isabs="false">
       <a id="handleEOF:CommandAction"></a>
@@ -389,10 +392,10 @@ command (On Unix-like systems, with some readline libraries, this
 happens when the user pressed Ctrl-D).</p><div class="fullcomment"><div class="comment cmt"><p>Called when an end-of-file condition is encountered while reading a
 command (On Unix-like systems, with some readline libraries, this
 happens when the user pressed Ctrl-D). prompt. The default version
-of this method simply returns <tt>Stop</tt>, causing the command
+of this method simply returns <code>Stop</code>, causing the command
 loop to exit.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleEmptyCommand" data-isabs="false">
       <a id="handleEmptyCommand:CommandAction"></a>
@@ -407,9 +410,9 @@ loop to exit.
       <p class="shortcomment cmt">Called when an empty command line is entered in response to the
 prompt.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an empty command line is entered in response to the
 prompt. The default version of this method simply returns
-<tt>KeepGoing</tt>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+<code>KeepGoing</code>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleException" data-isabs="false">
       <a id="handleException(Exception):CommandAction"></a>
@@ -423,12 +426,12 @@ prompt. The default version of this method simply returns
       </h4>
       <p class="shortcomment cmt">Called when an exception occurs during the main loop.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an exception occurs during the main loop. This method
 can handle the exception however it wants; it must return either
-<tt>KeepGoing</tt> or <tt>Stop</tt>. The default version
+<code>KeepGoing</code> or <code>Stop</code>. The default version
 of this method dumps the exception stack trace and returns
-<tt>Stop</tt>.
+<code>Stop</code>.
 </p></div><dl class="paramcmts block"><dt class="param">e</dt><dd class="cmt"><p>the exception
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#handleUnknownCommand" data-isabs="false">
       <a id="handleUnknownCommand(String,String):CommandAction"></a>
@@ -442,10 +445,10 @@ of this method dumps the exception stack trace and returns
       </h4>
       <p class="shortcomment cmt">Called when a command is entered that isn't recognized.</p><div class="fullcomment"><div class="comment cmt"><p>Called when a command is entered that isn't recognized. The default
 version of this method prints an error message and returns
-<tt>KeepGoing</tt>.
+<code>KeepGoing</code>.
 </p></div><dl class="paramcmts block"><dt class="param">commandName</dt><dd class="cmt"><p>the command name</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the command arguments
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
@@ -459,13 +462,13 @@ version of this method prints an error message and returns
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#helpHandler" data-isabs="false">
-      <a id="helpHandler:HelpHandler"></a>
+      <a id="helpHandler:CommandInterpreter.this.HelpHandler.type"></a>
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol"> 
         <span class="name">helpHandler</span>
         
-        <span class="result">: <span name="grizzled.cmd.CommandInterpreter.HelpHandler" class="extype">HelpHandler</span></span>
+        <span class="result">: CommandInterpreter.this.HelpHandler.type</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Get the help handler.</p><div class="fullcomment"><div class="comment cmt"><p>Get the help handler. Override this property if you want to supply
@@ -482,7 +485,7 @@ your own help handler.
       </span>
       </h4>
       <p class="shortcomment cmt">Get the history object being used to record command history.</p><div class="fullcomment"><div class="comment cmt"><p>Get the history object being used to record command history.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <tt>grizzled.readline.History</tt> object
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <code>grizzled.readline.History</code> object
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -553,10 +556,10 @@ the received input, and dispatch to execution handlers.
       </span>
       </h4>
       <p class="shortcomment cmt">Called after a command line is interpreted.</p><div class="fullcomment"><div class="comment cmt"><p>Called after a command line is interpreted. The default implementation
-simply returns <tt>KeepGoing</tt>.
+simply returns <code>KeepGoing</code>.
 </p></div><dl class="paramcmts block"><dt class="param">command</dt><dd class="cmt"><p>the command that invoked this handler</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>KeepGoing</tt> to tell the main loop to continue,
-        or <tt>Stop</tt> to tell the main loop to be done.
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.cmd.CommandInterpreter#postLoop" data-isabs="false">
       <a id="postLoop:Unit"></a>
@@ -568,8 +571,8 @@ simply returns <tt>KeepGoing</tt>.
         <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Called immediately after the main loop (<tt>mainLoop()</tt>) ends
-its command loop, this hook method can be used for cleanup.</p><div class="fullcomment"><div class="comment cmt"><p>Called immediately after the main loop (<tt>mainLoop()</tt>) ends
+      <p class="shortcomment cmt">Called immediately after the main loop (<code>mainLoop()</code>) ends
+its command loop, this hook method can be used for cleanup.</p><div class="fullcomment"><div class="comment cmt"><p>Called immediately after the main loop (<code>mainLoop()</code>) ends
 its command loop, this hook method can be used for cleanup. The
 default implementation does nothing.
 </p></div></div>
@@ -600,8 +603,8 @@ edit the command.
         <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Called just before the main loop (<tt>mainLoop()</tt>) begins its
-command loop, this hook method can be used for initialization.</p><div class="fullcomment"><div class="comment cmt"><p>Called just before the main loop (<tt>mainLoop()</tt>) begins its
+      <p class="shortcomment cmt">Called just before the main loop (<code>mainLoop()</code>) begins its
+command loop, this hook method can be used for initialization.</p><div class="fullcomment"><div class="comment cmt"><p>Called just before the main loop (<code>mainLoop()</code>) begins its
 command loop, this hook method can be used for initialization. The
 default implementation does nothing.
 </p></div></div>
@@ -627,13 +630,13 @@ default implementation does nothing.
       </span>
       </h4>
       <p class="shortcomment cmt">Push a reader on the reader stack.</p><div class="fullcomment"><div class="comment cmt"><p>Push a reader on the reader stack. The reader on top of the stack
-is used until it returns <tt>None</tt> (indicating EOF). Then, it is
+is used until it returns <code>None</code> (indicating EOF). Then, it is
 removed from the stack, and the next reader is used. When the only
-reader remaining on the stack returns <tt>None</tt>, the command
+reader remaining on the stack returns <code>None</code>, the command
 interpreter signals an EOF condition to the subclass (by calling
-<tt>handleEOF()</tt>).</p><p>The reader is a simple function that takes a prompt string (which
+<code>handleEOF()</code>).</p><p>The reader is a simple function that takes a prompt string (which
 it can choose to ignore) and returns a line of input
-(<tt>Some(input)</tt>) or <tt>None</tt> for EOF. The line of input,
+(<code>Some(input)</code>) or <code>None</code> for EOF. The line of input,
 if returned, should not have a trailing newline.
 </p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the reader function
 </p></dd></dl></div>
@@ -675,29 +678,21 @@ one string and the remaining unparsed argument string as the other
 string.</p><div class="fullcomment"><div class="comment cmt"><p>Split a command from its argument list, returning the command as
 one string and the remaining unparsed argument string as the other
 string. The commmand name is parsed from the remaining arguments
-using the following rules:</p><ul><li> If the first non-white character if the input line is in the
-       <tt>StartCommandIdentifier</tt> string, then the command is
-       assumed to be a identifier that is separated from the arguments
-       by white space.</li><li> If the first character if the input line is not in the
-       <tt>StartCommandIdentifier</tt> string, then the command is
-       assumed to be a single-character command, with the arguments
-       immediately following the single character.</li></ul><p>The <tt>StartCommandIdentifier</tt> string is an overridable field
+using the following rules:</p><p>- If the first non-white character if the input line is in the
+  <code>StartCommandIdentifier</code> string, then the command is assumed to be
+  a identifier that is separated from the arguments by white space.
+- If the first character if the input line is not in the
+  <code>StartCommandIdentifier</code> string, then the command is assumed to be
+  a single-character command, with the arguments immediately
+  following the single character.</p><p>The <code>StartCommandIdentifier</code> string is an overridable field
 defined by this class, consisting of the characters permitted to start
 a multicharacter command. By default, it consists of alphanumerics.
 Subclasses may override it to permit additional, or different, starting
 characters for multicharacter commands.</p><p>For example, using the default identifier characters, this function
-will break the following commands into command + arguments as shown:</p><p><table border="0" cellpadding="2">
-  <tr valign="top">
-    <td><tt>foo bar baz</tt></td>
-    <td>Command <tt>foo</tt>, argument string <tt>"bar baz"</tt></td>
-  </tr></p><p>  <tr valign="top">
-    <td><tt>!bar</tt></td>
-    <td>Command <tt>!</tt> argument string <tt>"bar baz"</tt></td>
-  </tr></p><p>  <tr valign="top">
-    <td><tt>? one two</tt></td>
-    <td>Command <tt>?</tt> argument string <tt>"one two"</tt></td>
-  </tr>
-</table></p><p>Subclasses may override this method to parse commands differently.
+will break the following commands into command + arguments as shown:</p><p>Input: <code>foo bar baz</code>
+Result: Command <code>foo</code>, argument string <code>&quot;bar baz&quot;</code></p><p>Input: <code>!bar</code>
+Result: Command <code>!</code> argument string <code>&quot;bar&quot;</code></p><p>Input: <code>? one two</code>
+Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code></p><p>Subclasses may override this method to parse commands differently.
 </p></div><dl class="paramcmts block"><dt class="param">line</dt><dd class="cmt"><p>the input type
 </p></dd><dt>returns</dt><dd class="cmt"><p>A (<i>commandName</i>, <i>argumentString</i>) 2-tuple
 </p></dd></dl></div>
@@ -794,6 +789,8 @@ prefix &quot;Warning: &quot;.
 </p></dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

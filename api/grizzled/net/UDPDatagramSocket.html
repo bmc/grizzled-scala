@@ -28,18 +28,17 @@
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>A <tt>UDPDatagramSocket</tt> object represents a UDP datagram socket,
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>A <code>UDPDatagramSocket</code> object represents a UDP datagram socket,
 providing a simpler interface to sending and receiving UDP packets than
 the one provided by the Java JDK.</p><h4> Sending UDP Datagrams </h4><p>The easiest way to explain how to use this API is with some code. So,
 without further ado, the following example shows how you might send the
-string &quot;foo&quot; to port 2003 on host &quot;foo.example.com&quot;.</p><p><blockquote>
-<pre>
+string &quot;foo&quot; to port 2003 on host &quot;foo.example.com&quot;.</p><pre>
 // Import the appropriate stuff.
 import grizzled.net._
 
 // First, create an grizzled.net.IPAddress object for the destination
 // machine.
-val address = IPAddress("foo.example.com")
+val address = IPAddress(&quot;foo.example.com&quot;)
 
 // Next, create the socket object. Since we're sending the packet,
 // we don't care what the local port is. By not specifying one, we allow
@@ -50,21 +49,18 @@ val address = IPAddress("foo.example.com")
 val socket = UDPDatagramSocket()
 
 // Next, use the sendString() method to send the string
-socket.sendString("foo", address, 2003)
+socket.sendString(&quot;foo&quot;, address, 2003)
 
 // Finally, close the socket.
 socket.close()
-</pre>
-</blockquote></p><p>That's pretty simple. However, using the utility methods provided by the
-<tt>UDPDatagramSocket</tt> companion object, we can further simplify the
-above code:</p><p><blockquote>
-<pre>
+</pre><p>That's pretty simple. However, using the utility methods provided by the
+<code>UDPDatagramSocket</code> companion object, we can further simplify the
+above code:</p><pre>
 // Import the appropriate stuff.
 import grizzled.net._
 
-UDPDatagramSocket.sendString("foo", IPAddress("foo.example.com"), 2003)
-</pre>
-</blockquote></p><p>The <tt>sendString()</tt> method in the companion object takes care
+UDPDatagramSocket.sendString(&quot;foo&quot;, IPAddress(&quot;foo.example.com&quot;), 2003)
+</pre><p>The <code>sendString()</code> method in the companion object takes care
 of allocating the socket, sending the packet, and closing the socket.
 Obviously, if you're planning on sending multiple packets at once, you'll
 want to use the first example (perhaps in a loop), so you're not constantly
@@ -73,8 +69,7 @@ can be as simple as one line of code, as shown in the second example.</p><p>Send
 the data to a stream of bytes, which the server must then decode. After
 that, however, sending the bytes isn't much more difficult than sending
 a string. Here's an example, which assumes that you have already encoded
-the data to be send into an array of bytes.</p><p><blockquote>
-<pre>
+the data to be send into an array of bytes.</p><pre>
 // Import the appropriate stuff.
 import grizzled.net._
 
@@ -85,14 +80,12 @@ val data: Array[Byte] = encodeTheData()
 val socket = UDPDatagramSocket()
 
 // Send the data.
-socket.send(data, IPAddress("foo.example.com"), 2003)
+socket.send(data, IPAddress(&quot;foo.example.com&quot;), 2003)
 
 // Finally, close the socket.
 socket.close()
-</pre>
-</blockquote></p><p>Once again, there's a simple utility method that does most of the work
-for you:</p><p><blockquote>
-<pre>
+</pre><p>Once again, there's a simple utility method that does most of the work
+for you:</p><pre>
 // Import the appropriate stuff.
 import grizzled.net._
 
@@ -100,31 +93,25 @@ import grizzled.net._
 val data: Array[Byte] = encodeTheData()
 
 // Send the data.
-UDPDatagramSocket.send(data, IPAddress("foo.example.com"), 2003)
-</pre>
-</blockquote></p><h4> Receiving UDP Datagrams </h4><p>When receiving UDP datagrams, you must first bind to an incoming
+UDPDatagramSocket.send(data, IPAddress(&quot;foo.example.com&quot;), 2003)
+</pre><h4> Receiving UDP Datagrams </h4><p>When receiving UDP datagrams, you must first bind to an incoming
 socket. That is, you must listen on the port to which clients are sending
 their packets. In this example, we create the socket object with the
 receiving port, and we allow the wildcard address to be used on the
-local machine (permitting us to receive packets on any interface).</p><p><blockquote>
-<pre>
+local machine (permitting us to receive packets on any interface).</p><pre>
 // Import the appropriate stuff.
 import grizzled.net._
 
 // Create the socket object.
 val socket = UDPDatagramSocket(2003)
-</pre>
-</blockquote></p><p>Next, we want to receive and process the incoming data. Let's assume
+</pre><p>Next, we want to receive and process the incoming data. Let's assume
 that we're receiving the &quot;foo&quot; string (or, for that matter, any string)
-being sent by the sample sender, above.</p><p><blockquote>
-<pre>
+being sent by the sample sender, above.</p><pre>
 // Receive and print strings.
 while (true)
     println(socket.receiveString(1024))
-</pre>
-</blockquote></p><p>That code says, &quot;Wait for incoming strings, using a 1024-byte buffer.
-Then, decode the strings and print them to standard output.</p><p>Receiving bytes isn't much more difficult.</p><p><blockquote>
-<pre>
+</pre><p>That code says, &quot;Wait for incoming strings, using a 1024-byte buffer.
+Then, decode the strings and print them to standard output.</p><p>Receiving bytes isn't much more difficult.</p><pre>
 // Allocate a byte buffer. For efficiency, we'll re-use the same buffer
 // on every incoming message.
 val buf = Array.make[Byte](1024, 0)
@@ -136,16 +123,12 @@ while (true)
     val totalRead = socket.receive(buf)
     process(buf, totalRead)
 }
-</pre>
-</blockquote></p><p>The above loop can be made even simpler (though a little more obscure),
-since the <tt>receive()</tt> method is filling <i>our</i> buffer and
-returning a count of the number of bytes it put into the buffer:</p><p><blockquote>
-<pre>
+</pre><p>The above loop can be made even simpler (though a little more obscure),
+since the <code>receive()</code> method is filling <i>our</i> buffer and
+returning a count of the number of bytes it put into the buffer:</p><pre>
 while (true)
     process(buf, socket.receive(buf))
-</pre>
-</blockquote>
-</p></div><div class="toggleContainer block">
+</pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
@@ -200,7 +183,7 @@ while (true)
       </span>
       </h4>
       <p class="shortcomment cmt">Whether or not the socket's broadcast flag is set.</p><div class="fullcomment"><div class="comment cmt"><p>Whether or not the socket's broadcast flag is set. The broadcast
-flag corresponds to the <tt>SO_BROADCAST</tt> socket option. When
+flag corresponds to the <code>SO_BROADCAST</code> socket option. When
 this option is enabled, datagram sockets will receive packets sent
 to a broadcast address, and they are permitted to send packets to a
 broadcast address.
@@ -217,12 +200,11 @@ broadcast address.
       </span>
       </h4>
       <p class="shortcomment cmt">Change the value of the socket's broadcast flag.</p><div class="fullcomment"><div class="comment cmt"><p>Change the value of the socket's broadcast flag. The broadcast flag
-corresponds to the <tt>SO_BROADCAST</tt> socket option. When this
+corresponds to the <code>SO_BROADCAST</code> socket option. When this
 option is enabled, datagram sockets will receive packets sent to a
 broadcast address, and they are permitted to send packets to a
 broadcast address.
-</p></div><dl class="paramcmts block"><dt class="param">enable</dt><dd class="cmt"><p><tt>true</tt> to enable broadcast, <tt>false</tt>
-              to disable it.
+</p></div><dl class="paramcmts block"><dt class="param">enable</dt><dd class="cmt"><p><code>true</code> to enable broadcast, <code>false</code> to disable it.
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#close" data-isabs="true">
       <a id="close():Unit"></a>
@@ -261,13 +243,10 @@ broadcast address.
       <p class="shortcomment cmt">Receive a buffer of bytes from the socket, writing them into a
 caller-supplied fixed-size buffer.</p><div class="fullcomment"><div class="comment cmt"><p>Receive a buffer of bytes from the socket, writing them into a
 caller-supplied fixed-size buffer. One simple way to create such
-a buffer:</p><p><blockquote>
-<pre>
+a buffer:</p><pre>
 // Create a 512-byte buffer initialized to zeros.
 val buf = Array.make[Byte](512, 0)
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data
+</pre></div><dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the buf into which to read the data
 </p></dd><dt>returns</dt><dd class="cmt"><p>actual number of bytes read
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#send" data-isabs="true">
@@ -281,7 +260,7 @@ val buf = Array.make[Byte](512, 0)
       </span>
       </h4>
       <p class="shortcomment cmt">Send data over the socket.</p><div class="fullcomment"><div class="comment cmt"><p>Send data over the socket. Accepts any sequence of bytes (e.g.,
-<tt>Array[Byte]</tt>, <tt>List[Byte]</tt>).
+<code>Array[Byte]</code>, <code>List[Byte]</code>).
 </p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>the bytes to send
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl></div>
     </li></ol>
@@ -415,7 +394,7 @@ val buf = Array.make[Byte](512, 0)
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -483,9 +462,9 @@ val buf = Array.make[Byte](512, 0)
       </h4>
       <p class="shortcomment cmt">Receive a buffer of bytes from the socket.</p><div class="fullcomment"><div class="comment cmt"><p>Receive a buffer of bytes from the socket. The buffer is dynamically
 allocated and returned. For more efficiency, use the version of
-<tt>receive()</tt> that takes a caller-supplied buffer.
+<code>receive()</code> that takes a caller-supplied buffer.
 </p></div><dl class="paramcmts block"><dt class="param">length</dt><dd class="cmt"><p>maximum number of bytes to receive
-</p></dd><dt>returns</dt><dd class="cmt"><p>a tuple containing the buffer of data (of size <tt>length</tt>)
+</p></dd><dt>returns</dt><dd class="cmt"><p>a tuple containing the buffer of data (of size <code>length</code>)
         and the actual number of bytes read. The buffer might be longer
         than the number of bytes read.
 </p></dd></dl></div>
@@ -649,6 +628,8 @@ converted to the specified encoding before being sent.
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

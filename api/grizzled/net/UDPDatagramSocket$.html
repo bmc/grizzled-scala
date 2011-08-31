@@ -28,10 +28,10 @@
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Companion object for the <tt>UDPDatagramSocket</tt> trait, containing
-methods to simplify creation of <tt>UDPDatagramSocket</tt> objects, as
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Companion object for the <code>UDPDatagramSocket</code> trait, containing
+methods to simplify creation of <code>UDPDatagramSocket</code> objects, as
 well as some useful utility methods. See the documentation for the
-<tt>UDPDatagramSocket</tt> trait for a full treatment on this API.
+<code>UDPDatagramSocket</code> trait for a full treatment on this API.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>UDPDatagramSocket
 </p></span></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
@@ -136,7 +136,7 @@ well as some useful utility methods. See the documentation for the
 local port and the wildcard IP address.</p><div class="fullcomment"><div class="comment cmt"><p>Create a UDP datagram socket object that's bound to any available
 local port and the wildcard IP address. The broadcast flag will
 initially be clear.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <tt>UDPDatagramSocket</tt> object
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <code>UDPDatagramSocket</code> object
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#apply" data-isabs="false">
       <a id="apply(Int):UDPDatagramSocket"></a>
@@ -153,7 +153,7 @@ local port and the wildcard IP address.</p><div class="fullcomment"><div class="
 local port and the wildcard IP address. The broadcast flag will
 initially be clear.
 </p></div><dl class="paramcmts block"><dt class="param">port</dt><dd class="cmt"><p>the local port
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <tt>UDPDatagramSocket</tt> object
+</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>UDPDatagramSocket</code> object
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#apply" data-isabs="false">
       <a id="apply(IPAddress,Int):UDPDatagramSocket"></a>
@@ -170,7 +170,7 @@ local port and IP address.</p><div class="fullcomment"><div class="comment cmt">
 local port and IP address. The broadcast flag will initially be
 clear.
 </p></div><dl class="paramcmts block"><dt class="param">address</dt><dd class="cmt"><p>the local IP address</p></dd><dt class="param">port</dt><dd class="cmt"><p>the local port
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <tt>UDPDatagramSocket</tt> object
+</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>UDPDatagramSocket</code> object
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -243,7 +243,7 @@ clear.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -310,8 +310,7 @@ clear.
       </span>
       </h4>
       <p class="shortcomment cmt">Utility method for sending a UDP packet.</p><div class="fullcomment"><div class="comment cmt"><p>Utility method for sending a UDP packet. This method is equivalent
-to the following code snippet:</p><p><blockquote>
-<pre>
+to the following code snippet:</p><pre>
 // Bind to a local (source) UDP port.
 val socket = UDPDatagramSocket()
 val address = IPAddress( /* details omitted */)
@@ -326,9 +325,7 @@ socket.send(bytes, address, port)
 
 // Close the socket
 socket.close()
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">bytes</dt><dd class="cmt"><p>sequence of bytes to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes</p></dd><dt class="param">broadcast</dt><dd class="cmt"><p>whether or not to enable broadcast on the socket
+</pre></div><dl class="paramcmts block"><dt class="param">bytes</dt><dd class="cmt"><p>sequence of bytes to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes</p></dd><dt class="param">broadcast</dt><dd class="cmt"><p>whether or not to enable broadcast on the socket
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#send" data-isabs="false">
       <a id="send(Seq[Byte],IPAddress,Int):Unit"></a>
@@ -341,8 +338,7 @@ socket.close()
       </span>
       </h4>
       <p class="shortcomment cmt">Utility method for sending a non-broadcast UDP packet.</p><div class="fullcomment"><div class="comment cmt"><p>Utility method for sending a non-broadcast UDP packet. This method
-is equivalent to the following code snippet:</p><p><blockquote>
-<pre>
+is equivalent to the following code snippet:</p><pre>
 // Bind to a local (source) UDP port.
 val socket = UDPDatagramSocket.bind()
 val address = IPAddress( /* details omitted */)
@@ -353,9 +349,7 @@ socket.send(bytes, address, port)
 
 // Close the socket
 socket.close()
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">bytes</dt><dd class="cmt"><p>sequence of bytes to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes
+</pre></div><dl class="paramcmts block"><dt class="param">bytes</dt><dd class="cmt"><p>sequence of bytes to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#sendString" data-isabs="false">
       <a id="sendString(String,String,IPAddress,Int,Boolean):Unit"></a>
@@ -369,8 +363,7 @@ socket.close()
       </h4>
       <p class="shortcomment cmt">Utility method for sending a UDP packet consisting string data.</p><div class="fullcomment"><div class="comment cmt"><p>Utility method for sending a UDP packet consisting string data. The
 string data is encoded the specified encoding before being sent.
-This method is equivalent to the following code snippet:</p><p><blockquote>
-<pre>
+This method is equivalent to the following code snippet:</p><pre>
 // Bind to a local (source) UDP port.
 val socket = UDPDatagramSocket()
 val address = IPAddress( /* details omitted */)
@@ -386,9 +379,7 @@ socket.send(string, encoding, address, port)
 
 // Close the socket
 socket.close()
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>Encoding to use</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes</p></dd><dt class="param">broadcast</dt><dd class="cmt"><p>Whether to enable broadcast or not.
+</pre></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>Encoding to use</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes</p></dd><dt class="param">broadcast</dt><dd class="cmt"><p>Whether to enable broadcast or not.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#sendString" data-isabs="false">
       <a id="sendString(String,IPAddress,Int,Boolean):Unit"></a>
@@ -402,8 +393,7 @@ socket.close()
       </h4>
       <p class="shortcomment cmt">Utility method for sending a UDP packet consisting string data.</p><div class="fullcomment"><div class="comment cmt"><p>Utility method for sending a UDP packet consisting string data. The
 string data is encoded in UTF-8 before being sent. This method is
-equivalent to the following code snippet:</p><p><blockquote>
-<pre>
+equivalent to the following code snippet:</p><pre>
 // Bind to a local (source) UDP port.
 val socket = UDPDatagramSocket()
 val address = IPAddress( /* details omitted */)
@@ -418,9 +408,7 @@ socket.send(string, address, port)
 
 // Close the socket
 socket.close()
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes</p></dd><dt class="param">broadcast</dt><dd class="cmt"><p>Whether to enable broadcast or not.
+</pre></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes</p></dd><dt class="param">broadcast</dt><dd class="cmt"><p>Whether to enable broadcast or not.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#sendString" data-isabs="false">
       <a id="sendString(String,IPAddress,Int):Unit"></a>
@@ -435,8 +423,7 @@ socket.close()
       <p class="shortcomment cmt">Utility method for sending a non-broadcast UDP packet consisting of
 string data.</p><div class="fullcomment"><div class="comment cmt"><p>Utility method for sending a non-broadcast UDP packet consisting of
 string data. The string data is encoded in UTF-8 before being sent.
-This method is equivalent to the following code snippet:</p><p><blockquote>
-<pre>
+This method is equivalent to the following code snippet:</p><pre>
 // Bind to a local (source) UDP port.
 val socket = UDPDatagramSocket.bind()
 val address = IPAddress( /* details omitted */)
@@ -447,9 +434,7 @@ socket.send(string, address, port)
 
 // Close the socket
 socket.close()
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes
+</pre></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.net.UDPDatagramSocket#sendString" data-isabs="false">
       <a id="sendString(String,String,IPAddress,Int):Unit"></a>
@@ -465,8 +450,7 @@ socket.close()
 string data.</p><div class="fullcomment"><div class="comment cmt"><p>Utility method for sending a non-broadcast UDP packet consisting of
 string data. The string data is encoded the specified encoding
 before being sent. This method is equivalent to the following code
-snippet:</p><p><blockquote>
-<pre>
+snippet:</p><pre>
 // Bind to a local (source) UDP port.
 val socket = UDPDatagramSocket.bind()
 val address = IPAddress( /* details omitted */)
@@ -478,9 +462,7 @@ socket.send(string, encoding, address, port)
 
 // Close the socket
 socket.close()
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>Encoding to use</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes
+</pre></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>String data to send</p></dd><dt class="param">encoding</dt><dd class="cmt"><p>Encoding to use</p></dd><dt class="param">address</dt><dd class="cmt"><p>IP address to which to send bytes</p></dd><dt class="param">port</dt><dd class="cmt"><p>UDP port to which to send bytes
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
       <a id="synchronized[T0](⇒ T0):T0"></a>
@@ -548,6 +530,8 @@ socket.close()
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

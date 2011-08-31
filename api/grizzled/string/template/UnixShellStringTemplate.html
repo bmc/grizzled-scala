@@ -28,19 +28,16 @@
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>A string template that uses the Unix shell-like syntax <tt>${varname}</tt>
-(or <tt>$varname</tt>) for variable references. A variable's name may consist
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>A string template that uses the Unix shell-like syntax <code>${varname}</code>
+(or <code>$varname</code>) for variable references. A variable's name may consist
 of alphanumerics and underscores. To include a literal &quot;$&quot; in a string,
-escape it with a backslash.</p><p>For this class, the general form of a variable reference is:</p><p><blockquote>
-<pre>
+escape it with a backslash.</p><p>For this class, the general form of a variable reference is:</p><pre>
 ${varname?default}
-</pre>
-</blockquote></p><p>The <tt>?default</tt> suffix is optional and specifies a default value
-to be used if the variable has no value.</p><p>A shorthand form of a variable reference is:</p><p><blockquote>
-<pre>
+}
+</pre><p>The <code>?default</code> suffix is optional and specifies a default value
+to be used if the variable has no value.</p><p>A shorthand form of a variable reference is:</p><pre>
 $varname
-</pre>
-</blockquote></p><p>The <i>default</i> capability is not available in the shorthand form.
+</pre><p>The <i>default</i> capability is not available in the shorthand form.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a name="grizzled.string.template.StringTemplate" class="extype" href="StringTemplate.html">StringTemplate</a>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
@@ -83,11 +80,11 @@ $varname
 variable names with alphanumerics and underscore.</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that uses a variable name pattern that permits
 variable names with alphanumerics and underscore.
 </p></div><dl class="paramcmts block"><dt class="param">resolveVar</dt><dd class="cmt"><p>A function that takes a variable name as a parameter
-                    and returns an <tt>Option[String]</tt> value for the
-                    variable, or <tt>None</tt> if there is no value
-                    (<tt>Map[String, String].get()</tt>, for instance).</p></dd><dt class="param">safe</dt><dd class="cmt"><p><tt>true</tt> for a &quot;safe&quot; template that just
+                    and returns an <code>Option[String]</code> value for the
+                    variable, or <code>None</code> if there is no value
+                    (<code>Map[String, String].get()</code>, for instance).</p></dd><dt class="param">safe</dt><dd class="cmt"><p><code>true</code> for a &quot;safe&quot; template that just
                     substitutes a blank string for an unknown variable,
-                    <tt>false</tt> for one that throws an exception.
+                    <code>false</code> for one that throws an exception.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.string.template.UnixShellStringTemplate#this" data-isabs="false">
       <a id="this:UnixShellStringTemplate"></a>
@@ -100,11 +97,11 @@ variable names with alphanumerics and underscore.
       </span>
       </h4>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">resolveVar</dt><dd class="cmt"><p>A function that takes a variable name as a parameter
-                    and returns an <tt>Option[String]</tt> value for the
-                    variable, or <tt>None</tt> if there is no value
-                    (<tt>Map[String, String].get()</tt>, for instance).</p></dd><dt class="param">namePattern</dt><dd class="cmt"><p>Regular expression pattern to match a variable name, as
-                    a string (not a Regex). For example: &quot;[a-zA-Z0-9_]+&quot;</p></dd><dt class="param">safe</dt><dd class="cmt"><p><tt>true</tt> for a &quot;safe&quot; template that just substitutes
-                    a blank string for an unknown variable, <tt>false</tt>
+                    and returns an <code>Option[String]</code> value for the
+                    variable, or <code>None</code> if there is no value
+                    (<code>Map[String, String].get()</code>, for instance).</p></dd><dt class="param">namePattern</dt><dd class="cmt"><p>Regular expression pattern to match a variable name, as
+                    a string (not a Regex). For example: &quot;[a-zA-Z0-9_]+&quot;</p></dd><dt class="param">safe</dt><dd class="cmt"><p><code>true</code> for a &quot;safe&quot; template that just substitutes
+                    a blank string for an unknown variable, <code>false</code>
                     for one that throws an exception.
 </p></dd></dl></div>
     </li></ol>
@@ -244,8 +241,8 @@ variable names with alphanumerics and underscore.
       </h4>
       <p class="shortcomment cmt">Parse the location of the first variable in string.</p><div class="fullcomment"><div class="comment cmt"><p>Parse the location of the first variable in string.
 </p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string
-</p></dd><dt>returns</dt><dd class="cmt"><p>an <tt>Option[Variable]</tt>, specifying the variable's
-        location; or <tt>None</tt> if not found
+</p></dd><dt>returns</dt><dd class="cmt"><p>an <code>Option[Variable]</code>, specifying the variable's
+        location; or <code>None</code> if not found
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a name="grizzled.string.template.UnixShellStringTemplate" class="extype" href="">UnixShellStringTemplate</a> → <a name="grizzled.string.template.StringTemplate" class="extype" href="StringTemplate.html">StringTemplate</a></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
       <a id="getClass():java.lang.Class[_]"></a>
@@ -257,7 +254,7 @@ variable names with alphanumerics and underscore.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -325,8 +322,8 @@ variable names with alphanumerics and underscore.
       </h4>
       <p class="shortcomment cmt">Replace all variable references in the given string.</p><div class="fullcomment"><div class="comment cmt"><p>Replace all variable references in the given string. Variable references
 are recognized per the regular expression passed to the constructor. If
-a referenced variable is not found in the resolver, this method either:</p><ul><li> throws a <tt>VariableNotFoundException</tt> (if <tt>safe</tt> is
-       <tt>false</tt>), or</li><li> substitutes an empty string (if <tt>safe</tt> is <tt>true</tt>)</li></ul><p>Recursive references are supported (but beware of infinite recursion).
+a referenced variable is not found in the resolver, this method either:</p><p>- throws a <code>VariableNotFoundException</code> (if <code>safe</code> is <code>false</code>), or
+- substitutes an empty string (if <code>safe</code> is <code>true</code>)</p><p>Recursive references are supported (but beware of infinite recursion).
 </p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string in which to replace variable references
 </p></dd><dt>returns</dt><dd class="cmt"><p>the result
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="grizzled.string.template.UnixShellStringTemplate" class="extype" href="">UnixShellStringTemplate</a> → <a name="grizzled.string.template.StringTemplate" class="extype" href="StringTemplate.html">StringTemplate</a></dd></dl></div>
@@ -396,6 +393,8 @@ a referenced variable is not found in the resolver, this method either:</p><ul><
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="grizzled.string.template.StringTemplate" class="parent">
               <h3>Inherited from <a name="grizzled.string.template.StringTemplate" class="extype" href="StringTemplate.html">StringTemplate</a></h3>

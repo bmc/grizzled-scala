@@ -28,19 +28,15 @@
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>An analog to Scala's <tt>RichChar</tt> class, providing some methods
-that neither <tt>RichChar</tt> nor <tt>Char</tt> (nor, for that matter,
-<tt>java.lang.Character</tt>) provide. By importing the implicit
-conversion functions, you can use the methods in this class
-transparently from a <tt>Char</tt>, <tt>RichChar</tt> or
-<tt>Character</tt> object.</p><p><blockquote>
-<pre>
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>An analog to Scala's <code>RichChar</code> class, providing some methods
+that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
+<code>java.lang.Character</code>) provide. By importing the implicit conversion
+functions, you can use the methods in this class transparently from a
+<code>Char</code>, <code>RichChar</code> or <code>Character</code> object.</p><pre>
 import grizzled.string.implicits._
 val ch = 'a'
 println(ch.isHexDigit) // prints: true
-</pre>
-</blockquote>
-</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl><div class="toggleContainer block">
+</pre></div><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
@@ -225,7 +221,7 @@ println(ch.isHexDigit) // prints: true
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -251,8 +247,8 @@ println(ch.isHexDigit) // prints: true
 given base.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether the character represents a valid digit in a
 given base.
 </p></div><dl class="paramcmts block"><dt class="param">radix</dt><dd class="cmt"><p>the radix
-</p></dd><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if the character is a valid digit in the
-        indicated radix, <tt>false</tt> if not.
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the character is a valid digit in the
+        indicated radix, <code>false</code> if not.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.string.GrizzledChar#isHexDigit" data-isabs="false">
       <a id="isHexDigit:Boolean"></a>
@@ -266,9 +262,9 @@ given base.
       </h4>
       <p class="shortcomment cmt">Determine whether the character represents a valid hexadecimal
 digit.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether the character represents a valid hexadecimal
-digit. This is a specialization of <tt>isDigit(radix)</tt>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><tt>true</tt> if the character is a valid hexadecimal
-        digit, <tt>false</tt> if not.
+digit. This is a specialization of <code>isDigit(radix)</code>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>true</code> if the character is a valid hexadecimal
+        digit, <code>false</code> if not.
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -380,6 +376,8 @@ digit. This is a specialization of <tt>isDigit(radix)</tt>.
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

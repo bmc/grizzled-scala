@@ -203,7 +203,7 @@
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -334,22 +334,25 @@
       </span>
       </h4>
       <p class="shortcomment cmt">Ensure that a closeable object is closed.</p><div class="fullcomment"><div class="comment cmt"><p>Ensure that a closeable object is closed. Note that this function
-uses a Scala structural type, rather than a <tt>java.io.Closeable</tt>,
-because there are classes and interfaces (e.g.,
-<tt>java.sql.ResultSet</tt>) that have <tt>close()</tt> methods that do
-not extend or implement <tt>java.io.Closeable</tt>.</p><p>Sample use:</p><p><blockquote>
-<pre>
-withCloseable(new java.io.FileInputStream("/path/to/file"))
+uses a Scala structural type, rather than a <code>java.io.Closeable</code>,
+because there are classes and interfaces (e.g., <code>java.sql.ResultSet</code>)
+that have <code>close()</code> methods that do not extend or implement
+<code>java.io.Closeable</code>.</p><p>Sample use:</p><pre>
+withCloseable(new java.io.FileInputStream(&quot;/path/to/file&quot;))
 {
-    in => ...
+    in =&gt; ...
 }
-</pre>
-</blockquote></p><p>The closeable object is not passed into the block, because its type
+</pre><p>The closeable object is not passed into the block, because its type
 is useless to the block.
-</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <tt>Closeable</tt></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <tt>Closeable</tt>
+</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <code>Closeable</code></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <code>Closeable</code>
 </p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
 </p></dd></dl></div>
-    </li><li visbl="pub" name="grizzled.io.util#useThenClose" data-isabs="false">
+    </li></ol>
+            </div>
+
+        <div class="values members" id="values">
+              <h3>Deprecated Value Members</h3>
+              <ol><li visbl="pub" name="grizzled.io.util#useThenClose" data-isabs="false">
       <a id="useThenClose[T](Closeable)(⇒ T):T"></a>
       <h4 class="signature">
       <span class="kind">def</span>
@@ -360,20 +363,18 @@ is useless to the block.
       </span>
       </h4>
       <p class="shortcomment cmt">Ensure that a closeable object is closed.</p><div class="fullcomment"><div class="comment cmt"><p>Ensure that a closeable object is closed. Note that this function
-uses a Scala structural type, rather than a <tt>java.io.Closeable</tt>,
+uses a Scala structural type, rather than a <code>java.io.Closeable</code>,
 because there are classes and interfaces (e.g.,
-<tt>java.sql.ResultSet</tt>) that have <tt>close()</tt> methods that do
-not extend or implement <tt>java.io.Closeable</tt>.</p><p>Sample use:</p><p><blockquote>
-<pre>
-val in = new java.io.FileInputStream("/path/to/file")
+<code>java.sql.ResultSet</code>) that have <code>close()</code> methods that do
+not extend or implement <code>java.io.Closeable</code>.</p><p>Sample use:</p><pre>
+val in = new java.io.FileInputStream(&quot;/path/to/file&quot;)
 useThenClose(in)
 {
     ...
 }
-</pre>
-</blockquote></p><p>The closeable object is not passed into the block, because its type
+</pre><p>The closeable object is not passed into the block, because its type
 is useless to the block.
-</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <tt>Closeable</tt></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <tt>Closeable</tt>
+</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <code>Closeable</code></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <code>Closeable</code>
 </p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
 </p></dd></dl><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use <code>withCloseable</code>
 </p></dd></dl></div>

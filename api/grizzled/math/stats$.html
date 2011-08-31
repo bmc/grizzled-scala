@@ -231,7 +231,7 @@ arithmetic mean, see
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="grizzled.math.stats#harmonicMean" data-isabs="false">
       <a id="harmonicMean[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
@@ -243,8 +243,9 @@ arithmetic mean, see
       </span>
       </h4>
       <p class="shortcomment cmt">Calculates the harmonic mean of the values of the passed-in
-numbers, namely: n / (1/x1 + 1/x2 + .</p><div class="fullcomment"><div class="comment cmt"><p>Calculates the harmonic mean of the values of the passed-in
-numbers, namely: n / (1/x1 + 1/x2 + ... + 1/xn).
+numbers, namely: <code>n / (1/x^1^ + 1/x^2^ + ... + 1/x^n^).</code>
+</p><div class="fullcomment"><div class="comment cmt"><p>Calculates the harmonic mean of the values of the passed-in
+numbers, namely: <code>n / (1/x^1^ + 1/x^2^ + ... + 1/x^n^).</code>
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the harmonic mean
 </p></dd></dl></div>
@@ -390,12 +391,12 @@ java.lang.Math.sqrt(populationVariance(items))
       <p class="shortcomment cmt">Calculate the population variance of the finite population defined
 by the <code>items</code> arguments.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the population variance of the finite population defined
 by the <code>items</code> arguments. The population variance is defined as:</p><pre>
-
-1                               2
-- *  SUM(i=1, N) { (x[i] - mean)  }
+1
+- *  SUM(i=1, N) { (x[i] - mean)^2^ }
 N
-
-</pre><p>See:</p><ul><li><a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a></li><li><a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a></li></ul></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
+</pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
+- <a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a>
+</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the variance
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.math.stats#range" data-isabs="false">
@@ -456,13 +457,12 @@ java.lang.Math.sqrt(sampleVariance(items))
       <p class="shortcomment cmt">Calculate the unbiased sample variance of the finite sample defined
 by the <code>items</code> arguments.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the unbiased sample variance of the finite sample defined
 by the <code>items</code> arguments. The sample variance is defined as:</p><pre>
-
-
-  1                                        2
------ *   SUM(i=1, N) { (x[i] - sampleMean)  }
+  1
+----- *   SUM(i=1, N) { (x[i] - sampleMean)^2^  }
 N - 1
-
-</pre><p>See:</p><ul><li><a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a></li><li><a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a></li></ul></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
+</pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
+- <a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a>
+</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the variance
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
@@ -531,6 +531,8 @@ N - 1
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

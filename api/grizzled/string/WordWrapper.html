@@ -30,39 +30,33 @@
       
           <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Wraps strings on word boundaries to fit within a proscribed output
 width. The wrapped string may have a prefix or not; prefixes are useful
-for error messages, for instance. You tell a <tt>WordWrapper</tt> about
-a prefix by passing a non-empty prefix to the constructor.</p><h4> Examples: </h4><p><blockquote>
-<pre>
+for error messages, for instance. You tell a <code>WordWrapper</code> about
+a prefix by passing a non-empty prefix to the constructor.</p><h4> Examples: </h4><pre>
 Unable to open file /usr/local/etc/wombat: No such file or directory
-</pre>
-</blockquote></p><p>might appear like this without a prefix:</p><p><blockquote>
-<pre>
+</pre><p>might appear like this without a prefix:</p><pre>
 Unable to open file /usr/local/etc/wombat: No such file or
 directory
-</pre>
-</blockquote></p><p>and like this if the prefix is &quot;myprog:&quot;</p><p><blockquote>
-<pre>
+</pre><p>and like this if the prefix is &quot;myprog:&quot;</p><pre>
 myprog: Unable to open file /usr/local/etc/wombat: No such
         file or directory
-</pre>
-</blockquote></p><p>Alternatively, if the output width is shortened, the same message
-can be made to wrap something like this:</p><p><blockquote>
-<pre>
+</pre><p>Alternatively, if the output width is shortened, the same message
+can be made to wrap something like this:</p><pre>
 myprog: Unable to open file
         /usr/local/etc/wombat:
         No such file or
         directory
-</pre>
-</blockquote></p><p>Note how the wrapping logic will &quot;tab&quot; past the prefix on wrapped
+</pre><p>Note how the wrapping logic will &quot;tab&quot; past the prefix on wrapped
 lines.</p><p>This method also supports the notion of an indentation level, which is
 independent of the prefix. A non-zero indentation level causes each line,
 including the first line, to be indented that many characters. Thus,
-initializing a <tt>WordWrapper</tt> object with an indentation value of 4
+initializing a <code>WordWrapper</code> object with an indentation value of 4
 will cause each output line to be preceded by 4 blanks. (It's also
 possible to change the indentation character from a blank to any other
-character.</p><h4> Notes </h4><ul><li> The class does not do any special processing of tab characters.
-       Embedded tab characters can have surprising (and unwanted) effects
-       on the rendered output.</li><li> Wrapping an already wrapped string is an invitation to trouble.</li></ul></div><div class="toggleContainer block">
+character.</p><h4> Notes </h4><p>- The class does not do any special processing of tab characters.
+  Embedded tab characters can have surprising (and unwanted) effects
+  on the rendered output.
+- Wrapping an already wrapped string is an invitation to trouble.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
@@ -237,7 +231,7 @@ character.</p><h4> Notes </h4><ul><li> The class does not do any special process
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -401,8 +395,8 @@ character.</p><h4> Notes </h4><ul><li> The class does not do any special process
       </span>
       </h4>
       <p class="shortcomment cmt">Wrap a string, using the wrap width, prefix, indentation and indentation
-character that were specified to the <tt>WordWrapper</tt> constructor.</p><div class="fullcomment"><div class="comment cmt"><p>Wrap a string, using the wrap width, prefix, indentation and indentation
-character that were specified to the <tt>WordWrapper</tt> constructor.
+character that were specified to the <code>WordWrapper</code> constructor.</p><div class="fullcomment"><div class="comment cmt"><p>Wrap a string, using the wrap width, prefix, indentation and indentation
+character that were specified to the <code>WordWrapper</code> constructor.
 The resulting string may have embedded newlines in it.
 </p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to wrap
 </p></dd><dt>returns</dt><dd class="cmt"><p>the wrapped string
@@ -420,6 +414,8 @@ The resulting string may have embedded newlines in it.
       <p class="shortcomment cmt">the number of characters after which to wrap each line</p>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

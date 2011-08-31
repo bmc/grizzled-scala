@@ -72,7 +72,7 @@ You can use backslashes to escape the special characters that the parser
 uses to recognize metacharacter and variable sequences; you can also use
 single quotes. See <i>Suppressing Metacharacter Expansion and Variable
 Substitution</i>, below, for more details.</p><p><b>Metacharacters</b></p><p>The parser recognizes Java-style ASCII escape sequences <code>\t</code>, <code>\n</code>,
-<code>\r</code>, <code>\\</code>, <code>\&amp;nbsp;</code> (a backslash and a space), and <code>\\u</code><i>xxxx</i> are
+<code>\r</code>, <code>\\</code>, <code>\ </code> (a backslash and a space), and <code>\</code><code>u</code><i>xxxx</i> are
 recognized and converted to single characters. Note that metacharacter
 expansion is performed <i>before</i> variable substitution.</p><p><b>Variable Substitution</b></p><p>A variable value can interpolate the values of other variables, using
 a variable substitution syntax. The general form of a variable reference
@@ -100,7 +100,7 @@ class to do variable substitution, so it honors all the syntax conventions
 supported by that class.</p><p>Variable substitutions are only permitted within variable values. They are
 ignored in variable names, section names, include directives and comments.</p><p>Variable substitution is performed <i>after</i> metacharacter expansion (so
 don't include metacharacter sequences in your variable names).</p><p>To include a literal &quot;$&quot; character in a variable value, escape it with a
-backslash, e.g., &quot;<code>var=value with $ dollar sign</code>&quot;</p><p><b>Suppressing Metacharacter Expansion and Variable Substitution</b></p><p>To prevent the parser from interpreting metacharacter sequences,
+backslash, e.g., &quot;<code>var=value with \$ dollar sign</code>&quot;</p><p><b>Suppressing Metacharacter Expansion and Variable Substitution</b></p><p>To prevent the parser from interpreting metacharacter sequences,
 variable substitutions and other special characters, use the &quot;-&gt;&quot;
 assignment operator, instead of &quot;:&quot; or &quot;=&quot;.</p><p>For example, suppose you want to set variable &quot;prompt&quot; to the
 literal value &quot;Enter value. To specify a newline, use \n.&quot; The following
@@ -113,7 +113,7 @@ abc -&gt; ${foo}
 </pre><p>Note: It's also possible, though hairy, to escape the special meaning
 of special characters via the backslash character. For instance, you can
 escape the variable substitution lead-in character, '$', with a
-backslash. e.g., &quot;$&quot;. This technique is not recommended, however,
+backslash. e.g., &quot;\$&quot;. This technique is not recommended, however,
 because you have to double-escape any backslash characters that you want
 to be preserved literally. For instance, to get &quot;\t&quot;, you must specify
 &quot;\\\\t&quot;. To get a literal backslash, specify &quot;\\\\&quot;. (Yes, that's four
@@ -440,7 +440,7 @@ is found, <code>None</code> if not. Does not throw exceptions.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="grizzled.config.Configuration#getInt" data-isabs="false">
       <a id="getInt(String,String):Option[Int]"></a>
       <h4 class="signature">
@@ -755,7 +755,12 @@ version of this method forces the option name to lower case.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li visbl="pub" name="grizzled.config.Configuration#option" data-isabs="false">
+    </li></ol>
+            </div>
+
+        <div class="values members" id="values">
+              <h3>Deprecated Value Members</h3>
+              <ol><li visbl="pub" name="grizzled.config.Configuration#option" data-isabs="false">
       <a id="option(String,String,String):String"></a>
       <h4 class="signature">
       <span class="kind">def</span>

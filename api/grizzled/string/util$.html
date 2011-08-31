@@ -189,7 +189,7 @@
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -258,13 +258,13 @@
       <p class="shortcomment cmt">An implicit conversion that handles creating a Boolean from a string
 value.</p><div class="fullcomment"><div class="comment cmt"><p>An implicit conversion that handles creating a Boolean from a string
 value. This implicit definition, when in scope, allows code like
-the following:</p><p><blockquote>
-<pre>
-val flag: Boolean = "true" // implicitly converts "true" to <tt>true</tt>
-</pre>
-</blockquote></p><p>This method currently understands the following strings (in any mixture
-of upper and lower case). It is currently English-specific.</p><p><blockquote>true, t, yes, y, 1<br>false, f, no, n, 0</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to convert
+the following:</p><pre>
+val flag: Boolean = &quot;true&quot; // implicitly converts &quot;true&quot; to `true`
+</pre><p>This method currently understands the following strings (in any mixture
+of upper and lower case). It is currently English-specific.</p><pre>
+true, t, yes, y, 1
+false, f, no, n, 0
+</pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to convert
 </p></dd><dt>returns</dt><dd class="cmt"><p>a boolean value
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
@@ -305,32 +305,29 @@ strings and embedded escaped quotes. Single quoted strings must start
 and end with single quotes. Double quoted strings must start and end
 with double quotes. Within quoted strings, the quotes themselves may
 be backslash-escaped. Quoted and non-quoted tokens may be mixed in
-the string; quotes are stripped.</p><p>Examples:</p><p><blockquote>
-<pre>
-val s = """one two "three four" ""
-for (t <- tokenizeWithQuotes(s)) println("|" + t + "|")
+the string; quotes are stripped.</p><p>Examples:</p><pre>
+val s = &quot;&quot;&quot;one two &quot;three four&quot; &quot;&quot;
+for (t &lt;- tokenizeWithQuotes(s)) println(&quot;|&quot; + t + &quot;|&quot;)
 // Prints:
 // |one|
 // |two|
 // |three four|
 
-val s = """one two 'three "four'"""
-for (t <- tokenizeWithQuotes(s)) println("|" + t + "|")
+val s = &quot;&quot;&quot;one two 'three &quot;four'&quot;&quot;&quot;
+for (t &lt;- tokenizeWithQuotes(s)) println(&quot;|&quot; + t + &quot;|&quot;)
 // Prints:
 // |one|
 // |two|
-// |three "four|
+// |three &quot;four|
 
-val s = """one two 'three \'four ' fiv"e"""
-for (t <- tokenizeWithQuotes(s)) println("|" + t + "|")
+val s = &quot;&quot;&quot;one two 'three \'four ' fiv&quot;e&quot;&quot;&quot;
+for (t &lt;- tokenizeWithQuotes(s)) println(&quot;|&quot; + t + &quot;|&quot;)
 // Prints:
 // |one|
 // |two|
 // |three 'four |
-// |fiv"e|
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to tokenize
+// |fiv&quot;e|
+</pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to tokenize
 </p></dd><dt>returns</dt><dd class="cmt"><p>the tokens, as a list of strings
 </p></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
@@ -377,6 +374,8 @@ for (t <- tokenizeWithQuotes(s)) println("|" + t + "|")
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

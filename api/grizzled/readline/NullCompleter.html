@@ -170,56 +170,20 @@
       <p class="shortcomment cmt">Get all completions for a token.</p><div class="fullcomment"><div class="comment cmt"><p>Get all completions for a token. The <code>context</code> argument bears
 some explaining. It's designed to allow the completer to locate the
 cursor (and the nearest token) via Scala pattern matching, and it
-consists of a stream of abstract tokens:</p><ul><li><code>LineToken</code> is a token parsed from the line, in an object
-     that's similar to <code>Some</code>: <code>LineToken.value</code> returns
-     the token's string.</li><li><code>Cursor</code> indicates the location of the cursor</li><li><code>Delim</code> indicates the presence of a token delimiter
-     (typically white space)</li></ul><p>The input line is broken into these tokens, which can then be matched.
+consists of a stream of abstract tokens:</p><p>- <code>LineToken</code> is a token parsed from the line, in an object that's
+  similar to <code>Some</code>: <code>LineToken.value</code> returns the token's string.
+- <code>Cursor</code> indicates the location of the cursor
+- <code>Delim</code> indicates the presence of a token delimiter (typically
+  white space)</p><p>The input line is broken into these tokens, which can then be matched.
 For example, consider the following input lines, with the cursor where
-the caret is:</p><p><blockquote>
-<table border="0" cellpadding="5">
-  <tr valign="top" align="left">
-    <th>Input</th>
-    <th>Tokens</th>
-  </tr>
-
-  <tr><td colspan="2"><hr></td></tr>
-
-  <tr valign="top" align="left">
-    <td>`^`
-    <td>`Cursor`</td>
-  </tr>
-
-  <tr valign="top" align="left">
-    <td>`cm^`
-    <td>`LineToken("cm") Cursor`</td>
-  </tr>
-
-  <tr valign="top" align="left">
-    <td>`cmd ^`
-    <td>`LineToken("cmd") Delim Cursor`</td>
-  </tr>
-
-  <tr valign="top" align="left">
-    <td>`cmd arg1^`
-    <td>`LineToken("cmd") Delim Token("arg1") Cursor`</td>
-  </tr>
-
-  <tr valign="top" align="left">
-    <td>`cmd arg1^`
-    <td>`LineToken("cmd") Delim Token("arg1") Delim Cursor`</td>
-  </tr>
-
-  <tr valign="top" align="left">
-    <td>`cmd^ arg1`
-    <td>`LineToken("cmd") Cursor Delim Token("arg1")`</td>
-  </tr>
-
-  <tr valign="top" align="left">
-    <td>`cm^d arg1`
-    <td>`LineToken("cmd") Cursor Delim Token("arg1")`</td>
-  </tr>
-</table>
-</blockquote>
+the caret is:</p><p>Line: <code>^</code> (empty)
+Tokens: <code>Cursor</code></p><p>Line: <code>cm^</code>
+Tokens: <code>LineToken(&quot;cm&quot;) Cursor</code></p><p>Line: <code>cmd ^</code>
+Tokens: <code>LineToken(&quot;cmd&quot;) Delim Cursor</code></td></p><p>Line: <code>cmd arg1^</code>
+Tokens: <code>LineToken(&quot;cmd&quot;) Delim Token(&quot;arg1&quot;) Cursor</code></p><p>Line: <code>cmd arg1^</code>
+Tokens: <code>LineToken(&quot;cmd&quot;) Delim Token(&quot;arg1&quot;) Delim Cursor</code></p><p>Line: <code>cmd^ arg1</code>
+Tokens: <code>LineToken(&quot;cmd&quot;) Cursor Delim Token(&quot;arg1&quot;)</code></p><p>Line: <code>cm^d arg1</code>
+Tokens: <code>LineToken(&quot;cmd&quot;) Cursor Delim Token(&quot;arg1&quot;)</code>
 </p></div><dl class="paramcmts block"><dt class="param">token</dt><dd class="cmt"><p>the token being completed</p></dd><dt class="param">line</dt><dd class="cmt"><p>the current unparsed input line, which includes the
                   token
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of completions, or Nil if there are no matches
@@ -270,7 +234,7 @@ the caret is:</p><p><blockquote>
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -406,6 +370,8 @@ The default is white space.
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="grizzled.readline.Completer" class="parent">
               <h3>Inherited from <a name="grizzled.readline.Completer" class="extype" href="Completer.html">Completer</a></h3>

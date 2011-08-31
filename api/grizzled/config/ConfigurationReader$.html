@@ -190,7 +190,7 @@ configuration.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -310,7 +310,12 @@ configuration.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li visbl="pub" name="grizzled.config.ConfigurationReader#read" data-isabs="false">
+    </li></ol>
+            </div>
+
+        <div class="values members" id="values">
+              <h3>Deprecated Value Members</h3>
+              <ol><li visbl="pub" name="grizzled.config.ConfigurationReader#read" data-isabs="false">
       <a id="read(Source,Map[String, Map[String, String]]):Configuration"></a>
       <h4 class="signature">
       <span class="kind">def</span>
@@ -327,19 +332,16 @@ are defined in a map of maps. The outer map is keyed by predefined
 section name. The inner maps consist of options and their values.
 For instance, to read a configuration file, giving it access to
 certain command line parameters, you could do something like this:</p><pre>
-object Foo
-{
-    def main(args: Array[String]) =
-    {
-        // You'd obviously want to do some real argument checking here.
-        val configFile = args(0)
-        val name = args(1)
-        val ipAddress = args(2)
-        val sections = Map(&quot;args&quot; -&gt; Map(&quot;name&quot; -&gt; name,
-                                         &quot;ip&quot; -&gt; ipAddress))
-        val config = Configuration(configFile, sections)
-        ..
-    }
+object Foo {
+  def main(args: Array[String]) = {
+    // You'd obviously want to do some real argument checking here.
+    val configFile = args(0)
+    val name = args(1)
+    val ipAddress = args(2)
+    val sections = Map(&quot;args&quot; -&gt; Map(&quot;name&quot; -&gt; name, &quot;ip&quot; -&gt; ipAddress))
+    val config = Configuration(configFile, sections)
+    ...
+  }
 }
 </pre></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sections</dt><dd class="cmt"><p>the predefined sections. An empty map means there are
                  no predefined sections.

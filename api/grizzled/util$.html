@@ -189,7 +189,7 @@
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -319,39 +319,32 @@
         <span class="params">(<span name="closeable">closeable: T</span>)</span><span class="params">(<span name="code">code: (T) ⇒ R</span>)</span><span class="result">: R</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Used with any object that contains a <tt>close()</tt> method that
-returns nothing, <tt>withCloseable()</tt> executes a block of code
+      <p class="shortcomment cmt">Used with any object that contains a <code>close()</code> method that
+returns nothing, <code>withCloseable()</code> executes a block of code
 with the closeable object, ensuring that the object is closed no
-matter what.</p><div class="fullcomment"><div class="comment cmt"><p>Used with any object that contains a <tt>close()</tt> method that
-returns nothing, <tt>withCloseable()</tt> executes a block of code
+matter what.</p><div class="fullcomment"><div class="comment cmt"><p>Used with any object that contains a <code>close()</code> method that
+returns nothing, <code>withCloseable()</code> executes a block of code
 with the closeable object, ensuring that the object is closed no
-matter what. It allows you to replace code like this:</p><p><blockquote>
-<pre>
+matter what. It allows you to replace code like this:</p><pre>
 val closeableObject = ...
-try
-{
-    doSomethingWith(closeableObject)
+try {
+  doSomethingWith(closeableObject)
 }
-finally
-{
-    closeableObject.close
+finally {
+  closeableObject.close
 }
-</pre>
-</blockquote></p><p>with:</p><p><blockquote>
-<pre>
-withCloseable(closeableObject)
-{
-    closeable =>
-    doSomethingWith(closeable)
+</pre><p>with:</p><pre>
+withCloseable(closeableObject) { closeable =&gt;
+  doSomethingWith(closeable)
 }
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">code</dt><dd class="cmt"><p>the block of code, which will take the closeable object
-               and return some arbitrary type <tt>R</tt>.
+</pre></div><dl class="paramcmts block"><dt class="param">code</dt><dd class="cmt"><p>the block of code, which will take the closeable object
+               and return some arbitrary type <code>R</code>.
 </p></dd><dt>returns</dt><dd class="cmt"><p>whatever the code block returns,if anything.
 </p></dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

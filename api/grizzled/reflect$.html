@@ -189,7 +189,7 @@
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -224,15 +224,14 @@
       </h4>
       <p class="shortcomment cmt">Determine whether an object is of a particular type.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether an object is of a particular type. Example
 of use:</p><pre>
-def foo(obj: Any) =
-{
-    // Is this object of type Seq[Int] or just Int?
-    if (isOfType[Int](obj))
-        ...
-    else if (isOfType[Seq[Int]](obj))
-        ...
-    else
-        ...
+def foo(obj: Any) = {
+  // Is this object of type Seq[Int] or just Int?
+  if (isOfType[Int](obj))
+    ...
+  else if (isOfType[Seq[Int]](obj))
+    ...
+  else
+    ...
 }
 </pre></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type to test against
 </p></dd><dt class="param">o</dt><dd class="cmt"><p>the object to test</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if <code>o</code> is of type <code>T</code>, <code>false</code> if not.
@@ -336,6 +335,8 @@ def foo(obj: Any) =
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="scala.AnyRef" class="parent">
               <h3>Inherited from AnyRef</h3>

@@ -28,7 +28,7 @@
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>The <tt>Pushback</tt> trait can be mixed into an <tt>IteratorStream</tt>
+          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
 to permit arbitrary pushback.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
@@ -190,7 +190,7 @@ to permit arbitrary pushback.
         <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -235,9 +235,9 @@ to permit arbitrary pushback.
       </span>
       </h4>
       <p class="shortcomment cmt">Get the next item from the stream, advancing the cursor, while
-honoring previous calls to <tt>pushback()</tt>.</p><div class="fullcomment"><div class="comment cmt"><p>Get the next item from the stream, advancing the cursor, while
-honoring previous calls to <tt>pushback()</tt>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an <tt>Option</tt> containing the next item, or <tt>None</tt>
+honoring previous calls to <code>pushback()</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Get the next item from the stream, advancing the cursor, while
+honoring previous calls to <code>pushback()</code>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an <code>Option</code> containing the next item, or <code>None</code>
         if the iterator is exhausted.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="grizzled.parsing.Pushback" class="extype" href="">Pushback</a> → <a name="grizzled.parsing.IteratorStream" class="extype" href="IteratorStream.html">IteratorStream</a></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
@@ -274,18 +274,15 @@ honoring previous calls to <tt>pushback()</tt>.
       </h4>
       <p class="shortcomment cmt">Push a list of items back onto the stream.</p><div class="fullcomment"><div class="comment cmt"><p>Push a list of items back onto the stream. The items are pushed
 back in reverse order, so the items in the list should be in the order
-they were retrieved from the stream. For example:</p><p><blockquote>
-<pre>
-val stream = new IteratorStream[Char]("foobar") with Pushback[Char]
+they were retrieved from the stream. For example:</p><pre>
+val stream = new IteratorStream[Char](&quot;foobar&quot;) with Pushback[Char]
 val list = List(stream.next.get, stream.next.get)
 
 // At this point, the list contains ('f', 'o'), and the stream
-// contains "obar".
+// contains &quot;obar&quot;.
 
-stream.pushback(list) // Stream now contains "foobar"
-</pre>
-</blockquote>
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the items to push back.
+stream.pushback(list) // Stream now contains &quot;foobar&quot;
+</pre></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the items to push back.
 </p></dd></dl></div>
     </li><li visbl="pub" name="grizzled.parsing.Pushback#pushback" data-isabs="false">
       <a id="pushback(T):Stack[T]"></a>
@@ -379,6 +376,8 @@ stream.pushback(list) // Stream now contains "foobar"
         </dd></dl></div>
     </li></ol>
             </div>
+
+        
 
         <div name="grizzled.parsing.IteratorStream" class="parent">
               <h3>Inherited from <a name="grizzled.parsing.IteratorStream" class="extype" href="IteratorStream.html">IteratorStream</a>[T]</h3>
