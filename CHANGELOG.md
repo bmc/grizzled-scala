@@ -3,6 +3,15 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.0.8:
+
+* Fixed an off-by-one error in `grizzled.collection.ListIterator`
+* Cleaned up Scaladocs considerably.
+* Converted code to confirm with standard Scala coding style.
+* Now builds for [Scala][] 2.9.1, as well as 2.9.0-1, 2.9.0, 2.8.1 and 2.8.0.
+
+[Scala]: http://www.scala-lang.org/
+
 Version 1.0.7:
 
 * Now builds against Scala 2.9.0.1, as well as Scala 2.9.0, 2.8.1 and 2.8.0.
