@@ -355,12 +355,10 @@ class Section(val name: String, val options: Map[String, String]) {
 class Configuration(predefinedSections: Map[String, Map[String, String]]) {
   private val SpecialSections  = Set("env", "system")
   private val SectionName      = """([a-zA-Z0-9_]+)""".r
-  private val ValidSection     = ("""^\s*\[""" +
-                                  SectionName.toString +
-                                  """\]\s*$""").r
+  private val ValidSection     = ("""^\s*\[([a-zA-Z0-9_\.#]+)\]\s*$""").r
   private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
   private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
-  private val CommentLine      = """^\s*(#.*)$""".r
+  private val CommentLine      = """^\s*([;#].*)$""".r
   private val BlankLine        = """^(\s*)$""".r
   private val VariableName     = """([a-zA-Z0-9_.]+)""".r
   private val RawAssignment    = ("""^\s*""" +
@@ -509,6 +507,21 @@ class Configuration(predefinedSections: Map[String, Map[String, String]]) {
                 optionName: String,
                 default: String): String = {
     get(sectionName, optionName).getOrElse(default)
+  }
+
+  /**
+   * Get a string option as a List, using a comma as the separator.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   *
+   * @return The option's value if the section and option exist as a List[String]
+   */
+
+  def getStringAsList(sectionName: String, optionName: String): List[String] = {
+
+    for (value:String <- getOrElse(sectionName, optionName, "").split(",").toList)
+      yield value.trim
   }
 
   /**

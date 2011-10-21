@@ -45,16 +45,21 @@ class ConfigTest extends FunSuite {
   test("basic configuration") {
     val configText = """
     |[section1]
+    |# This is a comment
     |var1 = val1
     |var2 = val2
     |[section2]
     |var1 = foo bar
+    |; This is also a comment
+    |[section3.test]
+    |var1 = #value
     """.stripMargin
 
     val expected = Map(
       Some("val1")    -> ("retrieval", "section1", "var1"),
       Some("val2")    -> ("retrieval", "section1", "var2"),
       Some("foo bar") -> ("retrieval", "section2", "var1"),
+      Some("#value")  -> ("retrieval", "section3.test", "var1"),
       None            -> ("bad variable", "section2", "var2"),
       None            -> ("bad section", "section3", "anything")
     )
@@ -98,6 +103,23 @@ class ConfigTest extends FunSuite {
 
       catch {
         case _: SubstitutionException =>
+      }
+    }
+  }
+
+  test("getStringAsList") {
+    val configText = """
+    |[section]
+    |var1 = val1, val2,val3,  val4
+    """.stripMargin
+
+    val data = Map("var1" -> List("val1", "val2", "val3", "val4"),
+                   "baz" -> List(""))
+    val config = Configuration(Source.fromString(configText))
+
+    for ((opt, expected) <- data) {
+      expect(expected, opt + " -> " + expected) {
+        config.getStringAsList("section", opt)
       }
     }
   }
@@ -192,7 +214,7 @@ class ConfigTest extends FunSuite {
     val config = Configuration(Source.fromString(configText))
 
     for (opt <- config.optionNames("section")) {
-      val expected = if (opt.startsWith("false")) Some(false) 
+      val expected = if (opt.startsWith("false")) Some(false)
                      else Some(true)
       expect(expected, opt + "=" + expected) {
         config.getBoolean("section", opt)
