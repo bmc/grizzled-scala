@@ -355,12 +355,10 @@ class Section(val name: String, val options: Map[String, String]) {
 class Configuration(predefinedSections: Map[String, Map[String, String]]) {
   private val SpecialSections  = Set("env", "system")
   private val SectionName      = """([a-zA-Z0-9_]+)""".r
-  private val ValidSection     = ("""^\s*\[""" +
-                                  SectionName.toString +
-                                  """\]\s*$""").r
+  private val ValidSection     = ("""^\s*\[([a-zA-Z0-9_\.#]+)\]\s*$""").r
   private val BadSectionFormat = """^\s*(\[[^\]]*)$""".r
   private val BadSectionName   = """^\s*\[(.*)\]\s*$""".r
-  private val CommentLine      = """^\s*(#.*)$""".r
+  private val CommentLine      = """^\s*([;#].*)$""".r
   private val BlankLine        = """^(\s*)$""".r
   private val VariableName     = """([a-zA-Z0-9_.]+)""".r
   private val RawAssignment    = ("""^\s*""" +
