@@ -107,6 +107,23 @@ class ConfigTest extends FunSuite {
     }
   }
 
+  test("getStringAsList") {
+    val configText = """
+    |[section]
+    |var1 = val1, val2,val3,  val4
+    """.stripMargin
+
+    val data = Map("var1" -> List("val1", "val2", "val3", "val4"),
+                   "baz" -> List(""))
+    val config = Configuration(Source.fromString(configText))
+
+    for ((opt, expected) <- data) {
+      expect(expected, opt + " -> " + expected) {
+        config.getStringAsList("section", opt)
+      }
+    }
+  }
+
   test("legal getInt(), no default") {
     val configText = """
     |[section]

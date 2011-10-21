@@ -510,6 +510,21 @@ class Configuration(predefinedSections: Map[String, Map[String, String]]) {
   }
 
   /**
+   * Get a string option as a List, using a comma as the separator.
+   *
+   * @param sectionName  the section name
+   * @param optionName   the option name
+   *
+   * @return The option's value if the section and option exist as a List[String]
+   */
+
+  def getStringAsList(sectionName: String, optionName: String): List[String] = {
+
+    for (value:String <- getOrElse(sectionName, optionName, "").split(",").toList)
+      yield value.trim
+  }
+
+  /**
    * Get an optional integer option.
    *
    * @param sectionName  the section name
