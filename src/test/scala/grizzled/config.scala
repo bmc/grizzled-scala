@@ -333,6 +333,108 @@ class ConfigTest extends FunSuite {
     }
   }
 
+  test("getAsList, default separators") {
+    val configText = """
+    |[section1]
+    |foo: bar
+    |bar: a, b,c  d
+    """.stripMargin
+
+    val data = Map("foo" -> Some(List("bar")),
+                   "bar" -> Some(List("a", "b", "c", "d")),
+                   "baz" -> None)
+
+    val config = Configuration(Source.fromString(configText))
+    for ((opt, expected) <- data) {
+      expect(expected, opt + "=" + expected.toString) {
+        config.getAsList("section1", opt)
+      }
+    }
+  }
+
+  test("getAsList, custom separators") {
+    val configText = """
+    |[section1]
+    |a: bar
+    |b: a, b,c  d
+    |c: a|b|c|d
+    """.stripMargin
+
+    val data = Map("a" -> Some(List("bar")),
+                   "b" -> Some(List("a, b,c  d")),
+                   "c" -> Some(List("a", "b", "c", "d")),
+                   "d" -> None)
+
+    val config = Configuration(Source.fromString(configText))
+    for ((opt, expected) <- data) {
+      expect(expected, opt + "=" + expected.toString) {
+        config.getAsList("section1", opt, """\|""".r)
+      }
+    }
+  }
+
+  test("section name, with alternate section regex") {
+    val configText = """
+    |[section.1#a]
+    |a: bar
+    |b: a, b,c  d
+    |c: a|b|c|d
+    |[section.2#a]
+    """.stripMargin
+
+    val testData = Map("section.1#a" -> true,
+                       "section.2#a" -> true,
+                       "section##"   -> false)
+
+    val config = Configuration(Source.fromString(configText),
+                               false,
+                               """([a-zA-Z0-9_#.]+)""".r)
+
+    for ((sectionName, expected) <- testData) {
+      expect(expected, sectionName) {
+        config.hasSection(sectionName)
+      }
+    }
+  }
+
+  test("alternate comment syntax") {
+    val configText1 = """
+    |; comment, ignored
+    |[section1]
+    |a: bar
+    |b: a, b,c  d
+    |c: a|b|c|d
+    |[section2]
+    """.stripMargin
+
+    val configText2 = """
+    |# comment, ignored
+    |[section1]
+    |a: bar
+    |b: a, b,c  d
+    |c: a|b|c|d
+    |[section2]
+    """.stripMargin
+
+    val CommentPattern = """^\s*(;.*)$""".r
+    // Should be fine
+    val config1 = Configuration(Source.fromString(configText1),
+                               safe=false,
+                               commentPattern=CommentPattern)
+
+    // Should fail
+    try {
+      val config2 = Configuration(Source.fromString(configText2),
+                                  safe=false,
+                                  commentPattern=CommentPattern)
+      fail("Did not get expected exception.")
+    }
+    catch {
+      case e: ConfigException => 
+    }
+
+  }
+
   private def doTest(configString: String,
                      data: Map[Option[String],Tuple3[String,String,String]],
                      safe: Boolean = false) = {

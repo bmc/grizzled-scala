@@ -357,7 +357,7 @@ private[readline] trait Util {
   def str2opt(string: String): Option[String] = {
     string match {
       case null                              => None
-      case s: String if (s.trim.length == 0) => None
+      case s: String if (s.trim.length == 0) => Some("")
       case s: String                         => Some(s)
     }
   }
