@@ -52,7 +52,7 @@ information are:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.9.1`
-* Version: `1.0.8`
+* Version: `1.0.9`
 * Type: `jar`
 * Repository: `http://www.scala-tools.org/repo-releases/`
 
@@ -73,7 +73,7 @@ For example:
     </dependency>
 
 Scala 2.8.0, Scala 2.8.1, Scala 2.9.0 and Scala 2.9.0-1, and Scala 2.9.1
-are supported in version 1.0.8.
+are supported in version 1.0.9.
 
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
@@ -86,7 +86,7 @@ If you're using [SBT][] 0.7.x to compile your code, you can place the
 following line in your project file (i.e., the Scala file in your
 `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.8"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.9"
 
 #### 0.10.x
 
@@ -95,7 +95,7 @@ following line in your `build.sbt` file (for Quick Configuration). If
 you're using an SBT 0.10.x Full Configuration, you're obviously smart
 enough to figure out what to do, on your own.
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.8"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.9"
 
 ## Source Code Repository
 

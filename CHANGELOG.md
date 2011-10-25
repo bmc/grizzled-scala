@@ -3,6 +3,23 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.0.9:
+
+* Fixed `grizzled.readline` so that a newline in the prompt doesn't return
+  `None` (for EOF).
+* Based on [pull request #3][], by [Dan Sully][], added the following
+  features to `grizzled.config`:
+  - Section name regular expression can now be specified to `Configuration`
+    objects, thus allowing alternate section name forms.
+  - Comment regular expression can now be specified to `Configuration`,
+    allowing alternate comment syntaxes.
+  - `Configuration` now supports at `getAsList()` method, which returns
+    a value split into a string list. Delimiters may be specified. The
+    value returned is of type `Option[List[String]]`.
+
+[pull request #3]: https://github.com/bmc/grizzled-scala/pull/3
+[Dan Sully]: https://github.com/dsully
+
 Version 1.0.8:
 
 * Fixed an off-by-one error in `grizzled.collection.ListIterator`
