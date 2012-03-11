@@ -1,0 +1,4 @@
+* Fixed `grizzled.sys.makeNativePath` and related functions to treat the
+  Mac platform the same as Posix, instead of throwing an exception.
+* Updated to use SBT 0.11.2.
+* Now publishes artifacts to `oss.sonatype.org`.

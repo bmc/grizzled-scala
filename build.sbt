@@ -3,11 +3,9 @@
 
 name := "grizzled-scala"
 
-version := "1.0.9"
+version := "1.0.10"
 
 organization := "org.clapper"
-
-scalaVersion := "2.8.1"
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
@@ -46,15 +44,31 @@ libraryDependencies += "jline" % "jline" % "0.9.94"
 // ---------------------------------------------------------------------------
 // Publishing criteria
 
-publishTo <<= version {(v: String) =>
-    val nexus = "http://nexus.scala-tools.org/content/repositories/"
-    if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "snapshots/") 
-    else                             Some("releases"  at nexus + "releases/")
+
+publishTo <<= version { v: String =>
+  val nexus = "https://oss.sonatype.org/"
+  if (v.trim.endsWith("SNAPSHOT"))
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
 publishMavenStyle := true
 
-credentials += Credentials(Path.userHome / "src" / "mystuff" / "scala" /
-                           "nexus.scala-tools.org.properties")
+publishArtifact in Test := false
 
+licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 
+pomExtra := (
+  <scm>
+    <url>http://software.clapper.org/grizzled-scala/</url>
+    <connection>scm:git:git@github.com:bmc/grizzled-scala.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>bmc</id>
+      <name>Brian Clapper</name>
+      <url>http://www.clapper.org/bmc</url>
+    </developer>
+  </developers>
+)

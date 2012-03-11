@@ -3,7 +3,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009, Brian M. Clapper
+  Copyright (c) 2009-2012, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -424,10 +424,10 @@ object util {
    * call.
    */
   private lazy val eglobPatternSplitter = os match {
-    case Posix   => splitPosixEglobPattern(_)
-    case Windows => splitWindowsEglobPattern(_)
-    case _       => throw new UnsupportedOperationException(
-      "Unknown OS: " + os)
+    case (Mac | Posix) => splitPosixEglobPattern(_)
+    case Windows       => splitWindowsEglobPattern(_)
+    case _             =>
+      throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
   /**
@@ -1088,9 +1088,9 @@ object util {
    * holds the real path normalizer, determined once.
    */
   private lazy val doPathNormalizing = os match {
-    case Posix   => normalizePosixPath(_)
-    case Windows => normalizeWindowsPath(_)
-    case _       => throw new UnsupportedOperationException("Unknown OS: " + os)
+    case (Mac | Posix) => normalizePosixPath(_)
+    case Windows       => normalizeWindowsPath(_)
+    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
   /**
@@ -1248,15 +1248,15 @@ object util {
    * These values hold the real converters, determined once.
    */
   private lazy val makeUniversalPath: (String) => String = os match {
-    case Posix   => (path: String) => path
-    case Windows => (path: String) => path.replace(fileSeparator, "/")
-    case _       => throw new UnsupportedOperationException("Unknown OS: " + os)
+    case (Mac | Posix) => (path: String) => path
+    case Windows       => (path: String) => path.replace(fileSeparator, "/")
+    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
   private lazy val makeNativePath: (String) => String = os match {
-    case Posix   => (path: String) => path
-    case Windows => (path: String) => path.replace("/", fileSeparator)
-    case _       => throw new UnsupportedOperationException("Unknown OS: " + os)
+    case (Mac | Posix) => (path: String) => path
+    case Windows       => (path: String) => path.replace("/", fileSeparator)
+    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
   /**
