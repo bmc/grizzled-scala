@@ -57,11 +57,15 @@ publishMavenStyle := true
 
 publishArtifact in Test := false
 
+pomIncludeRepository := { _ => false }
+
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
+
+homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 pomExtra := (
   <scm>
-    <url>http://software.clapper.org/grizzled-scala/</url>
+    <url>git@github.com:bmc/grizzled-scala.git/</url>
     <connection>scm:git:git@github.com:bmc/grizzled-scala.git</connection>
   </scm>
   <developers>
