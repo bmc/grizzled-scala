@@ -3,6 +3,14 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.0.10:
+
+* Fixed `grizzled.sys.makeNativePath` and related functions to treat the
+  Mac platform the same as Posix, instead of throwing an exception.
+* Updated to use SBT 0.11.2.
+* Now publishes artifacts to `oss.sonatype.org`. Artifacts are signed with
+  GPG key, as a result.
+
 Version 1.0.9:
 
 * Fixed `grizzled.readline` so that a newline in the prompt doesn't return
@@ -26,8 +34,6 @@ Version 1.0.8:
 * Cleaned up Scaladocs considerably.
 * Converted code to confirm with standard Scala coding style.
 * Now builds for [Scala][] 2.9.1, as well as 2.9.0-1, 2.9.0, 2.8.1 and 2.8.0.
-
-[Scala]: http://www.scala-lang.org/
 
 Version 1.0.7:
 
@@ -346,3 +352,8 @@ Version 0.2:
 Version 0.1:
 
 * Initial release.
+* Fixed an off-by-one error in `grizzled.collection.ListIterator`
+* Cleaned up Scaladocs considerably.
+* Converted code to confirm with standard Scala coding style.
+* Now builds for [Scala][] 2.9.1, as well as 2.9.0-1, 2.9.0, 2.8.1 and 2.8.0.
+

@@ -40,40 +40,32 @@ For a more detailed description of what's available, see the
 
 ## Installation
 
-The easiest way to install the Grizzled Scala library is to download a
-pre-compiled jar from the [Scala Tools Maven repository][]. However, you
-can also get certain build tools to download it for you automatically.
+Grizzled Scala is published to the `oss.sonatype.org` repository;  Sonatype
+automatically pushes the artifacts to the  [Maven central repository][]. You
+can get download the Grizzled Scala library jar directly from the Maven
+repository. However, if you're using [Maven][] or [SBT][], you can just have
+those tools do the job for you.
 
 ### Installing for Maven
 
-If you're using [Maven][], you can simply tell Maven to get Grizzled Scala
-from the [Scala Tools Maven repository][]. The relevant pieces of
-information are:
+If you're using [Maven][], just specify the artifact, and Maven will do the
+rest for you:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.9.1`
-* Version: `1.0.9`
+* Version: `1.0.10`
 * Type: `jar`
-* Repository: `http://www.scala-tools.org/repo-releases/`
 
 For example:
 
-    <repositories>
-      <repository>
-        <id>scala-tools.org</id>
-          <name>Scala-tools Maven2 Repository</name>
-          <url>http://scala-tools.org/repo-releases</url>
-      </repository>
-    </repositories>
-
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.9.0-1</artifactId>
-      <version>1.0.7</version>
+      <artifactId>grizzled-scala_2.9.1</artifactId>
+      <version>1.0.10</version>
     </dependency>
 
 Scala 2.8.0, Scala 2.8.1, Scala 2.9.0 and Scala 2.9.0-1, and Scala 2.9.1
-are supported in version 1.0.9.
+are currently supported.
 
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
@@ -86,7 +78,7 @@ If you're using [SBT][] 0.7.x to compile your code, you can place the
 following line in your project file (i.e., the Scala file in your
 `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.9"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.10"
 
 #### 0.10.x
 
@@ -95,7 +87,13 @@ following line in your `build.sbt` file (for Quick Configuration). If
 you're using an SBT 0.10.x Full Configuration, you're obviously smart
 enough to figure out what to do, on your own.
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.9"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.10"
+
+Grizzled Scala is also registered with [Doug Tangren][]'s excellent
+[ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
+Grizzled Scala with
+
+    sbt> ls-install grizzled-scala
 
 ## Source Code Repository
 
@@ -131,7 +129,7 @@ Brian M. Clapper, [bmc@clapper.org][]
 
 ## Copyright and License
 
-The Grizzled Scala Library is copyright &copy; 2009-2011 Brian M. Clapper
+The Grizzled Scala Library is copyright &copy; 2009-2012 Brian M. Clapper
 and is released under a [BSD License][].
 
 ## Patches
@@ -150,7 +148,7 @@ request. Along with any patch you send:
 [GitHub repository]: http://github.com/bmc/grizzled-scala
 [GitHub]: http://github.com/bmc/
 [downloads area]: http://github.com/bmc/grizzled-scala/downloads
-[Scala Tools Maven repository]: http://www.scala-tools.org/repo-releases/
+[Maven central repository]: http://search.maven.org/
 [Scala Maven Guide]: http://www.scala-lang.org/node/345
 [Maven]: http://maven.apache.org/
 [SBT]: http://code.google.com/p/simple-build-tool
@@ -162,3 +160,5 @@ request. Along with any patch you send:
 [SBT Manual]: http://code.google.com/p/simple-build-tool/wiki/DocumentationHome
 [SBT-repo-email-thread]: http://groups.google.com/group/simple-build-tool/browse_thread/thread/470bba921252a167
 [Grizzled Python]: http://software.clapper.org/grizzled-python/
+[Doug Tangren]: http://github.com/softprops/
+[ls.implicit.ly]: http://ls.implicit.ly
