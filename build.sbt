@@ -18,6 +18,12 @@ libraryDependencies <<= (scalaVersion, libraryDependencies) { (ver, deps) =>
     deps :+ compilerPlugin("org.scala-lang.plugins" % "continuations" % ver)
 }
 
+seq(lsSettings :_*)
+
+(LsKeys.tags in LsKeys.lsync) := Seq("utility", "library", "grizzled")
+
+(description in LsKeys.lsync) := "A general-purpose utility library"
+
 crossScalaVersions := Seq("2.9.1", "2.9.0-1", "2.9.0", "2.8.1", "2.8.0")
 
 // ---------------------------------------------------------------------------
