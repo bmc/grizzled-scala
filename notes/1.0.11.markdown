@@ -1,0 +1,2 @@
+* Fixed cross-compilation issues. Grizzled-Scala is, once again, cross-
+  compiled and cross-published for 2.8.0, 2.8.1, 2.9.0, 2.9.0-1 and 2.9.1.
