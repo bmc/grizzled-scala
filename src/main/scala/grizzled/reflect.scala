@@ -37,54 +37,52 @@
 
 package grizzled
 
-/**
- * Some reflection-related utility methods and classes.
- */
+/** Some reflection-related utility methods and classes.
+  */
 object reflect {
-    import scala.reflect.Manifest
+  import scala.reflect.Manifest
 
-    /**
-     * Determine whether an object is of a particular type. Example
-     * of use:
-     *
-     * {{{
-     * def foo(obj: Any) = {
-     *   // Is this object of type Seq[Int] or just Int?
-     *   if (isOfType[Int](obj))
-     *     ...
-     *   else if (isOfType[Seq[Int]](obj))
-     *     ...
-     *   else
-     *     ...
-     * }
-     * }}}
-     *
-     * @param  o  the object to test
-     * @tparam T   the type to test against
-     *
-     * @return `true` if `o` is of type `T`, `false` if not.
-     */
-    def isOfType[T](o: Any)(implicit man: Manifest[T]): Boolean = {
-        // The following is nice, but fails on "primitives" (e.g., Int).
-        /*
-        man >:> Manifest.classType(v.asInstanceOf[AnyRef].getClass)
-        */
-        def isPrimitive[P](implicit manP: Manifest[P]): Boolean =
-            Class.forName(manP.toString).
-                  isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
+  /** Determine whether an object is of a particular type. Example
+    * of use:
+    *
+    * {{{
+    * def foo(obj: Any) = {
+    *   // Is this object of type Seq[Int] or just Int?
+    *   if (isOfType[Int](obj))
+    *     ...
+    *   else if (isOfType[Seq[Int]](obj))
+    *     ...
+    *   else
+    *     ...
+    * }
+    * }}}
+    *
+    * @param  o  the object to test
+    * @tparam T   the type to test against
+    *
+    * @return `true` if `o` is of type `T`, `false` if not.
+    */
+  def isOfType[T](o: Any)(implicit man: Manifest[T]): Boolean = {
+      // The following is nice, but fails on "primitives" (e.g., Int).
+    /*
+    man >:> Manifest.classType(v.asInstanceOf[AnyRef].getClass)
+    */
+    def isPrimitive[P](implicit manP: Manifest[P]): Boolean =
+      Class.forName(manP.toString).
+            isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
-        def isClass: Boolean =
-            man.erasure.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
+    def isClass: Boolean =
+      man.erasure.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
-        man.toString match {
-            case "Int"    => isPrimitive[java.lang.Integer]
-            case "Short"  => isPrimitive[java.lang.Short]
-            case "Long"   => isPrimitive[java.lang.Long]
-            case "Float"  => isPrimitive[java.lang.Float]
-            case "Double" => isPrimitive[java.lang.Double]
-            case "Char"   => isPrimitive[java.lang.Character]
-            case "Byte"   => isPrimitive[java.lang.Byte]
-            case _        => isClass
-        }
+    man.toString match {
+      case "Int"    => isPrimitive[java.lang.Integer]
+      case "Short"  => isPrimitive[java.lang.Short]
+      case "Long"   => isPrimitive[java.lang.Long]
+      case "Float"  => isPrimitive[java.lang.Float]
+      case "Double" => isPrimitive[java.lang.Double]
+      case "Char"   => isPrimitive[java.lang.Character]
+      case "Byte"   => isPrimitive[java.lang.Byte]
+      case _        => isClass
     }
+  }
 }
