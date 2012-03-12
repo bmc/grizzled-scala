@@ -13,14 +13,6 @@
   }],
  "resolvers": ["http://scala-tools.org/repo-releases"],
  "dependencies": [{
-   "organization":"com.jsuereth",
-   "name": "xsbt-gpg-plugin",
-   "version": "0.6"
-  },{
-   "organization":"me.lessis",
-   "name": "ls-sbt",
-   "version": "0.1.1"
-  },{
    "organization":"org.scala-lang.plugins",
    "name": "continuations",
    "version": "2.9.1"
@@ -29,6 +21,6 @@
    "name": "jline",
    "version": "0.9.94"
   }],
- "scalas": ["2.9.1","2.9.0-1","2.9.0","2.8.1"],
+ "scalas": ["2.9.1","2.9.0","2.9.0-1","2.8.1","2.8.0"],
  "sbt": false
 }
