@@ -53,7 +53,7 @@ rest for you:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.9.1`
-* Version: `1.0.10`
+* Version: `1.0.11`
 * Type: `jar`
 
 For example:
@@ -61,7 +61,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.9.1</artifactId>
-      <version>1.0.10</version>
+      <version>1.0.11</version>
     </dependency>
 
 Scala 2.8.0, Scala 2.8.1, Scala 2.9.0 and Scala 2.9.0-1, and Scala 2.9.1
@@ -78,7 +78,7 @@ If you're using [SBT][] 0.7.x to compile your code, you can place the
 following line in your project file (i.e., the Scala file in your
 `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.10"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.11"
 
 #### 0.10.x
 
@@ -87,7 +87,7 @@ following line in your `build.sbt` file (for Quick Configuration). If
 you're using an SBT 0.10.x Full Configuration, you're obviously smart
 enough to figure out what to do, on your own.
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.10"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.11"
 
 Grizzled Scala is also registered with [Doug Tangren][]'s excellent
 [ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
