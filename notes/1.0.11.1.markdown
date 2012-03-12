@@ -1,0 +1,1 @@
+* Cross-compiled for Scala 2.8.2.
