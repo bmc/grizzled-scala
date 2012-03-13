@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.0.11.1"
+version := "1.0.12"
 
 organization := "org.clapper"
 
@@ -33,7 +33,7 @@ seq(lsSettings :_*)
 (description in LsKeys.lsync) <<= description(d => d)
 
 crossScalaVersions := Seq(
-  "2.9.1", "2.9.0", "2.9.0-1", "2.8.2", "2.8.1", "2.8.0"
+  "2.9.1-1", "2.9.1", "2.9.0", "2.9.0-1", "2.8.2", "2.8.1", "2.8.0"
 )
 
 // ---------------------------------------------------------------------------
@@ -46,7 +46,8 @@ libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
                                   "2.8.2"   -> ("scalatest_2.8.2", "1.7.1"),
                                   "2.9.0"   -> ("scalatest_2.9.0", "1.7.1"),
                                   "2.9.0-1" -> ("scalatest_2.9.0-1", "1.7.1"),
-                                  "2.9.1"   -> ("scalatest_2.9.0-1", "1.7.1"))
+                                  "2.9.1"   -> ("scalatest_2.9.1", "1.7.1"),
+                                  "2.9.1-1"   -> ("scalatest_2.9.1", "1.7.1"))
     val (scalatestArtifact, scalatestVersion) = scalatestVersionMap.getOrElse(
         sv, error("Unsupported Scala version for ScalaTest: " + scalaVersion)
     )
@@ -56,7 +57,7 @@ libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
 // ---------------------------------------------------------------------------
 // Other dependendencies
 
-libraryDependencies += "jline" % "jline" % "0.9.94"
+libraryDependencies += "jline" % "jline" % "2.6"
 
 // ---------------------------------------------------------------------------
 // Publishing criteria

@@ -1,0 +1,4 @@
+* Readline implementation now uses [Jline 2][].
+* Cross-compiled for Scala 2.9.1-1.
+
+[Jline 2]: https://github.com/huynhjl/jline2

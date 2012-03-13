@@ -40,7 +40,9 @@
 package grizzled.readline.jline
 
 import grizzled.readline._
-import _root_.jline.{Completor => JLineCompleter, ConsoleReader}
+import _root_.jline.console.ConsoleReader
+import _root_.jline.console.completer.{Completer => JLineCompleter}
+import scala.collection.JavaConversions._
 
 /** History implementation that wraps the JLine history API.
   */
@@ -58,10 +60,7 @@ extends History with Util {
     import scala.collection.mutable.ArrayBuffer
 
     val result = new ArrayBuffer[String]
-    val it = history.getHistoryList.iterator
-    while (it.hasNext)
-    result += it.next.asInstanceOf[String]
-    result.toList
+    history.entries.map(_.toString).toList
   }
 
   /** Clear the history buffer
@@ -73,7 +72,7 @@ extends History with Util {
     * @return the most recent entry, as an `Option`, or
     *         `None` if the history buffer is empty
     */
-  def last: Option[String] = str2opt(history.current)
+  def last: Option[String] = str2opt(history.current.toString)
 
   /** Get the current number of entries in the history buffer.
     *
@@ -85,19 +84,19 @@ extends History with Util {
     *
     * @return the current max history size, or 0 for unlimited.
     */
-  def max: Int = history.getMaxSize
+  def max: Int = 0
 
   /** Set maximum history size.
     *
     * @param newSize the new max history size, or 0 for unlimited.
     */
-  def max_=(newSize: Int) = history.setMaxSize(newSize)
+  def max_=(newSize: Int) = ()
 
   /** Unconditionally appends the specified line to the history.
     *
     * @param line  the line to add
     */
-  protected def append(line: String) = history.addToHistory(line)
+  protected def append(line: String) = history.add(line)
 }
 
 /** JLine implementation of the Readline trait.
@@ -107,8 +106,8 @@ extends Readline with Util {
   val name = "JLine"
   val reader = new ConsoleReader
   val history = new JLineHistory(reader)
-  reader.addCompletor(jlCompleter)
-  reader.setUseHistory(false) // we'll do it manually
+  reader.addCompleter(jlCompleter)
+  reader.setHistoryEnabled(false) // we'll do it manually
   val self = this
 
   // Need to use a Scala existential type as the parameter to the
@@ -121,7 +120,9 @@ extends Readline with Util {
   type JSList = java.util.List[String]
 
   object jlCompleter extends JLineCompleter with CompleterHelper {
-    def complete(buf: String, cursor: Int, completions: JList): Int = {
+    def complete(buf: String,
+                 cursor: Int,
+                 completions: java.util.List[CharSequence]): Int = {
       import grizzled.parsing.StringToken
       import grizzled.string.GrizzledString._
 
@@ -160,11 +161,11 @@ extends Readline with Util {
 
           case token :: rest if (before(token)) =>
             Cursor :: Delim :: LineToken(token.string) :: Delim ::
-          mapWithDelims(rest)
+            mapWithDelims(rest)
 
           case token :: rest if (within(token)) =>
             LineToken(token.string) :: Cursor :: Delim ::
-          mapWithDelims(rest)
+            mapWithDelims(rest)
 
           case token :: rest =>
             LineToken(token.string) :: Delim :: mapTokens(rest)
@@ -204,7 +205,7 @@ extends Readline with Util {
 
   private[readline] def doReadline(prompt: String): Option[String] = {
     try {
-      print(prompt)
+      reader.setPrompt(prompt)
       str2opt(reader.readLine)
     }
 
