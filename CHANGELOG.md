@@ -3,6 +3,22 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.0.12:
+
+* Readline implementation now uses [Jline 2][].
+* Cross-compiled for Scala 2.9.1-1.
+
+[Jline 2]: https://github.com/huynhjl/jline2
+
+Version 1.0.11.1:
+
+* Cross-compiled for Scala 2.8.2.
+
+Version 1.0.11:
+
+* Fixed cross-compilation issues. Grizzled-Scala is, once again, cross-
+  compiled and cross-published for 2.8.0, 2.8.1, 2.9.0, 2.9.0-1 and 2.9.1.
+
 Version 1.0.10:
 
 * Fixed `grizzled.sys.makeNativePath` and related functions to treat the

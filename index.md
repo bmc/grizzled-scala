@@ -46,6 +46,9 @@ can get download the Grizzled Scala library jar directly from the Maven
 repository. However, if you're using [Maven][] or [SBT][], you can just have
 those tools do the job for you.
 
+Version 1.0.12 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1 and
+2.9.1-1.
+
 ### Installing for Maven
 
 If you're using [Maven][], just specify the artifact, and Maven will do the
@@ -53,7 +56,7 @@ rest for you:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.9.1`
-* Version: `1.0.11.1`
+* Version: `1.0.12`
 * Type: `jar`
 
 For example:
@@ -61,11 +64,8 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.9.1</artifactId>
-      <version>1.0.11.1</version>
+      <version>1.0.12</version>
     </dependency>
-
-Scala 2.8.0, Scala 2.8.1, Scala 2.8.2, Scala 2.9.0 and Scala 2.9.0-1, and
-Scala 2.9.1 are currently supported.
 
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
@@ -78,7 +78,7 @@ If you're using [SBT][] 0.7.x to compile your code, you can place the
 following line in your project file (i.e., the Scala file in your
 `project/build/` directory):
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.11.1"
+    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.12"
 
 #### 0.11.x
 
@@ -87,7 +87,7 @@ following line in your `build.sbt` file (for Quick Configuration). If
 you're using an SBT 0.11.x Full Configuration, you're obviously smart
 enough to figure out what to do, on your own.
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.11.1"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.12"
 
 Grizzled Scala is also registered with [Doug Tangren][]'s excellent
 [ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
