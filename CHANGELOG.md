@@ -3,6 +3,10 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.0.13:
+
+* Cross-compiled for Scala 2.9.2.
+
 Version 1.0.12:
 
 * Readline implementation now uses [Jline 2][].
