@@ -40,7 +40,7 @@ package grizzled
 /** Some reflection-related utility methods and classes.
   */
 object reflect {
-  import scala.reflect.Manifest
+  import scala.reflect.{ClassTag, classTag}
 
   /** Determine whether an object is of a particular type. Example
     * of use:
@@ -62,27 +62,25 @@ object reflect {
     *
     * @return `true` if `o` is of type `T`, `false` if not.
     */
-  def isOfType[T](o: Any)(implicit man: Manifest[T]): Boolean = {
-      // The following is nice, but fails on "primitives" (e.g., Int).
-    /*
-    man >:> Manifest.classType(v.asInstanceOf[AnyRef].getClass)
-    */
-    def isPrimitive[P](implicit manP: Manifest[P]): Boolean =
-      Class.forName(manP.toString).
-            isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
+  def isOfType[T: ClassTag](o: Any): Boolean = {
+    val clsT = classTag[T].runtimeClass
 
-    def isClass: Boolean =
-      man.erasure.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
+    def isPrimitive[P: ClassTag]: Boolean =
+      classTag[P].runtimeClass.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
-    man.toString match {
-      case "Int"    => isPrimitive[java.lang.Integer]
-      case "Short"  => isPrimitive[java.lang.Short]
-      case "Long"   => isPrimitive[java.lang.Long]
-      case "Float"  => isPrimitive[java.lang.Float]
-      case "Double" => isPrimitive[java.lang.Double]
-      case "Char"   => isPrimitive[java.lang.Character]
-      case "Byte"   => isPrimitive[java.lang.Byte]
-      case _        => isClass
+    def isClass: Boolean = 
+      clsT.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
+
+    clsT.toString match {
+      case "int"      => isPrimitive[java.lang.Integer]
+      case "short"    => isPrimitive[java.lang.Short]
+      case "long"     => isPrimitive[java.lang.Long]
+      case "float"    => isPrimitive[java.lang.Float]
+      case "double"   => isPrimitive[java.lang.Double]
+      case "char"     => isPrimitive[java.lang.Character]
+      case "byte"     => isPrimitive[java.lang.Byte]
+      case "boolean"  => isPrimitive[java.lang.Boolean]
+      case _          => isClass
     }
   }
 }
