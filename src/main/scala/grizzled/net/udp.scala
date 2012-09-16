@@ -385,7 +385,7 @@ extends UDPDatagramSocket {
   def close(): Unit = socket.close()
 
   def send(data: Seq[Byte], address: IPAddress, port: Int): Unit = {
-    val buf = data toArray
+    val buf = data.toArray
     val packet = new JDKDatagramPacket(buf, buf.length, address, port)
     socket.send(packet)
   }

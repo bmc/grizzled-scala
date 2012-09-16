@@ -54,6 +54,8 @@ trait PartialReader[T] {
     * @return a list of the items
     */
   def readSome(max: Int): List[T] = {
+    import scala.language.reflectiveCalls
+
     @tailrec def doRead(partialList: List[T], cur: Int): List[T] = {
       if (cur >= max)
         partialList

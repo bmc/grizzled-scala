@@ -39,6 +39,7 @@ package grizzled.io
 
 import scala.io.Source
 import scala.annotation.tailrec
+import scala.language.implicitConversions
 
 import java.io.{Reader, Writer}
 

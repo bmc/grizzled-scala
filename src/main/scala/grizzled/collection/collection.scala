@@ -39,6 +39,7 @@ package grizzled.collection
 
 import scala.collection.generic._
 import scala.collection.immutable.LinearSeq
+import scala.language.implicitConversions
 import java.util.{Collection, Iterator => JIterator}
 
 /** Useful for converting a collection into an object suitable for use with

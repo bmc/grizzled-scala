@@ -74,6 +74,6 @@ object binary {
     val res3 = (res2 + (res2 >> 4)) & 0x0f0f0f0f0f0f0f0fl
 
     // Left-most bits.
-    ((res3 * 0x0101010101010101l) >> 56) toInt
+    ((res3 * 0x0101010101010101l) >> 56).toInt
   }
 }

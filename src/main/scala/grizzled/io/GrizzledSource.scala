@@ -38,6 +38,7 @@
 package grizzled.io
 
 import scala.io.Source
+import scala.language.implicitConversions
 
 /**
  * A wrapper for `java.io.File` that provides additional methods.

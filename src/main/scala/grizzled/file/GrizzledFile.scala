@@ -38,7 +38,6 @@
 package grizzled.file
 
 import grizzled.generator._
-import scala.util.continuations._
 
 import java.io.File
 
@@ -241,30 +240,7 @@ final class GrizzledFile(val file: File) {
    *         the directory.
    */
   def listRecursively(topdown: Boolean = true): Iterator[File] =
-  generator[File] {
-
-    def doList(list: List[File]): Unit @cps[Iteration[File]] = {
-      list match {
-        case Nil => ()
-
-          case f :: tail => {
-            if (topdown) {
-              generate(f)
-              doList(if (f.isDirectory) f.listFiles.toList else Nil)
-            }
-                     else {
-                       doList(if (f.isDirectory) f.listFiles.toList else Nil)
-                       generate(f)
-                     }
-
-            doList(tail)
-          }
-      }
-    }
-
-    if (file.isDirectory)
-      doList(file.listFiles.toList)
-  }
+    util.listRecursively(file, topdown)
 
   /**
    * Determine whether a directory is empty. Only meaningful for a directory.
@@ -305,6 +281,8 @@ final class GrizzledFile(val file: File) {
  * }}}
  */
 object GrizzledFile {
+  import scala.language.implicitConversions
+
   implicit def javaIoFileToGrizzledFile(f: File): GrizzledFile =
     new GrizzledFile(f)
 

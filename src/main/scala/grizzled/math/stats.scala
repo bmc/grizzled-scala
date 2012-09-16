@@ -181,7 +181,7 @@ object stats {
       val max = (0 /: m.values) (scala.math.max(_, _))
 
       // Extract the keys with values that match
-      m filter ( tup => tup._2 == max ) map ( tup => tup._1 ) toList
+      m.filter( tup => tup._2 == max ).map( tup => tup._1 ).toList
     }
   }
 

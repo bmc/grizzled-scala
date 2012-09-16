@@ -37,6 +37,8 @@
 
 package grizzled
 
+import scala.language.reflectiveCalls
+
 /** Miscellaneous utility functions and methods not otherwise categorized.
   */
 object util {

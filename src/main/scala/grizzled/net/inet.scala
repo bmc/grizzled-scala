@@ -38,6 +38,7 @@
 package grizzled.net
 
 import java.net.InetAddress
+import scala.language.implicitConversions
 
 /** Represents an IP address. This class is similar to `java.net.InetAddress`,
   * but it's designed to be more intuitive and easier to use from Scala.
@@ -134,7 +135,7 @@ object IPAddress {
     * @return the `IPAddress`
     */
   def apply(addr: Array[Byte]): IPAddress =
-    IPAddress(addr toList)
+    IPAddress(addr.toList)
 
   /** Create an `IPAddress`, given an array of integers representing
     * the address. The array must contain between 1 and 16 integer values.
@@ -157,7 +158,7 @@ object IPAddress {
     * @return the corresponding `IPAddress` object.
     */
   def apply(addr: Array[Int]): IPAddress = 
-    IPAddress(addr map (_ toByte))
+    IPAddress(addr.map(_.toByte))
 
   /** Create an `IPAddress`, given 1 to 16 integer arguments.
     * The integers will be truncated to 8-bit bytes.
@@ -179,7 +180,7 @@ object IPAddress {
     * @return the `IPAddress`
     */
   def apply(addr: Int*): IPAddress =
-    IPAddress(addr map (_ toByte) toList)
+    IPAddress(addr.map(_.toByte).toList)
 
   /** Create an `IPAddress`, given a list of bytes representing the
     * address
@@ -200,7 +201,7 @@ object IPAddress {
     * @return the `IPAddress`
     */
   def apply(address: List[Byte]): IPAddress = {
-    val zeroByte = 0 toByte
+    val zeroByte = 0.toByte
 
     val fullAddress: List[Byte] = address.length match {
       case 4 =>
@@ -219,11 +220,11 @@ object IPAddress {
 
       case n => {
         val upper = if (n < 4) 4 else 16
-        address ++ (n until upper map (i => zeroByte))
+        address ++ (n.until(upper).map(i => zeroByte))
       }
     }
 
-    new IPAddress(fullAddress toArray)
+    new IPAddress(fullAddress.toArray)
   }
 
   /** Create an `IPAddress`, given a host name.

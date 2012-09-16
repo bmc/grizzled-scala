@@ -38,6 +38,7 @@
 package grizzled.io
 
 import scala.io.Source
+import scala.language.reflectiveCalls
 
 /** Some utility methods.
   */
@@ -71,6 +72,7 @@ object util {
     * @deprecated Use `withCloseable`
     */
   def useThenClose[T](closeable: Closeable)(block: => T) = {
+
     try {
       block
     }

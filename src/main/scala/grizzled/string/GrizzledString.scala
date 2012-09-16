@@ -39,6 +39,7 @@ package grizzled.string
 
 import grizzled.parsing.StringToken
 
+import scala.language.implicitConversions
 import scala.util.matching.Regex
 import scala.util.matching.Regex.Match
 

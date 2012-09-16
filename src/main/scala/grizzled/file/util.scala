@@ -39,8 +39,10 @@ package grizzled.file
 
 import scala.util.matching.Regex
 import scala.annotation.tailrec
+import scala.util.continuations._
 
 import grizzled.file.GrizzledFile._
+import grizzled.generator._
 import grizzled.io.RichInputStream._
 import grizzled.io.RichReader._
 import grizzled.sys.os
@@ -319,43 +321,43 @@ object util {
       val piece = pieces(0)
       val last = (pieces.length == 1)
 
-        if (piece == "**") {
-          val remainingPieces = if (last) Nil else pieces.drop(1)
+      if (piece == "**") {
+        val remainingPieces = if (last) Nil else pieces.drop(1)
 
-          for ((root, dirs, files) <- walk(directory, true)) {
-            if (last)
-              // At the end of a pattern, "**" just recursively
-              // matches directories.
-              result += root
+        for ((root, dirs, files) <- walk(directory, true)) {
+          if (last)
+            // At the end of a pattern, "**" just recursively
+            // matches directories.
+            result += root
 
-            else
-              // Recurse downward, trying to match the rest of
-              // the pattern.
-              result ++= doGlob(remainingPieces, root)
+          else
+            // Recurse downward, trying to match the rest of
+            // the pattern.
+            result ++= doGlob(remainingPieces, root)
+        }
+      }
+
+      else {
+        // Regular glob pattern.
+
+        val path = directory + fileSeparator + piece
+        val matches = glob(path)
+        if (matches.length > 0) {
+          if (last)
+            // Save the matches, and stop.
+            result ++= matches
+
+          else {
+            // Must continue recursing.
+            val remainingPieces = pieces.drop(1)
+            for (m <- matches; if (new File(m).isDirectory)) {
+              val subResult = doGlob(remainingPieces, m)
+              for (partialPath <- subResult)
+                result += partialPath
+            }
           }
         }
-
-            else {
-              // Regular glob pattern.
-
-              val path = directory + fileSeparator + piece
-              val matches = glob(path)
-              if (matches.length > 0) {
-                if (last)
-                  // Save the matches, and stop.
-                  result ++= matches
-
-                else {
-                  // Must continue recursing.
-                  val remainingPieces = pieces.drop(1)
-                  for (m <- matches; if (new File(m).isDirectory)) {
-                    val subResult = doGlob(remainingPieces, m)
-                    for (partialPath <- subResult)
-                      result += partialPath
-                  }
-                }
-              }
-            }
+      }
 
       result.toList
     }
@@ -380,6 +382,51 @@ object util {
     val matches = doGlob(pieces.toList, directory)
 
     matches map (normalizePath _)
+  }
+
+
+  /**
+   * List a directory recursively, returning `File` objects for each file
+   * (and subdirectory) found. This method does lazy evaluation, instead
+   * of calculating everything up-front, as `walk()` does.
+   *
+   * If `topdown` is `true`, a directory is generated before the entries
+   * for any of its subdirectories (directories are generated top down).
+   * If `topdown` is `false`, a directory directory is generated after
+   * the entries for all of its subdirectories (directories are generated
+   * bottom up).
+   *
+   * @param file    The `File` object, presumed to represent a directory.
+   * @param topdown `true` to do a top-down traversal, `false` otherwise.
+   *
+   * @return a generator (iterator) of `File` objects for everything under
+   *         the directory. If `file` isn't a directory, the generator will
+   *         be empty.
+   */
+  def listRecursively(file: File, topdown: Boolean = true): Iterator[File] =
+  generator[File] {
+
+    def doList(list: List[File]): Unit @cps[Iteration[File]] = {
+      list match {
+        case Nil => ()
+
+          case f :: tail => {
+            if (topdown) {
+              generate(f)
+              doList(if (f.isDirectory) f.listFiles.toList else Nil)
+            }
+            else {
+              doList(if (f.isDirectory) f.listFiles.toList else Nil)
+              generate(f)
+            }
+
+            doList(tail)
+          }
+      }
+    }
+
+    if (file.isDirectory)
+      doList(file.listFiles.toList)
   }
 
   /* ---------------------------------------------------------------------- *\

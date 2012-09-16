@@ -50,7 +50,7 @@ import java.io.Reader
 class SourceReader(val source: Source) extends Reader {
   def read(buf: Array[Char], offset: Int, length: Int): Int = {
     val total = math.min(length, buf.length)
-    val chars = source take(total) toList
+    val chars = source.take(total).toList
     val actual = chars.length
     chars.copyToArray(buf, offset, length)
     actual

@@ -38,6 +38,7 @@
 package grizzled.string
 
 import scala.util.matching.Regex
+import scala.language.implicitConversions
 
 /** An analog to Scala's `RichChar` class, providing some methods
   * that neither `RichChar` nor `Char` (nor, for that matter,
