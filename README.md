@@ -1,6 +1,11 @@
 Grizzled Scala: A general-purpose library of Scala classes and objects
 ======================================================================
 
+**Branch: pre-scala-2.10-fixes**
+
+This branch exists as a place to patch the code for Scala 2.9.x and earlier.
+The trunk is now 2.10.x and later.
+
 ## Introduction
 
 This is the Grizzled Scala Library, which is similar to the clapper.org
