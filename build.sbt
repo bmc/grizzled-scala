@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.0.13"
+version := "1.0.14"
 
 organization := "org.clapper"
 
@@ -13,27 +13,23 @@ homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 description := "A general-purpose Scala utility library"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.10.0-M7"
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
 
-scalacOptions ++= Seq("-P:continuations:enable", "-deprecation", "-unchecked")
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature")
 
 autoCompilerPlugins := true
 
-libraryDependencies <<= (scalaVersion, libraryDependencies) { (ver, deps) =>
-    deps :+ compilerPlugin("org.scala-lang.plugins" % "continuations" % ver)
-}
+//seq(lsSettings :_*)
 
-seq(lsSettings :_*)
+//(LsKeys.tags in LsKeys.lsync) := Seq("utility", "library", "grizzled")
 
-(LsKeys.tags in LsKeys.lsync) := Seq("utility", "library", "grizzled")
-
-(description in LsKeys.lsync) <<= description(d => d)
+//(description in LsKeys.lsync) <<= description(d => d)
 
 crossScalaVersions := Seq(
-  "2.9.2", "2.9.1-1", "2.9.1", "2.9.0", "2.9.0-1", "2.8.2", "2.8.1", "2.8.0"
+  "2.10.0-M7"
 )
 
 // ---------------------------------------------------------------------------
@@ -41,14 +37,17 @@ crossScalaVersions := Seq(
 
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
     // Select ScalaTest version based on Scala version
-    val scalatestVersionMap = Map("2.8.0"   -> ("scalatest_2.8.0", "1.3.1.RC2"),
-                                  "2.8.1"   -> ("scalatest_2.8.1", "1.7.1"),
-                                  "2.8.2"   -> ("scalatest_2.8.2", "1.7.1"),
-                                  "2.9.0"   -> ("scalatest_2.9.0", "1.7.1"),
-                                  "2.9.0-1" -> ("scalatest_2.9.0-1", "1.7.1"),
-                                  "2.9.1"   -> ("scalatest_2.9.1", "1.7.1"),
-                                  "2.9.1-1"   -> ("scalatest_2.9.1", "1.7.1"),
-                                  "2.9.2"   -> ("scalatest_2.9.1", "1.7.1"))
+    val scalatestVersionMap = Map(
+      "2.8.0"     -> ("scalatest_2.8.0", "1.3.1.RC2"),
+      "2.8.1"     -> ("scalatest_2.8.1", "1.7.1"),
+      "2.8.2"     -> ("scalatest_2.8.2", "1.7.1"),
+      "2.9.0"     -> ("scalatest_2.9.0", "1.7.1"),
+      "2.9.0-1"   -> ("scalatest_2.9.0-1", "1.7.1"),
+      "2.9.1"     -> ("scalatest_2.9.1", "1.7.1"),
+      "2.9.1-1"   -> ("scalatest_2.9.1", "1.7.1"),
+      "2.9.2"     -> ("scalatest_2.9.1", "1.7.1"),
+      "2.10.0-M7" -> ("scalatest_2.10.0-M7", "1.9-2.10.0-M7-B1")
+    )
     val (scalatestArtifact, scalatestVersion) = scalatestVersionMap.getOrElse(
         sv, error("Unsupported Scala version for ScalaTest: " + scalaVersion)
     )
