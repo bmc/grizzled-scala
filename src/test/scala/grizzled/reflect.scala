@@ -37,14 +37,16 @@
 import org.scalatest.FunSuite
 import grizzled.reflect._
 import scala.reflect.Manifest
-
+import scala.reflect.{ClassTag, classTag}
+ 
 /**
   * Tests the grizzled.file functions.
   */
 class ReflectionTest extends FunSuite {
-  private def isOfTypeTest[T](expected: Boolean, v: Any)
-  (implicit m: Manifest[T]): Unit = {
-    expect(expected, "isOfType " + m.toString) { isOfType[T](v) }
+  private def isOfTypeTest[T: ClassTag](expected: Boolean, v: Any): Unit = {
+    expect(expected, "isOfType " + classTag.runtimeClass.toString) {
+      isOfType[T](v) 
+    }
   }
 
   test("isOfType primitives") {
