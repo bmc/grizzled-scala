@@ -44,7 +44,7 @@ import java.lang.Math.sqrt
  */
 class StatsTest extends FunSuite {
   private def dList[T](l: T*)(implicit x: Numeric[T]): List[Double] =
-    l map (x.toDouble(_)) toList
+    l.map (x.toDouble(_)).toList
 
   test("geometric mean") {
     val Data = List(

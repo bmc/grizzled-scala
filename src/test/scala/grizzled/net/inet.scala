@@ -38,8 +38,8 @@ import grizzled.net._
  * Tests the grizzled.net functions in inet.scala
  */
 class IPAddressTest extends FunSuite {
-  def byte(thing: Int): Byte = thing toByte
-  def bytes(data: Int*): List[Byte] = data map (_ toByte) toList
+  def byte(thing: Int): Byte = thing.toByte
+  def bytes(data: Int*): List[Byte] = data.map(_.toByte).toList
 
   val Data = List(
     // input                   expected result and expected string
@@ -74,21 +74,21 @@ class IPAddressTest extends FunSuite {
 
     for ((input, expected, expectedString) <- Data) {
       // Map the expected value into a list of bytes
-      val mappedExpected = expected map (_ toByte)
+      val mappedExpected = expected.map(_.toByte)
       val ipAddr = getIPAddress(input)
 
       // Run the test
       expect(mappedExpected, "IPAddress(" + input + ")") {
-        ipAddr.address toList
+        ipAddr.address.toList
       }
 
       expect(expectedString, "IPAddress(" + input + ")") {
-        ipAddr toString
+        ipAddr.toString
       }
     }
 
     intercept[IllegalArgumentException] { 
-      IPAddress( (for (i <- 0 to 20) yield i.toByte) toList )
+      IPAddress( (for (i <- 0 to 20) yield i.toByte).toList )
     }
 
     intercept[IllegalArgumentException] {
@@ -103,7 +103,7 @@ class IPAddressTest extends FunSuite {
 
     for ((input, expected, expectedString) <- Data) {
       // Map the expected value into a list of bytes
-      val mappedExpected = expected map (_ toByte)
+      val mappedExpected = expected.map(_.toByte)
 
       val ipAddr = getIPAddress(input)
       val jdkInetAddress: java.net.InetAddress = ipAddr
@@ -130,11 +130,11 @@ class IPAddressTest extends FunSuite {
 
   test("java.net.InetAddress call-throughs") {
     expect(true, "127.0.0.1 is loopback")  {
-      IPAddress(127, 0, 0, 1) isLoopbackAddress
+      IPAddress(127, 0, 0, 1).isLoopbackAddress
     }
 
     expect(false, "192.168.1.100 is not loopback")  {
-      IPAddress(192, 168, 1, 100) isLoopbackAddress
+      IPAddress(192, 168, 1, 100).isLoopbackAddress
     }
   }
 }
