@@ -55,14 +55,14 @@ class StringTest extends FunSuite {
       "0"     -> false
     )
 
-    for((input, expected) <- data;
-        val permutations = List(input,
-                                input.capitalize,
-                                input.toUpperCase,
-                                " " + input,
-                                " " + input + " ",
-                                input + " ");
-        s <- permutations) {
+    for {(input, expected) <- data;
+         permutations = List(input,
+                             input.capitalize,
+                             input.toUpperCase,
+                             " " + input,
+                             " " + input + " ",
+                             input + " ")
+         s <- permutations} {
       expect(expected, "\"" + s + "\" -> " + expected.toString)  {
         val b: Boolean = util.stringToBoolean(s)
         b
@@ -75,11 +75,9 @@ class StringTest extends FunSuite {
                     "000", "00", "111", "1a", "0z",
                     "fa", "fal", "fals", "falsee")
 
-    for(input <- data;
-        val permutations = List(input,
-                                input.capitalize,
-                                input.toUpperCase);
-        s <- permutations) {
+    for {input <- data
+         permutations = List(input, input.capitalize, input.toUpperCase)
+         s <- permutations} {
       intercept[IllegalArgumentException] {
         val b: Boolean = util.stringToBoolean(s)
         b

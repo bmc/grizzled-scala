@@ -68,7 +68,7 @@ class StringTemplateTest extends FunSuite {
     )
 
     for {(input, expected) <- data
-         val (str, vars) = (input._1, input._2)} {
+         (str, vars) = (input._1, input._2)} {
       expect(expected, "\"" + str + "\" -> " + expected.toString)  {
         new UnixShellStringTemplate(vars.get, true).substitute(str)
       }
@@ -100,7 +100,7 @@ class StringTemplateTest extends FunSuite {
     )
 
     for {(input, expected) <- data
-         val (str, vars) = (input._1, input._2)} {
+         (str, vars) = (input._1, input._2)} {
            intercept[VariableNotFoundException] {
              new UnixShellStringTemplate(vars.get, false).substitute(str)
            }
@@ -132,7 +132,7 @@ class StringTemplateTest extends FunSuite {
     )
 
     for {(input, expected) <- data
-         val (str, vars) = (input._1, input._2)} {
+         (str, vars) = (input._1, input._2)} {
       expect(expected, "\"" + str + "\" -> " + expected.toString)  {
         new WindowsCmdStringTemplate(vars.get, true).substitute(str)
       }
@@ -164,7 +164,7 @@ class StringTemplateTest extends FunSuite {
     )
 
     for {(input, expected) <- data
-         val (str, vars) = (input._1, input._2)} {
+         (str, vars) = (input._1, input._2)} {
       intercept[VariableNotFoundException] {
         new WindowsCmdStringTemplate(vars.get, false).substitute(str)
       }
