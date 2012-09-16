@@ -3,7 +3,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2010, Brian M. Clapper
+  Copyright (c) 2010-2012, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -130,11 +130,11 @@ extends Readline with Util {
   extends EditLine.PossibleCompletionsDisplayer {
     def showCompletions(tokens: java.lang.Iterable[String]) = {
       import grizzled.collection.GrizzledIterable._
-      import scala.collection.JavaConversions._
+      import scala.collection.convert.Wrappers._
 
       val maxTemp = editline.getMaxShownCompletions
       val max = if (maxTemp <= 0) java.lang.Integer.MAX_VALUE else maxTemp
-      val all = IterableWrapper(tokens).toList
+      val all = JIterableWrapper(tokens).toList
       val toShow = all take max
       println("\nPossible completions:")
       println(toShow.columnarize(79))
