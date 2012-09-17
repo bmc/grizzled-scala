@@ -268,4 +268,15 @@ class FileTest extends FunSuite {
       }
     }
   }
+
+  test("listRecursively") {
+    import grizzled.file.GrizzledFile._
+    import java.io.File
+
+    withTemporaryDirectory("listRecursively") { f =>
+      val paths = Set("foo/bar.c", "foo/baz.txt", "test.txt", "foo/bar/baz.txt")
+      paths.map {new File(_)}.map {_.dirname}.foreach { f => f.mkdirs }
+      println(f.listRecursively().toSet)
+    }
+  }
 }
