@@ -9,3 +9,6 @@ project/plugins/target
 target
 .history
 *.sublime-*
+.ensime*
+.idea
+*.iml
