@@ -62,6 +62,8 @@ object util {
   val fileSeparator = File.separator
   val fileSeparatorChar = fileSeparator(0)
 
+  private lazy val random = new Random()
+
   /* ---------------------------------------------------------------------- *\
    Public Methods
    \* ---------------------------------------------------------------------- */
@@ -408,124 +410,25 @@ object util {
 
     def doList(list: List[File]): Unit @cps[Iteration[File]] = {
       list match {
-        case Nil => ()
+        case Nil => 
 
-          case f :: tail => {
-            if (topdown) {
-              generate(f)
-              doList(if (f.isDirectory) f.listFiles.toList else Nil)
-            }
-            else {
-              doList(if (f.isDirectory) f.listFiles.toList else Nil)
-              generate(f)
-            }
-
-            doList(tail)
+        case f :: tail => {
+          if (topdown) {
+            generate(f)
+            doList(if (f.isDirectory) f.listFiles.toList else Nil)
           }
+          else {
+            doList(if (f.isDirectory) f.listFiles.toList else Nil)
+            generate(f)
+          }
+
+          doList(tail)
+        }
       }
     }
 
     if (file.isDirectory)
       doList(file.listFiles.toList)
-  }
-
-  /* ---------------------------------------------------------------------- *\
-                              Private Methods
-  \* ---------------------------------------------------------------------- */
-
-  /**
-   * Convert a file into a path array. Borrowed from SBT source code.
-   */
-  private def toPathArray(file: File): Array[String] = {
-    @tailrec def toPathList(f: File, current: List[String]): List[String] = {
-      if (f == null)
-        current
-      else
-        toPathList(f.getParentFile, f.getName :: current)
-    }
-
-    toPathList(file.getCanonicalFile, Nil).toArray
-  }
-
-  /**
-   * Get the length of the common prefix between two arrays.
-   */
-  private def commonPrefix[T](a: Array[T], b: Array[T]): Int = {
-    @tailrec def common(count: Int): Int = {
-      if ((count >= a.length) || (count >= b.length) || (a(count) != b(count)))
-        count
-      else
-        common(count + 1)
-    }
-
-    common(0)
-  }
-
-  /**
-   * For the eglob algorithm to work, the pattern needs to be split into a
-   * (directory, subpattern) pair, where the subpattern is relative. This
-   * splitting operating is operating system-dependent, largely because
-   * of Windows' stupid drive letters. This variable holds a partially
-   * applied function for the splitter, determined the first time it is
-   * referenced. That way, eglob() doesn't do this same match on every
-   * call.
-   */
-  private lazy val eglobPatternSplitter = os match {
-    case (Mac | Posix) => splitPosixEglobPattern(_)
-    case Windows       => splitWindowsEglobPattern(_)
-    case _             =>
-      throw new UnsupportedOperationException("Unknown OS: " + os)
-  }
-
-  /**
-   * Windows pattern splitter for eglob(). See description for the
-   * eglobPatternSplitter value, above.
-   *
-   * @param pattern  the pattern to split
-   *
-   * @return a (directory, subpattern) tuple
-   */
-  private def splitWindowsEglobPattern(pattern: String): (String, String) = {
-    splitDrivePath(pattern) match {
-      case ("", "") =>
-        (".", ".")
-
-      case ("", path) =>
-        (path, ".")
-
-      case (drive, "") =>
-        (".", drive)
-
-      case (drive, path) => {
-        // Hack: Can't handle non-absolute paths in a drive.
-        // Pretend a drive letter means "absolute". Note that
-        // "drive" can be empty here, which is fine.
-
-        if (path(0) == '\\')
-          (path drop 1, drive + "\\")
-        else
-          (path, drive + "\\")
-      }
-    }
-  }
-
-  /**
-   * Posix pattern splitter for eglob(). See description for the
-   * eglobPatternSplitter value, above.
-   *
-   * @param pattern  the pattern to split
-   *
-   * @return a (directory, subpattern) tuple
-   */
-  private def splitPosixEglobPattern(pattern: String): (String, String) = {
-    if (pattern.length == 0)
-      (".", ".")
-
-    else if (pattern(0) == fileSeparatorChar)
-      (pattern drop 1, "/")
-
-    else
-      (pattern, ".")
   }
 
   /**
@@ -803,7 +706,6 @@ object util {
     new File(tempDirName)
   }
 
-  private lazy val random = new Random()
   /**
    * Create a temporary directory.
    *
@@ -825,9 +727,9 @@ object util {
         Some(dir)
       }
 
-        else {
-          None
-        }
+      else {
+        None
+      }
     }
 
     @tailrec def create(tries: Int): File = {
@@ -870,7 +772,7 @@ object util {
     }
 
     finally {
-      temp.deleteRecursively
+      temp.deleteRecursively()
     }
   }
 
@@ -1131,14 +1033,32 @@ object util {
   }
 
   /**
-   * Path normalization is operating system-specific. This value
-   * holds the real path normalizer, determined once.
+   * Converts a path name from its operating system-specific format to a
+   * universal path notation. Universal path notation always uses a
+   * Unix-style "/" to separate path elements. A universal path can be
+   * converted to a native (operating system-specific) path via the
+   * <tt>native_path()</tt> function. Note that on POSIX-compliant systems,
+   * this function simply returns the <tt>path</tt> parameter unmodified.
+   *
+   * @param path the path to convert to universal path notation
+   *
+   * @return the universal path
    */
-  private lazy val doPathNormalizing = os match {
-    case (Mac | Posix) => normalizePosixPath(_)
-    case Windows       => normalizeWindowsPath(_)
-    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
-  }
+  def universalPath(path: String): String = makeUniversalPath(path)
+
+  /**
+   * Converts a path name from universal path notation to the operating
+   * system-specific format. Universal path notation always uses a
+   * Unix-style "/" to separate path elements. A native path can be
+   * converted to a universal path via the <tt>universal_path()</tt>
+   * function. Note that on POSIX-compliant systems, this function simply
+   * returns the <tt>path</tt> parameter unmodified.
+   *
+   * @param path the path to convert from universtal to native path notation
+   *
+   * @return the native path
+   */
+  def nativePath(path: String): String = makeNativePath(path)
 
   /**
    * Normalize a path, eliminating double slashes, resolving embedded
@@ -1150,35 +1070,6 @@ object util {
    * @return the normalized path
    */
   def normalizePath(path: String): String = doPathNormalizing(path)
-
-  /**
-   * Shared between normalizeWindowsPath() and normalizePosixPath(),
-   * this function normalizes the pieces of a path, handling embedded "..",
-   * empty elements (from splitting when there are adjacent file separators),
-   * etc.
-   *
-   * @param pieces  path components, with no separators
-   *
-   * @return sanitized list of path components
-   */
-  private def normalizePathPieces(pieces: List[String]): List[String] = {
-    pieces match {
-      case Nil =>
-        Nil
-
-      case "" :: tail =>
-        normalizePathPieces(tail)
-
-      case "." :: tail =>
-        normalizePathPieces(tail)
-
-      case a :: ".." :: tail =>
-        normalizePathPieces(tail)
-
-      case _ =>
-        List[String](pieces.head) ++ normalizePathPieces(pieces.tail)
-    }
-  }
 
   /**
    * Normalize a Windows path name. Handles UNC paths. Adapted from the
@@ -1290,6 +1181,144 @@ object util {
     }
   }
 
+  /* ---------------------------------------------------------------------- *\
+                              Private Methods
+  \* ---------------------------------------------------------------------- */
+
+  /**
+   * Convert a file into a path array. Borrowed from SBT source code.
+   */
+  private def toPathArray(file: File): Array[String] = {
+    @tailrec def toPathList(f: File, current: List[String]): List[String] = {
+      if (f == null)
+        current
+      else
+        toPathList(f.getParentFile, f.getName :: current)
+    }
+
+    toPathList(file.getCanonicalFile, Nil).toArray
+  }
+
+  /**
+   * Get the length of the common prefix between two arrays.
+   */
+  private def commonPrefix[T](a: Array[T], b: Array[T]): Int = {
+    @tailrec def common(count: Int): Int = {
+      if ((count >= a.length) || (count >= b.length) || (a(count) != b(count)))
+        count
+      else
+        common(count + 1)
+    }
+
+    common(0)
+  }
+
+  /**
+   * For the eglob algorithm to work, the pattern needs to be split into a
+   * (directory, subpattern) pair, where the subpattern is relative. This
+   * splitting operating is operating system-dependent, largely because
+   * of Windows' stupid drive letters. This variable holds a partially
+   * applied function for the splitter, determined the first time it is
+   * referenced. That way, eglob() doesn't do this same match on every
+   * call.
+   */
+  private lazy val eglobPatternSplitter = os match {
+    case (Mac | Posix) => splitPosixEglobPattern(_)
+    case Windows       => splitWindowsEglobPattern(_)
+    case _             =>
+      throw new UnsupportedOperationException("Unknown OS: " + os)
+  }
+
+  /**
+   * Windows pattern splitter for eglob(). See description for the
+   * eglobPatternSplitter value, above.
+   *
+   * @param pattern  the pattern to split
+   *
+   * @return a (directory, subpattern) tuple
+   */
+  private def splitWindowsEglobPattern(pattern: String): (String, String) = {
+    splitDrivePath(pattern) match {
+      case ("", "") =>
+        (".", ".")
+
+      case ("", path) =>
+        (path, ".")
+
+      case (drive, "") =>
+        (".", drive)
+
+      case (drive, path) => {
+        // Hack: Can't handle non-absolute paths in a drive.
+        // Pretend a drive letter means "absolute". Note that
+        // "drive" can be empty here, which is fine.
+
+        if (path(0) == '\\')
+          (path drop 1, drive + "\\")
+        else
+          (path, drive + "\\")
+      }
+    }
+  }
+
+  /**
+   * Posix pattern splitter for eglob(). See description for the
+   * eglobPatternSplitter value, above.
+   *
+   * @param pattern  the pattern to split
+   *
+   * @return a (directory, subpattern) tuple
+   */
+  private def splitPosixEglobPattern(pattern: String): (String, String) = {
+    if (pattern.length == 0)
+      (".", ".")
+
+    else if (pattern(0) == fileSeparatorChar)
+      (pattern drop 1, "/")
+
+    else
+      (pattern, ".")
+  }
+
+  /**
+   * Path normalization is operating system-specific. This value
+   * holds the real path normalizer, determined once.
+   */
+  private lazy val doPathNormalizing = os match {
+    case (Mac | Posix) => normalizePosixPath(_)
+    case Windows       => normalizeWindowsPath(_)
+    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
+  }
+
+  /**
+   * Shared between normalizeWindowsPath() and normalizePosixPath(),
+   * this function normalizes the pieces of a path, handling embedded "..",
+   * empty elements (from splitting when there are adjacent file separators),
+   * etc.
+   *
+   * @param pieces  path components, with no separators
+   *
+   * @return sanitized list of path components
+   */
+  private def normalizePathPieces(pieces: List[String]): List[String] = {
+    pieces match {
+      case Nil =>
+        Nil
+
+      case "" :: tail =>
+        normalizePathPieces(tail)
+
+      case "." :: tail =>
+        normalizePathPieces(tail)
+
+      case a :: ".." :: tail =>
+        normalizePathPieces(tail)
+
+      case _ =>
+        List[String](pieces.head) ++ normalizePathPieces(pieces.tail)
+    }
+  }
+
   /**
    * Native-to-universal path conversion is operating system-specific.
    * These values hold the real converters, determined once.
@@ -1306,31 +1335,4 @@ object util {
     case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
-  /**
-   * Converts a path name from its operating system-specific format to a
-   * universal path notation. Universal path notation always uses a
-   * Unix-style "/" to separate path elements. A universal path can be
-   * converted to a native (operating system-specific) path via the
-   * <tt>native_path()</tt> function. Note that on POSIX-compliant systems,
-   * this function simply returns the <tt>path</tt> parameter unmodified.
-   *
-   * @param path the path to convert to universal path notation
-   *
-   * @return the universal path
-   */
-  def universalPath(path: String): String = makeUniversalPath(path)
-
-  /**
-   * Converts a path name from universal path notation to the operating
-   * system-specific format. Universal path notation always uses a
-   * Unix-style "/" to separate path elements. A native path can be
-   * converted to a universal path via the <tt>universal_path()</tt>
-   * function. Note that on POSIX-compliant systems, this function simply
-   * returns the <tt>path</tt> parameter unmodified.
-   *
-   * @param path the path to convert from universtal to native path notation
-   *
-   * @return the native path
-   */
-  def nativePath(path: String): String = makeNativePath(path)
 }
