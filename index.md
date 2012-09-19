@@ -46,8 +46,9 @@ can get download the Grizzled Scala library jar directly from the Maven
 repository. However, if you're using [Maven][] or [SBT][], you can just have
 those tools do the job for you.
 
-Version 1.0.13 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1, 
-2.9.1-1 and 2.9.2.
+- Version 1.1.0 supports Scala 2.10.0-M7
+- Version 1.0.13 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1, 
+  2.9.1-1 and 2.9.2.
 
 ### Installing for Maven
 
@@ -55,16 +56,16 @@ If you're using [Maven][], just specify the artifact, and Maven will do the
 rest for you:
 
 * Group ID: `org.clapper`
-* Artifact ID: `grizzled-scala_2.9.2`
-* Version: `1.0.13`
+* Artifact ID: `grizzled-scala_2.9.2` or `grizzled-scala_2.10`
+* Version: `1.0.13` or `1.1.0`
 * Type: `jar`
 
-For example:
+For example, to get the 2.10.0-M7 build:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.9.2</artifactId>
-      <version>1.0.13</version>
+      <artifactId>grizzled-scala_2.10</artifactId>
+      <version>1.1.0</version>
     </dependency>
 
 For more information on using Maven and Scala, see Josh Suereth's
@@ -80,20 +81,28 @@ following line in your project file (i.e., the Scala file in your
 
     val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.13"
 
-#### 0.11.x
+#### 0.11.x and 0.12.x
 
 If you're using [SBT][] 0.11.x to compile your code, you can use the
 following line in your `build.sbt` file (for Quick Configuration). If
 you're using an SBT 0.11.x Full Configuration, you're obviously smart
 enough to figure out what to do, on your own.
 
+If you're using Scala 2.9.2 or earlier:
+
     libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.13"
+
+If you're using Scala 2.10.0-M7:
+
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.1.0"
 
 Grizzled Scala is also registered with [Doug Tangren][]'s excellent
 [ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
 Grizzled Scala with
 
     sbt> ls-install grizzled-scala
+
+**NOTE**: The `ls` capability doesn't yet work for the 1.1.x release.
 
 ## Source Code Repository
 
@@ -153,7 +162,7 @@ request. Along with any patch you send:
 [Maven]: http://maven.apache.org/
 [SBT]: http://code.google.com/p/simple-build-tool
 [bmc@clapper.org]: mailto:bmc@clapper.org
-[changelog]: CHANGELOG.html
+[changelog]: https://github.com/bmc/grizzled-scala/blob/master/CHANGELOG.md
 [SBT cross-building]: http://code.google.com/p/simple-build-tool/wiki/CrossBuild
 [Apache Ivy]: http://ant.apache.org/ivy/
 [Library Management Maven/Ivy section]: http://code.google.com/p/simple-build-tool/wiki/LibraryManagement#Maven/Ivy

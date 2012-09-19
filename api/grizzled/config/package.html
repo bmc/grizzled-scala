@@ -2,181 +2,227 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>grizzled.config</title>
+          <title>config - grizzled.config</title>
+          <meta name="description" content="config - grizzled.config" />
+          <meta name="keywords" content="config grizzled.config" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link type="text/css" media="screen" rel="stylesheet" href="../../lib/template.css" />
-      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.config.package';
+            window.location.href = url + '#' + hash;
+         }
+   	  </script>
     
         </head>
         <body class="value">
       <div id="definition">
         <img src="../../lib/package_big.png" />
-        <p id="owner"><a name="grizzled" class="extype" href="../package.html">grizzled</a></p>
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
         <h1>config</h1>
       </div>
 
-      <h4 class="signature" id="signature">
-      <span class="kind">package</span>
-      <span class="symbol"> 
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
         <span class="name">config</span>
-        
-        
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Classes and objects to aid in the parsing of INI-style configuration
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Classes and objects to aid in the parsing of INI-style configuration
 files. This package is similar, in concept, to the Python
 <code>ConfigParser</code> module (though its implementation and capabilities
 differ quite a bit).
-</p></div></div>
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.config"><span>config</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
 
       <div id="template">
-
-        <div id="mbrsel">
-          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
-          
-          
-          <div id="visbl">
-              <span class="filtertype">Visibility</span>
-              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-            </div>
-        </div>
-
+        <div id="allMembers">
         
 
-        <div class="types members" id="types">
+        <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="grizzled.config.ConfigException" data-isabs="false">
+              <ol><li name="grizzled.config.ConfigException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="ConfigException:ConfigException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="ConfigException.html"><span class="name">ConfigException</span></a>
-        
-        <span class="result"> extends Exception</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigException.html"><span class="name">ConfigException</span></a><span class="result"> extends <span class="extype" name="java.lang.Exception">Exception</span></span>
       </span>
       </h4>
       <p class="comment cmt">Base class for all configuration exceptions.</p>
-    </li><li visbl="pub" name="grizzled.config.Configuration" data-isabs="false">
+    </li><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="Configuration.html"><span class="name">Configuration</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Configuration.html"><span class="name">Configuration</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">An INI-style configuration file parser.</p>
-    </li><li visbl="pub" name="grizzled.config.ConversionException" data-isabs="false">
+    </li><li name="grizzled.config.ConversionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="ConversionException:ConversionException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="ConversionException.html"><span class="name">ConversionException</span></a>
-        
-        <span class="result"> extends ConfigException</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConversionException.html"><span class="name">ConversionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.config.DuplicateOptionException" data-isabs="false">
+    </li><li name="grizzled.config.DuplicateOptionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="DuplicateOptionException:DuplicateOptionException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="DuplicateOptionException.html"><span class="name">DuplicateOptionException</span></a>
-        
-        <span class="result"> extends ConfigException</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DuplicateOptionException.html"><span class="name">DuplicateOptionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
       </span>
       </h4>
       <p class="comment cmt">Thrown when a duplicate option is encountered.</p>
-    </li><li visbl="pub" name="grizzled.config.DuplicateSectionException" data-isabs="false">
+    </li><li name="grizzled.config.DuplicateSectionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="DuplicateSectionException:DuplicateSectionException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="DuplicateSectionException.html"><span class="name">DuplicateSectionException</span></a>
-        
-        <span class="result"> extends ConfigException</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DuplicateSectionException.html"><span class="name">DuplicateSectionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
       </span>
       </h4>
       <p class="comment cmt">Thrown when a duplicate section is encountered.</p>
-    </li><li visbl="pub" name="grizzled.config.NoSuchOptionException" data-isabs="false">
+    </li><li name="grizzled.config.NoSuchOptionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="NoSuchOptionException:NoSuchOptionException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="NoSuchOptionException.html"><span class="name">NoSuchOptionException</span></a>
-        
-        <span class="result"> extends ConfigException</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NoSuchOptionException.html"><span class="name">NoSuchOptionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
       </span>
       </h4>
       <p class="comment cmt">Thrown when an expected option is not present in the confiruation.</p>
-    </li><li visbl="pub" name="grizzled.config.NoSuchSectionException" data-isabs="false">
+    </li><li name="grizzled.config.NoSuchSectionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="NoSuchSectionException:NoSuchSectionException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="NoSuchSectionException.html"><span class="name">NoSuchSectionException</span></a>
-        
-        <span class="result"> extends ConfigException</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NoSuchSectionException.html"><span class="name">NoSuchSectionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
       </span>
       </h4>
       <p class="comment cmt">Thrown when an expected section is not present in the confiruation.</p>
-    </li><li visbl="pub" name="grizzled.config.Section" data-isabs="false">
+    </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="Section:Section"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="Section.html"><span class="name">Section</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Section.html"><span class="name">Section</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Used as a wrapper to pass a section to callbacks.</p>
-    </li><li visbl="pub" name="grizzled.config.SubstitutionException" data-isabs="false">
+    </li><li name="grizzled.config.SubstitutionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="SubstitutionException:SubstitutionException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="SubstitutionException.html"><span class="name">SubstitutionException</span></a>
-        
-        <span class="result"> extends ConfigException</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SubstitutionException.html"><span class="name">SubstitutionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
       </span>
       </h4>
       
     </li></ol>
             </div>
-        
+
         
 
-        <div class="values members" id="values">
+        <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="grizzled.config.Configuration" data-isabs="false">
+              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
         <a href="Configuration$.html"><span class="name">Configuration</span></a>
-        
-        <span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <p class="comment cmt">Companion object for the <code>Configuration</code> class
 </p>
-    </li><li visbl="pub" name="grizzled.config.ConfigurationReader" data-isabs="false">
+    </li><li name="grizzled.config.ConfigurationReader" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="ConfigurationReader:ConfigurationReader"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
         <a href="ConfigurationReader$.html"><span class="name">ConfigurationReader</span></a>
-        
-        <span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <p class="comment cmt">A configuration reader: Reads a source and produces a parsed
@@ -187,10 +233,30 @@ configuration.</p>
         
 
         
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="No Group">
+              <h3>No Group</h3>
+              
+            </div>
+        </div>
 
       </div>
-      
+
       <div id="tooltip"></div>
-      
+
+      <div id="footer">  </div>
+
+
     </body>
       </html>

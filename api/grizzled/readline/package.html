@@ -2,194 +2,241 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>grizzled.readline</title>
+          <title>readline - grizzled.readline</title>
+          <meta name="description" content="readline - grizzled.readline" />
+          <meta name="keywords" content="readline grizzled.readline" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link type="text/css" media="screen" rel="stylesheet" href="../../lib/template.css" />
-      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.readline.package';
+            window.location.href = url + '#' + hash;
+         }
+   	  </script>
     
         </head>
         <body class="value">
       <div id="definition">
         <img src="../../lib/package_big.png" />
-        <p id="owner"><a name="grizzled" class="extype" href="../package.html">grizzled</a></p>
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
         <h1>readline</h1>
       </div>
 
-      <h4 class="signature" id="signature">
-      <span class="kind">package</span>
-      <span class="symbol"> 
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
         <span class="name">readline</span>
-        
-        
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>The <code>grizzled.readline</code> package provides a common front-end API to
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>grizzled.readline</code> package provides a common front-end API to
 various underlying readline and readline-like implementations, including
 <a href="http://tiswww.case.edu/php/chet/readline/rltop.html">GNU Readline</a>,
 <a href="http://www.thrysoee.dk/editline/">Editline</a>, and
 <a href="http://jline.sourceforge.net/">JLine</a>.
-</p></div></div>
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.readline"><span>readline</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
 
       <div id="template">
-
-        <div id="mbrsel">
-          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
-          
-          
-          <div id="visbl">
-              <span class="filtertype">Visibility</span>
-              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-            </div>
-        </div>
-
+        <div id="allMembers">
         
 
-        <div class="types members" id="types">
+        <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="grizzled.readline.Completer" data-isabs="true">
+              <ol><li name="grizzled.readline.Completer" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
       <a id="Completer:Completer"></a>
       <h4 class="signature">
-      <span class="kind">trait</span>
-      <span class="symbol"> 
-        <a href="Completer.html"><span class="name">Completer</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Completer.html"><span class="name">Completer</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Models a completer: An object that, given a line of input and a token
 within that line, finds possible completions for the token.</p>
-    </li><li visbl="pub" name="grizzled.readline.CompleterHelper" data-isabs="true">
+    </li><li name="grizzled.readline.CompleterHelper" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
       <a id="CompleterHelper:CompleterHelper"></a>
       <h4 class="signature">
-      <span class="kind">trait</span>
-      <span class="symbol"> 
-        <a href="CompleterHelper.html"><span class="name">CompleterHelper</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="CompleterHelper.html"><span class="name">CompleterHelper</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.readline.CompletionToken" data-isabs="true">
+    </li><li name="grizzled.readline.CompletionToken" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
       <a id="CompletionToken:CompletionToken"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="CompletionToken.html"><span class="name">CompletionToken</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CompletionToken.html"><span class="name">CompletionToken</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>sealed abstract </dd></dl></div>
-    </li><li visbl="pub" name="grizzled.readline.History" data-isabs="true">
+      
+    </li><li name="grizzled.readline.History" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
       <a id="History:History"></a>
       <h4 class="signature">
-      <span class="kind">trait</span>
-      <span class="symbol"> 
-        <a href="History.html"><span class="name">History</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="History.html"><span class="name">History</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Models a Readline history: an object that holds previously read
 lines.</p>
-    </li><li visbl="pub" name="grizzled.readline.LineToken" data-isabs="false">
+    </li><li name="grizzled.readline.LineToken" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="LineToken:LineToken"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="LineToken.html"><span class="name">LineToken</span></a>
-        
-        <span class="params">(<span name="value">value: String</span>)</span><span class="result"> extends CompletionToken with Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LineToken.html"><span class="name">LineToken</span></a><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.readline.ListCompleter" data-isabs="false">
+    </li><li name="grizzled.readline.ListCompleter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="ListCompleter:ListCompleter"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="ListCompleter.html"><span class="name">ListCompleter</span></a>
-        
-        <span class="result"> extends Completer</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ListCompleter.html"><span class="name">ListCompleter</span></a><span class="result"> extends <a href="Completer.html" class="extype" name="grizzled.readline.Completer">Completer</a></span>
       </span>
       </h4>
       <p class="comment cmt">A completer that completes from a list of items.</p>
-    </li><li visbl="pub" name="grizzled.readline.NullCompleter" data-isabs="false">
+    </li><li name="grizzled.readline.NullCompleter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="NullCompleter:NullCompleter"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="NullCompleter.html"><span class="name">NullCompleter</span></a>
-        
-        <span class="result"> extends Completer</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NullCompleter.html"><span class="name">NullCompleter</span></a><span class="result"> extends <a href="Completer.html" class="extype" name="grizzled.readline.Completer">Completer</a></span>
       </span>
       </h4>
       <p class="comment cmt">A completer that doesn't do anything.</p>
-    </li><li visbl="pub" name="grizzled.readline.PathnameCompleter" data-isabs="false">
+    </li><li name="grizzled.readline.PathnameCompleter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="PathnameCompleter:PathnameCompleter"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="PathnameCompleter.html"><span class="name">PathnameCompleter</span></a>
-        
-        <span class="result"> extends Completer</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="PathnameCompleter.html"><span class="name">PathnameCompleter</span></a><span class="result"> extends <a href="Completer.html" class="extype" name="grizzled.readline.Completer">Completer</a></span>
       </span>
       </h4>
       <p class="comment cmt">A completer that completes path names.</p>
-    </li><li visbl="pub" name="grizzled.readline.Readline" data-isabs="true">
+    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
       <a id="Readline:Readline"></a>
       <h4 class="signature">
-      <span class="kind">trait</span>
-      <span class="symbol"> 
-        <a href="Readline.html"><span class="name">Readline</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Readline.html"><span class="name">Readline</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Defines the readline-like functionality supported by this API.</p>
     </li></ol>
             </div>
-        
+
         
 
-        <div class="values members" id="values">
+        <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="grizzled.readline.Cursor" data-isabs="false">
+              <ol><li name="grizzled.readline.Cursor" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="Cursor:Cursor"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
-        <a href="Cursor$.html"><span class="name">Cursor</span></a>
-        
-        <span class="result"> extends CompletionToken with Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Cursor$.html"><span class="name">Cursor</span></a><span class="result"> extends <a href="CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.readline.Delim" data-isabs="false">
+    </li><li name="grizzled.readline.Delim" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="Delim:Delim"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
-        <a href="Delim$.html"><span class="name">Delim</span></a>
-        
-        <span class="result"> extends CompletionToken with Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Delim$.html"><span class="name">Delim</span></a><span class="result"> extends <a href="CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="grizzled.readline.Readline" data-isabs="false">
+    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
       <a id="Readline:Readline"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
         <a href="Readline$.html"><span class="name">Readline</span></a>
-        
-        <span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <p class="comment cmt">Companion factory object, used to instantiate particular readline
@@ -200,10 +247,30 @@ implementations.</p>
         
 
         
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="No Group">
+              <h3>No Group</h3>
+              
+            </div>
+        </div>
 
       </div>
-      
+
       <div id="tooltip"></div>
-      
+
+      <div id="footer">  </div>
+
+
     </body>
       </html>
