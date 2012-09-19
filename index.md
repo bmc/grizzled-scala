@@ -102,8 +102,6 @@ Grizzled Scala with
 
     sbt> ls-install grizzled-scala
 
-**NOTE**: The `ls` capability doesn't yet work for the 1.1.x release.
-
 ## Source Code Repository
 
 The source code for the Grizzled Scala Library is maintained on [GitHub][].
