@@ -36,11 +36,13 @@
 
 import org.scalatest.FunSuite
 import grizzled.file.util._
+import grizzled.file.GrizzledFile._
+import java.io.File
 
 /**
  * Tests the grizzled.file functions.
  */
-class FileTest extends FunSuite {
+class FileUtilTest extends FunSuite {
   test("basename") {
     val data = Map(("", "/")                 -> "",
                    ("foo", "/")              -> "foo",
@@ -266,6 +268,32 @@ class FileTest extends FunSuite {
       expect(expected, "normalizeWindowsPath(\"" + path + "\")")  {
         normalizeWindowsPath(path)
       }
+    }
+  }
+
+  test("listRecursively") {
+    //withTemporaryDirectory("listRecursively") { f =>
+    //  val paths = Set("foo/bar.c", "foo/baz.txt", "test.txt", "foo/bar/baz.txt")
+    //  paths.map {new File(_)}.map {_.dirname}.foreach { f => f.mkdirs }
+    //  println(grizzled.file.util.listRecursively(f).toSet)
+    //}
+
+    val d = createTemporaryDirectory("list-recursively")
+    try {
+      val paths = Set("foo/bar.c", "foo/baz.txt", "test.txt", "foo/bar/baz.txt")
+      paths.map { p =>
+        new File(joinPath(d.getPath, p))
+      }.map {
+        _.dirname
+      }.foreach {
+        f => f.mkdirs
+      }
+
+      listRecursively(d).toSet
+    }
+
+    finally {
+      d.deleteRecursively()
     }
   }
 }
