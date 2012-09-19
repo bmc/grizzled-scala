@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.0.14"
+version := "1.1.0"
 
 organization := "org.clapper"
 
@@ -13,18 +13,26 @@ homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 description := "A general-purpose Scala utility library"
 
-scalaVersion := "2.10.0-M7"
+scalaVersion := "2.9.1"
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
 
-scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature")
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-P:continuations:enable")
 
 autoCompilerPlugins := true
 
-//seq(lsSettings :_*)
+libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
+  deps :+ compilerPlugin("org.scala-lang.plugins" % "continuations" % sv)
+}
 
-//(LsKeys.tags in LsKeys.lsync) := Seq("utility", "library", "grizzled")
+// addSbtPlugin("me.lessis" % "ls-sbt" % "0.1.2")
+
+// ls plugin is apparently not yet available for 2.10
+
+// seq(lsSettings: _*)
+
+// (LsKeys.tags in LsKeys.lsync) := Seq("utility", "library", "grizzled")
 
 //(description in LsKeys.lsync) <<= description(d => d)
 
