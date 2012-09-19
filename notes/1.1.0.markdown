@@ -1,0 +1,18 @@
+* Built for the Scala 2.10.0 series _only_ (2.10.0-M7, initially). **This
+  version, and later versions, are 2.10-only. 2.9.x and earlier will be
+  supported via the 1.0.x release branch.** This is due to changes in the
+  Scala library between 2.9 and 2.10.
+* Converted code to use 2.10 reflection API.
+* Added `-feature` to `scalac` options, and removed all feature warnings.
+  In many cases, this simply necessitating importing various `scala.language`
+  packages, such as `scala.language.reflectiveCalls` and
+  `scala.language.implicitConversions`.
+* Removed use of `val` in `for` comprehensions, as it's now deprecated.
+* Upgraded build to SBT 0.12.
+* Moved `GrizzledFile.listRecursively()` functionality from `GrizzledFile`
+  (which is intended to enhance `java.io.File` implicitly) to
+  `grizzled.file.util` package, where it is more easily invoked directly.
+  Replaced `GrizzledFile.listRecursively()` with a simple wrapper that
+  invokes `grizzled.file.util.listRecursively()`.
+* Converted use of `scala.collection.JavaConversions.IterableWrapper` (which
+  is deprecated in 2.10) to `scala.collection.convert.JIterableWrapper`.
