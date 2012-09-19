@@ -1,0 +1,1 @@
+* Re-integrated Doug Tangren's (outstanding) [ls](http://ls.implicit.ly/) SBT plugin.
