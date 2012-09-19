@@ -37,6 +37,8 @@
 
 package grizzled
 
+import scala.util.continuations._
+
 /** Functions that can be used to simulate Python-style generators.
   * Adapted liberally from Rich Dougherty's solution, as outlined in
   * Stack Overflow: [[http://stackoverflow.com/questions/2201882#2215182]]
@@ -70,7 +72,6 @@ package grizzled
   * `-P:continuations:enable` flag.
   */
 object generator {
-  import scala.util.continuations._
 
   sealed trait Iteration[+T]
 
@@ -99,7 +100,7 @@ object generator {
     * to yield values. The result of a generator, from the caller's
     * perspective, is a typed iterator.
     */
-  def generator[T](body: => Unit @cps[Iteration[T]]): Iterator[T] = {
+  def generator[T](body: => Unit @cpsParam[Iteration[T],Iteration[T]]): Iterator[T] = {
     trampoline {
       reset[Iteration[T], Iteration[T]] {
         body
@@ -111,7 +112,7 @@ object generator {
   /** Called from within the body of a generator, `generate()` yields a
     * value back from the generator.
     */
-  def generate[T](result: T): Unit @cps[Iteration[T]] = shift {
+  def generate[T](result: T): Unit @cpsParam[Iteration[T],Iteration[T]] = shift {
     k: (Unit => Iteration[T]) => Yield(result, () => k(()))
   }
 }
