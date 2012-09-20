@@ -94,7 +94,7 @@ If you're using Scala 2.9.2 or earlier:
 
 If you're using Scala 2.10.0-M7:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.1.0"
+    libraryDependencies += "org.clapper" % "grizzled-scala_2.10" % "1.1.0"
 
 Grizzled Scala is also registered with [Doug Tangren][]'s excellent
 [ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
