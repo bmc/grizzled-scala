@@ -43,7 +43,8 @@ For a more detailed description of what's available, see the
 Grizzled Scala is published to the `oss.sonatype.org` repository and
 automatically sync'd with the [Maven Central Repository][].
 
-- Version 1.1.0 supports Scala 2.10.0-M7
+- Version 1.1.2 supports Scala 2.10.0-RC1
+- Version 1.1.1 supports Scala 2.10.0-M7
 - Version 1.0.13 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1, 
   2.9.1-1 and 2.9.2.
 
@@ -54,7 +55,8 @@ rest for you:
 
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.9.2` or `grizzled-scala_2.10`
-* Version: `1.0.13` or `1.1.0`
+* Version: `1.0.13` (for Scala 2.9.2 or earlier), `1.1.1` (for Scala 2.10-M7), 
+  or`1.1.2` (for Scala 2.10-RC1)
 * Type: `jar`
 
 For example, to get the 2.10.0-M7 build:
@@ -62,7 +64,7 @@ For example, to get the 2.10.0-M7 build:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.10</artifactId>
-      <version>1.1.0</version>
+      <version>1.1.2</version>
     </dependency>
 
 For more information on using Maven and Scala, see Josh Suereth's
