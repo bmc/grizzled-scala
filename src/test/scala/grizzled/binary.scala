@@ -66,13 +66,13 @@ class BinaryTest extends FunSuite {
     )
 
     for((n, expected) <- intData) {
-      expect(expected, "\"" + n.toString + "\" -> " + expected.toString)  {
+      expectResult(expected, "\"" + n.toString + "\" -> " + expected.toString)  {
         bitCount(n)
       }
     }
 
     for((n, expected) <- longData) {
-      expect(expected, "\"" + n.toString + "\" -> " + expected.toString)  {
+      expectResult(expected, "\"" + n.toString + "\" -> " + expected.toString)  {
         bitCount(n)
       }
     }

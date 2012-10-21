@@ -1,0 +1,25 @@
+{
+  "organization" : "org.clapper",
+  "name" : "grizzled-scala",
+  "version" : "1.1.2",
+  "description" : "A general-purpose Scala utility library",
+  "site" : "http://software.clapper.org/grizzled-scala/",
+  "tags" : [ "utility", "library", "grizzled" ],
+  "docs" : "",
+  "resolvers" : [ "https://oss.sonatype.org/content/repositories/releases" ],
+  "dependencies" : [ {
+    "organization" : "org.scala-lang.plugins",
+    "name" : "continuations",
+    "version" : "2.10.0-RC1"
+  }, {
+    "organization" : "jline",
+    "name" : "jline",
+    "version" : "2.6"
+  } ],
+  "scalas" : [ "2.10.0-RC1" ],
+  "licenses" : [ {
+    "name" : "BSD",
+    "url" : "http://software.clapper.org/grizzled-scala/license.html"
+  } ],
+  "sbt" : false
+}

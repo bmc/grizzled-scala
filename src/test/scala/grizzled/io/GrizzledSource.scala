@@ -49,7 +49,7 @@ class GrizzledSourceTest extends FunSuite {
                     ("foobar", Some("foobar")) )
 
     for((input, expected) <- data) {
-      expect(expected, "firstNonblankLine(\"" + input + "\")") { 
+      expectResult(expected, "firstNonblankLine(\"" + input + "\")") { 
         val source = Source.fromString(input)
         source.firstNonblankLine
       }
@@ -68,7 +68,7 @@ class GrizzledSourceTest extends FunSuite {
     )
 
     for((input, start, end, expected) <- data) {
-      expect(expected, "linesBetween(\"" + input + "\")") { 
+      expectResult(expected, "linesBetween(\"" + input + "\")") { 
         val source = Source.fromString(input)
         source.linesBetween(start, end).toList
       }

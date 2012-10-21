@@ -44,7 +44,7 @@ import scala.reflect.{ClassTag, classTag}
   */
 class ReflectionTest extends FunSuite {
   private def isOfTypeTest[T: ClassTag](expected: Boolean, v: Any): Unit = {
-    expect(expected, "isOfType " + classTag.runtimeClass.toString) {
+    expectResult(expected, "isOfType " + classTag.runtimeClass.toString) {
       isOfType[T](v) 
     }
   }

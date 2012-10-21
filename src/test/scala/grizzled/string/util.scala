@@ -63,7 +63,7 @@ class StringTest extends FunSuite {
                              " " + input + " ",
                              input + " ")
          s <- permutations} {
-      expect(expected, "\"" + s + "\" -> " + expected.toString)  {
+      expectResult(expected, "\"" + s + "\" -> " + expected.toString)  {
         val b: Boolean = util.stringToBoolean(s)
         b
       }
@@ -95,7 +95,7 @@ class StringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      expect(expected, "\"" + input + "\" -> " + expected.toString) {
+      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
         tokenizeWithQuotes(input)
       }
     }
@@ -166,7 +166,7 @@ quam. Vestibulum ante ipsum primis in.""",
     for((input, expected) <- data) {
       val (string, width, indent, prefix, indentChar) = input
 
-      expect(expected, "\"" + input + "\" -> " + expected.toString) {
+      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
         val wrapper = new WordWrapper(width, indent, prefix, indentChar)
         wrapper.wrap(string)
       }

@@ -56,7 +56,7 @@ class FileFilterTest extends FunSuite {
     )
 
     for((input, expected) <- data)
-      expect(expected, "BackslashContinuedLineIterator(\"" + input + "\")") {
+      expectResult(expected, "BackslashContinuedLineIterator(\"" + input + "\")") {
         import grizzled.collection.ListIterator
         val iterator = new ListIterator[String](input)
         val result = {

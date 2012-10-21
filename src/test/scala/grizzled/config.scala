@@ -116,7 +116,7 @@ class ConfigTest extends FunSuite {
     val config = Configuration(Source.fromString(configText))
 
     for ((opt, expected) <- data)
-      expect(expected, opt + "=" + expected.toString) {
+      expectResult(expected, opt + "=" + expected.toString) {
         config.getInt("section", opt)
       }
   }
@@ -152,7 +152,7 @@ class ConfigTest extends FunSuite {
         val config = Configuration(Source.fromString(configText))
 
         for ((opt, expected) <- data)
-            expect(expected, opt + "=" + expected.toString) {
+            expectResult(expected, opt + "=" + expected.toString) {
                 config.getIntOrElse("section", opt, expected)
             }
     }
@@ -170,7 +170,7 @@ class ConfigTest extends FunSuite {
       val config = Configuration(Source.fromString(configText))
 
       for ((opt, expected) <- data) {
-        expect(expected, opt + " -> " + expected) {
+        expectResult(expected, opt + " -> " + expected) {
           config.getInt("section", opt)
         }
       }
@@ -194,7 +194,7 @@ class ConfigTest extends FunSuite {
     for (opt <- config.optionNames("section")) {
       val expected = if (opt.startsWith("false")) Some(false) 
                      else Some(true)
-      expect(expected, opt + "=" + expected) {
+      expectResult(expected, opt + "=" + expected) {
         config.getBoolean("section", opt)
       }
     }
@@ -232,7 +232,7 @@ class ConfigTest extends FunSuite {
     val config = Configuration(Source.fromString(configText))
 
     for ((opt, expected) <- data) {
-      expect(expected, opt + "=" + expected.toString) {
+      expectResult(expected, opt + "=" + expected.toString) {
         config.getBooleanOrElse("section", opt, expected)
       }
     }
@@ -252,7 +252,7 @@ class ConfigTest extends FunSuite {
     val config = Configuration(Source.fromString(configText))
 
     for ((opt, expected) <- data) {
-      expect(expected, opt + " -> " + expected) {
+      expectResult(expected, opt + " -> " + expected) {
         config.getBoolean("section", opt)
       }
     }
@@ -346,7 +346,7 @@ class ConfigTest extends FunSuite {
 
     val config = Configuration(Source.fromString(configText))
     for ((opt, expected) <- data) {
-      expect(expected, opt + "=" + expected.toString) {
+      expectResult(expected, opt + "=" + expected.toString) {
         config.getAsList("section1", opt)
       }
     }
@@ -367,7 +367,7 @@ class ConfigTest extends FunSuite {
 
     val config = Configuration(Source.fromString(configText))
     for ((opt, expected) <- data) {
-      expect(expected, opt + "=" + expected.toString) {
+      expectResult(expected, opt + "=" + expected.toString) {
         config.getAsList("section1", opt, """\|""".r)
       }
     }
@@ -391,7 +391,7 @@ class ConfigTest extends FunSuite {
                                """([a-zA-Z0-9_#.]+)""".r)
 
     for ((sectionName, expected) <- testData) {
-      expect(expected, sectionName) {
+      expectResult(expected, sectionName) {
         config.hasSection(sectionName)
       }
     }
@@ -445,7 +445,7 @@ class ConfigTest extends FunSuite {
       val section  = inputs._2
       val variable = inputs._3
 
-      expect(expectedResult, opIdent) {config.get(section, variable)}
+      expectResult(expectedResult, opIdent) {config.get(section, variable)}
     }
   }
 }

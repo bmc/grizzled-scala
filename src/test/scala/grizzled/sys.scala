@@ -44,7 +44,7 @@ class SysTest extends FunSuite {
   test("system properties") {
     for ((k, v) <- systemProperties) {
       val javaVal = System.getProperty(k)
-      expect(javaVal, "property \"" + k + "\" must be \"" + v + "\"") {v}
+      expectResult(javaVal, "property \"" + k + "\" must be \"" + v + "\"") {v}
     }
   }
 
@@ -63,7 +63,7 @@ class SysTest extends FunSuite {
 
     for ((osName, osType) <- data;
          name <- List(osName.capitalize, osName.toUpperCase, osName)) {
-      expect(osType, "OS name \"" + osName + "\" -> " + osType)  {
+      expectResult(osType, "OS name \"" + osName + "\" -> " + osType)  {
         getOS(osName)
       }
     }

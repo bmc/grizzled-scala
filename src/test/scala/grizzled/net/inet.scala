@@ -78,11 +78,11 @@ class IPAddressTest extends FunSuite {
       val ipAddr = getIPAddress(input)
 
       // Run the test
-      expect(mappedExpected, "IPAddress(" + input + ")") {
+      expectResult(mappedExpected, "IPAddress(" + input + ")") {
         ipAddr.address.toList
       }
 
-      expect(expectedString, "IPAddress(" + input + ")") {
+      expectResult(expectedString, "IPAddress(" + input + ")") {
         ipAddr.toString
       }
     }
@@ -109,19 +109,19 @@ class IPAddressTest extends FunSuite {
       val jdkInetAddress: java.net.InetAddress = ipAddr
       val ipAddr2: IPAddress = jdkInetAddress
 
-      expect(mappedExpected, "IPAddress(" + input + ")") {
+      expectResult(mappedExpected, "IPAddress(" + input + ")") {
         jdkInetAddress.getAddress.toList
       }
 
-      expect(expectedString, "IPAddress(" + input + ")") {
+      expectResult(expectedString, "IPAddress(" + input + ")") {
         jdkInetAddress.getHostAddress
       }
 
-      expect(ipAddr, "IPAddress -> java.net.InetAddress -> IPAddress") {
+      expectResult(ipAddr, "IPAddress -> java.net.InetAddress -> IPAddress") {
         ipAddr2
       }
 
-      expect(ipAddr.hashCode, 
+      expectResult(ipAddr.hashCode, 
              "IPAddress -> java.net.InetAddress -> IPAddress") {
         ipAddr2.hashCode
       }
@@ -129,11 +129,11 @@ class IPAddressTest extends FunSuite {
   }
 
   test("java.net.InetAddress call-throughs") {
-    expect(true, "127.0.0.1 is loopback")  {
+    expectResult(true, "127.0.0.1 is loopback")  {
       IPAddress(127, 0, 0, 1).isLoopbackAddress
     }
 
-    expect(false, "192.168.1.100 is not loopback")  {
+    expectResult(false, "192.168.1.100 is not loopback")  {
       IPAddress(192, 168, 1, 100).isLoopbackAddress
     }
   }
