@@ -3,6 +3,15 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.1.2:
+
+* Cross-compiled and published for Scala 2.10.0-RC1.
+* Converted to use ScalaTest 2.0, which changes `expect` to `expectResult`.
+
+Version 1.1.1:
+
+* Re-integrated Doug Tangren's (outstanding) [ls](http://ls.implicit.ly/) SBT plugin.
+
 Version 1.1.0:
 
 * Built for the Scala 2.10.0 series _only_ (2.10.0-M7, initially). **This
