@@ -2,7 +2,7 @@ Grizzled Scala Library License
 ==============================
 
 This software is released under BSD license, adapted from
-<http://opensource.org/licenses/bsd-license.php>
+<http://opensource.org/licenses/BSD-3-Clause>
 
 ---
 
