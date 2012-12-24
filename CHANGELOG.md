@@ -3,6 +3,15 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.1.3:
+
+* API documentation changes.
+* Built for Scala 2.10 release.
+* Removed a bunch of deprecated methods.
+* Updated ScalaTest version.
+* Addressed [Issue #4](https://github.com/bmc/grizzled-scala/issues/4):
+  `stats.range()` broken when passed a single value.
+
 Version 1.1.2:
 
 * Cross-compiled and published for Scala 2.10.0-RC1.
@@ -32,6 +41,11 @@ Version 1.1.0:
   invokes `grizzled.file.util.listRecursively()`.
 * Converted use of `scala.collection.JavaConversions.IterableWrapper` (which
   is deprecated in 2.10) to `scala.collection.convert.JIterableWrapper`.
+
+Version 1.0.14:
+
+* Addressed [Issue #4](https://github.com/bmc/grizzled-scala/issues/4):
+  `stats.range()` broken when passed a single value.
 
 Version 1.0.13:
 
