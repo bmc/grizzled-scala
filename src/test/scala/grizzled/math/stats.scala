@@ -100,7 +100,7 @@ class StatsTest extends FunSuite {
       (100.0,             dList(100, 150, 50)),
       (2.0,               dList(1, 1, 1, 2, 10, 30, 1000)),
       (16.0,              dList(2, 2, 2, 2, 2, 30, 30, 30, 30, 30))
-      
+
     )
 
     for ((expected, values) <- Data) {
@@ -223,6 +223,19 @@ class StatsTest extends FunSuite {
     for ((expected, values) <- Data2) {
       expect(expected, "range " + values) {
         range(values: _*)
+      }
+    }
+  }
+
+  test("range with a single value") {
+    val Data = List[(Int, Int)](
+      (1,   1),
+      (100, 100)
+    )
+
+    for ((expected, value) <- Data) {
+      expect(expected, "range " + value) {
+        range(value)
       }
     }
   }

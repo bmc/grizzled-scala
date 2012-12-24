@@ -1,0 +1,2 @@
+* Addressed [Issue #4](https://github.com/bmc/grizzled-scala/issues/4):
+  `stats.range()` broken when passed a single value.

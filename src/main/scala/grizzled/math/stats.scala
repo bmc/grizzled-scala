@@ -126,7 +126,7 @@ object stats {
     */
   def mean[T](items: T*)(implicit n: Numeric[T]): Double =
     arithmeticMean(items.toList: _*)
-  
+
 
   /** Calculates the median of the values of the passed-in numbers.
     *
@@ -189,9 +189,9 @@ object stats {
     * by the `items` arguments. The population variance is defined as:
     *
     * {{{
-    * 1 
+    * 1
     * - *  SUM(i=1, N) { (x[i] - mean)^2^ }
-    * N 
+    * N
     * }}}
     *
     * See:
@@ -210,7 +210,7 @@ object stats {
     * by the `items` arguments. The sample variance is defined as:
     *
     * {{{
-    *   1 
+    *   1
     * ----- *   SUM(i=1, N) { (x[i] - sampleMean)^2^  }
     * N - 1
     * }}}
@@ -272,7 +272,6 @@ object stats {
   def sampleStdDev[T](items: T*)(implicit n: Numeric[T]): Double =
     java.lang.Math.sqrt(sampleVariance(items.toList: _*))
 
-
   /** Calculate the range of a data set. This function does a single
     * linear pass over the data set.
     *
@@ -281,15 +280,18 @@ object stats {
     * @return the range
     */
   def range[T](items: T*)(implicit n: Numeric[T]): T = {
-    // Fold left, generating a (min, max) tuple along the way.
-
-    val (min, max) =
-      ((n.fromInt(Int.MaxValue), n.fromInt(0)) /: items)((tuple, i) =>
-        (n.min(tuple._1, i), n.max(tuple._1, i))
-    )
-
-    n.minus(max, min)
+    items.length match {
+      case 1 => items(0)
+      case _ => {
+        // Fold left, generating a (min, max) tuple along the way.
+        val (min, max) =
+          ((n.fromInt(Int.MaxValue), n.fromInt(0)) /: items)((tuple, i) =>
+           (n.min(tuple._1, i), n.max(tuple._1, i)))
+        n.minus(max, min)
+      }
+    }
   }
+
 
   private def calculateVariance[T](denominator: Int, items: List[T])
                                   (implicit n: Numeric[T]): Double = {
