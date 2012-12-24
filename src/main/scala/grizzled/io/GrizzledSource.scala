@@ -41,7 +41,7 @@ import scala.io.Source
 import scala.language.implicitConversions
 
 /**
- * A wrapper for `java.io.File` that provides additional methods.
+ * A wrapper for `scala.io.Source` that provides additional methods.
  * By importing the implicit conversion functions, you can use the methods
  * in this class transparently from a `java.io.File` object.
  *
