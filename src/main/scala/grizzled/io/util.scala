@@ -47,43 +47,6 @@ object util {
 
   /** Ensure that a closeable object is closed. Note that this function
     * uses a Scala structural type, rather than a `java.io.Closeable`,
-    * because there are classes and interfaces (e.g.,
-    * `java.sql.ResultSet`) that have `close()` methods that do
-    * not extend or implement `java.io.Closeable`.
-    *
-    * Sample use:
-    *
-    * {{{
-    * val in = new java.io.FileInputStream("/path/to/file")
-    * useThenClose(in)
-    * {
-    *     ...
-    * }
-    * }}}
-    *
-    * The closeable object is not passed into the block, because its type
-    * is useless to the block.
-    *
-    * @param closeable  the object that implements `Closeable`
-    * @param block      the code block to execute with the `Closeable`
-    *
-    * @return whatever the block returns
-    *
-    * @deprecated Use `withCloseable`
-    */
-  def useThenClose[T](closeable: Closeable)(block: => T) = {
-
-    try {
-      block
-    }
-
-    finally {
-      closeable.close
-    }
-  }
-
-  /** Ensure that a closeable object is closed. Note that this function
-    * uses a Scala structural type, rather than a `java.io.Closeable`,
     * because there are classes and interfaces (e.g., `java.sql.ResultSet`)
     * that have `close()` methods that do not extend or implement
     * `java.io.Closeable`.
@@ -115,4 +78,4 @@ object util {
     }
   }
 }
-                                     
+

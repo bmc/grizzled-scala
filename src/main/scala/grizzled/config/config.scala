@@ -303,7 +303,7 @@ class Section(val name: String, val options: Map[String, String]) {
   *
   * If the include path is not a URL, and is not an absolute path, its
   * location is relative to the file that's trying to include it.
-  * 
+  *
   * The included file may contain any content that is valid for this
   * parser. It may contain just variable definitions (i.e., the contents of
   * a section, without the section header), or it may contain a complete
@@ -626,54 +626,6 @@ class Configuration(
   def hasSection(sectionName: String): Boolean =
     sections contains sectionName
 
-  /** Get the value for an option in a section.
-    *
-    * @param sectionName  the section name
-    * @param optionName   the option name
-    *
-    * @return the option's value
-    *
-    * @throws NoSuchSectionException if the section doesn't exist
-    * @throws NoSuchOptionException  if the option doesn't exist
-    *
-    * @deprecated  Use get() or getOrElse(), instead
-    */
-  def option(sectionName: String, optionName: String): String = {
-    if ((! SpecialSections.contains(sectionName)) &&
-        (! hasSection(sectionName)))
-      throw new NoSuchSectionException(sectionName)
-
-    def noSuchOption =
-      throw new NoSuchOptionException(sectionName, optionName)
-
-    get(sectionName, optionName) getOrElse noSuchOption
-  }
-
-  /** Get the value for an option in a section, supplying a default if the
-    * option or the section doesn't exist. Exceptions for variable
-    * substitution errors are still thrown.
-    *
-    * @param sectionName  the section name
-    * @param optionName   the option name
-    * @param default      default value
-    *
-    * @return the option's value (which may be the default)
-    *
-    * @deprecated  Use get() or getOrElse(), instead
-    */
-  def option(sectionName: String,
-             optionName: String,
-             default: String): String = {
-    try {
-      option(sectionName, optionName)
-    }
-
-    catch {
-      case _: NoSuchOptionException | _: NoSuchSectionException =>
-        default
-    }
-  }
-
   /** Get all options in a section.
     *
     * @param sectionName  the section name
@@ -837,7 +789,7 @@ class Configuration(
       optionMap += (canonicalOptionName -> value)
     }
 
-  private def safeGetVar(curSection: String, 
+  private def safeGetVar(curSection: String,
                          varName: String): Option[String] = {
     try {
       getVar(curSection, varName)
@@ -887,57 +839,6 @@ class Configuration(
 }
 
 /**
-  * A configuration reader: Reads a source and produces a parsed
-  * configuration.
-  */
-object ConfigurationReader {
-  /** Read a configuration.
-    *
-    * @param source `scala.io.Source` object to read
-    *
-    * @return the `Configuration` object.
-    *
-    * @deprecated Use the Configuration object
-    */
-  def read(source: Source): Configuration =
-    read(source, Map.empty[String, Map[String, String]])
-
-  /** Read a configuration file, permitting some predefined sections to be
-    * added to the configuration before it is read. The predefined sections
-    * are defined in a map of maps. The outer map is keyed by predefined
-    * section name. The inner maps consist of options and their values.
-    * For instance, to read a configuration file, giving it access to
-    * certain command line parameters, you could do something like this:
-    *
-    * {{{
-    * object Foo {
-    *   def main(args: Array[String]) = {
-    *     // You'd obviously want to do some real argument checking here.
-    *     val configFile = args(0)
-    *     val name = args(1)
-    *     val ipAddress = args(2)
-    *     val sections = Map("args" -> Map("name" -> name, "ip" -> ipAddress))
-    *     val config = Configuration(configFile, sections)
-    *     ...
-    *   }
-    * }
-    * }}}
-    *
-    * @param source    `scala.io.Source` object to read
-    * @param sections  the predefined sections. An empty map means there are
-    *                  no predefined sections.
-    *
-    * @return the `Configuration` object.
-    *
-    * @deprecated Use the Configuration object
-    */
-  def read(source: Source,
-           sections: Map[String, Map[String, String]]): Configuration = {
-    new Configuration(sections).load(source)
-  }
-}
-
-/**
   * Companion object for the `Configuration` class
   */
 object Configuration {
@@ -964,7 +865,7 @@ object Configuration {
             sectionNamePattern: Regex = Configuration.DefaultSectionNamePattern,
             commentPattern: Regex = Configuration.DefaultCommentPattern) = {
     new Configuration(Map.empty[String, Map[String,String]],
-                      sectionNamePattern, 
+                      sectionNamePattern,
                       commentPattern).load(source, safe)
   }
 
