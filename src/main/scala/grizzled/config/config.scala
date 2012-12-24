@@ -45,13 +45,15 @@ package grizzled.config
 
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
-import grizzled.string.template.UnixShellStringTemplate
+import grizzled.string.template.{UnixShellStringTemplate,
+                                 VariableNotFoundException}
 import grizzled.string.GrizzledString._
 
 import scala.annotation.tailrec
 import scala.collection.mutable.{Map => MutableMap}
 import scala.io.Source
 import scala.util.matching.Regex
+import scala.util.control.Exception._
 
 /**
   * Base class for all configuration exceptions.
@@ -738,8 +740,17 @@ class Configuration(
               "section.".format(optionName, value)
             )
 
-          val newValue = template.substitute(value.translateMetachars)
-          addOption(curSection.get, optionName, newValue)
+          val v = catching(classOf[VariableNotFoundException]).either {
+            template.substitute(value.translateMetachars)
+          }
+          match {
+            case Left(e) =>
+              throw new SubstitutionException(curSection.get, e.getMessage)
+            case Right(v) =>
+              v
+          }
+
+          addOption(curSection.get, optionName, v)
           curSection
 
         case RawAssignment(optionName, value) =>
@@ -796,7 +807,9 @@ class Configuration(
     }
 
     catch {
-      case (_: NoSuchOptionException | _: NoSuchSectionException) =>
+      case (_: NoSuchOptionException |
+            _: NoSuchSectionException |
+            _: VariableNotFoundException) =>
         None
     }
   }
@@ -805,9 +818,9 @@ class Configuration(
     try {
       varName match {
         case FullVariableRef(section, option) =>
-          Some(this.option(section, option))
+          this.get(section, option)
         case VariableName(option) =>
-          Some(this.option(curSection, option))
+          this.get(curSection, option)
         case _ =>
           throw new SubstitutionException(
             curSection,
@@ -826,6 +839,9 @@ class Configuration(
         throw new SubstitutionException(
           curSection, "Reference to nonexistent section in ${" + varName + "}"
         )
+
+      case ex: VariableNotFoundException =>
+        throw new SubstitutionException(curSection, ex.getMessage)
     }
   }
 
