@@ -1,0 +1,4 @@
+* API documentation changes.
+* Built for Scala 2.10 release.
+* Removed a bunch of deprecated methods.
+* Updated ScalaTest version.

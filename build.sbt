@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.1.2"
+version := "1.1.3"
 
 organization := "org.clapper"
 
@@ -13,7 +13,7 @@ homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 description := "A general-purpose Scala utility library"
 
-scalaVersion := "2.10.0-RC1"
+scalaVersion := "2.10.0"
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
@@ -33,7 +33,7 @@ LsKeys.tags in LsKeys.lsync := Seq("utility", "library", "grizzled")
 description in LsKeys.lsync <<= description(d => d)
 
 crossScalaVersions := Seq(
-  "2.10.0-RC1"
+  "2.10.0"
 )
 
 // ---------------------------------------------------------------------------
@@ -42,7 +42,7 @@ crossScalaVersions := Seq(
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
     // Select ScalaTest version based on Scala version
     val scalatestVersionMap = Map(
-      "2.10.0-RC1" -> ("scalatest_2.10.0-RC1", "2.0.M4-2.10.0-RC1-B1")
+      "2.10.0" -> ("scalatest_2.10", "2.0.M5b")
     )
     val (scalatestArtifact, scalatestVersion) = scalatestVersionMap.getOrElse(
         sv, error("Unsupported Scala version for ScalaTest: " + scalaVersion)
