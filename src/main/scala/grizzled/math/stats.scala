@@ -292,7 +292,6 @@ object stats {
     }
   }
 
-
   private def calculateVariance[T](denominator: Int, items: List[T])
                                   (implicit n: Numeric[T]): Double = {
 
