@@ -2,3 +2,5 @@
 * Built for Scala 2.10 release.
 * Removed a bunch of deprecated methods.
 * Updated ScalaTest version.
+* Addressed [Issue #4](https://github.com/bmc/grizzled-scala/issues/4):
+  `stats.range()` broken when passed a single value.
