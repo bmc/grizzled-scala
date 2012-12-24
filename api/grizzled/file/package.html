@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.file.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -86,7 +90,8 @@ paths, not on open streams or sources.
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.file.FileDoesNotExistException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.file.FileDoesNotExistException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FileDoesNotExistExceptionextendsException"></a>
       <a id="FileDoesNotExistException:FileDoesNotExistException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,7 +103,8 @@ paths, not on open streams or sources.
       </span>
       </h4>
       
-    </li><li name="grizzled.file.GrizzledFile" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledFileextendsObject"></a>
       <a id="GrizzledFile:GrizzledFile"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -110,7 +116,8 @@ paths, not on open streams or sources.
       </span>
       </h4>
       <p class="comment cmt">A wrapper for <code>java.io.File</code> that provides additional methods.</p>
-    </li><li name="grizzled.file.Includer" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.Includer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IncluderextendsIterator[String]"></a>
       <a id="Includer:Includer"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -130,7 +137,8 @@ lines from the flattened files.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.file.GrizzledFile" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.file.GrizzledFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledFile"></a>
       <a id="GrizzledFile:GrizzledFile"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -142,7 +150,8 @@ lines from the flattened files.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object for <code>GrizzledFile</code>.</p>
-    </li><li name="grizzled.file.Includer" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.Includer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Includer"></a>
       <a id="Includer:Includer"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -154,7 +163,8 @@ lines from the flattened files.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object for the <code>Includer</code> class.</p>
-    </li><li name="grizzled.file.filter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.filter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="filter"></a>
       <a id="filter:filter"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -166,7 +176,8 @@ lines from the flattened files.</p>
       </span>
       </h4>
       <p class="comment cmt">Contains various file- and I/O-related filter classes.</p>
-    </li><li name="grizzled.file.util" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="util"></a>
       <a id="util:util"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -196,8 +207,8 @@ lines from the flattened files.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

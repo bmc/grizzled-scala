@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.math.stats$';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -91,7 +95,8 @@ println(median(l))</pre></div><div class="toggleContainer block">
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -103,7 +108,8 @@ println(median(l))</pre></div><div class="toggleContainer block">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -115,7 +121,8 @@ println(median(l))</pre></div><div class="toggleContainer block">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -127,7 +134,8 @@ println(median(l))</pre></div><div class="toggleContainer block">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -139,7 +147,8 @@ println(median(l))</pre></div><div class="toggleContainer block">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -151,7 +160,8 @@ println(median(l))</pre></div><div class="toggleContainer block">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.math.stats#arithmeticMean" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#arithmeticMean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="arithmeticMean[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="arithmeticMean[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -168,7 +178,8 @@ numbers.
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the arithmetic mean
 </p></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -180,7 +191,8 @@ numbers.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -195,7 +207,8 @@ numbers.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -207,7 +220,8 @@ numbers.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -219,7 +233,8 @@ numbers.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -234,7 +249,8 @@ numbers.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.math.stats#geometricMean" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#geometricMean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="geometricMean[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="geometricMean[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -251,11 +267,12 @@ numbers, namely, the n-th root of (x1 * x2 * ... * xn). Note that
 all numbers used in the calculation of a geometric mean must be
 positive.</p><p>For a discussion of when a geometric mean is more suitable than an
 arithmetic mean, see
-<a href="http://www.math.toronto.edu/mathnet/questionCorner/geomean.html">http://www.math.toronto.edu/mathnet/questionCorner/geomean.html</a>.
+<a href="http://www.math.toronto.edu/mathnet/questionCorner/geomean.html" target="_blank">http://www.math.toronto.edu/mathnet/questionCorner/geomean.html</a>.
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the geometric mean
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -267,7 +284,8 @@ arithmetic mean, see
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.math.stats#harmonicMean" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#harmonicMean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="harmonicMean[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="harmonicMean[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -285,7 +303,8 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the harmonic mean
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -297,7 +316,8 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -309,7 +329,8 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.math.stats#mean" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#mean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mean[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="mean[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -323,7 +344,8 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
       <p class="shortcomment cmt">Synonym for <code>arithmeticMean</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Synonym for <code>arithmeticMean</code>.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>arithmeticMean
 </p></span></dd></dl></div>
-    </li><li name="grizzled.math.stats#median" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#median" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="median[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="median[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -338,7 +360,8 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the median
 </p></dd></dl></div>
-    </li><li name="grizzled.math.stats#mode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#mode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mode[T](items:T*)(implicitn:Numeric[T]):List[T]"></a>
       <a id="mode[T](T*)(Numeric[T]):List[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -356,7 +379,8 @@ returned.
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>list of modal values
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -368,7 +392,8 @@ returned.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -380,7 +405,8 @@ returned.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -392,7 +418,8 @@ returned.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.math.stats#popStdDev" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#popStdDev" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="popStdDev[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="popStdDev[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -406,7 +433,8 @@ returned.
       <p class="shortcomment cmt">Shorter synonym for <code>populationStandardDeviation</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Shorter synonym for <code>populationStandardDeviation</code>.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>populationStandardDeviation
 </p></span></dd></dl></div>
-    </li><li name="grizzled.math.stats#populationStandardDeviation" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#populationStandardDeviation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="populationStandardDeviation[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="populationStandardDeviation[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -422,7 +450,8 @@ The population standard deviation is merely the square root of the
 population variance. Thus, this function is just shorthand for:</p><pre>java.lang.Math.sqrt(populationVariance(items))</pre></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the standard deviation
 </p></dd></dl></div>
-    </li><li name="grizzled.math.stats#populationVariance" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#populationVariance" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="populationVariance[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="populationVariance[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -437,12 +466,13 @@ population variance. Thus, this function is just shorthand for:</p><pre>java.lan
 by the <code>items</code> arguments.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the population variance of the finite population defined
 by the <code>items</code> arguments. The population variance is defined as:</p><pre><span class="num">1</span>
 - *  SUM(i=<span class="num">1</span>, N) { (x[i] - mean)^<span class="num">2</span>^ }
-N</pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
-- <a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a>
+N</pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance" target="_blank">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
+- <a href="http://www.quickmba.com/stats/standard-deviation/" target="_blank">http://www.quickmba.com/stats/standard-deviation/</a>
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the variance
 </p></dd></dl></div>
-    </li><li name="grizzled.math.stats#range" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#range" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="range[T](items:T*)(implicitn:Numeric[T]):T"></a>
       <a id="range[T](T*)(Numeric[T]):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -458,7 +488,8 @@ linear pass over the data set.
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the range
 </p></dd></dl></div>
-    </li><li name="grizzled.math.stats#sampleStandardDeviation" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#sampleStandardDeviation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sampleStandardDeviation[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="sampleStandardDeviation[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -474,7 +505,8 @@ The sample standard deviation is merely the square root of the
 sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Math.sqrt(sampleVariance(items))</pre></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the standard deviation
 </p></dd></dl></div>
-    </li><li name="grizzled.math.stats#sampleStdDev" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#sampleStdDev" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sampleStdDev[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="sampleStdDev[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -488,7 +520,8 @@ sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Ma
       <p class="shortcomment cmt">Shorter synonym for <code>sampleStandardDeviation</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Shorter synonym for <code>sampleStandardDeviation</code>.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>populationStandardDeviation
 </p></span></dd></dl></div>
-    </li><li name="grizzled.math.stats#sampleVariance" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.math.stats#sampleVariance" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sampleVariance[T](items:T*)(implicitn:Numeric[T]):Double"></a>
       <a id="sampleVariance[T](T*)(Numeric[T]):Double"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -503,12 +536,13 @@ sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Ma
 by the <code>items</code> arguments.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the unbiased sample variance of the finite sample defined
 by the <code>items</code> arguments. The sample variance is defined as:</p><pre><span class="num">1</span>
 ----- *   SUM(i=<span class="num">1</span>, N) { (x[i] - sampleMean)^<span class="num">2</span>^  }
-N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
-- <a href="http://www.quickmba.com/stats/standard-deviation/">http://www.quickmba.com/stats/standard-deviation/</a>
+N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance" target="_blank">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
+- <a href="http://www.quickmba.com/stats/standard-deviation/" target="_blank">http://www.quickmba.com/stats/standard-deviation/</a>
 </p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate
 </p></dd><dt>returns</dt><dd class="cmt"><p>the variance
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -520,7 +554,8 @@ N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -532,7 +567,8 @@ N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -547,7 +583,8 @@ N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -562,7 +599,8 @@ N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -595,8 +633,8 @@ N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

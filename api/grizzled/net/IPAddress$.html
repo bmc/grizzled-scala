@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.net.IPAddress$';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -87,7 +91,8 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -99,7 +104,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -111,7 +117,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -123,7 +130,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -135,7 +143,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -147,7 +156,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#Localhost" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.net.IPAddress#Localhost" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Localhost:grizzled.net.IPAddress"></a>
       <a id="Localhost:IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -159,7 +169,8 @@
       </span>
       </h4>
       <p class="shortcomment cmt">Singleton <code>IPAddress</code> for the local loop address.</p>
-    </li><li name="grizzled.net.IPAddress#allForName" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#allForName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="allForName(hostname:String):List[grizzled.net.IPAddress]"></a>
       <a id="allForName(String):List[IPAddress]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -185,7 +196,8 @@ the <code>java.net.InetAddress</code> class.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the list of matching <code>IPAddress</code> objects
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">UnknownHostException<p>unknown host
 </p></span></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(host:String):grizzled.net.IPAddress"></a>
       <a id="apply(String):IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -201,7 +213,8 @@ the <code>java.net.InetAddress</code> class.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the corresponding <code>IPAddress</code> object.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">java.net.UnknownHostException<p>unknown host
 </p></span></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(address:List[Byte]):grizzled.net.IPAddress"></a>
       <a id="apply(List[Byte]):IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -222,7 +235,8 @@ address</p><p>- If the array has fewer than four values, it is assumed to be
 Example of use:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="std">List</span>(<span class="num">192</span>, <span class="num">168</span>, <span class="num">1</span>, <span class="num">100</span>))</pre></div><dl class="paramcmts block"><dt class="param">address</dt><dd class="cmt"><p>the list of address values
 </p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code>
 </p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(addr:Int*):grizzled.net.IPAddress"></a>
       <a id="apply(Int*):IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -241,7 +255,8 @@ The integers will be truncated to 8-bit bytes.</p><p>- If the array has fewer th
 - Anything else will cause an <code>IllegalArgumentException</code> to be thrown.</p><p>Example of use:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="std">Array</span>(<span class="num">192</span>, <span class="num">168</span>, <span class="num">1</span>, <span class="num">100</span>))</pre></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the bytes (as integers) of the address
 </p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code>
 </p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(addr:Array[Int]):grizzled.net.IPAddress"></a>
       <a id="apply(Array[Int]):IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -262,7 +277,8 @@ The integers will be truncated to 8-bit bytes.</p><p>- If the array has fewer th
 - Anything else will cause an <code>IllegalArgumentException</code> to be thrown.</p><p>Example of use:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="std">Array</span>(<span class="num">192</span>, <span class="num">168</span>, <span class="num">1</span>, <span class="num">100</span>))</pre></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the address
 </p></dd><dt>returns</dt><dd class="cmt"><p>the corresponding <code>IPAddress</code> object.
 </p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(addr:Array[Byte]):grizzled.net.IPAddress"></a>
       <a id="apply(Array[Byte]):IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -283,7 +299,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
 </p></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the address
 </p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code>
 </p></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -295,7 +312,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -310,7 +328,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -322,7 +341,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -334,7 +354,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -349,7 +370,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -361,7 +383,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -373,7 +396,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#inetToIPAddress" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#inetToIPAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="inetToIPAddress(addr:java.net.InetAddress):grizzled.net.IPAddress"></a>
       <a id="inetToIPAddress(InetAddress):IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -390,7 +414,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
 </p></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the <code>java.net.InetAddress</code>
 </p></dd><dt>returns</dt><dd class="cmt"><p>the corresponding <code>IPAddress</code>
 </p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#ipToInetAddress" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.net.IPAddress#ipToInetAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ipToInetAddress(ipAddr:grizzled.net.IPAddress):java.net.InetAddress"></a>
       <a id="ipToInetAddress(IPAddress):InetAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -407,7 +432,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
 </p></div><dl class="paramcmts block"><dt class="param">ipAddr</dt><dd class="cmt"><p>the <code>IPAddress</code>
 </p></dd><dt>returns</dt><dd class="cmt"><p>the corresponding <code>java.net.InetAddress</code>
 </p></dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -419,7 +445,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -431,7 +458,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -443,7 +471,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -455,7 +484,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -467,7 +497,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -479,7 +510,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -494,7 +526,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -509,7 +542,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -542,8 +576,8 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

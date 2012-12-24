@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.readline.Readline$';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -88,7 +92,8 @@ implementations.
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -100,7 +105,8 @@ implementations.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -112,7 +118,8 @@ implementations.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -124,7 +131,8 @@ implementations.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -136,7 +144,8 @@ implementations.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -148,7 +157,8 @@ implementations.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.readline.Readline.ReadlineType" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline.ReadlineType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ReadlineType"></a>
       <a id="ReadlineType:ReadlineType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -161,7 +171,8 @@ implementations.
       </h4>
       <p class="comment cmt">An enumeration of the various underlying readline APIs supported by
 this API.</p>
-    </li><li name="grizzled.readline.Readline#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.readline.Readline#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(readlineType:grizzled.readline.Readline.ReadlineType.ReadlineType,appName:String):grizzled.readline.Readline"></a>
       <a id="apply(ReadlineType,String):Readline"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -169,7 +180,7 @@ this API.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="readlineType">readlineType: <a href="Readline$$ReadlineType$.html#ReadlineType:ReadlineType" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a></span>, <span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
+        <span class="name">apply</span><span class="params">(<span name="readlineType">readlineType: <a href="Readline$$ReadlineType$.html#ReadlineType=grizzled.readline.Readline.ReadlineType.Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a></span>, <span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Get the specified <code>Readline</code> implementation, with
@@ -179,7 +190,8 @@ this API.</p>
 </p></dd><dt>returns</dt><dd class="cmt"><p>the appropriate <code>Readline</code> implementation.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">UnsatisfiedLinkError<p>can't find the underlying library
 </p></span></dd></dl></div>
-    </li><li name="grizzled.readline.Readline#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.readline.Readline#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(readlineType:grizzled.readline.Readline.ReadlineType.ReadlineType,appName:String,autoAddHistory:Boolean):grizzled.readline.Readline"></a>
       <a id="apply(ReadlineType,String,Boolean):Readline"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -187,7 +199,7 @@ this API.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="readlineType">readlineType: <a href="Readline$$ReadlineType$.html#ReadlineType:ReadlineType" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a></span>, <span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="autoAddHistory">autoAddHistory: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
+        <span class="name">apply</span><span class="params">(<span name="readlineType">readlineType: <a href="Readline$$ReadlineType$.html#ReadlineType=grizzled.readline.Readline.ReadlineType.Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a></span>, <span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="autoAddHistory">autoAddHistory: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Get the specified <code>Readline</code> implementation.</p><div class="fullcomment"><div class="comment cmt"><p>Get the specified <code>Readline</code> implementation.
@@ -198,7 +210,8 @@ this API.</p>
 </p></dd><dt>returns</dt><dd class="cmt"><p>the appropriate <code>Readline</code> implementation.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">UnsatisfiedLinkError<p>can't find the underlying library
 </p></span></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -210,7 +223,8 @@ this API.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -225,7 +239,8 @@ this API.</p>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -237,7 +252,8 @@ this API.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -249,7 +265,8 @@ this API.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -264,7 +281,8 @@ this API.</p>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.readline.Readline#findReadline" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.readline.Readline#findReadline" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="findReadline(libs:List[grizzled.readline.Readline.ReadlineType.ReadlineType],appName:String,autoAddHistory:Boolean):Option[grizzled.readline.Readline]"></a>
       <a id="findReadline(List[ReadlineType],String,Boolean):Option[Readline]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -272,7 +290,7 @@ this API.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">findReadline</span><span class="params">(<span name="libs">libs: <span class="extype" name="scala.List">List</span>[<a href="Readline$$ReadlineType$.html#ReadlineType:ReadlineType" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a>]</span>, <span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="autoAddHistory">autoAddHistory: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a>]</span>
+        <span class="name">findReadline</span><span class="params">(<span name="libs">libs: <span class="extype" name="scala.List">List</span>[<a href="Readline$$ReadlineType$.html#ReadlineType=grizzled.readline.Readline.ReadlineType.Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a>]</span>, <span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="autoAddHistory">autoAddHistory: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Given a list of <code>Readline</code> types, find and return the first one
@@ -284,7 +302,8 @@ that loads.
                       is responsible for adding lines to the history.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the loaded implementation, or <code>None</code>.
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -296,7 +315,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -308,7 +328,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -320,7 +341,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -332,7 +354,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -344,7 +367,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -356,7 +380,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -368,7 +393,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -380,7 +406,8 @@ that loads.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -395,7 +422,8 @@ that loads.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -410,7 +438,8 @@ that loads.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -443,8 +472,8 @@ that loads.
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

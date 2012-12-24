@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.io.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -86,7 +90,8 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledSourceextendsObject"></a>
       <a id="GrizzledSource:GrizzledSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,8 +102,9 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
         <a href="GrizzledSource.html"><span class="name">GrizzledSource</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <p class="comment cmt">A wrapper for <code>java.io.File</code> that provides additional methods.</p>
-    </li><li name="grizzled.io.MultiSource" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+      <p class="comment cmt">A wrapper for <code>scala.io.Source</code> that provides additional methods.</p>
+    </li><li name="grizzled.io.MultiSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MultiSourceextendsSource"></a>
       <a id="MultiSource:MultiSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -111,7 +117,8 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
       </h4>
       <p class="comment cmt">A <code>MultiSource</code> contains multiple <code>scala.io.Source</code>
 objects and satisfies reads from them serially.</p>
-    </li><li name="grizzled.io.PartialReader" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.PartialReader" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="PartialReader[T]extendsObject"></a>
       <a id="PartialReader[T]:PartialReader[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -123,7 +130,8 @@ objects and satisfies reads from them serially.</p>
       </span>
       </h4>
       <p class="comment cmt">Contains methods that can read part of a stream or reader.</p>
-    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichInputStreamextendsPartialReader[Byte]"></a>
       <a id="RichInputStream:RichInputStream"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -136,7 +144,8 @@ objects and satisfies reads from them serially.</p>
       </h4>
       <p class="comment cmt">Provides additional methods, over and above those already present in
 the Java <code>InputStream</code> class.</p>
-    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichReaderextendsPartialReader[Char]"></a>
       <a id="RichReader:RichReader"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -149,7 +158,8 @@ the Java <code>InputStream</code> class.</p>
       </h4>
       <p class="comment cmt">Provides additional methods, over and above those already present in
 the Java <code>Reader</code> class.</p>
-    </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SourceReaderextendsReader"></a>
       <a id="SourceReader:SourceReader"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -168,7 +178,8 @@ the Java <code>Reader</code> class.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledSource"></a>
       <a id="GrizzledSource:GrizzledSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -180,7 +191,8 @@ the Java <code>Reader</code> class.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object for <code>GrizzledSource</code>.</p>
-    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichInputStream"></a>
       <a id="RichInputStream:RichInputStream"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -192,7 +204,8 @@ the Java <code>Reader</code> class.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object to <code>RichInputStream</code> class.</p>
-    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichReader"></a>
       <a id="RichReader:RichReader"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -204,7 +217,8 @@ the Java <code>Reader</code> class.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object to <code>RichReader</code> class.</p>
-    </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SourceReader"></a>
       <a id="SourceReader:SourceReader"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -216,7 +230,8 @@ the Java <code>Reader</code> class.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.io.util" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="util"></a>
       <a id="util:util"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -246,8 +261,8 @@ the Java <code>Reader</code> class.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

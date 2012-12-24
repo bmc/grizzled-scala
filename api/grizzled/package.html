@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../index.html';
             var hash = 'grizzled.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -42,7 +46,7 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The Grizzled Scala Library contains a variety of miscellaneous,
 general purpose utility classes and objects.</p><p>The home page for the Grizzled Scala Library is
-<a href="http://software.clapper.org/grizzled-scala/">http://software.clapper.org/grizzled-scala/</a>. Please see that page for
+<a href="http://software.clapper.org/grizzled-scala/" target="_blank">http://software.clapper.org/grizzled-scala/</a>. Please see that page for
 complete details, including installation instructions.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
@@ -90,7 +94,8 @@ complete details, including installation instructions.
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.binary" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.binary" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="binary"></a>
       <a id="binary:binary"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -102,7 +107,8 @@ complete details, including installation instructions.
       </span>
       </h4>
       <p class="comment cmt">Useful binary-related utility functions.</p>
-    </li><li name="grizzled.cmd" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cmd"></a>
       <a id="cmd:cmd"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -115,7 +121,8 @@ complete details, including installation instructions.
       </h4>
       <p class="comment cmt">Classes and objects to aid in the construction of line-oriented command
 interpreters.</p>
-    </li><li name="grizzled.collection" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="collection"></a>
       <a id="collection:collection"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -127,7 +134,8 @@ interpreters.</p>
       </span>
       </h4>
       <p class="comment cmt">Some collection-related helpers.</p>
-    </li><li name="grizzled.config" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="config"></a>
       <a id="config:config"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -140,7 +148,8 @@ interpreters.</p>
       </h4>
       <p class="comment cmt">Classes and objects to aid in the parsing of INI-style configuration
 files.</p>
-    </li><li name="grizzled.file" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="file"></a>
       <a id="file:file"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -152,7 +161,8 @@ files.</p>
       </span>
       </h4>
       <p class="comment cmt">File-related classes and utilities.</p>
-    </li><li name="grizzled.generator" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.generator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="generator"></a>
       <a id="generator:generator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -164,7 +174,8 @@ files.</p>
       </span>
       </h4>
       <p class="comment cmt">Functions that can be used to simulate Python-style generators.</p>
-    </li><li name="grizzled.io" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.io" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="io"></a>
       <a id="io:io"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -176,7 +187,8 @@ files.</p>
       </span>
       </h4>
       <p class="comment cmt">I/O-related classes and utilities.</p>
-    </li><li name="grizzled.math" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.math" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="math"></a>
       <a id="math:math"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -188,7 +200,8 @@ files.</p>
       </span>
       </h4>
       <p class="comment cmt">Miscellaneous math and statistics utilities.</p>
-    </li><li name="grizzled.net" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.net" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="net"></a>
       <a id="net:net"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -200,7 +213,8 @@ files.</p>
       </span>
       </h4>
       <p class="comment cmt">Network-related utility methods and classes.</p>
-    </li><li name="grizzled.parsing" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.parsing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="parsing"></a>
       <a id="parsing:parsing"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -212,7 +226,8 @@ files.</p>
       </span>
       </h4>
       <p class="comment cmt">Methods and classes useful for parsing various things.</p>
-    </li><li name="grizzled.readline" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="readline"></a>
       <a id="readline:readline"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -225,10 +240,11 @@ files.</p>
       </h4>
       <p class="comment cmt">The <code>grizzled.readline</code> package provides a common front-end API to
 various underlying readline and readline-like implementations, including
-<a href="http://tiswww.case.edu/php/chet/readline/rltop.html">GNU Readline</a>,
-<a href="http://www.thrysoee.dk/editline/">Editline</a>, and
-<a href="http://jline.sourceforge.net/">JLine</a>.</p>
-    </li><li name="grizzled.reflect" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+<a href="http://tiswww.case.edu/php/chet/readline/rltop.html" target="_blank">GNU Readline</a>,
+<a href="http://www.thrysoee.dk/editline/" target="_blank">Editline</a>, and
+<a href="http://jline.sourceforge.net/" target="_blank">JLine</a>.</p>
+    </li><li name="grizzled.reflect" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="reflect"></a>
       <a id="reflect:reflect"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -240,7 +256,8 @@ various underlying readline and readline-like implementations, including
       </span>
       </h4>
       <p class="comment cmt">Some reflection-related utility methods and classes.</p>
-    </li><li name="grizzled.string" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="string"></a>
       <a id="string:string"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -252,7 +269,8 @@ various underlying readline and readline-like implementations, including
       </span>
       </h4>
       <p class="comment cmt">String- and text-related classes.</p>
-    </li><li name="grizzled.sys" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.sys" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="sys"></a>
       <a id="sys:sys"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -264,7 +282,8 @@ various underlying readline and readline-like implementations, including
       </span>
       </h4>
       <p class="comment cmt">System-related utility functions and definitions.</p>
-    </li><li name="grizzled.util" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="util"></a>
       <a id="util:util"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -294,8 +313,8 @@ various underlying readline and readline-like implementations, including
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

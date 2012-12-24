@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.io.MultiSource';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -83,7 +87,8 @@ objects and satisfies reads from them serially. Once composed, a
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="grizzled.io.MultiSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="grizzled.io.MultiSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(sources:scala.io.Source*):grizzled.io.MultiSource"></a>
       <a id="&lt;init&gt;:MultiSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,7 +102,8 @@ objects and satisfies reads from them serially. Once composed, a
       <p class="shortcomment cmt">Version of constructor that takes multiple arguments, instead of a list.</p><div class="fullcomment"><div class="comment cmt"><p>Version of constructor that takes multiple arguments, instead of a list.
 </p></div><dl class="paramcmts block"><dt class="param">sources</dt><dd class="cmt"><p>the sources to wrap
 </p></dd></dl></div>
-    </li><li name="grizzled.io.MultiSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.io.MultiSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(sources:List[scala.io.Source]):grizzled.io.MultiSource"></a>
       <a id="&lt;init&gt;:MultiSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -115,7 +121,8 @@ objects and satisfies reads from them serially. Once composed, a
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="scala.collection.Iterator.GroupedIterator" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.collection.Iterator.GroupedIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="GroupedIterator[B&lt;:&lt;?&gt;]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]"></a>
       <a id="GroupedIterator[B&gt;:A]:GroupedIterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -127,7 +134,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.io.Source.LineIterator" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source.LineIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LineIteratorextendsAbstractIterator[String]withIterator[String]"></a>
       <a id="LineIterator:LineIterator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -139,7 +147,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source.Positioner" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source.Positioner" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PositionerextendsObject"></a>
       <a id="Positioner:Positioner"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -158,7 +167,8 @@ objects and satisfies reads from them serially. Once composed, a
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -170,7 +180,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -182,7 +193,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -194,7 +206,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.collection.Iterator#++" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++[B&lt;:&lt;?&gt;](that:&lt;?&gt;):Iterator[B]"></a>
       <a id="++[B&gt;:Char](⇒GenTraversableOnce[B]):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -206,7 +219,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#/:" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#/:" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="/:[B](z:B)(op:(B,A)=&gt;B):B"></a>
       <a id="/:[B](B)((B,Char)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -218,7 +232,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#:\" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#:\" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id=":\[B](z:B)(op:(A,B)=&gt;B):B"></a>
       <a id=":\[B](B)((Char,B)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -230,7 +245,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -242,7 +258,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -254,7 +271,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#addString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#addString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addString(b:StringBuilder):StringBuilder"></a>
       <a id="addString(StringBuilder):StringBuilder"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -266,7 +284,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#addString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#addString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addString(b:StringBuilder,sep:String):StringBuilder"></a>
       <a id="addString(StringBuilder,String):StringBuilder"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -278,7 +297,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#addString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#addString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addString(b:StringBuilder,start:String,sep:String,end:String):StringBuilder"></a>
       <a id="addString(StringBuilder,String,String,String):StringBuilder"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -290,7 +310,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#aggregate" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#aggregate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="aggregate[B](z:B)(seqop:(B,A)=&gt;B,combop:(B,B)=&gt;B):B"></a>
       <a id="aggregate[B](B)((B,Char)⇒B,(B,B)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -302,7 +323,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -314,7 +336,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.collection.Iterator#buffered" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#buffered" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="buffered:scala.collection.BufferedIterator[A]"></a>
       <a id="buffered:BufferedIterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -326,7 +349,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.io.Source#ch" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#ch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ch:Char"></a>
       <a id="ch:Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -338,7 +362,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -353,7 +378,8 @@ objects and satisfies reads from them serially. Once composed, a
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.io.Source#close" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#close" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="close():Unit"></a>
       <a id="close():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -365,7 +391,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#collect" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#collect" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="collect[B&lt;:&lt;?&gt;](pf:&lt;?&gt;):Iterator[B]"></a>
       <a id="collect[B](PartialFunction[Char,B]):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -380,7 +407,8 @@ objects and satisfies reads from them serially. Once composed, a
                 <span class="name">@migration</span>
               
         </dd><dt>Migration</dt><dd class="cmt"><p><i>(Changed in version 2.8.0)</i> <code>collect</code> has changed. The previous behavior can be reproduced with <code>toSeq</code>.</p></dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#collectFirst" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#collectFirst" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="collectFirst[B&lt;:&lt;?&gt;](pf:&lt;?&gt;):Option[B]"></a>
       <a id="collectFirst[B](PartialFunction[Char,B]):Option[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -392,7 +420,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#contains" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#contains" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="contains(elem:&lt;?&gt;):Boolean"></a>
       <a id="contains(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -404,7 +433,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyToArray[B&gt;:A](xs:Array[B],start:Int,len:Int):Unit"></a>
       <a id="copyToArray[B&gt;:Char](Array[B],Int,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -416,7 +446,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyToArray[B&gt;:A](xs:Array[B]):Unit"></a>
       <a id="copyToArray[B&gt;:Char](Array[B]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -428,7 +459,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyToArray[B&gt;:A](xs:Array[B],start:Int):Unit"></a>
       <a id="copyToArray[B&gt;:Char](Array[B],Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -440,7 +472,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#copyToBuffer" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#copyToBuffer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyToBuffer[B&gt;:A](dest:scala.collection.mutable.Buffer[B]):Unit"></a>
       <a id="copyToBuffer[B&gt;:Char](Buffer[B]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -452,7 +485,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#corresponds" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#corresponds" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="corresponds[B&lt;:&lt;?&gt;](that:&lt;?&gt;)(p:&lt;?&gt;):Boolean"></a>
       <a id="corresponds[B](GenTraversableOnce[B])((Char,B)⇒Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -464,7 +498,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#count" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#count" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="count(p:A=&gt;Boolean):Int"></a>
       <a id="count((Char)⇒Boolean):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -476,7 +511,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.io.Source#descr" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#descr" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="descr:String"></a>
       <a id="descr:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -488,7 +524,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#drop" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#drop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="drop(n:Int):Iterator[A]"></a>
       <a id="drop(Int):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -500,7 +537,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#dropWhile" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#dropWhile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dropWhile(p:A=&gt;Boolean):Iterator[A]"></a>
       <a id="dropWhile((Char)⇒Boolean):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -512,7 +550,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#duplicate" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#duplicate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="duplicate:(Iterator[A],Iterator[A])"></a>
       <a id="duplicate:(Iterator[Char],Iterator[Char])"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -524,7 +563,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -536,7 +576,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -548,7 +589,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.collection.Iterator#exists" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#exists" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="exists(p:A=&gt;Boolean):Boolean"></a>
       <a id="exists((Char)⇒Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -560,7 +602,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#filter" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#filter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="filter(p:&lt;?&gt;):Iterator[A]"></a>
       <a id="filter((Char)⇒Boolean):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -572,7 +615,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#filterNot" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#filterNot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="filterNot(p:&lt;?&gt;):Iterator[A]"></a>
       <a id="filterNot((Char)⇒Boolean):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -584,7 +628,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -599,7 +644,8 @@ objects and satisfies reads from them serially. Once composed, a
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.collection.Iterator#find" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#find" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="find(p:A=&gt;Boolean):Option[A]"></a>
       <a id="find((Char)⇒Boolean):Option[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -611,7 +657,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#flatMap" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#flatMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="flatMap[B&lt;:&lt;?&gt;](f:&lt;?&gt;):Iterator[B]"></a>
       <a id="flatMap[B]((Char)⇒GenTraversableOnce[B]):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -623,7 +670,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#fold" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#fold" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fold[A1&gt;:A](z:A1)(op:(A1,A1)=&gt;A1):A1"></a>
       <a id="fold[A1&gt;:Char](A1)((A1,A1)⇒A1):A1"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -635,7 +683,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#foldLeft" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#foldLeft" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="foldLeft[B](z:B)(op:(B,A)=&gt;B):B"></a>
       <a id="foldLeft[B](B)((B,Char)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -647,7 +696,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#foldRight" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#foldRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="foldRight[B](z:B)(op:(A,B)=&gt;B):B"></a>
       <a id="foldRight[B](B)((Char,B)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -659,7 +709,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#forall" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#forall" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="forall(p:A=&gt;Boolean):Boolean"></a>
       <a id="forall((Char)⇒Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -671,7 +722,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#foreach" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#foreach" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="foreach[U](f:A=&gt;U):Unit"></a>
       <a id="foreach[U]((Char)⇒U):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -683,7 +735,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -695,7 +748,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.io.Source#getLines" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#getLines" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getLines():Iterator[String]"></a>
       <a id="getLines():Iterator[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -707,7 +761,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#grouped" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#grouped" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="grouped[B&lt;:&lt;?&gt;](size:&lt;?&gt;):Iterator.this.GroupedIterator[B]"></a>
       <a id="grouped[B&gt;:Char](Int):GroupedIterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -715,11 +770,12 @@ objects and satisfies reads from them serially. Once composed, a
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">grouped</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.Char">Char</span></span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]:GroupedIterator[B]" class="extmbr" name="grizzled.io.MultiSource.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.grouped.B">B</span>]</span>
+        <span class="name">grouped</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.Char">Char</span></span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]" class="extmbr" name="grizzled.io.MultiSource.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.grouped.B">B</span>]</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#hasDefiniteSize" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#hasDefiniteSize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hasDefiniteSize:Boolean"></a>
       <a id="hasDefiniteSize:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -731,7 +787,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.io.Source#hasNext" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#hasNext" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hasNext:Boolean"></a>
       <a id="hasNext:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -743,7 +800,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source → Iterator</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -755,7 +813,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.collection.Iterator#indexOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#indexOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="indexOf[B&lt;:&lt;?&gt;](elem:&lt;?&gt;):Int"></a>
       <a id="indexOf[B&gt;:Char](B):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -767,7 +826,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#indexWhere" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#indexWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="indexWhere(p:&lt;?&gt;):Int"></a>
       <a id="indexWhere((Char)⇒Boolean):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -779,7 +839,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isEmpty:Boolean"></a>
       <a id="isEmpty:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -791,7 +852,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -803,7 +865,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.collection.Iterator#isTraversableAgain" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#isTraversableAgain" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isTraversableAgain:Boolean"></a>
       <a id="isTraversableAgain:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -815,7 +878,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → GenTraversableOnce</dd></dl></div>
-    </li><li name="grizzled.io.MultiSource#iter" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.io.MultiSource#iter" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="iter:Iterator[Char]"></a>
       <a id="iter:Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -828,7 +892,8 @@ objects and satisfies reads from them serially. Once composed, a
       </h4>
       <p class="shortcomment cmt">The actual iterator.</p><div class="fullcomment"><div class="comment cmt"><p>The actual iterator.
 </p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.MultiSource">MultiSource</a> → Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#length" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#length" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="length:Int"></a>
       <a id="length:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -840,7 +905,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#map" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#map" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="map[B](f:A=&gt;B):Iterator[B]"></a>
       <a id="map[B]((Char)⇒B):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -852,7 +918,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#max" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#max" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="max[B&gt;:A](implicitcmp:Ordering[B]):A"></a>
       <a id="max[B&gt;:Char](Ordering[B]):Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -864,7 +931,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#maxBy" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#maxBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="maxBy[B](f:A=&gt;B)(implicitcmp:Ordering[B]):A"></a>
       <a id="maxBy[B]((Char)⇒B)(Ordering[B]):Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -876,7 +944,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#min" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#min" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="min[B&gt;:A](implicitcmp:Ordering[B]):A"></a>
       <a id="min[B&gt;:Char](Ordering[B]):Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -888,7 +957,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#minBy" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#minBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="minBy[B](f:A=&gt;B)(implicitcmp:Ordering[B]):A"></a>
       <a id="minBy[B]((Char)⇒B)(Ordering[B]):Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -900,7 +970,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#mkString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#mkString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkString:String"></a>
       <a id="mkString:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -912,7 +983,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#mkString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#mkString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkString(sep:String):String"></a>
       <a id="mkString(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -924,7 +996,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#mkString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#mkString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkString(start:String,sep:String,end:String):String"></a>
       <a id="mkString(String,String,String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -936,7 +1009,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -948,7 +1022,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.io.Source#nerrors" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#nerrors" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nerrors:Int"></a>
       <a id="nerrors:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -960,7 +1035,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source#next" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#next" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="next():Char"></a>
       <a id="next():Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -972,7 +1048,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source → Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#nonEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#nonEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nonEmpty:Boolean"></a>
       <a id="nonEmpty:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -984,7 +1061,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -996,7 +1074,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1008,7 +1087,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.io.Source#nwarnings" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#nwarnings" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nwarnings:Int"></a>
       <a id="nwarnings:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1020,7 +1100,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#padTo" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#padTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="padTo[A1&lt;:&lt;?&gt;](len:&lt;?&gt;,elem:&lt;?&gt;):Iterator[A1]"></a>
       <a id="padTo[A1&gt;:Char](Int,A1):Iterator[A1]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1032,7 +1113,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#partition" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#partition" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="partition(p:&lt;?&gt;):(Iterator[A],Iterator[A])"></a>
       <a id="partition((Char)⇒Boolean):(Iterator[Char],Iterator[Char])"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1044,7 +1126,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#patch" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#patch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="patch[B&lt;:&lt;?&gt;](from:&lt;?&gt;,patchElems:&lt;?&gt;,replaced:&lt;?&gt;):Iterator[B]"></a>
       <a id="patch[B&gt;:Char](Int,Iterator[B],Int):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1056,7 +1139,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.io.Source#pos" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#pos" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="pos:Int"></a>
       <a id="pos:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1068,7 +1152,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#product" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#product" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="product[B&gt;:A](implicitnum:Numeric[B]):B"></a>
       <a id="product[B&gt;:Char](Numeric[B]):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1080,7 +1165,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reduce" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reduce" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduce[A1&gt;:A](op:(A1,A1)=&gt;A1):A1"></a>
       <a id="reduce[A1&gt;:Char]((A1,A1)⇒A1):A1"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1092,7 +1178,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reduceLeft" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reduceLeft" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduceLeft[B&gt;:A](op:(B,A)=&gt;B):B"></a>
       <a id="reduceLeft[B&gt;:Char]((B,Char)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1104,7 +1191,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reduceLeftOption" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reduceLeftOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduceLeftOption[B&gt;:A](op:(B,A)=&gt;B):Option[B]"></a>
       <a id="reduceLeftOption[B&gt;:Char]((B,Char)⇒B):Option[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1116,7 +1204,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reduceOption" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reduceOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduceOption[A1&gt;:A](op:(A1,A1)=&gt;A1):Option[A1]"></a>
       <a id="reduceOption[A1&gt;:Char]((A1,A1)⇒A1):Option[A1]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1128,7 +1217,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reduceRight" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reduceRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduceRight[B&gt;:A](op:(A,B)=&gt;B):B"></a>
       <a id="reduceRight[B&gt;:Char]((Char,B)⇒B):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1140,7 +1230,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reduceRightOption" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reduceRightOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reduceRightOption[B&gt;:A](op:(A,B)=&gt;B):Option[B]"></a>
       <a id="reduceRightOption[B&gt;:Char]((Char,B)⇒B):Option[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1152,7 +1243,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.io.Source#report" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#report" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="report(pos:&lt;?&gt;,msg:&lt;?&gt;,out:&lt;?&gt;):Unit"></a>
       <a id="report(Int,String,PrintStream):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1164,7 +1256,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source#reportError" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#reportError" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reportError(pos:&lt;?&gt;,msg:&lt;?&gt;,out:&lt;?&gt;):Unit"></a>
       <a id="reportError(Int,String,PrintStream):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1176,7 +1269,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source#reportWarning" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#reportWarning" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reportWarning(pos:&lt;?&gt;,msg:&lt;?&gt;,out:&lt;?&gt;):Unit"></a>
       <a id="reportWarning(Int,String,PrintStream):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1188,7 +1282,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="grizzled.io.MultiSource#reset" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.io.MultiSource#reset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reset():scala.io.Source"></a>
       <a id="reset():Source"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1201,7 +1296,8 @@ objects and satisfies reads from them serially. Once composed, a
       </h4>
       <p class="shortcomment cmt">Reset, returning a new source.</p><div class="fullcomment"><div class="comment cmt"><p>Reset, returning a new source.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.MultiSource">MultiSource</a> → Source</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#reversed" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#reversed" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reversed:List[A]"></a>
       <a id="reversed:List[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1213,7 +1309,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[this] </dd><dt>Definition Classes</dt><dd>TraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#sameElements" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#sameElements" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sameElements(that:&lt;?&gt;):Boolean"></a>
       <a id="sameElements(Iterator[_]):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1225,7 +1322,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#scanLeft" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#scanLeft" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="scanLeft[B&lt;:&lt;?&gt;](z:&lt;?&gt;)(op:&lt;?&gt;):Iterator[B]"></a>
       <a id="scanLeft[B](B)((B,Char)⇒B):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1237,7 +1335,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#scanRight" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#scanRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="scanRight[B&lt;:&lt;?&gt;](z:&lt;?&gt;)(op:&lt;?&gt;):Iterator[B]"></a>
       <a id="scanRight[B](B)((Char,B)⇒B):Iterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1249,7 +1348,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#seq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#seq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="seq:Iterator[A]"></a>
       <a id="seq:Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1261,7 +1361,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#size" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#size" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="size:Int"></a>
       <a id="size:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1273,7 +1374,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#slice" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#slice" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="slice(from:&lt;?&gt;,until:&lt;?&gt;):Iterator[A]"></a>
       <a id="slice(Int,Int):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1285,7 +1387,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#sliding" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#sliding" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sliding[B&lt;:&lt;?&gt;](size:&lt;?&gt;,step:&lt;?&gt;):Iterator.this.GroupedIterator[B]"></a>
       <a id="sliding[B&gt;:Char](Int,Int):GroupedIterator[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1293,11 +1396,12 @@ objects and satisfies reads from them serially. Once composed, a
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sliding</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.Char">Char</span></span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>, <span name="step">step: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]:GroupedIterator[B]" class="extmbr" name="grizzled.io.MultiSource.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.sliding.B">B</span>]</span>
+        <span class="name">sliding</span><span class="tparams">[<span name="B">B &gt;: <span class="extype" name="scala.Char">Char</span></span>]</span><span class="params">(<span name="size">size: <span class="extype" name="scala.Int">Int</span></span>, <span name="step">step: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#GroupedIterator[B&gt;:A]extendsAbstractIterator[Seq[B]]withIterator[Seq[B]]" class="extmbr" name="grizzled.io.MultiSource.GroupedIterator">GroupedIterator</a>[<span class="extype" name="scala.collection.Iterator.sliding.B">B</span>]</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#span" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#span" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="span(p:&lt;?&gt;):(Iterator[A],Iterator[A])"></a>
       <a id="span((Char)⇒Boolean):(Iterator[Char],Iterator[Char])"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1309,7 +1413,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#sum" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#sum" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sum[B&gt;:A](implicitnum:Numeric[B]):B"></a>
       <a id="sum[B&gt;:Char](Numeric[B]):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1321,7 +1426,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1333,7 +1439,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.collection.Iterator#take" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#take" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="take(n:Int):Iterator[A]"></a>
       <a id="take(Int):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1345,7 +1452,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#takeWhile" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#takeWhile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="takeWhile(p:A=&gt;Boolean):Iterator[A]"></a>
       <a id="takeWhile((Char)⇒Boolean):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1357,7 +1465,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#to" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#to" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="to[Col[_]](implicitcbf:scala.collection.generic.CanBuildFrom[Nothing,A,Col[A@scala.annotation.unchecked.uncheckedVariance]]):Col[A@scala.annotation.unchecked.uncheckedVariance]"></a>
       <a id="to[Col[_]](CanBuildFrom[Nothing,Char,Col[Char]]):Col[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1369,7 +1478,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toArray" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toArray" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toArray[B&gt;:A](implicitevidence$1:scala.reflect.ClassTag[B]):Array[B]"></a>
       <a id="toArray[B&gt;:Char](ClassTag[B]):Array[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1381,7 +1491,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toBuffer" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toBuffer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toBuffer[B&gt;:A]:scala.collection.mutable.Buffer[B]"></a>
       <a id="toBuffer[B&gt;:Char]:Buffer[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1393,7 +1504,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toIndexedSeq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toIndexedSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toIndexedSeq:scala.collection.immutable.IndexedSeq[A]"></a>
       <a id="toIndexedSeq:IndexedSeq[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1405,7 +1517,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toIterable" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toIterable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toIterable:Iterable[A]"></a>
       <a id="toIterable:Iterable[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1417,7 +1530,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#toIterator" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#toIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toIterator:Iterator[A]"></a>
       <a id="toIterator:Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1429,7 +1543,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toList" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toList:List[A]"></a>
       <a id="toList:List[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1441,7 +1556,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toMap" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toMap[T,U](implicitev:&lt;:&lt;[A,(T,U)]):scala.collection.immutable.Map[T,U]"></a>
       <a id="toMap[T,U](&lt;:&lt;[Char,(T,U)]):Map[T,U]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1453,7 +1569,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toSeq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toSeq:Seq[A]"></a>
       <a id="toSeq:Seq[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1465,7 +1582,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toSet" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toSet[B&gt;:A]:scala.collection.immutable.Set[B]"></a>
       <a id="toSet[B&gt;:Char]:Set[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1477,7 +1595,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#toStream" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#toStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toStream:scala.collection.immutable.Stream[A]"></a>
       <a id="toStream:Stream[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1489,7 +1608,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.Iterator#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1501,7 +1621,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → AnyRef → Any</dd></dl></div>
-    </li><li name="scala.collection.Iterator#toTraversable" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#toTraversable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toTraversable:Traversable[A]"></a>
       <a id="toTraversable:Traversable[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1513,7 +1634,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator → TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.collection.TraversableOnce#toVector" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.TraversableOnce#toVector" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toVector:Vector[A]"></a>
       <a id="toVector:Vector[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1525,7 +1647,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1540,7 +1663,8 @@ objects and satisfies reads from them serially. Once composed, a
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1555,7 +1679,8 @@ objects and satisfies reads from them serially. Once composed, a
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1570,7 +1695,8 @@ objects and satisfies reads from them serially. Once composed, a
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.io.Source#withClose" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#withClose" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withClose(f:&lt;?&gt;):Source.this.type"></a>
       <a id="withClose(()⇒Unit):MultiSource.this.type"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1582,7 +1708,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source#withDescription" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#withDescription" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withDescription(text:&lt;?&gt;):Source.this.type"></a>
       <a id="withDescription(String):MultiSource.this.type"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1594,7 +1721,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#withFilter" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#withFilter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withFilter(p:A=&gt;Boolean):Iterator[A]"></a>
       <a id="withFilter((Char)⇒Boolean):Iterator[Char]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1606,7 +1734,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.io.Source#withPositioning" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#withPositioning" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withPositioning(pos:&lt;?&gt;):Source.this.type"></a>
       <a id="withPositioning(Positioner):MultiSource.this.type"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1614,11 +1743,12 @@ objects and satisfies reads from them serially. Once composed, a
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withPositioning</span><span class="params">(<span name="pos">pos: <a href="#Positioner:Positioner" class="extmbr" name="grizzled.io.MultiSource.Positioner">Positioner</a></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.io.MultiSource">MultiSource</a>.this.type</span>
+        <span class="name">withPositioning</span><span class="params">(<span name="pos">pos: <a href="#PositionerextendsObject" class="extmbr" name="grizzled.io.MultiSource.Positioner">Positioner</a></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.io.MultiSource">MultiSource</a>.this.type</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source#withPositioning" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#withPositioning" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withPositioning(on:&lt;?&gt;):Source.this.type"></a>
       <a id="withPositioning(Boolean):MultiSource.this.type"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1630,7 +1760,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.io.Source#withReset" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.io.Source#withReset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withReset(f:&lt;?&gt;):Source.this.type"></a>
       <a id="withReset(()⇒Source):MultiSource.this.type"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1642,7 +1773,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Source</dd></dl></div>
-    </li><li name="scala.collection.Iterator#zip" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#zip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="zip[B&lt;:&lt;?&gt;](that:&lt;?&gt;):Iterator[(A,B)]"></a>
       <a id="zip[B](Iterator[B]):Iterator[(Char,B)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1654,7 +1786,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#zipAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#zipAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="zipAll[B&lt;:&lt;?&gt;,A1&lt;:&lt;?&gt;,B1&lt;:&lt;?&gt;](that:&lt;?&gt;,thisElem:&lt;?&gt;,thatElem:&lt;?&gt;):Iterator[(A1,B1)]"></a>
       <a id="zipAll[B,A1&gt;:Char,B1&gt;:B](Iterator[B],A1,B1):Iterator[(A1,B1)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1666,7 +1799,8 @@ objects and satisfies reads from them serially. Once composed, a
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterator</dd></dl></div>
-    </li><li name="scala.collection.Iterator#zipWithIndex" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.collection.Iterator#zipWithIndex" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="zipWithIndex:Iterator[(A,Int)]"></a>
       <a id="zipWithIndex:Iterator[(Char,Int)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1685,7 +1819,8 @@ objects and satisfies reads from them serially. Once composed, a
 
         <div id="values" class="values members">
               <h3>Deprecated Value Members</h3>
-              <ol><li name="scala.collection.GenTraversableOnce#/:\" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.collection.GenTraversableOnce#/:\" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="/:\[A1&lt;:&lt;?&gt;](z:&lt;?&gt;)(op:&lt;?&gt;):A1"></a>
       <a id="/:\[A1&gt;:Char](A1)((A1,A1)⇒A1):A1"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1722,8 +1857,8 @@ objects and satisfies reads from them serially. Once composed, a
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.config.Configuration';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -207,7 +211,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="grizzled.config.Configuration#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.config.Configuration#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;():grizzled.config.Configuration"></a>
       <a id="&lt;init&gt;:Configuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -219,7 +224,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <p class="shortcomment cmt">Alternate constructor for use when there are no predefined sections.</p>
-    </li><li name="grizzled.config.Configuration#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(predefinedSections:Map[String,Map[String,String]],sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex):grizzled.config.Configuration"></a>
       <a id="&lt;init&gt;:Configuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -245,7 +251,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -257,7 +264,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -269,7 +277,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -281,7 +290,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -293,7 +303,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -305,7 +316,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#addOption" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#addOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addOption(sectionName:String,optionName:String,value:String):Unit"></a>
       <a id="addOption(String,String,String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -321,7 +333,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">DuplicateOptionException<p>if the option already exists in the
                                  section
 </p></span><span class="cmt">NoSuchSectionException<p>if the section doesn't exist</p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#addSection" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#addSection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addSection(name:String):Unit"></a>
       <a id="addSection(String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -336,7 +349,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the new section's name
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">DuplicateSectionException<p>if the section already exists
 </p></span></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -348,7 +362,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -363,7 +378,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -375,7 +391,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -387,7 +404,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -402,7 +420,8 @@ you could do something like this:</p><pre><span class="kw">object</span> Foo
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.config.Configuration#forMatchingSections" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#forMatchingSections" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="forMatchingSections(regex:scala.util.matching.Regex)(code:grizzled.config.Section=&gt;Unit):Unit"></a>
       <a id="forMatchingSections(Regex)((Section)⇒Unit):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -418,7 +437,8 @@ expression.</p><div class="fullcomment"><div class="comment cmt"><p>Invoke a cod
 expression.
 </p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match</p></dd><dt class="param">code</dt><dd class="cmt"><p>the block of code to invoke with each section
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#get" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#get" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="get(sectionName:String,optionName:String):Option[String]"></a>
       <a id="get(String,String):Option[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -436,7 +456,8 @@ is found, <code>None</code> if not. Does not throw exceptions.
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(value)</code> if the section and option exist, <code>None</code> if
         either the section or option cannot be found.
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getAsList" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getAsList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getAsList(sectionName:String,optionName:String,separators:scala.util.matching.Regex):Option[List[String]]"></a>
       <a id="getAsList(String,String,Regex):Option[List[String]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -451,7 +472,8 @@ is found, <code>None</code> if not. Does not throw exceptions.
 Returns <code>Some(list)</code> if the key is found, and <code>None</code> otherwise.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">separators</dt><dd class="cmt"><p>separator regex to use. Default: [\s,]
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getBoolean(sectionName:String,optionName:String):Option[Boolean]"></a>
       <a id="getBoolean(String,String):Option[Boolean]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -467,7 +489,8 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(boolean)</code> or None.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">ConversionException<p>if the option has a non-boolean value
 </p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getBooleanOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getBooleanOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getBooleanOrElse(sectionName:String,optionName:String,default:Boolean):Boolean"></a>
       <a id="getBooleanOrElse(String,String,Boolean):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -483,7 +506,8 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
 </p></dd><dt>returns</dt><dd class="cmt"><p>the integer result
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">ConversionException<p>if the option cannot be converted
 </p></span></dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -495,7 +519,8 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getInt" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getInt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getInt(sectionName:String,optionName:String):Option[Int]"></a>
       <a id="getInt(String,String):Option[Int]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -511,7 +536,8 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(integer)</code> or None.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">ConversionException<p>if the option has a non-integer value
 </p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getIntOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getIntOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getIntOrElse(sectionName:String,optionName:String,default:Int):Int"></a>
       <a id="getIntOrElse(String,String,Int):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -527,7 +553,8 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
 </p></dd><dt>returns</dt><dd class="cmt"><p>the integer result
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">ConversionException<p>if the option cannot be converted
 </p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getOrElse(sectionName:String,optionName:String,default:String):String"></a>
       <a id="getOrElse(String,String,String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -545,7 +572,8 @@ Calling this function is the same as:</p><pre>get(sectionName, optionName).getOr
 </p></dd><dt>returns</dt><dd class="cmt"><p>The option's value if the section and option exist, the
         default if either the section or option cannot be found.
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getSection" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#getSection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getSection(name:String):Option[grizzled.config.Section]"></a>
       <a id="getSection(String):Option[Section]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -561,7 +589,8 @@ if the section exists, and <code>None</code> if it does not.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the section to get
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(Section)</code> or <code>None</code>
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#hasSection" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#hasSection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hasSection(sectionName:String):Boolean"></a>
       <a id="hasSection(String):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -577,7 +606,8 @@ if the section exists, and <code>None</code> if it does not.
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the configuration has a section with that name,
         <code>false</code> otherwise
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -589,7 +619,8 @@ if the section exists, and <code>None</code> if it does not.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -601,7 +632,8 @@ if the section exists, and <code>None</code> if it does not.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#load" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#load" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="load(source:scala.io.Source,safe:Boolean):grizzled.config.Configuration"></a>
       <a id="load(Source,Boolean):Configuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -618,7 +650,8 @@ Clears the configuration first.
                substitutions (<code>false</code>) or not (<code>true</code>).
 </p></dd><dt>returns</dt><dd class="cmt"><p>this object, for convenience
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#matchingSections" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#matchingSections" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="matchingSections(regex:scala.util.matching.Regex):Seq[grizzled.config.Section]"></a>
       <a id="matchingSections(Regex):Seq[Section]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -634,7 +667,8 @@ expression.</p><div class="fullcomment"><div class="comment cmt"><p>Return a seq
 expression.
 </p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -646,7 +680,8 @@ expression.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -658,7 +693,8 @@ expression.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -670,7 +706,8 @@ expression.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#optionNames" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#optionNames" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="optionNames(sectionName:String):Iterator[String]"></a>
       <a id="optionNames(String):Iterator[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -686,7 +723,8 @@ expression.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of option names in that section
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">NoSuchSectionException<p>if the section doesn't exist
 </p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#options" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#options" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="options(sectionName:String):Map[String,String]"></a>
       <a id="options(String):Map[String,String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -703,7 +741,8 @@ expression.
         the section doesn't exist, an empty map is returned.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">NoSuchSectionException<p>if the section doesn't exist
 </p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#putOption" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#putOption" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="putOption(sectionName:String,optionName:String,value:String,preCheck:(String,scala.collection.mutable.Map[String,String])=&gt;Unit):Unit"></a>
       <a id="putOption(String,String,String,(String,Map[String,String])⇒Unit):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -718,7 +757,8 @@ expression.
 logic first.</p><div class="fullcomment"><div class="comment cmt"><p>Puts an option in the configuration, running the specified pre-check
 logic first.
 </p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
-    </li><li name="grizzled.config.Configuration#sectionNames" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#sectionNames" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sectionNames:Iterator[String]"></a>
       <a id="sectionNames:Iterator[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -732,7 +772,8 @@ logic first.
       <p class="shortcomment cmt">Get the list of section names.</p><div class="fullcomment"><div class="comment cmt"><p>Get the list of section names.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the section names, in a iterator
 </p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#setOption" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#setOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setOption(sectionName:String,optionName:String,value:String):Unit"></a>
       <a id="setOption(String,String,String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -750,7 +791,8 @@ not throw <code>DuplicateOptionException</code>.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name, which will be transformed</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">NoSuchSectionException<p>if the section doesn't exist
 </p></span></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -762,7 +804,8 @@ not throw <code>DuplicateOptionException</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -774,7 +817,8 @@ not throw <code>DuplicateOptionException</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#transformOptionName" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.config.Configuration#transformOptionName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="transformOptionName(option:String):String"></a>
       <a id="transformOptionName(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -790,7 +834,8 @@ version of this method forces the option name to lower case.
 </p></div><dl class="paramcmts block"><dt class="param">option</dt><dd class="cmt"><p>the option name
 </p></dd><dt>returns</dt><dd class="cmt"><p>the transformed option name
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -805,7 +850,8 @@ version of this method forces the option name to lower case.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -820,7 +866,8 @@ version of this method forces the option name to lower case.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -840,48 +887,7 @@ version of this method forces the option name to lower case.
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.config.Configuration#option" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
-      <a id="option(String,String,String):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: Use get() or getOrElse(), instead
-">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get the value for an option in a section, supplying a default if the
-option or the section doesn't exist.</p><div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section, supplying a default if the
-option or the section doesn't exist. Exceptions for variable
-substitution errors are still thrown.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>default value
-</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value (which may be the default)
-</p></dd></dl><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use get() or getOrElse(), instead
-</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#option" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
-      <a id="option(String,String):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: Use get() or getOrElse(), instead
-">option</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get the value for an option in a section.</p><div class="fullcomment"><div class="comment cmt"><p>Get the value for an option in a section.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name
-</p></dd><dt>returns</dt><dd class="cmt"><p>the option's value
-</p></dd></dl><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use get() or getOrElse(), instead
-</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt">NoSuchOptionException<p>if the option doesn't exist
-</p></span><span class="cmt">NoSuchSectionException<p>if the section doesn't exist</p></span></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
@@ -894,8 +900,8 @@ substitution errors are still thrown.
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.net.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -83,7 +87,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.net.IPAddress" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.net.IPAddress" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IPAddressextendsObject"></a>
       <a id="IPAddress:IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -95,7 +100,8 @@
       </span>
       </h4>
       <p class="comment cmt">Represents an IP address.</p>
-    </li><li name="grizzled.net.UDPDatagramSocket" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.net.UDPDatagramSocket" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="UDPDatagramSocketextendsObject"></a>
       <a id="UDPDatagramSocket:UDPDatagramSocket"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -116,7 +122,8 @@ the one provided by the Java JDK.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.net.IPAddress" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.net.IPAddress" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IPAddress"></a>
       <a id="IPAddress:IPAddress"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -128,7 +135,8 @@ the one provided by the Java JDK.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object to <code>IPAddress</code> class.</p>
-    </li><li name="grizzled.net.UDPDatagramSocket" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.net.UDPDatagramSocket" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UDPDatagramSocket"></a>
       <a id="UDPDatagramSocket:UDPDatagramSocket"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -142,7 +150,8 @@ the one provided by the Java JDK.</p>
       <p class="comment cmt">Companion object for the <code>UDPDatagramSocket</code> trait, containing
 methods to simplify creation of <code>UDPDatagramSocket</code> objects, as
 well as some useful utility methods.</p>
-    </li><li name="grizzled.net.url" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.net.url" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="url"></a>
       <a id="url:url"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -172,8 +181,8 @@ well as some useful utility methods.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.cmd.RedoHandler';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -87,7 +91,8 @@ convenience, for command interpreters to use if desired.
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="grizzled.cmd.RedoHandler#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.cmd.RedoHandler#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(cmd:grizzled.cmd.CommandInterpreter):grizzled.cmd.RedoHandler"></a>
       <a id="&lt;init&gt;:RedoHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -108,7 +113,8 @@ convenience, for command interpreters to use if desired.
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -120,7 +126,8 @@ convenience, for command interpreters to use if desired.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -132,7 +139,8 @@ convenience, for command interpreters to use if desired.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -144,7 +152,8 @@ convenience, for command interpreters to use if desired.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -156,7 +165,8 @@ convenience, for command interpreters to use if desired.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -168,7 +178,8 @@ convenience, for command interpreters to use if desired.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#CommandName" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#CommandName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="CommandName:String"></a>
       <a id="CommandName:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -182,7 +193,8 @@ convenience, for command interpreters to use if desired.
       <p class="shortcomment cmt">The name of the command.</p><div class="fullcomment"><div class="comment cmt"><p>The name of the command. This name, or any of the aliases (see below)
 will cause the command to be invoked.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.cmd.RedoHandler">RedoHandler</a> → <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#Help" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#Help" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Help:String"></a>
       <a id="Help:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -197,7 +209,8 @@ will cause the command to be invoked.
 screen. It is not wrapped, indented, or otherwise reformatted. It
 may be a single string or a multiline string.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.cmd.RedoHandler">RedoHandler</a> → <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#aliases" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#aliases" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="aliases:List[String]"></a>
       <a id="aliases:List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -210,7 +223,8 @@ may be a single string or a multiline string.
       </h4>
       <p class="shortcomment cmt">Additional aliases for the command, if any.</p><div class="fullcomment"><div class="comment cmt"><p>Additional aliases for the command, if any.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.cmd.RedoHandler">RedoHandler</a> → <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -222,7 +236,8 @@ may be a single string or a multiline string.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -237,7 +252,8 @@ may be a single string or a multiline string.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#cmd" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#cmd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cmd:grizzled.cmd.CommandInterpreter"></a>
       <a id="cmd:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -249,7 +265,8 @@ may be a single string or a multiline string.
       </span>
       </h4>
       
-    </li><li name="grizzled.cmd.CommandHandler#commandNameCompletions" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.CommandHandler#commandNameCompletions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="commandNameCompletions(prefix:String):List[String]"></a>
       <a id="commandNameCompletions(String):List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -273,7 +290,8 @@ apply other matching criteria.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of the strings (name and/or aliases) that could be
         completed by <code>prefix</code>, or <code>Nil</code>.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="grizzled.cmd.CommandHandler#complete" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.CommandHandler#complete" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="complete(token:String,context:List[grizzled.readline.CompletionToken],commandLine:String):List[String]"></a>
       <a id="complete(String,List[CompletionToken],String):List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -291,7 +309,8 @@ completions. This method has the exact same interface and use as the
 Please see that trait for full documentation.
 </p></div><dl class="paramcmts block"><dt class="param">token</dt><dd class="cmt"><p>the token being completed</p></dd><dt class="param">context</dt><dd class="cmt"><p>the token context (i.e., list of parsed tokens,
                 with cursor)</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -303,7 +322,8 @@ Please see that trait for full documentation.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -315,7 +335,8 @@ Please see that trait for full documentation.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -330,7 +351,8 @@ Please see that trait for full documentation.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -342,7 +364,8 @@ Please see that trait for full documentation.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -354,7 +377,8 @@ Please see that trait for full documentation.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.cmd.CommandHandler#hidden" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.CommandHandler#hidden" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hidden:Boolean"></a>
       <a id="hidden:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -369,7 +393,8 @@ Please see that trait for full documentation.
 in the help list or the history. Using the <code>HiddenCommandHandler</code>
 trait saves a lot of work.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#history" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#history" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="history:grizzled.readline.History"></a>
       <a id="history:History"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -381,7 +406,8 @@ trait saves a lot of work.
       </span>
       </h4>
       
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -393,7 +419,8 @@ trait saves a lot of work.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.cmd.CommandHandler#matches" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.CommandHandler#matches" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="matches(candidate:String):Boolean"></a>
       <a id="matches(String):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -412,7 +439,8 @@ definitions of this method can apply other matching criteria.
 </p></div><dl class="paramcmts block"><dt class="param">candidate</dt><dd class="cmt"><p>the candidate name to be compared with this one
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if they match, <code>false</code> if not
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="grizzled.cmd.CommandHandler#moreInputNeeded" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.CommandHandler#moreInputNeeded" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="moreInputNeeded(lineSoFar:String):Boolean"></a>
       <a id="moreInputNeeded(String):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -433,7 +461,8 @@ required terminating character (e.g., a &quot;;&quot;), doesn't end with a line
 continuation character (e.g., &quot;\&quot;), or whatever the syntax requires.
 </p></div><dl class="paramcmts block"><dt class="param">lineSoFar</dt><dd class="cmt"><p>the line read so far
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -445,7 +474,8 @@ continuation character (e.g., &quot;\&quot;), or whatever the syntax requires.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -457,7 +487,8 @@ continuation character (e.g., &quot;\&quot;), or whatever the syntax requires.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -469,7 +500,8 @@ continuation character (e.g., &quot;\&quot;), or whatever the syntax requires.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#runCommand" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#runCommand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runCommand(commandName:String,unparsedArgs:String):grizzled.cmd.CommandAction"></a>
       <a id="runCommand(String,String):CommandAction"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -487,7 +519,8 @@ the <code>matches()</code> method.
 </p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
         or <code>Stop</code> to tell the main loop to be done.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.cmd.RedoHandler">RedoHandler</a> → <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="grizzled.cmd.RedoHandler#storeInHistory" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler#storeInHistory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="storeInHistory:Boolean"></a>
       <a id="storeInHistory:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -500,7 +533,8 @@ the <code>matches()</code> method.
       </h4>
       <p class="shortcomment cmt">Whether or not the command should be put in the history.</p><div class="fullcomment"><div class="comment cmt"><p>Whether or not the command should be put in the history.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.cmd.RedoHandler">RedoHandler</a> → <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -512,7 +546,8 @@ the <code>matches()</code> method.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -524,7 +559,8 @@ the <code>matches()</code> method.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -539,7 +575,8 @@ the <code>matches()</code> method.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -554,7 +591,8 @@ the <code>matches()</code> method.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -589,8 +627,8 @@ the <code>matches()</code> method.
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

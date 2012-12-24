@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.string.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -83,7 +87,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledCharextendsObject"></a>
       <a id="GrizzledChar:GrizzledChar"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,7 +102,8 @@
       <p class="comment cmt">An analog to Scala's <code>RichChar</code> class, providing some methods
 that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
 <code>java.lang.Character</code>) provide.</p>
-    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledStringextendsObject"></a>
       <a id="GrizzledString:GrizzledString"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -110,7 +116,8 @@ that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
       </h4>
       <p class="comment cmt">An analog to Scala's <code>RichString</code> class, providing some methods
 that neither <code>RichString</code> nor <code>String</code> provide.</p>
-    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="WordWrapperextendsObject"></a>
       <a id="WordWrapper:WordWrapper"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -130,7 +137,8 @@ width.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledChar"></a>
       <a id="GrizzledChar:GrizzledChar"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -142,7 +150,8 @@ width.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object for <code>GrizzledChar</code>.</p>
-    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledString"></a>
       <a id="GrizzledString:GrizzledString"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -154,7 +163,8 @@ width.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object for <code>GrizzledString</code>.</p>
-    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="WordWrapper"></a>
       <a id="WordWrapper:WordWrapper"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -166,7 +176,8 @@ width.</p>
       </span>
       </h4>
       <p class="comment cmt">Companion object for <code>WordWrapper</code>.</p>
-    </li><li name="grizzled.string.template" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.template" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="template"></a>
       <a id="template:template"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -179,7 +190,8 @@ width.</p>
       </h4>
       <p class="comment cmt">Scala classes that provide for variable substitution within strings,
 akin to the Python <code>StringTemplate</code> library.</p>
-    </li><li name="grizzled.string.util" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="util"></a>
       <a id="util:util"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -209,8 +221,8 @@ akin to the Python <code>StringTemplate</code> library.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.file.GrizzledFile';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -85,7 +89,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="grizzled.file.GrizzledFile#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.file.GrizzledFile#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(file:java.io.File):grizzled.file.GrizzledFile"></a>
       <a id="&lt;init&gt;:GrizzledFile"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -106,7 +111,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -118,7 +124,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -130,7 +137,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -142,7 +150,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -154,7 +163,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -166,7 +176,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -178,7 +189,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#basename" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#basename" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="basename:java.io.File"></a>
       <a id="basename:File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -192,7 +204,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       <p class="shortcomment cmt">Get the basename (file name only) part of a path.</p><div class="fullcomment"><div class="comment cmt"><p>Get the basename (file name only) part of a path.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the file name portion, as a <code>File</code>
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -207,7 +220,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#copyTo" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#copyTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTo(target:java.io.File):java.io.File"></a>
       <a id="copyTo(File):File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -222,7 +236,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
 </p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the target file
 </p></dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#copyTo" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#copyTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTo(target:String):java.io.File"></a>
       <a id="copyTo(String):File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -237,7 +252,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
 </p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the target file
 </p></dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#deleteRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#deleteRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deleteRecursively():Unit"></a>
       <a id="deleteRecursively():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -251,7 +267,8 @@ println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pr
       <p class="shortcomment cmt">Recursively remove the directory specified by this object.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively remove the directory specified by this object. This
 method is conceptually equivalent to <code>rm -r</code> on a Unix system.
 </p></div></div>
-    </li><li name="grizzled.file.GrizzledFile#dirname" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#dirname" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirname:java.io.File"></a>
       <a id="dirname:File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -265,7 +282,8 @@ method is conceptually equivalent to <code>rm -r</code> on a Unix system.
       <p class="shortcomment cmt">Get the directory name of the file.</p><div class="fullcomment"><div class="comment cmt"><p>Get the directory name of the file.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the directory portion, as a <code>File</code>.
 </p></dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#dirnameBasename" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#dirnameBasename" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirnameBasename:(java.io.File,java.io.File)"></a>
       <a id="dirnameBasename:(File,File)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -281,7 +299,8 @@ components.</p><div class="fullcomment"><div class="comment cmt"><p>Split the fi
 components. Analogous to Python's <code>os.path.pathsplit()</code> function.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a (dirname, basename) tuple of <code>File</code> objects.
 </p></dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#dirnameBasenameExtension" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#dirnameBasenameExtension" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirnameBasenameExtension:(java.io.File,String,String)"></a>
       <a id="dirnameBasenameExtension:(File,String,String)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -297,7 +316,8 @@ extension pieces.</p><div class="fullcomment"><div class="comment cmt"><p>Split 
 extension pieces.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a 3-tuple of (dirname, basename, extension)
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -309,7 +329,8 @@ extension pieces.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -321,7 +342,8 @@ extension pieces.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#file" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#file" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="file:java.io.File"></a>
       <a id="file:File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -333,7 +355,8 @@ extension pieces.
       </span>
       </h4>
       
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -348,7 +371,8 @@ extension pieces.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -360,7 +384,8 @@ extension pieces.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -372,7 +397,8 @@ extension pieces.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isEmpty:Boolean"></a>
       <a id="isEmpty:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -386,7 +412,8 @@ extension pieces.
       <p class="shortcomment cmt">Determine whether a directory is empty.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether a directory is empty. Only meaningful for a directory.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>true if the directory is empty, false if not
 </p></dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -398,7 +425,8 @@ extension pieces.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#listRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#listRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listRecursively(topdown:Boolean):Iterator[java.io.File]"></a>
       <a id="listRecursively(Boolean):Iterator[File]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -421,7 +449,8 @@ bottom up).
 </p></dd><dt>returns</dt><dd class="cmt"><p>a generator (iterator) of <code>File</code> objects for everything under
         the directory.
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -433,7 +462,8 @@ bottom up).
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -445,7 +475,8 @@ bottom up).
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -457,7 +488,8 @@ bottom up).
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#relativePath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#relativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="relativePath(relativeTo:java.io.File):String"></a>
       <a id="relativePath(File):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -472,7 +504,8 @@ bottom up).
 </p></div><dl class="paramcmts block"><dt class="param">relativeTo</dt><dd class="cmt"><p>the other file
 </p></dd><dt>returns</dt><dd class="cmt"><p>the path of this file, relative to the other file.
 </p></dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#split" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#split" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="split:List[String]"></a>
       <a id="split:List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -533,7 +566,8 @@ beginning. Examples:</p><p><table border="1">
 </table>
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the component pieces.
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -545,7 +579,8 @@ beginning. Examples:</p><p><table border="1">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -557,7 +592,8 @@ beginning. Examples:</p><p><table border="1">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#touch" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#touch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="touch(time:Long):Unit"></a>
       <a id="touch(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -575,7 +611,8 @@ will throw an exception.
               time if this parameter is negative.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IOException<p>on error
 </p></span></dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -590,7 +627,8 @@ will throw an exception.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -605,7 +643,8 @@ will throw an exception.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -620,7 +659,8 @@ will throw an exception.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.GrizzledFile#walk" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.GrizzledFile#walk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="walk(topdown:Boolean):List[(String,List[String],List[String])]"></a>
       <a id="walk(Boolean):List[(String,List[String],List[String])]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -669,8 +709,8 @@ subdirectories (directories are generated bottom up).</p><p>**WARNING!** This me
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

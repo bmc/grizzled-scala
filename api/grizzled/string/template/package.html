@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../../index.html';
             var hash = 'grizzled.string.template.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -85,7 +89,8 @@ supported.
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.string.template.StringTemplate" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+              <ol><li name="grizzled.string.template.StringTemplate" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="StringTemplateextendsObject"></a>
       <a id="StringTemplate:StringTemplate"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,7 +103,8 @@ supported.
       </h4>
       <p class="comment cmt">A simple, configurable string template that substitutes variable references
 within a string.</p>
-    </li><li name="grizzled.string.template.StringTemplateException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.template.StringTemplateException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StringTemplateExceptionextendsException"></a>
       <a id="StringTemplateException:StringTemplateException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -110,7 +116,8 @@ within a string.</p>
       </span>
       </h4>
       <p class="comment cmt">Base class for all <code>StringTemplate</code> exceptions.</p>
-    </li><li name="grizzled.string.template.UnixShellStringTemplate" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.template.UnixShellStringTemplate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnixShellStringTemplateextendsStringTemplate"></a>
       <a id="UnixShellStringTemplate:UnixShellStringTemplate"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -123,7 +130,8 @@ within a string.</p>
       </h4>
       <p class="comment cmt">A string template that uses the Unix shell-like syntax <code>${varname}</code>
 (or <code>$varname</code>) for variable references.</p>
-    </li><li name="grizzled.string.template.Variable" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.template.Variable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="VariableextendsObject"></a>
       <a id="Variable:Variable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -135,7 +143,8 @@ within a string.</p>
       </span>
       </h4>
       <p class="comment cmt">Information about a parsed variable name.</p>
-    </li><li name="grizzled.string.template.VariableNotFoundException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.template.VariableNotFoundException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="VariableNotFoundExceptionextendsException"></a>
       <a id="VariableNotFoundException:VariableNotFoundException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -147,7 +156,8 @@ within a string.</p>
       </span>
       </h4>
       <p class="comment cmt">Thrown for non-safe templates when a variable is not found.</p>
-    </li><li name="grizzled.string.template.WindowsCmdStringTemplate" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.string.template.WindowsCmdStringTemplate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="WindowsCmdStringTemplateextendsStringTemplate"></a>
       <a id="WindowsCmdStringTemplate:WindowsCmdStringTemplate"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -181,8 +191,8 @@ within a string.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

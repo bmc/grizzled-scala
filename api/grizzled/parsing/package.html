@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.parsing.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -83,7 +87,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IteratorStream[T]extendsObject"></a>
       <a id="IteratorStream[T]:IteratorStream[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -96,7 +101,8 @@
       </h4>
       <p class="comment cmt"><code>IteratorStream</code> places a simple stream on top of an iterator,
 returning <code>Option</code>-wrapped instances from the underlying iterator.</p>
-    </li><li name="grizzled.parsing.Pushback" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.parsing.Pushback" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Pushback[T]extendsIteratorStream[T]"></a>
       <a id="Pushback[T]:Pushback[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -109,7 +115,8 @@ returning <code>Option</code>-wrapped instances from the underlying iterator.</p
       </h4>
       <p class="comment cmt">The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
 to permit arbitrary pushback.</p>
-    </li><li name="grizzled.parsing.StringToken" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.parsing.StringToken" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StringTokenextendsProductwithSerializable"></a>
       <a id="StringToken:StringToken"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -143,8 +150,8 @@ to permit arbitrary pushback.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

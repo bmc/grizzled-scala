@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.cmd.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -85,7 +89,8 @@ interpreters. This package is very similar, in concept, to the Python
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.cmd.BlockCommandHandler" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+              <ol><li name="grizzled.cmd.BlockCommandHandler" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="BlockCommandHandlerextendsNoCompletionsHandler"></a>
       <a id="BlockCommandHandler:BlockCommandHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,7 +103,8 @@ interpreters. This package is very similar, in concept, to the Python
       </h4>
       <p class="comment cmt">A block command is one that consists of multiple input lines between
 some sort of start and end indicator.</p>
-    </li><li name="grizzled.cmd.Command" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.Command" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CommandextendsObject"></a>
       <a id="Command:Command"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -110,7 +116,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Mapped commands.</p>
-    </li><li name="grizzled.cmd.CommandAction" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.CommandAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CommandActionextendsObject"></a>
       <a id="CommandAction:CommandAction"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -122,7 +129,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Actions returned by handlers.</p>
-    </li><li name="grizzled.cmd.CommandHandler" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.CommandHandler" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CommandHandlerextendsObject"></a>
       <a id="CommandHandler:CommandHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -134,7 +142,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Trait for an object (or class) that handles a single command.</p>
-    </li><li name="grizzled.cmd.CommandInterpreter" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.CommandInterpreter" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CommandInterpreterextendsObject"></a>
       <a id="CommandInterpreter:CommandInterpreter"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -146,7 +155,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Base class for command interpreters.</p>
-    </li><li name="grizzled.cmd.HiddenCommandHandler" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.HiddenCommandHandler" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="HiddenCommandHandlerextendsNoCompletionsHandler"></a>
       <a id="HiddenCommandHandler:HiddenCommandHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -158,7 +168,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">The handler trait for a hidden command.</p>
-    </li><li name="grizzled.cmd.HistoryHandler" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.HistoryHandler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="HistoryHandlerextendsCommandHandler"></a>
       <a id="HistoryHandler:HistoryHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -170,7 +181,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Simple history command handler.</p>
-    </li><li name="grizzled.cmd.KnownCommand" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.KnownCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="KnownCommandextendsCommandwithProductwithSerializable"></a>
       <a id="KnownCommand:KnownCommand"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -182,7 +194,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.cmd.NoCompletionsHandler" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.NoCompletionsHandler" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="NoCompletionsHandlerextendsCommandHandler"></a>
       <a id="NoCompletionsHandler:NoCompletionsHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -194,7 +207,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Mixed in to indicate no completions are available.</p>
-    </li><li name="grizzled.cmd.RedoHandler" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.RedoHandler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RedoHandlerextendsCommandHandler"></a>
       <a id="RedoHandler:RedoHandler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -206,7 +220,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Simple &quot;redo command&quot; handler.</p>
-    </li><li name="grizzled.cmd.UnknownCommand" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.UnknownCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnknownCommandextendsCommandwithProductwithSerializable"></a>
       <a id="UnknownCommand:UnknownCommand"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -225,7 +240,8 @@ some sort of start and end indicator.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.cmd.CmdUtil" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.cmd.CmdUtil" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CmdUtil"></a>
       <a id="CmdUtil:CmdUtil"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -237,7 +253,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       <p class="comment cmt">Miscellaneous useful utility functions.</p>
-    </li><li name="grizzled.cmd.EOFCommand" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.EOFCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EOFCommand"></a>
       <a id="EOFCommand:EOFCommand"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -249,7 +266,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.cmd.EmptyCommand" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.EmptyCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmptyCommand"></a>
       <a id="EmptyCommand:EmptyCommand"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -261,7 +279,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.cmd.KeepGoing" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.KeepGoing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="KeepGoing"></a>
       <a id="KeepGoing:KeepGoing"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -273,7 +292,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.cmd.Stop" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.Stop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Stop"></a>
       <a id="Stop:Stop"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -285,7 +305,8 @@ some sort of start and end indicator.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.cmd.package#error" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.cmd.package#error" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="error(msg:String):Unit"></a>
       <a id="error(String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -315,8 +336,8 @@ some sort of start and end indicator.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

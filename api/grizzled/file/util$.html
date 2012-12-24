@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.file.util$';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -87,7 +91,8 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -99,7 +104,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -111,7 +117,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -123,7 +130,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -135,7 +143,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -147,7 +156,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -159,7 +169,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.file.util#basename" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#basename" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="basename(path:String,fileSep:String):String"></a>
       <a id="basename(String,String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -175,7 +186,8 @@
                 the &quot;file.separator&quot; property.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the file name portion
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -190,7 +202,8 @@
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copy(file:String,targetDir:String):Unit"></a>
       <a id="copy(String,String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -207,7 +220,8 @@ it is created.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">FileDoesNotExistException<p>a source file or the target directory
                                   doesn't exist</p></span><span class="cmt">IOException<p>cannot create target directory
 </p></span></dd></dl></div>
-    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copy(file:String,targetDir:String,createTarget:Boolean):Unit"></a>
       <a id="copy(String,String,Boolean):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -225,7 +239,8 @@ it is created.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">FileDoesNotExistException<p>source file or target directory
                                   doesn't exist</p></span><span class="cmt">IOException<p>cannot create target directory
 </p></span></dd></dl></div>
-    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copy(files:Iterable[String],targetDir:String,createTarget:Boolean):Unit"></a>
       <a id="copy(Iterable[String],String,Boolean):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -244,7 +259,8 @@ method that takes only one file.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">FileDoesNotExistException<p>a source file or the target directory
                                   doesn't exist</p></span><span class="cmt">IOException<p>cannot create target directory
 </p></span></dd></dl></div>
-    </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyFile(source:java.io.File,target:java.io.File):java.io.File"></a>
       <a id="copyFile(File,File):File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -262,7 +278,8 @@ as the source file.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the full path of the target file
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyFile(sourcePath:String,targetPath:String):String"></a>
       <a id="copyFile(String,String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -280,7 +297,8 @@ as the source file.
 </p></div><dl class="paramcmts block"><dt class="param">sourcePath</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">targetPath</dt><dd class="cmt"><p>path to the target file or directory
 </p></dd><dt>returns</dt><dd class="cmt"><p>the full path of the target file
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTree(sourceDir:java.io.File,targetDir:java.io.File):Unit"></a>
       <a id="copyTree(File,File):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -296,7 +314,8 @@ directory.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively c
 directory. Creates the target directory if it does not exist.
 </p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTree(sourceDir:String,targetDir:String):Unit"></a>
       <a id="copyTree(String,String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -312,7 +331,8 @@ directory.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively c
 directory. Creates the target directory if it does not exist.
 </p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#createTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#createTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File"></a>
       <a id="createTemporaryDirectory(String,Int):File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -329,7 +349,8 @@ directory. Creates the target directory if it does not exist.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the directory. Throws an IOException if it can't create
         the directory.
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deleteTree(dir:java.io.File):Unit"></a>
       <a id="deleteTree(File):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -344,7 +365,8 @@ directory. Creates the target directory if it does not exist.
 equivalent to <tt>rm -r</tt> on a Unix system.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deleteTree(dir:String):Unit"></a>
       <a id="deleteTree(String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -359,7 +381,8 @@ equivalent to <tt>rm -r</tt> on a Unix system.
 equivalent to <tt>rm -r</tt> on a Unix system.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#dirname" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#dirname" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirname(path:String,fileSep:String):String"></a>
       <a id="dirname(String,String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -375,7 +398,8 @@ equivalent to <tt>rm -r</tt> on a Unix system.
                 the &quot;file.separator&quot; property.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the directory portion
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#dirnameBasename" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#dirnameBasename" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirnameBasename(path:String,fileSep:String):(String,String)"></a>
       <a id="dirnameBasename(String,String):(String,String)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -392,7 +416,8 @@ Analogous to Python's <tt>os.path.pathsplit()</tt> function.
                 the &quot;file.separator&quot; property.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a (dirname, basename) tuple of strings
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#dirnameBasenameExtension" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#dirnameBasenameExtension" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirnameBasenameExtension(pathname:String,fileSep:String):(String,String,String)"></a>
       <a id="dirnameBasenameExtension(String,String):(String,String,String)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -410,7 +435,8 @@ pieces.
                 the &quot;file.separator&quot; property.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a 3-tuple of (dirname, basename, extension)
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#eglob" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#eglob" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eglob(pattern:String):List[String]"></a>
       <a id="eglob(String):List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -428,7 +454,8 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
 </p></div><dl class="paramcmts block"><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern
 </p></dd><dt>returns</dt><dd class="cmt"><p>list of matches, or an empty list for none
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -440,7 +467,8 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -452,7 +480,8 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.util#fileSeparator" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.util#fileSeparator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fileSeparator:String"></a>
       <a id="fileSeparator:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -464,7 +493,8 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
       </span>
       </h4>
       
-    </li><li name="grizzled.file.util#fileSeparatorChar" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.file.util#fileSeparatorChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fileSeparatorChar:Char"></a>
       <a id="fileSeparatorChar:Char"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -476,7 +506,8 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
       </span>
       </h4>
       
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -491,7 +522,8 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.util#fnmatch" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#fnmatch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fnmatch(name:String,pattern:String):Boolean"></a>
       <a id="fnmatch(String,String):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -526,7 +558,8 @@ are Unix shell-style wildcards:</p><p><table border="0" cellspacing="2" class="l
 case-sensitive on Posix operating systems, case-insensitive elsewhere.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name to match</p></dd><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -538,7 +571,8 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.util#glob" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#glob" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="glob(path:String):List[String]"></a>
       <a id="glob(String):List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -554,7 +588,8 @@ contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The path to expand.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of possibly expanded file names
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -566,7 +601,8 @@ contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -578,7 +614,8 @@ contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joinPath(pieces:java.io.File*):java.io.File"></a>
       <a id="joinPath(File*):File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -596,7 +633,8 @@ currently running system
 </p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces
 </p></dd><dt>returns</dt><dd class="cmt"><p>a composite path
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joinPath(pieces:String*):String"></a>
       <a id="joinPath(String*):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -614,7 +652,8 @@ currently running system
 </p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces
 </p></dd><dt>returns</dt><dd class="cmt"><p>a composite path
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joinPath(fileSep:String,pieces:List[String]):String"></a>
       <a id="joinPath(String,List[String]):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -629,7 +668,8 @@ currently running system
 </p></div><dl class="paramcmts block"><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use</p></dd><dt class="param">pieces</dt><dd class="cmt"><p>path pieces
 </p></dd><dt>returns</dt><dd class="cmt"><p>a composite path
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#listRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#listRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listRecursively(file:java.io.File,topdown:Boolean):Iterator[java.io.File]"></a>
       <a id="listRecursively(File,Boolean):Iterator[File]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -653,7 +693,8 @@ bottom up).
         the directory. If <code>file</code> isn't a directory, the generator will
         be empty.
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#nativePath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#nativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nativePath(path:String):String"></a>
       <a id="nativePath(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -674,7 +715,8 @@ returns the <tt>path</tt> parameter unmodified.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to convert from universtal to native path notation
 </p></dd><dt>returns</dt><dd class="cmt"><p>the native path
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -686,7 +728,8 @@ returns the <tt>path</tt> parameter unmodified.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.util#normalizePath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#normalizePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="normalizePath(path:String):String"></a>
       <a id="normalizePath(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -704,7 +747,8 @@ Windows and Posix operating systems.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#normalizePosixPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#normalizePosixPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="normalizePosixPath(path:String):String"></a>
       <a id="normalizePosixPath(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -721,7 +765,8 @@ Windows and Posix operating systems.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#normalizeWindowsPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#normalizeWindowsPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="normalizeWindowsPath(path:String):String"></a>
       <a id="normalizeWindowsPath(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -737,7 +782,8 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -749,7 +795,8 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -761,7 +808,8 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.util#pwd" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#pwd" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="pwd:String"></a>
       <a id="pwd:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -775,7 +823,8 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
       <p class="shortcomment cmt">Return the current working directory, as an absolute path.</p><div class="fullcomment"><div class="comment cmt"><p>Return the current working directory, as an absolute path.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the current working directory
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#relativePath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#relativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="relativePath(from:java.io.File,to:java.io.File):String"></a>
       <a id="relativePath(File,File):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -790,7 +839,8 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
 </p></div><dl class="paramcmts block"><dt class="param">from</dt><dd class="cmt"><p>the starting file</p></dd><dt class="param">to</dt><dd class="cmt"><p>the file to be converted to a relative path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the (String) relative path
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#splitDrivePath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#splitDrivePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="splitDrivePath(path:String):(String,String)"></a>
       <a id="splitDrivePath(String):(String,String)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -806,7 +856,8 @@ Python version of normpath() in Python's <tt>os.ntpath</tt> module.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a (drive, path) tuple, either component of which can be
 *       an empty string
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#splitPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#splitPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="splitPath(path:String,fileSep:String):List[String]"></a>
       <a id="splitPath(String,String):List[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -869,7 +920,8 @@ beginning. Examples:</p><p><table border="1">
                the &quot;file.separator&quot; property.
 </p></dd><dt>returns</dt><dd class="cmt"><p>the component pieces.
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -881,7 +933,8 @@ beginning. Examples:</p><p><table border="1">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.util#temporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#temporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="temporaryDirectory:java.io.File"></a>
       <a id="temporaryDirectory:File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -895,7 +948,8 @@ beginning. Examples:</p><p><table border="1">
       <p class="shortcomment cmt">Determine the temporary directory to use.</p><div class="fullcomment"><div class="comment cmt"><p>Determine the temporary directory to use.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the temporary directory
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -907,7 +961,8 @@ beginning. Examples:</p><p><table border="1">
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.util#touch" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#touch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="touch(path:String,time:Long):Unit"></a>
       <a id="touch(String,Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -923,7 +978,8 @@ beginning. Examples:</p><p><table border="1">
              time if this parameter is negative.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IOException<p>on error
 </p></span></dd></dl></div>
-    </li><li name="grizzled.file.util#touchMany" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#touchMany" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="touchMany(files:Iterable[String],time:Long):Unit"></a>
       <a id="touchMany(Iterable[String],Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -941,7 +997,8 @@ exception.
               time if this parameter is negative.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IOException<p>on error
 </p></span></dd></dl></div>
-    </li><li name="grizzled.file.util#universalPath" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#universalPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="universalPath(path:String):String"></a>
       <a id="universalPath(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -962,7 +1019,8 @@ this function simply returns the <tt>path</tt> parameter unmodified.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to convert to universal path notation
 </p></dd><dt>returns</dt><dd class="cmt"><p>the universal path
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -977,7 +1035,8 @@ this function simply returns the <tt>path</tt> parameter unmodified.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -992,7 +1051,8 @@ this function simply returns the <tt>path</tt> parameter unmodified.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1007,7 +1067,8 @@ this function simply returns the <tt>path</tt> parameter unmodified.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.util#walk" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#walk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="walk(top:String,topdown:Boolean):List[(String,List[String],List[String])]"></a>
       <a id="walk(String,Boolean):List[(String,List[String],List[String])]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1055,7 +1116,8 @@ bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic link
                otherwise.
 </p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.
 </p></dd></dl></div>
-    </li><li name="grizzled.file.util#withTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.file.util#withTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withTemporaryDirectory[T](prefix:String)(action:java.io.File=&gt;T):T"></a>
       <a id="withTemporaryDirectory[T](String)((File)⇒T):T"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1091,8 +1153,8 @@ completes.
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

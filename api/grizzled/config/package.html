@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.config.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -86,7 +90,8 @@ differ quite a bit).
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.config.ConfigException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.config.ConfigException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigExceptionextendsException"></a>
       <a id="ConfigException:ConfigException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,7 +103,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Base class for all configuration exceptions.</p>
-    </li><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationextendsObject"></a>
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -110,7 +116,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">An INI-style configuration file parser.</p>
-    </li><li name="grizzled.config.ConversionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.ConversionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConversionExceptionextendsConfigException"></a>
       <a id="ConversionException:ConversionException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -122,7 +129,8 @@ differ quite a bit).
       </span>
       </h4>
       
-    </li><li name="grizzled.config.DuplicateOptionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.DuplicateOptionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DuplicateOptionExceptionextendsConfigException"></a>
       <a id="DuplicateOptionException:DuplicateOptionException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -134,7 +142,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Thrown when a duplicate option is encountered.</p>
-    </li><li name="grizzled.config.DuplicateSectionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.DuplicateSectionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DuplicateSectionExceptionextendsConfigException"></a>
       <a id="DuplicateSectionException:DuplicateSectionException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -146,7 +155,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Thrown when a duplicate section is encountered.</p>
-    </li><li name="grizzled.config.NoSuchOptionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.NoSuchOptionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NoSuchOptionExceptionextendsConfigException"></a>
       <a id="NoSuchOptionException:NoSuchOptionException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -158,7 +168,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Thrown when an expected option is not present in the confiruation.</p>
-    </li><li name="grizzled.config.NoSuchSectionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.NoSuchSectionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NoSuchSectionExceptionextendsConfigException"></a>
       <a id="NoSuchSectionException:NoSuchSectionException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -170,7 +181,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Thrown when an expected section is not present in the confiruation.</p>
-    </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SectionextendsObject"></a>
       <a id="Section:Section"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -182,7 +194,8 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Used as a wrapper to pass a section to callbacks.</p>
-    </li><li name="grizzled.config.SubstitutionException" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.config.SubstitutionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SubstitutionExceptionextendsConfigException"></a>
       <a id="SubstitutionException:SubstitutionException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -201,7 +214,8 @@ differ quite a bit).
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Configuration"></a>
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -214,19 +228,6 @@ differ quite a bit).
       </h4>
       <p class="comment cmt">Companion object for the <code>Configuration</code> class
 </p>
-    </li><li name="grizzled.config.ConfigurationReader" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
-      <a id="ConfigurationReader:ConfigurationReader"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="ConfigurationReader$.html"><span class="name">ConfigurationReader</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">A configuration reader: Reads a source and produces a parsed
-configuration.</p>
     </li></ol>
             </div>
 
@@ -245,8 +246,8 @@ configuration.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

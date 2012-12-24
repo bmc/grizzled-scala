@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.math.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -87,7 +91,8 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.math.stats" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.math.stats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="stats"></a>
       <a id="stats:stats"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -99,7 +104,8 @@
       </span>
       </h4>
       <p class="comment cmt">Miscellaneous statistics-related functions.</p>
-    </li><li name="grizzled.math.util" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.math.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="util"></a>
       <a id="util:util"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -129,8 +135,8 @@
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

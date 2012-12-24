@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.collection.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -83,7 +87,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.collection.CollectionIterator" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.collection.CollectionIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CollectionIterator[T]extendsIterator[T]"></a>
       <a id="CollectionIterator[T]:CollectionIterator[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -96,7 +101,8 @@
       </h4>
       <p class="comment cmt">Useful for converting a collection into an object suitable for use with
 Scala's <code>for</code> loop.</p>
-    </li><li name="grizzled.collection.GrizzledIterable" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection.GrizzledIterable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledIterable[+T]extendsIterableForwarder[T]"></a>
       <a id="GrizzledIterable[+T]:GrizzledIterable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -108,7 +114,8 @@ Scala's <code>for</code> loop.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.collection.GrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection.GrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledLinearSeq[+T]extendsObject"></a>
       <a id="GrizzledLinearSeq[+T]:GrizzledLinearSeq[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -120,7 +127,8 @@ Scala's <code>for</code> loop.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.collection.ListIterator" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection.ListIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ListIterator[+T]extendsIterator[T]"></a>
       <a id="ListIterator[+T]:ListIterator[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -132,7 +140,8 @@ Scala's <code>for</code> loop.</p>
       </span>
       </h4>
       <p class="comment cmt">An <code>Iterator</code> for lists.</p>
-    </li><li name="grizzled.collection.MultiIterator" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection.MultiIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MultiIterator[+T]extendsIterator[T]"></a>
       <a id="MultiIterator[+T]:MultiIterator[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -152,7 +161,8 @@ iterators.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.collection.CollectionIterator" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.collection.CollectionIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CollectionIterator"></a>
       <a id="CollectionIterator:CollectionIterator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -164,7 +174,8 @@ iterators.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.collection.GrizzledIterable" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection.GrizzledIterable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledIterable"></a>
       <a id="GrizzledIterable:GrizzledIterable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -176,7 +187,8 @@ iterators.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.collection.GrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.collection.GrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GrizzledLinearSeq"></a>
       <a id="GrizzledLinearSeq:GrizzledLinearSeq"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -206,8 +218,8 @@ iterators.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

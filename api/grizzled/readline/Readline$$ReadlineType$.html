@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.readline.Readline$$ReadlineType$';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -44,16 +48,16 @@
 this API. Note that a given API may or may not be available on a
 particular machine. The following implementations are currently
 supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires the JavaReadline jar
-  (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>) and the GNU Readline
-  library (<a href="http://tiswww.case.edu/php/chet/readline/rltop.html">http://tiswww.case.edu/php/chet/readline/rltop.html</a>).
+  (<a href="http://java-readline.sourceforge.net/" target="_blank">http://java-readline.sourceforge.net/</a>) and the GNU Readline
+  library (<a href="http://tiswww.case.edu/php/chet/readline/rltop.html" target="_blank">http://tiswww.case.edu/php/chet/readline/rltop.html</a>).
 - <code>Editline</code>: The Editline library, originally from BSD Unix.
    Requires the <code>libjavaeditline jar</code> and dynamic library (see
-   <a href="http://software.clapper.org/java/javaeditline/">http://software.clapper.org/java/javaeditline/</a>) and the
-   Editline library (<a href="http://www.thrysoee.dk/editline/">http://www.thrysoee.dk/editline/</a>).
+   <a href="http://software.clapper.org/java/javaeditline/" target="_blank">http://software.clapper.org/java/javaeditline/</a>) and the
+   Editline library (<a href="http://www.thrysoee.dk/editline/" target="_blank">http://www.thrysoee.dk/editline/</a>).
 - <code>Getline</code>: The Getline library. Requires the JavaReadline jar
-  (<a href="http://java-readline.sourceforge.net/">http://java-readline.sourceforge.net/</a>) and the Getline library.
+  (<a href="http://java-readline.sourceforge.net/" target="_blank">http://java-readline.sourceforge.net/</a>) and the Getline library.
 - <code>JLine</code>: The JLine library. Requires the JLine jar
-   <a href="http://jline.sourceforge.net/">http://jline.sourceforge.net/</a>).
+   <a href="http://jline.sourceforge.net/" target="_blank">http://jline.sourceforge.net/</a>).
 - <code>Simple</code>: A simple, none-editing, pure Java implementation.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
@@ -97,7 +101,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.readline.Readline.ReadlineType.ReadlineType" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.readline.Readline.ReadlineType.ReadlineType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ReadlineType=grizzled.readline.Readline.ReadlineType.Value"></a>
       <a id="ReadlineType:ReadlineType"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -105,11 +110,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">ReadlineType</span><span class="result"> = <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">ReadlineType</span><span class="result"> = <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       
-    </li><li name="scala.Enumeration.Val" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration.Val" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ValextendsEnumeration.this.ValuewithSerializable"></a>
       <a id="Val:Val"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -124,7 +130,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@SerialVersionUID</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.Enumeration.Value" visbl="pub" data-isabs="true" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration.Value" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ValueextendsOrdered[Enumeration.this.Value]withSerializable"></a>
       <a id="Value:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -139,7 +146,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@SerialVersionUID</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.Enumeration.ValueSet" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration.ValueSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ValueSetextendsAbstractSet[Enumeration.this.Value]withSortedSet[Enumeration.this.Value]withSortedSetLike[Enumeration.this.Value,Enumeration.this.ValueSet]withSerializable"></a>
       <a id="ValueSet:ValueSet"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -158,7 +166,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -170,7 +179,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -182,7 +192,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -194,7 +205,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -206,7 +218,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -218,7 +231,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.readline.Readline.ReadlineType#EditLine" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline.ReadlineType#EditLine" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EditLine:grizzled.readline.Readline.ReadlineType.Value"></a>
       <a id="EditLine:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -226,11 +240,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">EditLine</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">EditLine</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.Readline.ReadlineType#GNUReadline" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline.ReadlineType#GNUReadline" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GNUReadline:grizzled.readline.Readline.ReadlineType.Value"></a>
       <a id="GNUReadline:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -238,11 +253,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">GNUReadline</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">GNUReadline</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.Readline.ReadlineType#GetLine" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline.ReadlineType#GetLine" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GetLine:grizzled.readline.Readline.ReadlineType.Value"></a>
       <a id="GetLine:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -250,11 +266,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">GetLine</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">GetLine</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.Readline.ReadlineType#JLine" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline.ReadlineType#JLine" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JLine:grizzled.readline.Readline.ReadlineType.Value"></a>
       <a id="JLine:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -262,11 +279,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">JLine</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">JLine</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.Readline.ReadlineType#Simple" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline.ReadlineType#Simple" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Simple:grizzled.readline.Readline.ReadlineType.Value"></a>
       <a id="Simple:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -274,11 +292,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">Simple</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">Simple</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       
-    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Value(i:Int,name:String):Enumeration.this.Value"></a>
       <a id="Value(Int,String):Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -286,11 +305,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Value(name:String):Enumeration.this.Value"></a>
       <a id="Value(String):Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -298,11 +318,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">Value</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">Value</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Value(i:Int):Enumeration.this.Value"></a>
       <a id="Value(Int):Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -310,11 +331,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Value:Enumeration.this.Value"></a>
       <a id="Value:Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -322,11 +344,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">Value</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">Value</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.Enumeration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(x:Int):Enumeration.this.Value"></a>
       <a id="apply(Int):Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -334,11 +357,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">apply</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -350,7 +374,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -365,7 +390,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -377,7 +403,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -389,7 +416,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -404,7 +432,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -416,7 +445,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -428,7 +458,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -440,7 +471,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.Enumeration#maxId" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#maxId" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="maxId:Int"></a>
       <a id="maxId:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -452,7 +484,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -464,7 +497,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Enumeration#nextId" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#nextId" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nextId:Int"></a>
       <a id="nextId:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -476,7 +510,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.Enumeration#nextName" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#nextName" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nextName:Iterator[String]"></a>
       <a id="nextName:Iterator[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -488,7 +523,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -500,7 +536,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -512,7 +549,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Enumeration#readResolve" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#readResolve" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="readResolve():AnyRef"></a>
       <a id="readResolve():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -524,7 +562,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -536,7 +575,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Enumeration#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -548,7 +588,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration → AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Enumeration#values" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#values" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="values:Enumeration.this.ValueSet"></a>
       <a id="values:ValueSet"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -556,11 +597,12 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">values</span><span class="result">: <a href="#ValueSet:ValueSet" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ValueSet">ValueSet</a></span>
+        <span class="name">values</span><span class="result">: <a href="#ValueSetextendsAbstractSet[Enumeration.this.Value]withSortedSet[Enumeration.this.Value]withSortedSetLike[Enumeration.this.Value,Enumeration.this.ValueSet]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ValueSet">ValueSet</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -575,7 +617,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -590,7 +633,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -605,7 +649,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.Enumeration#withName" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Enumeration#withName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withName(s:String):Enumeration.this.Value"></a>
       <a id="withName(String):Value"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -613,7 +658,7 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withName</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#Value:Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
+        <span class="name">withName</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">Value</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
@@ -641,8 +686,8 @@ supported:</p><p>- <code>GNUReadline</code>: The GNU Readline library. Requires 
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>

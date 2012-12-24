@@ -18,7 +18,11 @@
          if(top === self) {
             var url = '../../index.html';
             var hash = 'grizzled.readline.package';
-            window.location.href = url + '#' + hash;
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
@@ -42,9 +46,9 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>grizzled.readline</code> package provides a common front-end API to
 various underlying readline and readline-like implementations, including
-<a href="http://tiswww.case.edu/php/chet/readline/rltop.html">GNU Readline</a>,
-<a href="http://www.thrysoee.dk/editline/">Editline</a>, and
-<a href="http://jline.sourceforge.net/">JLine</a>.
+<a href="http://tiswww.case.edu/php/chet/readline/rltop.html" target="_blank">GNU Readline</a>,
+<a href="http://www.thrysoee.dk/editline/" target="_blank">Editline</a>, and
+<a href="http://jline.sourceforge.net/" target="_blank">JLine</a>.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -87,7 +91,8 @@ various underlying readline and readline-like implementations, including
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.readline.Completer" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+              <ol><li name="grizzled.readline.Completer" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CompleterextendsObject"></a>
       <a id="Completer:Completer"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -100,7 +105,8 @@ various underlying readline and readline-like implementations, including
       </h4>
       <p class="comment cmt">Models a completer: An object that, given a line of input and a token
 within that line, finds possible completions for the token.</p>
-    </li><li name="grizzled.readline.CompleterHelper" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.CompleterHelper" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CompleterHelperextendsObject"></a>
       <a id="CompleterHelper:CompleterHelper"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -112,7 +118,8 @@ within that line, finds possible completions for the token.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.CompletionToken" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.CompletionToken" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CompletionTokenextendsObject"></a>
       <a id="CompletionToken:CompletionToken"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -124,7 +131,8 @@ within that line, finds possible completions for the token.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.History" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.History" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="HistoryextendsObject"></a>
       <a id="History:History"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -137,7 +145,8 @@ within that line, finds possible completions for the token.</p>
       </h4>
       <p class="comment cmt">Models a Readline history: an object that holds previously read
 lines.</p>
-    </li><li name="grizzled.readline.LineToken" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.LineToken" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LineTokenextendsCompletionTokenwithProductwithSerializable"></a>
       <a id="LineToken:LineToken"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -149,7 +158,8 @@ lines.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.ListCompleter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.ListCompleter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ListCompleterextendsCompleter"></a>
       <a id="ListCompleter:ListCompleter"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -161,7 +171,8 @@ lines.</p>
       </span>
       </h4>
       <p class="comment cmt">A completer that completes from a list of items.</p>
-    </li><li name="grizzled.readline.NullCompleter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.NullCompleter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NullCompleterextendsCompleter"></a>
       <a id="NullCompleter:NullCompleter"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -173,7 +184,8 @@ lines.</p>
       </span>
       </h4>
       <p class="comment cmt">A completer that doesn't do anything.</p>
-    </li><li name="grizzled.readline.PathnameCompleter" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.PathnameCompleter" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PathnameCompleterextendsCompleter"></a>
       <a id="PathnameCompleter:PathnameCompleter"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -185,7 +197,8 @@ lines.</p>
       </span>
       </h4>
       <p class="comment cmt">A completer that completes path names.</p>
-    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="true" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ReadlineextendsObject"></a>
       <a id="Readline:Readline"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -204,7 +217,8 @@ lines.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.readline.Cursor" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+              <ol><li name="grizzled.readline.Cursor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Cursor"></a>
       <a id="Cursor:Cursor"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -216,7 +230,8 @@ lines.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.Delim" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Delim" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Delim"></a>
       <a id="Delim:Delim"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -228,7 +243,8 @@ lines.</p>
       </span>
       </h4>
       
-    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="false" fullComment="no" group="No Group">
+    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Readline"></a>
       <a id="Readline:Readline"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -259,8 +275,8 @@ implementations.</p>
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>
