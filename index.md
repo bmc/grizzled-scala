@@ -28,6 +28,7 @@ Currently, the library is broken into a number of modules:
 * `grizzled.parsing`: Classes that aid in certain kinds of parsing.
 * `grizzled.readline`: Front-end API for various readline-like libraries.
 * `grizzled.reflect`: Some utility functions to help with Scala reflection.
+* `grizzled.security`: Some utility front-ends to `java.security`.
 * `grizzled.string`: Useful string- and text-related functions.
 * `grizzled.string.template`: For substituting variable references within a
   string. Supports both ${var} (Unix-like) and %var% (Windows-like) syntaxes.
@@ -43,7 +44,7 @@ For a more detailed description of what's available, see the
 Grizzled Scala is published to the `oss.sonatype.org` repository and
 automatically sync'd with the [Maven Central Repository][].
 
-- Version 1.1.3 supports Scala 2.10.0
+- Versions 1.1.3 and 1.1.4 supports Scala 2.10.
 - Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
   2.9.1-1 and 2.9.2.
 
@@ -55,15 +56,15 @@ rest for you:
 * Group ID: `org.clapper`
 * Artifact ID: `grizzled-scala_2.9.2` or `grizzled-scala_2.10`
 * Version: `1.0.13` (for Scala 2.9.2 or earlier), `1.1.1` (for Scala 2.10-M7),
-  or`1.1.3` (for Scala 2.10)
+  or`1.1.4` (for Scala 2.10)
 * Type: `jar`
 
-For example, to get the 2.10.0-M7 build:
+For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.10</artifactId>
-      <version>1.1.3</version>
+      <version>1.1.4</version>
     </dependency>
 
 For more information on using Maven and Scala, see Josh Suereth's
@@ -90,9 +91,9 @@ If you're using Scala 2.9.2 or earlier:
 
     libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.14"
 
-If you're using Scala 2.10.0-M7:
+If you're using Scala 2.10:
 
-    libraryDependencies += "org.clapper" % "grizzled-scala_2.10" % "1.1.3"
+    libraryDependencies += "org.clapper" % "grizzled-scala_2.10" % "1.1.4"
 
 Grizzled Scala is also registered with [Doug Tangren][]'s excellent
 [ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install

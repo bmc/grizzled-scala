@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>util - grizzled.string.util</title>
-          <meta name="description" content="util - grizzled.string.util" />
-          <meta name="keywords" content="util grizzled.string.util" />
+          <title>MessageDigest - grizzled.security.MessageDigest</title>
+          <meta name="description" content="MessageDigest - grizzled.security.MessageDigest" />
+          <meta name="keywords" content="MessageDigest grizzled.security.MessageDigest" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -17,7 +17,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.string.util$';
+            var hash = 'grizzled.security.MessageDigest$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -30,8 +30,8 @@
         <body class="value">
       <div id="definition">
         <img src="../../lib/object_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.string">string</a></p>
-        <h1>util</h1>
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.security">security</a></p>
+        <h1>MessageDigest</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -40,12 +40,18 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">util</span>
+        <span class="name">MessageDigest</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Useful string-related utility functions.
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Convenience methods for generating crypto-hash (i.e., message digest)
+strings (e.g., MD5, SHA256, etc.) from byte values. Sample use:</p><pre><span class="cmt">// Generate an MD5 hash-string of a string</span>
+
+<span class="kw">val</span> hash = MessageDigest(<span class="lit">"md5"</span>).digestString(<span class="lit">"foo"</span>)
+
+<span class="cmt">// Generate an SHA256 hash-string of a file's contents.</span>
+
+<span class="kw">val</span> hash = MessageDigest(<span class="lit">"sha256"</span>).digestString(<span class="kw">new</span> File(<span class="lit">"/tmp/foo"</span>))</pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -65,7 +71,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.string.util"><span>util</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.security.MessageDigest"><span>MessageDigest</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -156,6 +162,23 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.security.MessageDigest#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(algorithm:String):grizzled.security.Digester"></a>
+      <a id="apply(String):Digester"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="algorithm">algorithm: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Digester.html" class="extype" name="grizzled.security.Digester">Digester</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Get a <code>Digester</code> for the specified algorithm.</p><div class="fullcomment"><div class="comment cmt"><p>Get a <code>Digester</code> for the specified algorithm.
+</p></div><dl class="paramcmts block"><dt class="param">algorithm</dt><dd class="cmt"><p>Any algorithm string accepted by
+                 <code>java.security.MessageDigest.getInstance()</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>Digester</code> object.
+</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -169,23 +192,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.string.util#bytesToHexString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="bytesToHexString(bytes:Array[Byte]):String"></a>
-      <a id="bytesToHexString(Array[Byte]):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">bytesToHexString</span><span class="params">(<span name="bytes">bytes: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Convert an array of bytes to a hexadecimal string.</p><div class="fullcomment"><div class="comment cmt"><p>Convert an array of bytes to a hexadecimal string.
-</p></div><dl class="paramcmts block"><dt class="param">bytes</dt><dd class="cmt"><p>the array of bytes
-</p></dd><dt>returns</dt><dd class="cmt"><p>the hexadecimal string, with lower-case hex digits and no
-        separators.
-</p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -322,24 +328,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.string.util#stringToBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="stringToBoolean(s:String):Boolean"></a>
-      <a id="stringToBoolean(String):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">stringToBoolean</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Convert a string to a boolean.</p><div class="fullcomment"><div class="comment cmt"><p>Convert a string to a boolean.</p><p>This method currently understands the following strings (in any mixture
-of upper and lower case). It is currently English-specific.</p><pre><span class="kw">true</span>, t, yes, y, <span class="num">1</span>
-<span class="kw">false</span>, f, no, n, <span class="num">0</span></pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to convert
-</p></dd><dt>returns</dt><dd class="cmt"><p>a boolean value
-</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IllegalArgumentException<p>if <code>s</code> cannot be parsed
-</p></span></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -366,47 +354,6 @@ of upper and lower case). It is currently English-specific.</p><pre><span class=
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.string.util#tokenizeWithQuotes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tokenizeWithQuotes(s:String):List[String]"></a>
-      <a id="tokenizeWithQuotes(String):List[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tokenizeWithQuotes</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Tokenize a string the way a command line shell would, honoring quoted
-strings and embedded escaped quotes.</p><div class="fullcomment"><div class="comment cmt"><p>Tokenize a string the way a command line shell would, honoring quoted
-strings and embedded escaped quotes. Single quoted strings must start
-and end with single quotes. Double quoted strings must start and end
-with double quotes. Within quoted strings, the quotes themselves may
-be backslash-escaped. Quoted and non-quoted tokens may be mixed in
-the string; quotes are stripped.</p><p>Examples:</p><pre><span class="kw">val</span> s = <span class="lit">""</span><span class="lit">"one two "</span>three four<span class="lit">" "</span><span class="lit">"
-for (t <- tokenizeWithQuotes(s)) println("</span>|<span class="lit">" + t + "</span>|<span class="lit">")
-// Prints:
-// |one|
-// |two|
-// |three four|
-
-val s = "</span><span class="lit">""</span>one two 'three <span class="lit">"four'"</span><span class="lit">""</span>
-<span class="kw">for</span> (t <span class="kw">&lt;-</span> tokenizeWithQuotes(s)) println(<span class="lit">"|"</span> + t + <span class="lit">"|"</span>)
-<span class="cmt">// Prints:</span>
-<span class="cmt">// |one|</span>
-<span class="cmt">// |two|</span>
-<span class="cmt">// |three "four|</span>
-
-<span class="kw">val</span> s = <span class="lit">""</span><span class="lit">"one two 'three \'four ' fiv"</span>e<span class="lit">""</span><span class="lit">"
-for (t <- tokenizeWithQuotes(s)) println("</span>|<span class="lit">" + t + "</span>|<span class="lit">")
-// Prints:
-// |one|
-// |two|
-// |three 'four |
-// |fiv"</span>e|</pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to tokenize
-</p></dd><dt>returns</dt><dd class="cmt"><p>the tokens, as a list of strings
-</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

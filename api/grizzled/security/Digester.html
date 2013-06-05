@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>ConfigurationReader - grizzled.config.ConfigurationReader</title>
-          <meta name="description" content="ConfigurationReader - grizzled.config.ConfigurationReader" />
-          <meta name="keywords" content="ConfigurationReader grizzled.config.ConfigurationReader" />
+          <title>Digester - grizzled.security.Digester</title>
+          <meta name="description" content="Digester - grizzled.security.Digester" />
+          <meta name="keywords" content="Digester grizzled.security.Digester" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -17,31 +17,34 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.config.ConfigurationReader$';
-            window.location.href = url + '#' + hash;
+            var hash = 'grizzled.security.Digester';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
          }
    	  </script>
     
         </head>
-        <body class="value">
+        <body class="type">
       <div id="definition">
-        <img src="../../lib/object_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.config">config</a></p>
-        <h1>ConfigurationReader</h1>
+        <img src="../../lib/class_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.security">security</a></p>
+        <h1>Digester</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">ConfigurationReader</span>
+        <span class="name">Digester</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A configuration reader: Reads a source and produces a parsed
-configuration.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A message digest producer.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -62,7 +65,7 @@ configuration.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.config.ConfigurationReader"><span>ConfigurationReader</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.security.Digester"><span>Digester</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -80,7 +83,23 @@ configuration.
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="grizzled.security.Digester#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(dg:java.security.MessageDigest):grizzled.security.Digester"></a>
+      <a id="&lt;init&gt;:Digester"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Digester</span><span class="params">(<span name="dg">dg: <span class="extype" name="java.security.MessageDigest">MessageDigest</span></span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
 
         
 
@@ -88,7 +107,8 @@ configuration.
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -100,7 +120,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -112,7 +133,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
       <a id="##():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -124,7 +146,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -136,7 +159,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -148,7 +172,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -160,7 +185,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -175,7 +201,137 @@ configuration.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="grizzled.security.Digester#digest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digest(stream:java.io.InputStream):Array[Byte]"></a>
+      <a id="digest(InputStream):Array[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digest</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.InputStream">InputStream</span></span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of an <code>InputStream</code>, returning the digest bytes.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of an <code>InputStream</code>, returning the digest bytes.
+</p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>the <code>InputStream</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest bytes
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digest(source:scala.io.Source):Array[Byte]"></a>
+      <a id="digest(Source):Array[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digest</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of a <code>Source</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of a <code>Source</code>. Note that sources are implicitly
+character-based, not byte-based.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest bytes
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digest(file:java.io.File):Array[Byte]"></a>
+      <a id="digest(File):Array[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digest</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of a file, returning the digest bytes.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of a file, returning the digest bytes.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the file
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest bytes
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digest(string:String):Array[Byte]"></a>
+      <a id="digest(String):Array[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digest</span><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of a string, returning the digest bytes.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of a string, returning the digest bytes.
+</p></div><dl class="paramcmts block"><dt class="param">string</dt><dd class="cmt"><p>the input string
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest bytes
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digestString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digestString(stream:java.io.InputStream):String"></a>
+      <a id="digestString(InputStream):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digestString</span><span class="params">(<span name="stream">stream: <span class="extype" name="java.io.InputStream">InputStream</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of an <code>InputStream</code>, returning the digest string.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of an <code>InputStream</code>, returning the digest string.
+</p></div><dl class="paramcmts block"><dt class="param">stream</dt><dd class="cmt"><p>the <code>InputStream</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest string
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digestString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digestString(source:scala.io.Source):String"></a>
+      <a id="digestString(Source):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digestString</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of a <code>Source</code>, returning the digest string.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of a <code>Source</code>, returning the digest string. Note that
+sources are implicitly character-based, not byte-based.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest string
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digestString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digestString(file:java.io.File):String"></a>
+      <a id="digestString(File):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digestString</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of a string, returning the digest string.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of a string, returning the digest string.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the digest bytes
+</p></dd></dl></div>
+    </li><li name="grizzled.security.Digester#digestString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="digestString(string:String):String"></a>
+      <a id="digestString(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">digestString</span><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create a digest of a string, returning the digest string.</p><div class="fullcomment"><div class="comment cmt"><p>Create a digest of a string, returning the digest string.
+</p></div><dl class="paramcmts block"><dt class="param">string</dt><dd class="cmt"><p>the input string
+</p></dd><dt>returns</dt><dd class="cmt"><p>the digest bytes
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -187,7 +343,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -199,7 +356,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -214,7 +372,8 @@ configuration.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -226,7 +385,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -238,7 +398,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -250,7 +411,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -262,7 +424,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -274,7 +437,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -286,7 +450,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -298,7 +463,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -310,7 +476,8 @@ configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -325,7 +492,8 @@ configuration.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -340,7 +508,8 @@ configuration.
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -360,60 +529,7 @@ configuration.
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.config.ConfigurationReader#read" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
-      <a id="read(Source,Map[String,Map[String,String]]):Configuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: Use the Configuration object
-">read</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sections">sections: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>)</span><span class="result">: <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Read a configuration file, permitting some predefined sections to be
-added to the configuration before it is read.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, permitting some predefined sections to be
-added to the configuration before it is read. The predefined sections
-are defined in a map of maps. The outer map is keyed by predefined
-section name. The inner maps consist of options and their values.
-For instance, to read a configuration file, giving it access to
-certain command line parameters, you could do something like this:</p><pre><span class="kw">object</span> Foo {
-<span class="kw">def</span> main(args: <span class="std">Array</span>[<span class="std">String</span>]) = {
-  <span class="cmt">// You'd obviously want to do some real argument checking here.</span>
-  <span class="kw">val</span> configFile = args(<span class="num">0</span>)
-  <span class="kw">val</span> name = args(<span class="num">1</span>)
-  <span class="kw">val</span> ipAddress = args(<span class="num">2</span>)
-  <span class="kw">val</span> sections = <span class="std">Map</span>(<span class="lit">"args"</span> -&gt; <span class="std">Map</span>(<span class="lit">"name"</span> -&gt; name, <span class="lit">"ip"</span> -&gt; ipAddress))
-  <span class="kw">val</span> config = Configuration(configFile, sections)
-  ...
-}
-}</pre></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sections</dt><dd class="cmt"><p>the predefined sections. An empty map means there are
-                 no predefined sections.
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>Configuration</code> object.
-</p></dd></dl><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use the Configuration object
-</p></dd></dl></div>
-    </li><li name="grizzled.config.ConfigurationReader#read" visbl="pub" data-isabs="false" fullComment="yes" group="No Group">
-      <a id="read(Source):Configuration"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: Use the Configuration object
-">read</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Read a configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration.
-</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>Configuration</code> object.
-</p></dd></dl><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use the Configuration object
-</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
@@ -426,8 +542,8 @@ certain command line parameters, you could do something like this:</p><pre><span
         </div>
 
         <div id="groupedMembers">
-        <div class="group" name="No Group">
-              <h3>No Group</h3>
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
               
             </div>
         </div>
