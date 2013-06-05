@@ -1,0 +1,3 @@
+* Added `grizzled.string.util.bytesToHexString`.
+* Added `grizzled.security.MessageDigest`, a simplified interface to the
+  Java `MessageDigest` capability.

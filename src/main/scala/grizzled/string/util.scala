@@ -42,13 +42,8 @@ import scala.annotation.tailrec
 /** Useful string-related utility functions.
   */
 object util {
-  /** An implicit conversion that handles creating a Boolean from a string
-    * value. This implicit definition, when in scope, allows code like
-    * the following:
-    *
-    * {{{
-    * val flag: Boolean = "true" // implicitly converts "true" to `true`
-    * }}}
+
+  /** Convert a string to a boolean.
     *
     * This method currently understands the following strings (in any mixture
     * of upper and lower case). It is currently English-specific.
@@ -80,10 +75,21 @@ object util {
       case "0"     => false
       case "off"   => false
 
-      case _       => 
+      case _       =>
         throw new IllegalArgumentException("Can't convert string \"" +
                                            s + "\" to boolean.")
     }
+  }
+
+  /** Convert an array of bytes to a hexadecimal string.
+    *
+    * @param bytes the array of bytes
+    *
+    * @return the hexadecimal string, with lower-case hex digits and no
+    *         separators.
+    */
+  def bytesToHexString(bytes: Array[Byte]): String = {
+    bytes.map("%02x" format _).mkString
   }
 
   private lazy val QUOTED_REGEX = """(["'])(?:\\?+.)*?\1""".r
@@ -155,17 +161,17 @@ object util {
       }
     }
 
-      else {
-        val mOpt = WHITE_SPACE_REGEX.findFirstMatchIn(trimmed)
-        if (mOpt == None) // to eol
-          List(trimmed)
+    else {
+      val mOpt = WHITE_SPACE_REGEX.findFirstMatchIn(trimmed)
+      if (mOpt == None) // to eol
+        List(trimmed)
 
-        else {
-          val matched = mOpt.get
-          val token = trimmed.substring(0, matched.start)
-          val past = trimmed.substring(matched.end)
-          List(token) ++ tokenizeWithQuotes(past)
-        }
+      else {
+        val matched = mOpt.get
+        val token = trimmed.substring(0, matched.start)
+        val past = trimmed.substring(matched.end)
+        List(token) ++ tokenizeWithQuotes(past)
       }
+    }
   }
 }

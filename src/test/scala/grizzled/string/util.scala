@@ -39,7 +39,7 @@ import grizzled.string.GrizzledString._
 /**
  * Tests the grizzled.string functions.
  */
-class StringTest extends FunSuite {
+class StringUtilTest extends FunSuite {
   test("string to boolean conversions that should succeed") {
     val data = Map(
       "true"  -> true,
@@ -169,6 +169,22 @@ quam. Vestibulum ante ipsum primis in.""",
       expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
         val wrapper = new WordWrapper(width, indent, prefix, indentChar)
         wrapper.wrap(string)
+      }
+    }
+  }
+
+  test("bytesToHexString") {
+    val Data = Seq(
+      Array(0x10, 0x13, 0x99, 0xff) -> "101399ff"
+    )
+
+    for (testItem <- Data) {
+      val data     = testItem._1
+      val expected = testItem._2
+
+      expectResult(expected, s"bytesToHexString yielding: $expected") {
+        val bytes = data.map { i => (i & 0xff).asInstanceOf[Byte]}
+        bytesToHexString(bytes)
       }
     }
   }

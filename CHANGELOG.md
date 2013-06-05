@@ -3,6 +3,12 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.1.4:
+
+* Added `grizzled.string.util.bytesToHexString`.
+* Added `grizzled.security.MessageDigest`, a simplified interface to the
+  Java `MessageDigest` capability.
+
 Version 1.1.3:
 
 * API documentation changes.
@@ -263,7 +269,7 @@ Version 0.6:
 * Added `findReadline()` convenience method to `grizzled.readline.Readline`.
   This method attempts to find and load a suitable Readline library.
 * Cleaned up `grizzled.file.util.deleteTree` method.
-* Added versions of `grizzled.file.util.copyFile`, 
+* Added versions of `grizzled.file.util.copyFile`,
   `grizzled.file.util.copyTree`, and `grizzled.file.util.deleteTree` that
   take `java.io.File` objects.
 * Replaced `grizzled.io.useThenClose` with the more flexible
@@ -321,7 +327,7 @@ Version 0.4.2:
 * Updated to [SBT][] version 0.7.3.
 * Added `withDownloadedFile()` to `grizzled.net.url`, to execute a block on
   a downloaded URL.
-* The `grizzled.io.implicits` module has been replaced by individual 
+* The `grizzled.io.implicits` module has been replaced by individual
   modules, for more granular scope control (e.g.,
   `grizzled.io.RichInputStream`, `grizzled.io.RichReader`)
 * The `grizzled.io` package has been split into individual source files.
@@ -349,7 +355,7 @@ Version 0.4:
 * `grizzled.editline.EditLine` now shows its completions in columnar format.
 * Added `BlockCommandHandler` to `grizzled`.cmd, to handle commands consisting
   of blocks of lines between a start and end line.
-* Added `HiddenCommandHandler` to `grizzled.cmd`, allowing special commands 
+* Added `HiddenCommandHandler` to `grizzled.cmd`, allowing special commands
   that are not displayed in the help.
 * Changed EOF handling in `grizzled.cmd` slightly.
 * Added `createTemporaryDirectory()` and `withTemporaryDirectory()` to
@@ -386,7 +392,7 @@ Version 0.3:
 * Fixed tail call optimization problem in `grizzled.io.RichInputStream`.
   Thanks to Claudio Bley (*cbley /at/ av-test.de*)
 * Added grizzled.parsing.MarkdownParser, for parsing Markdown documents.
-  (Currently uses the [Showdown][showdown] Javascript library, via 
+  (Currently uses the [Showdown][showdown] Javascript library, via
   [Mozilla Rhino][rhino].)
 * `grizzled.cmd.HelpHandler` now supports a ".help" alias.
 * Added `grizzled.util.withCloseable` control structure.
