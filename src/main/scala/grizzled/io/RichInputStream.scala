@@ -55,9 +55,7 @@ extends PartialReader[Byte] {
 
   protected def convert(b: Int) = b.asInstanceOf[Byte]
 
-  /** Copy the input stream to an output stream, stopping on EOF. This
-    * method does no buffering. If you want buffering, make sure you use a
-    * `java.io.BufferedInputStream` and a `java.io.BufferedOutputStream`.
+  /** Copy the input stream to an output stream, stopping on EOF.
     * This method does not close either stream.
     *
     * @param out  the output stream
