@@ -64,15 +64,16 @@ extends PartialReader[Byte] {
     */
   def copyTo(out: OutputStream): Unit =
     {
+      val buffer = new Array[Byte](8192)
+
       @tailrec def doCopyTo: Unit =
         {
-          val c: Int = inputStream.read()
-          if (c != -1)
-            {
-              out.write(c)
-              // Tail recursion means never having to use a var.
-              doCopyTo
-            }
+          val read = reader.read(buffer)
+          if (read > 0) {
+            out.write(buffer, 0, read)
+            // Tail recursion means never having to use a var.
+            doCopyTo
+          }
         }
 
       doCopyTo
