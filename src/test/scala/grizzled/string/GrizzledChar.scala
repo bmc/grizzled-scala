@@ -70,7 +70,7 @@ class GrizzledCharTest extends FunSuite {
                    '.' -> false)
 
     for((c, expected) <- data) {
-      expectResult(expected, "'" + c + "' -> " + expected.toString) {
+      assertResult(expected, "'" + c + "' -> " + expected.toString) {
         c.isHexDigit
       }
     }

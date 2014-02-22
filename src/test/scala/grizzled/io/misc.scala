@@ -52,7 +52,7 @@ class IOTest extends FunSuite {
     )
 
     for((input, max, expected) <- data) {
-      expectResult(expected, "RichReader.readSome(" + max + ") on: " + input) {
+      assertResult(expected, "RichReader.readSome(" + max + ") on: " + input) {
         val r = new StringReader(input)
         r.readSome(max) mkString ""
       }
@@ -72,7 +72,7 @@ class IOTest extends FunSuite {
     )
 
     for((max, expected) <- data) {
-      expectResult(expected, 
+      assertResult(expected, 
              "RichInputStream.readSome(%d) on: %s" format (max, inputArray)) {
         val is = new ByteArrayInputStream(inputArray)
         is.readSome(max)
@@ -89,7 +89,7 @@ class IOTest extends FunSuite {
                     "")
 
     for(s <- data) {
-      expectResult(s, "RichReader.copyTo() on: " + s) {
+      assertResult(s, "RichReader.copyTo() on: " + s) {
         val r = new StringReader(s)
         val w = new StringWriter
         r.copyTo(w)
@@ -108,7 +108,7 @@ class IOTest extends FunSuite {
                     input.slice(0, 1))
 
     for(bytes <- data) {
-      expectResult(bytes, "RichInputStream.copyTo() on: " + bytes) {
+      assertResult(bytes, "RichInputStream.copyTo() on: " + bytes) {
         val is = new ByteArrayInputStream(bytes.toArray)
         val os = new ByteArrayOutputStream
         is.copyTo(os)
@@ -160,7 +160,7 @@ class IOTest extends FunSuite {
     temp.deleteOnExit
 
     val fs = new FileOutputStream(temp)
-    expectResult(false, "withCloseable") {
+    assertResult(false, "withCloseable") {
       val chan = Channels.newChannel(fs)
       withCloseable(chan) { chan => assert(chan.isOpen) }
       chan.isOpen

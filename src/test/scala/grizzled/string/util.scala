@@ -63,7 +63,7 @@ class StringUtilTest extends FunSuite {
                              " " + input + " ",
                              input + " ")
          s <- permutations} {
-      expectResult(expected, "\"" + s + "\" -> " + expected.toString)  {
+      assertResult(expected, "\"" + s + "\" -> " + expected.toString)  {
         val b: Boolean = util.stringToBoolean(s)
         b
       }
@@ -95,7 +95,7 @@ class StringUtilTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
+      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
         tokenizeWithQuotes(input)
       }
     }
@@ -166,7 +166,7 @@ quam. Vestibulum ante ipsum primis in.""",
     for((input, expected) <- data) {
       val (string, width, indent, prefix, indentChar) = input
 
-      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
+      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
         val wrapper = new WordWrapper(width, indent, prefix, indentChar)
         wrapper.wrap(string)
       }
@@ -182,7 +182,7 @@ quam. Vestibulum ante ipsum primis in.""",
       val data     = testItem._1
       val expected = testItem._2
 
-      expectResult(expected, s"bytesToHexString yielding: $expected") {
+      assertResult(expected, s"bytesToHexString yielding: $expected") {
         val bytes = data.map { i => (i & 0xff).asInstanceOf[Byte]}
         bytesToHexString(bytes)
       }

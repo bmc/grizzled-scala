@@ -61,7 +61,7 @@ class FileUtilTest extends FunSuite {
                    ("D:\\foo\\bar", "\\")    -> "bar")
 
     for(((path, sep), expected) <- data) {
-      expectResult(expected, "basename(\"" + path + "\", \"" + sep + "\")")  { 
+      assertResult(expected, "basename(\"" + path + "\", \"" + sep + "\")")  {
         basename(path, sep)
       }
     }
@@ -91,7 +91,7 @@ class FileUtilTest extends FunSuite {
                    ("\\\\\\\\", "\\")        -> "\\")
 
     for(((path, sep), expected) <- data) {
-      expectResult(expected, "dirname(\"" + path + "\", \"" + sep + "\")")  {
+      assertResult(expected, "dirname(\"" + path + "\", \"" + sep + "\")")  {
         dirname(path, sep)
       }
     }
@@ -120,7 +120,7 @@ class FileUtilTest extends FunSuite {
                    ("D:\\foo\\bar", "\\")    -> ("D:\\foo", "bar"))
 
     for(((path, sep), expected) <- data) {
-      expectResult(expected, "dirnameBasename(\"" + path + "\", \"" + sep + "\")")  {
+      assertResult(expected, "dirnameBasename(\"" + path + "\", \"" + sep + "\")")  {
         dirnameBasename(path, sep)
       }
     }
@@ -153,7 +153,7 @@ class FileUtilTest extends FunSuite {
     )
     
     for(((path, sep), expected) <- data) {
-      expectResult(expected, "splitPath(\"" + path + "\", \"" + sep + "\")")  {
+      assertResult(expected, "splitPath(\"" + path + "\", \"" + sep + "\")")  {
         splitPath(path, sep)
       }
     }
@@ -184,7 +184,7 @@ class FileUtilTest extends FunSuite {
     )
     
     for(((sep, pieces), expected) <- data) {
-      expectResult(expected, "joinPath(\"" + sep + "\"" + pieces) {
+      assertResult(expected, "joinPath(\"" + sep + "\"" + pieces) {
         joinPath(sep, pieces)
       }
     }
@@ -204,7 +204,7 @@ class FileUtilTest extends FunSuite {
     )
 
     for((path, expected) <- data) {
-      expectResult(expected, "splitDrivePath(\"" + path + "\"")  {
+      assertResult(expected, "splitDrivePath(\"" + path + "\"")  {
         splitDrivePath(path)
       }
     }
@@ -224,7 +224,7 @@ class FileUtilTest extends FunSuite {
                    ("sabc", "[^a-r]*")    -> true)
 
     for(((string, pattern), expected) <- data) {
-      expectResult(expected, 
+      assertResult(expected, 
              "fnmatch(\"" + string + "\", \"" + pattern + "\")") {
                fnmatch(string, pattern) 
              }
@@ -244,7 +244,7 @@ class FileUtilTest extends FunSuite {
                    "//////////////////." -> "/")
 
     for ((path, expected) <- data) {
-      expectResult(expected, "normalizePosixPath(\"" + path + "\")")  {
+      assertResult(expected, "normalizePosixPath(\"" + path + "\")")  {
         normalizePosixPath(path)
       }
     }
@@ -265,7 +265,7 @@ class FileUtilTest extends FunSuite {
     )
 
     for ((path, expected) <- data) {
-      expectResult(expected, "normalizeWindowsPath(\"" + path + "\")")  {
+      assertResult(expected, "normalizeWindowsPath(\"" + path + "\")")  {
         normalizeWindowsPath(path)
       }
     }

@@ -50,12 +50,12 @@ class StatsTest extends FunSuite {
     val Data = List(
       (8.15193109605923,   dList(1, 10, 30, 10, 12)),
       (5.78182338862232,   dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-      (12.044497038131643, dList((1 to 30): _*)),
+      (12.04449703813164,  dList((1 to 30): _*)),
       (100.0,              List(100.0))
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "Geometric mean of " + values) {
+      assertResult(expected, "Geometric mean of " + values) {
         geometricMean(values: _*)
       }
     }
@@ -70,7 +70,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "Harmonic mean of " + values) {
+      assertResult(expected, "Harmonic mean of " + values) {
         harmonicMean(values: _*)
       }
     }
@@ -86,7 +86,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "Arithmetic mean of " + values) {
+      assertResult(expected, "Arithmetic mean of " + values) {
         mean(values: _*)
       }
     }
@@ -104,7 +104,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "median of " + values) {
+      assertResult(expected, "median of " + values) {
         median(values: _*)
       }
     }
@@ -120,7 +120,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "mode of " + values) {
+      assertResult(expected, "mode of " + values) {
         mode(values: _*).sortWith(_ < _)
       }
     }
@@ -136,7 +136,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "variance of " + values) {
+      assertResult(expected, "variance of " + values) {
         sampleVariance(values: _*)
       }
     }
@@ -152,12 +152,12 @@ class StatsTest extends FunSuite {
 
     for ((expected, values) <- Data) {
       val stddev = sampleStandardDeviation(values: _*)
-      expectResult(expected, "standard deviation " + values) {
+      assertResult(expected, "standard deviation " + values) {
         stddev
       }
 
       val variance = sampleVariance(values: _*)
-      expectResult(sqrt(variance), "standard deviation = sqrt(variance)") {
+      assertResult(sqrt(variance), "standard deviation = sqrt(variance)") {
         stddev
       }
     }
@@ -173,7 +173,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      expectResult(expected, "variance of " + values) {
+      assertResult(expected, "variance of " + values) {
         populationVariance(values: _*)
       }
     }
@@ -190,12 +190,12 @@ class StatsTest extends FunSuite {
 
     for ((expected, values) <- Data) {
       val stddev = populationStandardDeviation(values: _*)
-      expectResult(expected, "standard deviation " + values) {
+      assertResult(expected, "standard deviation " + values) {
         stddev
       }
 
       val variance = populationVariance(values: _*)
-      expectResult(sqrt(variance), "standard deviation = sqrt(variance)") {
+      assertResult(sqrt(variance), "standard deviation = sqrt(variance)") {
         stddev
       }
     }
@@ -215,13 +215,13 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data1) {
-      expectResult(expected, "range " + values) {
+      assertResult(expected, "range " + values) {
         range(values: _*)
       }
     }
 
     for ((expected, values) <- Data2) {
-      expectResult(expected, "range " + values) {
+      assertResult(expected, "range " + values) {
         range(values: _*)
       }
     }
@@ -234,7 +234,7 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, value) <- Data) {
-      expectResult(expected, "range " + value) {
+      assertResult(expected, "range " + value) {
         range(value)
       }
     }

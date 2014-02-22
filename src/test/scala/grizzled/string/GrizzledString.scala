@@ -48,7 +48,7 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
+      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
         input.ltrim
       }
     }
@@ -64,7 +64,7 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
+      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
         input.rtrim
       }
     }
@@ -81,7 +81,7 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
+      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
         input.tokenize
       }
     }
@@ -98,7 +98,7 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for ((input, expected) <- data) {
-      expectResult(expected, "\"" + input + "\" -> " + expected.toString) {
+      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
         input.translateMetachars
       }
     }

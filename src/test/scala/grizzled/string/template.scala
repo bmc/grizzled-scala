@@ -69,7 +69,7 @@ class StringTemplateTest extends FunSuite {
 
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
-      expectResult(expected, "\"" + str + "\" -> " + expected.toString)  {
+      assertResult(expected, "\"" + str + "\" -> " + expected.toString)  {
         new UnixShellStringTemplate(vars.get, true).substitute(str)
       }
     }
@@ -133,7 +133,7 @@ class StringTemplateTest extends FunSuite {
 
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
-      expectResult(expected, "\"" + str + "\" -> " + expected.toString)  {
+      assertResult(expected, "\"" + str + "\" -> " + expected.toString)  {
         new WindowsCmdStringTemplate(vars.get, true).substitute(str)
       }
     }

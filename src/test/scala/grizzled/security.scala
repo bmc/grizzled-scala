@@ -19,7 +19,7 @@ class SecurityTest extends FunSuite {
       val (algorithm, str) = testItem._1
       val expected         = testItem._2
 
-      expectResult(expected) {
+      assertResult(expected) {
         MessageDigest(algorithm).digestString(str)
       }
     }
@@ -31,7 +31,7 @@ class SecurityTest extends FunSuite {
       val (algorithm, str) = testItem._1
       val expected         = testItem._2
 
-      expectResult(expected) {
+      assertResult(expected) {
         MessageDigest(algorithm).digestString(Source.fromString(str))
       }
     }
@@ -43,7 +43,7 @@ class SecurityTest extends FunSuite {
       val (algorithm, str) = testItem._1
       val expected         = testItem._2
 
-      expectResult(expected) {
+      assertResult(expected) {
         val stream = new ByteArrayInputStream(str.getBytes)
         MessageDigest(algorithm).digestString(stream)
       }
