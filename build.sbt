@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.1.4"
+version := "1.1.5"
 
 organization := "org.clapper"
 
@@ -13,18 +13,16 @@ homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 description := "A general-purpose Scala utility library"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.3"
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
 
-scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-P:continuations:enable")
-
 autoCompilerPlugins := true
 
-libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
-  deps :+ compilerPlugin("org.scala-lang.plugins" % "continuations" % sv)
-}
+addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.10.3")
+
+scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-P:continuations:enable")
 
 seq(lsSettings :_*)
 
@@ -36,19 +34,11 @@ crossScalaVersions := Seq(
   "2.10.0"
 )
 
+
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
 
-libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
-    // Select ScalaTest version based on Scala version
-    val scalatestVersionMap = Map(
-      "2.10.0" -> ("scalatest_2.10", "2.0.M5b")
-    )
-    val (scalatestArtifact, scalatestVersion) = scalatestVersionMap.getOrElse(
-        sv, error("Unsupported Scala version for ScalaTest: " + scalaVersion)
-    )
-    deps :+ "org.scalatest" % scalatestArtifact % scalatestVersion % "test"
-}
+libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
 
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
   // ScalaTest still uses the (deprecated) scala.actors API.
