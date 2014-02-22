@@ -406,19 +406,20 @@ object util {
    *         be empty.
    */
   def listRecursively(file: File, topdown: Boolean = true): Iterator[File] =
-  generator[File] {
+    generator[File] {
 
     def doList(list: List[File]): Unit @cps[Iteration[File]] = {
       list match {
         case Nil => 
 
         case f :: tail => {
+          val list = if (f.isDirectory) f.listFiles.toList else Nil
           if (topdown) {
             generate(f)
-            doList(if (f.isDirectory) f.listFiles.toList else Nil)
+            doList(list)
           }
           else {
-            doList(if (f.isDirectory) f.listFiles.toList else Nil)
+            doList(list)
             generate(f)
           }
 
