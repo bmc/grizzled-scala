@@ -12,3 +12,4 @@ target
 .ensime*
 .idea
 *.iml
+atlassian*.xml
