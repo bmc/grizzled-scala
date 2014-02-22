@@ -30,11 +30,6 @@ LsKeys.tags in LsKeys.lsync := Seq("utility", "library", "grizzled")
 
 description in LsKeys.lsync <<= description(d => d)
 
-crossScalaVersions := Seq(
-  "2.10.0"
-)
-
-
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
 
