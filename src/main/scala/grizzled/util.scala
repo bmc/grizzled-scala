@@ -66,9 +66,9 @@ object util {
     * }
     * }}}
     *
-    * @param thing   the closeable object
-    * @param code    the block of code, which will take the closeable object
-    *                and return some arbitrary type `R`.
+    * @param closeable  the closeable object
+    * @param code       the block of code, which will take the closeable object
+    *                   and return some arbitrary type `R`.
     *
     * @return whatever the code block returns,if anything.
     */
