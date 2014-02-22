@@ -282,7 +282,7 @@ object stats {
     */
   def range[T](items: T*)(implicit n: Numeric[T]): T = {
     items.length match {
-      case 1 => items(0)
+      case 1 => n.minus(items(0), items(0))
       case _ => {
         // Fold left, generating a (min, max) tuple along the way.
         val (min, max) =
