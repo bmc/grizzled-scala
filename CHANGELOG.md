@@ -3,6 +3,18 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.1.5:
+
+* Added `grizzled.either`, which contains enrichments for the `Either`
+  class, including `map()` and `flatMap()` methods that map when the
+  value is `Right` (and permits easier use of `Either` objects in
+  `for` comprehensions).
+* Increased file copying speed in `grizzled.io.RichInputStream` by
+  adding buffering. (Fix supplied by [Jim Fulton](https://github.com/jimfulton)
+* `grizzled.math.stats.range()` of a single value now returns 0, as it should.
+  Addresses [Issue #4](https://github.com/bmc/grizzled-scala/issues/4)
+* Upgraded to latest version of ScalaTest.
+
 Version 1.1.4:
 
 * Added `grizzled.string.util.bytesToHexString`.
