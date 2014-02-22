@@ -55,24 +55,23 @@ extends PartialReader[Byte] {
 
   protected def convert(b: Int) = b.asInstanceOf[Byte]
 
-  /** Copy the input stream to an output stream, stopping on EOF. This
-    * method does no buffering. If you want buffering, make sure you use a
-    * `java.io.BufferedInputStream` and a `java.io.BufferedOutputStream`.
+  /** Copy the input stream to an output stream, stopping on EOF.
     * This method does not close either stream.
     *
     * @param out  the output stream
     */
   def copyTo(out: OutputStream): Unit =
     {
+      val buffer = new Array[Byte](8192)
+
       @tailrec def doCopyTo: Unit =
         {
-          val c: Int = inputStream.read()
-          if (c != -1)
-            {
-              out.write(c)
-              // Tail recursion means never having to use a var.
-              doCopyTo
-            }
+          val read = reader.read(buffer)
+          if (read > 0) {
+            out.write(buffer, 0, read)
+            // Tail recursion means never having to use a var.
+            doCopyTo
+          }
         }
 
       doCopyTo
