@@ -39,10 +39,8 @@ package grizzled.file
 
 import scala.util.matching.Regex
 import scala.annotation.tailrec
-import scala.util.continuations._
 
 import grizzled.file.GrizzledFile._
-import grizzled.generator._
 import grizzled.io.RichInputStream._
 import grizzled.io.RichReader._
 import grizzled.sys.os
@@ -179,7 +177,7 @@ object util {
    */
   def dirnameBasenameExtension(pathname: String, 
                                fileSep: String = fileSeparator):
-  (String, String, String) = {
+    (String, String, String) = {
 
     val (path1, extension) = pathname match {
       case ExtRegexp(pathNoExt, ext) => (pathNoExt, ext)
@@ -392,44 +390,33 @@ object util {
    * (and subdirectory) found. This method does lazy evaluation, instead
    * of calculating everything up-front, as `walk()` does.
    *
-   * If `topdown` is `true`, a directory is generated before the entries
-   * for any of its subdirectories (directories are generated top down).
-   * If `topdown` is `false`, a directory directory is generated after
-   * the entries for all of its subdirectories (directories are generated
-   * bottom up).
-   *
    * @param file    The `File` object, presumed to represent a directory.
-   * @param topdown `true` to do a top-down traversal, `false` otherwise.
+   * @param topdown If `true` (the default), the stream will be generated
+   *                top down. If `false`, it'll be generated bottom-up.
    *
-   * @return a generator (iterator) of `File` objects for everything under
-   *         the directory. If `file` isn't a directory, the generator will
-   *         be empty.
+   * @return a stream of `File` objects.
    */
-  def listRecursively(file: File, topdown: Boolean = true): Iterator[File] =
-    generator[File] {
+  def listRecursively(file: File, topdown: Boolean = true): Stream[File] = {
 
-    def doList(list: List[File]): Unit @cps[Iteration[File]] = {
+    def doList(list: List[File]): Stream[File] = {
+      // See http://www.nurkiewicz.com/2013/05/lazy-sequences-in-scala-and-clojure.html
       list match {
-        case Nil => 
+        case Nil => Stream.empty
 
         case f :: tail => {
           val list = if (f.isDirectory) f.listFiles.toList else Nil
-          if (topdown) {
-            generate(f)
-            doList(list)
-          }
-          else {
-            doList(list)
-            generate(f)
-          }
-
-          doList(tail)
+          if (topdown)
+            f #:: doList(list ++ tail)
+          else
+            doList(list ++ tail) :+ f
         }
       }
     }
 
     if (file.isDirectory)
       doList(file.listFiles.toList)
+    else
+      Stream.empty[File]
   }
 
   /**

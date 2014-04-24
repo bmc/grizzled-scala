@@ -37,8 +37,6 @@
 
 package grizzled.file
 
-import grizzled.generator._
-
 import java.io.File
 
 /**
@@ -99,8 +97,6 @@ final class GrizzledFile(val file: File) {
    * Split this file's pathname into the directory name, basename, and
    * extension pieces.
    *
-   * @param pathname the pathname
-   *
    * @return a 3-tuple of (dirname, basename, extension)
    */
   def dirnameBasenameExtension: (File, String, String) = {
@@ -159,8 +155,6 @@ final class GrizzledFile(val file: File) {
    *     <td class="code">List("/foo")</td>
    *   </tr>
    * </table>
-   *
-   * @param path    the path
    *
    * @return the component pieces.
    */
@@ -236,10 +230,10 @@ final class GrizzledFile(val file: File) {
    *
    * @param topdown `true` to do a top-down traversal, `false` otherwise.
    *
-   * @return a generator (iterator) of `File` objects for everything under
+   * @return a stream of `File` objects for everything under
    *         the directory.
    */
-  def listRecursively(topdown: Boolean = true): Iterator[File] =
+  def listRecursively(topdown: Boolean = true): Stream[File] =
     util.listRecursively(file, topdown)
 
   /**

@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.1.5"
+version := "1.1.6"
 
 organization := "org.clapper"
 
@@ -13,16 +13,21 @@ homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 description := "A general-purpose Scala utility library"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.11.0"
+
+crossScalaVersions := Seq("2.10.4", "2.11.0")
+
+// Incremental compilation performance improvement. See
+// http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
+
+incOptions := incOptions.value.withNameHashing(true)
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
 
 autoCompilerPlugins := true
 
-addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.10.3")
-
-scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-P:continuations:enable")
+scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 
 seq(lsSettings :_*)
 
@@ -30,10 +35,15 @@ LsKeys.tags in LsKeys.lsync := Seq("utility", "library", "grizzled")
 
 description in LsKeys.lsync <<= description(d => d)
 
+seq(bintraySettings: _*)
+
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
 
-libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "2.1.3" % "test",
+  "org.scala-lang.modules" %% "scala-async" % "0.9.1"
+)
 
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
   // ScalaTest still uses the (deprecated) scala.actors API.
@@ -48,7 +58,7 @@ libraryDependencies += "jline" % "jline" % "2.6"
 // ---------------------------------------------------------------------------
 // Publishing criteria
 
-publishTo := Some(Opts.resolver.sonatypeStaging)
+// Don't set publishTo. The Bintray plugin does that automatically.
 
 publishMavenStyle := true
 

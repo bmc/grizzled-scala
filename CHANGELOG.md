@@ -3,6 +3,17 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.1.6:
+
+* Removed the `grizzled.generator` package, as it relies on the unsupported
+  and unmaintained Scala continuations plugin.
+* Changed `grizzled.file.util.listRecursively()` to use Scala `Stream` objects,
+  which permit lazy evaluation. It's a better, and simpler, solution than
+  continuation passing.
+* Now cross-compiled for Scala 2.11.
+* Published to Bintray.
+* Updated to SBT 0.13.2
+
 Version 1.1.5:
 
 * Added `grizzled.either`, which contains enrichments for the `Either`

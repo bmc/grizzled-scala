@@ -41,6 +41,7 @@ import scala.collection.generic._
 import scala.collection.immutable.LinearSeq
 import scala.language.implicitConversions
 import java.util.{Collection, Iterator => JIterator}
+import scala.collection.IterableProxy
 
 /** Useful for converting a collection into an object suitable for use with
   * Scala's `for` loop.
@@ -64,6 +65,7 @@ object CollectionIterator {
 
 /** An `Iterator` for lists.
   */
+@deprecated(message="Use List.iterator()", since="1.1.6")
 class ListIterator[+T](val list: List[T]) extends Iterator[T] {
   private[this] var current = list
 
@@ -128,7 +130,9 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
 }
 
 class GrizzledIterable[+T](protected val underlying: Iterable[T])
-extends IterableForwarder[T] {
+extends IterableProxy[T] {
+  def self = this
+
   def realIterable = underlying
 
   def columnarize(width: Int): String = {
@@ -167,9 +171,12 @@ class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T]) {
     val buf = new ArrayBuffer[Char] 
 
     // Lay them out in columns. Simple-minded for now.
+    println(underlying)
     val strings = underlying.map(_.toString).toList
+    println(s">>> strings=$strings")
     val colSize = maxnum(strings.map(_.length): _*) + 2
     val colsPerLine = width / colSize
+    println(s"*** width=$width, colSize=$colSize, colsPerLine=$colsPerLine")
     for ((s, i) <- strings.zipWithIndex) {
       val count = i + 1
       val padding = " " * (colSize - s.length)
