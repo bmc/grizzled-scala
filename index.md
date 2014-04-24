@@ -44,7 +44,8 @@ For a more detailed description of what's available, see the
 Grizzled Scala is published to the `oss.sonatype.org` repository and
 automatically sync'd with the [Maven Central Repository][].
 
-- Versions 1.1.3 and 1.1.4 supports Scala 2.10.
+- Version 1.1.6 supports Scala 2.10 and 2.11.
+- Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
 - Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
   2.9.1-1 and 2.9.2.
 
@@ -54,9 +55,8 @@ If you're using [Maven][], just specify the artifact, and Maven will do the
 rest for you:
 
 * Group ID: `org.clapper`
-* Artifact ID: `grizzled-scala_2.9.2` or `grizzled-scala_2.10`
-* Version: `1.0.13` (for Scala 2.9.2 or earlier), `1.1.1` (for Scala 2.10-M7),
-  or`1.1.4` (for Scala 2.10)
+* Artifact ID: `grizzled-scala_`*scala-version*
+* Version: The usual
 * Type: `jar`
 
 For example:
@@ -64,36 +64,59 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.10</artifactId>
-      <version>1.1.4</version>
+      <version>1.1.6</version>
     </dependency>
+
+If you cannot resolve the artifact, then add the JCenter repository:
+
+    <repositories>
+      <repository>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+        <id>central</id>
+        <name>bintray</name>
+        <url>http://jcenter.bintray.com</url>
+      </repository>
+      ...
+    </repositories>
 
 For more information on using Maven and Scala, see Josh Suereth's
 [Scala Maven Guide][].
 
 ### Using with SBT
 
-#### 0.7.x
+#### 0.11.x/0.12.x
 
-If you're using [SBT][] 0.7.x to compile your code, you can place the
-following line in your project file (i.e., the Scala file in your
-`project/build/` directory):
+If you're using [SBT][] 0.11.x or 0.12.x to compile your code, you can use the
+following line in your build.sbt file (for Quick Configuration).
 
-    val grizzled = "org.clapper" %% "grizzled-scala" % "1.0.14"
+    repositories += "JCenter" at "http://jcenter.bintray.com/"
 
-#### 0.11.x and 0.12.x
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.1.6"
 
-If you're using [SBT][] 0.11.x to compile your code, you can use the
-following line in your `build.sbt` file (for Quick Configuration). If
-you're using an SBT 0.11.x Full Configuration, you're obviously smart
-enough to figure out what to do, on your own.
+You only need the `repositories` line if the artifact cannot be resolved (e.g.,
+has not, for some reason, been pushed to Maven Central yet).
 
-If you're using Scala 2.9.2 or earlier:
+#### 0.13.x
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.0.14"
+With SBT 0.13.x, you can just use [Doug Tangren's](https://github.com/softprops/)
+`bintray-sbt` plugin. In your `project/plugins.sbt` file, add:
 
-If you're using Scala 2.10:
+    resolvers += Resolver.url(
+      "bintray-sbt-plugin-releases",
+      url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
+        Resolver.ivyStylePatterns)
 
-    libraryDependencies += "org.clapper" % "grizzled-scala_2.10" % "1.1.4"
+    addSbtPlugin("me.lessis" % "bintray-sbt" % "0.1.1")
+
+Then, in your `build.sbt` file, add:
+
+    seq(bintrayResolverSettings:_*)
+
+That automatically adds the appropriate Bintray repositories. Finally, add:
+
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.1.6"
 
 Grizzled Scala is also registered with [Doug Tangren][]'s excellent
 [ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
@@ -110,7 +133,7 @@ To clone the repository, run this command:
 
 ## Building from Source
 
-Building the Grizzled Scala Library requires [SBT][] 0.11.1 or better.
+Building the Grizzled Scala Library requires [SBT][] 0.13.2 or better.
 Install SBT, as described at the SBT web site. Then, assuming you have an
 `sbt` shell script (or .BAT file, for Windows), run:
 
