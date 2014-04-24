@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>generator - grizzled.generator</title>
-          <meta name="description" content="generator - grizzled.generator" />
-          <meta name="keywords" content="generator grizzled.generator" />
+          <title>either - grizzled.either</title>
+          <meta name="description" content="either - grizzled.either" />
+          <meta name="keywords" content="either grizzled.either" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -17,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'grizzled.generator$';
+            var hash = 'grizzled.either$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -31,7 +30,7 @@
       <div id="definition">
         <img src="../lib/object_big.png" />
         <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a></p>
-        <h1>generator</h1>
+        <h1>either</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -40,33 +39,11 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">generator</span>
+        <span class="name">either</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Functions that can be used to simulate Python-style generators.
-Adapted liberally from Rich Dougherty's solution, as outlined in
-Stack Overflow: <a href="http://stackoverflow.com/questions/2201882#2215182" target="_blank">http://stackoverflow.com/questions/2201882#2215182</a></p><p>Example usage:</p><pre><span class="kw">import</span> grizzled.generator._
-<span class="kw">import</span> scala.util.continuations._
-<span class="kw">import</span> java.io.File
-
-<span class="kw">def</span> recursivelyListFiles(dir: File): Iterator[File] = generator[File] {
-  <span class="kw">def</span> handleList(list: <span class="std">List</span>[File]): <span class="std">Unit</span> @cps[GeneratorIteration[File]] = {
-    list <span class="kw">match</span> {
-      <span class="kw">case</span> Nil <span class="kw">=&gt;</span> ()
-
-      <span class="kw">case</span> f :: tail <span class="kw">=&gt;</span> {
-        generate(f)
-        doList(<span class="kw">if</span> (f.isDirectory) f.listFiles.toList <span class="kw">else</span> Nil)
-        doList(tail)
-      }
-    }
-  }
-
-  handleList(dir.listFiles.toList)
-}</pre><p>This package uses the Scala compilers continuations plug-in. The above
-example must be compiled with tha plug-in enabled. Use the
-<code>-P:continuations:enable</code> flag.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Helpers for the Scala <code>Either</code> class.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -87,7 +64,7 @@ example must be compiled with tha plug-in enabled. Use the
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.generator"><span>generator</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.either"><span>either</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -107,55 +84,13 @@ example must be compiled with tha plug-in enabled. Use the
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="grizzled.generator.Iteration" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Iteration[+T]extendsObject"></a>
-      <a id="Iteration[+T]:Iteration[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">sealed </span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="generator$$Iteration.html"><span class="name">Iteration</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      
-    </li><li name="grizzled.generator.Yield" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Yield[+T]extendsgenerator.Iteration[T]withProductwithSerializable"></a>
-      <a id="Yield[+T]:Yield[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="generator$$Yield.html"><span class="name">Yield</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="params">(<span name="result">result: <span class="extype" name="grizzled.generator.Yield.T">T</span></span>, <span name="next">next: () ⇒ <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[<span class="extype" name="grizzled.generator.Yield.T">T</span>]</span>)</span><span class="result"> extends <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[<span class="extype" name="grizzled.generator.Yield.T">T</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      
-    </li></ol>
-            </div>
+        
 
         
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -167,7 +102,7 @@ example must be compiled with tha plug-in enabled. Use the
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -182,19 +117,6 @@ example must be compiled with tha plug-in enabled. Use the
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -206,20 +128,20 @@ example must be compiled with tha plug-in enabled. Use the
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.generator.Done" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Done"></a>
-      <a id="Done:Done"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.either.Implicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Implicits"></a>
+      <a id="Implicits:Implicits"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="generator$$Done$.html"><span class="name">Done</span></a><span class="result"> extends <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[<span class="extype" name="scala.Nothing">Nothing</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="either$$Implicits$.html"><span class="name">Implicits</span></a>
       </span>
       </h4>
-      
+      <p class="comment cmt">Implicits.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -245,8 +167,11 @@ example must be compiled with tha plug-in enabled. Use the
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -287,42 +212,13 @@ example must be compiled with tha plug-in enabled. Use the
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.generator#generate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="generate[T](result:T):Unit@scala.util.continuations.cpsParam[grizzled.generator.Iteration[T],grizzled.generator.Iteration[T]]"></a>
-      <a id="generate[T](T):Unit@scala.util.continuations.cpsParam[grizzled.generator.Iteration[T],grizzled.generator.Iteration[T]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">generate</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="result">result: <span class="extype" name="grizzled.generator.generate.T">T</span></span>)</span><span class="result">: Unit @scala.util.continuations.cpsParam[grizzled.generator.Iteration[T],grizzled.generator.Iteration[T]]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Called from within the body of a generator, <code>generate()</code> yields a
-value back from the generator.</p>
-    </li><li name="grizzled.generator#generator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="generator[T](body:=&gt;Unit@scala.util.continuations.cpsParam[grizzled.generator.Iteration[T],grizzled.generator.Iteration[T]]):Iterator[T]"></a>
-      <a id="generator[T](⇒Unit@scala.util.continuations.cpsParam[grizzled.generator.Iteration[T],grizzled.generator.Iteration[T]]):Iterator[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">generator</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="body">body: ⇒ Unit @scala.util.continuations.cpsParam[grizzled.generator.Iteration[T],grizzled.generator.Iteration[T]]</span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="grizzled.generator.generator.T">T</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Used to define a generator; the code (<code>body</code>) is the partial function
-to run as the generator.</p><div class="fullcomment"><div class="comment cmt"><p>Used to define a generator; the code (<code>body</code>) is the partial function
-to run as the generator. Within the body, you can call <code>generate()</code>
-to yield values. The result of a generator, from the caller's
-perspective, is a typed iterator.
-</p></div></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -427,21 +323,6 @@ perspective, is a typed iterator.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.generator#trampoline" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="trampoline[T](body:=&gt;grizzled.generator.Iteration[T]):Iterator[T]"></a>
-      <a id="trampoline[T](⇒Iteration[T]):Iterator[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">trampoline</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="body">body: ⇒ <a href="generator$$Iteration.html" class="extype" name="grizzled.generator.Iteration">Iteration</a>[<span class="extype" name="grizzled.generator.trampoline.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="grizzled.generator.trampoline.T">T</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Create a function trampoline.</p><div class="fullcomment"><div class="comment cmt"><p>Create a function trampoline. The body should return either</p><p>- <code>Yield</code>, with the result and the next function to call, or
-- <code>Done</code>, to signal completion.
-</p></div></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -455,7 +336,10 @@ perspective, is a typed iterator.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -471,7 +355,10 @@ perspective, is a typed iterator.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -487,7 +374,10 @@ perspective, is a typed iterator.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>

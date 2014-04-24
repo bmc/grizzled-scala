@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>util - grizzled.file.util</title>
@@ -92,19 +91,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -116,7 +102,7 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -131,19 +117,6 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -155,7 +128,7 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -198,8 +171,11 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -448,7 +424,7 @@ pieces.
       </span>
       </h4>
       <p class="shortcomment cmt">An extended <i>glob</i> function that supports all the wildcards of
-the <tt>glob()</tt> function, in addition to:</p><div class="fullcomment"><div class="comment cmt"><p>An extended <i>glob</i> function that supports all the wildcards of
+the <tt>glob()</tt> function, in addition to:</tt></i></p><div class="fullcomment"><div class="comment cmt"><p>An extended <i>glob</i> function that supports all the wildcards of
 the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot;, signifying the user's home directory</li><li> a special &quot;**&quot; wildcard that recursively matches any directory.
       (Think &quot;ant&quot;.)</li></ul><p>&quot;~user&quot; is not supported, however.
 </p></div><dl class="paramcmts block"><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern
@@ -518,8 +494,11 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="grizzled.file.util#fnmatch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -535,7 +514,7 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
       </span>
       </h4>
       <p class="shortcomment cmt">Similar to Python's <tt>fnmatch()</tt> function, this function
-determines whether a string matches a wildcard pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Similar to Python's <tt>fnmatch()</tt> function, this function
+determines whether a string matches a wildcard pattern.</tt></p><div class="fullcomment"><div class="comment cmt"><p>Similar to Python's <tt>fnmatch()</tt> function, this function
 determines whether a string matches a wildcard pattern. Patterns
 are Unix shell-style wildcards:</p><p><table border="0" cellspacing="2" class="list">
   <tr>
@@ -669,29 +648,24 @@ currently running system
 </p></dd><dt>returns</dt><dd class="cmt"><p>a composite path
 </p></dd></dl></div>
     </li><li name="grizzled.file.util#listRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="listRecursively(file:java.io.File,topdown:Boolean):Iterator[java.io.File]"></a>
-      <a id="listRecursively(File,Boolean):Iterator[File]"></a>
+      <a id="listRecursively(file:java.io.File,topdown:Boolean):Stream[java.io.File]"></a>
+      <a id="listRecursively(File,Boolean):Stream[File]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">listRecursively</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="java.io.File">File</span>]</span>
+        <span class="name">listRecursively</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Stream">Stream</span>[<span class="extype" name="java.io.File">File</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found.</p><div class="fullcomment"><div class="comment cmt"><p>List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found. This method does lazy evaluation, instead
-of calculating everything up-front, as <code>walk()</code> does.</p><p>If <code>topdown</code> is <code>true</code>, a directory is generated before the entries
-for any of its subdirectories (directories are generated top down).
-If <code>topdown</code> is <code>false</code>, a directory directory is generated after
-the entries for all of its subdirectories (directories are generated
-bottom up).
-</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The <code>File</code> object, presumed to represent a directory.</p></dd><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code> otherwise.
-</p></dd><dt>returns</dt><dd class="cmt"><p>a generator (iterator) of <code>File</code> objects for everything under
-        the directory. If <code>file</code> isn't a directory, the generator will
-        be empty.
+of calculating everything up-front, as <code>walk()</code> does.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The <code>File</code> object, presumed to represent a directory.</p></dd><dt class="param">topdown</dt><dd class="cmt"><p>If <code>true</code> (the default), the stream will be generated
+               top down. If <code>false</code>, it'll be generated bottom-up.
+</p></dd><dt>returns</dt><dd class="cmt"><p>a stream of <code>File</code> objects.
 </p></dd></dl></div>
     </li><li name="grizzled.file.util#nativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nativePath(path:String):String"></a>
@@ -760,7 +734,7 @@ Windows and Posix operating systems.
       </span>
       </h4>
       <p class="shortcomment cmt">Adapted from the Python version of normpath() in Python's
-<tt>os.posixpath</tt> module.</p><div class="fullcomment"><div class="comment cmt"><p>Adapted from the Python version of normpath() in Python's
+<tt>os.posixpath</tt> module.</tt></p><div class="fullcomment"><div class="comment cmt"><p>Adapted from the Python version of normpath() in Python's
 <tt>os.posixpath</tt> module.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path
@@ -973,7 +947,7 @@ beginning. Examples:</p><p><table border="1">
         <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for a file</li><li>creates the file if it does not exist</li></ul><p>If the file is a directory, this method will throw an exception.
+      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</i></p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for a file</li><li>creates the file if it does not exist</li></ul><p>If the file is a directory, this method will throw an exception.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The file to touch</p></dd><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
              time if this parameter is negative.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IOException<p>on error
@@ -990,7 +964,7 @@ beginning. Examples:</p><p><table border="1">
         <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for any existing files
+      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</i></p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for any existing files
       in a list of files</li><li>creates any non-existent files in the list of files</li></ul><p>If any file in the list is a directory, this method will throw an
 exception.
 </p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>Iterable of files to touch</p></dd><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
@@ -1032,7 +1006,10 @@ this function simply returns the <tt>path</tt> parameter unmodified.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1048,7 +1025,10 @@ this function simply returns the <tt>path</tt> parameter unmodified.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1064,7 +1044,10 @@ this function simply returns the <tt>path</tt> parameter unmodified.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="grizzled.file.util#walk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1080,7 +1063,7 @@ this function simply returns the <tt>path</tt> parameter unmodified.
       </span>
       </h4>
       <p class="shortcomment cmt">Directory tree generator, adapted from Python's <tt>os.walk()</tt>
-function.</p><div class="fullcomment"><div class="comment cmt"><p>Directory tree generator, adapted from Python's <tt>os.walk()</tt>
+function.</tt></p><div class="fullcomment"><div class="comment cmt"><p>Directory tree generator, adapted from Python's <tt>os.walk()</tt>
 function.</p><p>For each directory in the directory tree rooted at top (including top
 itself, but excluding '.' and '..'), yields a 3-tuple</p><p><blockquote>
 <pre>
@@ -1099,19 +1082,31 @@ generated before the triples for any of its subdirectories
 <tt>false</tt>, the triple for a directory is generated after the
 triples for all of its subdirectories (directories are generated
 bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p><p>dirpath, dirnames, filenames
-</pre></p><p><i>dirpath</i> is a string, the path to the directory.
+</pre>
+
+
+
+<i>dirpath</i> is a string, the path to the directory.
 <i>dirnames</i> is a list of the names of the subdirectories in
 <i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
 of the names of the non-directory files in <i>dirpath</i>. Note that
 the names in the lists are just names, with no path components. To
 get a full path (which begins with top) to a file or directory in
 <i>dirpath</i>, use <tt>dirpath + java.io.fileSeparator + name</tt>,
-or use <tt>joinPath()</tt>.</p><p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
+or use <tt>joinPath()</tt>.
+
+
+
+If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
 generated before the triples for any of its subdirectories
 (directories are generated top down). If <tt>topdown</tt> is
 <tt>false</tt>, the triple for a directory is generated after the
 triples for all of its subdirectories (directories are generated
-bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!
+bottom up).
+
+
+
+<b>WARNING!</b> This method does <i>not</i> grok symbolic links!
 </p></div><dl class="paramcmts block"><dt class="param">top</dt><dd class="cmt"><p>name of starting directory</p></dd><dt class="param">topdown</dt><dd class="cmt"><p><tt>true</tt> to do a top-down traversal, <tt>false</tt>
                otherwise.
 </p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.

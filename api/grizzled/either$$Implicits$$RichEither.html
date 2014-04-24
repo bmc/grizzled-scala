@@ -1,10 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
-          <title>Iteration - grizzled.generator.Iteration</title>
-          <meta name="description" content="Iteration - grizzled.generator.Iteration" />
-          <meta name="keywords" content="Iteration grizzled.generator.Iteration" />
+          <title>RichEither - grizzled.either.Implicits.RichEither</title>
+          <meta name="description" content="RichEither - grizzled.either.Implicits.RichEither" />
+          <meta name="keywords" content="RichEither grizzled.either.Implicits.RichEither" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -17,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'grizzled.generator$$Iteration';
+            var hash = 'grizzled.either$$Implicits$$RichEither';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -29,27 +28,27 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../lib/trait_big.png" />
-        <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a>.<a href="generator$.html" class="extype" name="grizzled.generator">generator</a></p>
-        <h1>Iteration</h1>
+        <img src="../lib/class_big.png" />
+        <p id="owner"><a href="package.html" class="extype" name="grizzled">grizzled</a>.<a href="either$.html" class="extype" name="grizzled.either">either</a>.<a href="either$$Implicits$.html" class="extype" name="grizzled.either.Implicits">Implicits</a></p>
+        <h1>RichEither</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed </span>
-        <span class="kind">trait</span>
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Iteration</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">RichEither</span><span class="tparams">[<span name="L">L</span>, <span name="R">R</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Enriched <code>Either</code> class, providing <code>map</code> and <code>flatMap</code> methods
+that map over and <code>Either</code> object if its value is <code>Right</code> (and
+permit easier use of <code>Either</code> objects in <code>for</code> comprehensions).
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div><div class="toggleContainer block">
-          <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="generator$$Done$.html" class="extype" name="grizzled.generator.Done">Done</a>, <a href="generator$$Yield.html" class="extype" name="grizzled.generator.Yield">Yield</a></div>
         </div></div>
         
 
@@ -67,7 +66,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.generator.Iteration"><span>Iteration</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.either.Implicits.RichEither"><span>RichEither</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -85,7 +84,23 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="grizzled.either.Implicits.RichEither#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(e:Either[L,R]):grizzled.either.Implicits.RichEither[L,R]"></a>
+      <a id="&lt;init&gt;:RichEither[L,R]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RichEither</span><span class="params">(<span name="e">e: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="grizzled.either.Implicits.RichEither.L">L</span>, <span class="extype" name="grizzled.either.Implicits.RichEither.R">R</span>]</span>)</span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
 
         
 
@@ -94,19 +109,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -118,7 +120,7 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -133,19 +135,6 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -157,7 +146,7 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -183,10 +172,26 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
+    </li><li name="grizzled.either.Implicits.RichEither#e" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="e:Either[L,R]"></a>
+      <a id="e:Either[L,R]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">e</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="grizzled.either.Implicits.RichEither.L">L</span>, <span class="extype" name="grizzled.either.Implicits.RichEither.R">R</span>]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -225,10 +230,37 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
+    </li><li name="grizzled.either.Implicits.RichEither#flatMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="flatMap[R2](mapper:R=&gt;Either[L,R2]):Either[L,R2]"></a>
+      <a id="flatMap[R2]((R)⇒Either[L,R2]):Either[L,R2]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">flatMap</span><span class="tparams">[<span name="R2">R2</span>]</span><span class="params">(<span name="mapper">mapper: (<span class="extype" name="grizzled.either.Implicits.RichEither.R">R</span>) ⇒ <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="grizzled.either.Implicits.RichEither.L">L</span>, <span class="extype" name="grizzled.either.Implicits.RichEither.flatMap.R2">R2</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="grizzled.either.Implicits.RichEither.L">L</span>, <span class="extype" name="grizzled.either.Implicits.RichEither.flatMap.R2">R2</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Similar to the <code>map()</code> method, this method invokes the
+supplied partial function only if the supplied <code>Either</code> is a
+<code>Right</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the <code>map()</code> method, this method invokes the
+supplied partial function only if the supplied <code>Either</code> is a
+<code>Right</code>. Unlike <code>map()</code>, however, <code>flatMap()</code> does
+not automatically rewrap the result in a <code>Right</code>; instead, it
+expects the supplied partial function to return an <code>Either</code>.</p><p>This method is roughly analogous to the Scala <code>Option</code> class's
+<code>flatMap()</code> function.
+</p></div><dl class="paramcmts block"><dt class="tparam">R2</dt><dd class="cmt"><p>the mapped <code>Right</code> type
+</p></dd><dt class="param">mapper</dt><dd class="cmt"><p>Partial function taking a value of type <code>R</code>
+              (i.e., what's stored in the <code>Right</code> side) and maps
+              it to an <code>Either[L, R2]</code>.</p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -268,6 +300,25 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.either.Implicits.RichEither#map" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="map[R2](mapper:R=&gt;R2):Either[L,R2]"></a>
+      <a id="map[R2]((R)⇒R2):Either[L,R2]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">map</span><span class="tparams">[<span name="R2">R2</span>]</span><span class="params">(<span name="mapper">mapper: (<span class="extype" name="grizzled.either.Implicits.RichEither.R">R</span>) ⇒ <span class="extype" name="grizzled.either.Implicits.RichEither.map.R2">R2</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="grizzled.either.Implicits.RichEither.L">L</span>, <span class="extype" name="grizzled.either.Implicits.RichEither.map.R2">R2</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Map an <code>Either</code> value only if it's a <code>Right</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Map an <code>Either</code> value only if it's a <code>Right</code>. If it's a
+<code>Left</code>, just return the <code>Left</code> unmodified.</p><p>This method is roughly analogous to the Scala <code>Option</code> class's
+<code>map()</code> function.
+</p></div><dl class="paramcmts block"><dt class="tparam">R2</dt><dd class="cmt"><p>the mapped <code>Right</code> type
+</p></dd><dt class="param">mapper</dt><dd class="cmt"><p>Partial function taking a value of type <code>R</code>
+              (i.e., what's stored in the <code>Right</code> side) and maps
+              it to a value of type <code>R2</code>.</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -346,7 +397,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -362,7 +416,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -378,7 +435,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>
