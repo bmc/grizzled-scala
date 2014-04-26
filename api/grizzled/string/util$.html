@@ -301,24 +301,23 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.string.util#stringToBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="stringToBoolean(s:String):Boolean"></a>
-      <a id="stringToBoolean(String):Boolean"></a>
+    </li><li name="grizzled.string.util#strToBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="strToBoolean(s:String):Either[String,Boolean]"></a>
+      <a id="strToBoolean(String):Either[String,Boolean]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">stringToBoolean</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">strToBoolean</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Convert a string to a boolean.</p><div class="fullcomment"><div class="comment cmt"><p>Convert a string to a boolean.</p><p>This method currently understands the following strings (in any mixture
 of upper and lower case). It is currently English-specific.</p><pre><span class="kw">true</span>, t, yes, y, <span class="num">1</span>
 <span class="kw">false</span>, f, no, n, <span class="num">0</span></pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to convert
-</p></dd><dt>returns</dt><dd class="cmt"><p>a boolean value
-</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IllegalArgumentException<p>if <code>s</code> cannot be parsed
-</p></span></dd></dl></div>
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(boolean)</code> on success, <code>Left(error)</code> on failure
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -448,7 +447,31 @@ for (t <- tokenizeWithQuotes(s)) println("</span>|<span class="lit">" + t + "</s
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.string.util#stringToBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="stringToBoolean(s:String):Boolean"></a>
+      <a id="stringToBoolean(String):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use str2boolean(), instead">stringToBoolean</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Convert a string to a boolean.</p><div class="fullcomment"><div class="comment cmt"><p>Convert a string to a boolean.</p><p>This method currently understands the following strings (in any mixture
+of upper and lower case). It is currently English-specific.</p><pre><span class="kw">true</span>, t, yes, y, <span class="num">1</span>
+<span class="kw">false</span>, f, no, n, <span class="num">0</span></pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string to convert
+</p></dd><dt>returns</dt><dd class="cmt"><p>a boolean value
+</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use str2boolean(), instead</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt">IllegalArgumentException<p>if <code>s</code> cannot be parsed
+</p></span></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

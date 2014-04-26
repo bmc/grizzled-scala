@@ -162,15 +162,15 @@
               
         </dd></dl></div>
     </li><li name="grizzled.net.url#download" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="download(url:java.net.URL,pathOut:java.io.File):java.io.File"></a>
-      <a id="download(URL,File):File"></a>
+      <a id="download(url:java.net.URL,pathOut:java.io.File):Either[String,java.io.File]"></a>
+      <a id="download(URL,File):Either[String,File]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">download</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="pathOut">pathOut: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="java.io.File">File</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Download the specified URL to a file.</p><div class="fullcomment"><div class="comment cmt"><p>Download the specified URL to a file.
@@ -178,7 +178,7 @@
                 is overwritten. If the file does not exist, it is
                 created. If any of the directories in the path do not
                 exist, they are created.
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>pathOut</code> parameter, for convenience
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(pathOut)</code> on success; <code>Left(error)</code> on failure
 </p></dd></dl></div>
     </li><li name="grizzled.net.url#download" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="download(url:String,pathOut:java.io.File):Unit"></a>
@@ -458,40 +458,42 @@ taken from the URL, if possible, or generated otherwise.
               
         </dd></dl></div>
     </li><li name="grizzled.net.url#withDownloadedFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withDownloadedFile[T](url:java.net.URL)(block:java.io.File=&gt;T):T"></a>
-      <a id="withDownloadedFile[T](URL)((File)⇒T):T"></a>
+      <a id="withDownloadedFile[T](url:java.net.URL)(block:java.io.File=&gt;T):Either[String,T]"></a>
+      <a id="withDownloadedFile[T](URL)((File)⇒T):Either[String,T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span></span>)</span><span class="result">: <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span></span>
+        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Execute a block of code with a downloaded, temporary file.</p><div class="fullcomment"><div class="comment cmt"><p>Execute a block of code with a downloaded, temporary file.
 The specified URL is downloaded to a file, the file is passed
 to the block, and when the block exits, the file is removed.
 </p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL</p></dd><dt class="param">block</dt><dd class="cmt"><p>the block to execute
-</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error. <code>Right(t)</code>, where <code>t</code> is what the
+        block returns, on success.
 </p></dd></dl></div>
     </li><li name="grizzled.net.url#withDownloadedFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withDownloadedFile[T](url:String)(block:java.io.File=&gt;T):T"></a>
-      <a id="withDownloadedFile[T](String)((File)⇒T):T"></a>
+      <a id="withDownloadedFile[T](url:String)(block:java.io.File=&gt;T):Either[String,T]"></a>
+      <a id="withDownloadedFile[T](String)((File)⇒T):Either[String,T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span></span>)</span><span class="result">: <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span></span>
+        <span class="name">withDownloadedFile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="grizzled.net.url.withDownloadedFile.T">T</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Execute a block of code with a downloaded, temporary file.</p><div class="fullcomment"><div class="comment cmt"><p>Execute a block of code with a downloaded, temporary file.
 The specified URL is downloaded to a file, the file is passed
 to the block, and when the block exits, the file is removed.
 </p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL</p></dd><dt class="param">block</dt><dd class="cmt"><p>the block to execute
-</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error. <code>Right(t)</code>, where <code>t</code> is what the
+        block returns, on success.
 </p></dd></dl></div>
     </li></ol>
             </div>

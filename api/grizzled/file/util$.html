@@ -209,8 +209,8 @@ it is created.
       </span>
       </h4>
       <p class="shortcomment cmt">Copy a file to a directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a file to a directory.
-</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>Path name of the file to copy</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><tt>true</tt> to create the target directory,
-                    <tt>false</tt> to throw an exception if the
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>Path name of the file to copy</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><code>true</code> to create the target directory,
+                    <code>false</code> to throw an exception if the
                     directory doesn't already exist.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">FileDoesNotExistException<p>source file or target directory
                                   doesn't exist</p></span><span class="cmt">IOException<p>cannot create target directory
@@ -229,8 +229,8 @@ it is created.
       </h4>
       <p class="shortcomment cmt">Copy multiple files to a target directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy multiple files to a target directory. Also see the version of this
 method that takes only one file.
-</p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>An <tt>Iterable</tt> of file names to be copied</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><tt>true</tt> to create the target directory,
-                    <tt>false</tt> to throw an exception if the
+</p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>An <code>Iterable</code> of file names to be copied</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><code>true</code> to create the target directory,
+                    <code>false</code> to throw an exception if the
                     directory doesn't already exist.
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">FileDoesNotExistException<p>a source file or the target directory
                                   doesn't exist</p></span><span class="cmt">IOException<p>cannot create target directory
@@ -326,20 +326,22 @@ directory. Creates the target directory if it does not exist.
         the directory.
 </p></dd></dl></div>
     </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="deleteTree(dir:java.io.File):Unit"></a>
-      <a id="deleteTree(File):Unit"></a>
+      <a id="deleteTree(dir:java.io.File):Either[String,Int]"></a>
+      <a id="deleteTree(File):Either[String,Int]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Int">Int</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Recursively remove a directory tree.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively remove a directory tree. This function is conceptually
-equivalent to <tt>rm -r</tt> on a Unix system.
+equivalent to <code>rm -r</code> on a Unix system.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error, <code>Right(total)</code> on success. <code>total</code>
+        is the total number of deleted files.
 </p></dd></dl></div>
     </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="deleteTree(dir:String):Unit"></a>
@@ -354,7 +356,7 @@ equivalent to <tt>rm -r</tt> on a Unix system.
       </span>
       </h4>
       <p class="shortcomment cmt">Recursively remove a directory tree.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively remove a directory tree. This function is conceptually
-equivalent to <tt>rm -r</tt> on a Unix system.
+equivalent to <code>rm -r</code> on a Unix system.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory
 </p></dd></dl></div>
     </li><li name="grizzled.file.util#dirname" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -387,7 +389,7 @@ equivalent to <tt>rm -r</tt> on a Unix system.
       </span>
       </h4>
       <p class="shortcomment cmt">Split a path into directory (dirname) and file (basename) components.</p><div class="fullcomment"><div class="comment cmt"><p>Split a path into directory (dirname) and file (basename) components.
-Analogous to Python's <tt>os.path.pathsplit()</tt> function.
+Analogous to Python's <code>os.path.pathsplit()</code> function.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to split</p></dd><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use. Defaults to the value of
                 the &quot;file.separator&quot; property.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a (dirname, basename) tuple of strings
@@ -424,9 +426,9 @@ pieces.
       </span>
       </h4>
       <p class="shortcomment cmt">An extended <i>glob</i> function that supports all the wildcards of
-the <tt>glob()</tt> function, in addition to:</tt></i></p><div class="fullcomment"><div class="comment cmt"><p>An extended <i>glob</i> function that supports all the wildcards of
-the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot;, signifying the user's home directory</li><li> a special &quot;**&quot; wildcard that recursively matches any directory.
-      (Think &quot;ant&quot;.)</li></ul><p>&quot;~user&quot; is not supported, however.
+the <code>glob()</code> function, in addition to:</p><div class="fullcomment"><div class="comment cmt"><p>An extended <i>glob</i> function that supports all the wildcards of
+the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</code>, signifying the user's home directory</li><li>a special <code>**</code> wildcard that recursively matches any directory.
+   (Think &quot;ant&quot;.)</li></ul><p><i>~user</i> is not supported, however.
 </p></div><dl class="paramcmts block"><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern
 </p></dd><dt>returns</dt><dd class="cmt"><p>list of matches, or an empty list for none
 </p></dd></dl></div>
@@ -513,27 +515,10 @@ the <tt>glob()</tt> function, in addition to:</p><ul><li> a leading &quot;~&quot
         <span class="name">fnmatch</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Similar to Python's <tt>fnmatch()</tt> function, this function
-determines whether a string matches a wildcard pattern.</tt></p><div class="fullcomment"><div class="comment cmt"><p>Similar to Python's <tt>fnmatch()</tt> function, this function
-determines whether a string matches a wildcard pattern. Patterns
-are Unix shell-style wildcards:</p><p><table border="0" cellspacing="2" class="list">
-  <tr>
-    <td align="right" class="code">*</td>
-    <td align="left">matches everything</td>
-  </tr>
-  <tr>
-    <td align="right" class="code">?</td>
-    <td align="left">matches any single character</td>
-  </tr>
-  <tr>
-    <td align="right" class="code">[set]</td>
-    <td align="left">matches any character in <i>set</i></td>
-  </tr>
-  <tr>
-    <td align="right" class="code">[!set]</td>
-    <td align="left">matches any character not in <i>set</i></td>
-  </tr>
-</table></p><p>An initial period in <tt>filename</tt> is not special. Matches are
+      <p class="shortcomment cmt">Similar to Python's <code>fnmatch()</code> function, this function determines
+whether a string matches a wildcard pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Similar to Python's <code>fnmatch()</code> function, this function determines
+whether a string matches a wildcard pattern. Patterns are Unix-style
+shell-style wildcards:</p><ul><li><code>*</code> matches everything</li><li><code>?</code> matches any single character</li><li><code>[set]</code> matches any character in <i>set</i></li><li><code><code>[!set]</code> matches any character not in <i>set</i></code></li></ul><p>An initial period in <code>filename</code> is not special. Matches are
 case-sensitive on Posix operating systems, case-insensitive elsewhere.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name to match</p></dd><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern
 </p></dd></dl></div>
@@ -563,7 +548,7 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
       </span>
       </h4>
       <p class="shortcomment cmt">Return a list of paths matching a pathname pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Return a list of paths matching a pathname pattern. The pattern may
-contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
+contain simple shell-style wildcards. See <code>fnmatch()</code>.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The path to expand.
 </p></dd><dt>returns</dt><dd class="cmt"><p>a list of possibly expanded file names
 </p></dd></dl></div>
@@ -683,9 +668,9 @@ of calculating everything up-front, as <code>walk()</code> does.
 system-specific format.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a path name from universal path notation to the operating
 system-specific format. Universal path notation always uses a
 Unix-style &quot;/&quot; to separate path elements. A native path can be
-converted to a universal path via the <tt>universal_path()</tt>
+converted to a universal path via the <code>universal_path()</code>
 function. Note that on POSIX-compliant systems, this function simply
-returns the <tt>path</tt> parameter unmodified.
+returns the <code>path</code> parameter unmodified.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to convert from universtal to native path notation
 </p></dd><dt>returns</dt><dd class="cmt"><p>the native path
 </p></dd></dl></div>
@@ -734,8 +719,8 @@ Windows and Posix operating systems.
       </span>
       </h4>
       <p class="shortcomment cmt">Adapted from the Python version of normpath() in Python's
-<tt>os.posixpath</tt> module.</tt></p><div class="fullcomment"><div class="comment cmt"><p>Adapted from the Python version of normpath() in Python's
-<tt>os.posixpath</tt> module.
+ <code>os.posixpath</code> module.</p><div class="fullcomment"><div class="comment cmt"><p>Adapted from the Python version of normpath() in Python's
+ <code>os.posixpath</code> module.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path
 </p></dd></dl></div>
@@ -752,7 +737,7 @@ Windows and Posix operating systems.
       </span>
       </h4>
       <p class="shortcomment cmt">Normalize a Windows path name.</p><div class="fullcomment"><div class="comment cmt"><p>Normalize a Windows path name. Handles UNC paths. Adapted from the
-Python version of normpath() in Python's <tt>os.ntpath</tt> module.
+Python version of normpath() in Python's <code>os.ntpath</code> module.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path
 </p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path
 </p></dd></dl></div>
@@ -936,41 +921,40 @@ beginning. Examples:</p><p><table border="1">
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.file.util#touch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="touch(path:String,time:Long):Unit"></a>
-      <a id="touch(String,Long):Unit"></a>
+      <a id="touch(path:String,time:Long):Either[String,Boolean]"></a>
+      <a id="touch(String,Long):Either[String,Boolean]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</i></p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for a file</li><li>creates the file if it does not exist</li></ul><p>If the file is a directory, this method will throw an exception.
+      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for a file</li><li>creates the file if it does not exist</li></ul><p>If the file is a directory, this method will return an error.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The file to touch</p></dd><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
              time if this parameter is negative.
-</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IOException<p>on error
-</p></span></dd></dl></div>
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error, <code>Right(true)</code> on success
+</p></dd></dl></div>
     </li><li name="grizzled.file.util#touchMany" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="touchMany(files:Iterable[String],time:Long):Unit"></a>
-      <a id="touchMany(Iterable[String],Long):Unit"></a>
+      <a id="touchMany(files:Iterable[String],time:Long):Either[String,Int]"></a>
+      <a id="touchMany(Iterable[String],Long):Either[String,Int]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Int">Int</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</i></p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for any existing files
-      in a list of files</li><li>creates any non-existent files in the list of files</li></ul><p>If any file in the list is a directory, this method will throw an
-exception.
+      <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for any existing files
+   in a list of files</li><li>creates an nonexistent files in the list</li></ul><p>If any file in the list is a directory, this method will return an error.
 </p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>Iterable of files to touch</p></dd><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
               time if this parameter is negative.
-</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">IOException<p>on error
-</p></span></dd></dl></div>
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error. <code>Right(total)</code> on success.
+</p></dd></dl></div>
     </li><li name="grizzled.file.util#universalPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="universalPath(path:String):String"></a>
       <a id="universalPath(String):String"></a>
@@ -988,8 +972,8 @@ universal path notation.</p><div class="fullcomment"><div class="comment cmt"><p
 universal path notation. Universal path notation always uses a
 Unix-style &quot;/&quot; to separate path elements. A universal path can be
 converted to a native (operating system-specific) path via the
-<tt>native_path()</tt> function. Note that on POSIX-compliant systems,
-this function simply returns the <tt>path</tt> parameter unmodified.
+<code>native_path()</code> function. Note that on POSIX-compliant systems,
+this function simply returns the <code>path</code> parameter unmodified.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to convert to universal path notation
 </p></dd><dt>returns</dt><dd class="cmt"><p>the universal path
 </p></dd></dl></div>
@@ -1062,52 +1046,21 @@ this function simply returns the <tt>path</tt> parameter unmodified.
         <span class="name">walk</span><span class="params">(<span name="top">top: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>])]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Directory tree generator, adapted from Python's <tt>os.walk()</tt>
-function.</tt></p><div class="fullcomment"><div class="comment cmt"><p>Directory tree generator, adapted from Python's <tt>os.walk()</tt>
+      <p class="shortcomment cmt">Directory tree generator, adapted from Python's <code>os.walk()</code>
+function.</p><div class="fullcomment"><div class="comment cmt"><p>Directory tree generator, adapted from Python's <code>os.walk()</code>
 function.</p><p>For each directory in the directory tree rooted at top (including top
-itself, but excluding '.' and '..'), yields a 3-tuple</p><p><blockquote>
-<pre>
-dirpath, dirnames, filenames
-</pre>
-</blockquote></p><p><i>dirpath</i> is a string, the path to the directory.
-<i>dirnames</i> is a list of the names of the subdirectories in
-<i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
-of the names of the non-directory files in <i>dirpath</i>. Note that
-the names in the lists are just names, with no path components. To
-get a full path (which begins with top) to a file or directory in
-<i>dirpath</i>, use <tt>dirpath + java.io.fileSeparator + name</tt>,
-or use <tt>joinPath()</tt>.</p><p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
-generated before the triples for any of its subdirectories
-(directories are generated top down). If <tt>topdown</tt> is
-<tt>false</tt>, the triple for a directory is generated after the
-triples for all of its subdirectories (directories are generated
-bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p><p>dirpath, dirnames, filenames
-</pre>
-
-
-
-<i>dirpath</i> is a string, the path to the directory.
-<i>dirnames</i> is a list of the names of the subdirectories in
-<i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
-of the names of the non-directory files in <i>dirpath</i>. Note that
-the names in the lists are just names, with no path components. To
-get a full path (which begins with top) to a file or directory in
-<i>dirpath</i>, use <tt>dirpath + java.io.fileSeparator + name</tt>,
-or use <tt>joinPath()</tt>.
-
-
-
-If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
-generated before the triples for any of its subdirectories
-(directories are generated top down). If <tt>topdown</tt> is
-<tt>false</tt>, the triple for a directory is generated after the
-triples for all of its subdirectories (directories are generated
-bottom up).
-
-
-
-<b>WARNING!</b> This method does <i>not</i> grok symbolic links!
-</p></div><dl class="paramcmts block"><dt class="param">top</dt><dd class="cmt"><p>name of starting directory</p></dd><dt class="param">topdown</dt><dd class="cmt"><p><tt>true</tt> to do a top-down traversal, <tt>false</tt>
+itself, but excluding '.' and '..'), yields a 3-tuple</p><pre>(dirpath, dirnames, filenames)</pre><p><i>dirpath</i> is a string, the path to the directory. <i>dirnames</i> is a
+list of the names of the subdirectories in <i>dirpath</i> (excluding '.'
+and '..'). <i>filenames</i> is a list of the names of the non-directory
+files in <i>dirpath</i>. Note that the names in the lists are just names,
+with no path components. To get a full path (which begins with top) to a
+file or directory in <i>dirpath</i>, use <code>dirpath + java.io.fileSeparator +
+name</code>, or use <code>joinPath()</code>.</p><p>If <i>topdown</i> is <code>true</code>, the triple for a directory is generated before
+the triples for any of its subdirectories (directories are generated top
+down). If <code>topdown</code> is <code>false</code>, the triple for a directory is generated
+after the triples for all of its subdirectories (directories are generated
+bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!
+</p></div><dl class="paramcmts block"><dt class="param">top</dt><dd class="cmt"><p>name of starting directory</p></dd><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code>
                otherwise.
 </p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.
 </p></dd></dl></div>

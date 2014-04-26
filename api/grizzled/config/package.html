@@ -89,25 +89,12 @@ differ quite a bit).
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.config.ConfigException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ConfigExceptionextendsException"></a>
-      <a id="ConfigException:ConfigException"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="ConfigException.html"><span class="name">ConfigException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Base class for all configuration exceptions.</p>
-    </li><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ConfigurationextendsAnyRef"></a>
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
@@ -115,71 +102,6 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">An INI-style configuration file parser.</p>
-    </li><li name="grizzled.config.ConversionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ConversionExceptionextendsConfigException"></a>
-      <a id="ConversionException:ConversionException"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="ConversionException.html"><span class="name">ConversionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
-      </span>
-      </h4>
-      
-    </li><li name="grizzled.config.DuplicateOptionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="DuplicateOptionExceptionextendsConfigException"></a>
-      <a id="DuplicateOptionException:DuplicateOptionException"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="DuplicateOptionException.html"><span class="name">DuplicateOptionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Thrown when a duplicate option is encountered.</p>
-    </li><li name="grizzled.config.DuplicateSectionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="DuplicateSectionExceptionextendsConfigException"></a>
-      <a id="DuplicateSectionException:DuplicateSectionException"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="DuplicateSectionException.html"><span class="name">DuplicateSectionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Thrown when a duplicate section is encountered.</p>
-    </li><li name="grizzled.config.NoSuchOptionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="NoSuchOptionExceptionextendsConfigException"></a>
-      <a id="NoSuchOptionException:NoSuchOptionException"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="NoSuchOptionException.html"><span class="name">NoSuchOptionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Thrown when an expected option is not present in the confiruation.</p>
-    </li><li name="grizzled.config.NoSuchSectionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="NoSuchSectionExceptionextendsConfigException"></a>
-      <a id="NoSuchSectionException:NoSuchSectionException"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="NoSuchSectionException.html"><span class="name">NoSuchSectionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Thrown when an expected section is not present in the confiruation.</p>
     </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SectionextendsAnyRef"></a>
       <a id="Section:Section"></a>
@@ -193,19 +115,48 @@ differ quite a bit).
       </span>
       </h4>
       <p class="comment cmt">Used as a wrapper to pass a section to callbacks.</p>
-    </li><li name="grizzled.config.SubstitutionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SubstitutionExceptionextendsConfigException"></a>
-      <a id="SubstitutionException:SubstitutionException"></a>
+    </li><li name="grizzled.config.ValueConverter" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ValueConverter[T]extendsAnyRef"></a>
+      <a id="ValueConverter[T]:ValueConverter[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ValueConverter.html"><span class="name">ValueConverter</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">To create your own value converter, implement this trait.</p>
+    </li><li name="grizzled.config.ConfigException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigExceptionextendsException"></a>
+      <a id="ConfigException:ConfigException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="SubstitutionException.html"><span class="name">SubstitutionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
+        <a href="ConfigException.html"><span class="name deprecated" title="Deprecated: (Since version 1.2) No longer used, except by deprecated methods">ConfigException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
       </span>
       </h4>
-      
+      <p class="comment cmt">Base class for all configuration exceptions.</p>
+    </li><li name="grizzled.config.ConversionException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ConversionExceptionextendsConfigException"></a>
+      <a id="ConversionException:ConversionException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConversionException.html"><span class="name deprecated" title="Deprecated: (Since version 1.2) No longer used, except by deprecated methods">ConversionException</span></a><span class="result"> extends <a href="ConfigException.html" class="extype" name="grizzled.config.ConfigException">ConfigException</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> No longer used, except by deprecated methods</p></dd></dl></div>
     </li></ol>
             </div>
 

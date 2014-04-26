@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>IPAddress - grizzled.net.IPAddress</title>
-          <meta name="description" content="IPAddress - grizzled.net.IPAddress" />
-          <meta name="keywords" content="IPAddress grizzled.net.IPAddress" />
+          <title>Implicits - grizzled.net.Implicits</title>
+          <meta name="description" content="Implicits - grizzled.net.Implicits" />
+          <meta name="keywords" content="Implicits grizzled.net.Implicits" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.net.IPAddress$';
+            var hash = 'grizzled.net.Implicits$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -28,9 +28,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="IPAddress.html" title="Go to companion"><img src="../../lib/object_to_class_big.png" /></a>
+        <img src="../../lib/object_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.net">net</a></p>
-        <h1><a href="IPAddress.html" title="Go to companion">IPAddress</a></h1>
+        <h1>Implicits</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -39,11 +39,11 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">IPAddress</span>
+        <span class="name">Implicits</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object to <code>IPAddress</code> class.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implicit conversions for network classes and types.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -64,7 +64,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.net.IPAddress"><span>IPAddress</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.net.Implicits"><span>Implicits</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -129,148 +129,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#Localhost" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Localhost:Either[String,grizzled.net.IPAddress]"></a>
-      <a id="Localhost:Either[String,IPAddress]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">Localhost</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Singleton <code>IPAddress</code> for the local loop address.</p>
-    </li><li name="grizzled.net.IPAddress#allForName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="allForName(hostname:String):Either[String,List[grizzled.net.IPAddress]]"></a>
-      <a id="allForName(String):Either[String,List[IPAddress]]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">allForName</span><span class="params">(<span name="hostname">hostname: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Get a list of all <code>IPAddress</code> objects for a given host
-name, based on whatever name service is configured for the running
-system.</p><div class="fullcomment"><div class="comment cmt"><p>Get a list of all <code>IPAddress</code> objects for a given host
-name, based on whatever name service is configured for the running
-system.</p><p>The host name can either be a machine name, such as
-&quot;www.clapper.org&quot;, or a textual representation of its IP address. If
-a literal IP address is supplied, only the validity of the address
-format is checked.</p><p>If the host is null, then this method return an <code>IPAddress</code>
-representing an address of the loopback interfaced. See RFC 3330
-section 2 and RFC 2373 section 2.5.3.</p><p>This method corresponds to the <code>getAllByName()</code> method in
-the <code>java.net.InetAddress</code> class.
-</p></div><dl class="paramcmts block"><dt class="param">hostname</dt><dd class="cmt"><p>the host name
-</p></dd><dt>returns</dt><dd class="cmt"><p>a <code>Right</code> containing the list of resolved IP addresses, or
-        <code>Left(error)</code> on error.
-</p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(host:String):Either[String,grizzled.net.IPAddress]"></a>
-      <a id="apply(String):Either[String,IPAddress]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="host">host: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Create an <code>IPAddress</code>, given a host name.</p><div class="fullcomment"><div class="comment cmt"><p>Create an <code>IPAddress</code>, given a host name.
-</p></div><dl class="paramcmts block"><dt class="param">host</dt><dd class="cmt"><p>the host name
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code> in a <code>Right</code>, on success; <code>Left(error)</code> on error.
-</p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(address:List[Byte]):Either[String,grizzled.net.IPAddress]"></a>
-      <a id="apply(List[Byte]):Either[String,IPAddress]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="address">address: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Create an <code>IPAddress</code>, given a list of bytes representing the
-address</p><div class="fullcomment"><div class="comment cmt"><p>Create an <code>IPAddress</code>, given a list of bytes representing the
-address</p><p>- If the array has fewer than four values, it is assumed to be
-  an IPv4 address, and it will be padded with 0s to 4 bytes.
-- If the array has between four and 16 values, it is assumed to be
-  an IPv6 address, and it will be padded with 0s to 16 bytes.
-- Anything else will cause an <code>IllegalArgumentException</code> to be thrown.
-Example of use:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="std">List</span>(<span class="num">192</span>, <span class="num">168</span>, <span class="num">1</span>, <span class="num">100</span>))</pre></div><dl class="paramcmts block"><dt class="param">address</dt><dd class="cmt"><p>the list of address values
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code> in a <code>Right</code>, on success; <code>Left(error)</code> on error.
-</p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(addr:Int*):Either[String,grizzled.net.IPAddress]"></a>
-      <a id="apply(Int*):Either[String,IPAddress]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="addr">addr: <span class="extype" name="scala.Int">Int</span>*</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Create an <code>IPAddress</code>, given 1 to 16 integer arguments.</p><div class="fullcomment"><div class="comment cmt"><p>Create an <code>IPAddress</code>, given 1 to 16 integer arguments.
-The integers will be truncated to 8-bit bytes.</p><p>- If the array has fewer than four values, it is assumed to be
-  an IPv4 address, and it will be padded with 0s to 4 bytes.
-- If the array has between four and 16 values, it is assumed to be
-  an IPv6 address, and it will be padded with 0s to 16 bytes.
-- Anything else will cause an <code>IllegalArgumentException</code> to be thrown.</p><p>Example of use:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="std">Array</span>(<span class="num">192</span>, <span class="num">168</span>, <span class="num">1</span>, <span class="num">100</span>))</pre></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the bytes (as integers) of the address
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code> in a <code>Right</code>, on success; <code>Left(error)</code> on error.
-</p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(addr:Array[Int]):Either[String,grizzled.net.IPAddress]"></a>
-      <a id="apply(Array[Int]):Either[String,IPAddress]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="addr">addr: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Int">Int</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Create an <code>IPAddress</code>, given an array of integers representing
-the address.</p><div class="fullcomment"><div class="comment cmt"><p>Create an <code>IPAddress</code>, given an array of integers representing
-the address. The array must contain between 1 and 16 integer values.
-The integers will be truncated to 8-bit bytes.</p><p>- If the array has fewer than four values, it is assumed to be
-  an IPv4 address, and it will be padded with 0s to 4 bytes.
-- If the array has between four and 16 values, it is assumed to be
-  an IPv6 address, and it will be padded with 0s to 16 bytes.
-- Anything else will cause an <code>IllegalArgumentException</code> to be thrown.</p><p>Example of use:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="std">Array</span>(<span class="num">192</span>, <span class="num">168</span>, <span class="num">1</span>, <span class="num">100</span>))</pre></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the address
-</p></dd><dt>returns</dt><dd class="cmt"><p>the corresponding <code>IPAddress</code> object.
-</p></dd></dl></div>
-    </li><li name="grizzled.net.IPAddress#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(addr:Array[Byte]):Either[String,grizzled.net.IPAddress]"></a>
-      <a id="apply(Array[Byte]):Either[String,IPAddress]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="addr">addr: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Create an <code>IPAddress</code>, given an array of bytes representing
-the address.</p><div class="fullcomment"><div class="comment cmt"><p>Create an <code>IPAddress</code>, given an array of bytes representing
-the address. The array must contain between 1 and 16 byte values.</p><p>- If the array has fewer than four values, it is assumed to be
-  an IPv4 address, and it will be padded with 0s to 4 bytes.
-- If the array has between four and 16 values, it is assumed to be
-  an IPv6 address, and it will be padded with 0s to 16 bytes.
-- Anything else will cause an <code>IllegalArgumentException</code> to be thrown.
-</p></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the address
-</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code> in a <code>Right</code>, on success; <code>Left(error)</code> on error.
-</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -374,6 +232,42 @@ the address. The array must contain between 1 and 16 byte values.</p><p>- If the
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.net.Implicits#inetToIPAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="inetToIPAddress(addr:java.net.InetAddress):grizzled.net.IPAddress"></a>
+      <a id="inetToIPAddress(InetAddress):IPAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">inetToIPAddress</span><span class="params">(<span name="addr">addr: <span class="extype" name="java.net.InetAddress">InetAddress</span></span>)</span><span class="result">: <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicitly converts a <code>java.net.InetAddress</code> to an
+<code>IPAddress</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Implicitly converts a <code>java.net.InetAddress</code> to an
+<code>IPAddress</code>.
+</p></div><dl class="paramcmts block"><dt class="param">addr</dt><dd class="cmt"><p>the <code>java.net.InetAddress</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the <code>IPAddress</code>
+</p></dd></dl></div>
+    </li><li name="grizzled.net.Implicits#ipToInetAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ipToInetAddress(ipAddr:grizzled.net.IPAddress):java.net.InetAddress"></a>
+      <a id="ipToInetAddress(IPAddress):InetAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ipToInetAddress</span><span class="params">(<span name="ipAddr">ipAddr: <a href="IPAddress.html" class="extype" name="grizzled.net.IPAddress">IPAddress</a></span>)</span><span class="result">: <span class="extype" name="java.net.InetAddress">InetAddress</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicitly converts an <code>IPAddress</code> to a
+<code>java.net.InetAddress</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Implicitly converts an <code>IPAddress</code> to a
+<code>java.net.InetAddress</code>.
+</p></div><dl class="paramcmts block"><dt class="param">ipAddr</dt><dd class="cmt"><p>the <code>IPAddress</code>
+</p></dd><dt>returns</dt><dd class="cmt"><p>the corresponding <code>java.net.InetAddress</code>
+</p></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>

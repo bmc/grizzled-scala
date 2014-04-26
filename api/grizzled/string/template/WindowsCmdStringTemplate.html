@@ -386,16 +386,16 @@ variable names with alphanumerics and underscore.
                    a blank string for an unknown variable, <code>false</code>
                    for one that throws an exception.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></dd></dl></div>
-    </li><li name="grizzled.string.template.WindowsCmdStringTemplate#substitute" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="substitute(s:String):String"></a>
-      <a id="substitute(String):String"></a>
+    </li><li name="grizzled.string.template.WindowsCmdStringTemplate#sub" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sub(s:String):Either[String,String]"></a>
+      <a id="sub(String):Either[String,String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">substitute</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">sub</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Replace all variable references in the given string.</p><div class="fullcomment"><div class="comment cmt"><p>Replace all variable references in the given string. Variable references
@@ -404,11 +404,8 @@ a referenced variable is not found in the resolver, this method either:</p><p>- 
        <code>false</code>), or
 -  substitutes an empty string (if <code>safe</code> is <code>true</code>)</p><p>Recursive references are supported (but beware of infinite recursion).
 </p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string in which to replace variable references
-</p></dd><dt>returns</dt><dd class="cmt"><p>the result
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.string.template.WindowsCmdStringTemplate">WindowsCmdStringTemplate</a> → <a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></dd><dt>Exceptions thrown</dt><dd><span class="cmt">VariableNotFoundException<p>a referenced variable could not be
-                                   found, and <code>safe</code> is
-                                   <code>false</code>
-</p></span></dd></dl></div>
+</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(substitutedValue)</code> or <code>Left(error)</code>
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.string.template.WindowsCmdStringTemplate">WindowsCmdStringTemplate</a> → <a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -497,7 +494,35 @@ a referenced variable is not found in the resolver, this method either:</p><p>- 
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.string.template.StringTemplate#substitute" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="substitute(s:String):String"></a>
+      <a id="substitute(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use sub(), instead">substitute</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Replace all variable references in the given string.</p><div class="fullcomment"><div class="comment cmt"><p>Replace all variable references in the given string. Variable references
+are recognized per the regular expression passed to the constructor. If
+a referenced variable is not found in the resolver, this method either:</p><p>- throws a <code>VariableNotFoundException</code> (if <code>safe</code> is <code>false</code>), or
+- substitutes an empty string (if <code>safe</code> is <code>true</code>)</p><p>Recursive references are supported (but beware of infinite recursion).
+</p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the string in which to replace variable references
+</p></dd><dt>returns</dt><dd class="cmt"><p>the result
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use sub(), instead</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt">VariableNotFoundException<p>a referenced variable could not be
+                                   found, and <code>safe</code> is
+                                   <code>false</code>
+</p></span></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

@@ -44,7 +44,7 @@ For a more detailed description of what's available, see the
 Grizzled Scala is published to the `oss.sonatype.org` repository and
 automatically sync'd with the [Maven Central Repository][].
 
-- Version 1.1.6 supports Scala 2.10 and 2.11.
+- Versions 1.2, 1.1.7 and 1.1.6 support Scala 2.10 and 2.11.
 - Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
 - Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
   2.9.1-1 and 2.9.2.
