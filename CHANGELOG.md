@@ -34,6 +34,8 @@ Version 1.2:
 * The functions in `grizzled.file.util` and the methods in
   `grizzled.file.GrizzledFile` now return `Either`, instead of throwing
   exceptions.
+* Implicits in the `grizzled.net.inet` class are now in a special `Implicits`
+  object.
 
 Version 1.1.6:
 

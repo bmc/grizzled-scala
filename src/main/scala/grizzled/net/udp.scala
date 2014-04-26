@@ -41,7 +41,8 @@ import scala.annotation.tailrec
 
 import java.net.{DatagramSocket => JDKDatagramSocket}
 import java.net.{DatagramPacket => JDKDatagramPacket}
-import java.net.InetAddress
+import grizzled.net.Implicits._
+import scala.language.implicitConversions
 
 
 /** A `UDPDatagramSocket` object represents a UDP datagram socket,
@@ -213,6 +214,8 @@ trait UDPDatagramSocket {
     def port: Int
 
   /** The local address to which the socket is bound.
+    *
+    * @return the address
     */
   def address: IPAddress
 
@@ -363,7 +366,7 @@ trait UDPDatagramSocket {
 
   /** Make a byte array of a given length, initialized to zeros.
     *
-    * @param len  length
+    * @param length  length
     *
     * @return the array of bytes, initialized to zeros
     */
@@ -376,12 +379,15 @@ trait UDPDatagramSocket {
   * `DatagramSocket` object.
   */
 private class UDPDatagramSocketImpl(val socket: JDKDatagramSocket)
-extends UDPDatagramSocket {
+  extends UDPDatagramSocket {
+
   def broadcast: Boolean = socket.getBroadcast()
   def broadcast_=(enable: Boolean) = socket.setBroadcast(enable)
 
   def port: Int = socket.getPort()
+
   def address: IPAddress = socket.getInetAddress()
+
   def close(): Unit = socket.close()
 
   def send(data: Seq[Byte], address: IPAddress, port: Int): Unit = {
@@ -431,8 +437,6 @@ object UDPDatagramSocket {
   /** Create a UDP datagram socket object that's bound to any available
     * local port and the wildcard IP address. The broadcast flag will
     * initially be clear.
-    *
-    * @param port     the local port
     *
     * @return the `UDPDatagramSocket` object
     */

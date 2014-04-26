@@ -29,3 +29,5 @@ Now with _More Immutable_ and _Fewer Exceptionism_...
 * The functions in `grizzled.file.util` and the methods in
   `grizzled.file.GrizzledFile` now return `Either`, instead of throwing
   exceptions.
+* Implicits in the `grizzled.net.IPAddress` class are now in a special
+  `grizzled.net.Implicits` object.

@@ -38,7 +38,12 @@
 package grizzled.net
 
 import java.net.InetAddress
+
 import scala.language.implicitConversions
+import scala.util.{Failure, Success, Try}
+
+import grizzled.either.Implicits._
+import grizzled.net.Implicits._
 
 /** Represents an IP address. This class is similar to `java.net.InetAddress`,
   * but it's designed to be more intuitive and easier to use from Scala.
@@ -132,10 +137,11 @@ object IPAddress {
     *
     * @param addr  the address
     *
-    * @return the `IPAddress`
+    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
     */
-  def apply(addr: Array[Byte]): IPAddress =
+  def apply(addr: Array[Byte]): Either[String, IPAddress] = {
     IPAddress(addr.toList)
+  }
 
   /** Create an `IPAddress`, given an array of integers representing
     * the address. The array must contain between 1 and 16 integer values.
@@ -157,8 +163,9 @@ object IPAddress {
     *
     * @return the corresponding `IPAddress` object.
     */
-  def apply(addr: Array[Int]): IPAddress = 
+  def apply(addr: Array[Int]): Either[String, IPAddress] = {
     IPAddress(addr.map(_.toByte))
+  }
 
   /** Create an `IPAddress`, given 1 to 16 integer arguments.
     * The integers will be truncated to 8-bit bytes.
@@ -177,10 +184,11 @@ object IPAddress {
     *
     * @param addr  the bytes (as integers) of the address
     *
-    * @return the `IPAddress`
+    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
     */
-  def apply(addr: Int*): IPAddress =
+  def apply(addr: Int*): Either[String, IPAddress] = {
     IPAddress(addr.map(_.toByte).toList)
+  }
 
   /** Create an `IPAddress`, given a list of bytes representing the
     * address
@@ -198,45 +206,37 @@ object IPAddress {
     *
     * @param address  the list of address values
     *
-    * @return the `IPAddress`
+    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
     */
-  def apply(address: List[Byte]): IPAddress = {
+  def apply(address: List[Byte]): Either[String, IPAddress] = {
     val zeroByte = 0.toByte
 
-    val fullAddress: List[Byte] = address.length match {
-      case 4 =>
-        address
-
-      case 16 =>
-        address
-
-      case 0 =>
-        throw new IllegalArgumentException("Empty IP address.")
+    val fullAddressRes = address.length match {
+      case 4  => Right(address)
+      case 16 => Right(address)
+      case 0  => Left("Empty IP address.")
 
       case n if (n > 16) =>
-        throw new IllegalArgumentException("IP address (" +
-                                           address.mkString(",") +
-                                           ") is too long.")
+        Left(s"IP address ${address.mkString(".")} is too long.")
 
       case n => {
         val upper = if (n < 4) 4 else 16
-        address ++ (n.until(upper).map(i => zeroByte))
+        Right(address ++ (n.until(upper).map(i => zeroByte)))
       }
     }
 
-    new IPAddress(fullAddress.toArray)
+    fullAddressRes.map { bytes => new IPAddress(bytes.toArray) }
   }
 
   /** Create an `IPAddress`, given a host name.
     *
     * @param host  the host name
     *
-    * @return the corresponding `IPAddress` object.
-    *
-    * @throws java.net.UnknownHostException unknown host
+    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
     */
-  def apply(host: String): IPAddress =
+  def apply(host: String): Either[String, IPAddress] = {
     IPAddress(InetAddress.getByName(host).getAddress)
+  }
 
   /** Get a list of all `IPAddress` objects for a given host
     * name, based on whatever name service is configured for the running
@@ -256,32 +256,29 @@ object IPAddress {
     *
     * @param hostname  the host name
     *
-    * @return the list of matching `IPAddress` objects
-    *
-    * @throws UnknownHostException unknown host
+    * @return a `Right` containing the list of resolved IP addresses, or
+    *         `Left(error)` on error.
     */
-  def allForName(hostname: String): List[IPAddress] =
-    InetAddress.getAllByName(hostname)
-  .map((x: InetAddress) => IPAddress(x.getAddress))
-  .toList
+  def allForName(hostname: String): Either[String, List[IPAddress]] = {
+    val t = Try {
+      InetAddress.getAllByName(hostname)
+                 .map((x: InetAddress) => IPAddress(x.getAddress))
+                 .toList
+    }
 
-  /** Implicitly converts a `java.net.InetAddress` to an
-    * `IPAddress`.
-    *
-    * @param addr  the `java.net.InetAddress`
-    *
-    * @return the corresponding `IPAddress`
-    */
-  implicit def inetToIPAddress(addr: InetAddress): IPAddress =
-    IPAddress(addr.getAddress)
+    t match {
+      case Failure(ex)   => Left(ex.getMessage)
+      case Success(list) => {
+        list.filter { _.isLeft }.map { _.left.get } match {
+          case err :: errs => {
+            Left((List(err) ++ errs).mkString(". "))
+          }
 
-  /** Implicitly converts an `IPAddress` to a
-    * `java.net.InetAddress`.
-    *
-    * @param ipAddr  the `IPAddress`
-    *
-    * @return the corresponding `java.net.InetAddress`
-    */
-  implicit def ipToInetAddress(ipAddr: IPAddress): InetAddress =
-    InetAddress.getByAddress(ipAddr.address)
+          case Nil => {
+            Right(list.filter { _.isRight }.map { _.right.get })
+          }
+        }
+      }
+    }
+  }
 }

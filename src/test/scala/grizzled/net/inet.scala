@@ -33,6 +33,7 @@
 
 import org.scalatest.FunSuite
 import grizzled.net._
+import grizzled.net.Implicits._
 
 /**
  * Tests the grizzled.net functions in inet.scala
@@ -59,13 +60,14 @@ class IPAddressTest extends FunSuite {
     (Array(0, 0, 0, 0),        List(0, 0, 0, 0), "0.0.0.0")
   )
 
-  def getIPAddress(input: AnyRef): IPAddress =
+  def getIPAddress(input: AnyRef): Either[String, IPAddress] = {
     input match {
       case s: String       => IPAddress("localhost")
       case a: Array[Int]   => IPAddress(a)
       case ab: Array[Byte] => IPAddress(ab)
-      case _               => throw new AssertionError("oops")
+      case _               => Left("oops")
     }
+  }
 
   test("IPAddress constructors") {
     // NOTE: Must use List[Byte], not Array[Byte]. Two identical arrays
@@ -75,7 +77,10 @@ class IPAddressTest extends FunSuite {
     for ((input, expected, expectedString) <- Data) {
       // Map the expected value into a list of bytes
       val mappedExpected = expected.map(_.toByte)
-      val ipAddr = getIPAddress(input)
+      val ipAddrRes = getIPAddress(input)
+      assert(ipAddrRes.isRight)
+
+      val ipAddr = ipAddrRes.right.get
 
       // Run the test
       assertResult(mappedExpected, "IPAddress(" + input + ")") {
@@ -87,13 +92,10 @@ class IPAddressTest extends FunSuite {
       }
     }
 
-    intercept[IllegalArgumentException] { 
-      IPAddress( (for (i <- 0 to 20) yield i.toByte).toList )
-    }
+    val ip = IPAddress( (for (i <- 0 to 20) yield i.toByte).toList )
+    assert(ip.isLeft)
 
-    intercept[IllegalArgumentException] {
-      IPAddress(Nil) 
-    }
+    assert(IPAddress(Nil).isLeft)
   }
 
   test("IPAddress implicits") {
@@ -105,7 +107,10 @@ class IPAddressTest extends FunSuite {
       // Map the expected value into a list of bytes
       val mappedExpected = expected.map(_.toByte)
 
-      val ipAddr = getIPAddress(input)
+      val ipAddrRes = getIPAddress(input)
+      assert(ipAddrRes.isRight)
+
+      val ipAddr = ipAddrRes.right.get
       val jdkInetAddress: java.net.InetAddress = ipAddr
       val ipAddr2: IPAddress = jdkInetAddress
 
@@ -130,11 +135,19 @@ class IPAddressTest extends FunSuite {
 
   test("java.net.InetAddress call-throughs") {
     assertResult(true, "127.0.0.1 is loopback")  {
-      IPAddress(127, 0, 0, 1).isLoopbackAddress
+      val ipAddrRes = IPAddress(127, 0, 0, 1)
+      assert(ipAddrRes.isRight)
+
+      val ipAddr = ipAddrRes.right.get
+
+      ipAddr.isLoopbackAddress
     }
 
     assertResult(false, "192.168.1.100 is not loopback")  {
-      IPAddress(192, 168, 1, 100).isLoopbackAddress
+      val ipAddrRes = IPAddress(192, 168, 0, 1)
+      assert(ipAddrRes.isRight)
+      val ipAddr = ipAddrRes.right.get
+      ipAddr.isLoopbackAddress
     }
   }
 }
