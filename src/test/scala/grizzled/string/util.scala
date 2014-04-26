@@ -42,17 +42,17 @@ import grizzled.string.GrizzledString._
 class StringUtilTest extends FunSuite {
   test("string to boolean conversions that should succeed") {
     val data = Map(
-      "true"  -> true,
-      "t"     -> true,
-      "yes"   -> true,
-      "y"     -> true,
-      "1"     -> true,
+      "true"  -> Right(true),
+      "t"     -> Right(true),
+      "yes"   -> Right(true),
+      "y"     -> Right(true),
+      "1"     -> Right(true),
 
-      "false" -> false,
-      "f"     -> false,
-      "no"    -> false,
-      "n"     -> false,
-      "0"     -> false
+      "false" -> Right(false),
+      "f"     -> Right(false),
+      "no"    -> Right(false),
+      "n"     -> Right(false),
+      "0"     -> Right(false)
     )
 
     for {(input, expected) <- data;
@@ -64,8 +64,7 @@ class StringUtilTest extends FunSuite {
                              input + " ")
          s <- permutations} {
       assertResult(expected, "\"" + s + "\" -> " + expected.toString)  {
-        val b: Boolean = util.stringToBoolean(s)
-        b
+        util.strToBoolean(s)
       }
     }
   }
@@ -78,10 +77,7 @@ class StringUtilTest extends FunSuite {
     for {input <- data
          permutations = List(input, input.capitalize, input.toUpperCase)
          s <- permutations} {
-      intercept[IllegalArgumentException] {
-        val b: Boolean = util.stringToBoolean(s)
-        b
-      }
+      assert(util.strToBoolean(s).isLeft)
     }
   }
 

@@ -24,6 +24,8 @@ Version 1.1.7:
     However, `asEither()` will properly handle that situation.
   - Most exceptions have been removed, except those still thrown by deprecated
     methods.
+* `grizzled.string.util.stringToBoolean()` is deprecated, as it throws an
+  exception. Use the new `str2Boolean()` instead; it returns an `Either`.
 
 Version 1.1.6:
 

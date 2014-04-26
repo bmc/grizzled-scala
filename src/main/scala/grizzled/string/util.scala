@@ -43,6 +43,41 @@ import scala.annotation.tailrec
   */
 object util {
 
+  private val BooleanStrings = Map(
+    "true"  -> true,
+    "t"     -> true,
+    "yes"   -> true,
+    "y"     -> true,
+    "1"     -> true,
+    "on"    -> true,
+    "false" -> false,
+    "f"     -> false,
+    "no"    -> false,
+    "n"     -> false,
+    "0"     -> false,
+    "off"   -> false
+  )
+
+  /** Convert a string to a boolean.
+    *
+    * This method currently understands the following strings (in any mixture
+    * of upper and lower case). It is currently English-specific.
+    *
+    * {{{
+    * true, t, yes, y, 1
+    * false, f, no, n, 0
+    * }}}
+    *
+    * @param s  the string to convert
+    *
+    * @return `Right(boolean)` on success, `Left(error)` on failure
+    */
+  def strToBoolean(s: String): Either[String, Boolean] = {
+    BooleanStrings.get(s.trim.toLowerCase)
+      .map(Right(_))
+      .getOrElse(Left(s"Cannot convert '$s' to boolean"))
+  }
+
   /** Convert a string to a boolean.
     *
     * This method currently understands the following strings (in any mixture
@@ -59,22 +94,10 @@ object util {
     *
     * @throws IllegalArgumentException if `s` cannot be parsed
     */
+  @deprecated("Use str2boolean(), instead", "1.1.7")
   def stringToBoolean(s: String): Boolean = {
-    s.trim.toLowerCase match {
-      case "true"  => true
-      case "t"     => true
-      case "yes"   => true
-      case "y"     => true
-      case "1"     => true
-      case "on"    => true
-
-      case "false" => false
-      case "f"     => false
-      case "no"    => false
-      case "n"     => false
-      case "0"     => false
-      case "off"   => false
-
+    BooleanStrings.get(s.trim.toLowerCase) match {
+      case Some(bool) => bool
       case _       =>
         throw new IllegalArgumentException("Can't convert string \"" +
                                            s + "\" to boolean.")
