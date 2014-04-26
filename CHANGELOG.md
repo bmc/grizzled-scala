@@ -31,8 +31,9 @@ Version 1.2:
   `sub()` method (which returns an `Either`).
 * `grizzled.url.download()` now returns an `Either`, instead of throwing an
   exception on error.
-* The functions in `grizzled.file.util` now return `Either`, instead of
-  throwing exceptions.
+* The functions in `grizzled.file.util` and the methods in
+  `grizzled.file.GrizzledFile` now return `Either`, instead of throwing
+  exceptions.
 
 Version 1.1.6:
 

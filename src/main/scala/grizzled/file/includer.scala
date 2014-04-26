@@ -308,7 +308,6 @@ object Includer {
    * `maxNesting` parameter.
    *
    * @param pathOrURI    the path or URI string to read
-   * @param source       the `Source` to read
    * @param includeRegex the regular expression that defines an include
    *                     directive. Must contain a group that surrounds the
    *                     file or URL part.
@@ -363,8 +362,8 @@ object Includer {
     val fileOut = File.createTempFile(tempPrefix, tempSuffix)
     fileOut.deleteOnExit
 
-    withCloseable(new FileWriter(fileOut)) {out =>
-     includer.foreach(s => out.write(s + "\n"))
+    withCloseable(new FileWriter(fileOut)) { out =>
+      includer.foreach(s => out.write(s + "\n"))
     }
 
     fileOut.getAbsolutePath
