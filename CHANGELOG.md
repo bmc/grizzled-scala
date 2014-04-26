@@ -3,7 +3,7 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
-Version 1.1.7:
+Version 1.2:
 
 * `grizzled.config.Configuration` is now completely immutable. Specifically,
   the following changes have been made:

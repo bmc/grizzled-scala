@@ -94,7 +94,7 @@ object util {
     *
     * @throws IllegalArgumentException if `s` cannot be parsed
     */
-  @deprecated("Use str2boolean(), instead", "1.1.7")
+  @deprecated("Use str2boolean(), instead", "1.2")
   def stringToBoolean(s: String): Boolean = {
     BooleanStrings.get(s.trim.toLowerCase) match {
       case Some(bool) => bool

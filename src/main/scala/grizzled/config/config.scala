@@ -58,10 +58,10 @@ import scala.util.{Try, Success, Failure}
 /**
   * Base class for all configuration exceptions.
   */
-@deprecated("No longer used, except by deprecated methods", "1.1.7")
+@deprecated("No longer used, except by deprecated methods", "1.2")
 class ConfigException(val message: String) extends Exception(message)
 
-@deprecated("No longer used, except by deprecated methods", "1.1.7")
+@deprecated("No longer used, except by deprecated methods", "1.2")
 class ConversionException(sectionName: String,
                           optionName: String,
                           value: String,
@@ -623,7 +623,7 @@ final class Configuration private[config](
     *
     * @throws ConversionException    if the option has a non-integer value
     */
-  @deprecated("Use asOpt[Int]", "1.1.7")
+  @deprecated("Use asOpt[Int]", "1.2")
   def getInt(sectionName: String, optionName: String): Option[Int] = {
     def makeInt(value: String): Int = {
       try {
@@ -651,7 +651,7 @@ final class Configuration private[config](
     *
     * @throws ConversionException    if the option cannot be converted
     */
-  @deprecated("Use asOpt[Int].getOrElse(...) instead", "1.1.7")
+  @deprecated("Use asOpt[Int].getOrElse(...) instead", "1.2")
   def getIntOrElse(sectionName: String,
                    optionName: String,
                    default: Int): Int = {
@@ -667,7 +667,7 @@ final class Configuration private[config](
     *
     * @throws ConversionException if the option has a non-boolean value
     */
-  @deprecated("Use asOpt[Boolean] instead", "1.1.7")
+  @deprecated("Use asOpt[Boolean] instead", "1.2")
   def getBoolean(sectionName: String, optionName: String): Option[Boolean] = {
     import grizzled.string.util._
 
@@ -698,7 +698,7 @@ final class Configuration private[config](
     *
     * @throws ConversionException    if the option cannot be converted
     */
-  @deprecated("Use asOpt[Boolean].getOrElse(...), instead", "1.1.7")
+  @deprecated("Use asOpt[Boolean].getOrElse(...), instead", "1.2")
   def getBooleanOrElse(sectionName: String,
                        optionName: String,
                        default: Boolean): Boolean = {
