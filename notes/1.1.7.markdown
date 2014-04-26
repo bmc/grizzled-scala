@@ -1,0 +1,19 @@
+* `grizzled.config.Configuration` is now completely immutable. Specifically,
+  the following changes have been made:
+  - Explicit conversion methods (e.g., `getInt()`, `getBoolean()`) have
+    been removed, in favor of new `asOpt[T]()` and `asEither[T]()` methods.
+    These new methods take an implicit `ValueConverter` object, allowing
+    callers to specify their own type conversions. Some predefined converters
+    are available in the `grizzled.config.Configuration.Implicits` package.
+  - It is now possible to specify a "not found" handler, when constructing
+    a `Configuration` object, to handle cases where an option was not found.
+  - The `Configuration` class is now final, because the constructor is now
+    private.
+  - All `Configuration` objects must be instantiated through the companion
+    `Configuration` object.
+  - All methods throwing exceptions have either been deprecated or removed.
+    Implication: Non-safe configuration objects (i.e., those that throw
+    exceptions for variables that cannot be substituted) are not supported.
+    However, `asEither()` will properly handle that situation.
+  - Most exceptions have been removed, except those still thrown by deprecated
+    methods.

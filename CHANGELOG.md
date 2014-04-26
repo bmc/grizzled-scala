@@ -24,7 +24,6 @@ Version 1.1.7:
     However, `asEither()` will properly handle that situation.
   - Most exceptions have been removed, except those still thrown by deprecated
     methods.
-  -
 
 Version 1.1.6:
 
