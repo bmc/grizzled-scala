@@ -46,7 +46,7 @@ class Digester(dg: JMessageDigest) {
 
   /** Create a digest of a string, returning the digest string.
     *
-    * @param string the file
+    * @param file the file
     *
     * @return the digest bytes
     */
