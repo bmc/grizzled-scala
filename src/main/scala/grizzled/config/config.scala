@@ -83,45 +83,22 @@ class Section(val name: String, val options: Map[String, String]) {
   override def toString = "[" + name + "]"
 }
 
+/** To create your own value converter, implement this trait.
+  *
+  * @tparam T the type the converter returns
+  */
 trait ValueConverter[T] {
+  /** Convert an option value to the appropriate type.
+    *
+    * @param sectionName the name of the section, for error messages
+    * @param optionName  the name of the option, for error messages
+    * @param value       the option's value, as a string
+    *
+    * @return `Right(value)` on success; `Left(error)` on error
+    */
   def convert(sectionName: String,
               optionName:  String,
               value:       String): Either[String, T]
-}
-
-object ValueConverters {
-
-  implicit object BooleanValueConverter extends ValueConverter[Boolean] {
-    def convert(sectionName: String,
-                optionName:  String,
-                value:       String): Either[String, Boolean] = {
-      import grizzled.string.util._
-
-      Try { stringToBoolean(value) } match {
-        case Failure(e) => {
-          Left(s"Section '$sectionName', option '$optionName': '$value' is " +
-               "not boolean.")
-        }
-
-        case Success(b) => Right(b)
-      }
-    }
-  }
-
-  implicit object IntConverter extends ValueConverter[Int] {
-    def convert(sectionName: String,
-                optionName:  String,
-                value:       String): Either[String, Int] = {
-      Try { Integer.parseInt(value) } match {
-        case Failure(e) => {
-          Left(s"Section '$sectionName', option '$optionName': '$value' is " +
-            "not an integer.")
-        }
-
-        case Success(i) => Right(i)
-      }
-    }
-  }
 }
 
 /** An INI-style configuration file parser.
@@ -371,7 +348,7 @@ object ValueConverters {
   * sections.
   *
   * Applications may also provide a "not found" function that is called to
-  * resolve options that are not found in the table. Such a function can be
+  * resolveOpt options that are not found in the table. Such a function can be
   * used to supply on-demand sections and values. For example, suppose you
   * want to do something crazy, such as look up any not-found values in a
   * database. (This is probably a very bad idea, but it makes a good example.)
@@ -398,13 +375,20 @@ object ValueConverters {
   *                            a key
   * @param notFoundFunction    function to call if an option is not found,
   *                            or None
+  * @param safe                `true` does "safe" substitutions, with
+  *                            substitutions of nonexistent values replaced by
+  *                            empty strings. `false` ensures that bad
+  *                            substitutions result in errors (or `None` in
+  *                            functions, like `get()`, that return `Option`
+  *                            values).
   */
-class Configuration private[config](
+final class Configuration private[config](
   contents:             Map[String, Map[String, Value]],
   sectionNamePattern:   Regex,
   commentPattern:       Regex,
   normalizeOptionName:  (String => String),
-  notFoundFunction:     Option[Types.NotFoundFunction] = None) {
+  notFoundFunction:     Option[Types.NotFoundFunction] = None,
+  safe:                 Boolean = true) {
 
   private val SectionName      = sectionNamePattern
   private val VariableName     = """([a-zA-Z0-9_.]+)""".r
@@ -450,7 +434,7 @@ class Configuration private[config](
     sections.get(name).map { m =>
       val sectionMap = m.map {
         case (option, value) =>
-          option -> resolve(name, value.value)
+          option -> resolveOpt(name, value.value)
       }.
       filter { case (key, value) =>
         value != None
@@ -503,7 +487,38 @@ class Configuration private[config](
           case None    => handleNotFound()
         }
 
-        res.flatMap { v => resolve(sectionName, v) }
+        res.flatMap { v => resolveOpt(sectionName, v) }
+      }
+    }
+  }
+
+  /** Like `get()`, except that this method returns an `Either`, allowing
+    * errors to be captured and processed.
+    *
+    * @param sectionName  the section name
+    * @param optionName   the option name
+    *
+    * @return `Left(error)` on error. `Right(None)` if not found.
+    *         `Right(Some(value))` if found and processed.
+    */
+  def getEither(sectionName: String, optionName: String):
+    Either[String, Option[String]] = {
+
+    sectionName match {
+      case "env" =>
+        Right(Option(System.getenv(optionName)))
+
+      case "system" =>
+        Right(Option(System.getProperties.getProperty(optionName)))
+
+      case _ if (! hasSection(sectionName)) =>
+        Right(None)
+
+      case _ => {
+        val key = OptionKey(optionName)
+        val res = sections(sectionName).get(key).map (_.value)
+
+        res.map { resolveEither(sectionName, _) }.getOrElse(Right(None))
       }
     }
   }
@@ -511,7 +526,7 @@ class Configuration private[config](
   /** Get a value as an instance of specified type. This method retrieves the
     * value of an option from a section and, using the specified (or implicit)
     * converter, attempts to convert the option's to the specified type. If you
-    * import `grizzled.config.ValueConverters._`, you'll bring implicit
+    * import `grizzled.config.Configuration.Implicits._`, you'll bring implicit
     * converters for various common types into scope.
     *
     * @param sectionName  the section from which to retrieve the value
@@ -535,10 +550,16 @@ class Configuration private[config](
   /** Get a value as an instance of specified type. This method retrieves the
     * value of an option from a section and, using the specified (or implicit)
     * converter, attempts to convert the option's to the specified type. If you
-    * import `grizzled.config.ValueConverters._`, you'll bring implicit
+    * import `grizzled.config.Configuration.Implicits._`, you'll bring implicit
     * converters for various common types into scope.
     *
-    * @param sectionName  the section from which to retrieve the value
+    * If `safe` is `true` (as defined when the `Configuration` object is built),
+    * substitutions of nonexistent variables will result in empty strings for
+    * where the substitutions were specified (e.g., `val${section1.notValid}`
+    * will result in the string "val"). If `safe` is `false`, substitutions
+    * of nonexistent values will result in an error (i.e., a `Left` result).
+    *
+    *@param sectionName  the section from which to retrieve the value
     * @param optionName   the name of the option whose value is to be returned
     * @tparam T           the desired type of the result
     * @param converter    a `ValueConverter` object that will handle the
@@ -551,14 +572,13 @@ class Configuration private[config](
                  (implicit converter: ValueConverter[T]):
     Either[String, Option[T]] = {
 
-    get(sectionName, optionName).map { valueString =>
-      // convert() returns Right(value) on success. We need to map it to
-      // a Right(Option[T]).
-      converter.convert(sectionName, optionName, valueString).map(Some(_))
-    }.
-    getOrElse {
-      val res: Option[T] = None
-      Right(res)
+    getEither(sectionName, optionName).flatMap { valueOpt: Option[String] =>
+      valueOpt.map { value =>
+        // Converter returns an Either[String, T]. We need to map it to an
+        // Either[String, Option[T]]
+        converter.convert(sectionName, optionName, value).map {Some(_)}
+      }.
+      getOrElse(Right(None))
     }
   }
 
@@ -753,16 +773,27 @@ class Configuration private[config](
   // Private methods
   // --------------------------------------------------------------------------
 
-  private def resolve(sectionName: String, value: String): Option[String] = {
+  private def resolveOpt(sectionName: String, value: String): Option[String] = {
+    resolveEither(sectionName, value) match {
+      case Left(e)    => None
+      case Right(opt) => opt
+    }
+  }
+
+  private def resolveEither(sectionName: String, value: String):
+    Either[String, Option[String]] = {
+
     val template = new UnixShellStringTemplate(templateResolve(sectionName, _),
                                                "[a-zA-Z0-9_.]+",
-                                               true)
+                                               safe)
     Try {
       template.substitute(value)
     }
+
     match {
-      case Failure(e) => None
-      case Success(s) => Some(s)
+      case Failure(e) => Left(s"Can't process '$value' from $sectionName: " +
+                              s"${e.getMessage}")
+      case Success(s) => Right(Some(s))
     }
   }
 
@@ -783,7 +814,7 @@ class Configuration private[config](
       case _ => {
         val key = OptionKey(optionName)
         sections(sectionName).get(key).flatMap { value =>
-          resolve(sectionName, value.value)
+          resolveOpt(sectionName, value.value)
         }
       }
     }
@@ -820,6 +851,12 @@ object Configuration {
     *                            parameters. It must return `Left(error)` on
     *                            error, `Right(None)` if the value isn't found,
     *                            and `Right(string)` if the value is found.
+    * @param safe                `true` does "safe" substitutions, with
+    *                            substitutions of nonexistent values replaced by
+    *                            empty strings. `false` ensures that bad
+    *                            substitutions result in errors (or `None` in
+    *                            functions, like `get()`, that return `Option`
+    *                            values).
     *
     *@return `Right(config)` on success, `Left(error)` on error.
     */
@@ -827,7 +864,8 @@ object Configuration {
             sectionNamePattern:  Regex = Configuration.DefaultSectionNamePattern,
             commentPattern:      Regex = Configuration.DefaultCommentPattern,
             normalizeOptionName: (String => String) = DefaultOptionNameTransformer,
-            notFoundFunction:    Option[Types.NotFoundFunction] = None):
+            notFoundFunction:    Option[Types.NotFoundFunction] = None,
+            safe:                Boolean = true):
     Either[String, Configuration] = {
 
     load(source).map { map =>
@@ -835,7 +873,8 @@ object Configuration {
                         sectionNamePattern,
                         commentPattern,
                         normalizeOptionName,
-                        notFoundFunction)
+                        notFoundFunction,
+                        safe)
     }
   }
 
@@ -910,6 +949,98 @@ object Configuration {
     Either[String, Configuration] = {
 
     apply(source, sections, sectionNamePattern, commentPattern)
+  }
+
+  // --------------------------------------------------------------------------
+  // Objects
+  // --------------------------------------------------------------------------
+
+  /** Import this object's contents (`import Configuration.Implicits._`)
+    * to get the implicit converters.
+    */
+  object Implicits {
+
+    /** Value converter for Boolean values, for use with
+      * `Configuration.asEither()` and `Configuration.asOpt()`.
+      */
+    implicit object BooleanValueConverter extends ValueConverter[Boolean] {
+      def convert(sectionName: String,
+                  optionName:  String,
+                  value:       String): Either[String, Boolean] = {
+        import grizzled.string.util._
+
+        Try { stringToBoolean(value) } match {
+          case Failure(e) => {
+            Left(s"Section '$sectionName', option '$optionName': '$value' is " +
+              "not boolean.")
+          }
+
+          case Success(b) => Right(b)
+        }
+      }
+    }
+
+    /** Value converter for integer values, for use with
+      * `Configuration.asEither()` and `Configuration.asOpt()`.
+      */
+    implicit object IntConverter extends ValueConverter[Int] {
+      def convert(sectionName: String,
+                  optionName:  String,
+                  value:       String): Either[String, Int] = {
+        Try { Integer.parseInt(value) } match {
+          case Failure(e) => {
+            Left(s"Section '$sectionName', option '$optionName': '$value' is " +
+              "not an integer.")
+          }
+
+          case Success(i) => Right(i)
+        }
+      }
+    }
+
+    /** Value converter for long integer values, for use with
+      * `Configuration.asEither()` and `Configuration.asOpt()`.
+      */
+    implicit object LongConverter extends ValueConverter[Long] {
+      def convert(sectionName: String,
+                  optionName:  String,
+                  value:       String): Either[String, Long] = {
+        Try { java.lang.Long.parseLong(value) } match {
+          case Failure(e) => {
+            Left(s"Section '$sectionName', option '$optionName': '$value' is " +
+              "not an integer.")
+          }
+
+          case Success(i) => Right(i)
+        }
+      }
+    }
+
+    /** Value converter for String values, for use with
+      * `Configuration.asEither()` and `Configuration.asOpt()`.
+      */
+    implicit object StringConverter extends ValueConverter[String] {
+      def convert(sectionName: String,
+                  optionName:  String,
+                  value:       String): Either[String, String] = {
+        Right(value)
+      }
+    }
+
+    /** Value converter for Character values, for use with
+      * `Configuration.asEither()` and `Configuration.asOpt()`.
+      */
+    implicit object CharConverter extends ValueConverter[Character] {
+      def convert(sectionName: String,
+                  optionName:  String,
+                  value:       String): Either[String, Character] = {
+        if (value.length == 1)
+          Right(value(0))
+        else
+          Left(s"Section '$sectionName', option '$optionName': '$value' is " +
+               "not a character.")
+      }
+    }
   }
 
   // --------------------------------------------------------------------------
