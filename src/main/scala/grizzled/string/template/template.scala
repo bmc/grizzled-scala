@@ -37,18 +37,20 @@
 
 package grizzled.string.template
 
-import scala.util.matching.Regex
 import scala.util.matching.Regex.Match
 import scala.annotation.tailrec
+import grizzled.either.Implicits._
 
 /** Base class for all `StringTemplate` exceptions.
   */
+@deprecated("Exceptions are no longer supported in this API", "1.2")
 class StringTemplateException(val message: String) extends Exception(message)
 
 /** Thrown for non-safe templates when a variable is not found.
   */
+@deprecated("Use sub(), which returns an Either", "1.2")
 class VariableNotFoundException(val variableName: String)
-    extends Exception("Variable \"" + variableName + "\" not found.")
+    extends Exception(s"Variable $variableName not found.")
 
 /** Information about a parsed variable name.
   */
@@ -87,29 +89,54 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     *                                    found, and `safe` is
     *                                    `false`
     */
+  @deprecated("Use sub(), instead", "1.2")
   def substitute(s: String): String = {
-    def doSub(s2: String): String = {
-      def subVariable(variable: Variable): Option[String] = {
+    sub(s) match {
+      case Left(error) => throw new VariableNotFoundException(error)
+      case Right(res)  => res
+    }
+  }
+
+  /** Replace all variable references in the given string. Variable references
+    * are recognized per the regular expression passed to the constructor. If
+    * a referenced variable is not found in the resolver, this method either:
+    *
+    * - throws a `VariableNotFoundException` (if `safe` is `false`), or
+    * - substitutes an empty string (if `safe` is `true`)
+    *
+    * Recursive references are supported (but beware of infinite recursion).
+    *
+    * @param s  the string in which to replace variable references
+    *
+    * @return `Right(substitutedValue)` or `Left(error)`
+    */
+  def sub(s: String): Either[String, String] = {
+    def doSub(s2: String): Either[String, String] = {
+
+      def subVariable(variable: Variable): Either[String, String] = {
         var endString = if (variable.end == s2.length) ""
                         else s2.substring(variable.end)
-        val transformed = s2.substring(0, variable.start) +
-        getVar(variable.name, variable.default) +
-        endString
-        Some(doSub(transformed))
+        val before = s2.substring(0, variable.start)
+
+        getVar(variable.name, variable.default).flatMap { subbed =>
+          doSub(before + subbed + endString)
+        }
       }
 
       // Note to self:
-      // 
+      //
       // - findVariableReferences() returns an Option[Variable].
       // - flatMap() on an option invokes the supplied function on the
       //   option's value, if it's not None; otherwise, it returns None.
       // - The getOrElse() is invoked on the result.
 
-      findVariableReference(s2) flatMap(v => subVariable(v)) getOrElse s2
+      findVariableReference(s2).map { v => subVariable(v) }
+                               .getOrElse(Right(s2))
     }
 
     doSub(s)
   }
+
 
   /** Parse the location of the first variable in string.
     *
@@ -126,22 +153,23 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     * @param name    the variable name
     * @param default default value, or None if there isn't one
     *
-    * @return the value of the variable
-    *
-    * @throws VariableNotFoundException  the variable could not be found
+    * @return the value of the variable, in a `Right`, or `Left(error)`
+    *         if the variable doesn't exist and `safe` is `false`.
     *                                    and `safe` is `false`
     */
-  private def getVar(name: String, default: Option[String]): String = {
-    def handleDefault: String = {
+  private def getVar(name: String, default: Option[String]):
+    Either[String, String] = {
+
+    def handleDefault: Either[String, String] = {
       if (default != None)
-        default.get
+        Right(default.get)
       else if (safe)
-        ""
+        Right("")
       else
-        throw new VariableNotFoundException(name)
+        Left(s"Variable not found: $name")
     }
 
-    resolveVar(name) getOrElse handleDefault
+    resolveVar(name).map {s => Right(s)}.getOrElse(handleDefault)
   }
 }
 
@@ -180,7 +208,8 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
 class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
                               namePattern: String,
                               safe:        Boolean)
-extends StringTemplate(resolveVar, safe) {
+  extends StringTemplate(resolveVar, safe) {
+
   // ${foo} or ${foo?default}
   private var LongFormVariable = ("""\$\{(""" + 
                                   namePattern + 
@@ -219,13 +248,9 @@ extends StringTemplate(resolveVar, safe) {
     *
     * @param s  the string in which to replace variable references
     *
-    * @return the result
-    *
-    * @throws VariableNotFoundException  a referenced variable could not be
-    *                                    found, and `safe` is
-    *                                    `false`
+    * @return On success, `Right(result)`. On failure, `Left(error)`
     */
-  override def substitute(s: String): String = {
+  override def sub(s: String): Either[String, String] = {
     // Kludge to handle escaped "$". Temporarily replace it with something
     // highly unlikely to be in the string. Then, put a single "$" in its
     // place, after the substitution. Must be sure to handle even versus
@@ -237,14 +262,14 @@ extends StringTemplate(resolveVar, safe) {
           // Odd number of backslashes before "$", including
           // the one with the dollar token (group 2). Valid escape.
           List(s.substring(0, m.start(2)), RealEscapeToken) :::
-          preSub(s.substring(m.end(2)))
+            preSub(s.substring(m.end(2)))
         }
 
         else {
           // Even number of backslashes before "$", including
           // the one with the dollar token (group 2). Not an escape.
           List(s.substring(0, m.start(2)), NonEscapeToken) :::
-          preSub(s.substring(m.end(2)))
+            preSub(s.substring(m.end(2)))
         }
       }
 
@@ -252,13 +277,14 @@ extends StringTemplate(resolveVar, safe) {
       // invoke handleMatch on the result.
 
       EscapedDollar.findFirstMatchIn(s).
-                    map(m => handleMatch(m)).
-                    getOrElse(List(s))
+        map(m => handleMatch(m)).
+        getOrElse(List(s))
     }
 
-    val s2 = super.substitute(preSub(s) mkString "")
-    s2.replaceAll(RealEscapeToken, """\$""").
-       replaceAll(NonEscapeToken, """\\\$""")
+    super.sub(preSub(s) mkString "").map { s2 =>
+      s2.replaceAll(RealEscapeToken, """\$""").
+        replaceAll(NonEscapeToken, """\\\$""")
+    }
   }
 
   /** Parse the location of the first variable in string.
@@ -320,7 +346,8 @@ extends StringTemplate(resolveVar, safe) {
 class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
                                namePattern: String,
                                safe:        Boolean)
-extends StringTemplate(resolveVar, safe) {
+  extends StringTemplate(resolveVar, safe) {
+
   private val Variable       = ("""%(""" + namePattern + """)%""").r
   private val EscapedPercent = """%%"""   // regexp string, for replaceAll
   private val Placeholder    = "\u0001"   // temporarily replaces $$
@@ -354,19 +381,16 @@ extends StringTemplate(resolveVar, safe) {
     *
     * @param s  the string in which to replace variable references
     *
-    * @return the result
-    *
-    * @throws VariableNotFoundException  a referenced variable could not be
-    *                                    found, and `safe` is
-    *                                    `false`
+    * @return `Right(substitutedValue)` or `Left(error)`
     */
-  override def substitute(s: String): String = {
+  override def sub(s: String): Either[String, String] = {
     // Kludge to handle escaped "%%". Temporarily replace it with something
     // highly unlikely to be in the string. Then, put a single "%" in its
     // place, after the substitution.
 
-    super.substitute(s.replaceAll(EscapedPercent, Placeholder)).
-    replaceAll(Placeholder, "%");
+    super.sub(s.replaceAll(EscapedPercent, Placeholder)).map { s2 =>
+      s2.replaceAll(Placeholder, "%")
+    }
   }
 
   /** Parse the location of the first variable in string.

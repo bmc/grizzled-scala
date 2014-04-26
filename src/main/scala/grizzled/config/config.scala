@@ -782,14 +782,9 @@ final class Configuration private[config](
     val template = new UnixShellStringTemplate(templateResolve(sectionName, _),
                                                "[a-zA-Z0-9_.]+",
                                                safe)
-    Try {
-      template.substitute(value)
-    }
-
-    match {
-      case Failure(e) => Left(s"Can't process '$value' from $sectionName: " +
-                              s"${e.getMessage}")
-      case Success(s) => Right(Some(s))
+    template.sub(value) match {
+      case Right(s) => Right(Some(s))
+      case Left(e)  => Left(s"Can't get '$value' from $sectionName: $e")
     }
   }
 
@@ -965,13 +960,13 @@ object Configuration {
                   value:       String): Either[String, Boolean] = {
         import grizzled.string.util._
 
-        Try { stringToBoolean(value) } match {
-          case Failure(e) => {
+        strToBoolean(value) match {
+          case Left(error) => {
             Left(s"Section '$sectionName', option '$optionName': '$value' is " +
-              "not boolean.")
+                 "not boolean: $error")
           }
 
-          case Success(b) => Right(b)
+          case Right(b) => Right(b)
         }
       }
     }

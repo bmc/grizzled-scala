@@ -44,34 +44,33 @@ class StringTemplateTest extends FunSuite {
       ("$foo bar $bar ${baz} $",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
+           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN $"),
 
       ("$foo bar $bar ${baz} $_",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
+           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN "),
 
       ("$foo bar $bar ${baz} $frodo$",
        Map("foo" -> "FOO",
            "bar" -> "$foo",
-           "baz" -> "YAWN")) -> "FOO bar FOO YAWN $",
+           "baz" -> "YAWN")) -> Right("FOO bar FOO YAWN $"),
 
       ("""$foo bar $bar ${baz} \$""",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN $",
+           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN $"),
 
       ("""$foo ${foobar?blitz}""",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO blitz"
+           "baz" -> "YAWN")) -> Right("FOO blitz")
     )
 
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
-      assertResult(expected, "\"" + str + "\" -> " + expected.toString)  {
-        new UnixShellStringTemplate(vars.get, true).substitute(str)
-      }
+      val template = new UnixShellStringTemplate(vars.get, true)
+      assert(template.sub(str) === expected)
     }
   }
 
@@ -101,10 +100,9 @@ class StringTemplateTest extends FunSuite {
 
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
-           intercept[VariableNotFoundException] {
-             new UnixShellStringTemplate(vars.get, false).substitute(str)
-           }
-         }
+      val template = new UnixShellStringTemplate(vars.get, false)
+      assert(template.sub(str).isLeft)
+    }
   }
 
   test("WindowsCmdStringTemplate: safe=true") {
@@ -113,29 +111,28 @@ class StringTemplateTest extends FunSuite {
       ("%foo% bar %bar% %baz% %",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %",
+           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN %"),
 
       ("%foo% bar %bar% %baz% %_%",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN ",
+           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN "),
 
       ("%foo% bar %bar% %baz% %frodo%x",
        Map("foo" -> "FOO",
            "bar" -> "%foo%",
-           "baz" -> "YAWN")) -> "FOO bar FOO YAWN x",
+           "baz" -> "YAWN")) -> Right("FOO bar FOO YAWN x"),
 
       ("%foo% bar %bar% %baz% %%",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> "FOO bar BARSKI YAWN %"
+           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN %")
     )
 
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
-      assertResult(expected, "\"" + str + "\" -> " + expected.toString)  {
-        new WindowsCmdStringTemplate(vars.get, true).substitute(str)
-      }
+      val template = new WindowsCmdStringTemplate(vars.get, true)
+      assert(template.sub(str) === expected)
     }
   }
 
@@ -165,9 +162,8 @@ class StringTemplateTest extends FunSuite {
 
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
-      intercept[VariableNotFoundException] {
-        new WindowsCmdStringTemplate(vars.get, false).substitute(str)
-      }
+      val template = new WindowsCmdStringTemplate(vars.get, false)
+      assert(template.sub(str).isLeft)
     }
   }
 }

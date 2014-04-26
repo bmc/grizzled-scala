@@ -26,6 +26,10 @@ Version 1.2:
     methods.
 * `grizzled.string.util.stringToBoolean()` is deprecated, as it throws an
   exception. Use the new `str2Boolean()` instead; it returns an `Either`.
+* Removed exceptions from `grizzled.string.StringTemplate`. The `substitute()`
+  method is now deprecated (because it throws exceptions) in favor of the
+  `sub()` method (which returns an `Either`).
+
 
 Version 1.1.6:
 
