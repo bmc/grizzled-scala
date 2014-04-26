@@ -1,7 +1,7 @@
 {
   "organization" : "org.clapper",
   "name" : "grizzled-scala",
-  "version" : "1.1.7",
+  "version" : "1.2",
   "description" : "A general-purpose Scala utility library",
   "site" : "http://software.clapper.org/grizzled-scala/",
   "tags" : [ "utility", "library", "grizzled" ],
