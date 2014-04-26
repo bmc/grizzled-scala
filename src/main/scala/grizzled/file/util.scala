@@ -3,7 +3,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2009-2012, Brian M. Clapper
+  Copyright (c) 2009-2014, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -37,23 +37,22 @@
 
 package grizzled.file
 
-import scala.util.matching.Regex
 import scala.annotation.tailrec
 
 import grizzled.file.GrizzledFile._
 import grizzled.io.RichInputStream._
-import grizzled.io.RichReader._
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
+import grizzled.either.Implicits._
 
 import java.io.{File, IOException}
 import java.security.{SecureRandom => Random}
+import scala.util.{Failure, Success, Try}
 
 class FileDoesNotExistException(message: String) extends Exception
 
-/**
- * Useful file-related utility functions.
- */
+/** Useful file-related utility functions.
+  */
 object util {
   import grizzled.string._ // Grizzled string functions
 
@@ -66,15 +65,14 @@ object util {
    Public Methods
    \* ---------------------------------------------------------------------- */
 
-  /**
-   * Get the directory name of a pathname.
-   *
-   * @param path     path (absolute or relative)
-   * @param fileSep  the file separator to use. Defaults to the value of
-   *                 the "file.separator" property.
-   *
-   * @return the directory portion
-   */
+  /** Get the directory name of a pathname.
+    *
+    * @param path     path (absolute or relative)
+    * @param fileSep  the file separator to use. Defaults to the value of
+    *                 the "file.separator" property.
+    *
+    * @return the directory portion
+    */
   def dirname(path: String, fileSep: String = fileSeparator): String = {
     val components = splitPath(path, fileSep) 
     components match {
@@ -98,15 +96,14 @@ object util {
     }
   }
 
-  /**
-   * Get the basename (file name only) part of a path.
-   *
-   * @param path     the path (absolute or relative)
-   * @param fileSep  the file separator to use. Defaults to the value of
-   *                 the "file.separator" property.
-   *
-   * @return the file name portion
-   */
+  /** Get the basename (file name only) part of a path.
+    *
+    * @param path     the path (absolute or relative)
+    * @param fileSep  the file separator to use. Defaults to the value of
+    *                 the "file.separator" property.
+    *
+    * @return the file name portion
+    */
   def basename(path: String, fileSep: String = fileSeparator): String = {
     val components = splitPath(path, fileSep)
     components match {
@@ -121,16 +118,15 @@ object util {
     }
   }
 
-  /**
-   * Split a path into directory (dirname) and file (basename) components.
-   * Analogous to Python's <tt>os.path.pathsplit()</tt> function.
-   *
-   * @param path     the path to split
-   * @param fileSep  the file separator to use. Defaults to the value of
-   *                 the "file.separator" property.
-   *
-   * @return a (dirname, basename) tuple of strings
-   */
+  /** Split a path into directory (dirname) and file (basename) components.
+    * Analogous to Python's `os.path.pathsplit()` function.
+    *
+    * @param path     the path to split
+    * @param fileSep  the file separator to use. Defaults to the value of
+    *                 the "file.separator" property.
+    *
+    * @return a (dirname, basename) tuple of strings
+    */
   def dirnameBasename(path: String,
                       fileSep: String = fileSeparator): (String, String) = {
     if ((path == null) || (path.length == 0))
@@ -165,16 +161,15 @@ object util {
 
   private lazy val ExtRegexp = """^(.*)(\.[^.]+)$""".r
 
-  /**
-   * Split a pathname into the directory name, basename, and extension
-   * pieces.
-   *
-   * @param pathname the pathname
-   * @param fileSep  the file separator to use. Defaults to the value of
-   *                 the "file.separator" property.
-   *
-   * @return a 3-tuple of (dirname, basename, extension)
-   */
+  /** Split a pathname into the directory name, basename, and extension
+    * pieces.
+    *
+    * @param pathname the pathname
+    * @param fileSep  the file separator to use. Defaults to the value of
+    *                 the "file.separator" property.
+    *
+    * @return a 3-tuple of (dirname, basename, extension)
+    */
   def dirnameBasenameExtension(pathname: String, 
                                fileSep: String = fileSeparator):
     (String, String, String) = {
@@ -188,11 +183,10 @@ object util {
     (dirname, basename, extension)
   }
 
-  /**
-   * Return the current working directory, as an absolute path.
-   *
-   * @return the current working directory
-   */
+  /** Return the current working directory, as an absolute path.
+    *
+    * @return the current working directory
+    */
   def pwd: String = new File(".").getCanonicalPath
 
   /**
@@ -224,14 +218,13 @@ object util {
     }
   }
 
-  /**
-   * Return a list of paths matching a pathname pattern. The pattern may
-   * contain simple shell-style wildcards. See <tt>fnmatch()</tt>.
-   *
-   * @param path  The path to expand.
-   *
-   * @return a list of possibly expanded file names
-   */
+  /** Return a list of paths matching a pathname pattern. The pattern may
+    * contain simple shell-style wildcards. See `fnmatch()`.
+    *
+    * @param path  The path to expand.
+    *
+    * @return a list of possibly expanded file names
+    */
   def glob(path: String): List[String] = {
     // This method is essentially a direct translation of the Python
     // glob.glob() function.
@@ -296,22 +289,19 @@ object util {
     }
   }
 
-  /**
-   * An extended <i>glob</i> function that supports all the wildcards of
-   * the <tt>glob()</tt> function, in addition to:
-   *
-   * <ul>
-   *  <li> a leading "~", signifying the user's home directory
-   *  <li> a special "**" wildcard that recursively matches any directory.
-   *       (Think "ant".)
-   * </ul>
-   *
-   * "~user" is not supported, however.
-   *
-   * @param pattern   the wildcard pattern
-   *
-   * @return list of matches, or an empty list for none
-   */
+  /** An extended ''glob'' function that supports all the wildcards of
+    * the `glob()` function, in addition to:
+
+    *  - a leading `~`, signifying the user's home directory
+    *  - a special `**` wildcard that recursively matches any directory.
+    *    (Think "ant".)
+    *
+    * ''~user'' is not supported, however.
+    *
+    * @param pattern   the wildcard pattern
+    *
+    * @return list of matches, or an empty list for none
+    */
   def eglob(pattern: String): List[String] = {
     def doGlob(pieces: List[String], directory: String): List[String] = {
       import scala.collection.mutable.ArrayBuffer
@@ -385,17 +375,16 @@ object util {
   }
 
 
-  /**
-   * List a directory recursively, returning `File` objects for each file
-   * (and subdirectory) found. This method does lazy evaluation, instead
-   * of calculating everything up-front, as `walk()` does.
-   *
-   * @param file    The `File` object, presumed to represent a directory.
-   * @param topdown If `true` (the default), the stream will be generated
-   *                top down. If `false`, it'll be generated bottom-up.
-   *
-   * @return a stream of `File` objects.
-   */
+  /** List a directory recursively, returning `File` objects for each file
+    * (and subdirectory) found. This method does lazy evaluation, instead
+    * of calculating everything up-front, as `walk()` does.
+    *
+    * @param file    The `File` object, presumed to represent a directory.
+    * @param topdown If `true` (the default), the stream will be generated
+    *                top down. If `false`, it'll be generated bottom-up.
+    *
+    * @return a stream of `File` objects.
+    */
   def listRecursively(file: File, topdown: Boolean = true): Stream[File] = {
 
     def doList(list: List[File]): Stream[File] = {
@@ -419,36 +408,21 @@ object util {
       Stream.empty[File]
   }
 
-  /**
-   * Similar to Python's <tt>fnmatch()</tt> function, this function
-   * determines whether a string matches a wildcard pattern. Patterns
-   * are Unix shell-style wildcards:
-   *
-   * <table border="0" cellspacing="2" class="list">
-   *   <tr>
-   *     <td align="right" class="code">*</td>
-   *     <td align="left">matches everything</td>
-   *   </tr>
-   *   <tr>
-   *     <td align="right" class="code">?</td>
-   *     <td align="left">matches any single character</td>
-   *   </tr>
-   *   <tr>
-   *     <td align="right" class="code">[set]</td>
-   *     <td align="left">matches any character in <i>set</i></td>
-   *   </tr>
-   *   <tr>
-   *     <td align="right" class="code">[!set]</td>
-   *     <td align="left">matches any character not in <i>set</i></td>
-   *   </tr>
-   * </table>
-   *
-   * An initial period in <tt>filename</tt> is not special. Matches are
-   * case-sensitive on Posix operating systems, case-insensitive elsewhere.
-   *
-   * @param name    the name to match
-   * @param pattern the wildcard pattern
-   */
+  /** Similar to Python's `fnmatch()` function, this function determines
+    * whether a string matches a wildcard pattern. Patterns are Unix-style
+    * shell-style wildcards:
+    *
+    *  - `*` matches everything
+    *  - `?` matches any single character
+    *  - `[set]` matches any character in ''set''
+    *  - ``[!set]` matches any character not in ''set''
+    *
+    * An initial period in `filename` is not special. Matches are
+    * case-sensitive on Posix operating systems, case-insensitive elsewhere.
+    *
+    * @param name    the name to match
+    * @param pattern the wildcard pattern
+    */
   def fnmatch(name: String, pattern: String): Boolean = {
     // Convert to regular expression pattern.
 
@@ -466,39 +440,38 @@ object util {
     (regex findFirstIn caseConv(name)) != None
   }
 
-  /**
-   * Directory tree generator, adapted from Python's <tt>os.walk()</tt>
-   * function.
-   *
-   * <p>For each directory in the directory tree rooted at top (including top
-   * itself, but excluding '.' and '..'), yields a 3-tuple</p>
-   *
-   * <blockquote><pre>dirpath, dirnames, filenames</pre></blockquote>
-   *
-   * <p><i>dirpath</i> is a string, the path to the directory.
-   * <i>dirnames</i> is a list of the names of the subdirectories in
-   * <i>dirpath</i> (excluding '.' and '..'). <i>filenames</i> is a list
-   * of the names of the non-directory files in <i>dirpath</i>. Note that
-   * the names in the lists are just names, with no path components. To
-   * get a full path (which begins with top) to a file or directory in
-   * <i>dirpath</i>, use <tt>dirpath + java.io.fileSeparator + name</tt>,
-   * or use <tt>joinPath()</tt>.</p>
-   *
-   * <p>If <i>topdown</i> is <tt>true</tt>, the triple for a directory is
-   * generated before the triples for any of its subdirectories
-   * (directories are generated top down). If <tt>topdown</tt> is
-   * <tt>false</tt>, the triple for a directory is generated after the
-   * triples for all of its subdirectories (directories are generated
-   * bottom up).</p>
-   *
-   * <p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p>
-   *
-   * @param top     name of starting directory
-   * @param topdown <tt>true</tt> to do a top-down traversal, <tt>false</tt>
-   *                otherwise.
-   *
-   * @return List of triplets, as described above.
-   */
+  /** Directory tree generator, adapted from Python's `os.walk()`
+    * function.
+    *
+    * For each directory in the directory tree rooted at top (including top
+    * itself, but excluding '.' and '..'), yields a 3-tuple
+    *
+    * {{{
+    * (dirpath, dirnames, filenames)
+    * }}}
+    *
+    * ''dirpath'' is a string, the path to the directory. ''dirnames'' is a 
+    * list of the names of the subdirectories in ''dirpath'' (excluding '.' 
+    * and '..'). ''filenames'' is a list of the names of the non-directory
+    * files in ''dirpath''. Note that the names in the lists are just names,
+    * with no path components. To get a full path (which begins with top) to a
+    * file or directory in ''dirpath'', use `dirpath + java.io.fileSeparator +
+    * name`, or use `joinPath()`.
+    *
+    * If ''topdown'' is `true`, the triple for a directory is generated before
+    * the triples for any of its subdirectories (directories are generated top
+    * down). If `topdown` is `false`, the triple for a directory is generated
+    * after the triples for all of its subdirectories (directories are generated
+    * bottom up).
+    *
+    * '''WARNING!''' This method does ''not'' grok symbolic links!
+    *
+    * @param top     name of starting directory
+    * @param topdown `true` to do a top-down traversal, `false`
+    *                otherwise.
+    *
+    * @return List of triplets, as described above.
+    */
   def walk(top: String, topdown: Boolean = true):
   List[(String, List[String], List[String])] = {
     // This needs to be made more efficient, with some kind of generator.
@@ -532,64 +505,63 @@ object util {
     result.toList
   }
 
-  /**
-   * Split a path into its constituent components. If the path is
-   * absolute, the first piece will have a file separator in the
-   * beginning. Examples:
-   *
-   * <table border="1">
-   *   <tr>
-   *     <th>Input</th>
-   *     <th>Output</th>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">""</td>
-   *      <td class="code">List("")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"/"</td>
-   *     <td class="code">List("/")
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"foo"</td>
-   *     <td class="code">List("foo")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"foo/bar"</td>
-   *     <td class="code">List("foo", "bar")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"."</td>
-   *     <td class="code">List(".")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"../foo"</td>
-   *     <td class="code">List("..", "foo")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"./foo"</td>
-   *     <td class="code">List(".", "foo")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"/foo/bar/baz"</td>
-   *     <td class="code">List("/foo", "bar", "baz")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"foo/bar/baz"</td>
-   *     <td class="code">List("foo", "bar", "baz")</td>
-   *   </tr>
-   *   <tr>
-   *     <td class="code">"/foo"</td>
-   *     <td class="code">List("/foo")</td>
-   *   </tr>
-   * </table>
-   *
-   * @param path    the path
-   * @param fileSep the file separator to use. Defaults to the value of
-   *                the "file.separator" property.
-   *
-   * @return the component pieces.
-   */
+  /** Split a path into its constituent components. If the path is
+    * absolute, the first piece will have a file separator in the
+    * beginning. Examples:
+    *
+    * <table border="1">
+    *   <tr>
+    *     <th>Input</th>
+    *     <th>Output</th>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">""</td>
+    *      <td class="code">List("")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"/"</td>
+    *     <td class="code">List("/")
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"foo"</td>
+    *     <td class="code">List("foo")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"foo/bar"</td>
+    *     <td class="code">List("foo", "bar")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"."</td>
+    *     <td class="code">List(".")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"../foo"</td>
+    *     <td class="code">List("..", "foo")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"./foo"</td>
+    *     <td class="code">List(".", "foo")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"/foo/bar/baz"</td>
+    *     <td class="code">List("/foo", "bar", "baz")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"foo/bar/baz"</td>
+    *     <td class="code">List("foo", "bar", "baz")</td>
+    *   </tr>
+    *   <tr>
+    *     <td class="code">"/foo"</td>
+    *     <td class="code">List("/foo")</td>
+    *   </tr>
+    * </table>
+    *
+    * @param path    the path
+    * @param fileSep the file separator to use. Defaults to the value of
+    *                the "file.separator" property.
+    *
+    * @return the component pieces.
+    */
   def splitPath(path: String, fileSep: String = fileSeparator): List[String] = {
     // Split with the path separator character, rather than the path
     // separator string. Using the string causes Scala to interpret it
@@ -639,44 +611,40 @@ object util {
         pieces
   }
 
-  /**
-   * Join components of a path together.
-   *
-   * @param fileSep the file separator to use
-   * @param pieces  path pieces
-   *
-   * @return a composite path
-   */
+  /** Join components of a path together.
+    *
+    * @param fileSep the file separator to use
+    * @param pieces  path pieces
+    *
+    * @return a composite path
+    */
   def joinPath(fileSep: String, pieces: List[String]): String =
     pieces mkString fileSep
 
-  /**
-   * Join components of a path together, using the file separator of the
-   * currently running system
-   *
-   * @param pieces  path pieces
-   *
-   * @return a composite path
-   */
+  /** Join components of a path together, using the file separator of the
+    * currently running system
+    *
+    * @param pieces  path pieces
+    *
+    * @return a composite path
+    */
   def joinPath(pieces: String*): String =
     joinPath(fileSeparator, pieces.toList)
 
-  /**
-   * Join components of a path together, using the file separator of the
-   * currently running system
-   *
-   * @param pieces  path pieces
-   *
-   * @return a composite path
-   */
+  /** Join components of a path together, using the file separator of the
+    * currently running system
+    *
+    * @param pieces  path pieces
+    *
+    * @return a composite path
+    */
   def joinPath(pieces: File*): File =
     new File(joinPath(fileSeparator, pieces.toList.map(_.getName)))
 
-  /**
-   * Determine the temporary directory to use.
-   *
-   * @return the temporary directory
-   */
+  /** Determine the temporary directory to use.
+    *
+    * @return the temporary directory
+    */
   def temporaryDirectory: File = {
     import grizzled.sys.OperatingSystem._
 
@@ -694,16 +662,15 @@ object util {
     new File(tempDirName)
   }
 
-  /**
-   * Create a temporary directory.
-   *
-   * @param prefix    Prefix for directory name
-   * @param maxTries  Maximum number of times to try creating the
-   *                  directory before giving up.
-   *
-   * @return the directory. Throws an IOException if it can't create
-   *         the directory.
-   */
+  /** Create a temporary directory.
+    *
+    * @param prefix    Prefix for directory name
+    * @param maxTries  Maximum number of times to try creating the
+    *                  directory before giving up.
+    *
+    * @return the directory. Throws an IOException if it can't create
+    *         the directory.
+    */
   def createTemporaryDirectory(prefix: String, maxTries: Int = 3): File = {
     def createDirectory(dir: File): Option[File] = {
       if (! dir.exists) {
@@ -742,16 +709,15 @@ object util {
     create(0)
   }
 
-  /**
-   * Allow execution of a block of code within the context of a temporary
-   * directory. The temporary directory is cleaned up after the operation
-   * completes.
-   *
-   * @param prefix  file name prefix to use
-   * @param action  action to perform
-   *
-   * @return whatever the action returns
-   */
+  /** Allow execution of a block of code within the context of a temporary
+    * directory. The temporary directory is cleaned up after the operation
+    * completes.
+    *
+    * @param prefix  file name prefix to use
+    * @param action  action to perform
+    *
+    * @return whatever the action returns
+    */
   def withTemporaryDirectory[T](prefix: String)(action: File => T) = {
     val temp = createTemporaryDirectory(prefix)
     temp.deleteOnExit
@@ -764,20 +730,19 @@ object util {
     }
   }
 
-  /**
-   * Copy multiple files to a target directory. Also see the version of this
-   * method that takes only one file.
-   *
-   * @param files        An <tt>Iterable</tt> of file names to be copied
-   * @param targetDir    Path name to target directory
-   * @param createTarget <tt>true</tt> to create the target directory,
-   *                     <tt>false</tt> to throw an exception if the
-   *                     directory doesn't already exist.
-   *
-   * @throws FileDoesNotExistException a source file or the target directory
-   *                                   doesn't exist
-   * @throws IOException cannot create target directory
-   */
+  /** Copy multiple files to a target directory. Also see the version of this
+    * method that takes only one file.
+    *
+    * @param files        An `Iterable` of file names to be copied
+    * @param targetDir    Path name to target directory
+    * @param createTarget `true` to create the target directory,
+    *                     `false` to throw an exception if the
+    *                     directory doesn't already exist.
+    *
+    * @throws FileDoesNotExistException a source file or the target directory
+    *                                   doesn't exist
+    * @throws IOException cannot create target directory
+    */
   def copy(files: Iterable[String],
            targetDir: String,
            createTarget: Boolean = true): Unit = {
@@ -801,61 +766,57 @@ object util {
       copyFile(file, targetDir + fileSeparator + basename(file))
   }
 
-  /**
-   * Copy a file to a directory.
-   *
-   * @param file         Path name of the file to copy
-   * @param targetDir    Path name to target directory
-   * @param createTarget <tt>true</tt> to create the target directory,
-   *                     <tt>false</tt> to throw an exception if the
-   *                     directory doesn't already exist.
-   *
-   * @throws FileDoesNotExistException source file or target directory
-   *                                   doesn't exist
-   * @throws IOException cannot create target directory
-   */
+  /** Copy a file to a directory.
+    *
+    * @param file         Path name of the file to copy
+    * @param targetDir    Path name to target directory
+    * @param createTarget `true` to create the target directory,
+    *                     `false` to throw an exception if the
+    *                     directory doesn't already exist.
+    *
+    * @throws FileDoesNotExistException source file or target directory
+    *                                   doesn't exist
+    * @throws IOException cannot create target directory
+    */
   def copy(file: String, targetDir: String, createTarget: Boolean): Unit =
     copy(List[String](file), targetDir, createTarget)
 
-  /**
-   * Copy a file to a directory. If the target directory does not exist,
-   * it is created.
-   *
-   * @param file         Path name of the file to copy
-   * @param targetDir    Path name to target directory
-   *
-   * @throws FileDoesNotExistException a source file or the target directory
-   *                                   doesn't exist
-   * @throws IOException cannot create target directory
-   */
+  /** Copy a file to a directory. If the target directory does not exist,
+    * it is created.
+    *
+    * @param file         Path name of the file to copy
+    * @param targetDir    Path name to target directory
+    *
+    * @throws FileDoesNotExistException a source file or the target directory
+    *                                   doesn't exist
+    * @throws IOException cannot create target directory
+    */
   def copy(file: String, targetDir: String): Unit =
     copy(file, targetDir, true)
 
-  /**
-   * Copy a source file to a target file, using binary copying. The source
-   * file must be a file. The target path can be a file or a directory; if
-   * it is a directory, the target file will have the same base name as
-   * as the source file.
-   *
-   * @param sourcePath  path to the source file
-   * @param targetPath  path to the target file or directory
-   *
-   * @return the full path of the target file
-   */
+  /** Copy a source file to a target file, using binary copying. The source
+    * file must be a file. The target path can be a file or a directory; if
+    * it is a directory, the target file will have the same base name as
+    * as the source file.
+    *
+    * @param sourcePath  path to the source file
+    * @param targetPath  path to the target file or directory
+    *
+    * @return the full path of the target file
+    */
   def copyFile(sourcePath: String, targetPath: String): String =
     copyFile(new File(sourcePath), new File(targetPath)).getPath
 
-  /**
-   * Copy a source file to a target file, using binary copying. The source
-   * file must be a file. The target path can be a file or a directory; if
-   * it is a directory, the target file will have the same base name as
-   * as the source file.
-   *
-   * @param source  path to the source file
-   * @param target  path to the target file or directory
-   *
-   * @return the full path of the target file
-   */
+  /** Copy a source file to a target file, using binary copying. The source
+    * file must be a file. The target path can be a file or a directory; if
+    * it is a directory, the target file will have the same base name as
+    * as the source file.
+    *
+    * @param source  path to the source file
+    * @param target  path to the target file or directory
+    *
+    * @return the full path of the target file
+    */
   def copyFile(source: File, target: File): File = {
     import java.io.{InputStream, OutputStream,
                     BufferedInputStream, BufferedOutputStream,
@@ -881,23 +842,21 @@ object util {
     }
   }
 
-  /**
-   * Recursively copy a source directory and its contents to a target
-   * directory. Creates the target directory if it does not exist.
-   *
-   * @param sourceDir  the source directory
-   * @param targetDir  the target directory
-   */
+  /** Recursively copy a source directory and its contents to a target
+    * directory. Creates the target directory if it does not exist.
+    *
+    * @param sourceDir  the source directory
+    * @param targetDir  the target directory
+    */
   def copyTree(sourceDir: String, targetDir: String): Unit =
     copyTree(new File(sourceDir), new File(targetDir))
 
-  /**
-   * Recursively copy a source directory and its contents to a target
-   * directory. Creates the target directory if it does not exist.
-   *
-   * @param sourceDir  the source directory
-   * @param targetDir  the target directory
-   */
+  /** Recursively copy a source directory and its contents to a target
+    * directory. Creates the target directory if it does not exist.
+    *
+    * @param sourceDir  the source directory
+    * @param targetDir  the target directory
+    */
   def copyTree(sourceDir: File, targetDir: File): Unit = {
     if (! sourceDir.exists())
       throw new FileDoesNotExistException(sourceDir.getPath)
@@ -918,95 +877,114 @@ object util {
     }
   }
 
-  /**
-   * Recursively remove a directory tree. This function is conceptually
-   * equivalent to <tt>rm -r</tt> on a Unix system.
-   *
-   * @param dir  The directory
-   */
+  /** Recursively remove a directory tree. This function is conceptually
+    * equivalent to `rm -r` on a Unix system.
+    *
+    * @param dir  The directory
+    */
   def deleteTree(dir: String): Unit = deleteTree(new File(dir))
 
   /**
    * Recursively remove a directory tree. This function is conceptually
-   * equivalent to <tt>rm -r</tt> on a Unix system.
+   * equivalent to `rm -r` on a Unix system.
    *
    * @param dir  The directory
+   *
+   * @return `Left(error)` on error, `Right(total)` on success. `total`
+   *         is the total number of deleted files.
    */
-  def deleteTree(dir: File): Unit = {
-    if (! dir.isDirectory)
-      throw new IOException("\"" + dir + "\" is not a directory.")
-
-    for (f <- dir.listFiles) {
-      if (f.isDirectory)
-        deleteTree(f)
-      else
-        f.delete()
+  def deleteTree(dir: File): Either[String, Int] = {
+    def doDelete(f: File): Either[String, Int] = {
+      Try { if (! f.delete) Left(s"Can't delete '$f'") else Right(1) } match {
+        case Success(either) => either
+        case Failure(ex)     => Left(s"Can't delete '$f': ${ex.getMessage}")
+      }
     }
 
-    dir.delete()
+    if (! dir.isDirectory) {
+      Left(s"'$dir' is not a directory.")
+    }
+
+    else {
+      val treeResults = dir.listFiles.map { f =>
+        if (f.isDirectory)
+          deleteTree(f)
+        else
+          doDelete(f)
+      }
+
+      mapEitherCount(List(doDelete(dir)) ++ treeResults)
+    }
   }
 
-  /**
-   * Similar to the Unix <i>touch</i> command, this function:
-   *
-   * <ul>
-   *   <li>updates the access and modification times for any existing files
-   *       in a list of files
-   *   <li>creates any non-existent files in the list of files
-   * </ul>
-   *
-   * If any file in the list is a directory, this method will throw an
-   * exception.
-   *
-   * @param files  Iterable of files to touch
-   * @param time   Set the last-modified time to this time, or to the current
-   *               time if this parameter is negative.
-   *
-   * @throws IOException on error
-   */
-  def touchMany(files: Iterable[String], time: Long = -1): Unit = {
+  /** Similar to the Unix ''touch'' command, this function:
+    *
+    *  - updates the access and modification times for any existing files
+    *    in a list of files
+    *  - creates an nonexistent files in the list
+    *
+    * If any file in the list is a directory, this method will return an error.
+    *
+    * @param files  Iterable of files to touch
+    * @param time   Set the last-modified time to this time, or to the current
+    *               time if this parameter is negative.
+    *
+    * @return `Left(error)` on error. `Right(total)` on success.
+    */
+  def touchMany(files: Iterable[String],
+                time:  Long = -1): Either[String, Int] = {
+
     val useTime = if (time < 0) System.currentTimeMillis else time
-    for (name <- files) {
+    val results: Iterable[Either[String, Int]] = files.map { name =>
       val file = new File(name)
-
       if (file.isDirectory)
-        throw new IOException("File \"" + name + "\" is a directory")
+        Left(s"File '$name' is a directory.")
+      else {
+        val t = Try {
+          if ((! file.exists) && (! file.createNewFile()))
+            Left(s"Unable to create '$name'")
+          else if (! file.setLastModified(useTime))
+            Left(s"Unable to set time on '$name'")
+          else
+            Right(1)
+        }
 
-      if (! file.exists())
-        file.createNewFile()
-
-      file.setLastModified(useTime)
+        t match {
+          case Success(either) => either
+          case Failure(ex)     => Left(s"File $name: ${ex.getMessage}")
+        }
+      }
     }
+
+    mapEitherCount(results.toSeq)
   }
 
-  /**
-   * Similar to the Unix <i>touch</i> command, this function:
-   *
-   * <ul>
-   *   <li>updates the access and modification times for a file
-   *   <li>creates the file if it does not exist
-   * </ul>
-   *
-   * If the file is a directory, this method will throw an exception.
-   *
-   * @param path  The file to touch
-   * @param time  Set the last-modified time to this time, or to the current
-   *              time if this parameter is negative.
-   *
-   * @throws IOException on error
-   */
-  def touch(path: String, time: Long = -1): Unit =
-    touchMany(List[String](path), time)
+  /** Similar to the Unix ''touch'' command, this function:
+    *
+    *  - updates the access and modification times for a file
+    *  - creates the file if it does not exist
+    *
+    * If the file is a directory, this method will return an error.
+    *
+    * @param path  The file to touch
+    * @param time  Set the last-modified time to this time, or to the current
+    *              time if this parameter is negative.
+    *
+    * @return `Left(error)` on error, `Right(true)` on success
+    */
+  def touch(path: String, time: Long = -1): Either[String, Boolean] = {
+    touchMany(List[String](path), time).map { count => true }
+  }
 
   private lazy val DrivePathPattern = "^([A-Za-z]?:)?(.*)$".r
-  /**
-   * Split a Windows-style path into drive name and path portions.
-   *
-   * @param path  the path
-   *
-   * @return a (drive, path) tuple, either component of which can be
-   * *       an empty string
-   */
+
+  /** Split a Windows-style path into drive name and path portions.
+    *
+    * @param path  the path
+    *
+    * @return a (drive, path) tuple, either component of which can be
+    * *       an empty string
+    */
   def splitDrivePath(path: String): (String, String) = {
     path match {
       case DrivePathPattern(driveSpec, path) =>
@@ -1020,53 +998,49 @@ object util {
     }
   }
 
-  /**
-   * Converts a path name from its operating system-specific format to a
-   * universal path notation. Universal path notation always uses a
-   * Unix-style "/" to separate path elements. A universal path can be
-   * converted to a native (operating system-specific) path via the
-   * <tt>native_path()</tt> function. Note that on POSIX-compliant systems,
-   * this function simply returns the <tt>path</tt> parameter unmodified.
-   *
-   * @param path the path to convert to universal path notation
-   *
-   * @return the universal path
-   */
+  /** Converts a path name from its operating system-specific format to a
+    * universal path notation. Universal path notation always uses a
+    * Unix-style "/" to separate path elements. A universal path can be
+    * converted to a native (operating system-specific) path via the
+    * `native_path()` function. Note that on POSIX-compliant systems,
+    * this function simply returns the `path` parameter unmodified.
+    *
+    * @param path the path to convert to universal path notation
+    *
+    * @return the universal path
+    */
   def universalPath(path: String): String = makeUniversalPath(path)
 
-  /**
-   * Converts a path name from universal path notation to the operating
-   * system-specific format. Universal path notation always uses a
-   * Unix-style "/" to separate path elements. A native path can be
-   * converted to a universal path via the <tt>universal_path()</tt>
-   * function. Note that on POSIX-compliant systems, this function simply
-   * returns the <tt>path</tt> parameter unmodified.
-   *
-   * @param path the path to convert from universtal to native path notation
-   *
-   * @return the native path
-   */
+  /** Converts a path name from universal path notation to the operating
+     * system-specific format. Universal path notation always uses a
+     * Unix-style "/" to separate path elements. A native path can be
+     * converted to a universal path via the `universal_path()`
+     * function. Note that on POSIX-compliant systems, this function simply
+     * returns the `path` parameter unmodified.
+     *
+     * @param path the path to convert from universtal to native path notation
+     *
+     * @return the native path
+     */
   def nativePath(path: String): String = makeNativePath(path)
 
-  /**
-   * Normalize a path, eliminating double slashes, resolving embedded
-   * ".." strings (e.g., "/foo/../bar" becomes "/bar"), etc. Works for
-   * Windows and Posix operating systems.
-   *
-   * @param path  the path
-   *
-   * @return the normalized path
-   */
+  /** Normalize a path, eliminating double slashes, resolving embedded
+    * ".." strings (e.g., "/foo/../bar" becomes "/bar"), etc. Works for
+    * Windows and Posix operating systems.
+    *
+    * @param path  the path
+    *
+    * @return the normalized path
+    */
   def normalizePath(path: String): String = doPathNormalizing(path)
 
-  /**
-   * Normalize a Windows path name. Handles UNC paths. Adapted from the
-   * Python version of normpath() in Python's <tt>os.ntpath</tt> module.
-   *
-   * @param path   the path
-   *
-   * @return the normalized path
-   */
+  /** Normalize a Windows path name. Handles UNC paths. Adapted from the
+    * Python version of normpath() in Python's `os.ntpath` module.
+    *
+    * @param path   the path
+    *
+    * @return the normalized path
+    */
   def normalizeWindowsPath(path: String): String = {
     // We need to be careful here. If the prefix is empty, and the path
     // starts with a backslash, it could either be an absolute path on
@@ -1110,14 +1084,13 @@ object util {
       prefix + (newPieces mkString "\\")
   }
 
-  /**
-   * Adapted from the Python version of normpath() in Python's
-   * <tt>os.posixpath</tt> module.
-   *
-   * @param path   the path
-   *
-   * @return the normalized path
-   */
+  /** Adapted from the Python version of normpath() in Python's
+    *  `os.posixpath` module.
+    *
+    * @param path   the path
+    *
+    * @return the normalized path
+    */
   def normalizePosixPath(path: String): String = {
     import scala.collection.mutable.ListBuffer
 
@@ -1173,9 +1146,26 @@ object util {
                               Private Methods
   \* ---------------------------------------------------------------------- */
 
-  /**
-   * Convert a file into a path array. Borrowed from SBT source code.
-   */
+  /** Map a sequence of Either objects containing either an error message
+    * or a count, producing either a consolidated Left (if any errors are
+    * found) or a consolidated count in a Right.
+    */
+  private def mapEitherCount(results: Seq[Either[String, Int]]):
+    Either[String, Int] = {
+
+    results.filter(_.isLeft).map { _.left.get }.toSeq match {
+      case err :: errs => {
+        Left((List(err) ++ errs).mkString("; "))
+      }
+
+      case Nil => {
+        Right(results.filter {_.isRight }.map {_.right.get}.reduce {_ + _})
+      }
+    }
+  }
+
+  /** Convert a file into a path array. Borrowed from SBT source code.
+    */
   private def toPathArray(file: File): Array[String] = {
     @tailrec def toPathList(f: File, current: List[String]): List[String] = {
       if (f == null)
@@ -1187,9 +1177,8 @@ object util {
     toPathList(file.getCanonicalFile, Nil).toArray
   }
 
-  /**
-   * Get the length of the common prefix between two arrays.
-   */
+  /** Get the length of the common prefix between two arrays.
+    */
   private def commonPrefix[T](a: Array[T], b: Array[T]): Int = {
     @tailrec def common(count: Int): Int = {
       if ((count >= a.length) || (count >= b.length) || (a(count) != b(count)))
@@ -1201,15 +1190,14 @@ object util {
     common(0)
   }
 
-  /**
-   * For the eglob algorithm to work, the pattern needs to be split into a
-   * (directory, subpattern) pair, where the subpattern is relative. This
-   * splitting operating is operating system-dependent, largely because
-   * of Windows' stupid drive letters. This variable holds a partially
-   * applied function for the splitter, determined the first time it is
-   * referenced. That way, eglob() doesn't do this same match on every
-   * call.
-   */
+  /** For the eglob algorithm to work, the pattern needs to be split into a
+    * (directory, subpattern) pair, where the subpattern is relative. This
+    * splitting operating is operating system-dependent, largely because
+    * of Windows' stupid drive letters. This variable holds a partially
+    * applied function for the splitter, determined the first time it is
+    * referenced. That way, eglob() doesn't do this same match on every
+    * call.
+    */
   private lazy val eglobPatternSplitter = os match {
     case (Mac | Posix) => splitPosixEglobPattern(_)
     case Windows       => splitWindowsEglobPattern(_)
@@ -1217,14 +1205,13 @@ object util {
       throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
-  /**
-   * Windows pattern splitter for eglob(). See description for the
-   * eglobPatternSplitter value, above.
-   *
-   * @param pattern  the pattern to split
-   *
-   * @return a (directory, subpattern) tuple
-   */
+  /** Windows pattern splitter for eglob(). See description for the
+    * eglobPatternSplitter value, above.
+    *
+    * @param pattern  the pattern to split
+    *
+    * @return a (directory, subpattern) tuple
+    */
   private def splitWindowsEglobPattern(pattern: String): (String, String) = {
     splitDrivePath(pattern) match {
       case ("", "") =>
@@ -1249,14 +1236,13 @@ object util {
     }
   }
 
-  /**
-   * Posix pattern splitter for eglob(). See description for the
-   * eglobPatternSplitter value, above.
-   *
-   * @param pattern  the pattern to split
-   *
-   * @return a (directory, subpattern) tuple
-   */
+  /** Posix pattern splitter for eglob(). See description for the
+    * eglobPatternSplitter value, above.
+    *
+    * @param pattern  the pattern to split
+    *
+    * @return a (directory, subpattern) tuple
+    */
   private def splitPosixEglobPattern(pattern: String): (String, String) = {
     if (pattern.length == 0)
       (".", ".")
@@ -1268,26 +1254,24 @@ object util {
       (pattern, ".")
   }
 
-  /**
-   * Path normalization is operating system-specific. This value
-   * holds the real path normalizer, determined once.
-   */
+  /** Path normalization is operating system-specific. This value
+    * holds the real path normalizer, determined once.
+    */
   private lazy val doPathNormalizing = os match {
     case (Mac | Posix) => normalizePosixPath(_)
     case Windows       => normalizeWindowsPath(_)
     case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
   }
 
-  /**
-   * Shared between normalizeWindowsPath() and normalizePosixPath(),
-   * this function normalizes the pieces of a path, handling embedded "..",
-   * empty elements (from splitting when there are adjacent file separators),
-   * etc.
-   *
-   * @param pieces  path components, with no separators
-   *
-   * @return sanitized list of path components
-   */
+  /** Shared between normalizeWindowsPath() and normalizePosixPath(),
+    * this function normalizes the pieces of a path, handling embedded "..",
+    * empty elements (from splitting when there are adjacent file separators),
+    * etc.
+    *
+    * @param pieces  path components, with no separators
+    *
+    * @return sanitized list of path components
+    */
   private def normalizePathPieces(pieces: List[String]): List[String] = {
     pieces match {
       case Nil =>
@@ -1307,10 +1291,9 @@ object util {
     }
   }
 
-  /**
-   * Native-to-universal path conversion is operating system-specific.
-   * These values hold the real converters, determined once.
-   */
+  /** Native-to-universal path conversion is operating system-specific.
+    * These values hold the real converters, determined once.
+    */
   private lazy val makeUniversalPath: (String) => String = os match {
     case (Mac | Posix) => (path: String) => path
     case Windows       => (path: String) => path.replace(fileSeparator, "/")

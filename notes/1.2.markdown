@@ -1,3 +1,5 @@
+Now with _More Immutable_ and _Fewer Exceptionism_...
+
 * `grizzled.config.Configuration` is now completely immutable. Specifically,
   the following changes have been made:
   - Explicit conversion methods (e.g., `getInt()`, `getBoolean()`) have
@@ -24,3 +26,5 @@
   `sub()` method (which returns an `Either`).
 * `grizzled.url.download()` now returns an `Either`, instead of throwing an
   exception on error.
+* The functions in `grizzled.file.util` now return `Either`, instead of
+  throwing exceptions.
