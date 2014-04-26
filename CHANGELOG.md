@@ -29,6 +29,8 @@ Version 1.2:
 * Removed exceptions from `grizzled.string.StringTemplate`. The `substitute()`
   method is now deprecated (because it throws exceptions) in favor of the
   `sub()` method (which returns an `Either`).
+* `grizzled.url.download()` now returns an `Either`, instead of throwing an
+  exception on error.
 
 
 Version 1.1.6:

@@ -38,9 +38,10 @@
 package grizzled.net
 
 import grizzled.file.{util => FileUtil}
+import grizzled.either.Implicits._
 
 import java.net.URL
-import java.io.{File, IOException, FileInputStream}
+import java.io.{File, IOException}
 
 /** URL-related utility methods.
   */
@@ -119,9 +120,9 @@ object url {
     *                 created. If any of the directories in the path do not
     *                 exist, they are created.
     *
-    * @return the `pathOut` parameter, for convenience
+    * @return `Right(pathOut)` on success; `Left(error)` on failure
     */
-  def download(url: URL, pathOut: File): File = {
+  def download(url: URL, pathOut: File): Either[String, File] = {
     import java.io.{BufferedInputStream, BufferedOutputStream}
     import java.io.{FileOutputStream}
     import grizzled.io.RichInputStream._
@@ -131,26 +132,29 @@ object url {
                             "and is a directory.")
 
     val dir = new File(FileUtil.dirname(pathOut.getCanonicalPath))
-    if ((! dir.exists) && (! dir.mkdirs()))
-      throw new IOException("Can't create either target directory \"" +
-                            dir.toString + "\" or one of its parents.")
-
-    // Open the URL and the output file. (Do the URL first. That way, if it
-    // fails, we don't get a zero-length output file.
-    val in = new BufferedInputStream(url.openStream())
-    val out = new BufferedOutputStream(new FileOutputStream(pathOut))
-
-    // Copy and close.
-    try {
-      in.copyTo(out)
+    if ((! dir.exists) && (! dir.mkdirs())) {
+      Left(s"Can't create either target directory '$dir' or one of its parents.")
     }
 
-    finally {
-      out.close()
-      in.close()
-    }
+    else {
 
-    pathOut
+      // Open the URL and the output file. (Do the URL first. That way, if it
+      // fails, we don't get a zero-length output file.
+      val in = new BufferedInputStream(url.openStream())
+      val out = new BufferedOutputStream(new FileOutputStream(pathOut))
+
+      // Copy and close.
+      try {
+        in.copyTo(out)
+      }
+
+      finally {
+        out.close()
+        in.close()
+      }
+
+      Right(pathOut)
+    }
   }
 
   /** Execute a block of code with a downloaded, temporary file.
@@ -160,9 +164,10 @@ object url {
     * @param url    the URL
     * @param block  the block to execute
     *
-    * @return whatever the block returns
+    * @return `Left(error)` on error. `Right(t)`, where `t` is what the
+    *         block returns, on success.
     */
-  def withDownloadedFile[T](url: String)(block: File => T): T =
+  def withDownloadedFile[T](url: String)(block: File => T): Either[String, T] =
     withDownloadedFile(new URL(url))(block)
 
   /** Execute a block of code with a downloaded, temporary file.
@@ -172,12 +177,15 @@ object url {
     * @param url    the URL
     * @param block  the block to execute
     *
-    * @return whatever the block returns
+    * @return `Left(error)` on error. `Right(t)`, where `t` is what the
+    *         block returns, on success.
     */
-  def withDownloadedFile[T](url: URL)(block: File => T): T = {
+  def withDownloadedFile[T](url: URL)(block: File => T): Either[String, T] = {
     val file = File.createTempFile("grizzled", ".dat")
     try {
-      block(download(url, file))
+      download(url, file).map { res =>
+        block(file)
+      }
     }
 
     finally {

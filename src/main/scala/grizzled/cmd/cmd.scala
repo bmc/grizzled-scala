@@ -168,10 +168,11 @@ trait CommandHandler {
     * `complete()` method in `grizzled.readline.Completer`.
     * Please see that trait for full documentation.
     *
-    * @param token    the token being completed
-    * @param context  the token context (i.e., list of parsed tokens,
-    *                 with cursor)
-    * @param line     the current unparsed input line, which includes the token
+    * @param token       the token being completed
+    * @param context     the token context (i.e., list of parsed tokens,
+    *                    with cursor)
+    * @param commandLine the current unparsed input line, which includes the
+    *                    token
     */
   def complete(token: String, 
                context: List[CompletionToken],
@@ -272,8 +273,8 @@ abstract class CommandInterpreter(val appName: String,
   private def NoReadlineLibrary =
     throw new Exception("Can't find a readline library.")
 
-  val readline = Readline.findReadline(readlineLibs, appName, false).
-  getOrElse(NoReadlineLibrary)
+  val readline = Readline.findReadline(readlineLibs, appName, false)
+                         .getOrElse(NoReadlineLibrary)
 
   // Make sure readline library does its cleanup, no matter what happens.
   Runtime.getRuntime.addShutdownHook(
@@ -339,8 +340,8 @@ abstract class CommandInterpreter(val appName: String,
     * method for more details.
     */
   def StartCommandIdentifier = "abcdefghijklmnopqrstuvwxyz" +
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-  "0123456789."
+                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                               "0123456789."
 
   /** List of handlers. The subclass must define this value to contain a
     * list of its handlers. The `allHandlers` property will combine
@@ -810,8 +811,6 @@ abstract class CommandInterpreter(val appName: String,
   }
 
   /** Read and process the next command.
-    *
-    * @param prompt  Prompt to issue
     */
   @tailrec private def readAndProcessCommand: Unit = {
     if (handleCommand(readCommand) == KeepGoing)
@@ -889,13 +888,13 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
   val history = cmd.history 
   val Help = 
     """Show history. 
-  |
-  |Usage: history [-n] [regex]
-  |
-  |Where n is the number of recent history entries to show. If a regular
-  |expression is supplied, then only those history entries that match the
-  |regular expression are shown."""
-  .stripMargin
+      |
+      |Usage: history [-n] [regex]
+      |
+      |Where n is the number of recent history entries to show. If a regular
+      |expression is supplied, then only those history entries that match the
+      |regular expression are shown."""
+      .stripMargin
   
   private val TotalRegex = """^-([0-9]+)$""".r
 
@@ -913,28 +912,31 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
         strings.filter {tup => re.findFirstIn(tup._1) != None}
       }
       catch {
-        case e: PatternSyntaxException =>
+        case e: PatternSyntaxException => {
           error("\"" + pat + "\" is a bad regular " +
                 "expression: " + e.getMessage)
-        Nil
+          Nil
+        }
       }
     }
 
     val toShow =
       tokens match {
-        case TotalRegex(sTotal) :: Nil =>
+        case TotalRegex(sTotal) :: Nil => {
           val n = sTotal.toInt
-        historyCommands.zipWithIndex
-        .reverse
-        .slice(0, n)
-        .reverse
+          historyCommands.zipWithIndex
+                         .reverse
+                         .slice(0, n)
+                         .reverse
+        }
 
-        case TotalRegex(sTotal) :: regex :: Nil=>
-        val n = sTotal.toInt
-        filterByRegex(historyCommands.zipWithIndex, regex)
-        .reverse
-        .slice(0, n)
-        .reverse
+        case TotalRegex(sTotal) :: regex :: Nil => {
+          val n = sTotal.toInt
+          filterByRegex(historyCommands.zipWithIndex, regex)
+            .reverse
+            .slice(0, n)
+            .reverse
+        }
 
         case regex :: Nil =>
           filterByRegex(historyCommands.zipWithIndex, regex)
@@ -942,9 +944,10 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
         case Nil =>
           historyCommands.zipWithIndex
 
-        case _ =>
+        case _ => {
           error("Usage: history [-n] [regex]")
-        Nil
+          Nil
+        }
       }
 
     if (toShow.length > 0) {
