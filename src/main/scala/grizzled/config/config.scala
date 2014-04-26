@@ -329,20 +329,16 @@ trait ValueConverter[T] {
   * configuration file, giving it access to certain command line parameters,
   * you could do something like this:
   *
-  * {{{
-  * object Foo {
-  *   def main(args: Array[String]) = {
-  *     // You'd obviously want to do some real argument checking here.
-  *     val configFile = args(0)
-  *     val name = args(1)
-  *     val ipAddress = args(2)
-  *     val sections = Map("args" -> Map("name" -> name,
-  *                                      "ip" -> ipAddress))
-  *     val config = Configuration(configFile, sections)
-  *     ...
-  *   }
+  * <pre>
+  * def main(args: Array[String]): Unit = {
+  *   val configFile = args(0)
+  *   val name = args(1)
+  *   val ipAddress = args(2)
+  *   val sections = Map("args" -> Map("name" -> name, "ip" -> ipAddress))
+  *   val config = Configuration(configFile, sections)
+  *   ...
   * }
-  * }}}
+  * </pre>
   *
   * Note that contents of the configuration file can override the predefined
   * sections.
@@ -555,7 +551,7 @@ final class Configuration private[config](
     *
     * If `safe` is `true` (as defined when the `Configuration` object is built),
     * substitutions of nonexistent variables will result in empty strings for
-    * where the substitutions were specified (e.g., `val${section1.notValid}`
+    * where the substitutions were specified (e.g., `val\${section1.notValid}`
     * will result in the string "val"). If `safe` is `false`, substitutions
     * of nonexistent values will result in an error (i.e., a `Left` result).
     *
