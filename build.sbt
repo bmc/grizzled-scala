@@ -29,13 +29,19 @@ autoCompilerPlugins := true
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 
-seq(lsSettings :_*)
+lsSettings
 
 LsKeys.tags in LsKeys.lsync := Seq("utility", "library", "grizzled")
 
 description in LsKeys.lsync <<= description(d => d)
 
-seq(bintraySettings: _*)
+bintraySettings
+
+bintray.Keys.packageLabels in bintray.Keys.bintray := (
+  LsKeys.tags in LsKeys.lsync
+).value
+
+externalResolvers in LsKeys.lsync := (resolvers in bintray.Keys.bintray).value
 
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
