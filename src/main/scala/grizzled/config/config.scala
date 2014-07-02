@@ -859,7 +859,7 @@ object Configuration {
             safe:                Boolean = true):
     Either[String, Configuration] = {
 
-    load(source).map { map =>
+    load(source, sectionNamePattern, commentPattern).map { map =>
       new Configuration(map,
                         sectionNamePattern,
                         commentPattern,
