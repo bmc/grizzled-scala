@@ -171,17 +171,40 @@ quam. Vestibulum ante ipsum primis in.""",
 
   test("bytesToHexString") {
     val Data = Seq(
-      Array(0x10, 0x13, 0x99, 0xff) -> "101399ff"
+      byteArray(Array(0x10, 0x13, 0x99, 0xff)) -> "101399ff"
     )
 
-    for (testItem <- Data) {
-      val data     = testItem._1
-      val expected = testItem._2
+    for ((bytes, s) <- Data) {
 
-      assertResult(expected, s"bytesToHexString yielding: $expected") {
-        val bytes = data.map { i => (i & 0xff).asInstanceOf[Byte]}
+      assertResult(s, s"bytesToHexString yielding: $s") {
         bytesToHexString(bytes)
       }
     }
   }
+
+  test("hexStringToBytes") {
+    val Data = Seq(
+      "101399ff" -> Some(byteArray(Array(0x10, 0x13, 0x99, 0xff))),
+      "fail"     -> None,
+      "FFBC9D"   -> Some(byteArray(Array(0xff, 0xbc, 0x9d)))
+    )
+
+    def eqByteArray(b1: Array[Byte], b2: Array[Byte]): Boolean = {
+      val s1 = b1.toSet
+      val s2 = b2.toSet
+      s2 == s1
+    }
+
+    def eqOpt(o1: Option[Array[Byte]], o2: Option[Array[Byte]]): Boolean = {
+      o1.map { b1 => o2.isDefined && eqByteArray(b1, o2.get) }
+        .getOrElse( o2.isEmpty )
+    }
+
+    for ((s, byteOpt) <- Data) {
+      assert(eqOpt(byteOpt, hexStringToBytes(s)), s"hexStringToBytes: $s")
+    }
+  }
+
+  private def byteArray(b: Array[Int]) = b.map { _.asInstanceOf[Byte] }
+
 }

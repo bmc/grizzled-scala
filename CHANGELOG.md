@@ -3,6 +3,12 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.3:
+
+* `grizzled.config.Configuration` wasn't properly handling custom regular 
+  expressions for parsing section names and comments. Fixed by
+  [Stefan Schlott (@Skyr)](https://github.com/Skyr).
+
 Version 1.2:
 
 * `grizzled.config.Configuration` is now completely immutable. Specifically,

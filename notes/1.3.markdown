@@ -1,0 +1,5 @@
+* `grizzled.config.Configuration` wasn't properly handling custom regular 
+  expressions for parsing section names and comments. Fixed by
+  [Stefan Schlott (@Skyr)](https://github.com/Skyr).
+* Added `grizzled.string.util.hexBytesToString()`, to complement the
+  `bytesToHexString()` function.

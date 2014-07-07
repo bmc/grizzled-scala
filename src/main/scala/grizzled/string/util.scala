@@ -38,6 +38,7 @@
 package grizzled.string
 
 import scala.annotation.tailrec
+import scala.util.Try
 
 /** Useful string-related utility functions.
   */
@@ -113,6 +114,42 @@ object util {
     */
   def bytesToHexString(bytes: Array[Byte]): String = {
     bytes.map("%02x" format _).mkString
+  }
+
+  // Presumably faster than Integer.parseInt()
+  private val HexDigits = Map(
+    '0' -> 0,  '1' -> 1,  '2' -> 2,  '3' -> 3,
+    '4' -> 4,  '5' -> 5,  '6' -> 6,  '7' -> 7,
+    '8' -> 8,  '9' -> 9,  'a' -> 10, 'b' -> 11,
+    'c' -> 12, 'd' -> 13, 'e' -> 14, 'f' -> 15
+  )
+
+  /** Convert a hex string to bytes.
+    *
+    * @param hexString  the hex string
+    *
+    * @return `Some(bytes)` if the string was succesfully parsed;
+    *         `None` if the string could not be parsed.
+    */
+  def hexStringToBytes(hexString: String): Option[Array[Byte]] = {
+
+    def parse(chars: Seq[Char], accum: Array[Byte]): Option[Array[Byte]] = {
+      chars match {
+        case upper :: lower :: rest => {
+          val res = for { u <- HexDigits.get(upper)
+                          l <- HexDigits.get(lower) }
+                    yield ((u << 4) | l).asInstanceOf[Byte]
+
+          res map { byte => parse(rest, accum :+ byte) } getOrElse { None }
+        }
+        case Nil => Some(accum)
+      }
+    }
+
+    if ((hexString.length % 2) == 0)
+      parse(hexString.toLowerCase.toList, Array.empty[Byte])
+    else
+      None
   }
 
   private lazy val QUOTED_REGEX = """(["'])(?:\\?+.)*?\1""".r
