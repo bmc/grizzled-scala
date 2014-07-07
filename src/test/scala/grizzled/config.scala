@@ -33,6 +33,14 @@ class config extends FlatSpec {
       """.stripMargin
 
     val cfg = Configuration(Source.fromString(TestConfig)).right.get
+
+    val TestConfigWithExoticSection =
+      """
+        |[section1]
+        |foo=bar
+        |[section1.1]
+        |bar=baz
+      """.stripMargin
   }
 
   "A Configuration object" should "return values properly" in {
@@ -184,5 +192,18 @@ class config extends FlatSpec {
     assert(cfg.asEither[String]("section2", "substError").isLeft)
     assert(cfg.asEither[Int]("section3", "intOpt") === Right(Some(10)))
     assert(cfg.asEither[Int]("section1", "intOpt") === Right(Some(10)))
+  }
+
+  it should "detect illegal characters in section names" in {
+    val cfg = Configuration(Source.fromString(Fixture.TestConfigWithExoticSection))
+    assert(cfg.isLeft)
+  }
+
+  it should "honor given SectionNamePattern when loading data" in {
+    val cfg = Configuration(Source.fromString(Fixture.TestConfigWithExoticSection),
+      sectionNamePattern = """([a-zA-Z0-9_\.]+)""".r)
+    assert(cfg.isRight)
+    val loadedCfg = cfg.right.get
+    assert(loadedCfg.get("section1.1", "bar") === Some("baz"))
   }
 }
