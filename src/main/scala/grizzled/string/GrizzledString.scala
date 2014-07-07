@@ -61,8 +61,6 @@ final class GrizzledString(val string: String) {
 
   /** Trim white space from the front (left) of a string.
     *
-    * @param s  string to trim
-    *
     * @return possibly modified string
     */
   def ltrim: String = {
@@ -73,16 +71,12 @@ final class GrizzledString(val string: String) {
 
   /** Trim white space from the back (right) of a string.
     *
-    * @param s  string to trim
-    *
     * @return possibly modified string
     */
   def rtrim: String = RTrimRegex.replaceFirstIn(string, "")
 
   /** Like perl's `chomp()`: Remove any newline at the end of the
     * line.
-    *
-    * @param line  the line
     *
     * @return the possibly modified line
     */
@@ -185,22 +179,22 @@ final class GrizzledString(val string: String) {
         case None                    => Nil
       }
     }
-    
+
     def parseUnicode: List[Char] = {
       val digits = parseHexDigits
       if (digits == Nil)
         Nil
-    
+
       else if (digits.length != 4) {
         // Invalid Unicode string.
 
         List('\\', 'u') ++ digits
       }
-    
+
       else
         List(Integer.parseInt(digits mkString "", 16).asInstanceOf[Char])
     }
-    
+
     def parseMeta: List[Char] = {
       stream.next match {
         case Some('t')  => List('\t')
@@ -213,7 +207,7 @@ final class GrizzledString(val string: String) {
         case None       => Nil
       }
     }
-    
+
     def translate: List[Char] = {
       stream.next match {
         case Some('\\') => parseMeta ::: translate
@@ -221,7 +215,7 @@ final class GrizzledString(val string: String) {
         case None       => Nil
       }
     }
-    
+
     translate mkString ""
   }
 }
@@ -258,7 +252,7 @@ object GrizzledString {
   /** Implicit function to convert from a Scala string object to a
     * `GrizzledString`.
     *
-    * @param s  a Scala string
+    * @param rs  a Scala string
     *
     * @return the `GrizzledString`
     */
@@ -268,7 +262,7 @@ object GrizzledString {
   /** Implicit function to convert from `GrizzledString` to a
     * Scala `RichString`.
     *
-    * @param s  the `GrizzledString`
+    * @param gs  the `GrizzledString`
     *
     * @return the Scala string
     */
