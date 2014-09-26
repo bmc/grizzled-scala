@@ -45,7 +45,7 @@ Grizzled Scala is published to the
 [Bintray Maven repository](https://bintray.com/bmc/maven), which is
 automatically linked to Bintray's [JCenter](https://bintray.com/bintray/jcenter)
 repository. (From JCenter, it's eventually pushed to the
-automatically sync'd with the [Maven Central Repository][].
+[Maven Central Repository][].
 
 - Versions 1.2 and 1.1.6 support Scala 2.10 and 2.11.
 - Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
