@@ -54,8 +54,7 @@ object util {
     * Sample use:
     *
     * {{{
-    * withCloseable(new java.io.FileInputStream("/path/to/file"))
-    * {
+    * withCloseable(new java.io.FileInputStream("/path/to/file")) {
     *     in => ...
     * }
     * }}}
