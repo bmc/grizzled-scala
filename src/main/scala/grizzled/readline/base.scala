@@ -519,8 +519,6 @@ object Readline {
     * @param appName       an arbitrary name of the calling application
     *
     * @return the appropriate `Readline` implementation.
-    *
-    * @throws UnsatisfiedLinkError can't find the underlying library
     */
   def apply(readlineType: ReadlineType, appName: String): Readline =
     apply(readlineType, appName, true)

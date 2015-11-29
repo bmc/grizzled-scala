@@ -92,8 +92,6 @@ object util {
     * @param s  the string to convert
     *
     * @return a boolean value
-    *
-    * @throws IllegalArgumentException if `s` cannot be parsed
     */
   @deprecated("Use str2boolean(), instead", "1.2")
   def stringToBoolean(s: String): Boolean = {

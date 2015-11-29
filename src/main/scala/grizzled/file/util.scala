@@ -74,9 +74,9 @@ object util {
     * @return the directory portion
     */
   def dirname(path: String, fileSep: String = fileSeparator): String = {
-    val components = splitPath(path, fileSep) 
+    val components = splitPath(path, fileSep)
     components match {
-      case Nil => 
+      case Nil =>
         ""
 
       case List("") =>
@@ -149,7 +149,7 @@ object util {
       else {
         val listTuple = components splitAt (components.length - 1)
         val s: String = listTuple._1 mkString fileSep
-        val prefix = 
+        val prefix =
           if ((s.length == 0) && (path startsWith fileSep))
             fileSep
           else
@@ -170,7 +170,7 @@ object util {
     *
     * @return a 3-tuple of (dirname, basename, extension)
     */
-  def dirnameBasenameExtension(pathname: String, 
+  def dirnameBasenameExtension(pathname: String,
                                fileSep: String = fileSeparator):
     (String, String, String) = {
 
@@ -415,7 +415,7 @@ object util {
     *  - `*` matches everything
     *  - `?` matches any single character
     *  - `[set]` matches any character in ''set''
-    *  - ``[!set]` matches any character not in ''set''
+    *  - `[!set]` matches any character not in ''set''
     *
     * An initial period in `filename` is not special. Matches are
     * case-sensitive on Posix operating systems, case-insensitive elsewhere.
@@ -450,8 +450,8 @@ object util {
     * (dirpath, dirnames, filenames)
     * }}}
     *
-    * ''dirpath'' is a string, the path to the directory. ''dirnames'' is a 
-    * list of the names of the subdirectories in ''dirpath'' (excluding '.' 
+    * ''dirpath'' is a string, the path to the directory. ''dirnames'' is a
+    * list of the names of the subdirectories in ''dirpath'' (excluding '.'
     * and '..'). ''filenames'' is a list of the names of the non-directory
     * files in ''dirpath''. Note that the names in the lists are just names,
     * with no path components. To get a full path (which begins with top) to a
@@ -494,10 +494,10 @@ object util {
 
       if (topdown)
         result += ((top, dirs.toList, nondirs.toList))
-      
+
       for (name <- dirs)
         result ++= walk(top + fileSeparator + name, topdown)
-      
+
       if (! topdown)
         result += ((top, dirs.toList, nondirs.toList))
     }
@@ -568,14 +568,14 @@ object util {
     // as a regular expression, which causes problems when the separator
     // is a backslash (as on Windows). We could escape the backslash,
     // but it's just as easy to split on the character, not the string,
-    
+
     // Null guard.
 
     val nonNullPath = if (path == null) "" else path
 
     // Special case for Windows. (Stupid drive letters.)
 
-    val (prefix, usePath) = 
+    val (prefix, usePath) =
       if (fileSep == "\\")
         splitDrivePath(nonNullPath)
       else
@@ -606,9 +606,8 @@ object util {
       else
         (prefix + fileSep + pieces.head) :: pieces.tail
     }
-
-      else
-        pieces
+    else
+      pieces
   }
 
   /** Join components of a path together.
@@ -739,31 +738,36 @@ object util {
     *                     `false` to throw an exception if the
     *                     directory doesn't already exist.
     *
-    * @throws FileDoesNotExistException a source file or the target directory
-    *                                   doesn't exist
-    * @throws IOException cannot create target directory
+    * @return `Success(true)` if the copy worked. `Failure(exception)` on
+    *         error.
     */
   def copy(files: Iterable[String],
            targetDir: String,
-           createTarget: Boolean = true): Unit = {
-    val target = new File(targetDir)
+           createTarget: Boolean = true): Try[Boolean] = {
+    Try {
+      val target = new File(targetDir)
 
-    if ((! target.exists()) && (createTarget))
-      if (! target.mkdirs())
-        throw new IOException("Unable to create target directory \"" +
+      if ((! target.exists()) && (createTarget))
+        if (! target.mkdirs())
+          throw new IOException("Unable to create target directory \"" +
+                                targetDir + "\"")
+
+      if (target.exists() && (! target.isDirectory()))
+        throw new IOException("Cannot copy files to non-directory \"" +
                               targetDir + "\"")
 
-    if (target.exists() && (! target.isDirectory()))
-      throw new IOException("Cannot copy files to non-directory \"" +
-                            targetDir + "\"")
+      if (! target.exists())
+        throw new FileDoesNotExistException("Target directory \"" +
+                                            targetDir +
+                                            "\" does not exist.")
 
-    if (! target.exists())
-      throw new FileDoesNotExistException("Target directory \"" +
-                                          targetDir + 
-                                          "\" does not exist.")
+      for (file <- files) {
+        // The .get() forces a failure if a specific copy fails.
+        copyFile(file, targetDir + fileSeparator + basename(file)).get
+      }
 
-    for (file <- files)
-      copyFile(file, targetDir + fileSeparator + basename(file))
+      true
+    }
   }
 
   /** Copy a file to a directory.
@@ -774,12 +778,14 @@ object util {
     *                     `false` to throw an exception if the
     *                     directory doesn't already exist.
     *
-    * @throws FileDoesNotExistException source file or target directory
-    *                                   doesn't exist
-    * @throws IOException cannot create target directory
+    * @return `Success(true)` if the copy worked. `Failure(exception)` on
+    *         error.
     */
-  def copy(file: String, targetDir: String, createTarget: Boolean): Unit =
+  def copy(file:         String,
+           targetDir:    String,
+           createTarget: Boolean): Try[Boolean] = {
     copy(List[String](file), targetDir, createTarget)
+  }
 
   /** Copy a file to a directory. If the target directory does not exist,
     * it is created.
@@ -787,12 +793,12 @@ object util {
     * @param file         Path name of the file to copy
     * @param targetDir    Path name to target directory
     *
-    * @throws FileDoesNotExistException a source file or the target directory
-    *                                   doesn't exist
-    * @throws IOException cannot create target directory
+    * @return `Success(true)` if the copy worked. `Failure(exception)` on
+    *         error.
     */
-  def copy(file: String, targetDir: String): Unit =
+  def copy(file: String, targetDir: String): Try[Boolean] = {
     copy(file, targetDir, true)
+  }
 
   /** Copy a source file to a target file, using binary copying. The source
     * file must be a file. The target path can be a file or a directory; if
@@ -802,10 +808,12 @@ object util {
     * @param sourcePath  path to the source file
     * @param targetPath  path to the target file or directory
     *
-    * @return the full path of the target file
+    * @return A `Success` with the full path of the target file, or
+    *         `Failure(exception)`
     */
-  def copyFile(sourcePath: String, targetPath: String): String =
-    copyFile(new File(sourcePath), new File(targetPath)).getPath
+  def copyFile(sourcePath: String, targetPath: String): Try[String] = {
+    copyFile(new File(sourcePath), new File(targetPath)).map {_.getPath}
+  }
 
   /** Copy a source file to a target file, using binary copying. The source
     * file must be a file. The target path can be a file or a directory; if
@@ -815,30 +823,27 @@ object util {
     * @param source  path to the source file
     * @param target  path to the target file or directory
     *
-    * @return the full path of the target file
+    * @return A `Success` containing the full path of the target file,
+    *         or `Failure(exception)`
     */
-  def copyFile(source: File, target: File): File = {
-    import java.io.{InputStream, OutputStream,
-                    BufferedInputStream, BufferedOutputStream,
+  def copyFile(source: File, target: File): Try[File] = {
+    import java.io.{BufferedInputStream, BufferedOutputStream,
                     FileInputStream, FileOutputStream}
+    import grizzled.io.util._
 
-    val targetFile = 
-      if (target.isDirectory())
+    val targetFile =
+      if (target.isDirectory)
         new File(joinPath(target.getPath, basename(source.getName)))
       else
         target
 
-    val in = new BufferedInputStream(new FileInputStream(source))
-    val out = new BufferedOutputStream(new FileOutputStream(targetFile))
-
-    try {
-      in.copyTo(out)
-      targetFile
-    }
-
-    finally {
-      in.close()
-      out.close()
+    Try {
+      withCloseable(new BufferedInputStream(new FileInputStream(source))) { in =>
+        withCloseable(new BufferedOutputStream(new FileOutputStream(targetFile))) { out =>
+          in.copyTo(out)
+          targetFile
+        }
+      }
     }
   }
 
@@ -847,8 +852,11 @@ object util {
     *
     * @param sourceDir  the source directory
     * @param targetDir  the target directory
+    *
+    * @return `Success(true)` if the copy worked. `Failure(exception)` on
+    *         error.
     */
-  def copyTree(sourceDir: String, targetDir: String): Unit =
+  def copyTree(sourceDir: String, targetDir: String): Try[Boolean] =
     copyTree(new File(sourceDir), new File(targetDir))
 
   /** Recursively copy a source directory and its contents to a target
@@ -856,24 +864,31 @@ object util {
     *
     * @param sourceDir  the source directory
     * @param targetDir  the target directory
+    *
+    * @return `Success(true)` if the copy worked. `Failure(exception)` on
+    *         error.
     */
-  def copyTree(sourceDir: File, targetDir: File): Unit = {
-    if (! sourceDir.exists())
-      throw new FileDoesNotExistException(sourceDir.getPath)
+  def copyTree(sourceDir: File, targetDir: File): Try[Boolean] = {
+    Try {
+      if (! sourceDir.exists())
+        throw new FileDoesNotExistException(sourceDir.getPath)
 
-    if (! sourceDir.isDirectory)
-      throw new IOException("Source directory \"" + sourceDir.getPath +
-                            "\" is not a directory.")
+      if (! sourceDir.isDirectory)
+        throw new IOException("Source directory \"" + sourceDir.getPath +
+                              "\" is not a directory.")
 
-    val files = sourceDir.list.map(f => (new File(sourceDir, f),
-                                         new File(targetDir, f)))
+      val files = sourceDir.list.map(f => (new File(sourceDir, f),
+                                           new File(targetDir, f)))
 
-    targetDir.mkdirs
-    for ((src, target) <- files) {
-      if (src.isDirectory)
-        copyTree(src, target)
-      else
-        copyFile(src, target)
+      targetDir.mkdirs
+      for ((src, target) <- files) {
+        if (src.isDirectory)
+          copyTree(src, target)
+        else
+          copyFile(src, target)
+      }
+
+      true
     }
   }
 
@@ -888,32 +903,38 @@ object util {
    * Recursively remove a directory tree. This function is conceptually
    * equivalent to `rm -r` on a Unix system.
    *
-   * @param dir  The directory
+   * @param dir The directory
    *
-   * @return `Left(error)` on error, `Right(total)` on success. `total`
+   * @return `Failure(exception)` on error, `Success(total)` on success. `total`
    *         is the total number of deleted files.
    */
-  def deleteTree(dir: File): Either[String, Int] = {
-    def doDelete(f: File): Either[String, Int] = {
-      Try { if (! f.delete) Left(s"Can't delete '$f'") else Right(1) } match {
-        case Success(either) => either
-        case Failure(ex)     => Left(s"Can't delete '$f': ${ex.getMessage}")
-      }
+  def deleteTree(dir: File): Try[Int] = {
+    def deleteOne(f: File): Try[Int] = {
+      if (! f.delete)
+        Failure(new IOException(s"Can't delete '$f'"))
+      else
+        Success(1)
     }
 
-    if (! dir.isDirectory) {
-      Left(s"'$dir' is not a directory.")
-    }
-
+    if (! dir.isDirectory)
+      Failure(new IOException(s""""$dir" is not a directory."""))
     else {
       val treeResults = dir.listFiles.map { f =>
-        if (f.isDirectory)
-          deleteTree(f)
-        else
-          doDelete(f)
+
+        val t = Try {
+          if (f.isDirectory)
+            deleteTree(f)
+          else
+            deleteOne(f)
+        }
+
+        // Force an abort on first failure.
+        t.get
       }
 
-      mapEitherCount(List(doDelete(dir)) ++ treeResults)
+      treeResults.find { t => t.isFailure }.getOrElse {
+        deleteOne(dir)
+      }
     }
   }
 
@@ -929,37 +950,23 @@ object util {
     * @param time   Set the last-modified time to this time, or to the current
     *               time if this parameter is negative.
     *
-    * @return `Left(error)` on error. `Right(total)` on success.
+    * @return `Failure(exception)` on error. `Success(total)` on success.
     */
-  def touchMany(files: Iterable[String],
-                time:  Long = -1): Either[String, Int] = {
+  def touchMany(files: Iterable[String], time: Long = -1): Try[Int] = {
 
     val useTime = if (time < 0) System.currentTimeMillis else time
-    val results: Iterable[Either[String, Int]] = files.map { name =>
-      val file = new File(name)
-      if (file.isDirectory)
-        Left(s"File '$name' is a directory.")
-      else {
-        val t = Try {
-          if ((! file.exists) && (! file.createNewFile()))
-            Left(s"Unable to create '$name'")
-          else if (! file.setLastModified(useTime))
-            Left(s"Unable to set time on '$name'")
-          else
-            Right(1)
-        }
-
-        t match {
-          case Success(either) => either
-          case Failure(ex)     => Left(s"File $name: ${ex.getMessage}")
-        }
+    Try {
+      val results = files.map { name =>
+        // Force a failure on error.
+        touch(name, time).get
+        1
       }
-    }
 
-    mapEitherCount(results.toSeq)
+      results.reduce(_ + _)
+    }
   }
 
-  /** Similar to the Unix ''touch'' command, this function:
+  /** Similar to the Unix `touch` command, this function:
     *
     *  - updates the access and modification times for a file
     *  - creates the file if it does not exist
@@ -970,10 +977,23 @@ object util {
     * @param time  Set the last-modified time to this time, or to the current
     *              time if this parameter is negative.
     *
-    * @return `Left(error)` on error, `Right(true)` on success
+    * @return `Failure(exception)` on error, `Success(true)` on success
     */
-  def touch(path: String, time: Long = -1): Either[String, Boolean] = {
-    touchMany(List[String](path), time).map { count => true }
+  def touch(path: String, time: Long = -1): Try[Boolean] = {
+    Try {
+      val file = new File(path)
+      if (file.isDirectory)
+        throw new Exception(s"""File "$path" is a directory.""")
+
+      if ((! file.exists) && (! file.createNewFile()))
+        throw new IOException(s"""Unable to create "$path"""")
+
+      val useTime = if (time < 0) System.currentTimeMillis else time
+      if (! file.setLastModified(useTime))
+        throw new IOException(s"""Unable to set time on "$path"""")
+
+      true
+    }
   }
 
   private lazy val DrivePathPattern = "^([A-Za-z]?:)?(.*)$".r
@@ -1055,7 +1075,7 @@ object util {
       case ("", path) => {
         // No drive letter - preserve initial backslashes
 
-        (path takeWhile (_ == '\\') mkString "", 
+        (path takeWhile (_ == '\\') mkString "",
          path dropWhile (_ == '\\') mkString "")
       }
 
@@ -1145,24 +1165,6 @@ object util {
   /* ---------------------------------------------------------------------- *\
                               Private Methods
   \* ---------------------------------------------------------------------- */
-
-  /** Map a sequence of Either objects containing either an error message
-    * or a count, producing either a consolidated Left (if any errors are
-    * found) or a consolidated count in a Right.
-    */
-  private def mapEitherCount(results: Seq[Either[String, Int]]):
-    Either[String, Int] = {
-
-    results.filter(_.isLeft).map { _.left.get }.toSeq match {
-      case err :: errs => {
-        Left((List(err) ++ errs).mkString("; "))
-      }
-
-      case Nil => {
-        Right(results.filter {_.isRight }.map {_.right.get}.reduce {_ + _})
-      }
-    }
-  }
 
   /** Convert a file into a path array. Borrowed from SBT source code.
     */

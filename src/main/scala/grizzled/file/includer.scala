@@ -51,7 +51,7 @@ import java.net.{URI, URISyntaxException}
  * directives within a text file, returning a file-like object. It also
  * contains some utility functions that permit using include-enabled files
  * in other contexts.
- * 
+ *
  * <h3>Syntax</h3>
  *
  * The <i>include</i> syntax is defined by a regular expression; any
@@ -65,7 +65,7 @@ import java.net.{URI, URISyntaxException}
  * %include "local_reference"
  * %include "http://localhost/path/to/my.config"
  * }}}
- * 
+ *
  * Relative and local file references are relative to the including file
  * or URL. That is, if an `Includer` is processing file
  * "/home/bmc/foo.txt" and encounters an attempt to include file "bar.txt",
@@ -79,37 +79,37 @@ import java.net.{URI, URISyntaxException}
  * Nested includes are permitted; that is, an included file may, itself,
  * include other files. The maximum recursion level is configurable and
  * defaults to 100.
- * 
+ *
  * The include syntax can be changed by passing a different regular
  * expression to the `Includer` constructor.
- * 
+ *
  * <h3>Usage</h3>
  *
  * This package provides an `Includer` class, which processes include
  * directives in a file and behaves somewhat like a Scala `Source`. See the
  * class documentation for more details.
- * 
+ *
  * The package also provides a `preprocess()` convenience function, via a
  * companion object, that can be used to preprocess a file; it returns the
  * path to the resulting preprocessed file.
- * 
+ *
  * <h3>Examples</h3>
- * 
+ *
  * Preprocess a file containing include directives, then read the result:
- * 
+ *
  * {{{
  * import grizzled.file.Includer
- * 
+ *
  * Includer(path).foreach(println(_))
  * }}}
- * 
+ *
  * Use an include-enabled file with a Scala `scala.io.Source`
  * object:
- * 
+ *
  * {{{
  * import grizzled.file.includer.Includer
  * import scala.io.Source
- * 
+ *
  * val source = Source.fromFile(Includer.preprocess("/path/to/file"))
  * }}}
  *
@@ -159,13 +159,12 @@ extends Iterator[String] {
   }
 
   /**
-   * Get the next input line. You should call `hasNext` before calling
-   * this method, to ensure that there are input lines remaining.
-   *
-   * @return the next input line
-   *
-   * @throws IllegalStateException no more input lines
-   */
+    * Get the next input line. You should call `hasNext` before calling
+    * this method, to ensure that there are input lines remaining. Calling
+    * `next` on an empty `Includer` will result in a runtime exception
+    *
+    * @return the next input line
+    */
   def next: String = {
     @tailrec def nextFromStack: String = {
       if (sourceStack.length == 0)
@@ -253,7 +252,7 @@ object Includer {
    *                     directive. Must contain a group that surrounds the
    *                     file or URL part.
    */
-  def apply(source: Source, includeRegex: Regex): Includer = 
+  def apply(source: Source, includeRegex: Regex): Includer =
     apply(source, includeRegex, DefaultMaxNesting)
 
   /**
@@ -262,7 +261,7 @@ object Includer {
    *
    * @param source       the `Source` to read
    */
-  def apply(source: Source): Includer = 
+  def apply(source: Source): Includer =
     apply(source, DefaultIncludeRegex, DefaultMaxNesting)
 
   /**
@@ -274,8 +273,8 @@ object Includer {
    *                     file or URL part.
    * @param maxNesting   the maximum nesting level
    */
-  def apply(pathOrURI: String, 
-            includeRegex: Regex, 
+  def apply(pathOrURI: String,
+            includeRegex: Regex,
             maxNesting: Int): Includer = {
     import grizzled.file.{util => futil}
     import java.io.File
@@ -286,7 +285,7 @@ object Includer {
         new File(pathOrURI).toURI
 
       else {
-        // Windows paths (with backslashes) will cause a 
+        // Windows paths (with backslashes) will cause a
         // URISyntaxException, so we can use that behavior to check
         // for them.
 
@@ -312,7 +311,7 @@ object Includer {
    *                     directive. Must contain a group that surrounds the
    *                     file or URL part.
    */
-  def apply(pathOrURI: String, includeRegex: Regex): Includer = 
+  def apply(pathOrURI: String, includeRegex: Regex): Includer =
     apply(pathOrURI, includeRegex, DefaultMaxNesting)
 
   /**
@@ -321,7 +320,7 @@ object Includer {
    *
    * @param pathOrURI    the path or URI string to read
    */
-  def apply(pathOrURI: String): Includer = 
+  def apply(pathOrURI: String): Includer =
     apply(pathOrURI, DefaultIncludeRegex, DefaultMaxNesting)
 
   /**
@@ -341,15 +340,15 @@ object Includer {
    *
    * @return the path to the temporary file
    */
-  def preprocess(pathOrURI:  String, 
-                 tempPrefix: String, 
+  def preprocess(pathOrURI:  String,
+                 tempPrefix: String,
                  tempSuffix: String): String = {
     import java.io.{File, FileWriter}
     import grizzled.io.util.withCloseable
 
     def sourceFromFile(s: String) = Source.fromFile(new File(s))
 
-    val source = 
+    val source =
       try {
         Source.fromURI(new URI(pathOrURI))
       }

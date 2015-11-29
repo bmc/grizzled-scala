@@ -34,16 +34,18 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.file.util._
 import grizzled.file.GrizzledFile._
 import java.io.File
 
+import scala.util.Failure
+
 /**
  * Tests the grizzled.file functions.
  */
-class FileUtilTest extends FunSuite {
-  test("basename") {
+class FileUtilTest extends FlatSpec with Matchers {
+  "basename" should "handle all kinds of paths" in {
     val data = Map(("", "/")                 -> "",
                    ("foo", "/")              -> "foo",
                    ("foo/bar", "/")          -> "bar",
@@ -61,13 +63,11 @@ class FileUtilTest extends FunSuite {
                    ("D:\\foo\\bar", "\\")    -> "bar")
 
     for(((path, sep), expected) <- data) {
-      assertResult(expected, "basename(\"" + path + "\", \"" + sep + "\")")  {
-        basename(path, sep)
-      }
+      basename(path, sep) shouldBe (expected)
     }
   }
 
-  test("dirname") {
+  "dirname" should "handle all kinds of paths" in {
     val data = Map(("", "/")                  -> "",
                    ("foo", "/")               -> ".",
                    ("foo/bar", "/")           -> "foo",
@@ -91,13 +91,11 @@ class FileUtilTest extends FunSuite {
                    ("\\\\\\\\", "\\")        -> "\\")
 
     for(((path, sep), expected) <- data) {
-      assertResult(expected, "dirname(\"" + path + "\", \"" + sep + "\")")  {
-        dirname(path, sep)
-      }
+      dirname(path, sep) shouldBe (expected)
     }
   }
 
-  test("dirnameBasename") {
+  "dirnameBasename" should "handle all kinds of files" in {
     val data = Map(("", "/")                 -> ("", ""),
                    ("foo", "/")              -> (".", "foo"),
                    ("foo/bar", "/")          -> ("foo", "bar"),
@@ -120,13 +118,11 @@ class FileUtilTest extends FunSuite {
                    ("D:\\foo\\bar", "\\")    -> ("D:\\foo", "bar"))
 
     for(((path, sep), expected) <- data) {
-      assertResult(expected, "dirnameBasename(\"" + path + "\", \"" + sep + "\")")  {
-        dirnameBasename(path, sep)
-      }
+      dirnameBasename(path, sep) shouldBe (expected)
     }
   }
 
-  test("splitPath, Posix") {
+  "splitPath, Posix" should "handle all kinds of paths" in {
     val data = Map(
       ("", "/")                  -> List[String](""),
       ("foo", "/")               -> List[String]("foo"),
@@ -151,15 +147,13 @@ class FileUtilTest extends FunSuite {
       ("\\", "\\")               -> List[String]("\\"),
       ("d:\\", "\\")             -> List[String]("d:\\")
     )
-    
+
     for(((path, sep), expected) <- data) {
-      assertResult(expected, "splitPath(\"" + path + "\", \"" + sep + "\")")  {
-        splitPath(path, sep)
-      }
+      splitPath(path, sep) shouldBe (expected)
     }
   }
 
-  test("joinPath") {
+  "joinPath" should "handle all kinds of paths" in {
     val data = Map(
       ("/", List(""))                       -> "",
       ("/", List("foo"))                    -> "foo",
@@ -182,15 +176,13 @@ class FileUtilTest extends FunSuite {
       ("\\", List("\\"))                    -> "\\",
       ("\\", List("d:\\"))                  -> "d:\\"
     )
-    
+
     for(((sep, pieces), expected) <- data) {
-      assertResult(expected, "joinPath(\"" + sep + "\"" + pieces) {
-        joinPath(sep, pieces)
-      }
+      joinPath(sep, pieces) shouldBe (expected)
     }
   }
 
-  test("splitDrivePath") {
+  "splitDrivePath" should "handle all kinds of paths" in {
     val data = Map(
       ""                 -> ("", ""),
       ":"                -> ("", ""),
@@ -204,13 +196,11 @@ class FileUtilTest extends FunSuite {
     )
 
     for((path, expected) <- data) {
-      assertResult(expected, "splitDrivePath(\"" + path + "\"")  {
-        splitDrivePath(path)
-      }
+      splitDrivePath(path) shouldBe (expected)
     }
   }
 
-  test("fnmatch") {
+  "fnmatch" should "work" in {
     val data = Map(("foo", "f*")          -> true,
                    ("foo", "f*o")         -> true,
                    ("foo", "f*b")         -> false,
@@ -224,14 +214,11 @@ class FileUtilTest extends FunSuite {
                    ("sabc", "[^a-r]*")    -> true)
 
     for(((string, pattern), expected) <- data) {
-      assertResult(expected, 
-             "fnmatch(\"" + string + "\", \"" + pattern + "\")") {
-               fnmatch(string, pattern) 
-             }
+      fnmatch(string, pattern) shouldBe (expected)
     }
   }
 
-  test("normalizePosixPath") {
+  "normalizePosixPath" should "work" in {
     val data = Map("/foo/../bar/////baz" -> "/bar/baz",
                    "///////foo/bar/" -> "/foo/bar",
                    "." -> ".",
@@ -244,13 +231,11 @@ class FileUtilTest extends FunSuite {
                    "//////////////////." -> "/")
 
     for ((path, expected) <- data) {
-      assertResult(expected, "normalizePosixPath(\"" + path + "\")")  {
-        normalizePosixPath(path)
-      }
+      normalizePosixPath(path) shouldBe (expected)
     }
   }
 
-  test("normalizeWindowsPath") {
+  "normalizeWindowsPath" should "work" in {
     val data = Map(
       "\\" -> "\\",
       "c:\\foo\\" -> "c:\\foo",
@@ -265,35 +250,55 @@ class FileUtilTest extends FunSuite {
     )
 
     for ((path, expected) <- data) {
-      assertResult(expected, "normalizeWindowsPath(\"" + path + "\")")  {
-        normalizeWindowsPath(path)
-      }
+      normalizeWindowsPath(path) shouldBe (expected)
     }
   }
 
-  test("listRecursively") {
-    //withTemporaryDirectory("listRecursively") { f =>
-    //  val paths = Set("foo/bar.c", "foo/baz.txt", "test.txt", "foo/bar/baz.txt")
-    //  paths.map {new File(_)}.map {_.dirname}.foreach { f => f.mkdirs }
-    //  println(grizzled.file.util.listRecursively(f).toSet)
-    //}
-
-    val d = createTemporaryDirectory("list-recursively")
-    try {
+  "listRecursively" should "work" in {
+    withTemporaryDirectory("list-recursively") { d =>
       val paths = Set("foo/bar.c", "foo/baz.txt", "test.txt", "foo/bar/baz.txt")
-      paths.map { p =>
-        new File(joinPath(d.getPath, p))
-      }.map {
-        _.dirname
-      }.foreach {
-        f => f.mkdirs
+      val dirs =  paths.map { p => new File(joinPath(d.getPath, p)).dirname }
+
+      dirs.foreach(_.mkdirs())
+      val dirPaths: Set[String] = dirs.map(_.getPath)
+      val expected: Set[String] = dirPaths + d.getPath
+
+      listRecursively(d).length should be < paths.size
+    }
+  }
+
+  "copy" should "fail if the directory doesn't exist" in {
+    copy(Seq("foo.c"), "/nonexistent/directory", false).isFailure shouldBe (true)
+  }
+
+  it should "fail if the directory cannot be created" in {
+    copy(Seq("foo.c"), "/etc/foo/bar/baz").isFailure shouldBe (true)
+  }
+
+  it should "fail if the source path doesn't exist" in {
+    withTemporaryDirectory("copy") { d =>
+      copy(Seq("foo.c"), d.getPath).isFailure shouldBe (true)
+    }
+  }
+
+  it should "work if the source file and directory exist" in {
+    withTemporaryDirectory("copy") { d =>
+      import java.io._
+      import grizzled.io.util._
+      val sourceFile = File.createTempFile("foo", "txt")
+      try {
+        withCloseable(new FileWriter(sourceFile)) { f =>
+          f.write("This is a test.\n")
+        }
+        val sourceSize = sourceFile.length
+        copy(sourceFile.getPath, d.getPath).isSuccess shouldBe (true)
+        val targetPath = joinPath(d.getPath, basename(sourceFile.getPath))
+        new File(targetPath).length shouldBe (sourceSize)
       }
 
-      listRecursively(d).toSet
-    }
-
-    finally {
-      d.deleteRecursively()
+      finally {
+        sourceFile.delete()
+      }
     }
   }
 }

@@ -39,6 +39,8 @@ package grizzled.file
 
 import java.io.File
 
+import scala.util.Try
+
 /** A wrapper for `java.io.File` that provides additional methods.
   * By importing the implicit conversion functions, you can use the methods
   * in this class transparently from a `java.io.File` object.
@@ -86,10 +88,10 @@ final class GrizzledFile(val file: File) {
   /** Recursively remove the directory specified by this object. This
     * method is conceptually equivalent to `rm -r` on a Unix system.
     *
-    * @return `Left(error)` or `Right(total)`, where `total` is the
+    * @return `Failure(exception)` or `Success(total)`, where `total` is the
     *         number of files and directories actually deleted.
     */
-  def deleteRecursively(): Either[String, Int] = util.deleteTree(file)
+  def deleteRecursively(): Try[Int] = util.deleteTree(file)
 
   /** Split this file's pathname into the directory name, basename, and
     * extension pieces.
@@ -167,8 +169,10 @@ final class GrizzledFile(val file: File) {
     *
     * @param time   Set the last-modified time to this time, or to the current
     *               time if this parameter is negative.
+    *
+    * @return `Success(true)` on success, `Failure(exception)` on error.
     */
-  def touch(time: Long = -1): Either[String, Boolean] = {
+  def touch(time: Long = -1): Try[Boolean] = {
     util.touch(file.getPath, time)
   }
 
@@ -241,17 +245,17 @@ final class GrizzledFile(val file: File) {
     *
     * @param target  path to the target file or directory
     *
-    * @return the target file
+    * @return A `Success` containing the target file, or `Failure(exception)`
     */
-  def copyTo(target: String): File = copyTo(new File(target))
+  def copyTo(target: String): Try[File] = copyTo(new File(target))
 
   /** Copy the file to a target directory or file.
     *
     * @param target  path to the target file or directory
     *
-    * @return the target file
+    * @return A `Success` containing the target file, or `Failure(exception)`
     */
-  def copyTo(target: File): File = util.copyFile(file, target)
+  def copyTo(target: File): Try[File] = util.copyFile(file, target)
 }
 
 /** Companion object for `GrizzledFile`. To get implicit functions that
