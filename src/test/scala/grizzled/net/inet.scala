@@ -37,6 +37,8 @@ import org.scalatest.{FlatSpec, Matchers, FunSuite}
 import grizzled.net._
 import grizzled.net.Implicits._
 
+import scala.util.{Failure, Try}
+
 /**
  * Tests the grizzled.net functions in inet.scala
  */
@@ -62,12 +64,12 @@ class IPAddressTest extends FlatSpec with Matchers {
     (Array(0, 0, 0, 0),        List(0, 0, 0, 0), "0.0.0.0")
   )
 
-  def getIPAddress(input: AnyRef): Either[String, IPAddress] = {
+  def getIPAddress(input: AnyRef): Try[IPAddress] = {
     input match {
       case s: String       => IPAddress("localhost")
       case a: Array[Int]   => IPAddress(a)
       case ab: Array[Byte] => IPAddress(ab)
-      case _               => Left("oops")
+      case _               => Failure(new IllegalArgumentException("oops"))
     }
   }
 
@@ -80,9 +82,9 @@ class IPAddressTest extends FlatSpec with Matchers {
       // Map the expected value into a list of bytes
       val mappedExpected = expected.map(_.toByte)
       val ipAddrRes = getIPAddress(input)
-      assert(ipAddrRes.isRight)
+      assert(ipAddrRes.isSuccess)
 
-      val ipAddr = ipAddrRes.right.get
+      val ipAddr = ipAddrRes.get
 
       // Run the test
       assertResult(mappedExpected, "IPAddress(" + input + ")") {
@@ -94,10 +96,7 @@ class IPAddressTest extends FlatSpec with Matchers {
       }
     }
 
-    val ip = IPAddress( (for (i <- 0 to 20) yield i.toByte).toList )
-    assert(ip.isLeft)
-
-    assert(IPAddress(Nil).isLeft)
+    assert(IPAddress(Nil).isFailure)
   }
 
   "IPAddress implicits" should "properly convert" in {
@@ -110,9 +109,9 @@ class IPAddressTest extends FlatSpec with Matchers {
       val mappedExpected = expected.map(_.toByte)
 
       val ipAddrRes = getIPAddress(input)
-      assert(ipAddrRes.isRight)
+      assert(ipAddrRes.isSuccess)
 
-      val ipAddr = ipAddrRes.right.get
+      val ipAddr = ipAddrRes.get
       val jdkInetAddress: java.net.InetAddress = ipAddr
       val ipAddr2: IPAddress = jdkInetAddress
 
@@ -145,17 +144,17 @@ class IPAddressTest extends FlatSpec with Matchers {
   "java.net.InetAddress call-throughs" should "work on an IPAddress" in {
     assertResult(true, "127.0.0.1 is loopback")  {
       val ipAddrRes = IPAddress(127, 0, 0, 1)
-      assert(ipAddrRes.isRight)
+      assert(ipAddrRes.isSuccess)
 
-      val ipAddr = ipAddrRes.right.get
+      val ipAddr = ipAddrRes.get
 
       ipAddr.isLoopbackAddress
     }
 
     assertResult(false, "192.168.1.100 is not loopback")  {
       val ipAddrRes = IPAddress(192, 168, 0, 1)
-      assert(ipAddrRes.isRight)
-      val ipAddr = ipAddrRes.right.get
+      assert(ipAddrRes.isSuccess)
+      val ipAddr = ipAddrRes.get
       ipAddr.isLoopbackAddress
     }
   }
@@ -163,15 +162,15 @@ class IPAddressTest extends FlatSpec with Matchers {
   "IPAddress.parseAddress" should "handle a valid IPv4 address" in {
     val addresses = Array("192.168.12.0", "200.30.99.254", "127.0.0.1")
     for (a <- addresses)
-      IPAddress.parseAddress(a).isRight shouldBe (true)
+      IPAddress.parseAddress(a).isSuccess shouldBe (true)
   }
 
   it should "fail on a nonsense string" in {
-    IPAddress.parseAddress("foobar").isLeft shouldBe (true)
+    IPAddress.parseAddress("foobar").isFailure shouldBe (true)
   }
 
   it should "fail on an invalid IPv4 address" in {
-    IPAddress.parseAddress("256.0.0.1").isLeft shouldBe (true)
+    IPAddress.parseAddress("256.0.0.1").isFailure shouldBe (true)
   }
 
   it should "handle a valid IPv6 address" in {
@@ -183,7 +182,7 @@ class IPAddressTest extends FlatSpec with Matchers {
     )
 
     for (a <- addresses)
-      IPAddress.parseAddress(a).isRight shouldBe (true)
+      IPAddress.parseAddress(a).isSuccess shouldBe (true)
   }
 
   private val IPv4sAndNumbers = Array(
@@ -202,29 +201,29 @@ class IPAddressTest extends FlatSpec with Matchers {
 
   "IPAddress.apply(BigInt)" should "handle a valid IPv6 address" in {
     for ((_, addrNum) <- IPv6sAndNumbers) {
-      IPAddress(addrNum).isRight shouldBe (true)
+      IPAddress(addrNum).isSuccess shouldBe (true)
     }
   }
 
   it should "handle a valid IPv4 address" in {
     for ((_, addrNum) <- IPv4sAndNumbers) {
-      IPAddress(addrNum).isRight shouldBe (true)
+      IPAddress(addrNum).isSuccess shouldBe (true)
     }
   }
 
   "IPAddress.toNumber" should "return valid numbers for IPv6 addresses" in {
     for ((s, expected) <- IPv6sAndNumbers) {
       val res = IPAddress.parseAddress(s)
-      res.isRight shouldBe (true)
-      IPAddress.parseAddress(s).right.get.toNumber shouldBe (expected)
+      res.isSuccess shouldBe (true)
+      IPAddress.parseAddress(s).get.toNumber shouldBe (expected)
     }
   }
 
   it should "return value numbers for IPv4 addresses" in {
     for ((s, expected) <- IPv4sAndNumbers) {
       val res = IPAddress.parseAddress(s)
-      res.isRight shouldBe (true)
-      IPAddress.parseAddress(s).right.get.toNumber shouldBe (expected)
+      res.isSuccess shouldBe (true)
+      IPAddress.parseAddress(s).get.toNumber shouldBe (expected)
     }
   }
 }

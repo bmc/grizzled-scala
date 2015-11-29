@@ -42,7 +42,6 @@ import java.net.InetAddress
 import scala.language.implicitConversions
 import scala.util.{Failure, Success, Try}
 
-import grizzled.either.Implicits._
 import grizzled.net.Implicits._
 
 /** Represents an IP address. This class is similar to `java.net.InetAddress`,
@@ -170,9 +169,9 @@ object IPAddress {
     *
     * @param addr  the address
     *
-    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def apply(addr: Array[Byte]): Either[String, IPAddress] = {
+  def apply(addr: Array[Byte]): Try[IPAddress] = {
     IPAddress(addr.toList)
   }
 
@@ -194,9 +193,9 @@ object IPAddress {
     *
     * @param addr  the address
     *
-    * @return the corresponding `IPAddress` object.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def apply(addr: Array[Int]): Either[String, IPAddress] = {
+  def apply(addr: Array[Int]): Try[IPAddress] = {
     IPAddress(addr.map(_.toByte))
   }
 
@@ -217,9 +216,9 @@ object IPAddress {
     *
     * @param addr  the bytes (as integers) of the address
     *
-    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def apply(addr: Int*): Either[String, IPAddress] = {
+  def apply(addr: Int*): Try[IPAddress] = {
     IPAddress(addr.map(_.toByte).toList)
   }
 
@@ -239,22 +238,24 @@ object IPAddress {
     *
     * @param address  the list of address values
     *
-    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def apply(address: List[Byte]): Either[String, IPAddress] = {
+  def apply(address: List[Byte]): Try[IPAddress] = {
     val zeroByte = 0.toByte
 
     val fullAddressRes = address.length match {
-      case 4  => Right(address)
-      case 16 => Right(address)
-      case 0  => Left("Empty IP address.")
+      case 4  => Success(address)
+      case 16 => Success(address)
+      case 0  => Failure(new IllegalArgumentException("Empty IP address."))
 
       case n if (n > 16) =>
-        Left(s"IP address ${address.mkString(".")} is too long.")
+        Failure(new IllegalArgumentException(
+          s"IP address ${address.mkString(".")} is too long."
+        ))
 
       case n => {
         val upper = if (n < 4) 4 else 16
-        Right(address ++ (n.until(upper).map(i => zeroByte)))
+        Success(address ++ (n.until(upper).map(i => zeroByte)))
       }
     }
 
@@ -277,47 +278,35 @@ object IPAddress {
     *
     * @param host  the host name or address string
     *
-    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def apply(host: String): Either[String, IPAddress] = {
-    Try {
-      IPAddress(InetAddress.getByName(host).getAddress)
-    }.
-    recover {
-      case e: Exception => Left(e.getMessage)
-    }.
-    get
+  def apply(host: String): Try[IPAddress] = {
+    Try { InetAddress.getByName(host).getAddress }.flatMap(IPAddress(_))
   }
 
   /** Create an `IPAddress` from a number.
     *
     * @param address the numeric IP address
     *
-    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def apply(address: BigInt): Either[String, IPAddress] = {
-    Try {
-      if (address <= MaxIPv4) {
-        // IPv4. Do it manually, because, sometimes, BigInt.toByteArray will
-        // produce a byte array with one or more leading zero bytes, which
-        // causes InetAddress.getByAddress() to throw an exception.
-        val bytes = Array(
-          ((address >> 24) & 0xff).toByte,
-          ((address >> 16) & 0xff).toByte,
-          ((address >> 8) & 0xff).toByte,
-           (address & 0xff).toByte
-        )
-        IPAddress(bytes)
-      }
-      else {
-        // IPv6.
-        IPAddress(address.toByteArray)
-      }
-    }.
-    recover {
-      case e: Exception => Left(e.getMessage)
-    }.
-    get
+  def apply(address: BigInt): Try[IPAddress] = {
+    if (address <= MaxIPv4) {
+      // IPv4. Do it manually, because, sometimes, BigInt.toByteArray will
+      // produce a byte array with one or more leading zero bytes, which
+      // causes InetAddress.getByAddress() to throw an exception.
+      val bytes = Array(
+        ((address >> 24) & 0xff).toByte,
+        ((address >> 16) & 0xff).toByte,
+        ((address >> 8) & 0xff).toByte,
+         (address & 0xff).toByte
+      )
+      IPAddress(bytes)
+    }
+    else {
+      // IPv6.
+      IPAddress(address.toByteArray)
+    }
   }
 
   /** Parse an address string (IPv4 or IPv6) only. Host names will result
@@ -327,20 +316,16 @@ object IPAddress {
     *
     * @param addressString The address string
     *
-    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    * @return the `IPAddress` in a `Success`, or `Failure(exception)` on error.
     */
-  def parseAddress(addressString: String): Either[String, IPAddress] = {
-    Try {
-      addressString match {
-        case IPv4Pattern(_*)    => IPAddress(addressString)
-        case IPv6Pattern(a, _*) => IPAddress(a)
-        case _                  => Left(s"Invalid IP address: $addressString")
-      }
-    }.
-    recover {
-      case e: Exception => Left(e.getMessage)
-    }.
-    get
+  def parseAddress(addressString: String): Try[IPAddress] = {
+    addressString match {
+      case IPv4Pattern(_*)    => IPAddress(addressString)
+      case IPv6Pattern(a, _*) => IPAddress(a)
+      case _                  => Failure(new IllegalArgumentException(
+                                   s"Invalid IP address: $addressString"
+                                 ))
+    }
   }
 
   /** Get a list of all `IPAddress` objects for a given host
@@ -361,22 +346,16 @@ object IPAddress {
     *
     * @param hostname  the host name
     *
-    * @return a `Right` containing the list of resolved IP addresses, or
-    *         `Left(error)` on error.
+    * @return a `Success` containing the list of resolved IP addresses, or
+    *         `Failure(exception)` on error.
     */
-  def allForName(hostname: String): Either[String, List[IPAddress]] = {
-    Try {
-      val res = InetAddress.getAllByName(hostname).
-                            map((x: InetAddress) => IPAddress(x.getAddress)).
-                            toList
-      res.filter(_.isLeft).map(_.left.get) match {
-        case err :: errs => Left((err :+ errs).mkString(". "))
-        case Nil         => Right(res.filter(_.isRight).map(_.right.get))
-      }
-    }.
-    recover {
-      case e: Exception => Left(e.getMessage)
-    }.
-    get
+  def allForName(hostname: String): Try[List[IPAddress]] = {
+    val res = InetAddress.getAllByName(hostname)
+                         .map((x: InetAddress) => IPAddress(x.getAddress))
+                         .toList
+    res.filter(_.isFailure) match {
+      case failure :: rest => Try { List(failure.get) }
+      case Nil             => Success(res.map(_.get))
+    }
   }
 }

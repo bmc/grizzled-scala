@@ -15,10 +15,7 @@ object Implicits {
     * @return the `IPAddress`
     */
   implicit def inetToIPAddress(addr: InetAddress): IPAddress = {
-    IPAddress(addr.getAddress) match {
-      case Left(error) => throw new RuntimeException(error)
-      case Right(ip)   => ip
-    }
+    IPAddress(addr.getAddress).get
   }
 
   /** Implicitly converts an `IPAddress` to a

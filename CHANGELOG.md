@@ -11,6 +11,7 @@ Version 1.4.0:
 * Added `grizzled.net.IPAddress.parseAddress()`, to parse a non-hostname IP
   address without incurring a DNS lookup penalty.
 * Cleaned up code in `grizzled.net.IPAddress`.
+* Converted various functions to return `Try` instead of `Either`.
 * Removed use of deprecated Scala `IterableProxy` trait.
 * Deprecated the `grizzled.readline` package. Use
   [JLine2](https://github.com/jline/jline2), instead.
