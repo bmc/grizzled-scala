@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.3"
+version := "1.4"
 
 organization := "org.clapper"
 
@@ -13,9 +13,9 @@ homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 
 description := "A general-purpose Scala utility library"
 
-scalaVersion := "2.11.2"
+scalaVersion := "2.11.7"
 
-crossScalaVersions := Seq("2.10.4", "2.11.1")
+crossScalaVersions := Seq("2.10.5", "2.11.7")
 
 // Incremental compilation performance improvement. See
 // http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
@@ -29,19 +29,7 @@ autoCompilerPlugins := true
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 
-lsSettings
-
-LsKeys.tags in LsKeys.lsync := Seq("utility", "library", "grizzled")
-
-description in LsKeys.lsync <<= description(d => d)
-
-bintraySettings
-
-bintray.Keys.packageLabels in bintray.Keys.bintray := (
-  LsKeys.tags in LsKeys.lsync
-).value
-
-externalResolvers in LsKeys.lsync := (resolvers in bintray.Keys.bintray).value
+bintrayPackageLabels := Seq("library", "grizzled", "scala")
 
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
