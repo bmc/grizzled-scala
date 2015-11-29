@@ -228,6 +228,14 @@ object IPAddress {
     fullAddressRes.map { bytes => new IPAddress(bytes.toArray) }
   }
 
+  /** Create an `IPAddress` from a `java.net.InetAddress`.
+    *
+    * @param inetAddress the `InetAddress`
+    *
+    * @return the `IPAddress`
+    */
+  def apply(inetAddress: InetAddress) = IPAddress(inetAddress.getAddress)
+
   /** Create an `IPAddress`, given a host name. Note that this function may
     *  do a DNS lookup if the host name is not an address string. To parse
     *  _just_ an address string, ignoring host names, use `parseAddress()`.
