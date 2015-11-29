@@ -31,14 +31,14 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+import org.scalatest.{FlatSpec, Matchers, FunSuite}
 import grizzled.net._
 import grizzled.net.Implicits._
 
 /**
  * Tests the grizzled.net functions in inet.scala
  */
-class IPAddressTest extends FunSuite {
+class IPAddressTest extends FlatSpec with Matchers {
   def byte(thing: Int): Byte = thing.toByte
   def bytes(data: Int*): List[Byte] = data.map(_.toByte).toList
 
@@ -69,7 +69,7 @@ class IPAddressTest extends FunSuite {
     }
   }
 
-  test("IPAddress constructors") {
+  "IPAddress constructors" should "behave as expected" in {
     // NOTE: Must use List[Byte], not Array[Byte]. Two identical arrays
     // are not "equal", according to "==". Two identical lists are.
     // (Scala array quirk.)
@@ -98,7 +98,7 @@ class IPAddressTest extends FunSuite {
     assert(IPAddress(Nil).isLeft)
   }
 
-  test("IPAddress implicits") {
+  "IPAddress implicits" should "properly convert" in {
     // NOTE: Must use List[Byte], not Array[Byte]. Two identical arrays
     // are not "equal", according to "==". Two identical lists are.
     // (Scala array quirk.)
@@ -126,14 +126,14 @@ class IPAddressTest extends FunSuite {
         ipAddr2
       }
 
-      assertResult(ipAddr.hashCode, 
+      assertResult(ipAddr.hashCode,
              "IPAddress -> java.net.InetAddress -> IPAddress") {
         ipAddr2.hashCode
       }
     }
   }
 
-  test("java.net.InetAddress call-throughs") {
+  "java.net.InetAddress call-throughs" should "work on an IPAddress" in {
     assertResult(true, "127.0.0.1 is loopback")  {
       val ipAddrRes = IPAddress(127, 0, 0, 1)
       assert(ipAddrRes.isRight)
@@ -150,4 +150,29 @@ class IPAddressTest extends FunSuite {
       ipAddr.isLoopbackAddress
     }
   }
-}
+
+  "IPAddress.parseAddress" should "handle a valid IPv4 address" in {
+    val addresses = Array("192.168.12.0", "200.30.99.254", "127.0.0.1")
+    for (a <- addresses)
+      IPAddress.parseAddress(a).isRight shouldBe (true)
+  }
+
+  it should "fail on a nonsense string" in {
+    IPAddress.parseAddress("foobar").isLeft shouldBe (true)
+  }
+
+  it should "fail on an invalid IPv4 address" in {
+    IPAddress.parseAddress("256.0.0.1").isLeft shouldBe (true)
+  }
+
+  it should "handle a valid IPv6 address" in {
+    val addresses = Array(
+      "2601:8c:4002:71d2:9838:f195:45c6:c8a5",
+      "2600:1011:B12B:6647:A0E7:421A:7904:4F2B",
+      "::129.144.52.38",
+      "2600:1011:B12B:6647:A0E7:421A:7904:4923%eth0"
+    )
+
+    for (a <- addresses)
+      IPAddress.parseAddress(a).isRight shouldBe (true)
+  }}

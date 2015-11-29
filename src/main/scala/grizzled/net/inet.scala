@@ -228,15 +228,45 @@ object IPAddress {
     fullAddressRes.map { bytes => new IPAddress(bytes.toArray) }
   }
 
-  /** Create an `IPAddress`, given a host name.
+  /** Create an `IPAddress`, given a host name. Note that this function may
+    *  do a DNS lookup if the host name is not an address string. To parse
+    *  _just_ an address string, ignoring host names, use `parseAddress()`.
     *
-    * @param host  the host name
+    * @param host  the host name or address string
     *
     * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
     */
   def apply(host: String): Either[String, IPAddress] = {
     Try {
       IPAddress(InetAddress.getByName(host).getAddress)
+    }.
+    recover {
+      case e: Exception => Left(e.getMessage)
+    }.
+    get
+  }
+
+  // This is one butt-ugly regular expression. See
+  // http://stackoverflow.com/a/17871737
+  private val IPv6Pattern = """^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(%.*)?$""".r
+  private val IPv4Pattern = """^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$""".r
+
+  /** Parse an address string (IPv4 or IPv6) only. Host names will result
+    * in an error return value. NOTE: This function strips any IPv6 interface
+    * names, if they exist. That is, an address such as
+    * "fe80::cab3:73ff:fe19:c600%en5" is parsed as "fe80::cab3:73ff:fe19:c600".
+    *
+    * @param addressString The address string
+    *
+    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    */
+  def parseAddress(addressString: String): Either[String, IPAddress] = {
+    Try {
+      addressString match {
+        case IPv4Pattern(_*)    => IPAddress(addressString)
+        case IPv6Pattern(a, _*) => IPAddress(a)
+        case _                  => Left(s"Invalid IP address: $addressString")
+      }
     }.
     recover {
       case e: Exception => Left(e.getMessage)
