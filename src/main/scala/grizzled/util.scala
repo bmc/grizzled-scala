@@ -3,7 +3,7 @@
   This software is released under a BSD license, adapted from
   http://opensource.org/licenses/bsd-license.php
 
-  Copyright (c) 2010-2014, Brian M. Clapper
+  Copyright © 2009-2016, Brian M. Clapper
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
