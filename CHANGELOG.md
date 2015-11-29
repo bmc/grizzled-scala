@@ -12,12 +12,14 @@ Version 1.4:
   address without incurring a DNS lookup penalty.
 * Cleaned up code in `grizzled.net.IPAddress`.
 * Removed use of deprecated Scala `IterableProxy` trait.
+* Deprecated the `grizzled.readline` package. Use
+  [JLine2](https://github.com/jline/jline2), instead.
 * Build cleanups: Removed SBT "ls" plugin and removed stray repos.
 * Cleaned up Scaladoc warnings.
 
 Version 1.3:
 
-* `grizzled.config.Configuration` wasn't properly handling custom regular 
+* `grizzled.config.Configuration` wasn't properly handling custom regular
   expressions for parsing section names and comments. Fixed by
   [Stefan Schlott (@Skyr)](https://github.com/Skyr).
 

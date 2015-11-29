@@ -37,11 +37,17 @@
 
 package grizzled
 
-/** The `grizzled.readline` package provides a common front-end API to
+/** This package is deprecated and will be removed in a future version of
+  * this library. [[https://github.com/jline/jline2 JLine2]] is a better
+  * alternative, and it's more consistent with other Scala tools.
+  *
+  * The `grizzled.readline` package provides a common front-end API to
   * various underlying readline and readline-like implementations, including
   * [[http://tiswww.case.edu/php/chet/readline/rltop.html GNU Readline]],
   * [[http://www.thrysoee.dk/editline/ Editline]], and
   * [[http://jline.sourceforge.net/ JLine]].
+  *
+  * @deprecated Use JLine2 <https://github.com/jline/jline2>
   */
 package object readline {
 }

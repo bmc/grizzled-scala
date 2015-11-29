@@ -40,8 +40,10 @@ package grizzled.readline
 import scala.annotation.tailrec
 
 /** Models a Readline history: an object that holds previously read
-   * lines.
-   */
+  * lines.
+  *
+  * @deprecated Use JLine <https://github.com/jline/jline2>
+  */
 trait History {
   /** Get maximum history size.
     *
@@ -141,14 +143,27 @@ trait History {
   protected def append(line: String)
 }
 
-sealed abstract class CompletionToken;
-case class LineToken(val value: String) extends CompletionToken;
-case object Delim extends CompletionToken;
-case object Cursor extends CompletionToken;
+/** @deprecated Use JLine <https://github.com/jline/jline2>
+  */
+sealed abstract class CompletionToken
+
+/** @deprecated Use JLine <https://github.com/jline/jline2>
+  */
+case class LineToken(val value: String) extends CompletionToken
+
+/** @deprecated Use JLine <https://github.com/jline/jline2>
+  */
+case object Delim extends CompletionToken
+
+/** @deprecated Use JLine <https://github.com/jline/jline2>
+  */
+case object Cursor extends CompletionToken
 
 /** Models a completer: An object that, given a line of input and a token
-   * within that line, finds possible completions for the token.
-   */
+  * within that line, finds possible completions for the token.
+  *
+  * @deprecated Use JLine <https://github.com/jline/jline2>
+  */
 trait Completer {
 
   /** Get all completions for a token. The `context` argument bears
@@ -207,6 +222,8 @@ trait Completer {
   def tokenDelimiters: String = """ \t"""
 }
 
+/** @deprecated Use JLine <https://github.com/jline/jline2>
+  */
 trait CompleterHelper {
   /** Helper method that takes a set of tokens (of whatever type) and
     * converts them into `LineToken` objects with `Delim`
@@ -247,6 +264,7 @@ trait CompleterHelper {
 }
 
 /** A completer that doesn't do anything. Useful as a default.
+  * @deprecated Use JLine <https://github.com/jline/jline2>
   */
 class NullCompleter extends Completer {
   def complete(token: String,
@@ -256,6 +274,7 @@ class NullCompleter extends Completer {
 
 /** A completer that completes path names. Handles "~" expansion, but only
   * for the current user.
+  * @deprecated Use JLine <https://github.com/jline/jline2>
   */
 class PathnameCompleter extends Completer {
   def complete(token: String,
@@ -329,6 +348,8 @@ class PathnameCompleter extends Completer {
   * @param convert      function to convert both the token to be compared
   *                     and the candidate completion token, before comparing
   *                     them (e.g., by converting them to lower case)
+  *
+  * @deprecated Use JLine <https://github.com/jline/jline2>
   */
 class ListCompleter(val completions: List[String],
                     val convert: (String) => String) extends Completer {
@@ -350,6 +371,8 @@ class ListCompleter(val completions: List[String],
 }
 
 /** Utility stuff to mix in.
+  *
+  * @deprecated Use JLine <https://github.com/jline/jline2>
   */
 private[readline] trait Util {
   /** Common string-to-option method. Handles nulls and blank lines.
@@ -368,7 +391,9 @@ private[readline] trait Util {
   *
   * - a means to read lines of input from (presumably) a terminal
   * - a history mechanism
-  * -  an optional tab-completion capability
+  * - an optional tab-completion capability
+  *
+  * @deprecated Use JLine <https://github.com/jline/jline2>
   */
 trait Readline {
   /** A printable name for the implementation.
@@ -440,6 +465,8 @@ trait Readline {
 
 /** Companion factory object, used to instantiate particular readline
   * implementations.
+  *
+  * @deprecated Use JLine <https://github.com/jline/jline2>
   */
 object Readline {
 
