@@ -88,6 +88,31 @@ import grizzled.net.Implicits._
 class IPAddress(val address: Array[Byte]) {
   require((address.length == 4) || (address.length == 16))
 
+  /** Convert the IP address to a number, suitable for numeric comparisons
+    * against other IP addresses. The number is returned as a `BigInt` to
+    * allow for both IPv4 and IPv6 addresses.
+    *
+    * @return the number
+    */
+  def toNumber: BigInt = {
+    address.length match {
+      case 4 /* IPv4 */ => {
+        (
+          ((address(0) << 24) & 0xff000000) |
+          ((address(1) << 16) & 0x00ff0000) |
+          ((address(2) <<  8) & 0x0000ff00)  |
+          (address(3)         & 0x000000ff)
+          ).
+          toLong & 0x00000000ffffffffL
+      }
+
+      case 16 /* IPv6 */ => {
+        val j: InetAddress = this
+        BigInt(j.getAddress)
+      }
+    }
+  }
+
   /** Return a printable version of this IP address.
     *
     * @return the printable version
@@ -103,13 +128,14 @@ class IPAddress(val address: Array[Byte]) {
     *
     * @return `true` if equal, `false` if not
     */
-  override def equals(other: Any): Boolean =
+  override def equals(other: Any): Boolean = {
     other match {
       case that: IPAddress =>
         that.address.toList == this.address.toList
       case _ =>
         false
     }
+  }
 
   /** Overloaded hash method: Ensures that two `IPAddress` objects
     * that represent the same IP address have the same hash code.
@@ -125,6 +151,13 @@ object IPAddress {
   /** Singleton `IPAddress` for the local loop address.
     */
   final val Localhost = IPAddress(Array(127, 0, 0, 1))
+
+  private val MaxIPv4 = BigInt("4294967295")
+
+  // This is one butt-ugly regular expression. See
+  // http://stackoverflow.com/a/17871737
+  private val IPv6Pattern = """^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(%.*)?$""".r
+  private val IPv4Pattern = """^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$""".r
 
   /** Create an `IPAddress`, given an array of bytes representing
     * the address. The array must contain between 1 and 16 byte values.
@@ -234,7 +267,9 @@ object IPAddress {
     *
     * @return the `IPAddress`
     */
-  def apply(inetAddress: InetAddress) = IPAddress(inetAddress.getAddress)
+  def apply(inetAddress: InetAddress): IPAddress = {
+    new IPAddress(inetAddress.getAddress)
+  }
 
   /** Create an `IPAddress`, given a host name. Note that this function may
     *  do a DNS lookup if the host name is not an address string. To parse
@@ -254,10 +289,36 @@ object IPAddress {
     get
   }
 
-  // This is one butt-ugly regular expression. See
-  // http://stackoverflow.com/a/17871737
-  private val IPv6Pattern = """^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(%.*)?$""".r
-  private val IPv4Pattern = """^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$""".r
+  /** Create an `IPAddress` from a number.
+    *
+    * @param address the numeric IP address
+    *
+    * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
+    */
+  def apply(address: BigInt): Either[String, IPAddress] = {
+    Try {
+      if (address <= MaxIPv4) {
+        // IPv4. Do it manually, because, sometimes, BigInt.toByteArray will
+        // produce a byte array with one or more leading zero bytes, which
+        // causes InetAddress.getByAddress() to throw an exception.
+        val bytes = Array(
+          ((address >> 24) & 0xff).toByte,
+          ((address >> 16) & 0xff).toByte,
+          ((address >> 8) & 0xff).toByte,
+           (address & 0xff).toByte
+        )
+        IPAddress(bytes)
+      }
+      else {
+        // IPv6.
+        IPAddress(address.toByteArray)
+      }
+    }.
+    recover {
+      case e: Exception => Left(e.getMessage)
+    }.
+    get
+  }
 
   /** Parse an address string (IPv4 or IPv6) only. Host names will result
     * in an error return value. NOTE: This function strips any IPv6 interface

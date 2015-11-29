@@ -31,6 +31,8 @@
   ---------------------------------------------------------------------------
 */
 
+import java.net.InetAddress
+
 import org.scalatest.{FlatSpec, Matchers, FunSuite}
 import grizzled.net._
 import grizzled.net.Implicits._
@@ -54,7 +56,7 @@ class IPAddressTest extends FlatSpec with Matchers {
     (Array(192),               List(192, 0, 0, 0), "192.0.0.0"),
     (Array(192, 1, 1, 10, 3),  List(192, 1, 1, 10, 3, 0, 0, 0,
                                     0, 0, 0,  0, 0, 0, 0, 0),
-     "c001:10a:300:0:0:0:0:0"),
+                                    "c001:10a:300:0:0:0:0:0"),
     (Array(255, 255, 255, 255),List(255, 255, 255, 255), "255.255.255.255"),
     (Array(255, 255, 255, 0),  List(255, 255, 255, 0), "255.255.255.0"),
     (Array(0, 0, 0, 0),        List(0, 0, 0, 0), "0.0.0.0")
@@ -133,6 +135,13 @@ class IPAddressTest extends FlatSpec with Matchers {
     }
   }
 
+  "IPAddress.apply(InetAddress)" should "work" in {
+    val inetAddress = InetAddress.getLoopbackAddress
+    val ipAddress = IPAddress(inetAddress)
+
+    ipAddress.toString shouldBe ("127.0.0.1")
+  }
+
   "java.net.InetAddress call-throughs" should "work on an IPAddress" in {
     assertResult(true, "127.0.0.1 is loopback")  {
       val ipAddrRes = IPAddress(127, 0, 0, 1)
@@ -175,4 +184,47 @@ class IPAddressTest extends FlatSpec with Matchers {
 
     for (a <- addresses)
       IPAddress.parseAddress(a).isRight shouldBe (true)
-  }}
+  }
+
+  private val IPv4sAndNumbers = Array(
+    ("192.168.10.20", BigInt("3232238100")),
+    ("127.0.0.1", BigInt("2130706433"))
+  )
+
+  private val IPv6sAndNumbers = Array(
+    ("2601:8c:4002:71d2:9838:f195:45c6:c8a5",
+      BigInt("50515867248438085987383377804669667493")),
+    ("2600:1011:B12B:6647:A0E7:421A:7904:4F2B",
+      BigInt("50510989760090537890881087140064939819")),
+    ("2A02:C7D:E19:2800:8485:1403:6CD3:D5CB",
+      BigInt("55838213713482296607501816151617557963"))
+  )
+
+  "IPAddress.apply(BigInt)" should "handle a valid IPv6 address" in {
+    for ((_, addrNum) <- IPv6sAndNumbers) {
+      IPAddress(addrNum).isRight shouldBe (true)
+    }
+  }
+
+  it should "handle a valid IPv4 address" in {
+    for ((_, addrNum) <- IPv4sAndNumbers) {
+      IPAddress(addrNum).isRight shouldBe (true)
+    }
+  }
+
+  "IPAddress.toNumber" should "return valid numbers for IPv6 addresses" in {
+    for ((s, expected) <- IPv6sAndNumbers) {
+      val res = IPAddress.parseAddress(s)
+      res.isRight shouldBe (true)
+      IPAddress.parseAddress(s).right.get.toNumber shouldBe (expected)
+    }
+  }
+
+  it should "return value numbers for IPv4 addresses" in {
+    for ((s, expected) <- IPv4sAndNumbers) {
+      val res = IPAddress.parseAddress(s)
+      res.isRight shouldBe (true)
+      IPAddress.parseAddress(s).right.get.toNumber shouldBe (expected)
+    }
+  }
+}
