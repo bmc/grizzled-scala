@@ -3,6 +3,18 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.4:
+
+* Added `grizzled.net.IPAddress` functions and methods to handle converting IP
+  addresses to and from numeric values.
+* Added a version of `IPAddress.apply()` that takes a `java.net.InetAddress`.
+* Added `grizzled.net.IPAddress.parseAddress()`, to parse a non-hostname IP
+  address without incurring a DNS lookup penalty.
+* Cleaned up code in `grizzled.net.IPAddress`.
+* Removed use of deprecated Scala `IterableProxy` trait.
+* Build cleanups: Removed SBT "ls" plugin and removed stray repos.
+* Cleaned up Scaladoc warnings.
+
 Version 1.3:
 
 * `grizzled.config.Configuration` wasn't properly handling custom regular 
