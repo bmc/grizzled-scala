@@ -3,7 +3,7 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
-Version 1.4:
+Version 1.4.0:
 
 * Added `grizzled.net.IPAddress` functions and methods to handle converting IP
   addresses to and from numeric values.
