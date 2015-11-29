@@ -481,7 +481,9 @@ object Readline {
     Simple      -> "grizzled.readline.simple.SimpleImpl"
   )
 
-  /** Get the specified `Readline` implementation.
+  /** Get the specified `Readline` implementation. This function will
+    * throw an `UnsatisfiedLinkError` if the underlying library cannot be
+    * found.
     *
     * @param readlineType   the `ReadlineType` to use
     * @param appName        an arbitrary name of the calling application
@@ -491,8 +493,6 @@ object Readline {
     *                       is responsible for adding lines to the history.
     *
     * @return the appropriate `Readline` implementation.
-    *
-    * @throws UnsatisfiedLinkError can't find the underlying library
     */
   def apply(readlineType: ReadlineType,
             appName: String,
