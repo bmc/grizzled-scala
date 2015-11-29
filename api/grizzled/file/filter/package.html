@@ -28,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../lib/package_big.png" />
+        <img alt="Package" src="../../../lib/package_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="grizzled">grizzled</a>.<a href="../package.html" class="extype" name="grizzled.file">file</a></p>
-        <h1>filter</h1>
+        <h1>filter</h1><span class="permalink">
+      <a href="../../../index.html#grizzled.file.filter.package" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -72,7 +76,6 @@
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -86,7 +89,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.file.filter.BackslashContinuedLineIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.file.filter.BackslashContinuedLineIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="BackslashContinuedLineIteratorextendsIterator[String]"></a>
       <a id="BackslashContinuedLineIterator:BackslashContinuedLineIterator"></a>
       <h4 class="signature">
@@ -97,8 +100,24 @@
       <span class="symbol">
         <a href="BackslashContinuedLineIterator.html"><span class="name">BackslashContinuedLineIterator</span></a><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Assemble input lines, honoring backslash escapes for line continuation.</p>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.file.filter.package@BackslashContinuedLineIteratorextendsIterator[String]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Assemble input lines, honoring backslash escapes for line continuation.</p><div class="fullcomment"><div class="comment cmt"><p>Assemble input lines, honoring backslash escapes for line continuation.
+<code>BackslashContinuedLineIterator</code> takes an iterator over lines of
+input, looks for lines containing trailing backslashes, and treats them
+as continuation lines, to be concatenated with subsequent lines in the
+input. Thus, when a <code>BackslashContinuedLineIterator</code> filters this
+input:</p><pre>Lorem ipsum dolor sit amet, consectetur \
+adipiscing elit.
+In congue tincidunt fringilla. \
+Sed interdum nibh vitae \
+libero
+fermentum id dictum risus facilisis.</pre><p>it produces these lines:</p><pre>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+In congue tincidunt fringilla. Sed interdum nibh vitae libero
+fermentum id dictum risus facilisis.</pre></div></div>
     </li></ol>
             </div>
 

@@ -28,9 +28,15 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../lib/class_big.png" />
+        <img alt="Class" src="../../lib/class_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.cmd">cmd</a></p>
-        <h1>CommandInterpreter</h1>
+        <h1>CommandInterpreter</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="grizzled.cmd">package cmd</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -85,7 +91,6 @@ in the documentation for the <code>splitCommandAndArgs()</code> method.
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -108,7 +113,11 @@ in the documentation for the <code>splitCommandAndArgs()</code> method.
       <span class="symbol">
         <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@&lt;init&gt;(appName:String):grizzled.cmd.CommandInterpreter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Alternate constructor that tries all known readline implementations,
 in this order:</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor that tries all known readline implementations,
 in this order:</p><p>-  GNU Readline
@@ -116,8 +125,7 @@ in this order:</p><p>-  GNU Readline
 -  Getline
 -  JLine
 -  Simple (pure Java)
-</p></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="&lt;init&gt;(appName:String,readline:grizzled.readline.Readline.ReadlineType.ReadlineType):grizzled.cmd.CommandInterpreter"></a>
       <a id="&lt;init&gt;:CommandInterpreter"></a>
@@ -129,11 +137,14 @@ in this order:</p><p>-  GNU Readline
       <span class="symbol">
         <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="readline">readline: <a href="../readline/Readline$$ReadlineType$.html#ReadlineType=grizzled.readline.Readline.ReadlineType.Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a></span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@&lt;init&gt;(appName:String,readline:grizzled.readline.Readline.ReadlineType.ReadlineType):grizzled.cmd.CommandInterpreter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Alternate constructor taking a single readline implementation.</p><div class="fullcomment"><div class="comment cmt"><p>Alternate constructor taking a single readline implementation. Fails
 if that readline implementation cannot be found.
-</p></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name</p></dd><dt class="param">readline</dt><dd class="cmt"><p>readline implementation
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>application name</p></dd><dt class="param">readline</dt><dd class="cmt"><p>readline implementation</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="&lt;init&gt;(appName:String,readlineCandidates:List[grizzled.readline.Readline.ReadlineType.ReadlineType],tokenDelimiters:String):grizzled.cmd.CommandInterpreter"></a>
       <a id="&lt;init&gt;:CommandInterpreter"></a>
@@ -145,14 +156,17 @@ if that readline implementation cannot be found.
       <span class="symbol">
         <span class="name">CommandInterpreter</span><span class="params">(<span name="appName">appName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="readlineCandidates">readlineCandidates: <span class="extype" name="scala.List">List</span>[<a href="../readline/Readline$$ReadlineType$.html#ReadlineType=grizzled.readline.Readline.ReadlineType.Value" class="extmbr" name="grizzled.readline.Readline.ReadlineType.ReadlineType">ReadlineType</a>]</span>, <span name="tokenDelimiters">tokenDelimiters: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;&quot; \t&quot;&quot;&quot;</span></span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@&lt;init&gt;(appName:String,readlineCandidates:List[grizzled.readline.Readline.ReadlineType.ReadlineType],tokenDelimiters:String):grizzled.cmd.CommandInterpreter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">appName</dt><dd class="cmt"><p>the application name, used by some readline
                            libraries for key-binding</p></dd><dt class="param">readlineCandidates</dt><dd class="cmt"><p>list of readline libraries to try to load, in
                            order. The <code>ReadlineType</code> values are
                            defined by the <code>grizzled.readline</code>
                            package.</p></dd><dt class="param">tokenDelimiters</dt><dd class="cmt"><p>delimiters to use when tokenizing a line for
-                           tab-completion.
-</p></dd></dl></div>
+                           tab-completion.</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -171,7 +185,11 @@ if that readline implementation cannot be found.
       <span class="symbol">
         <span class="name">handlers</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@handlers:List[grizzled.cmd.CommandHandler]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">List of handlers.</p><div class="fullcomment"><div class="comment cmt"><p>List of handlers. The subclass must define this value to contain a
 list of its handlers. The <code>allHandlers</code> property will combine
 this list with the help handler to get the list of all handlers.
@@ -195,7 +213,11 @@ the default one.
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
@@ -208,7 +230,11 @@ the default one.
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
@@ -221,7 +247,11 @@ the default one.
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#DefaultReadlineLibraryList" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DefaultReadlineLibraryList:List[grizzled.readline.Readline.ReadlineType.Value]"></a>
@@ -234,7 +264,11 @@ the default one.
       <span class="symbol">
         <span class="name">DefaultReadlineLibraryList</span><span class="result">: <span class="extype" name="scala.collection.immutable.List">List</span>[<a href="../readline/Readline$$ReadlineType$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.readline.Readline.ReadlineType.Value">readline.Readline.ReadlineType.Value</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@DefaultReadlineLibraryList:List[grizzled.readline.Readline.ReadlineType.Value]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Default list of readline libraries to try, in order.</p>
     </li><li name="grizzled.cmd.CommandInterpreter#OutputWidth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="OutputWidth:Int"></a>
@@ -247,7 +281,11 @@ the default one.
       <span class="symbol">
         <span class="name">OutputWidth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@OutputWidth:Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Assumed output width of the screen.</p>
     </li><li name="grizzled.cmd.CommandInterpreter#StartCommandIdentifier" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="StartCommandIdentifier:String"></a>
@@ -260,7 +298,11 @@ the default one.
       <span class="symbol">
         <span class="name">StartCommandIdentifier</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@StartCommandIdentifier:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><code>StartCommandIdentifier</code> is the list of characters that are
 permitted as the first character of a white space-delimited,
 multicharacter command name.</p><div class="fullcomment"><div class="comment cmt"><p><code>StartCommandIdentifier</code> is the list of characters that are
@@ -282,7 +324,11 @@ method for more details.
       <span class="symbol">
         <span class="name">allHandlers</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@allHandlers:List[grizzled.cmd.CommandHandler]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Get all handlers.</p><div class="fullcomment"><div class="comment cmt"><p>Get all handlers. By default, this property combines the
 <code>handlers</code> value with the default help handler,
 <code>HelpHandler</code>. If you define your own help handler, you'll
@@ -300,7 +346,11 @@ help handler, instead of the default one.
       <span class="symbol">
         <span class="name">appName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@appName:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">the application name, used by some readline
                            libraries for key-binding</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -314,7 +364,11 @@ help handler, instead of the default one.
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -327,7 +381,11 @@ help handler, instead of the default one.
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -346,7 +404,11 @@ help handler, instead of the default one.
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a>
@@ -359,7 +421,11 @@ help handler, instead of the default one.
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#error" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="error(message:String):Unit"></a>
@@ -372,11 +438,14 @@ help handler, instead of the default one.
       <span class="symbol">
         <span class="name">error</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@error(message:String):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Emit an error message in a consistent way.</p><div class="fullcomment"><div class="comment cmt"><p>Emit an error message in a consistent way. May be overridden by
 subclasses. The default implementation prints errors in red.
-</p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit</p></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -388,7 +457,11 @@ subclasses. The default implementation prints errors in red.
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -407,7 +480,11 @@ subclasses. The default implementation prints errors in red.
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#handleCommand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="handleCommand(commandLine:Option[String]):grizzled.cmd.CommandAction"></a>
@@ -420,14 +497,16 @@ subclasses. The default implementation prints errors in red.
       <span class="symbol">
         <span class="name">handleCommand</span><span class="params">(<span name="commandLine">commandLine: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@handleCommand(commandLine:Option[String]):grizzled.cmd.CommandAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Handles a command line, just as if it had been typed directly at the
 prompt.</p><div class="fullcomment"><div class="comment cmt"><p>Handles a command line, just as if it had been typed directly at the
 prompt.
-</p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line
-</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
-        or <code>Stop</code> to tell the main loop to be done.
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#handleEOF" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="handleEOF:grizzled.cmd.CommandAction"></a>
       <a id="handleEOF:CommandAction"></a>
@@ -439,7 +518,11 @@ prompt.
       <span class="symbol">
         <span class="name">handleEOF</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@handleEOF:grizzled.cmd.CommandAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called when an end-of-file condition is encountered while reading a
 command (On Unix-like systems, with some readline libraries, this
 happens when the user pressed Ctrl-D).</p><div class="fullcomment"><div class="comment cmt"><p>Called when an end-of-file condition is encountered while reading a
@@ -448,8 +531,7 @@ happens when the user pressed Ctrl-D). prompt. The default version
 of this method simply returns <code>Stop</code>, causing the command
 loop to exit.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
-        or <code>Stop</code> to tell the main loop to be done.
-</p></dd></dl></div>
+        or <code>Stop</code> to tell the main loop to be done.</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#handleEmptyCommand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="handleEmptyCommand:grizzled.cmd.CommandAction"></a>
       <a id="handleEmptyCommand:CommandAction"></a>
@@ -461,14 +543,17 @@ loop to exit.
       <span class="symbol">
         <span class="name">handleEmptyCommand</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@handleEmptyCommand:grizzled.cmd.CommandAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called when an empty command line is entered in response to the
 prompt.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an empty command line is entered in response to the
 prompt. The default version of this method simply returns
 <code>KeepGoing</code>.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
-        or <code>Stop</code> to tell the main loop to be done.
-</p></dd></dl></div>
+        or <code>Stop</code> to tell the main loop to be done.</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#handleException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="handleException(e:Exception):grizzled.cmd.CommandAction"></a>
       <a id="handleException(Exception):CommandAction"></a>
@@ -480,16 +565,18 @@ prompt. The default version of this method simply returns
       <span class="symbol">
         <span class="name">handleException</span><span class="params">(<span name="e">e: <span class="extype" name="scala.Exception">Exception</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@handleException(e:Exception):grizzled.cmd.CommandAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called when an exception occurs during the main loop.</p><div class="fullcomment"><div class="comment cmt"><p>Called when an exception occurs during the main loop. This method
 can handle the exception however it wants; it must return either
 <code>KeepGoing</code> or <code>Stop</code>. The default version
 of this method dumps the exception stack trace and returns
 <code>Stop</code>.
-</p></div><dl class="paramcmts block"><dt class="param">e</dt><dd class="cmt"><p>the exception
-</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
-        or <code>Stop</code> to tell the main loop to be done.
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">e</dt><dd class="cmt"><p>the exception</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#handleUnknownCommand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="handleUnknownCommand(commandName:String,unparsedArgs:String):grizzled.cmd.CommandAction"></a>
       <a id="handleUnknownCommand(String,String):CommandAction"></a>
@@ -501,14 +588,16 @@ of this method dumps the exception stack trace and returns
       <span class="symbol">
         <span class="name">handleUnknownCommand</span><span class="params">(<span name="commandName">commandName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@handleUnknownCommand(commandName:String,unparsedArgs:String):grizzled.cmd.CommandAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called when a command is entered that isn't recognized.</p><div class="fullcomment"><div class="comment cmt"><p>Called when a command is entered that isn't recognized. The default
 version of this method prints an error message and returns
 <code>KeepGoing</code>.
-</p></div><dl class="paramcmts block"><dt class="param">commandName</dt><dd class="cmt"><p>the command name</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the command arguments
-</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
-        or <code>Stop</code> to tell the main loop to be done.
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">commandName</dt><dd class="cmt"><p>the command name</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the command arguments</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.</p></dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -520,7 +609,11 @@ version of this method prints an error message and returns
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#helpHandler" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="helpHandler:CommandInterpreter.this.HelpHandler.type"></a>
@@ -533,7 +626,11 @@ version of this method prints an error message and returns
       <span class="symbol">
         <span class="name">helpHandler</span><span class="result">: <span class="extype" name="grizzled.cmd.CommandInterpreter.HelpHandler">HelpHandler</span>.type</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@helpHandler:CommandInterpreter.this.HelpHandler.type" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Get the help handler.</p><div class="fullcomment"><div class="comment cmt"><p>Get the help handler. Override this property if you want to supply
 your own help handler.
 </p></div></div>
@@ -548,10 +645,13 @@ your own help handler.
       <span class="symbol">
         <span class="name">history</span><span class="result">: <a href="../readline/History.html" class="extype" name="grizzled.readline.History">History</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@history:grizzled.readline.History" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Get the history object being used to record command history.</p><div class="fullcomment"><div class="comment cmt"><p>Get the history object being used to record command history.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <code>grizzled.readline.History</code> object
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <code>grizzled.readline.History</code> object</p></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -563,7 +663,11 @@ your own help handler.
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#mainLoop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="mainLoop:Unit"></a>
@@ -576,7 +680,11 @@ your own help handler.
       <span class="symbol">
         <span class="name">mainLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@mainLoop:Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Repeatedly issue a prompt, accept input, parse an initial prefix from
 the received input, and dispatch to execution handlers.</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -590,7 +698,11 @@ the received input, and dispatch to execution handlers.</p>
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
@@ -603,7 +715,11 @@ the received input, and dispatch to execution handlers.</p>
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -616,7 +732,11 @@ the received input, and dispatch to execution handlers.</p>
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#postCommand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="postCommand(command:String,unparsedArgs:String):grizzled.cmd.CommandAction"></a>
@@ -629,13 +749,15 @@ the received input, and dispatch to execution handlers.</p>
       <span class="symbol">
         <span class="name">postCommand</span><span class="params">(<span name="command">command: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="unparsedArgs">unparsedArgs: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@postCommand(command:String,unparsedArgs:String):grizzled.cmd.CommandAction" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called after a command line is interpreted.</p><div class="fullcomment"><div class="comment cmt"><p>Called after a command line is interpreted. The default implementation
 simply returns <code>KeepGoing</code>.
-</p></div><dl class="paramcmts block"><dt class="param">command</dt><dd class="cmt"><p>the command that invoked this handler</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line
-</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
-        or <code>Stop</code> to tell the main loop to be done.
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">command</dt><dd class="cmt"><p>the command that invoked this handler</p></dd><dt class="param">unparsedArgs</dt><dd class="cmt"><p>the remainder of the unparsed command line</p></dd><dt>returns</dt><dd class="cmt"><p><code>KeepGoing</code> to tell the main loop to continue,
+        or <code>Stop</code> to tell the main loop to be done.</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#postLoop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="postLoop:Unit"></a>
       <a id="postLoop:Unit"></a>
@@ -647,7 +769,11 @@ simply returns <code>KeepGoing</code>.
       <span class="symbol">
         <span class="name">postLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@postLoop:Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called immediately after the main loop (<code>mainLoop()</code>) ends
 its command loop, this hook method can be used for cleanup.</p><div class="fullcomment"><div class="comment cmt"><p>Called immediately after the main loop (<code>mainLoop()</code>) ends
 its command loop, this hook method can be used for cleanup. The
@@ -664,14 +790,16 @@ default implementation does nothing.
       <span class="symbol">
         <span class="name">preCommand</span><span class="params">(<span name="commandLine">commandLine: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@preCommand(commandLine:String):Option[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called just before a command line is interpreted, this hook method can
 edit the command.</p><div class="fullcomment"><div class="comment cmt"><p>Called just before a command line is interpreted, this hook method can
 edit the command.
-</p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line
-</p></dd><dt>returns</dt><dd class="cmt"><p>The possibly edited command, Some(&quot;&quot;) to signal an empty
-        command, or None to signal EOF.
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">commandLine</dt><dd class="cmt"><p>the command line</p></dd><dt>returns</dt><dd class="cmt"><p>The possibly edited command, Some(&quot;&quot;) to signal an empty
+        command, or None to signal EOF.</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#preLoop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="preLoop:Unit"></a>
       <a id="preLoop:Unit"></a>
@@ -683,7 +811,11 @@ edit the command.
       <span class="symbol">
         <span class="name">preLoop</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@preLoop:Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Called just before the main loop (<code>mainLoop()</code>) begins its
 command loop, this hook method can be used for initialization.</p><div class="fullcomment"><div class="comment cmt"><p>Called just before the main loop (<code>mainLoop()</code>) begins its
 command loop, this hook method can be used for initialization. The
@@ -700,7 +832,11 @@ default implementation does nothing.
       <span class="symbol">
         <span class="name">primaryPrompt</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@primaryPrompt:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The primary prompt string.</p>
     </li><li name="grizzled.cmd.CommandInterpreter#pushReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="pushReader(reader:String=&gt;Option[String]):scala.collection.mutable.Stack[String=&gt;Option[String]]"></a>
@@ -713,7 +849,11 @@ default implementation does nothing.
       <span class="symbol">
         <span class="name">pushReader</span><span class="params">(<span name="reader">reader: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[(<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@pushReader(reader:String=&gt;Option[String]):scala.collection.mutable.Stack[String=&gt;Option[String]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Push a reader on the reader stack.</p><div class="fullcomment"><div class="comment cmt"><p>Push a reader on the reader stack. The reader on top of the stack
 is used until it returns <code>None</code> (indicating EOF). Then, it is
 removed from the stack, and the next reader is used. When the only
@@ -723,8 +863,7 @@ interpreter signals an EOF condition to the subclass (by calling
 it can choose to ignore) and returns a line of input
 (<code>Some(input)</code>) or <code>None</code> for EOF. The line of input,
 if returned, should not have a trailing newline.
-</p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the reader function
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the reader function</p></dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#readline" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="readline:grizzled.readline.Readline"></a>
       <a id="readline:Readline"></a>
@@ -736,7 +875,11 @@ if returned, should not have a trailing newline.
       <span class="symbol">
         <span class="name">readline</span><span class="result">: <a href="../readline/Readline.html" class="extype" name="grizzled.readline.Readline">Readline</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@readline:grizzled.readline.Readline" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li><li name="grizzled.cmd.CommandInterpreter#secondaryPrompt" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="secondaryPrompt:String"></a>
@@ -749,7 +892,11 @@ if returned, should not have a trailing newline.
       <span class="symbol">
         <span class="name">secondaryPrompt</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@secondaryPrompt:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The second prompt string, used when additional input is being
 retrieved.</p>
     </li><li name="grizzled.cmd.CommandInterpreter#splitCommandAndArgs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -763,7 +910,11 @@ retrieved.</p>
       <span class="symbol">
         <span class="name">splitCommandAndArgs</span><span class="params">(<span name="line">line: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@splitCommandAndArgs(line:String):(String,String)" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Split a command from its argument list, returning the command as
 one string and the remaining unparsed argument string as the other
 string.</p><div class="fullcomment"><div class="comment cmt"><p>Split a command from its argument list, returning the command as
@@ -784,9 +935,7 @@ will break the following commands into command + arguments as shown:</p><p>Input
 Result: Command <code>foo</code>, argument string <code>&quot;bar baz&quot;</code></p><p>Input: <code>!bar</code>
 Result: Command <code>!</code> argument string <code>&quot;bar&quot;</code></p><p>Input: <code>? one two</code>
 Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code></p><p>Subclasses may override this method to parse commands differently.
-</p></div><dl class="paramcmts block"><dt class="param">line</dt><dd class="cmt"><p>the input type
-</p></dd><dt>returns</dt><dd class="cmt"><p>A (<i>commandName</i>, <i>argumentString</i>) 2-tuple
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">line</dt><dd class="cmt"><p>the input type</p></dd><dt>returns</dt><dd class="cmt"><p>A (<i>commandName</i>, <i>argumentString</i>) 2-tuple</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -798,7 +947,11 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
@@ -811,7 +964,11 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@toString():String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.cmd.CommandInterpreter#tokenDelimiters" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="tokenDelimiters:String"></a>
@@ -824,7 +981,11 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">tokenDelimiters</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@tokenDelimiters:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">delimiters to use when tokenizing a line for
                            tab-completion.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -838,7 +999,11 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -857,7 +1022,11 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -876,7 +1045,11 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -895,12 +1068,15 @@ Result: Command <code>?</code> argument string <code>&quot;one two&quot;</code><
       <span class="symbol">
         <span class="name">warning</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.CommandInterpreter@warning(message:String):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Emit a warning message in a consistent way.</p><div class="fullcomment"><div class="comment cmt"><p>Emit a warning message in a consistent way. May be overridden by
 subclasses. The default implementation prints the message with the
 prefix &quot;Warning: &quot;.
-</p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit
-</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the message to emit</p></dd></dl></div>
     </li></ol>
             </div>
 

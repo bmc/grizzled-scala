@@ -47,7 +47,7 @@ automatically linked to Bintray's [JCenter](https://bintray.com/bintray/jcenter)
 repository. (From JCenter, it's eventually pushed to the
 [Maven Central Repository][].
 
-- Versions 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
+- Versions 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
 - Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
 - Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
   2.9.1-1 and 2.9.2.
@@ -66,8 +66,8 @@ For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.10</artifactId>
-      <version>1.3</version>
+      <artifactId>grizzled-scala_2.11</artifactId>
+      <version>1.4.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -89,20 +89,6 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 ### Using with SBT
 
-#### 0.11.x/0.12.x
-
-If you're using [SBT][] 0.11.x or 0.12.x to compile your code, you can use the
-following line in your build.sbt file (for Quick Configuration).
-
-    repositories += "JCenter" at "http://jcenter.bintray.com/"
-
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.3"
-
-You only need the `repositories` line if the artifact cannot be resolved (e.g.,
-has not, for some reason, been pushed to Maven Central yet).
-
-#### 0.13.x
-
 With SBT 0.13.x, you can just use [Doug Tangren's](https://github.com/softprops/)
 `bintray-sbt` plugin. In your `project/plugins.sbt` file, add:
 
@@ -119,13 +105,7 @@ Then, in your `build.sbt` file, add:
 
 That automatically adds the appropriate Bintray repositories. Finally, add:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.3"
-
-Grizzled Scala is also registered with [Doug Tangren][]'s excellent
-[ls.implicit.ly][] catalog. If you use the `ls` SBT plugin, you can install
-Grizzled Scala with
-
-    sbt> ls-install grizzled-scala
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.4.0"
 
 ## Source Code Repository
 

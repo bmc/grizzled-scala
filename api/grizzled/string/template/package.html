@@ -28,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../lib/package_big.png" />
+        <img alt="Package" src="../../../lib/package_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="grizzled">grizzled</a>.<a href="../package.html" class="extype" name="grizzled.string">string</a></p>
-        <h1>template</h1>
+        <h1>template</h1><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -74,7 +78,6 @@ supported.
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -99,10 +102,14 @@ supported.
       <span class="symbol">
         <a href="StringTemplate.html"><span class="name">StringTemplate</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A simple, configurable string template that substitutes variable references
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@StringTemplateextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A simple, configurable string template that substitutes variable references
 within a string.</p>
-    </li><li name="grizzled.string.template.UnixShellStringTemplate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="grizzled.string.template.UnixShellStringTemplate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="UnixShellStringTemplateextendsStringTemplate"></a>
       <a id="UnixShellStringTemplate:UnixShellStringTemplate"></a>
       <h4 class="signature">
@@ -113,9 +120,18 @@ within a string.</p>
       <span class="symbol">
         <a href="UnixShellStringTemplate.html"><span class="name">UnixShellStringTemplate</span></a><span class="result"> extends <a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">A string template that uses the Unix shell-like syntax <code>${varname}</code>
-(or <code>$varname</code>) for variable references.</p>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@UnixShellStringTemplateextendsStringTemplate" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A string template that uses the Unix shell-like syntax <code>${varname}</code>
+(or <code>$varname</code>) for variable references.</p><div class="fullcomment"><div class="comment cmt"><p>A string template that uses the Unix shell-like syntax <code>${varname}</code>
+(or <code>$varname</code>) for variable references. A variable's name may consist
+of alphanumerics and underscores. To include a literal &quot;$&quot; in a string,
+escape it with a backslash.</p><p>For this class, the general form of a variable reference is:</p><pre>${varname?default}</pre><p>}</p><p>The <code>?default</code> suffix is optional and specifies a default value
+to be used if the variable has no value.</p><p>A shorthand form of a variable reference is:</p><pre>$varname</pre><p>The <i>default</i> capability is not available in the shorthand form.
+</p></div></div>
     </li><li name="grizzled.string.template.Variable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="VariableextendsAnyRef"></a>
       <a id="Variable:Variable"></a>
@@ -127,9 +143,13 @@ within a string.</p>
       <span class="symbol">
         <a href="Variable.html"><span class="name">Variable</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Information about a parsed variable name.</p>
-    </li><li name="grizzled.string.template.WindowsCmdStringTemplate" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@VariableextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Information about a parsed variable name.</p>
+    </li><li name="grizzled.string.template.WindowsCmdStringTemplate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="WindowsCmdStringTemplateextendsStringTemplate"></a>
       <a id="WindowsCmdStringTemplate:WindowsCmdStringTemplate"></a>
       <h4 class="signature">
@@ -140,9 +160,18 @@ within a string.</p>
       <span class="symbol">
         <a href="WindowsCmdStringTemplate.html"><span class="name">WindowsCmdStringTemplate</span></a><span class="result"> extends <a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></span>
       </span>
-      </h4>
-      <p class="comment cmt">A string template that uses the cmd Windows.</p>
-    </li><li name="grizzled.string.template.StringTemplateException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@WindowsCmdStringTemplateextendsStringTemplate" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A string template that uses the cmd Windows.exe syntax <code>%varname%</code> for
+variable references.</p><div class="fullcomment"><div class="comment cmt"><p>A string template that uses the cmd Windows.exe syntax <code>%varname%</code> for
+variable references. A variable's name may consist of alphanumerics and
+underscores. To include a literal &quot;%&quot; in a string, use two in a row
+(&quot;%%&quot;).
+</p></div></div>
+    </li><li name="grizzled.string.template.StringTemplateException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="StringTemplateExceptionextendsException"></a>
       <a id="StringTemplateException:StringTemplateException"></a>
       <h4 class="signature">
@@ -153,9 +182,17 @@ within a string.</p>
       <span class="symbol">
         <a href="StringTemplateException.html"><span class="name deprecated" title="Deprecated: (Since version 1.2) Exceptions are no longer supported in this API">StringTemplateException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Base class for all <code>StringTemplate</code> exceptions.</p>
-    </li><li name="grizzled.string.template.VariableNotFoundException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@StringTemplateExceptionextendsException" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base class for all <code>StringTemplate</code> exceptions.</p><div class="fullcomment"><div class="comment cmt"><p>Base class for all <code>StringTemplate</code> exceptions.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Exceptions are no longer supported in this API</p></dd></dl></div>
+    </li><li name="grizzled.string.template.VariableNotFoundException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="VariableNotFoundExceptionextendsException"></a>
       <a id="VariableNotFoundException:VariableNotFoundException"></a>
       <h4 class="signature">
@@ -166,8 +203,16 @@ within a string.</p>
       <span class="symbol">
         <a href="VariableNotFoundException.html"><span class="name deprecated" title="Deprecated: (Since version 1.2) Use sub(), which returns an Either">VariableNotFoundException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Thrown for non-safe templates when a variable is not found.</p>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@VariableNotFoundExceptionextendsException" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Thrown for non-safe templates when a variable is not found.</p><div class="fullcomment"><div class="comment cmt"><p>Thrown for non-safe templates when a variable is not found.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use sub(), which returns an Either</p></dd></dl></div>
     </li></ol>
             </div>
 

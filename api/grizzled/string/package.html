@@ -28,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../lib/package_big.png" />
+        <img alt="Package" src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
-        <h1>string</h1>
+        <h1>string</h1><span class="permalink">
+      <a href="../../index.html#grizzled.string.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -72,7 +76,6 @@
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -86,7 +89,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledCharextendsAnyRef"></a>
       <a id="GrizzledChar:GrizzledChar"></a>
       <h4 class="signature">
@@ -97,11 +100,21 @@
       <span class="symbol">
         <a href="GrizzledChar.html"><span class="name">GrizzledChar</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An analog to Scala's <code>RichChar</code> class, providing some methods
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@GrizzledCharextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An analog to Scala's <code>RichChar</code> class, providing some methods
 that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
-<code>java.lang.Character</code>) provide.</p>
-    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+<code>java.lang.Character</code>) provide.</p><div class="fullcomment"><div class="comment cmt"><p>An analog to Scala's <code>RichChar</code> class, providing some methods
+that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
+<code>java.lang.Character</code>) provide. By importing the implicit conversion
+functions, you can use the methods in this class transparently from a
+<code>Char</code>, <code>RichChar</code> or <code>Character</code> object.</p><pre><span class="kw">import</span> grizzled.string.implicits._
+<span class="kw">val</span> ch = <span class="lit">'a'</span>
+println(ch.isHexDigit) <span class="cmt">// prints: true</span></pre></div></div>
+    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledStringextendsAnyRef"></a>
       <a id="GrizzledString:GrizzledString"></a>
       <h4 class="signature">
@@ -112,10 +125,21 @@ that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
       <span class="symbol">
         <a href="GrizzledString.html"><span class="name">GrizzledString</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">An analog to Scala's <code>RichString</code> class, providing some methods
-that neither <code>RichString</code> nor <code>String</code> provide.</p>
-    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@GrizzledStringextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">An analog to Scala's <code>RichString</code> class, providing some methods
+that neither <code>RichString</code> nor <code>String</code> provide.</p><div class="fullcomment"><div class="comment cmt"><p>An analog to Scala's <code>RichString</code> class, providing some methods
+that neither <code>RichString</code> nor <code>String</code> provide. By
+importing the implicit conversion functions, you can use the methods in
+this class transparently from a <code>String</code> or <code>RichString</code>
+object.</p><pre><span class="kw">import</span> grizzled.string.implicits._
+
+<span class="kw">val</span> s = <span class="lit">"a  b          c"</span>
+println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div></div>
+    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="WordWrapperextendsAnyRef"></a>
       <a id="WordWrapper:WordWrapper"></a>
       <h4 class="signature">
@@ -126,9 +150,33 @@ that neither <code>RichString</code> nor <code>String</code> provide.</p>
       <span class="symbol">
         <a href="WordWrapper.html"><span class="name">WordWrapper</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Wraps strings on word boundaries to fit within a proscribed output
-width.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@WordWrapperextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Wraps strings on word boundaries to fit within a proscribed output
+width.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps strings on word boundaries to fit within a proscribed output
+width. The wrapped string may have a prefix or not; prefixes are useful
+for error messages, for instance. You tell a <code>WordWrapper</code> about
+a prefix by passing a non-empty prefix to the constructor.</p><h4> Examples: </h4><pre>Unable to open file /usr/local/etc/wombat: No such file or directory</pre><p>might appear like this without a prefix:</p><pre>Unable to open file /usr/local/etc/wombat: No such file or
+directory</pre><p>and like this if the prefix is &quot;myprog:&quot;</p><pre>myprog: Unable to open file /usr/local/etc/wombat: No such
+        file or directory</pre><p>Alternatively, if the output width is shortened, the same message
+can be made to wrap something like this:</p><pre>myprog: Unable to open file
+        /usr/local/etc/wombat:
+        No such file or
+        directory</pre><p>Note how the wrapping logic will &quot;tab&quot; past the prefix on wrapped
+lines.</p><p>This method also supports the notion of an indentation level, which is
+independent of the prefix. A non-zero indentation level causes each line,
+including the first line, to be indented that many characters. Thus,
+initializing a <code>WordWrapper</code> object with an indentation value of 4
+will cause each output line to be preceded by 4 blanks. (It's also
+possible to change the indentation character from a blank to any other
+character.</p><h4> Notes </h4><p>- The class does not do any special processing of tab characters.
+  Embedded tab characters can have surprising (and unwanted) effects
+  on the rendered output.
+- Wrapping an already wrapped string is an invitation to trouble.
+</p></div></div>
     </li></ol>
             </div>
 
@@ -136,7 +184,7 @@ width.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledChar"></a>
       <a id="GrizzledChar:GrizzledChar"></a>
       <h4 class="signature">
@@ -147,9 +195,15 @@ width.</p>
       <span class="symbol">
         <a href="GrizzledChar$.html"><span class="name">GrizzledChar</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object for <code>GrizzledChar</code>.</p>
-    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@GrizzledChar" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for <code>GrizzledChar</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledChar</code>. To get implicit functions that
+define automatic conversions between <code>GrizzledChar</code> and <code>Char</code>,
+import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledChar._</pre></div></div>
+    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledString"></a>
       <a id="GrizzledString:GrizzledString"></a>
       <h4 class="signature">
@@ -160,8 +214,14 @@ width.</p>
       <span class="symbol">
         <a href="GrizzledString$.html"><span class="name">GrizzledString</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object for <code>GrizzledString</code>.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@GrizzledString" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for <code>GrizzledString</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledString</code>. To get implicit functions that
+define automatic conversions between <code>GrizzledString</code> and <code>String</code>,
+import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledString._</pre></div></div>
     </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="WordWrapper"></a>
       <a id="WordWrapper:WordWrapper"></a>
@@ -173,9 +233,13 @@ width.</p>
       <span class="symbol">
         <a href="WordWrapper$.html"><span class="name">WordWrapper</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object for <code>WordWrapper</code>.</p>
-    </li><li name="grizzled.string.template" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@WordWrapper" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for <code>WordWrapper</code>.</p>
+    </li><li name="grizzled.string.template" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="template"></a>
       <a id="template:template"></a>
       <h4 class="signature">
@@ -186,9 +250,16 @@ width.</p>
       <span class="symbol">
         <a href="template/package.html"><span class="name">template</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Scala classes that provide for variable substitution within strings,
-akin to the Python <code>StringTemplate</code> library.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@template" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Scala classes that provide for variable substitution within strings,
+akin to the Python <code>StringTemplate</code> library.</p><div class="fullcomment"><div class="comment cmt"><p>Scala classes that provide for variable substitution within strings,
+akin to the Python <code>StringTemplate</code> library. Several syntaxes are
+supported.
+</p></div></div>
     </li><li name="grizzled.string.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="util"></a>
       <a id="util:util"></a>
@@ -200,8 +271,12 @@ akin to the Python <code>StringTemplate</code> library.</p>
       <span class="symbol">
         <a href="util$.html"><span class="name">util</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Useful string-related utility functions.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@util" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Useful string-related utility functions.</p>
     </li></ol>
             </div>
 

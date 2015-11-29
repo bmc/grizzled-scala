@@ -28,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../lib/package_big.png" />
+        <img alt="Package" src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
-        <h1>io</h1>
+        <h1>io</h1><span class="permalink">
+      <a href="../../index.html#grizzled.io.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -75,7 +79,6 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -89,7 +92,7 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledSourceextendsAnyRef"></a>
       <a id="GrizzledSource:GrizzledSource"></a>
       <h4 class="signature">
@@ -100,9 +103,18 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
       <span class="symbol">
         <a href="GrizzledSource.html"><span class="name">GrizzledSource</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A wrapper for <code>scala.io.Source</code> that provides additional methods.</p>
-    </li><li name="grizzled.io.MultiSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@GrizzledSourceextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A wrapper for <code>scala.io.Source</code> that provides additional methods.</p><div class="fullcomment"><div class="comment cmt"><p>A wrapper for <code>scala.io.Source</code> that provides additional methods.
+By importing the implicit conversion functions, you can use the methods
+in this class transparently from a <code>java.io.File</code> object.</p><pre><span class="kw">import</span> grizzled.io.GrizzledSource._
+
+<span class="kw">val</span> source = Source.fromFile(<span class="kw">new</span> java.io.File(<span class="lit">"/tmp/foo/bar"</span>))
+source.firstNonblankLine.getOrElse(<span class="lit">""</span>)</pre></div></div>
+    </li><li name="grizzled.io.MultiSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MultiSourceextendsSource"></a>
       <a id="MultiSource:MultiSource"></a>
       <h4 class="signature">
@@ -113,9 +125,16 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
       <span class="symbol">
         <a href="MultiSource.html"><span class="name">MultiSource</span></a><span class="result"> extends <span class="extype" name="scala.io.Source">Source</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A <code>MultiSource</code> contains multiple <code>scala.io.Source</code>
-objects and satisfies reads from them serially.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@MultiSourceextendsSource" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A <code>MultiSource</code> contains multiple <code>scala.io.Source</code>
+objects and satisfies reads from them serially.</p><div class="fullcomment"><div class="comment cmt"><p>A <code>MultiSource</code> contains multiple <code>scala.io.Source</code>
+objects and satisfies reads from them serially. Once composed, a
+<code>MultiSource</code> can be used anywhere a <code>Source</code> is used.
+</p></div></div>
     </li><li name="grizzled.io.PartialReader" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="PartialReader[T]extendsAnyRef"></a>
       <a id="PartialReader[T]:PartialReader[T]"></a>
@@ -127,9 +146,13 @@ objects and satisfies reads from them serially.</p>
       <span class="symbol">
         <a href="PartialReader.html"><span class="name">PartialReader</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Contains methods that can read part of a stream or reader.</p>
-    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@PartialReader[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Contains methods that can read part of a stream or reader.</p>
+    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RichInputStreamextendsPartialReader[Byte]"></a>
       <a id="RichInputStream:RichInputStream"></a>
       <h4 class="signature">
@@ -140,10 +163,17 @@ objects and satisfies reads from them serially.</p>
       <span class="symbol">
         <a href="RichInputStream.html"><span class="name">RichInputStream</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Provides additional methods, over and above those already present in
-the Java <code>InputStream</code> class.</p>
-    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@RichInputStreamextendsPartialReader[Byte]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
+the Java <code>InputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
+the Java <code>InputStream</code> class. The <code>implicits</code> object contains implicit
+conversions between <code>RichInputStream</code> and <code>InputStream</code>.
+</p></div></div>
+    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RichReaderextendsPartialReader[Char]"></a>
       <a id="RichReader:RichReader"></a>
       <h4 class="signature">
@@ -154,9 +184,16 @@ the Java <code>InputStream</code> class.</p>
       <span class="symbol">
         <a href="RichReader.html"><span class="name">RichReader</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Char">Char</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">Provides additional methods, over and above those already present in
-the Java <code>Reader</code> class.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@RichReaderextendsPartialReader[Char]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
+the Java <code>Reader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
+the Java <code>Reader</code> class. The <code>implicits</code> object contains implicit
+conversions between <code>RichReader</code> and <code>Reader</code>.
+</p></div></div>
     </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SourceReaderextendsReader"></a>
       <a id="SourceReader:SourceReader"></a>
@@ -168,8 +205,12 @@ the Java <code>Reader</code> class.</p>
       <span class="symbol">
         <a href="SourceReader.html"><span class="name">SourceReader</span></a><span class="result"> extends <span class="extype" name="java.io.Reader">Reader</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">Provides a <code>java.io.Reader</code> that is backed by a Scala <code>Source</code> object.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@SourceReaderextendsReader" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides a <code>java.io.Reader</code> that is backed by a Scala <code>Source</code> object.</p>
     </li></ol>
             </div>
 
@@ -177,7 +218,7 @@ the Java <code>Reader</code> class.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledSource"></a>
       <a id="GrizzledSource:GrizzledSource"></a>
       <h4 class="signature">
@@ -188,9 +229,15 @@ the Java <code>Reader</code> class.</p>
       <span class="symbol">
         <a href="GrizzledSource$.html"><span class="name">GrizzledSource</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object for <code>GrizzledSource</code>.</p>
-    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@GrizzledSource" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for <code>GrizzledSource</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledSource</code>. To get implicit functions that
+define automatic conversions between <code>GrizzledSource</code> and <code>scala.io.Source</code>,
+import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledSource._</pre></div></div>
+    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RichInputStream"></a>
       <a id="RichInputStream:RichInputStream"></a>
       <h4 class="signature">
@@ -201,9 +248,15 @@ the Java <code>Reader</code> class.</p>
       <span class="symbol">
         <a href="RichInputStream$.html"><span class="name">RichInputStream</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object to <code>RichInputStream</code> class.</p>
-    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@RichInputStream" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object to <code>RichInputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object to <code>RichInputStream</code> class. Importing this object brings
+the implicit conversations into scope.
+</p></div></div>
+    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RichReader"></a>
       <a id="RichReader:RichReader"></a>
       <h4 class="signature">
@@ -214,8 +267,14 @@ the Java <code>Reader</code> class.</p>
       <span class="symbol">
         <a href="RichReader$.html"><span class="name">RichReader</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Companion object to <code>RichReader</code> class.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@RichReader" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object to <code>RichReader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object to <code>RichReader</code> class. Importing this object brings the
+implicit conversations into scope.
+</p></div></div>
     </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SourceReader"></a>
       <a id="SourceReader:SourceReader"></a>
@@ -227,7 +286,11 @@ the Java <code>Reader</code> class.</p>
       <span class="symbol">
         <a href="SourceReader$.html"><span class="name">SourceReader</span></a>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@SourceReader" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       
     </li><li name="grizzled.io.util" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="util"></a>
@@ -240,8 +303,12 @@ the Java <code>Reader</code> class.</p>
       <span class="symbol">
         <a href="util$.html"><span class="name">util</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Some utility methods.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@util" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Some utility methods.</p>
     </li></ol>
             </div>
 

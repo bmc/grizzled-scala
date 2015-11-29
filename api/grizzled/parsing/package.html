@@ -28,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../lib/package_big.png" />
+        <img alt="Package" src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
-        <h1>parsing</h1>
+        <h1>parsing</h1><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -72,7 +76,6 @@
               <li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -86,7 +89,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="IteratorStream[T]extendsAnyRef"></a>
       <a id="IteratorStream[T]:IteratorStream[T]"></a>
       <h4 class="signature">
@@ -97,9 +100,20 @@
       <span class="symbol">
         <a href="IteratorStream.html"><span class="name">IteratorStream</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt"><code>IteratorStream</code> places a simple stream on top of an iterator,
-returning <code>Option</code>-wrapped instances from the underlying iterator.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@IteratorStream[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>IteratorStream</code> places a simple stream on top of an iterator,
+returning <code>Option</code>-wrapped instances from the underlying iterator.</p><div class="fullcomment"><div class="comment cmt"><p><code>IteratorStream</code> places a simple stream on top of an iterator,
+returning <code>Option</code>-wrapped instances from the underlying iterator.
+When the stream is exhausted, the <code>Iterator</code> stream returns
+<code>None</code>. Differences from a plain <code>Iterator</code> include:</p><p>- An <code>IteratorStream</code> will not throw an exception if you try to read
+  past the end of it. Instead, it will just keep returning <code>None</code>.</p><p>Example of use with a string:</p><pre><span class="kw">import</span> grizzled.parsing.IteratorStream
+
+<span class="kw">val</span> s = ...
+<span class="kw">val</span> istream = <span class="kw">new</span> IteratorStream[<span class="std">Char</span>](s.elements)</pre></div></div>
     </li><li name="grizzled.parsing.Pushback" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="Pushback[T]extendsIteratorStream[T]"></a>
       <a id="Pushback[T]:Pushback[T]"></a>
@@ -111,10 +125,14 @@ returning <code>Option</code>-wrapped instances from the underlying iterator.</p
       <span class="symbol">
         <a href="Pushback.html"><span class="name">Pushback</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
       </span>
-      </h4>
-      <p class="comment cmt">The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@Pushback[T]extendsIteratorStream[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
 to permit arbitrary pushback.</p>
-    </li><li name="grizzled.parsing.StringToken" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="grizzled.parsing.StringToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="StringTokenextendsProductwithSerializable"></a>
       <a id="StringToken:StringToken"></a>
       <h4 class="signature">
@@ -125,8 +143,15 @@ to permit arbitrary pushback.</p>
       <span class="symbol">
         <a href="StringToken.html"><span class="name">StringToken</span></a><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A simple string token class, consisting of:</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@StringTokenextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A simple string token class, consisting of:</p><div class="fullcomment"><div class="comment cmt"><p>A simple string token class, consisting of:</p><p>- a string token
+- the starting position of the token in the original string from which
+  the token was parsed
+</p></div></div>
     </li></ol>
             </div>
 

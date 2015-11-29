@@ -28,9 +28,13 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../lib/package_big.png" />
+        <img alt="Package" src="../../lib/package_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
-        <h1>security</h1>
+        <h1>security</h1><span class="permalink">
+      <a href="../../index.html#grizzled.security.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -73,8 +77,12 @@
       <span class="symbol">
         <a href="Digester.html"><span class="name">Digester</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
-      <p class="comment cmt">A message digest producer.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.security.package@DigesterextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A message digest producer.</p>
     </li></ol>
             </div>
 
@@ -82,7 +90,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.security.MessageDigest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.security.MessageDigest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MessageDigest"></a>
       <a id="MessageDigest:MessageDigest"></a>
       <h4 class="signature">
@@ -93,8 +101,20 @@
       <span class="symbol">
         <a href="MessageDigest$.html"><span class="name">MessageDigest</span></a>
       </span>
-      </h4>
-      <p class="comment cmt">Convenience methods for generating crypto-hash (i.</p>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.security.package@MessageDigest" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Convenience methods for generating crypto-hash (i.e., message digest)
+strings (e.g., MD5, SHA256, etc.) from byte values.</p><div class="fullcomment"><div class="comment cmt"><p>Convenience methods for generating crypto-hash (i.e., message digest)
+strings (e.g., MD5, SHA256, etc.) from byte values. Sample use:</p><pre><span class="cmt">// Generate an MD5 hash-string of a string</span>
+
+<span class="kw">val</span> hash = MessageDigest(<span class="lit">"md5"</span>).digestString(<span class="lit">"foo"</span>)
+
+<span class="cmt">// Generate an SHA256 hash-string of a file's contents.</span>
+
+<span class="kw">val</span> hash = MessageDigest(<span class="lit">"sha256"</span>).digestString(<span class="kw">new</span> File(<span class="lit">"/tmp/foo"</span>))</pre></div></div>
     </li></ol>
             </div>
 
