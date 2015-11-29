@@ -235,7 +235,13 @@ object IPAddress {
     * @return the `IPAddress` in a `Right`, on success; `Left(error)` on error.
     */
   def apply(host: String): Either[String, IPAddress] = {
-    IPAddress(InetAddress.getByName(host).getAddress)
+    Try {
+      IPAddress(InetAddress.getByName(host).getAddress)
+    }.
+    recover {
+      case e: Exception => Left(e.getMessage)
+    }.
+    get
   }
 
   /** Get a list of all `IPAddress` objects for a given host
@@ -260,25 +266,18 @@ object IPAddress {
     *         `Left(error)` on error.
     */
   def allForName(hostname: String): Either[String, List[IPAddress]] = {
-    val t = Try {
-      InetAddress.getAllByName(hostname)
-                 .map((x: InetAddress) => IPAddress(x.getAddress))
-                 .toList
-    }
-
-    t match {
-      case Failure(ex)   => Left(ex.getMessage)
-      case Success(list) => {
-        list.filter { _.isLeft }.map { _.left.get } match {
-          case err :: errs => {
-            Left((List(err) ++ errs).mkString(". "))
-          }
-
-          case Nil => {
-            Right(list.filter { _.isRight }.map { _.right.get })
-          }
-        }
+    Try {
+      val res = InetAddress.getAllByName(hostname).
+                            map((x: InetAddress) => IPAddress(x.getAddress)).
+                            toList
+      res.filter(_.isLeft).map(_.left.get) match {
+        case err :: errs => Left((err :+ errs).mkString(". "))
+        case Nil         => Right(res.filter(_.isRight).map(_.right.get))
       }
-    }
+    }.
+    recover {
+      case e: Exception => Left(e.getMessage)
+    }.
+    get
   }
 }
