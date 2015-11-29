@@ -130,10 +130,12 @@ class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
 }
 
 class GrizzledIterable[+T](protected val underlying: Iterable[T])
-extends IterableProxy[T] {
+extends Iterable[T] {
   def self = this
 
   def realIterable = underlying
+
+  def iterator = underlying.iterator
 
   def columnarize(width: Int): String = {
     new GrizzledLinearSeq(underlying.toList).columnarize(width)
@@ -168,7 +170,7 @@ class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T]) {
     import scala.collection.mutable.ArrayBuffer
     import grizzled.math.util.{max => maxnum}
 
-    val buf = new ArrayBuffer[Char] 
+    val buf = new ArrayBuffer[Char]
 
     // Lay them out in columns. Simple-minded for now.
     println(underlying)
