@@ -163,7 +163,10 @@ quam. Vestibulum ante ipsum primis in.""",
       val (string, width, indent, prefix, indentChar) = input
 
       assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        val wrapper = new WordWrapper(width, indent, prefix, indentChar)
+        val wrapper = WordWrapper(wrapWidth   = width,
+                                  indentation = indent,
+                                  prefix      = prefix,
+                                  indentChar  = indentChar)
         wrapper.wrap(string)
       }
     }

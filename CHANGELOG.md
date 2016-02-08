@@ -3,6 +3,12 @@ title: "Change Log: The Grizzled Scala Utility Library"
 layout: default
 ---
 
+Version 1.5.0:
+
+* Modified `grizzled.string.WordWrapper` to allow specification of
+  characters that should be ignored when calculating wrapping.
+* Updated ScalaTest to 2.2.6 and scala-async to 0.9.5.
+
 Version 1.4.0:
 
 * Added `grizzled.net.IPAddress` functions and methods to handle converting IP

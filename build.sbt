@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.4.0"
+version := "1.5.0"
 
 organization := "org.clapper"
 
@@ -35,8 +35,8 @@ bintrayPackageLabels := Seq("library", "grizzled", "scala")
 // ScalaTest dependendency
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.1.3" % "test",
-  "org.scala-lang.modules" %% "scala-async" % "0.9.1"
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
+  "org.scala-lang.modules" %% "scala-async" % "0.9.5"
 )
 
 libraryDependencies <<= (scalaVersion, libraryDependencies) { (sv, deps) =>
