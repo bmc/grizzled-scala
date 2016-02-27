@@ -379,12 +379,12 @@ trait ValueConverter[T] {
   *                            values).
   */
 final class Configuration private[config](
-  contents:             Map[String, Map[String, Value]],
-  sectionNamePattern:   Regex,
-  commentPattern:       Regex,
-  normalizeOptionName:  (String => String),
-  notFoundFunction:     Option[Types.NotFoundFunction] = None,
-  safe:                 Boolean = true) {
+  private val contents:             Map[String, Map[String, Value]],
+  private val sectionNamePattern:   Regex,
+  private val commentPattern:       Regex,
+  private val normalizeOptionName:  (String => String),
+  private val notFoundFunction:     Option[Types.NotFoundFunction] = None,
+  private val safe:                 Boolean = true) {
 
   private val SectionName      = sectionNamePattern
   private val VariableName     = """([a-zA-Z0-9_.]+)""".r
@@ -433,7 +433,7 @@ final class Configuration private[config](
           option -> resolveOpt(name, value.value)
       }.
       filter { case (key, value) =>
-        value != None
+        value.isDefined
       }.
       map { case (key, optValue) =>
         // At this point, courtesy of the filter(), we know the option is
@@ -473,7 +473,7 @@ final class Configuration private[config](
       case "system" =>
         Option(System.getProperties.getProperty(optionName))
 
-      case _ if (! hasSection(sectionName)) =>
+      case _ if ! hasSection(sectionName) =>
         handleNotFound()
 
       case _ => {
@@ -507,7 +507,7 @@ final class Configuration private[config](
       case "system" =>
         Right(Option(System.getProperties.getProperty(optionName)))
 
-      case _ if (! hasSection(sectionName)) =>
+      case _ if ! hasSection(sectionName) =>
         Right(None)
 
       case _ => {
@@ -614,95 +614,71 @@ final class Configuration private[config](
     ).map(_.toList)
   }
 
-  /** Get an optional integer option.
+  /** Add a value to the configuration, returning a new object. If the
+    * option already exists in the specified section, it is replaced in
+    * the new configuration. Otherwise, it's added. If the section doesn't
+    * exist, it's created and the option is added.
     *
-    * @param sectionName  the section name
-    * @param optionName   the option name
+    * Example:
+    * {{{
+    *   val cfg = Configuration(...)
+    *   val newCfg = cfg + ("myNewSection", "optionName", "value")
+    * }}}
     *
-    * @return `Some(integer)` or None.
+    * @param section  the section name
+    * @param option   the option name
+    * @param value    the value
     *
-    * @throws ConversionException    if the option has a non-integer value
+    * @return a new `Configuration` object with the change applied.
     */
-  @deprecated("Use asOpt[Int]", "1.2")
-  def getInt(sectionName: String, optionName: String): Option[Int] = {
-    def makeInt(value: String): Int = {
-      try {
-        value.toInt
-      }
+  def +(section: String, option: String, value: String): Configuration = {
+    val existing = contents.get(section)
+    val newSection = existing.map { sectionMap =>
+      sectionMap + (option -> Value(value))
+    }.
+    getOrElse(Map(option -> Value(value)))
 
-      catch {
-        case _: NumberFormatException =>
-          throw new ConversionException(
-            sectionName, optionName, value, "not an integer."
-          )
-      }
+    val newContents = contents + (section -> newSection)
+    new Configuration(contents            = newContents,
+                      sectionNamePattern  = this.sectionNamePattern,
+                      commentPattern      = this.commentPattern,
+                      normalizeOptionName = this.normalizeOptionName,
+                      notFoundFunction    = this.notFoundFunction,
+                      safe                = this.safe)
+  }
+
+  /** Remove a value from the configuration, returning a new object. If the
+    * section or option don't exist, the original configuration is returned
+    * (not a copy). If the section and option exist, the option is removed.
+    * If the section is then empty, it's also removed.
+    *
+    * @param section  the section name
+    * @param option   the option name
+    *
+    * @return a new `Configuration` object with the change applied, or the
+    *         original configuration if the section or option weren't
+    *         there.
+    */
+  def -(section: String, option: String): Configuration = {
+    val optNewContents = for { sectionMap <- contents.get(section)
+                               value      <- sectionMap.get(option) }
+    yield {
+      val newSection = sectionMap - option
+      if (newSection.isEmpty)
+        contents - section
+      else
+        contents + (section -> newSection)
     }
 
-    get(sectionName, optionName).map(makeInt _)
-  }
-
-  /** Get an integer option, applying a default if not found.
-    *
-    * @param sectionName  the section name
-    * @param optionName   the option name
-    * @param default      the default value
-    *
-    * @return the integer result
-    *
-    * @throws ConversionException    if the option cannot be converted
-    */
-  @deprecated("Use asOpt[Int].getOrElse(...) instead", "1.2")
-  def getIntOrElse(sectionName: String,
-                   optionName: String,
-                   default: Int): Int = {
-    getInt(sectionName, optionName).getOrElse(default)
-  }
-
-  /** Get an optional boolean option.
-    *
-    * @param sectionName  the section name
-    * @param optionName   the option name
-    *
-    * @return `Some(boolean)` or None.
-    *
-    * @throws ConversionException if the option has a non-boolean value
-    */
-  @deprecated("Use asOpt[Boolean] instead", "1.2")
-  def getBoolean(sectionName: String, optionName: String): Option[Boolean] = {
-    import grizzled.string.util._
-
-    def makeBoolean(value: String): Boolean = {
-      try {
-        stringToBoolean(value)
-      }
-
-      catch {
-        case _: IllegalArgumentException =>
-          throw new ConversionException(
-            sectionName, optionName, value, "not a boolean."
-          )
-      }
-    }
-
-    get(sectionName, optionName).map(makeBoolean _)
-
-  }
-
-  /** Get a boolean option, applying a default if not found.
-    *
-    * @param sectionName  the section name
-    * @param optionName   the option name
-    * @param default      the default value
-    *
-    * @return the integer result
-    *
-    * @throws ConversionException    if the option cannot be converted
-    */
-  @deprecated("Use asOpt[Boolean].getOrElse(...), instead", "1.2")
-  def getBooleanOrElse(sectionName: String,
-                       optionName: String,
-                       default: Boolean): Boolean = {
-    getBoolean(sectionName, optionName).getOrElse(default)
+    optNewContents.map { newContents =>
+      new Configuration(contents            = newContents,
+                        sectionNamePattern  = this.sectionNamePattern,
+                        commentPattern      = this.commentPattern,
+                        normalizeOptionName = this.normalizeOptionName,
+                        notFoundFunction    = this.notFoundFunction,
+                        safe                = this.safe)
+    }.
+    getOrElse(this)
   }
 
   /** Determine whether the configuration contains a named section.

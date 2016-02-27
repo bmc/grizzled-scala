@@ -1,11 +1,11 @@
 
-import org.scalatest.FlatSpec
+import org.scalatest.{Matchers, FlatSpec}
 import scala.io.Source
 import grizzled.config._
 
 /** Test the Configuration class.
   */
-class config extends FlatSpec {
+class config extends FlatSpec with Matchers {
 
   import Configuration.Implicits._
 
@@ -58,6 +58,54 @@ class config extends FlatSpec {
     for (((section, option), expected) <- testData) {
       assert(cfg.get(section, option) === expected)
     }
+  }
+
+  it should "allow + to replace an option without mutating the original" in {
+    val eCfg = Configuration(Source.fromString(Fixture.TestConfig))
+    eCfg.isRight shouldBe true
+
+    val cfg: Configuration = eCfg.right.get
+    val newCfg = cfg + ("section2", "o1", "bar")
+
+    cfg.asOpt[String]("section2", "o1") shouldBe Some("foo")
+    newCfg.asOpt[String]("section2", "o1") shouldBe Some("bar")
+  }
+
+  it should "allow + to add an option without mutating the original" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg + ("section99", "opt1", "something")
+
+    cfg.asOpt[String]("section99", "opt1") shouldBe None
+    newCfg.asOpt[String]("section99", "opt1") shouldBe Some("something")
+  }
+
+  it should "allow - to remove a non-existing section" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg - ("section-xxx", "option")
+    cfg should === (newCfg)
+  }
+
+  it should "allow - to remove a section with only one option" in {
+    val cfg = Fixture.cfg + ("section999", "option", "value")
+    val newCfg = cfg - ("section999", "option")
+
+    cfg.hasSection("section999") should === (true)
+    cfg.get("section999", "option") shouldBe Some("value")
+    newCfg.hasSection("section999") should === (false)
+    newCfg.get("section999", "option") shouldBe None
+  }
+
+  it should "allow - to remove an option from a section with many options" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg - ("section1", "o1")
+
+    cfg.hasSection("section1") should === (true)
+    newCfg.hasSection("section1") should === (true)
+    val cfgOptionNames = cfg.optionNames("section1").toSet
+    cfgOptionNames.contains("o1") should === (true)
+    val newCfgOptionNames = newCfg.optionNames("section1").toSet
+    newCfgOptionNames.contains("o1") should === (false)
+    newCfgOptionNames.size should === (cfgOptionNames.size - 1)
   }
 
   it should "support a 'not found' function" in {
