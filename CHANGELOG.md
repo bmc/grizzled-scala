@@ -1,8 +1,3 @@
----
-title: "Change Log: The Grizzled Scala Utility Library"
-layout: default
----
-
 Version 1.5.0:
 
 * Modified `grizzled.string.WordWrapper` to allow specification of
