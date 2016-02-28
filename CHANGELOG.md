@@ -7,7 +7,7 @@ Version 1.5.0:
 
 * Modified `grizzled.string.WordWrapper` to allow specification of
   characters that should be ignored when calculating wrapping.
-* Removed deprecated methods from `grizzled.config.Configuration`.
+* Removed some deprecated methods and classes that have been around for awhile.
 * Added `+`, `++`, `-` and `--` methods to `grizzled.config.Configuration`, to
   allow addition to and removal from a `Configuration` in an immutable way.
 * Updated ScalaTest to 2.2.6 and scala-async to 0.9.5.
