@@ -41,22 +41,11 @@ import scala.util.matching.Regex.Match
 import scala.annotation.tailrec
 import grizzled.either.Implicits._
 
-/** Base class for all `StringTemplate` exceptions.
-  */
-@deprecated("Exceptions are no longer supported in this API", "1.2")
-class StringTemplateException(val message: String) extends Exception(message)
-
-/** Thrown for non-safe templates when a variable is not found.
-  */
-@deprecated("Use sub(), which returns an Either", "1.2")
-class VariableNotFoundException(val variableName: String)
-    extends Exception(s"Variable $variableName not found.")
-
 /** Information about a parsed variable name.
   */
-class Variable(val start: Int, 
-               val end: Int, 
-               val name: String, 
+class Variable(val start: Int,
+               val end: Int,
+               val name: String,
                val default: Option[String])
 
 /** A simple, configurable string template that substitutes variable references
@@ -64,7 +53,7 @@ class Variable(val start: Int,
   *
   * @param resolveVar  A function that takes a variable name as a parameter and
   *                    returns an `Option[String]` value for the variable,
-  *                    or `None` if there is no value 
+  *                    or `None` if there is no value
   *                    (`Map[String, String].get()`, for instance).
   * @param safe        `true` for a "safe" template that just substitutes
   *                    a blank string for an unknown variable, `false`
@@ -72,30 +61,6 @@ class Variable(val start: Int,
   */
 abstract class StringTemplate(val resolveVar: (String) => Option[String],
                               val safe: Boolean) {
-  /** Replace all variable references in the given string. Variable references
-    * are recognized per the regular expression passed to the constructor. If
-    * a referenced variable is not found in the resolver, this method either:
-    *
-    * - throws a `VariableNotFoundException` (if `safe` is `false`), or
-    * - substitutes an empty string (if `safe` is `true`)
-    *
-    * Recursive references are supported (but beware of infinite recursion).
-    *
-    * @param s  the string in which to replace variable references
-    *
-    * @return the result
-    *
-    * @throws VariableNotFoundException  a referenced variable could not be
-    *                                    found, and `safe` is
-    *                                    `false`
-    */
-  @deprecated("Use sub(), instead", "1.2")
-  def substitute(s: String): String = {
-    sub(s) match {
-      case Left(error) => throw new VariableNotFoundException(error)
-      case Right(res)  => res
-    }
-  }
 
   /** Replace all variable references in the given string. Variable references
     * are recognized per the regular expression passed to the constructor. If
@@ -197,7 +162,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
   *
   * @param resolveVar   A function that takes a variable name as a parameter
   *                     and returns an `Option[String]` value for the
-  *                     variable, or `None` if there is no value 
+  *                     variable, or `None` if there is no value
   *                     (`Map[String, String].get()`, for instance).
   * @param namePattern  Regular expression pattern to match a variable name, as
   *                     a string (not a Regex). For example: "[a-zA-Z0-9_]+"
@@ -211,8 +176,8 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
   extends StringTemplate(resolveVar, safe) {
 
   // ${foo} or ${foo?default}
-  private var LongFormVariable = ("""\$\{(""" + 
-                                  namePattern + 
+  private var LongFormVariable = ("""\$\{(""" +
+                                  namePattern +
                                   """)(\?[^}]*)?\}""").r
 
   // $foo
@@ -227,7 +192,7 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
     *
     * @param resolveVar   A function that takes a variable name as a parameter
     *                     and returns an `Option[String]` value for the
-    *                     variable, or `None` if there is no value 
+    *                     variable, or `None` if there is no value
     *                     (`Map[String, String].get()`, for instance).
     * @param safe         `true` for a "safe" template that just
     *                     substitutes a blank string for an unknown variable,
@@ -335,7 +300,7 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
   *
   * @param resolveVar   A function that takes a variable name as a parameter
   *                     and returns an `Option[String]` value for the
-  *                     variable, or `None` if there is no value 
+  *                     variable, or `None` if there is no value
   *                     (`Map[String, String].get()`, for instance).
   * @param namePattern  Regular expression pattern to match a variable name, as
   *                     a string (not a Regex). For example: "[a-zA-Z0-9_]+"
@@ -357,7 +322,7 @@ class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
     *
     * @param resolveVar   A function that takes a variable name as a parameter
     *                     and returns an `Option[String]` value for the
-    *                     variable, or `None` if there is no value 
+    *                     variable, or `None` if there is no value
     *                     (`Map[String, String].get()`, for instance).
     * @param safe         `true` for a "safe" template that just
     *                     substitutes a blank string for an unknown variable,

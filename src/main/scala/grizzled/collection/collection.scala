@@ -63,31 +63,6 @@ object CollectionIterator {
     new CollectionIterator[T](c)
 }
 
-/** An `Iterator` for lists.
-  */
-@deprecated(message="Use List.iterator()", since="1.1.6")
-class ListIterator[+T](val list: List[T]) extends Iterator[T] {
-  private[this] var current = list
-
-  def hasNext: Boolean = {
-    current match {
-      case Nil => false
-      case _   => true
-    }
-  }
-
-  def next: T = {
-    current match {
-      case Nil =>
-        throw new IllegalStateException("Unexpected empty list")
-      case h :: t => {
-        current = t
-        h
-      }
-    }
-  }
-}
-
 /** An iterator that iterates, serially, over the contents of multiple other
   * iterators.
   *

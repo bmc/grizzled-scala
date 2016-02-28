@@ -79,30 +79,6 @@ object util {
       .getOrElse(Left(s"Cannot convert '$s' to boolean"))
   }
 
-  /** Convert a string to a boolean.
-    *
-    * This method currently understands the following strings (in any mixture
-    * of upper and lower case). It is currently English-specific.
-    *
-    * {{{
-    * true, t, yes, y, 1
-    * false, f, no, n, 0
-    * }}}
-    *
-    * @param s  the string to convert
-    *
-    * @return a boolean value
-    */
-  @deprecated("Use str2boolean(), instead", "1.2")
-  def stringToBoolean(s: String): Boolean = {
-    BooleanStrings.get(s.trim.toLowerCase) match {
-      case Some(bool) => bool
-      case _       =>
-        throw new IllegalArgumentException("Can't convert string \"" +
-                                           s + "\" to boolean.")
-    }
-  }
-
   /** Convert an array of bytes to a hexadecimal string.
     *
     * @param bytes the array of bytes
