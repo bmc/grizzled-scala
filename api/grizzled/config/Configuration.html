@@ -266,6 +266,116 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#+" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="+(section:String,option:String,value:String):grizzled.config.Configuration"></a>
+      <a id="+(String,String,String):Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus" class="name">+</span><span class="params">(<span name="section">section: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="option">option: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@+(section:String,option:String,value:String):grizzled.config.Configuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Add a value to the configuration, returning a new object.</p><div class="fullcomment"><div class="comment cmt"><p>Add a value to the configuration, returning a new object. If the
+option already exists in the specified section, it is replaced in
+the new configuration. Otherwise, it's added. If the section doesn't
+exist, it's created and the option is added.</p><p>Example:</p><pre><span class="kw">val</span> cfg = Configuration(...)
+<span class="kw">val</span> newCfg = cfg + (<span class="lit">"myNewSection"</span>, <span class="lit">"optionName"</span>, <span class="lit">"value"</span>)</pre></div><dl class="paramcmts block"><dt class="param">section</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">option</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">value</dt><dd class="cmt"><p>the value</p></dd><dt>returns</dt><dd class="cmt"><p>a new <code>Configuration</code> object with the change applied.</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++(newValues:Map[String,Map[String,String]]):grizzled.config.Configuration"></a>
+      <a id="++(Map[String,Map[String,String]]):Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="newValues">newValues: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@++(newValues:Map[String,Map[String,String]]):grizzled.config.Configuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Add new sections to the configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Add new sections to the configuration. Example usage:</p><pre><span class="kw">val</span> cfg = Configuration(...)
+<span class="kw">val</span> newCfg = cfg ++ <span class="std">Map</span>(
+  <span class="lit">"newSection1"</span> -&gt; <span class="std">Map</span>(<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>,
+                       <span class="lit">"option2"</span> -&gt; <span class="lit">"value2"</span>),
+  <span class="lit">"newSection2"</span> -&gt; <span class="std">Map</span>(<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>)
+)</pre></div><dl class="paramcmts block"><dt class="param">newValues</dt><dd class="cmt"><p>A map of (section -&gt; Map(option -&gt; value)) values</p></dd><dt>returns</dt><dd class="cmt"><p>new configuration</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++(values:(String,(String,String))*):grizzled.config.Configuration"></a>
+      <a id="++((String,(String,String))*):Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="values">values: (<span class="extype" name="scala.Predef.String">String</span>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>))*</span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@++(values:(String,(String,String))*):grizzled.config.Configuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Add multiple (section -&gt; (option -&gt; value)) triplets to the configuration,
+returning the new configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Add multiple (section -&gt; (option -&gt; value)) triplets to the configuration,
+returning the new configuration. Example use:</p><pre><span class="kw">val</span> cfg = Configuration(...)
+<span class="kw">val</span> newCfg = cfg ++ ((<span class="lit">"newSection1"</span> -&gt; (<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>)),
+                     (<span class="lit">"newSection2"</span> -&gt; (<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>)),
+                     (<span class="lit">"newSection1"</span> -&gt; (<span class="lit">"option3"</span> -&gt; <span class="lit">"value3"</span>)))</pre></div><dl class="paramcmts block"><dt class="param">values</dt><dd class="cmt"><p>one or more (section -&gt; (option -&gt; value)) triplets</p></dd><dt>returns</dt><dd class="cmt"><p>new configuration</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#-" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="-(section:String,option:String):grizzled.config.Configuration"></a>
+      <a id="-(String,String):Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $minus" class="name">-</span><span class="params">(<span name="section">section: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="option">option: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@-(section:String,option:String):grizzled.config.Configuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Remove a value from the configuration, returning a new object.</p><div class="fullcomment"><div class="comment cmt"><p>Remove a value from the configuration, returning a new object. If the
+section or option don't exist, the original configuration is returned
+(not a copy). If the section and option exist, the option is removed.
+If the section is then empty, it's also removed.
+</p></div><dl class="paramcmts block"><dt class="param">section</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">option</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p>a new <code>Configuration</code> object with the change applied, or the
+        original configuration if the section or option weren't
+        there.</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#--" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="--(values:Seq[(String,String)]):grizzled.config.Configuration"></a>
+      <a id="--(Seq[(String,String)]):Configuration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $minus$minus" class="name">--</span><span class="params">(<span name="values">values: <span class="extype" name="scala.Seq">Seq</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@--(values:Seq[(String,String)]):grizzled.config.Configuration" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Remove multiple (section -&gt; option) pairs from the configuration,
+returning the new configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Remove multiple (section -&gt; option) pairs from the configuration,
+returning the new configuration. Example use:</p><pre><span class="kw">val</span> cfg = Configuration(...)
+<span class="kw">val</span> newCfg = cfg -- ((<span class="lit">"newSection1"</span> -&gt; <span class="lit">"option1"</span>),
+                     (<span class="lit">"newSection2"</span> -&gt; <span class="lit">"option1"</span>),
+                     (<span class="lit">"newSection1"</span> -&gt; <span class="lit">"option3"</span>))</pre></div><dl class="paramcmts block"><dt class="param">values</dt><dd class="cmt"><p>sequence of (section, option) pairs</p></dd><dt>returns</dt><dd class="cmt"><p>new configuration</p></dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
@@ -859,94 +969,7 @@ expression.
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.config.Configuration#getBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getBoolean(sectionName:String,optionName:String):Option[Boolean]"></a>
-      <a id="getBoolean(String,String):Option[Boolean]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use asOpt[Boolean] instead">getBoolean</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getBoolean(sectionName:String,optionName:String):Option[Boolean]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Get an optional boolean option.</p><div class="fullcomment"><div class="comment cmt"><p>Get an optional boolean option.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(boolean)</code> or None.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use asOpt[Boolean] instead</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt"><p><a href="ConversionException.html" class="extype" name="grizzled.config.ConversionException"><code>ConversionException</code></a> if the option has a non-boolean value</p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getBooleanOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getBooleanOrElse(sectionName:String,optionName:String,default:Boolean):Boolean"></a>
-      <a id="getBooleanOrElse(String,String,Boolean):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use asOpt[Boolean].getOrElse(...), instead">getBooleanOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getBooleanOrElse(sectionName:String,optionName:String,default:Boolean):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Get a boolean option, applying a default if not found.</p><div class="fullcomment"><div class="comment cmt"><p>Get a boolean option, applying a default if not found.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value</p></dd><dt>returns</dt><dd class="cmt"><p>the integer result</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use asOpt[Boolean].getOrElse(...), instead</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt"><p><a href="ConversionException.html" class="extype" name="grizzled.config.ConversionException"><code>ConversionException</code></a> if the option cannot be converted</p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getInt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getInt(sectionName:String,optionName:String):Option[Int]"></a>
-      <a id="getInt(String,String):Option[Int]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use asOpt[Int]">getInt</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getInt(sectionName:String,optionName:String):Option[Int]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Get an optional integer option.</p><div class="fullcomment"><div class="comment cmt"><p>Get an optional integer option.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(integer)</code> or None.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use asOpt[Int]</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt"><p><a href="ConversionException.html" class="extype" name="grizzled.config.ConversionException"><code>ConversionException</code></a> if the option has a non-integer value</p></span></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getIntOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getIntOrElse(sectionName:String,optionName:String,default:Int):Int"></a>
-      <a id="getIntOrElse(String,String,Int):Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.2) Use asOpt[Int].getOrElse(...) instead">getIntOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getIntOrElse(sectionName:String,optionName:String,default:Int):Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Get an integer option, applying a default if not found.</p><div class="fullcomment"><div class="comment cmt"><p>Get an integer option, applying a default if not found.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value</p></dd><dt>returns</dt><dd class="cmt"><p>the integer result</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.2)</i> Use asOpt[Int].getOrElse(...) instead</p></dd><dt>Exceptions thrown</dt><dd><span class="cmt"><p><a href="ConversionException.html" class="extype" name="grizzled.config.ConversionException"><code>ConversionException</code></a> if the option cannot be converted</p></span></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">

@@ -47,7 +47,7 @@ automatically linked to Bintray's [JCenter](https://bintray.com/bintray/jcenter)
 repository. (From JCenter, it's eventually pushed to the
 [Maven Central Repository][].
 
-- Versions 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
+- Versions 1.5.0, 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
 - Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
 - Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
   2.9.1-1 and 2.9.2.
@@ -67,7 +67,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.11</artifactId>
-      <version>1.4.0</version>
+      <version>1.5.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -105,7 +105,7 @@ Then, in your `build.sbt` file, add:
 
 That automatically adds the appropriate Bintray repositories. Finally, add:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.4.0"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.5.0"
 
 ## Source Code Repository
 

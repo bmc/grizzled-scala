@@ -111,7 +111,7 @@ character.</p><h4> Notes </h4><p>- The class does not do any special processing 
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="grizzled.string.WordWrapper#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(wrapWidth:Int,indentation:Int,prefix:String,indentChar:Char):grizzled.string.WordWrapper"></a>
+      <a id="&lt;init&gt;(wrapWidth:Int,indentation:Int,prefix:String,ignore:Set[Char],indentChar:Char):grizzled.string.WordWrapper"></a>
       <a id="&lt;init&gt;:WordWrapper"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -119,14 +119,17 @@ character.</p><h4> Notes </h4><p>- The class does not do any special processing 
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">WordWrapper</span><span class="params">(<span name="wrapWidth">wrapWidth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">79</span></span>, <span name="indentation">indentation: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>, <span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="indentChar">indentChar: <span class="extype" name="scala.Char">Char</span> = <span class="symbol">' '</span></span>)</span>
+        <span class="name">WordWrapper</span><span class="params">(<span name="wrapWidth">wrapWidth: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">79</span></span>, <span name="indentation">indentation: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>, <span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="ignore">ignore: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="scala.Char">Char</span>] = <span class="symbol">Set.empty[Char]</span></span>, <span name="indentChar">indentChar: <span class="extype" name="scala.Char">Char</span> = <span class="symbol">' '</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.WordWrapper@&lt;init&gt;(wrapWidth:Int,indentation:Int,prefix:String,indentChar:Char):grizzled.string.WordWrapper" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.WordWrapper@&lt;init&gt;(wrapWidth:Int,indentation:Int,prefix:String,ignore:Set[Char],indentChar:Char):grizzled.string.WordWrapper" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">wrapWidth</dt><dd class="cmt"><p>the number of characters after which to wrap each line</p></dd><dt class="param">indentation</dt><dd class="cmt"><p>how many characters to indent</p></dd><dt class="param">prefix</dt><dd class="cmt"><p>the prefix to use, or &quot;&quot; for none. Cannot be null.</p></dd><dt class="param">indentChar</dt><dd class="cmt"><p>the indentation character to use.</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">wrapWidth</dt><dd class="cmt"><p>the number of characters after which to wrap each line</p></dd><dt class="param">indentation</dt><dd class="cmt"><p>how many characters to indent</p></dd><dt class="param">prefix</dt><dd class="cmt"><p>the prefix to use, or &quot;&quot; for none. Cannot be null.</p></dd><dt class="param">ignore</dt><dd class="cmt"><p>set of characters to ignore when calculating wrapping.
+                   This feature can be useful when certain characters
+                   represent escape characters, and you intend to
+                   post-process the wrapped string.</p></dd><dt class="param">indentChar</dt><dd class="cmt"><p>the indentation character to use.</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -318,6 +321,26 @@ character.</p><h4> Notes </h4><p>- The class does not do any special processing 
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.string.WordWrapper#ignore" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ignore:Set[Char]"></a>
+      <a id="ignore:Set[Char]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ignore</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="scala.Char">Char</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.WordWrapper@ignore:Set[Char]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">set of characters to ignore when calculating wrapping.</p><div class="fullcomment"><div class="comment cmt"><p>set of characters to ignore when calculating wrapping.
+                   This feature can be useful when certain characters
+                   represent escape characters, and you intend to
+                   post-process the wrapped string.</p></div></div>
     </li><li name="grizzled.string.WordWrapper#indentChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="indentChar:Char"></a>
       <a id="indentChar:Char"></a>
