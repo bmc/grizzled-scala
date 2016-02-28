@@ -45,8 +45,7 @@ package grizzled.config
 
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
-import grizzled.string.template.{UnixShellStringTemplate,
-                                 VariableNotFoundException}
+import grizzled.string.template.UnixShellStringTemplate
 import grizzled.string.GrizzledString._
 import grizzled.either.Implicits._
 
@@ -54,21 +53,6 @@ import scala.annotation.tailrec
 import scala.io.Source
 import scala.util.matching.Regex
 import scala.util.{Try, Success, Failure}
-
-/**
-  * Base class for all configuration exceptions.
-  */
-@deprecated("No longer used, except by deprecated methods", "1.2")
-class ConfigException(val message: String) extends Exception(message)
-
-@deprecated("No longer used, except by deprecated methods", "1.2")
-class ConversionException(sectionName: String,
-                          optionName: String,
-                          value: String,
-                          message: String)
-extends ConfigException("Section \"" + sectionName + "\", option \"" +
-                        optionName + "\": Conversion error for value \"" +
-                        value + "\": " + message)
 
 /** Some commonly used type aliases
   */
@@ -647,6 +631,90 @@ final class Configuration private[config](
                       safe                = this.safe)
   }
 
+  /** Add multiple (section -> (option -> value)) triplets to the configuration,
+    * returning the new configuration. Example use:
+    *
+    * {{{
+    *   val cfg = Configuration(...)
+    *   val newCfg = cfg ++ (("newSection1" -> ("option1" -> "value1")),
+    *                        ("newSection2" -> ("option1" -> "value1")),
+    *                        ("newSection1" -> ("option3" -> "value3")))
+    * }}}
+    *
+    * @param values one or more (section -> (option -> value)) triplets
+    *
+    * @return new configuration
+    */
+  def ++(values: (String, (String, String))*): Configuration = {
+    // Broken into pieces for easier reading. Types added for the same
+    // reason.
+
+    // Group the passed-in (section, (option, value)) tuples by section name.
+    val t1: Map[String, Seq[(String, (String, String))]] = values.groupBy(_._1)
+
+    // Map t1 so that we:
+    //
+    // (a) drop the section name from each map value (so that each map value
+    //     is an (option, value) pair, and
+    // (b) map the "value" part of (option, value) from a String to a Value.
+    //
+    // Then, we'll end up with a new contents map we can merge with the
+    // existing one.
+    val t2: Map[String, Map[String, Value]] = t1.map { case (sect, entries) =>
+      val optionsAndVals = for { (_, ov) <- entries
+                                 (option, valueString) = ov }
+                           yield (option, Value(valueString))
+
+      (sect, optionsAndVals.toMap)
+    }
+
+    // Finally, merge the two maps.
+    val newContents = t2.map { case (sectionName, optionsMap) =>
+      val optExistingOptions = contents.get(sectionName)
+
+      // If there's an existing map, add the new map to the existing one.
+      // Otherwise, just use the new one.
+      val newOptionsMap = optExistingOptions.map { existingOptionsMap =>
+        existingOptionsMap ++ optionsMap
+      }
+      .getOrElse(optionsMap)
+
+      (sectionName, newOptionsMap)
+    }
+
+    // Finally, construct the new Configuration.
+    new Configuration(contents            = newContents,
+                      sectionNamePattern  = this.sectionNamePattern,
+                      commentPattern      = this.commentPattern,
+                      normalizeOptionName = this.normalizeOptionName,
+                      notFoundFunction    = this.notFoundFunction,
+                      safe                = this.safe)
+  }
+
+  /** Add new sections to the configuration. Example usage:
+    *
+    * {{{
+    *   val cfg = Configuration(...)
+    *   val newCfg = cfg ++ Map(
+    *     "newSection1" -> Map("option1" -> "value1",
+    *                          "option2" -> "value2"),
+    *     "newSection2" -> Map("option1" -> "value1")
+    *   )
+    * }}}
+    *
+    * @param newValues A map of (section -> Map(option -> value)) values
+    *
+    * @return new configuration
+    */
+  def ++(newValues: Map[String, Map[String, String]]): Configuration = {
+
+    val sequence = for { (sectionName, optionsMap) <- newValues.toSeq
+                         optionValue               <- optionsMap.toSeq }
+                   yield (sectionName, optionValue)
+
+    ++(sequence: _*)
+  }
+
   /** Remove a value from the configuration, returning a new object. If the
     * section or option don't exist, the original configuration is returned
     * (not a copy). If the section and option exist, the option is removed.
@@ -679,6 +747,61 @@ final class Configuration private[config](
                         safe                = this.safe)
     }.
     getOrElse(this)
+  }
+
+  /** Remove multiple (section -> option) pairs from the configuration,
+    * returning the new configuration. Example use:
+    *
+    * {{{
+    *   val cfg = Configuration(...)
+    *   val newCfg = cfg -- (("newSection1" -> "option1"),
+    *                        ("newSection2" -> "option1"),
+    *                        ("newSection1" -> "option3"))
+    * }}}
+    *
+    * @param values sequence of (section, option) pairs
+    *
+    * @return new configuration
+    */
+  def --(values: Seq[(String, String)]): Configuration = {
+    // Group the passed-in (section, option) pairs by section name.
+    val grouped: Map[String, Seq[(String, String)]] = values.groupBy(_._1)
+
+    // Strip the section name from the grouped values.
+    val groupedValuesMap = grouped.map { case (section, seq) =>
+      (section, seq.map(_._2))
+    }
+
+    val emptyMapPlaceholder = Map.empty[String, Value]
+
+    // Create a new content map by subtracting the options from existing
+    // sections. Note that we may well end up with empty sections.
+    val newContents1 = contents.map { case (sectionName, optionsMap) =>
+      groupedValuesMap.get(sectionName).map { removeOptions =>
+        sectionName -> (optionsMap -- removeOptions)
+      }.
+      getOrElse {
+        sectionName -> optionsMap
+      }
+    }
+
+    // Now, remove empty sections.
+    val newContents2 = newContents1.filter { case (section, optionsMap) =>
+      optionsMap.nonEmpty
+    }
+
+    if (contents == newContents2) {
+      this
+    }
+    else {
+      // Finally, construct the new Configuration.
+      new Configuration(contents            = newContents2,
+                        sectionNamePattern  = this.sectionNamePattern,
+                        commentPattern      = this.commentPattern,
+                        normalizeOptionName = this.normalizeOptionName,
+                        notFoundFunction    = this.notFoundFunction,
+                        safe                = this.safe)
+    }
   }
 
   /** Determine whether the configuration contains a named section.

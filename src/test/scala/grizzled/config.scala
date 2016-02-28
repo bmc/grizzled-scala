@@ -1,3 +1,4 @@
+package grizzled.config
 
 import org.scalatest.{Matchers, FlatSpec}
 import scala.io.Source
@@ -5,7 +6,7 @@ import grizzled.config._
 
 /** Test the Configuration class.
   */
-class config extends FlatSpec with Matchers {
+class ConfigSpec extends FlatSpec with Matchers {
 
   import Configuration.Implicits._
 
@@ -106,6 +107,100 @@ class config extends FlatSpec with Matchers {
     val newCfgOptionNames = newCfg.optionNames("section1").toSet
     newCfgOptionNames.contains("o1") should === (false)
     newCfgOptionNames.size should === (cfgOptionNames.size - 1)
+  }
+
+  it should "allow addition of multiple new sections and options with ++" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg ++ (("section999" -> ("opt1" -> "value1")),
+                         ("section888" -> ("opt2" -> "value2")),
+                         ("section999" -> ("opt3" -> "value3")))
+    cfg.hasSection("section999") should === (false)
+    cfg.hasSection("section888") should === (false)
+
+    newCfg.get("section999", "opt1") shouldBe Some("value1")
+    newCfg.get("section999", "opt2") shouldBe None
+    newCfg.get("section999", "opt3") shouldBe Some("value3")
+    newCfg.get("section888", "opt2") shouldBe Some("value2")
+  }
+
+  it should "allow addition of new options to existing sections with ++" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg ++ (("section1" -> ("newOption1" -> "value1")),
+                         ("section2" -> ("newOption2" -> "value2")),
+                         ("section1" -> ("newOption3" -> "value3")))
+
+    cfg.hasSection("section1") should === (true)
+    cfg.hasSection("section2") should === (true)
+    newCfg.hasSection("section1") should === (true)
+    newCfg.hasSection("section2") should === (true)
+
+    val oldSection1Keys = cfg.options("section1").keySet
+    val oldSection2Keys = cfg.options("section2").keySet
+    val newSection1Keys = newCfg.options("section1").keySet
+    val newSection2Keys = newCfg.options("section2").keySet
+
+    (newSection1Keys -- oldSection1Keys) should === (Set("newOption1", "newOption3"))
+    (newSection2Keys -- oldSection2Keys) should === (Set("newOption2"))
+  }
+
+  it should "allow replacing options in existing sections with ++" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg ++ (("section1" -> ("o1" -> "newValue1")),
+                         ("section1" -> ("o2" -> "newValue2")))
+
+    cfg.hasSection("section1") should === (true)
+    newCfg.hasSection("section1") should === (true)
+
+    val oldSection1Keys = cfg.options("section1").keySet
+    val newSection1Keys = newCfg.options("section1").keySet
+
+    newSection1Keys should === (oldSection1Keys)
+    cfg.get("section1", "o1") shouldBe Some("val1")
+    newCfg.get("section1", "o1") shouldBe Some("newValue1")
+    newCfg.get("section1", "o2") shouldBe Some("newValue2")
+  }
+
+  it should "allow addition of a new map of values with ++" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg ++ Map(
+      "section999"  -> Map("opt1" -> "value1",
+                           "opt2" -> "value2"),
+      "section1000" -> Map("opt3" -> "value3")
+    )
+
+    cfg.hasSection("section999") should === (false)
+    cfg.hasSection("section888") should === (false)
+
+    newCfg.get("section999", "opt1") shouldBe Some("value1")
+    newCfg.get("section999", "opt2") shouldBe Some("value2")
+    newCfg.get("section1000", "opt3") shouldBe Some("value3")
+  }
+
+  it should "allow removal of existing options via --" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg -- Seq("section1" -> "o1", "section1" -> "o2")
+
+    cfg.get("section1", "o1") shouldBe Some("val1")
+    cfg.get("section1", "o2") shouldBe Some("val2")
+    newCfg.get("section1", "o1") shouldBe None
+    newCfg.get("section1", "o2") shouldBe None
+  }
+
+  it should "allow removal of nonexistent options via --" in {
+    val cfg = Fixture.cfg
+    val newCfg = cfg -- Seq("section1" -> "o99999", "section1" -> "x99999")
+
+    cfg should === (newCfg)
+  }
+
+  it should "remove sections that are empty after --" in {
+    val cfg = Fixture.cfg
+    val optionsToRemove = cfg.options("section1").keySet.map { opt =>
+      "section1" -> opt
+    }.toSeq
+
+    val newCfg = cfg -- optionsToRemove
+    newCfg.hasSection("section1") shouldBe false
   }
 
   it should "support a 'not found' function" in {
