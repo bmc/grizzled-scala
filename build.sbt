@@ -3,7 +3,7 @@
 
 name := "grizzled-scala"
 
-version := "1.5.0"
+version := "1.5.1"
 
 organization := "org.clapper"
 

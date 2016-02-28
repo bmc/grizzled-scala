@@ -37,7 +37,6 @@
 
 package grizzled.io
 
-import scala.io.Source
 import scala.annotation.tailrec
 
 /** Contains methods that can read part of a stream or reader.

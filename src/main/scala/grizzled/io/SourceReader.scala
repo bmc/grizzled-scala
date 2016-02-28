@@ -37,13 +37,9 @@
 package grizzled.io
 
 import scala.io.Source
-import scala.annotation.tailrec
-import scala.math
-
 import java.io.Reader
 
-/**
-  * Provides a `java.io.Reader` that is backed by a Scala `Source` object.
+/** Provides a `java.io.Reader` that is backed by a Scala `Source` object.
   *
   * @param source  the source to wrap
   */

@@ -37,11 +37,9 @@
 
 package grizzled.collection
 
-import scala.collection.generic._
 import scala.collection.immutable.LinearSeq
 import scala.language.implicitConversions
 import java.util.{Collection, Iterator => JIterator}
-import scala.collection.IterableProxy
 
 /** Useful for converting a collection into an object suitable for use with
   * Scala's `for` loop.
@@ -59,7 +57,7 @@ class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T] {
 }
 
 object CollectionIterator {
-  implicit def javaCollectionToScalaIterator[T](c: Collection[T]) =
+  implicit def javaCollectionToScalaIterator[T](c: Collection[T]): Iterator[T] =
     new CollectionIterator[T](c)
 }
 
@@ -120,12 +118,12 @@ extends Iterable[T] {
 object GrizzledIterable {
   /** Convert a Scala Iterable object to a GrizzledIterable.
     */
-  implicit def IterableToGrizzledIterable[T](it: Iterable[T]) =
+  implicit def iterableToGrizzledIterable[T](it: Iterable[T]): GrizzledIterable[T] =
     new GrizzledIterable[T](it)
 
   /** Convert GrizzledIterator a object to a Scala Iterable.
     */
-  implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]) =
+  implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]): Iterable[T] =
     it.realIterable
 }
 
@@ -173,16 +171,16 @@ class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T]) {
 object GrizzledLinearSeq {
   /** Convert a Scala Seq object to a GrizzledLinearSeq.
     */
-  implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]) =
+  implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]): GrizzledLinearSeq[T] =
     new GrizzledLinearSeq[T](seq)
 
   /** Convert a Scala List object to a GrizzledLinearSeq.
     */
-  implicit def listToGrizzledLinearSeq[T](list: List[T]) =
+  implicit def listToGrizzledLinearSeq[T](list: List[T]): GrizzledLinearSeq[T] =
     new GrizzledLinearSeq[T](list)
 
   /** Convert GrizzledLinearSeq a object to a Scala Seq.
     */
-  implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]) =
+  implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]): LinearSeq[T] =
     seq.realSeq
 }

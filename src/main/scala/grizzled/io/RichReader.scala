@@ -37,7 +37,6 @@
 
 package grizzled.io
 
-import scala.io.Source
 import scala.annotation.tailrec
 import scala.language.implicitConversions
 
@@ -54,22 +53,22 @@ class RichReader(val reader: Reader) extends PartialReader[Char] {
 
   /** Copy the reader to a writer, stopping on EOF. This method does no
     * buffering. If you want buffering, make sure you use a
-    * `java.io.BufferedReader` and a `java.io.BufferedWriter. This method
+    * `java.io.BufferedReader` and a `java.io.BufferedWriter`. This method
     * does not close either object.
     *
     * @param out  the output stream
     */
   def copyTo(out: Writer): Unit = {
-    @tailrec def doCopyTo: Unit = {
+    @tailrec def doCopyTo(): Unit = {
       val c: Int = reader.read()
       if (c != -1) {
         out.write(c)
         // Tail recursion means never having to use a var.
-        doCopyTo
+        doCopyTo()
       }
     }
 
-    doCopyTo
+    doCopyTo()
   }
 }
 
@@ -77,6 +76,8 @@ class RichReader(val reader: Reader) extends PartialReader[Char] {
   * implicit conversations into scope.
   */
 object RichReader {
-  implicit def readerToRichReader(reader: Reader) = new RichReader(reader)
-  implicit def richReaderToReader(richReader: RichReader) = richReader.reader
+  implicit def readerToRichReader(reader: Reader): RichReader =
+    new RichReader(reader)
+  implicit def richReaderToReader(richReader: RichReader): Reader =
+    richReader.reader
 }

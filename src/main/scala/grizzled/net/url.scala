@@ -59,7 +59,7 @@ object url {
       case '/' =>
         File.createTempFile("urldownload", extension)
 
-      case _   => 
+      case _   =>
         new File(FileUtil.joinPath(System.getProperty("java.io.tmpdir"),
                                    FileUtil.basename(urlPath)))
     }
@@ -124,7 +124,7 @@ object url {
     */
   def download(url: URL, pathOut: File): Either[String, File] = {
     import java.io.{BufferedInputStream, BufferedOutputStream}
-    import java.io.{FileOutputStream}
+    import java.io.FileOutputStream
     import grizzled.io.RichInputStream._
 
     if (pathOut.isDirectory)

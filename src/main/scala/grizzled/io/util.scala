@@ -37,7 +37,6 @@
 
 package grizzled.io
 
-import scala.io.Source
 import scala.language.reflectiveCalls
 
 /** Some utility methods.
@@ -63,17 +62,17 @@ object util {
     * is useless to the block.
     *
     * @param closeable  the object that implements `Closeable`
-    * @param block      the code block to execute with the `Closeable`
+    * @param code       the code block to execute with the `Closeable`
     *
     * @return whatever the block returns
     */
-  def withCloseable[C <% Closeable, T](closeable: C)(block: C => T) = {
+  def withCloseable[T <: {def close(): Unit}, R](closeable: T)(code: T => R) = {
     try {
-      block(closeable)
+      code(closeable)
     }
 
     finally {
-      closeable.close
+      closeable.close()
     }
   }
 }

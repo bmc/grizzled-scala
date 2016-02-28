@@ -43,7 +43,6 @@ import grizzled.file.GrizzledFile._
 import grizzled.io.RichInputStream._
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
-import grizzled.either.Implicits._
 
 import java.io.{File, IOException}
 import java.security.{SecureRandom => Random}
@@ -54,8 +53,6 @@ class FileDoesNotExistException(message: String) extends Exception
 /** Useful file-related utility functions.
   */
 object util {
-  import grizzled.string._ // Grizzled string functions
-
   val fileSeparator = File.separator
   val fileSeparatorChar = fileSeparator(0)
 
@@ -82,17 +79,16 @@ object util {
       case List("") =>
         ""
 
-      case simple :: Nil if (! (simple startsWith fileSep)) =>
+      case simple :: Nil if ! (simple startsWith fileSep) =>
         "."
 
-      case _ => {
+      case _ =>
         val len = components.length
         val result = components.take(len - 1) mkString fileSep
         if (result.length == 0)
           fileSep
         else
           result
-      }
     }
   }
 
@@ -111,7 +107,7 @@ object util {
         ""
       case List("") =>
         ""
-      case simple :: Nil if (! (simple startsWith fileSep)) =>
+      case simple :: Nil if ! (simple startsWith fileSep) =>
         path
       case _ =>
         components.drop(components.length - 1) mkString fileSep
@@ -210,7 +206,7 @@ object util {
         // It's right under the from path.
         relativeTo mkString fileSeparator
       else {
-        val commonParentsTotal = (fromPath.length - commonLength - 1)
+        val commonParentsTotal = fromPath.length - commonLength - 1
           require(commonParentsTotal >= 0)
         val up = (".." + fileSeparator) * commonParentsTotal
         relativeTo.mkString(up, fileSeparator, "")
@@ -264,7 +260,7 @@ object util {
     }
 
     val wildcards = """[\*\?\[]""".r
-    if ((wildcards findFirstIn path) == None)
+    if ((wildcards findFirstIn path).isEmpty)
       List[String](path)
 
     else {
@@ -274,12 +270,12 @@ object util {
 
       else {
         val dirs =
-          if ((wildcards findFirstIn dirname) != None)
+          if ((wildcards findFirstIn dirname).nonEmpty)
             glob(dirname)
           else
             List[String](dirname)
         val globber =
-          if ((wildcards findFirstIn basename) != None)
+          if ((wildcards findFirstIn basename).nonEmpty)
             glob1 _
           else
             glob0 _
@@ -308,13 +304,13 @@ object util {
 
       val result = new ArrayBuffer[String]()
 
-      val piece = pieces(0)
-      val last = (pieces.length == 1)
+      val piece = pieces.head
+      val last = pieces.length == 1
 
       if (piece == "**") {
         val remainingPieces = if (last) Nil else pieces.drop(1)
 
-        for ((root, dirs, files) <- walk(directory, true)) {
+        for ((root, dirs, files) <- walk(directory, topdown = true)) {
           if (last)
             // At the end of a pattern, "**" just recursively
             // matches directories.
@@ -332,7 +328,7 @@ object util {
 
         val path = directory + fileSeparator + piece
         val matches = glob(path)
-        if (matches.length > 0) {
+        if (matches.nonEmpty) {
           if (last)
             // Save the matches, and stop.
             result ++= matches
@@ -340,7 +336,7 @@ object util {
           else {
             // Must continue recursing.
             val remainingPieces = pieces.drop(1)
-            for (m <- matches; if (new File(m).isDirectory)) {
+            for (m <- matches if new File(m).isDirectory) {
               val subResult = doGlob(remainingPieces, m)
               for (partialPath <- subResult)
                 result += partialPath
@@ -371,7 +367,7 @@ object util {
     val pieces = splitPath(relativePattern)
     val matches = doGlob(pieces.toList, directory)
 
-    matches map (normalizePath _)
+    matches map normalizePath
   }
 
 
@@ -392,13 +388,12 @@ object util {
       list match {
         case Nil => Stream.empty
 
-        case f :: tail => {
+        case f :: tail =>
           val list = if (f.isDirectory) f.listFiles.toList else Nil
           if (topdown)
             f #:: doList(list ++ tail)
           else
             doList(list ++ tail) :+ f
-        }
       }
     }
 
@@ -437,7 +432,7 @@ object util {
                          .replace("*", ".*")
                          .replace("[!", "[^")
                          .replace("?", ".") + "$").r
-    (regex findFirstIn caseConv(name)) != None
+    regex.findFirstIn(caseConv(name)).nonEmpty
   }
 
   /** Directory tree generator, adapted from Python's `os.walk()`
@@ -601,7 +596,7 @@ object util {
     // ass.
     val pieces = (subpath split fileSep(0)).toList
     if (absolute) {
-      if (pieces.length == 0)
+      if (pieces.isEmpty)
         List[String](prefix + fileSep)
       else
         (prefix + fileSep + pieces.head) :: pieces.tail
@@ -700,8 +695,8 @@ object util {
       val dir = new File (temporaryDirectory, randomName)
 
       createDirectory(dir) match {
-        case Some(dir) if (dir.isEmpty) => dir
-        case _                          => create(tries + 1)
+        case Some(d) if d.isEmpty => dir
+        case _                    => create(tries + 1)
       }
     }
 
@@ -719,7 +714,7 @@ object util {
     */
   def withTemporaryDirectory[T](prefix: String)(action: File => T) = {
     val temp = createTemporaryDirectory(prefix)
-    temp.deleteOnExit
+    temp.deleteOnExit()
     try {
       action(temp)
     }
@@ -747,12 +742,12 @@ object util {
     Try {
       val target = new File(targetDir)
 
-      if ((! target.exists()) && (createTarget))
+      if ((! target.exists()) && createTarget)
         if (! target.mkdirs())
           throw new IOException("Unable to create target directory \"" +
                                 targetDir + "\"")
 
-      if (target.exists() && (! target.isDirectory()))
+      if (target.exists() && (! target.isDirectory))
         throw new IOException("Cannot copy files to non-directory \"" +
                               targetDir + "\"")
 
@@ -797,7 +792,7 @@ object util {
     *         error.
     */
   def copy(file: String, targetDir: String): Try[Boolean] = {
-    copy(file, targetDir, true)
+    copy(file, targetDir, createTarget = true)
   }
 
   /** Copy a source file to a target file, using binary copying. The source
@@ -962,7 +957,7 @@ object util {
         1
       }
 
-      results.reduce(_ + _)
+      results.sum
     }
   }
 
@@ -1007,11 +1002,11 @@ object util {
     */
   def splitDrivePath(path: String): (String, String) = {
     path match {
-      case DrivePathPattern(driveSpec, path) =>
+      case DrivePathPattern(driveSpec, subPath) =>
         driveSpec match {
-          case null => ("", path)
-          case ":"  => ("", path)
-          case _    => (driveSpec, path)
+          case null => ("", subPath)
+          case ":"  => ("", subPath)
+          case _    => (driveSpec, subPath)
         }
 
       case _ => ("", path)
@@ -1072,17 +1067,16 @@ object util {
     // unchanged, where a\\\b is normalized to a\b.
 
     val (prefix, newPath) = splitDrivePath(path) match {
-      case ("", path) => {
+      case ("", subPath) =>
         // No drive letter - preserve initial backslashes
 
-        (path takeWhile (_ == '\\') mkString "",
-         path dropWhile (_ == '\\') mkString "")
-      }
+        (subPath takeWhile (_ == '\\') mkString "",
+         subPath dropWhile (_ == '\\') mkString "")
 
-      case (prefix, path) =>
+      case (pfx, subPath) =>
         // We have a drive letter.
 
-        (prefix + "\\", path dropWhile (_ == '\\') mkString "")
+        (pfx + "\\", subPath dropWhile (_ == '\\') mkString "")
     }
 
     // Normalize the path pieces. Note: normalizePathPieces() doesn't
@@ -1098,7 +1092,7 @@ object util {
         piecesTemp
 
     // If the path is now empty, substitute ".".
-    if ((prefix.length == 0) && (newPieces.length == 0))
+    if ((prefix.length == 0) && newPieces.isEmpty)
       "."
     else
       prefix + (newPieces mkString "\\")
@@ -1112,12 +1106,10 @@ object util {
     * @return the normalized path
     */
   def normalizePosixPath(path: String): String = {
-    import scala.collection.mutable.ListBuffer
-
     path match {
       case ""  => "."
       case "." => "."
-      case _   => {
+      case _   =>
         // POSIX allows one or two initial slashes, but treats
         // three or more as a single slash. We don't do that here.
         // Two initial slashes is also collapsed into one.
@@ -1158,7 +1150,6 @@ object util {
           "."
         else
           result
-      }
     }
   }
 
@@ -1201,8 +1192,8 @@ object util {
     * call.
     */
   private lazy val eglobPatternSplitter = os match {
-    case (Mac | Posix) => splitPosixEglobPattern(_)
-    case Windows       => splitWindowsEglobPattern(_)
+    case (Mac | Posix) => splitPosixEglobPattern _
+    case Windows       => splitWindowsEglobPattern _
     case _             =>
       throw new UnsupportedOperationException("Unknown OS: " + os)
   }
@@ -1225,7 +1216,7 @@ object util {
       case (drive, "") =>
         (".", drive)
 
-      case (drive, path) => {
+      case (drive, path) =>
         // Hack: Can't handle non-absolute paths in a drive.
         // Pretend a drive letter means "absolute". Note that
         // "drive" can be empty here, which is fine.
@@ -1234,7 +1225,6 @@ object util {
           (path drop 1, drive + "\\")
         else
           (path, drive + "\\")
-      }
     }
   }
 

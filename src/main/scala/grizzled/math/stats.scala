@@ -37,8 +37,6 @@
 
 package grizzled.math
 
-import scala.math
-
 /** Miscellaneous statistics-related functions.
   *
   * Note: You must import `scala.math.Numeric` (or just `Numeric._`) for these
@@ -76,7 +74,7 @@ object stats {
 
     len match {
       case 1 =>
-        n.toDouble(itemList(0))
+        n.toDouble(itemList.head)
 
       case _ =>
         val recip = 1.0 / len.toDouble
@@ -178,10 +176,10 @@ object stats {
       itemList.foreach(t => m += t -> (m.getOrElse(t, 0) + 1))
 
       // Find the maximum count.
-      val max = (0 /: m.values) (scala.math.max(_, _))
+      val max = (0 /: m.values)(scala.math.max)
 
       // Extract the keys with values that match
-      m.filter( tup => tup._2 == max ).map( tup => tup._1 ).toList
+      m.filter { case (k, v) => v == max }.keys.toList
     }
   }
 
@@ -283,13 +281,12 @@ object stats {
   def range[T](items: T*)(implicit n: Numeric[T]): T = {
     items.length match {
       case 1 => n.minus(items(0), items(0))
-      case _ => {
+      case _ =>
         // Fold left, generating a (min, max) tuple along the way.
         val (min, max) =
           ((n.fromInt(Int.MaxValue), n.fromInt(0)) /: items)((tuple, i) =>
            (n.min(tuple._1, i), n.max(tuple._1, i)))
         n.minus(max, min)
-      }
     }
   }
 

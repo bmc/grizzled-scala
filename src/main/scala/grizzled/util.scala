@@ -72,13 +72,14 @@ object util {
     *
     * @return whatever the code block returns,if anything.
     */
+  @deprecated("Use grizzled.io.withCloseable", "1.5.1")
   def withCloseable[T <: {def close(): Unit}, R](closeable: T)(code: T => R) = {
     try {
       code(closeable)
     }
 
     finally {
-      closeable.close
+      closeable.close()
     }
   }
 }

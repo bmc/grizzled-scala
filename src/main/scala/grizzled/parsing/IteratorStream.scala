@@ -91,9 +91,8 @@ class IteratorStream[T](private val iterator: Iterator[T]) {
   * to permit arbitrary pushback.
   */
 trait Pushback[T] extends IteratorStream[T] {
-  import scala.collection.mutable.Stack
 
-  private val pushbackStack = new Stack[T]
+  private val pushbackStack = new scala.collection.mutable.Stack[T]
 
   /** Get the next item from the stream, advancing the cursor, while
     * honoring previous calls to `pushback()`.
@@ -112,7 +111,7 @@ trait Pushback[T] extends IteratorStream[T] {
     *
     * @return the count
     */
-  override def totalRead: Int = (super.totalRead - pushbackStack.length)
+  override def totalRead: Int = super.totalRead - pushbackStack.length
 
   /** Push a single item back onto the stream.
     *
@@ -128,7 +127,7 @@ trait Pushback[T] extends IteratorStream[T] {
     * val stream = new IteratorStream[Char]("foobar") with Pushback[Char]
     * val list = List(stream.next.get, stream.next.get)
     *
-    * // At this point, the list contains ('f', 'o'), and the stream 
+    * // At this point, the list contains ('f', 'o'), and the stream
     * // contains "obar".
     *
     * stream.pushback(list) // Stream now contains "foobar"

@@ -238,7 +238,7 @@ final class GrizzledFile(val file: File) {
     */
   def isEmpty: Boolean = {
     assert (file.isDirectory)
-    file.listFiles.length == 0
+    file.listFiles.isEmpty
   }
 
   /** Copy the file to a target directory or file.

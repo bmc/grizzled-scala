@@ -1,3 +1,9 @@
+Version 1.5.1:
+
+* Cleaned up some warnings identified by IntelliJ.
+* Deprecated `grizzled.util.withCloseable()` in favor of
+  `grizzled.io.withCloseable()`.
+
 Version 1.5.0:
 
 * Modified `grizzled.string.WordWrapper` to allow specification of

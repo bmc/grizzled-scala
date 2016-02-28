@@ -38,7 +38,6 @@
 package grizzled.string.template
 
 import scala.util.matching.Regex.Match
-import scala.annotation.tailrec
 import grizzled.either.Implicits._
 
 /** Information about a parsed variable name.
@@ -126,7 +125,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     Either[String, String] = {
 
     def handleDefault: Either[String, String] = {
-      if (default != None)
+      if (default.isDefined)
         Right(default.get)
       else if (safe)
         Right("")
@@ -266,14 +265,13 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
       val default = m.group(2) match {
         case null      =>
           None
-        case s: String => {
+        case s: String =>
           // Pull off the "?". Can't do Some(s drop 1),
           // because that yields a StringOps, not a String.
           // Casting doesn't work, either. But assigning to a
           // temporary string does.
           val realDefault: String = s drop 1
           Some(realDefault)
-        }
       }
 
         Some(new Variable(m.start, m.end, name, default))

@@ -37,7 +37,6 @@
 
 package grizzled.io
 
-import scala.io.Source
 import scala.annotation.tailrec
 import scala.language.implicitConversions
 
@@ -60,21 +59,19 @@ extends PartialReader[Byte] {
     *
     * @param out  the output stream
     */
-  def copyTo(out: OutputStream): Unit =
-    {
+  def copyTo(out: OutputStream): Unit = {
       val buffer = new Array[Byte](8192)
 
-      @tailrec def doCopyTo: Unit =
-        {
+      @tailrec def doCopyTo(): Unit = {
           val read = reader.read(buffer)
           if (read > 0) {
             out.write(buffer, 0, read)
             // Tail recursion means never having to use a var.
-            doCopyTo
+            doCopyTo()
           }
         }
 
-      doCopyTo
+      doCopyTo()
     }
 }
 
@@ -82,9 +79,9 @@ extends PartialReader[Byte] {
   * the implicit conversations into scope.
   */
 object RichInputStream {
-  implicit def inputStreamToRichInputStream(inputStream: InputStream) =
+  implicit def isToRichInputStream(inputStream: InputStream): RichInputStream =
     new RichInputStream(inputStream)
 
-  implicit def richInputStreamInputStream(richInputStream: RichInputStream) =
+  implicit def richInputStreamIS(richInputStream: RichInputStream): InputStream =
     richInputStream.inputStream
 }

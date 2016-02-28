@@ -37,10 +37,6 @@
 
 package grizzled
 
-import scala.util.matching.Regex
-
-import java.io.File
-
 /** System-related utility functions and definitions.
   */
 object sys {
@@ -80,13 +76,13 @@ object sys {
     val lcName = name.toLowerCase
     val firstToken = lcName.split("""\s""")(0)
     firstToken match {
-      case "windows" if (lcName == "windows ce") => WindowsCE
-      case "windows" if (lcName != "windows ce") => Windows
-      case "mac"                                 => Mac
-      case "os/2"                                => OS2
-      case "netware"                             => NetWare
-      case "openvms"                             => VMS
-      case _                                     => Posix
+      case "windows" if lcName == "windows ce" => WindowsCE
+      case "windows" if lcName != "windows ce" => Windows
+      case "mac"                               => Mac
+      case "os/2"                              => OS2
+      case "netware"                           => NetWare
+      case "openvms"                           => VMS
+      case _                                   => Posix
     }
   }
 

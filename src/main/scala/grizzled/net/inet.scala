@@ -95,20 +95,16 @@ class IPAddress(val address: Array[Byte]) {
     */
   def toNumber: BigInt = {
     address.length match {
-      case 4 /* IPv4 */ => {
-        (
-          ((address(0) << 24) & 0xff000000) |
-          ((address(1) << 16) & 0x00ff0000) |
-          ((address(2) <<  8) & 0x0000ff00)  |
-          (address(3)         & 0x000000ff)
-          ).
-          toLong & 0x00000000ffffffffL
-      }
+      case 4 /* IPv4 */ =>
+        (((address(0) << 24) & 0xff000000) |
+         ((address(1) << 16) & 0x00ff0000) |
+         ((address(2) <<  8) & 0x0000ff00)  |
+         (address(3)         & 0x000000ff)).
+        toLong & 0x00000000ffffffffL
 
-      case 16 /* IPv6 */ => {
+      case 16 /* IPv6 */ =>
         val j: InetAddress = this
         BigInt(j.getAddress)
-      }
     }
   }
 
@@ -248,15 +244,14 @@ object IPAddress {
       case 16 => Success(address)
       case 0  => Failure(new IllegalArgumentException("Empty IP address."))
 
-      case n if (n > 16) =>
+      case n if n > 16 =>
         Failure(new IllegalArgumentException(
           s"IP address ${address.mkString(".")} is too long."
         ))
 
-      case n => {
+      case n =>
         val upper = if (n < 4) 4 else 16
-        Success(address ++ (n.until(upper).map(i => zeroByte)))
-      }
+        Success(address ++ n.until(upper).map(_ => zeroByte))
     }
 
     fullAddressRes.map { bytes => new IPAddress(bytes.toArray) }

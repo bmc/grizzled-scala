@@ -331,7 +331,6 @@ trait UDPDatagramSocket {
   def receiveString(buf: Array[Byte], encoding: String): String = {
     import java.io.{ByteArrayInputStream, InputStreamReader, StringWriter}
     import java.nio.charset.Charset
-    import scala.collection.mutable.ArrayBuffer
 
     val total = receive(buf)
     val bytes = (0 until total map (i => buf(i))).toArray
@@ -381,10 +380,10 @@ trait UDPDatagramSocket {
 private class UDPDatagramSocketImpl(val socket: JDKDatagramSocket)
   extends UDPDatagramSocket {
 
-  def broadcast: Boolean = socket.getBroadcast()
+  def broadcast: Boolean = socket.getBroadcast
   def broadcast_=(enable: Boolean) = socket.setBroadcast(enable)
 
-  def port: Int = socket.getPort()
+  def port: Int = socket.getPort
 
   def address: IPAddress = socket.getInetAddress()
 
@@ -537,7 +536,7 @@ object UDPDatagramSocket {
                  encoding: String,
                  address: IPAddress,
                  port: Int): Unit = {
-    UDPDatagramSocket.sendString(data, encoding, address, port, false)
+    UDPDatagramSocket.sendString(data, encoding, address, port, broadcast=false)
   }
 
   /** Utility method for sending a non-broadcast UDP packet consisting of
@@ -562,7 +561,7 @@ object UDPDatagramSocket {
     * @param port     UDP port to which to send bytes
     */
   def sendString(data: String, address: IPAddress, port: Int): Unit =
-    UDPDatagramSocket.sendString(data, "UTF-8", address, port, false)
+    UDPDatagramSocket.sendString(data, "UTF-8", address, port, broadcast=false)
 
   /** Utility method for sending a UDP packet consisting string data. The
     * string data is encoded in UTF-8 before being sent. This method is
