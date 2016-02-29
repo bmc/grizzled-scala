@@ -41,6 +41,8 @@ import java.util.regex.PatternSyntaxException
 import org.scalatest.{FlatSpec, Matchers}
 import grizzled.file.util._
 import grizzled.file.GrizzledFile._
+import grizzled.io.withCloseable
+
 import java.io.File
 
 /**
@@ -286,7 +288,8 @@ class FileUtilSpec extends FlatSpec with Matchers {
   it should "work if the source file and directory exist" in {
     withTemporaryDirectory("copy") { d =>
       import java.io._
-      import grizzled.io.util._
+      import grizzled.io.withCloseable
+
       val sourceFile = File.createTempFile("foo", "txt")
       try {
         withCloseable(new FileWriter(sourceFile)) { f =>
@@ -314,28 +317,32 @@ class FileUtilSpec extends FlatSpec with Matchers {
 
   "eglob" should """glob a "*" properly""" in {
     withTemporaryDirectory("glob") { d =>
-      val paths = makeFiles(d.getPath, Array("aaa.txt", "bbb.txt", "ccc.java"))
-      val expected = paths.filter(_.endsWith(".txt"))
+      val paths = makeFiles(d.getAbsolutePath,
+                            Array("aaa.txt", "bbb.txt", "ccc.java"))
+      val expected = paths.filter(_.endsWith(".txt")).toSet
 
-      val matches = eglob(joinPath(d.getPath, "*.txt"))
+      val matches = eglob(joinPath(d.getPath, "*.txt")).toSet
       matches shouldBe expected
     }
   }
 
   it should "glob a character class properly" in {
     withTemporaryDirectory("glob") { d =>
-      val paths = makeFiles(d.getPath, Array("abc.txt", "aaa.txt", "abd.txt",
-                                             "abcdef.txt", "aaa.scala"))
-      val matches = eglob(joinPath(d.getPath, "a[ab][a-z].txt"))
-      matches.map(basename(_)) shouldBe Seq("aaa.txt", "abc.txt", "abd.txt")
+      val paths = makeFiles(d.getAbsolutePath,
+                            Array("abc.txt", "aaa.txt", "abd.txt",
+                                  "abcdef.txt", "aaa.scala"))
+      val matches = eglob(joinPath(d.getPath, "a[ab][a-z].txt")).toSet
+      val expected = Set("aaa.txt", "abc.txt", "abd.txt")
+      matches.map(basename(_)) shouldBe expected
     }
   }
 
   it should "glob a ? properly" in {
     withTemporaryDirectory("glob") { d =>
-      val paths = makeFiles(d.getPath, Array("aba.txt", "aaa.txt", "abd.txt"))
-      val matches = eglob(joinPath(d.getPath, "a?a.txt"))
-      matches.map(basename(_)) shouldBe Seq("aaa.txt", "aba.txt")
+      val paths = makeFiles(d.getAbsolutePath,
+                            Array("aba.txt", "aaa.txt", "abd.txt"))
+      val matches = eglob(joinPath(d.getPath, "a?a.txt")).toSet
+      matches.map(basename(_)) shouldBe Set("aaa.txt", "aba.txt")
     }
   }
 
@@ -350,20 +357,87 @@ class FileUtilSpec extends FlatSpec with Matchers {
         makeFiles(subdirPath, files)
       }
 
-      val expected = filePaths.filter(_.endsWith(".scala"))
-      eglob(joinPath(fullDirPath, "**", "*.scala")) shouldBe expected
+      val expected = filePaths.filter(_.endsWith(".scala")).toSet
+      eglob(joinPath(fullDirPath, "**", "*.scala")).toSet shouldBe expected
+    }
+  }
+
+  it should """ensure that a trailing "**" just gets directories""" in {
+    withTemporaryDirectory("glob") { d =>
+      val fullDirPath = d.getAbsolutePath
+      val subdirs = Array("d1", "d2", "longer-dir-name")
+      val files = Array("a.scala", "f.scala", "foobar.scala", "README.md",
+                        "config.txt")
+      val filePaths = subdirs.flatMap { subdir =>
+        val subdirPath = joinPath(fullDirPath, subdir)
+        new File(subdirPath).mkdirs()
+        makeFiles(subdirPath, files)
+      }
+
+      val expected = subdirs.map(joinPath(fullDirPath, _)) :+ fullDirPath
+      eglob(joinPath(fullDirPath, "**")).toSet shouldBe expected.toSet
     }
   }
 
   it should "handle an empty match" in {
     withTemporaryDirectory("glob") { d =>
-      eglob(joinPath(d.getAbsolutePath, "**", "*.scala")) shouldBe List.empty[String]
+      val globPath = joinPath(d.getAbsolutePath, "**", "*.scala")
+      eglob(globPath).toSet shouldBe Set.empty[String]
     }
   }
 
   it should "bail on a bad glob pattern (though that isn't functional)" in {
     intercept[PatternSyntaxException] {
       eglob("[a-z")
+    }
+  }
+
+  "glob" should "properly glob with a *" in {
+    withTemporaryDirectory("glob") { d =>
+      val fullDirPath = d.getAbsolutePath
+      val simpleFilenames = Array("foo.txt", "bar.c", "bar.txt")
+      makeFiles(fullDirPath, simpleFilenames)
+      val expected = simpleFilenames.filter(_ startsWith "bar")
+                                    .map(s => joinPath(fullDirPath, s))
+                                    .toSet
+      glob(joinPath(fullDirPath, "bar*")).toSet shouldBe expected
+    }
+  }
+
+  it should "properly glob with ?" in {
+    withTemporaryDirectory("glob") { d =>
+      val fullDirPath = d.getAbsolutePath
+      val simpleFilenames = Array("foo.txt", "bar.c", "boo.txt", "bar.txt")
+      makeFiles(fullDirPath, simpleFilenames)
+      val expected = simpleFilenames.filter(_ contains "oo.txt")
+                                    .map(s => joinPath(fullDirPath, s))
+                                    .toSet
+      glob(joinPath(fullDirPath, "?oo.txt")).toSet shouldBe expected
+    }
+  }
+
+  it should "properly glob with a character class" in {
+    withTemporaryDirectory("glob") { d =>
+      val fullDirPath = d.getAbsolutePath
+      val simpleFilenames = Array("foo.txt", "bar.c", "boo.txt", "bar.txt")
+      makeFiles(fullDirPath, simpleFilenames)
+      val expected = simpleFilenames.filter(_ contains "oo.txt")
+                                    .map(s => joinPath(fullDirPath, s))
+                                    .toSet
+      glob(joinPath(fullDirPath, "[a-f]oo.txt")).toSet shouldBe expected
+    }
+  }
+
+  it should "handle an empty match" in {
+    withTemporaryDirectory("glob") { d =>
+      val globPath = joinPath(d.getAbsolutePath, "*.scala")
+      glob(globPath).toSet shouldBe Set.empty[String]
+    }
+  }
+
+  it should "bail on a bad glob pattern (though that isn't functional)" in {
+    intercept[PatternSyntaxException] {
+      glob("[a-z")
     }
   }
 }

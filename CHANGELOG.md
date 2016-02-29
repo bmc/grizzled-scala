@@ -4,7 +4,8 @@ Version 1.5.1:
 * Deprecated `grizzled.util.withCloseable()` and
   `grizzled.io.util.withCloseable()` in favor of
   `grizzled.io.withCloseable()`.
-* Added some unit tests for the `grizzled.file.util.eglob()` function.
+* Added some unit tests for the `grizzled.file.util.eglob()` and
+  `grizzled.file.util.glob()` functions.
 
 Version 1.5.0:
 
