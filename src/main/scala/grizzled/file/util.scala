@@ -215,15 +215,21 @@ object util {
   }
 
   /** Return a list of paths matching a pathname pattern. The pattern may
-    * contain simple shell-style wildcards. See `fnmatch()`.
+    * contain simple shell-style wildcards. See `fnmatch()`. This function
+    * is essentially a direct port of the Python `glob.glob()` function.
+    *
+    * Restrictions:
+    *
+    * - There's currently no way to escape a wildcard character. That is,
+    *   if you need to match a '*' character or a '?' character exactly,
+    *   you can't do that with this library. (You can't do it with the
+    *   `glob` library in Python 2 or Python 3, either.)
     *
     * @param path  The path to expand.
     *
     * @return a list of possibly expanded file names
     */
   def glob(path: String): List[String] = {
-    // This method is essentially a direct translation of the Python
-    // glob.glob() function.
 
     def glob1(dirname: String, pattern: String): List[String] = {
       val dir = if (dirname.length == 0) pwd else dirname
@@ -269,16 +275,15 @@ object util {
         for (name <- glob1(pwd, basename)) yield name
 
       else {
-        val dirs =
-          if ((wildcards findFirstIn dirname).nonEmpty)
-            glob(dirname)
-          else
-            List[String](dirname)
-        val globber =
-          if ((wildcards findFirstIn basename).nonEmpty)
-            glob1 _
-          else
-            glob0 _
+        val dirs = if ((wildcards findFirstIn dirname).nonEmpty)
+          glob(dirname)
+        else
+          List[String](dirname)
+        val globber = if ((wildcards findFirstIn basename).nonEmpty)
+          glob1 _
+        else
+          glob0 _
+
         for (d <- dirs; name <- globber(d, basename))
           yield d + fileSeparator + name
       }
