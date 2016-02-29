@@ -341,7 +341,7 @@ object Includer {
                  tempPrefix: String,
                  tempSuffix: String): String = {
     import java.io.{File, FileWriter}
-    import grizzled.io.util.withCloseable
+    import grizzled.io.withCloseable
 
     def sourceFromFile(s: String) = Source.fromFile(new File(s))
 
