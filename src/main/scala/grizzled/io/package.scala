@@ -45,4 +45,37 @@ package grizzled
   * See [[grizzled.file]]
   */
 package object io {
+  import scala.language.reflectiveCalls
+
+  /** Ensure that a closeable object is closed. Note that this function
+    * uses a Scala structural type, rather than a `java.io.Closeable`,
+    * because there are classes and interfaces (e.g., `java.sql.ResultSet`)
+    * that have `close()` methods that do not extend or implement
+    * `java.io.Closeable`.
+    *
+    * Sample use:
+    *
+    * {{{
+    * withCloseable(new java.io.FileInputStream("/path/to/file")) {
+    *     in => ...
+    * }
+    * }}}
+    *
+    * The closeable object is not passed into the block, because its type
+    * is useless to the block.
+    *
+    * @param closeable  the object that implements `Closeable`
+    * @param code       the code block to execute with the `Closeable`
+    *
+    * @return whatever the block returns
+    */
+  def withCloseable[T <: {def close(): Unit}, R](closeable: T)(code: T => R) = {
+    try {
+      code(closeable)
+    }
+
+    finally {
+      closeable.close()
+    }
+  }
 }

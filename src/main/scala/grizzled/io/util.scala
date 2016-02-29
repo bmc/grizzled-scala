@@ -42,8 +42,6 @@ import scala.language.reflectiveCalls
 /** Some utility methods.
   */
 object util {
-  type Closeable = {def close(): Unit}
-
   /** Ensure that a closeable object is closed. Note that this function
     * uses a Scala structural type, rather than a `java.io.Closeable`,
     * because there are classes and interfaces (e.g., `java.sql.ResultSet`)
@@ -66,6 +64,7 @@ object util {
     *
     * @return whatever the block returns
     */
+  @deprecated("Use grizzled.io.withCloseable", "1.5.1")
   def withCloseable[T <: {def close(): Unit}, R](closeable: T)(code: T => R) = {
     try {
       code(closeable)

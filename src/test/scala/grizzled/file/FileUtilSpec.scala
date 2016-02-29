@@ -34,17 +34,19 @@
   ---------------------------------------------------------------------------
 */
 
+package grizzled.file
+
+import java.util.regex.PatternSyntaxException
+
 import org.scalatest.{FlatSpec, Matchers}
 import grizzled.file.util._
 import grizzled.file.GrizzledFile._
 import java.io.File
 
-import scala.util.Failure
-
 /**
  * Tests the grizzled.file functions.
  */
-class FileUtilTest extends FlatSpec with Matchers {
+class FileUtilSpec extends FlatSpec with Matchers {
   "basename" should "handle all kinds of paths" in {
     val data = Map(("", "/")                 -> "",
                    ("foo", "/")              -> "foo",
@@ -63,7 +65,7 @@ class FileUtilTest extends FlatSpec with Matchers {
                    ("D:\\foo\\bar", "\\")    -> "bar")
 
     for(((path, sep), expected) <- data) {
-      basename(path, sep) shouldBe (expected)
+      basename(path, sep) shouldBe expected
     }
   }
 
@@ -91,7 +93,7 @@ class FileUtilTest extends FlatSpec with Matchers {
                    ("\\\\\\\\", "\\")        -> "\\")
 
     for(((path, sep), expected) <- data) {
-      dirname(path, sep) shouldBe (expected)
+      dirname(path, sep) shouldBe expected
     }
   }
 
@@ -118,7 +120,7 @@ class FileUtilTest extends FlatSpec with Matchers {
                    ("D:\\foo\\bar", "\\")    -> ("D:\\foo", "bar"))
 
     for(((path, sep), expected) <- data) {
-      dirnameBasename(path, sep) shouldBe (expected)
+      dirnameBasename(path, sep) shouldBe expected
     }
   }
 
@@ -149,7 +151,7 @@ class FileUtilTest extends FlatSpec with Matchers {
     )
 
     for(((path, sep), expected) <- data) {
-      splitPath(path, sep) shouldBe (expected)
+      splitPath(path, sep) shouldBe expected
     }
   }
 
@@ -178,7 +180,7 @@ class FileUtilTest extends FlatSpec with Matchers {
     )
 
     for(((sep, pieces), expected) <- data) {
-      joinPath(sep, pieces) shouldBe (expected)
+      joinPath(sep, pieces) shouldBe expected
     }
   }
 
@@ -196,7 +198,7 @@ class FileUtilTest extends FlatSpec with Matchers {
     )
 
     for((path, expected) <- data) {
-      splitDrivePath(path) shouldBe (expected)
+      splitDrivePath(path) shouldBe expected
     }
   }
 
@@ -214,7 +216,7 @@ class FileUtilTest extends FlatSpec with Matchers {
                    ("sabc", "[^a-r]*")    -> true)
 
     for(((string, pattern), expected) <- data) {
-      fnmatch(string, pattern) shouldBe (expected)
+      fnmatch(string, pattern) shouldBe expected
     }
   }
 
@@ -231,7 +233,7 @@ class FileUtilTest extends FlatSpec with Matchers {
                    "//////////////////." -> "/")
 
     for ((path, expected) <- data) {
-      normalizePosixPath(path) shouldBe (expected)
+      normalizePosixPath(path) shouldBe expected
     }
   }
 
@@ -250,7 +252,7 @@ class FileUtilTest extends FlatSpec with Matchers {
     )
 
     for ((path, expected) <- data) {
-      normalizeWindowsPath(path) shouldBe (expected)
+      normalizeWindowsPath(path) shouldBe expected
     }
   }
 
@@ -268,16 +270,16 @@ class FileUtilTest extends FlatSpec with Matchers {
   }
 
   "copy" should "fail if the directory doesn't exist" in {
-    copy(Seq("foo.c"), "/nonexistent/directory", false).isFailure shouldBe (true)
+    copy(Seq("foo.c"), "/nonexistent/directory", false).isFailure shouldBe true
   }
 
   it should "fail if the directory cannot be created" in {
-    copy(Seq("foo.c"), "/etc/foo/bar/baz").isFailure shouldBe (true)
+    copy(Seq("foo.c"), "/etc/foo/bar/baz").isFailure shouldBe true
   }
 
   it should "fail if the source path doesn't exist" in {
     withTemporaryDirectory("copy") { d =>
-      copy(Seq("foo.c"), d.getPath).isFailure shouldBe (true)
+      copy(Seq("foo.c"), d.getPath).isFailure shouldBe true
     }
   }
 
@@ -291,14 +293,77 @@ class FileUtilTest extends FlatSpec with Matchers {
           f.write("This is a test.\n")
         }
         val sourceSize = sourceFile.length
-        copy(sourceFile.getPath, d.getPath).isSuccess shouldBe (true)
+        copy(sourceFile.getPath, d.getPath).isSuccess shouldBe true
         val targetPath = joinPath(d.getPath, basename(sourceFile.getPath))
-        new File(targetPath).length shouldBe (sourceSize)
+        new File(targetPath).length shouldBe sourceSize
       }
 
       finally {
         sourceFile.delete()
       }
+    }
+  }
+
+  private def makeFiles(directory: String, files: Seq[String]): Seq[String] = {
+    for (fname <- files) yield {
+      val path = joinPath(directory, fname)
+      touch(path)
+      path
+    }
+  }
+
+  "eglob" should """glob a "*" properly""" in {
+    withTemporaryDirectory("glob") { d =>
+      val paths = makeFiles(d.getPath, Array("aaa.txt", "bbb.txt", "ccc.java"))
+      val expected = paths.filter(_.endsWith(".txt"))
+
+      val matches = eglob(joinPath(d.getPath, "*.txt"))
+      matches shouldBe expected
+    }
+  }
+
+  it should "glob a character class properly" in {
+    withTemporaryDirectory("glob") { d =>
+      val paths = makeFiles(d.getPath, Array("abc.txt", "aaa.txt", "abd.txt",
+                                             "abcdef.txt", "aaa.scala"))
+      val matches = eglob(joinPath(d.getPath, "a[ab][a-z].txt"))
+      matches.map(basename(_)) shouldBe Seq("aaa.txt", "abc.txt", "abd.txt")
+    }
+  }
+
+  it should "glob a ? properly" in {
+    withTemporaryDirectory("glob") { d =>
+      val paths = makeFiles(d.getPath, Array("aba.txt", "aaa.txt", "abd.txt"))
+      val matches = eglob(joinPath(d.getPath, "a?a.txt"))
+      matches.map(basename(_)) shouldBe Seq("aaa.txt", "aba.txt")
+    }
+  }
+
+  it should """handle "**" properly""" in {
+    withTemporaryDirectory("glob") { d =>
+      val fullDirPath = d.getAbsolutePath
+      val subdirs = Array("d1", "d2", "longer-dir-name")
+      val files = Array("a.scala", "foobar.scala", "README.md", "config.txt")
+      val filePaths = subdirs.flatMap { subdir =>
+        val subdirPath = joinPath(fullDirPath, subdir)
+        new File(subdirPath).mkdirs()
+        makeFiles(subdirPath, files)
+      }
+
+      val expected = filePaths.filter(_.endsWith(".scala"))
+      eglob(joinPath(fullDirPath, "**", "*.scala")) shouldBe expected
+    }
+  }
+
+  it should "handle an empty match" in {
+    withTemporaryDirectory("glob") { d =>
+      eglob(joinPath(d.getAbsolutePath, "**", "*.scala")) shouldBe List.empty[String]
+    }
+  }
+
+  it should "bail on a bad glob pattern (though that isn't functional)" in {
+    intercept[PatternSyntaxException] {
+      eglob("[a-z")
     }
   }
 }

@@ -1,8 +1,10 @@
 Version 1.5.1:
 
 * Cleaned up some warnings identified by IntelliJ.
-* Deprecated `grizzled.util.withCloseable()` in favor of
+* Deprecated `grizzled.util.withCloseable()` and
+  `grizzled.io.util.withCloseable()` in favor of
   `grizzled.io.withCloseable()`.
+* Added some unit tests for the `grizzled.file.util.eglob()` function.
 
 Version 1.5.0:
 
