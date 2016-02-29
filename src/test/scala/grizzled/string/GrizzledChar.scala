@@ -31,14 +31,16 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.string
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.string.GrizzledChar._
 
 /**
  * Tests the GrizzledChar class.
  */
-class GrizzledCharTest extends FunSuite {
-  test("isHexDigit") {
+class GrizzledCharSpec extends FlatSpec with Matchers {
+  "isHexDigit" should "detect valid hex digits and reject invalid ones" in {
     val data = Map('0' -> true,
                    '1' -> true,
                    '2' -> true,
@@ -70,9 +72,7 @@ class GrizzledCharTest extends FunSuite {
                    '.' -> false)
 
     for((c, expected) <- data) {
-      assertResult(expected, "'" + c + "' -> " + expected.toString) {
-        c.isHexDigit
-      }
+      c.isHexDigit shouldBe expected
     }
   }
 }

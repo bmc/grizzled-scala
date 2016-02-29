@@ -34,16 +34,20 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.io
+
 import grizzled.io.RichReader._
 import grizzled.io.RichInputStream._
+
+import java.io.{ByteArrayInputStream, StringReader}
+
+import org.scalatest.{FlatSpec, Matchers}
 
 /**
  * Tests the grizzled.io functions.
  */
-class IOTest extends FunSuite {
-  test("RichReader.readSome") {
-    import java.io.StringReader
+class MiscIOSpec extends FlatSpec with Matchers {
+  "RichReader.readSome" should "stop reading when it hits the max" in {
 
     val data = List(
       ("12345678901234567890", 10, "1234567890"),
@@ -52,19 +56,25 @@ class IOTest extends FunSuite {
     )
 
     for((input, max, expected) <- data) {
-      assertResult(expected, "RichReader.readSome(" + max + ") on: " + input) {
-        val r = new StringReader(input)
-        r.readSome(max) mkString ""
-      }
+      val r = new StringReader(input)
+      r.readSome(max).mkString shouldBe expected
     }
   }
 
-  test("RichInputStream.readSome") {
-    import java.io.ByteArrayInputStream
+  it should "handle a max that's larger than the input" in {
+    val s = "1234"
+    val r = new StringReader(s)
+    r.readSome(1000).mkString shouldBe s
+  }
 
-    val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
-                           11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-    val inputArray = input.toArray
+  it should "handle an empty input" in {
+    val r = new StringReader("")
+    r.readSome(1000).mkString shouldBe ""
+  }
+
+  "RichInputStream.readSome" should "stop reading when it hits the max" in {
+    val input = Array[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
+                            11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
     val data = List(
       (10, input.slice(0, 10)),
       (20, input),
@@ -72,15 +82,24 @@ class IOTest extends FunSuite {
     )
 
     for((max, expected) <- data) {
-      assertResult(expected, 
-             "RichInputStream.readSome(%d) on: %s" format (max, inputArray)) {
-        val is = new ByteArrayInputStream(inputArray)
-        is.readSome(max)
-      }
+      val is = new ByteArrayInputStream(input)
+      is.readSome(max) shouldBe expected
     }
   }
 
-  test("RichReader.copyTo") {
+  it should "handle a max that's larger than the input" in {
+    val input = Array[Byte](1, 2, 3, 4)
+    val is = new ByteArrayInputStream(input)
+    is.readSome(1000) shouldBe input
+  }
+
+  it should "handle an empty input" in {
+    val input = Array.empty[Byte]
+    val is = new ByteArrayInputStream(input)
+    is.readSome(1000) shouldBe input
+  }
+
+  "RichReader.copyTo" should "copy chars from a reader to a writer" in {
     import java.io.{StringReader, StringWriter}
 
     val data = List("12345678901234567890",
@@ -89,16 +108,14 @@ class IOTest extends FunSuite {
                     "")
 
     for(s <- data) {
-      assertResult(s, "RichReader.copyTo() on: " + s) {
-        val r = new StringReader(s)
-        val w = new StringWriter
-        r.copyTo(w)
-        w.toString
-      }
+      val r = new StringReader(s)
+      val w = new StringWriter
+      r.copyTo(w)
+      w.toString shouldBe s
     }
   }
 
-  test("RichInputStream.copyTo") {
+  "RichInputStream.copyTo" should "copy bytes from an InputStream to an OutputStream" in {
     import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 
     val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
@@ -108,16 +125,14 @@ class IOTest extends FunSuite {
                     input.slice(0, 1))
 
     for(bytes <- data) {
-      assertResult(bytes, "RichInputStream.copyTo() on: " + bytes) {
-        val is = new ByteArrayInputStream(bytes.toArray)
-        val os = new ByteArrayOutputStream
-        is.copyTo(os)
-        os.toByteArray.toList
-      }
+      val is = new ByteArrayInputStream(bytes.toArray)
+      val os = new ByteArrayOutputStream
+      is.copyTo(os)
+      os.toByteArray.toList shouldBe bytes
     }
   }
 
-  test("RichInputStream.copyTo with big input") {
+  it should "work fine with with big input" in {
     // will fail with java.lang.StackOverflowError if copyTo was
     // not tail-call optimized
 
@@ -151,19 +166,17 @@ class IOTest extends FunSuite {
     }
   }
 
-  test("withCloseable") {
+  "withCloseable" should "properly close an object" in {
     import java.io.{FileOutputStream, File}
     import java.nio.channels.Channels
-    import grizzled.io.util._
+    import grizzled.io.withCloseable
 
     val temp = File.createTempFile("test", ".dat")
-    temp.deleteOnExit
+    temp.deleteOnExit()
 
     val fs = new FileOutputStream(temp)
-    assertResult(false, "withCloseable") {
-      val chan = Channels.newChannel(fs)
-      withCloseable(chan) { chan => assert(chan.isOpen) }
-      chan.isOpen
-    }
+    val chan = Channels.newChannel(fs)
+    withCloseable(chan) { chan => assert(chan.isOpen) }
+    chan.isOpen shouldBe false
   }
 }

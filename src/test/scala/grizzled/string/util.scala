@@ -31,16 +31,15 @@
   --------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.string._
 import grizzled.string.util._
-import grizzled.string.GrizzledString._
 
 /**
  * Tests the grizzled.string functions.
  */
-class StringUtilTest extends FunSuite {
-  test("string to boolean conversions that should succeed") {
+class StringUtilSpec extends FlatSpec with Matchers {
+  "strToBoolean" should "succeed on valid input" in {
     val data = Map(
       "true"  -> Right(true),
       "t"     -> Right(true),
@@ -63,13 +62,12 @@ class StringUtilTest extends FunSuite {
                              " " + input + " ",
                              input + " ")
          s <- permutations} {
-      assertResult(expected, "\"" + s + "\" -> " + expected.toString)  {
-        util.strToBoolean(s)
-      }
+
+      util.strToBoolean(s) shouldBe expected
     }
   }
 
-  test("string to boolean conversions that should fail") {
+  it should "fail on invalid input" in {
     val data = List("tru", "tr", "z", "truee", "xtrue",
                     "000", "00", "111", "1a", "0z",
                     "fa", "fal", "fals", "falsee")
@@ -77,11 +75,11 @@ class StringUtilTest extends FunSuite {
     for {input <- data
          permutations = List(input, input.capitalize, input.toUpperCase)
          s <- permutations} {
-      assert(util.strToBoolean(s).isLeft)
+      util.strToBoolean(s).isLeft shouldBe true
     }
   }
 
-  test("tokenizing quoted strings") {
+  "tokenizeWithQuotes" should "handle quoted strings" in {
     val data = Map(
       "a b c"                        -> List("a", "b", "c"),
       "aa bb cc"                     -> List("aa", "bb", "cc"),
@@ -91,101 +89,22 @@ class StringUtilTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        tokenizeWithQuotes(input)
-      }
-    }
-
-  }
-
-  test("WordWrapper") {
-    val s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-            "In congue tincidunt fringilla. Sed interdum nibh vitae " +
-            "libero fermentum id dictum risus facilisis. Pellentesque " +
-            "habitant morbi tristique senectus et netus et malesuada " +
-            "fames ac turpis egestas. Sed ante nisi, pharetra ut " +
-            "eleifend vitae, congue ut quam. Vestibulum ante ipsum " +
-            "primis in."
-
-    val data = Map(
-      (s, 79, 0, "", ' ') ->
-"""Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue tincidunt
-fringilla. Sed interdum nibh vitae libero fermentum id dictum risus facilisis.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-turpis egestas. Sed ante nisi, pharetra ut eleifend vitae, congue ut quam.
-Vestibulum ante ipsum primis in.""",
-
-      (s, 40, 0, "", ' ') ->
-"""Lorem ipsum dolor sit amet, consectetur
-adipiscing elit. In congue tincidunt
-fringilla. Sed interdum nibh vitae
-libero fermentum id dictum risus
-facilisis. Pellentesque habitant morbi
-tristique senectus et netus et malesuada
-fames ac turpis egestas. Sed ante nisi,
-pharetra ut eleifend vitae, congue ut
-quam. Vestibulum ante ipsum primis in.""",
-
-      (s, 40, 5, "", ' ') ->
-"""     Lorem ipsum dolor sit amet,
-     consectetur adipiscing elit. In
-     congue tincidunt fringilla. Sed
-     interdum nibh vitae libero
-     fermentum id dictum risus
-     facilisis. Pellentesque habitant
-     morbi tristique senectus et netus
-     et malesuada fames ac turpis
-     egestas. Sed ante nisi, pharetra ut
-     eleifend vitae, congue ut quam.
-     Vestibulum ante ipsum primis in.""",
-
-      (s, 60, 0, "foobar: ", ' ') ->
-"""foobar: Lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. In congue tincidunt fringilla. Sed interdum
-        nibh vitae libero fermentum id dictum risus
-        facilisis. Pellentesque habitant morbi tristique
-        senectus et netus et malesuada fames ac turpis
-        egestas. Sed ante nisi, pharetra ut eleifend vitae,
-        congue ut quam. Vestibulum ante ipsum primis in.""",
-
-      (s, 60, 0, "foobar: ", '.') ->
-"""foobar: Lorem ipsum dolor sit amet, consectetur adipiscing
-........elit. In congue tincidunt fringilla. Sed interdum
-........nibh vitae libero fermentum id dictum risus
-........facilisis. Pellentesque habitant morbi tristique
-........senectus et netus et malesuada fames ac turpis
-........egestas. Sed ante nisi, pharetra ut eleifend vitae,
-........congue ut quam. Vestibulum ante ipsum primis in."""
-
-    )
-
-    for((input, expected) <- data) {
-      val (string, width, indent, prefix, indentChar) = input
-
-      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        val wrapper = WordWrapper(wrapWidth   = width,
-                                  indentation = indent,
-                                  prefix      = prefix,
-                                  indentChar  = indentChar)
-        wrapper.wrap(string)
-      }
+      tokenizeWithQuotes(input) shouldBe expected
     }
   }
 
-  test("bytesToHexString") {
+  "bytesToHexString" should "produce proper hex strings" in {
     val Data = Seq(
       byteArray(Array(0x10, 0x13, 0x99, 0xff)) -> "101399ff"
     )
 
-    for ((bytes, s) <- Data) {
+    for ((bytes, expected) <- Data) {
 
-      assertResult(s, s"bytesToHexString yielding: $s") {
-        bytesToHexString(bytes)
-      }
+      bytesToHexString(bytes) shouldBe expected
     }
   }
 
-  test("hexStringToBytes") {
+  "hexStringToBytes" should "properly decode valid hex strings" in {
     val Data = Seq(
       "101399ff" -> Some(byteArray(Array(0x10, 0x13, 0x99, 0xff))),
       "fail"     -> None,
@@ -204,7 +123,7 @@ quam. Vestibulum ante ipsum primis in.""",
     }
 
     for ((s, byteOpt) <- Data) {
-      assert(eqOpt(byteOpt, hexStringToBytes(s)), s"hexStringToBytes: $s")
+      eqOpt(byteOpt, hexStringToBytes(s)) shouldBe true
     }
   }
 

@@ -34,29 +34,29 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.io
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.io.GrizzledSource._
 import scala.io.Source
 
 /**
   * Tests the grizzled.file.GrizzledSource functions.
   */
-class GrizzledSourceTest extends FunSuite {
-  test("First nonblank line") {
+class GrizzledSourceSpec extends FlatSpec with Matchers {
+  "First nonblank line" should "skip blank lines" in {
     val data = List(("\n\n\n\nfoo\n\n\n", Some("foo")),
                     ("\n\n\n\n\n\n\n\n", None),
                     ("", None),
                     ("foobar", Some("foobar")) )
 
     for((input, expected) <- data) {
-      assertResult(expected, "firstNonblankLine(\"" + input + "\")") { 
-        val source = Source.fromString(input)
-        source.firstNonblankLine
-      }
+      val source = Source.fromString(input)
+      source.firstNonblankLine shouldBe expected
     }
   }
 
-  test("linesBetween") {
+  "linesBetween" should "properly throw away lines outside the range" in {
     val data = List(
       ("{{\na\n}}\n", "{{", "}}", List("a")),
       ("*\nfoo\nbar\nbaz\n*\n", "*", "*", List("foo", "bar", "baz")),
@@ -68,10 +68,8 @@ class GrizzledSourceTest extends FunSuite {
     )
 
     for((input, start, end, expected) <- data) {
-      assertResult(expected, "linesBetween(\"" + input + "\")") { 
-        val source = Source.fromString(input)
-        source.linesBetween(start, end).toList
-      }
+      val source = Source.fromString(input)
+      source.linesBetween(start, end).toList shouldBe expected
     }
   }
 }

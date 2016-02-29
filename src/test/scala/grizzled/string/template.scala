@@ -31,14 +31,18 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.string
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.string.template._
 
 /**
  * Tests the grizzled.string.StringTemplate functions.
  */
-class StringTemplateTest extends FunSuite {
-  test("UnixShellStringTemplate: safe=true") {
+class StringTemplateSpec extends FlatSpec with Matchers {
+  "UnixShellStringTemplate" should
+    "substitute empty strings for bad vars in safe mode" in {
+
     val data = Map(
 
       ("$foo bar $bar ${baz} $",
@@ -70,11 +74,11 @@ class StringTemplateTest extends FunSuite {
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
       val template = new UnixShellStringTemplate(vars.get, true)
-      assert(template.sub(str) === expected)
+      template.sub(str) shouldBe expected
     }
   }
 
-  test("UnixShellStringTemplate: safe=false") {
+  it should "abort on bad vars in unsafe mode" in {
     val data = Map(
 
       ("$foo bar $bar ${baz} $$ $x",
@@ -101,11 +105,13 @@ class StringTemplateTest extends FunSuite {
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
       val template = new UnixShellStringTemplate(vars.get, false)
-      assert(template.sub(str).isLeft)
+      template.sub(str).isLeft shouldBe true
     }
   }
 
-  test("WindowsCmdStringTemplate: safe=true") {
+  "WindowsCmdStringTemplate" should
+    "substitute empty strings for bad vars in safe mode" in {
+
     val data = Map(
 
       ("%foo% bar %bar% %baz% %",
@@ -132,11 +138,11 @@ class StringTemplateTest extends FunSuite {
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
       val template = new WindowsCmdStringTemplate(vars.get, true)
-      assert(template.sub(str) === expected)
+      template.sub(str) shouldBe expected
     }
   }
 
-  test("WindowsCmdStringTemplate: safe=false") {
+  it should "abort on bad vars in unsafe mode" in {
     val data = Map(
 
       ("%foo% bar %bar% ${baz} %% %x%",
@@ -163,7 +169,7 @@ class StringTemplateTest extends FunSuite {
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
       val template = new WindowsCmdStringTemplate(vars.get, false)
-      assert(template.sub(str).isLeft)
+      template.sub(str).isLeft shouldBe true
     }
   }
 }

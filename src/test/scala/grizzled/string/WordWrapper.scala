@@ -75,4 +75,76 @@ class WordWrapperSpec extends FlatSpec with Matchers {
     val postProcessed = r.replaceAllIn(w.wrap(s), "")
     postProcessed shouldBe (w2.wrap(expected))
   }
+
+  it should "wrap words appropriately on column boundaries" in {
+    val s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+      "In congue tincidunt fringilla. Sed interdum nibh vitae " +
+      "libero fermentum id dictum risus facilisis. Pellentesque " +
+      "habitant morbi tristique senectus et netus et malesuada " +
+      "fames ac turpis egestas. Sed ante nisi, pharetra ut " +
+      "eleifend vitae, congue ut quam. Vestibulum ante ipsum " +
+      "primis in."
+
+    val data = Map(
+      (s, 79, 0, "", ' ') ->
+        """Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue tincidunt
+fringilla. Sed interdum nibh vitae libero fermentum id dictum risus facilisis.
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+turpis egestas. Sed ante nisi, pharetra ut eleifend vitae, congue ut quam.
+Vestibulum ante ipsum primis in.""",
+
+      (s, 40, 0, "", ' ') ->
+        """Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. In congue tincidunt
+fringilla. Sed interdum nibh vitae
+libero fermentum id dictum risus
+facilisis. Pellentesque habitant morbi
+tristique senectus et netus et malesuada
+fames ac turpis egestas. Sed ante nisi,
+pharetra ut eleifend vitae, congue ut
+quam. Vestibulum ante ipsum primis in.""",
+
+      (s, 40, 5, "", ' ') ->
+        """     Lorem ipsum dolor sit amet,
+     consectetur adipiscing elit. In
+     congue tincidunt fringilla. Sed
+     interdum nibh vitae libero
+     fermentum id dictum risus
+     facilisis. Pellentesque habitant
+     morbi tristique senectus et netus
+     et malesuada fames ac turpis
+     egestas. Sed ante nisi, pharetra ut
+     eleifend vitae, congue ut quam.
+     Vestibulum ante ipsum primis in.""",
+
+      (s, 60, 0, "foobar: ", ' ') ->
+        """foobar: Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. In congue tincidunt fringilla. Sed interdum
+        nibh vitae libero fermentum id dictum risus
+        facilisis. Pellentesque habitant morbi tristique
+        senectus et netus et malesuada fames ac turpis
+        egestas. Sed ante nisi, pharetra ut eleifend vitae,
+        congue ut quam. Vestibulum ante ipsum primis in.""",
+
+      (s, 60, 0, "foobar: ", '.') ->
+        """foobar: Lorem ipsum dolor sit amet, consectetur adipiscing
+........elit. In congue tincidunt fringilla. Sed interdum
+........nibh vitae libero fermentum id dictum risus
+........facilisis. Pellentesque habitant morbi tristique
+........senectus et netus et malesuada fames ac turpis
+........egestas. Sed ante nisi, pharetra ut eleifend vitae,
+........congue ut quam. Vestibulum ante ipsum primis in."""
+
+    )
+
+    for((input, expected) <- data) {
+      val (string, width, indent, prefix, indentChar) = input
+      val wrapper = WordWrapper(wrapWidth   = width,
+        indentation = indent,
+        prefix      = prefix,
+        indentChar  = indentChar)
+      wrapper.wrap(string) shouldBe expected
+    }
+  }
+
 }

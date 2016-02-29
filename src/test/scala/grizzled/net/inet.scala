@@ -31,6 +31,8 @@
   ---------------------------------------------------------------------------
 */
 
+package grizzled.net
+
 import java.net.InetAddress
 
 import org.scalatest.{FlatSpec, Matchers, FunSuite}
@@ -42,7 +44,7 @@ import scala.util.{Failure, Try}
 /**
  * Tests the grizzled.net functions in inet.scala
  */
-class IPAddressTest extends FlatSpec with Matchers {
+class IPAddressSpec extends FlatSpec with Matchers {
   def byte(thing: Int): Byte = thing.toByte
   def bytes(data: Int*): List[Byte] = data.map(_.toByte).toList
 

@@ -34,21 +34,23 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.sys._
 
 /**
   * Tests the grizzled.file functions.
   */
-class SysTest extends FunSuite {
-  test("system properties") {
+class SysSpec extends FlatSpec with Matchers {
+  "systemProperties" should "retrieve Java system properties" in {
     for ((k, v) <- systemProperties) {
       val javaVal = System.getProperty(k)
-      assertResult(javaVal, "property \"" + k + "\" must be \"" + v + "\"") {v}
+      javaVal shouldBe v
     }
   }
 
-  test("operating system name") {
+  "operating system name" should "be correct" in {
     import OperatingSystem._
 
     val data = Map("mac"        -> Mac,
@@ -63,9 +65,7 @@ class SysTest extends FunSuite {
 
     for ((osName, osType) <- data;
          name <- List(osName.capitalize, osName.toUpperCase, osName)) {
-      assertResult(osType, "OS name \"" + osName + "\" -> " + osType)  {
-        getOS(osName)
-      }
+      getOS(osName) shouldBe osType
     }
   }
 }

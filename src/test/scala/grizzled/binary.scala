@@ -1,12 +1,14 @@
 
-import org.scalatest.FunSuite
+package grizzled
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.binary._
 
 /**
  * Tests the grizzled.binary functions.
  */
-class BinaryTest extends FunSuite {
-  test("bitCount") {
+class BinarySpec extends FlatSpec with Matchers {
+  "bitCount" should "properly count bits" in {
     val intData = Map[Int, Int](
       0                -> 0,
       1                -> 1,
@@ -31,15 +33,11 @@ class BinaryTest extends FunSuite {
     )
 
     for((n, expected) <- intData) {
-      assertResult(expected, "\"" + n.toString + "\" -> " + expected.toString)  {
-        bitCount(n)
-      }
+      bitCount(n) shouldBe expected
     }
 
     for((n, expected) <- longData) {
-      assertResult(expected, "\"" + n.toString + "\" -> " + expected.toString)  {
-        bitCount(n)
-      }
+      bitCount(n) shouldBe expected
     }
   }
 }

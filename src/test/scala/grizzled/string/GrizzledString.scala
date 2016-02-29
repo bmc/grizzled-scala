@@ -31,14 +31,16 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.string
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.string.GrizzledString._
 
 /**
  * Tests the GrizzledString class.
  */
-class GrizzledStringTest extends FunSuite {
-  test("ltrim") {
+class GrizzledStringSpec extends FlatSpec with Matchers {
+  "ltrim" should "properly trim from the beginning of a string" in {
     val data = Map(
       "a b c"                        -> "a b c",
       "                     a"       -> "a",
@@ -48,13 +50,12 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        input.ltrim
-      }
+      input.ltrim shouldBe expected
     }
   }
 
-  test("rtrim") {
+  "rtrim" should "properly trim from the end of a string" in {
+
     val data = Map(
       "a b c"                        -> "a b c",
       "a                     "       -> "a",
@@ -64,13 +65,11 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        input.rtrim
-      }
+      input.rtrim shouldBe expected
     }
   }
 
-  test("tokenize") {
+  "tokenize" should "properly break a line into tokens" in {
     val data = Map(
       ""                       -> Nil,
       " "                      -> Nil,
@@ -81,13 +80,11 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for((input, expected) <- data) {
-      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        input.tokenize
-      }
+      input.tokenize shouldBe expected
     }
   }
 
-  test("translateMetachars") {
+  "translateMetachars" should "translate metacharacter sequences into chars" in {
     val data = Map(
       "a b c"                        -> "a b c",
       "\\u2122"                      -> "\u2122",
@@ -98,9 +95,7 @@ class GrizzledStringTest extends FunSuite {
     )
 
     for ((input, expected) <- data) {
-      assertResult(expected, "\"" + input + "\" -> " + expected.toString) {
-        input.translateMetachars
-      }
+      input.translateMetachars shouldBe expected
     }
   }
 }

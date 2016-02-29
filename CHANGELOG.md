@@ -6,6 +6,7 @@ Version 1.5.1:
   `grizzled.io.withCloseable()`.
 * Added some unit tests for the `grizzled.file.util.eglob()` and
   `grizzled.file.util.glob()` functions.
+* Converted remaining unit tests from ScalaTest's `FunSuite` to `FlatSpec`.
 
 Version 1.5.0:
 

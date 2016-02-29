@@ -34,91 +34,66 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.either.Implicits._
 
 /**
  * Tests the grizzled.either class.
  */
-class EitherTest extends FunSuite {
-  test("map - if right") {
+class EitherSpec extends FlatSpec with Matchers {
+  "map" should "work on a Right" in {
     val r = Right(true)
-
-    assertResult(Right(false), "Right(true) mapped to Right(false)") {
-      r.map(_ => false)
-    }
+    r.map(_ => false) shouldBe Right(false)
   }
 
-  test("map - if left") {
+  it should "work on a Left" in {
     val r: Either[String, Boolean] = Left("no change")
-
-    assertResult(r, "Left(string) not mapped Right(false)") {
-      r.map(_ => false)
-    }
+    r.map(_ => false) shouldBe r
   }
 
-  test("flatMap - Right to Right") {
+  "flatMap" should "properly map a Right to a Right" in {
     val r = Right(true)
-
-    assertResult(Right(false), "Right(true) flatMapped to Right(false)") {
-      r.flatMap(_ => Right(false))
-    }
+    r.flatMap(_ => Right(false)) shouldBe Right(false)
   }
 
-  test("flatMap - Right to Left") {
+  it should "properly map a Right to a Left" in {
     val r: Either[String, Boolean] = Right(true)
-
-    assertResult(Left("fail"), "Right(true) flatMapped to Left(err)") {
-      r.flatMap(_ => Left("fail"))
-    }
+    r.flatMap(_ => Left("fail")) shouldBe Left("fail")
   }
 
-  test("flatMap - Left to Right") {
+  it should "properly map a Left to a Right" in {
     val r: Either[String, Boolean] = Left("fail")
-
-    assertResult(Left("fail"), "Left(s) flatMapped to Right(true)") {
-      r.flatMap(_ => Right(true))
-    }
+    r.flatMap(_ => Right(true)) shouldBe Left("fail")
   }
 
-  test("flatMap - Left to Left") {
+  it should "properly map a Left to a Left by preserving the original" in {
     val r: Either[String, Boolean] = Left("fail")
-
-    assertResult(Left("fail"), "Left(s) flatMapped to Left(s2)") {
-      r.flatMap(_ => Left("fail 2"))
-    }
+    r.flatMap(_ => Left("fail 2")) shouldBe Left("fail")
   }
 
-  test("Either - for comprehension with two Rights") {
+  "Either with a for comprehension" should "work with 2 Rights" in {
     val expected: Either[String, Int] = Right(30)
+    val rv1: Either[String, Int] = Right(10)
+    val rv2: Either[String, Int] = Right(20)
 
-    assertResult(expected, "for over two Right objects") {
-      val rv1: Either[String, Int] = Right(10)
-      val rv2: Either[String, Int] = Right(20)
-
-      for { v1 <- rv1; v2 <- rv2 } yield v1 + v2
-    }
+    (for { v1 <- rv1; v2 <- rv2 } yield v1 + v2) shouldBe expected
   }
 
-  test("Either - for comprehension with a Right and a Left") {
+  it should "work with a Right and a Left" in {
     val expected: Either[String, Int] = Left("foo")
+    val rv1: Either[String, Int] = Right(10)
+    val rv2: Either[String, Int] = Left("foo")
 
-    assertResult(expected, "for over a Left and a Right") {
-      val rv1: Either[String, Int] = Right(10)
-      val rv2: Either[String, Int] = Left("foo")
-
-      for { v1 <- rv1; v2 <- rv2 } yield v1 + v2
-    }
+    (for { v1 <- rv1; v2 <- rv2 } yield v1 + v2) shouldBe expected
   }
 
-  test("Either - for comprehension with two Lefts") {
+  it should "work with 2 Lefts" in {
     val expected: Either[String, Int] = Left("bar")
+    val rv1: Either[String, Int] = Left("bar")
+    val rv2: Either[String, Int] = Left("foo")
 
-    assertResult(expected, "for over a Left and a Right") {
-      val rv1: Either[String, Int] = Left("bar")
-      val rv2: Either[String, Int] = Left("foo")
-
-      for { v1 <- rv1; v2 <- rv2 } yield v1 + v2
-    }
+    (for { v1 <- rv1; v2 <- rv2 } yield v1 + v2) shouldBe expected
   }
 }

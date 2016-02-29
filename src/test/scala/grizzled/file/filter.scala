@@ -34,14 +34,16 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.file
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.file.filter._
 
 /**
   * Tests the grizzled.file.filter functions.
   */
-class FileFilterTest extends FunSuite {
-  test("BackslashContinuedLineIterator") {
+class FileFilterSpec extends FlatSpec with Matchers {
+  "BackslashContinuedLineIterator" should "properly join lines" in {
     val data = List[(List[String], List[String])](
       (List("Lorem ipsum dolor sit amet, consectetur \\",
             "adipiscing elit.",
@@ -55,14 +57,10 @@ class FileFilterTest extends FunSuite {
             "fermentum id dictum risus facilisis."))
     )
 
-    for((input, expected) <- data)
-      assertResult(expected, "BackslashContinuedLineIterator(\"" + input + "\")") {
-        val iterator = input.iterator
-        val result = {
-          for (line <- new BackslashContinuedLineIterator(iterator))
-            yield line
-        }.toList
-        result
-      }
+    for((input, expected) <- data) {
+      val iterator = input.iterator
+      val result = new BackslashContinuedLineIterator(iterator).toList
+      result shouldBe expected
+    }
   }
 }

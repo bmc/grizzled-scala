@@ -34,7 +34,9 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled.math
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.math.stats._
 import Numeric._
 import java.lang.Math.sqrt
@@ -42,11 +44,11 @@ import java.lang.Math.sqrt
 /**
  * Tests the grizzled.file functions.
  */
-class StatsTest extends FunSuite {
+class StatsSpec extends FlatSpec with Matchers {
   private def dList[T](l: T*)(implicit x: Numeric[T]): List[Double] =
     l.map (x.toDouble(_)).toList
 
-  test("geometric mean") {
+  "geometric mean" should "produce proper values" in {
     val Data = List(
       (8.15193109605923,   dList(1, 10, 30, 10, 12)),
       (5.78182338862232,   dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
@@ -55,13 +57,11 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      assertResult(expected, "Geometric mean of " + values) {
-        geometricMean(values: _*)
-      }
+      geometricMean(values: _*) shouldBe expected
     }
   }
 
-  test("harmonic mean") {
+  "harmonic mean" should "produce proper values" in {
     val Data = List(
       (3.797468354430379,  dList(1, 10, 30, 10, 12)),
       (3.2558139534883717, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
@@ -70,13 +70,11 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      assertResult(expected, "Harmonic mean of " + values) {
-        harmonicMean(values: _*)
-      }
+      harmonicMean(values: _*) shouldBe expected
     }
   }
 
-  test("arithmetic mean") {
+  "arithmetic mean" should "produce proper values" in {
     val Data = List(
       (12.6,              dList(1, 10, 30, 10, 12)),
       (9.714285714285714, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
@@ -86,13 +84,11 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      assertResult(expected, "Arithmetic mean of " + values) {
-        mean(values: _*)
-      }
+      mean(values: _*) shouldBe expected
     }
   }
 
-  test("median") {
+  "median" should "produce proper values" in {
     val Data = List(
       (10.0,              dList(1, 10, 30, 10, 12)),
       (10.0,              dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
@@ -104,13 +100,11 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      assertResult(expected, "median of " + values) {
-        median(values: _*)
-      }
+      median(values: _*) shouldBe expected
     }
   }
 
-  test("mode") {
+  "mode" should "produce proper values" in {
     val Data = List(
       (dList(10),          dList(1, 10, 30, 10, 12)),
       (dList(1),           dList(1, 10, 3, 1, 100)),
@@ -120,13 +114,11 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      assertResult(expected, "mode of " + values) {
-        mode(values: _*).sortWith(_ < _)
-      }
+      mode(values: _*).sortWith(_ < _) shouldBe expected
     }
   }
 
-  test("sample variance") {
+  "sample variance" should "produce proper values" in {
     val Data = List(
       (50.0,               dList(10, 20)),
       (1866.5,             dList(1, 10, 3, 1, 100)),
@@ -136,72 +128,70 @@ class StatsTest extends FunSuite {
     )
 
     for ((expected, values) <- Data) {
-      assertResult(expected, "variance of " + values) {
-        sampleVariance(values: _*)
-      }
+      sampleVariance(values: _*) shouldBe expected
     }
   }
 
-  test("sample standard deviation") {
-    val Data = List(
-      (7.0710678118654755, dList(10, 20)),
-      (43.2030091544559,   dList(1, 10, 3, 1, 100)),
-      (1.0,                dList(1, 2, 3, 1, 3)),
-      (461.45110791935474, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-    )
+  private val SampleStddevData = List(
+    (7.0710678118654755, dList(10, 20)),
+    (43.2030091544559,   dList(1, 10, 3, 1, 100)),
+    (1.0,                dList(1, 2, 3, 1, 3)),
+    (461.45110791935474, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+  )
 
-    for ((expected, values) <- Data) {
-      val stddev = sampleStandardDeviation(values: _*)
-      assertResult(expected, "standard deviation " + values) {
-        stddev
-      }
+  private val PopulationVarianceData = List(
+    (25.0,          dList(10, 20)),
+    (25.0,          dList(10.5, 20.5)),
+    (1493.2,        dList(1, 10, 3, 1, 100)),
+    (0.8,           dList(1, 2, 3, 1, 3)),
+    (186319.984375, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+  )
 
+  private val PopulationStddevData = List(
+    (5,                  dList(10, 20)),
+    (5.0,                dList(10.5, 20.5)),
+    (38.64194612076364,  dList(1, 10, 3, 1, 100)),
+    (0.8944271909999159, dList(1, 2, 3, 1, 3)),
+    (431.64798664536823, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+  )
+
+  "sample standard deviation" should "produce proper values" in {
+    for ((expected, values) <- SampleStddevData) {
+      sampleStandardDeviation(values: _*) shouldBe expected
+    }
+  }
+
+  it should "be the square root of the sample variance" in {
+    for ((expected, values) <- SampleStddevData) {
       val variance = sampleVariance(values: _*)
-      assertResult(sqrt(variance), "standard deviation = sqrt(variance)") {
-        stddev
-      }
+      val stddev = sampleStandardDeviation(values: _*)
+
+      sqrt(variance) shouldBe stddev
     }
   }
 
-  test("population variance") {
-    val Data = List(
-      (25.0,             dList(10, 20)),
-      (25.0,             dList(10.5, 20.5)),
-      (1493.2,           dList(1, 10, 3, 1, 100)),
-      (0.8,              dList(1, 2, 3, 1, 3)),
-      (186319.984375,    dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-    )
-
-    for ((expected, values) <- Data) {
-      assertResult(expected, "variance of " + values) {
-        populationVariance(values: _*)
-      }
+  "population variance" should "produce proper values" in {
+    for ((expected, values) <- PopulationVarianceData) {
+      populationVariance(values: _*) shouldBe expected
     }
   }
 
-  test("population standard deviation") {
-    val Data = List(
-      (5,                  dList(10, 20)),
-      (5.0,                dList(10.5, 20.5)),
-      (38.64194612076364,  dList(1, 10, 3, 1, 100)),
-      (0.8944271909999159, dList(1, 2, 3, 1, 3)),
-      (431.64798664536823, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
-    )
+  "population standard deviation" should "produce proper values" in {
+    for ((expected, values) <- PopulationStddevData) {
+      populationStandardDeviation(values: _*) shouldBe expected
+    }
+  }
 
-    for ((expected, values) <- Data) {
-      val stddev = populationStandardDeviation(values: _*)
-      assertResult(expected, "standard deviation " + values) {
-        stddev
-      }
-
+  it should "be the square root of the population variance" in {
+    for ((expected, values) <- PopulationStddevData) {
       val variance = populationVariance(values: _*)
-      assertResult(sqrt(variance), "standard deviation = sqrt(variance)") {
-        stddev
-      }
+      val stddev = populationStandardDeviation(values: _*)
+
+      sqrt(variance) shouldBe stddev
     }
   }
 
-  test("range") {
+  "range" should "produce proper values" in {
     // Must be all the same type
     val Data1 = List[(Double, List[Double])](
       (29.0,            dList((1 to 30): _*)),
@@ -227,16 +217,14 @@ class StatsTest extends FunSuite {
     }
   }
 
-  test("range with a single value") {
+  it should "work with a single value" in {
     val Data = List[(Int, Int)](
       (0,   1),
       (0, 100)
     )
 
     for ((expected, value) <- Data) {
-      assertResult(expected, "range " + value) {
-        range(value)
-      }
+      range(value) shouldBe expected
     }
   }
 }

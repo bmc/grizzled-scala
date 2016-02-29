@@ -34,22 +34,24 @@
   ---------------------------------------------------------------------------
 */
 
-import org.scalatest.FunSuite
+package grizzled
+
+import org.scalatest.{FlatSpec, Matchers}
 import grizzled.reflect._
 import scala.reflect.Manifest
 import scala.reflect.{ClassTag, classTag}
- 
+
 /**
   * Tests the grizzled.file functions.
   */
-class ReflectionTest extends FunSuite {
+class ReflectionSpec extends FlatSpec with Matchers {
   private def isOfTypeTest[T: ClassTag](expected: Boolean, v: Any): Unit = {
     assertResult(expected, "isOfType " + classTag.runtimeClass.toString) {
-      isOfType[T](v) 
+      isOfType[T](v)
     }
   }
 
-  test("isOfType primitives") {
+  "isOfType primitives" should "work" in {
     isOfTypeTest [Int] (true, 10)
     isOfTypeTest [Int] (false, 10L)
 
@@ -77,7 +79,7 @@ class ReflectionTest extends FunSuite {
     isOfTypeTest [Char] (false, 65.asInstanceOf[Byte])
   }
 
-  test("isOfType non-primitives") {
+  "isOfType non-primitives" should "work" in {
     class Foo
     class Bar extends Foo
 
