@@ -2,19 +2,12 @@
 // Basic settings
 
 name := "grizzled-scala"
-
 version := "1.5.1"
-
 organization := "org.clapper"
-
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
-
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
-
 description := "A general-purpose Scala utility library"
-
 scalaVersion := "2.11.7"
-
 crossScalaVersions := Seq("2.10.5", "2.11.7")
 
 // Incremental compilation performance improvement. See
@@ -26,9 +19,7 @@ incOptions := incOptions.value.withNameHashing(true)
 // Additional compiler options and plugins
 
 autoCompilerPlugins := true
-
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
-
 bintrayPackageLabels := Seq("library", "grizzled", "scala")
 
 // ---------------------------------------------------------------------------
@@ -55,11 +46,8 @@ libraryDependencies += "jline" % "jline" % "2.6"
 // Don't set publishTo. The Bintray plugin does that automatically.
 
 publishMavenStyle := true
-
 publishArtifact in Test := false
-
 pomIncludeRepository := { _ => false }
-
 pomExtra := (
   <scm>
     <url>git@github.com:bmc/grizzled-scala.git/</url>
