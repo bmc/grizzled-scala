@@ -62,7 +62,7 @@ object Implicits {
     * @param underlying the underlying `LinearSeq`
     * @tparam T the type
     */
-  implicit class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T])
+  implicit class GrizzledLinearSeq[+T](val underlying: LinearSeq[T])
     extends AnyVal {
 
     def realSeq = underlying
