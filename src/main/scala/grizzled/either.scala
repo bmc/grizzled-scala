@@ -36,6 +36,9 @@
 
 package grizzled
 
+import scala.reflect.ClassTag
+import scala.util.{Success, Failure, Try}
+
 /** Helpers for the Scala `Either` class.
   */
 object either {
@@ -85,6 +88,27 @@ object either {
           case Right(value) => mapper(value)
         }
       }
+
+      /** Convert an `Either` to a `Try`. If the `Either` is a `Right`, then
+        * the value is extracted from the `Right` and wrapped in a `Success`.
+        * If the `Either` is a `Left`, then the value is extracted from the
+        * left, stored in an `Exception`, and wrapped in a `Failure`.
+        *
+        * To convert the exception to another exception, you can use `.orElse`:
+        *
+        * {{{
+        *   either.toTry.orElse { e => Failure(new MyException(e)) }
+        * }}}
+        *
+        * @return the `Either`, converted to a `Try`
+        */
+      def toTry: Try[R] = {
+        e match {
+          case Left(error)  => Failure(new Exception(error.toString))
+          case Right(value) => Success(value)
+        }
+      }
     }
   }
 }
+

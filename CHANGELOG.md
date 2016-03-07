@@ -1,7 +1,9 @@
-Version 1.5.2:
+Version 1.6.0:
 
 * Added a better message when a `CanReleaseResource` implicit evidence
   parameter cannot be found for `grizzled.util.withCloseable()`.
+* Added `toTry` method to the rich `Either` class, to convert an
+  `Either` to a `Try`.
 
 Version 1.5.1:
 
