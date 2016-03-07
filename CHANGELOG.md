@@ -1,3 +1,8 @@
+Version 1.5.2:
+
+* Added a better message when a `CanReleaseResource` implicit evidence
+  parameter cannot be found for `grizzled.util.withCloseable()`.
+
 Version 1.5.1:
 
 * Cleaned up some warnings identified by IntelliJ.

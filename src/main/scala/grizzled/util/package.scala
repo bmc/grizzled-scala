@@ -37,6 +37,7 @@
 
 package grizzled
 
+import scala.annotation.implicitNotFound
 import scala.language.implicitConversions
 import scala.language.reflectiveCalls
 
@@ -89,6 +90,7 @@ package object util {
     * @tparam T the type (which must be contravariant to allow, for instance,
     *           a `T` of `Closeable` to apply to subclasses like `InputStream`).
     */
+  @implicitNotFound("Can't find a CanReleaseSource[${T}] for withCloseable()")
   trait CanReleaseResource[-T] {
     def release(a: T): Unit
   }
