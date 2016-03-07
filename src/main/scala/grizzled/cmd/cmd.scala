@@ -43,7 +43,7 @@ package grizzled.cmd
 
 import grizzled.readline.Readline.ReadlineType._
 import grizzled.readline.Readline.ReadlineType
-import grizzled.readline.{Readline, 
+import grizzled.readline.{Readline,
                           CompletionToken,
                           Completer,
                           ListCompleter,
@@ -68,12 +68,12 @@ case object Stop extends CommandAction
 sealed abstract class Command
 case object EOFCommand extends Command
 case object EmptyCommand extends Command
-case class KnownCommand(handler: CommandHandler, 
+case class KnownCommand(handler: CommandHandler,
                         fullInputLine: String,
                         name: String,
                         args: String) extends Command
 case class UnknownCommand(fullInputLine: String,
-                          name: String, 
+                          name: String,
                           args: String) extends Command
 
 /** Trait for an object (or class) that handles a single command. All logic
@@ -174,7 +174,7 @@ trait CommandHandler {
     * @param commandLine the current unparsed input line, which includes the
     *                    token
     */
-  def complete(token: String, 
+  def complete(token: String,
                context: List[CompletionToken],
                commandLine: String): List[String] = Nil
 
@@ -186,7 +186,7 @@ trait CommandHandler {
 /** Mixed in to indicate no completions are available.
   */
 trait NoCompletionsHandler extends CommandHandler {
-  override final def commandNameCompletions(prefix: String): List[String] = 
+  override final def commandNameCompletions(prefix: String): List[String] =
     Nil
 }
 
@@ -213,7 +213,7 @@ trait BlockCommandHandler extends NoCompletionsHandler {
 }
 
 /** Base class for command interpreters.
-  * 
+  *
   * `CommandInterpreter` is the base class of any command interpreter. This
   * class and the `CommandHandler` trait provide a simple framework for
   * writing line-oriented command-interpreters. This framework is
@@ -305,7 +305,7 @@ abstract class CommandInterpreter(val appName: String,
     * @param appName   application name
     * @param readline  readline implementation
     */
-  def this(appName: String, readline: ReadlineType) = 
+  def this(appName: String, readline: ReadlineType) =
     this(appName, List(readline))
 
   /** Alternate constructor that tries all known readline implementations,
@@ -319,7 +319,7 @@ abstract class CommandInterpreter(val appName: String,
     *
     * @param appName   application name
     */
-  def this(appName: String) = 
+  def this(appName: String) =
     this(appName, Nil)
 
   /** The primary prompt string.
@@ -396,7 +396,7 @@ abstract class CommandInterpreter(val appName: String,
     *
     * @param message the message to emit
     */
-  def warning(message: String) = 
+  def warning(message: String) =
     println(Console.YELLOW + "Warning: " + message + Console.RESET)
 
   /** Called just before the main loop (`mainLoop()`) begins its
@@ -417,7 +417,7 @@ abstract class CommandInterpreter(val appName: String,
     * @param commandLine  the command line
     *
     * @return The possibly edited command, Some("") to signal an empty
-    *         command, or None to signal EOF. 
+    *         command, or None to signal EOF.
     */
   def preCommand(commandLine: String): Option[String] = Some(commandLine)
 
@@ -463,7 +463,7 @@ abstract class CommandInterpreter(val appName: String,
     * @return `KeepGoing` to tell the main loop to continue,
     *         or `Stop` to tell the main loop to be done.
     */
-  def handleUnknownCommand(commandName: String, 
+  def handleUnknownCommand(commandName: String,
                            unparsedArgs: String): CommandAction = {
     error("Unknown command: " + commandName)
     KeepGoing
@@ -557,7 +557,7 @@ abstract class CommandInterpreter(val appName: String,
     try {
       val commandLine2 = commandLine.flatMap(preCommand _)
       mapCommandLine(commandLine2) match {
-        case EOFCommand  => 
+        case EOFCommand  =>
           handleEOF
 
         case EmptyCommand =>
@@ -607,8 +607,7 @@ abstract class CommandInterpreter(val appName: String,
     override val Help = """This message"""
 
     private def helpHelp = {
-      import scala.collection.mutable.ArrayBuffer
-      import grizzled.collection.GrizzledLinearSeq._
+      import grizzled.collection.Implicits.GrizzledLinearSeq
 
       // Help only.
 
@@ -627,7 +626,7 @@ abstract class CommandInterpreter(val appName: String,
             val header = "Help for \"" + cmd.CommandName + "\""
           println("\n" + header + "\n" + ("-" * header.length))
           if (cmd.aliases != Nil)
-            printf("Aliases: %s\n\n", 
+            printf("Aliases: %s\n\n",
                    cmd.aliases.mkString(", "))
 
           println(cmd.Help)
@@ -684,13 +683,13 @@ abstract class CommandInterpreter(val appName: String,
 
     override def tokenDelimiters = interpreter.tokenDelimiters
 
-    def complete(token: String, 
+    def complete(token: String,
                  allTokens: List[CompletionToken],
                  line: String): List[String] = {
       def completeForCommand(commandName: String): List[String] = {
         findCommand(commandName) match {
           case None          => Nil
-          case Some(handler) => handler.complete(token, allTokens, 
+          case Some(handler) => handler.complete(token, allTokens,
                                                  line)
         }
       }
@@ -733,16 +732,16 @@ abstract class CommandInterpreter(val appName: String,
     *         not `None`.
     */
   private def readCommand: Option[String] = {
-    @tailrec def doRead(lineSoFar: String, 
+    @tailrec def doRead(lineSoFar: String,
                         usePrompt: String): Option[String] = {
       assert (readerStack.size > 0)
       val reader = readerStack.top
       val readlineResult = reader(usePrompt) match {
         case None =>
           None
-        case Some(line) if (lineSoFar == "") => 
+        case Some(line) if (lineSoFar == "") =>
           Some((line, line))
-        case Some(line) => 
+        case Some(line) =>
           Some((line, (List(lineSoFar, line) mkString "\n")))
       }
 
@@ -841,7 +840,7 @@ abstract class CommandInterpreter(val appName: String,
     */
   private def sortedCommandNames(includeAliases: Boolean): List[String] = {
     val namesOnly = allHandlers.filter(! _.hidden).map(_.CommandName)
-    val allNames = 
+    val allNames =
       if (includeAliases)
         // Extract the aliases, producing a list of lists of strings.
         // Then, flatten that list of lists into a single list of
@@ -867,7 +866,7 @@ object CmdUtil {
 }
 
 /** Simple history command handler.
-  * 
+  *
   * A simple "history" (alias: "h") handler that displays the history to
   * standard output. This history handler supports the following usage:
   *
@@ -885,9 +884,9 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
   val CommandName = "history"
   override val aliases = List("h")
 
-  val history = cmd.history 
-  val Help = 
-    """Show history. 
+  val history = cmd.history
+  val Help =
+    """Show history.
       |
       |Usage: history [-n] [regex]
       |
@@ -895,7 +894,7 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
       |expression is supplied, then only those history entries that match the
       |regular expression are shown."""
       .stripMargin
-  
+
   private val TotalRegex = """^-([0-9]+)$""".r
 
   def runCommand(commandName: String, unparsedArgs: String): CommandAction =  {
@@ -905,7 +904,7 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
     val tokens = CmdUtil.tokenize(unparsedArgs)
     val historyCommands = history.get
 
-    def filterByRegex(strings: List[(String, Int)], 
+    def filterByRegex(strings: List[(String, Int)],
                       pat: String): List[(String, Int)] = {
       try {
         val re = new Regex("(?i)" + pat) // case insensitive
@@ -960,7 +959,7 @@ class HistoryHandler(val cmd: CommandInterpreter) extends CommandHandler {
 }
 
 /** Simple "redo command" handler.
-  * 
+  *
   * A simple "redo" command handler that supports re-issuing a numbered
   * command from the history or the last command with a given prefix. For
   * example, it supports the following syntaxes:
@@ -982,7 +981,7 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler {
   override val aliases = List("!", "/")
   override val storeInHistory = false
 
-  val history = cmd.history 
+  val history = cmd.history
   val Help = """Reissue a command, by partial name or number.
   |
   |Usage: r namePrefix  -or-  !namePrefix
@@ -1018,7 +1017,7 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler {
         commandList match {
           case "r" :: Nil =>
             Some(historyBuf(historyBuf.length - 1))
-          
+
           case "!!" :: Nil =>
             Some(historyBuf(historyBuf.length - 1))
 
@@ -1058,10 +1057,10 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler {
     }
   }
 
-  private def getByPrefix(historyBuf: List[String], 
+  private def getByPrefix(historyBuf: List[String],
                           prefix: String): Option[String] = {
     historyBuf.reverse.filter(_.startsWith(prefix)) match {
-      case Nil => 
+      case Nil =>
         cmd.error("No command matches \"" + prefix + "\"")
         None
 
@@ -1071,4 +1070,4 @@ class RedoHandler(val cmd: CommandInterpreter) extends CommandHandler {
   }
 }
 
- 
+

@@ -129,7 +129,7 @@ extends Readline with Util {
   object editlineCompletionsDisplayer
   extends EditLine.PossibleCompletionsDisplayer {
     def showCompletions(tokens: java.lang.Iterable[String]) = {
-      import grizzled.collection.GrizzledIterable._
+      import grizzled.collection.Implicits.GrizzledIterable
       import scala.collection.convert.Wrappers._
 
       val maxTemp = editline.getMaxShownCompletions
@@ -143,7 +143,7 @@ extends Readline with Util {
     }
   }
 
-  object editlineCompleter 
+  object editlineCompleter
   extends EditLine.CompletionHandler with CompleterHelper {
     def complete(token: String, line: String, cursor: Int): Array[String] = {
       import grizzled.parsing.StringToken
@@ -164,7 +164,7 @@ extends Readline with Util {
           cursor > (token.start + token.string.length)
 
         tokens match {
-          case Nil => 
+          case Nil =>
             List(Cursor)
 
           case token :: Nil if (before(token)) =>

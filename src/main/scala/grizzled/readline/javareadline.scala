@@ -41,8 +41,6 @@
 package grizzled.readline.javareadline
 
 import grizzled.readline._
-import grizzled.collection._
-import grizzled.collection.CollectionIterator._
 import grizzled.string.GrizzledString._
 
 import org.gnu.readline.{Readline => JavaReadline,
@@ -60,11 +58,12 @@ private[javareadline] class ReadlineHistory extends History {
     */
   def get: List[String] = {
     import _root_.java.util.ArrayList
+    import scala.collection.JavaConversions.asScalaIterator
 
     val history = new ArrayList[String]
 
     JavaReadline.getHistory(history)
-    history.toList
+    history.iterator.toList
   }
 
   /** Clear the history buffer
@@ -188,11 +187,11 @@ extends Readline with Util {
               case Nil =>
                 List(LineToken(matchToken), Cursor)
               case _ if lastIsWhite =>
-                mapWithDelims(rest.reverse) ++ 
-              List(Delim, LineToken(matchToken), Delim, 
+                mapWithDelims(rest.reverse) ++
+              List(Delim, LineToken(matchToken), Delim,
                    Cursor)
               case _  =>
-                mapWithDelims(rest.reverse) ++ 
+                mapWithDelims(rest.reverse) ++
               List(Delim, LineToken(matchToken), Cursor)
             }
           }

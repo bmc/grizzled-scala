@@ -41,146 +41,139 @@ import scala.collection.immutable.LinearSeq
 import scala.language.implicitConversions
 import java.util.{Collection, Iterator => JIterator}
 
-/** Useful for converting a collection into an object suitable for use with
-  * Scala's `for` loop.
+/** Enrichment classes for collections.
   */
-class CollectionIterator[T](val iterator: JIterator[T]) extends Iterator[T] {
-
-  /** Alternate constructor that takes a collection.
-    *
-    * @param collection  the collection
+object Implicits {
+  /** Useful for converting a collection into an object suitable for use with
+    * Scala's `for` loop.
     */
-  def this(collection: Collection[T]) = this(collection.iterator)
+  implicit class CollectionIterator[T](val iterator: JIterator[T])
+    extends Iterator[T] {
 
-  def hasNext: Boolean = iterator.hasNext
-  def next: T = iterator.next
+    def this(c: Collection[T]) = this(c.iterator)
+
+    def hasNext: Boolean = iterator.hasNext
+
+    def next: T = iterator.next
+  }
+
+  /** An enrichment class that decorates a `LinearSeq`.
+    *
+    * @param underlying the underlying `LinearSeq`
+    * @tparam T the type
+    */
+  implicit class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T])
+    extends AnyVal {
+
+    def realSeq = underlying
+
+    /** Create a string containing the contents of this sequence, arranged
+      * in columns.
+      *
+      * @param width total (maximum) columns
+      *
+      * @return a possibly multiline string containing the columnar output.
+      *         The string may have embedded newlines, but it will not end
+      *         with a newline.
+      */
+    def columnarize(width: Int): String = {
+      import scala.collection.mutable.ArrayBuffer
+      import grizzled.math.util.{max => maxnum}
+
+      val buf = new ArrayBuffer[Char]
+
+      // Lay them out in columns. Simple-minded for now.
+      val strings = underlying.map(_.toString).toList
+      val colSize = maxnum(strings.map(_.length): _*) + 2
+      val colsPerLine = width / colSize
+
+      for ((s, i) <- strings.zipWithIndex) {
+        val count = i + 1
+        val padding = " " * (colSize - s.length)
+        buf ++= (s + padding)
+        if ((count % colsPerLine) == 0)
+          buf += '\n'
+      }
+
+      buf mkString ""
+    }
+
+    override def toString = underlying.toString
+  }
+
+  /** An `Iterable` enrichment class.
+    *
+    * @param underlying the underlying iterable
+    * @tparam T the iterable type
+    */
+  implicit class GrizzledIterable[+T](protected val underlying: Iterable[T])
+    extends Iterable[T] {
+    def self = this
+
+    def realIterable = underlying
+
+    def iterator = underlying.iterator
+
+
+    /** Create a string containing the contents of this iterable, arranged
+      * in columns.
+      *
+      * @param width    total (maximum) columns
+      *
+      * @return a possibly multiline string containing the columnar output.
+      *         The string may have embedded newlines, but it will not end
+      *         with a newline.
+      */
+    def columnarize(width: Int): String = {
+      new GrizzledLinearSeq(underlying.toList).columnarize(width)
+    }
+  }
 }
 
 object CollectionIterator {
+  import Implicits._
+
+  @deprecated("Please import grizzled.collection.Implicits._", "1.5.1")
   implicit def javaCollectionToScalaIterator[T](c: Collection[T]): Iterator[T] =
     new CollectionIterator[T](c)
 }
 
-/** An iterator that iterates, serially, over the contents of multiple other
-  * iterators.
-  *
-  * @param iterators  the iterators to wrap
-  */
-class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
-  private[this] val iteratorList: List[Iterator[T]] = iterators.toList
-  private[this] var current = iteratorList.head
-  private[this] var nextIterators = iteratorList.tail
-
-  /** Determines whether the iterator is empty. A `MultiIterator`
-    * is empty when all contained iterators have been exhausted.
-    *
-    * @return `true` if there's more to read, `false` if not
-    */
-  def hasNext: Boolean = {
-    if( current.hasNext )
-      true
-
-    else if( nextIterators == Nil )
-      false
-
-    else {
-      current = nextIterators.head
-      nextIterators = nextIterators.tail
-      hasNext
-    }
-  }
-
-  /** Get the next element.
-    *
-    * @return the next element
-    */
-  def next: T = {
-    if (! hasNext)
-      throw new java.util.NoSuchElementException
-
-    current.next
-  }
-}
-
-class GrizzledIterable[+T](protected val underlying: Iterable[T])
-extends Iterable[T] {
-  def self = this
-
-  def realIterable = underlying
-
-  def iterator = underlying.iterator
-
-  def columnarize(width: Int): String = {
-    new GrizzledLinearSeq(underlying.toList).columnarize(width)
-  }
-}
-
 object GrizzledIterable {
+  import Implicits._
+
   /** Convert a Scala Iterable object to a GrizzledIterable.
     */
+  @deprecated("Please import grizzled.collection.Implicits._", "1.5.1")
   implicit def iterableToGrizzledIterable[T](it: Iterable[T]): GrizzledIterable[T] =
     new GrizzledIterable[T](it)
 
   /** Convert GrizzledIterator a object to a Scala Iterable.
     */
+  @deprecated("Please import grizzled.collection.Implicits._", "1.5.1")
   implicit def grizzledIterableToIterable[T](it: GrizzledIterable[T]): Iterable[T] =
     it.realIterable
-}
-
-class GrizzledLinearSeq[+T](protected val underlying: LinearSeq[T]) {
-  def realSeq = underlying
-
-  /** Create a string containing the contents of this sequence, arranged
-    * in columns.
-    *
-    * @param width    total (maximum) columns
-    *
-    * @return a possibly multiline string containing the columnar output.
-    *         The string may have embedded newlines, but it will not end
-    *         with a newline.
-    */
-  def columnarize(width: Int): String = {
-    import scala.collection.mutable.ArrayBuffer
-    import grizzled.math.util.{max => maxnum}
-
-    val buf = new ArrayBuffer[Char]
-
-    // Lay them out in columns. Simple-minded for now.
-    println(underlying)
-    val strings = underlying.map(_.toString).toList
-    println(s">>> strings=$strings")
-    val colSize = maxnum(strings.map(_.length): _*) + 2
-    val colsPerLine = width / colSize
-    println(s"*** width=$width, colSize=$colSize, colsPerLine=$colsPerLine")
-    for ((s, i) <- strings.zipWithIndex) {
-      val count = i + 1
-      val padding = " " * (colSize - s.length)
-      buf ++= (s + padding)
-      if ((count % colsPerLine) == 0)
-        buf += '\n'
-    }
-
-    buf mkString ""
-  }
-
-  override def toString = underlying.toString
 }
 
 /** Implicit conversions specific to GrizzledLinearSeq.
   */
 object GrizzledLinearSeq {
+  import Implicits._
+
   /** Convert a Scala Seq object to a GrizzledLinearSeq.
     */
+  @deprecated("Please import grizzled.collection.Implicits._", "1.5.1")
   implicit def scalaSeqToGrizzledLinearSeq[T](seq: LinearSeq[T]): GrizzledLinearSeq[T] =
     new GrizzledLinearSeq[T](seq)
 
   /** Convert a Scala List object to a GrizzledLinearSeq.
     */
+  @deprecated("Please import grizzled.collection.Implicits._", "1.5.1")
   implicit def listToGrizzledLinearSeq[T](list: List[T]): GrizzledLinearSeq[T] =
     new GrizzledLinearSeq[T](list)
 
   /** Convert GrizzledLinearSeq a object to a Scala Seq.
     */
+  @deprecated("Please import grizzled.collection.Implicits._", "1.5.1")
   implicit def grizzledLinearSeqToScalaSeq[T](seq: GrizzledLinearSeq[T]): LinearSeq[T] =
     seq.realSeq
 }
