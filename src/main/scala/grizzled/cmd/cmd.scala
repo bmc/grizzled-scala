@@ -52,7 +52,7 @@ import grizzled.readline.{Readline,
                           Cursor,
                           History}
 
-import grizzled.string.GrizzledString._
+import grizzled.string.Implicits.String._
 
 import scala.collection.mutable.Stack
 import scala.annotation.tailrec

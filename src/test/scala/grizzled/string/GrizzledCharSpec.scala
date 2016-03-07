@@ -34,12 +34,13 @@
 package grizzled.string
 
 import org.scalatest.{FlatSpec, Matchers}
-import grizzled.string.GrizzledChar._
 
 /**
  * Tests the GrizzledChar class.
  */
 class GrizzledCharSpec extends FlatSpec with Matchers {
+  import grizzled.string.Implicits.Char._
+
   "isHexDigit" should "detect valid hex digits and reject invalid ones" in {
     val data = Map('0' -> true,
                    '1' -> true,

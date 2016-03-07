@@ -41,7 +41,7 @@
 package grizzled.readline.javareadline
 
 import grizzled.readline._
-import grizzled.string.GrizzledString._
+import grizzled.string.Implicits.String._
 
 import org.gnu.readline.{Readline => JavaReadline,
                          ReadlineCompleter => JavaReadlineCompleter,
@@ -101,7 +101,7 @@ private[javareadline] class ReadlineHistory extends History {
     */
   def max_=(newSize: Int) {
     maxSize = newSize
-    ensureMaxSize
+    ensureMaxSize()
   }
 
   /** Unconditionally appends the specified line to the history.
@@ -110,10 +110,10 @@ private[javareadline] class ReadlineHistory extends History {
     */
   protected def append(line: String) = {
     JavaReadline.addToHistory(line)
-    ensureMaxSize
+    ensureMaxSize()
   }
 
-  private def ensureMaxSize: Unit = {
+  private def ensureMaxSize(): Unit = {
     val history = get
     if (history.length > maxSize) {
       val newHistory = history drop (history.length - maxSize)

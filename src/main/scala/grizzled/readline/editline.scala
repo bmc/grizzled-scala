@@ -147,7 +147,7 @@ extends Readline with Util {
   extends EditLine.CompletionHandler with CompleterHelper {
     def complete(token: String, line: String, cursor: Int): Array[String] = {
       import grizzled.parsing.StringToken
-      import grizzled.string.GrizzledString._
+      import grizzled.string.Implicits.String._
       import scala.collection.mutable.ArrayBuffer
 
       val completions = ArrayBuffer.empty[String]

@@ -37,66 +37,28 @@
 
 package grizzled.string
 
-import scala.util.matching.Regex
 import scala.language.implicitConversions
-
-/** An analog to Scala's `RichChar` class, providing some methods
-  * that neither `RichChar` nor `Char` (nor, for that matter,
-  * `java.lang.Character`) provide. By importing the implicit conversion
-  * functions, you can use the methods in this class transparently from a
-  * `Char`, `RichChar` or `Character` object.
-  *
-  * {{{
-  * import grizzled.string.implicits._
-  * val ch = 'a'
-  * println(ch.isHexDigit) // prints: true
-  * }}}
-  */
-final class GrizzledChar(val character: Char) {
-  /** Determine whether the character represents a valid hexadecimal
-    * digit. This is a specialization of `isDigit(radix)`.
-    *
-    * @return `true` if the character is a valid hexadecimal
-    *         digit, `false` if not.
-    */
-  def isHexDigit = isDigit(16)
-
-  /** Determine whether the character represents a valid digit in a
-    * given base.
-    *
-    * @param radix the radix
-    *
-    * @return `true` if the character is a valid digit in the
-    *         indicated radix, `false` if not.
-    */
-  def isDigit(radix: Int): Boolean = {
-    try {
-      Integer.parseInt(character.toString, radix)
-      true
-    }
-    catch {
-      case _: NumberFormatException => false
-    }
-  }
-}
 
 /** Companion object for `GrizzledChar`. To get implicit functions that
   * define automatic conversions between `GrizzledChar` and `Char`,
   * import this module:
   *
   * {{{
-  * import grizzled.io.GrizzledChar._
+  * import grizzled.string.Implicits.Char._
   * }}}
   */
 object GrizzledChar {
   import scala.runtime.RichChar
+  import scala.language.implicitConversions
+  import grizzled.string.Implicits.Char.GrizzledChar
 
   /** Implicit function to convert from a character to a `GrizzledChar`.
     *
-    * @param s  the character
+    * @param c  the character
     *
     * @return the `GrizzledChar`
     */
+  @deprecated("Please import grizzled.string.Implicits.Character._", "1.5.1")
   implicit def Char_GrizzledChar(c: Char) = new GrizzledChar(c)
 
   /** Implicit function to convert from a `GrizzledChar` to a
@@ -106,25 +68,28 @@ object GrizzledChar {
     *
     * @return the character
     */
+  @deprecated("Please import grizzled.string.Implicits.Character._", "1.5.1")
   implicit def GrizzledChar_Char(gc: GrizzledChar) = gc.character
 
   /** Implicit function to convert from a Java `Character` object
     * to a `GrizzledChar`.
     *
-    * @param s  the `Character` object
+    * @param c  the `Character` object
     *
     * @return the `GrizzledChar`
     */
+  @deprecated("Please import grizzled.string.Implicits.Character._", "1.5.1")
   implicit def JavaCharacter_GrizzledChar(c: java.lang.Character) =
     new GrizzledChar(c.charValue)
 
   /** Implicit function to convert from a `GrizzledChar` to a
     * Java `Character` object.
     *
-    * @param gc  the `GrizzledChar`
+    * @param c  the `GrizzledChar`
     *
     * @return the `Character` object
     */
+  @deprecated("Please import grizzled.string.Implicits.Character._", "1.5.1")
   implicit def GrizzledChar_JavaCharacter(c: GrizzledChar) =
     new java.lang.Character(c.character)
 
@@ -132,20 +97,22 @@ object GrizzledChar {
   /** Implicit function to convert from a Scala `RichChar` object
     * to a `GrizzledChar`.
     *
-    * @param s  the `RichChar` object
+    * @param c  the `RichChar` object
     *
     * @return the `GrizzledChar`
     */
+  @deprecated("Please import grizzled.string.Implicits.Character._", "1.5.1")
   implicit def RichChar_GrizzledChar(c: RichChar) =
     new GrizzledChar(c.self.asInstanceOf[Char])
 
   /** Implicit function to convert from a `GrizzledChar` to a
     * Scala `RichChar` object.
     *
-    * @param gc  the `GrizzledChar`
+    * @param c  the `GrizzledChar`
     *
     * @return the `RichChar` object
     */
+  @deprecated("Please import grizzled.string.Implicits.Character._", "1.5.1")
   implicit def GrizzledChar_RichChar(c: GrizzledChar) =
     new RichChar(c.character)
 }

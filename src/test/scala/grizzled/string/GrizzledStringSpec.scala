@@ -34,12 +34,12 @@
 package grizzled.string
 
 import org.scalatest.{FlatSpec, Matchers}
-import grizzled.string.GrizzledString._
-
 /**
  * Tests the GrizzledString class.
  */
 class GrizzledStringSpec extends FlatSpec with Matchers {
+  import grizzled.string.Implicits.String._
+
   "ltrim" should "properly trim from the beginning of a string" in {
     val data = Map(
       "a b c"                        -> "a b c",

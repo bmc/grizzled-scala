@@ -124,7 +124,7 @@ extends Readline with Util {
                  cursor: Int,
                  completions: java.util.List[CharSequence]): Int = {
       import grizzled.parsing.StringToken
-      import grizzled.string.GrizzledString._
+      import grizzled.string.Implicits.String._
 
       def save(scalaCompletions: List[String]) = {
         // Hiding this in a method, and casting the incoming
@@ -143,11 +143,11 @@ extends Readline with Util {
 
         def before(token: StringToken) = cursor < token.start
 
-        def after(token: StringToken) = 
+        def after(token: StringToken) =
           cursor > (token.start + token.string.length)
 
         tokens match {
-          case Nil => 
+          case Nil =>
             List(Cursor)
 
           case token :: Nil if (before(token)) =>
@@ -194,7 +194,7 @@ extends Readline with Util {
       val tokenToComplete = findToken(tokens)
       save(self.completer.complete(tokenToComplete, tokens, line))
 
-      if (completions.size == 0) 
+      if (completions.size == 0)
         -1
       else if (tokenToComplete.length == 0)
         cursor

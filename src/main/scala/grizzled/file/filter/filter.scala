@@ -36,7 +36,7 @@
 */
 package grizzled.file.filter
 
-import grizzled.string.GrizzledString._
+import grizzled.string.Implicits.String._
 
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
@@ -58,7 +58,7 @@ import scala.collection.mutable.ArrayBuffer
   * }}}
   *
   * it produces these lines:
-  * 
+  *
   * {{{
   * Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   * In congue tincidunt fringilla. Sed interdum nibh vitae libero
