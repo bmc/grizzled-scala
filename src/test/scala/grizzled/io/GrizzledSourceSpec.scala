@@ -37,7 +37,6 @@
 package grizzled.io
 
 import org.scalatest.{FlatSpec, Matchers}
-import grizzled.io.GrizzledSource._
 import scala.io.Source
 
 /**
@@ -45,6 +44,8 @@ import scala.io.Source
   */
 class GrizzledSourceSpec extends FlatSpec with Matchers {
   "First nonblank line" should "skip blank lines" in {
+    import grizzled.io.Implicits._
+
     val data = List(("\n\n\n\nfoo\n\n\n", Some("foo")),
                     ("\n\n\n\n\n\n\n\n", None),
                     ("", None),
@@ -57,6 +58,8 @@ class GrizzledSourceSpec extends FlatSpec with Matchers {
   }
 
   "linesBetween" should "properly throw away lines outside the range" in {
+    import grizzled.io.Implicits._
+
     val data = List(
       ("{{\na\n}}\n", "{{", "}}", List("a")),
       ("*\nfoo\nbar\nbaz\n*\n", "*", "*", List("foo", "bar", "baz")),

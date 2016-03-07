@@ -7,6 +7,9 @@ Version 1.5.1:
 * Added some unit tests for the `grizzled.file.util.eglob()` and
   `grizzled.file.util.glob()` functions.
 * Converted remaining unit tests from ScalaTest's `FunSuite` to `FlatSpec`.
+* Deprecated enrichment classes that aren't inside objects called
+  `Implicits`, and added `Implicits` objects where appropriate, for
+  consistency.
 
 Version 1.5.0:
 

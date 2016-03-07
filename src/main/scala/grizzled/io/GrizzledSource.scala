@@ -40,71 +40,73 @@ package grizzled.io
 import scala.io.Source
 import scala.language.implicitConversions
 
-/**
- * A wrapper for `scala.io.Source` that provides additional methods.
- * By importing the implicit conversion functions, you can use the methods
- * in this class transparently from a `java.io.File` object.
- *
- * {{{
- * import grizzled.io.GrizzledSource._
- *
- * val source = Source.fromFile(new java.io.File("/tmp/foo/bar"))
- * source.firstNonblankLine.getOrElse("")
- * }}}
- */
-final class GrizzledSource(val source: Source) {
-  /**
-   * Find the lines between two marker lines in the source. For instance,
-   * to get all lines between the next occurrence of "{{{" (on a line by
-   * itself and "}}}" (or end of file), use:
-   *
-   * {{{
-   * import grizzled.io.GrizzledSource._
-   * import scala.io.Source
-   * import java.io.File
-   *
-   * val path = "/path/to/some/file"
-   * val lines = Source.fromFile(new File(path)).linesBetween("{{{", "}}}")
-   * }}}
-   *
-   * This method uses `Source.getLines()`, which may or may not start
-   * at the beginning of the source, depending on the source's state.
-   *
-   * @param start  the starting line marker
-   * @param finish    the ending line marker
-   *
-   * @return a iterator of lines, or an empty iterator if none found
-   */
-  def linesBetween(start: String, finish: String): Iterator[String] =
-    source.getLines().dropWhile(_ != start).drop(1).takeWhile(_ != finish)
+object Implicits {
 
   /**
-   * Find and return the first non-blank line (without trailing newline)
-   * in the source. Uses `Source.getLines()`, which may or may not start
-   * at the beginning of the source, depending on the source's state.
+   * A wrapper for `scala.io.Source` that provides additional methods.
+   * By importing the implicit conversion functions, you can use the methods
+   * in this class transparently from a `java.io.File` object.
    *
-   * @return `None` if there is no nonblank line, `Some(line)` if there is.
+   * {{{
+   * import grizzled.io.Implicits._
+   *
+   * val source = Source.fromFile(new java.io.File("/tmp/foo/bar"))
+   * source.firstNonblankLine.getOrElse("")
+   * }}}
    */
-  def firstNonblankLine: Option[String] = {
-    source.getLines().dropWhile(_.trim.length == 0).take(1).toList match {
-      case Nil          => None
-      case line :: tail => Some(line)
+  implicit class GrizzledSource(val source: Source) {
+    /**
+     * Find the lines between two marker lines in the source. For instance,
+     * to get all lines between the next occurrence of "{{{" (on a line by
+     * itself and "}}}" (or end of file), use:
+     *
+     * {{{
+     * import grizzled.io.Implicits._
+     * import scala.io.Source
+     * import java.io.File
+     *
+     * val path = "/path/to/some/file"
+     * val lines = Source.fromFile(new File(path)).linesBetween("{{{", "}}}")
+     * }}}
+     *
+     * This method uses `Source.getLines()`, which may or may not start
+     * at the beginning of the source, depending on the source's state.
+     *
+     * @param start  the starting line marker
+     * @param finish    the ending line marker
+     *
+     * @return a iterator of lines, or an empty iterator if none found
+     */
+    def linesBetween(start: String, finish: String): Iterator[String] =
+      source.getLines().dropWhile(_ != start).drop(1).takeWhile(_ != finish)
+
+    /**
+     * Find and return the first non-blank line (without trailing newline)
+     * in the source. Uses `Source.getLines()`, which may or may not start
+     * at the beginning of the source, depending on the source's state.
+     *
+     * @return `None` if there is no nonblank line, `Some(line)` if there is.
+     */
+    def firstNonblankLine: Option[String] = {
+      source.getLines().dropWhile(_.trim.length == 0).take(1).toList match {
+        case Nil          => None
+        case line :: tail => Some(line)
+      }
     }
   }
 }
 
-/**
- * Companion object for `GrizzledSource`. To get implicit functions that
- * define automatic conversions between `GrizzledSource` and `scala.io.Source`,
- * import this module:
- *
- * {{{
- * import grizzled.io.GrizzledSource._
- * }}}
- */
+/** Deprecated companion object for `GrizzledSource`.
+  */
 object GrizzledSource {
+
+  import grizzled.io.Implicits.GrizzledSource
+
+  @deprecated("Please import grizzled.io.GrizzledSource.Implicits._", "1.5.1")
   implicit def sourceToGrizzledSource(s: Source): GrizzledSource =
     new GrizzledSource(s)
 
+  @deprecated("Please import grizzled.io.GrizzledSource.Implicits._", "1.5.1")
   implicit def grizzledSourceToSource(gs: GrizzledSource): Source = gs.source
+
 }
