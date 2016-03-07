@@ -39,7 +39,6 @@ package grizzled.file
 
 import scala.annotation.tailrec
 
-import grizzled.file.GrizzledFile._
 import grizzled.io.RichInputStream._
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
@@ -671,6 +670,8 @@ object util {
     *         the directory.
     */
   def createTemporaryDirectory(prefix: String, maxTries: Int = 3): File = {
+    import grizzled.file.Implicits._
+
     def createDirectory(dir: File): Option[File] = {
       if (! dir.exists) {
         if (! dir.mkdirs())
@@ -718,6 +719,8 @@ object util {
     * @return whatever the action returns
     */
   def withTemporaryDirectory[T](prefix: String)(action: File => T) = {
+    import grizzled.file.Implicits._
+
     val temp = createTemporaryDirectory(prefix)
     temp.deleteOnExit()
     try {

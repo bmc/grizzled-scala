@@ -40,7 +40,6 @@ import java.util.regex.PatternSyntaxException
 
 import org.scalatest.{FlatSpec, Matchers}
 import grizzled.file.util._
-import grizzled.file.GrizzledFile._
 import grizzled.util.withResource
 
 import java.io.File
@@ -259,6 +258,8 @@ class FileUtilSpec extends FlatSpec with Matchers {
   }
 
   "listRecursively" should "work" in {
+    import grizzled.file.Implicits._
+
     withTemporaryDirectory("list-recursively") { d =>
       val paths = Set("foo/bar.c", "foo/baz.txt", "test.txt", "foo/bar/baz.txt")
       val dirs =  paths.map { p => new File(joinPath(d.getPath, p)).dirname }
