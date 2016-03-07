@@ -341,7 +341,7 @@ object Includer {
                  tempPrefix: String,
                  tempSuffix: String): String = {
     import java.io.{File, FileWriter}
-    import grizzled.io.withCloseable
+    import grizzled.util.withResource
 
     def sourceFromFile(s: String) = Source.fromFile(new File(s))
 
@@ -358,7 +358,7 @@ object Includer {
     val fileOut = File.createTempFile(tempPrefix, tempSuffix)
     fileOut.deleteOnExit()
 
-    withCloseable(new FileWriter(fileOut)) { out =>
+    withResource(new FileWriter(fileOut)) { out =>
       includer.foreach(s => out.write(s + "\n"))
     }
 

@@ -165,18 +165,4 @@ class MiscIOSpec extends FlatSpec with Matchers {
         fail("StackOverflowError - copyTo not tail-call optimized?")
     }
   }
-
-  "withCloseable" should "properly close an object" in {
-    import java.io.{FileOutputStream, File}
-    import java.nio.channels.Channels
-    import grizzled.io.withCloseable
-
-    val temp = File.createTempFile("test", ".dat")
-    temp.deleteOnExit()
-
-    val fs = new FileOutputStream(temp)
-    val chan = Channels.newChannel(fs)
-    withCloseable(chan) { chan => assert(chan.isOpen) }
-    chan.isOpen shouldBe false
-  }
 }

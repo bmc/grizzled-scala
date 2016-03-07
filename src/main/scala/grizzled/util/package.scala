@@ -37,11 +37,12 @@
 
 package grizzled
 
+import scala.language.implicitConversions
 import scala.language.reflectiveCalls
 
 /** Miscellaneous utility functions and methods not otherwise categorized.
   */
-object util {
+package object util {
 
   /** Used with any object that contains a `close()` method that
     * returns nothing, `withCloseable()` executes a block of code
@@ -69,10 +70,9 @@ object util {
     * @param closeable  the closeable object
     * @param code       the block of code, which will take the closeable object
     *                   and return some arbitrary type `R`.
-    *
     * @return whatever the code block returns,if anything.
     */
-  @deprecated("Use grizzled.io.withCloseable", "1.5.1")
+  @deprecated("Use grizzled.util.withResource", "1.5.1")
   def withCloseable[T <: {def close(): Unit}, R](closeable: T)(code: T => R) = {
     try {
       code(closeable)
@@ -80,6 +80,59 @@ object util {
 
     finally {
       closeable.close()
+    }
+  }
+
+  /** `withResource()` needs an implicit evidence parameter of this type
+    * to know how to release what's passed to it.
+    *
+    * @tparam T the type (which must be contravariant to allow, for instance,
+    *           a `T` of `Closeable` to apply to subclasses like `InputStream`).
+    */
+  trait CanReleaseResource[-T] {
+    def release(a: T): Unit
+  }
+
+  /** Companion object for `CanReleaseResource`, providing predefined implicit
+    * evidence parameters for `withResource()`.
+    */
+  object CanReleaseResource {
+    import java.io.Closeable
+
+    /** Defines evidence for type `Closeable`.
+      */
+    implicit object CanReleaseCloseable extends CanReleaseResource[Closeable] {
+      def release(c: Closeable) = c.close()
+    }
+  }
+
+  /** Ensure that a closeable object is closed. Note that this function
+    * requires an implicit evidence parameter of type `CanClose` to determine
+    * how to close the object. You can implement your own, though common
+    * ones are provided automatically.
+    *
+    * Sample use:
+    *
+    * {{{
+    * withResource(new java.io.FileInputStream("/path/to/file")) {
+    *     in => ...
+    * }
+    * }}}
+    *
+    * @param resource  the object that holds a resource to be released
+    * @param code      the code block to execute with the resource
+    * @param mgr       the resource manager that can release the resource
+    * @return whatever the block returns
+    */
+  def withResource[T, R](resource: T)
+                         (code: T => R)
+                         (implicit mgr: CanReleaseResource[T]): R = {
+    try {
+      code(resource)
+    }
+
+    finally {
+      mgr.release(resource)
     }
   }
 }

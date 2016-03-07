@@ -3,7 +3,7 @@ Version 1.5.1:
 * Cleaned up some warnings identified by IntelliJ.
 * Deprecated `grizzled.util.withCloseable()` and
   `grizzled.io.util.withCloseable()` in favor of
-  `grizzled.io.withCloseable()`.
+  `grizzled.util.withResource()`.
 * Added some unit tests for the `grizzled.file.util.eglob()` and
   `grizzled.file.util.glob()` functions.
 * Converted remaining unit tests from ScalaTest's `FunSuite` to `FlatSpec`.

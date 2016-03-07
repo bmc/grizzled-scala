@@ -829,7 +829,7 @@ object util {
   def copyFile(source: File, target: File): Try[File] = {
     import java.io.{BufferedInputStream, BufferedOutputStream,
                     FileInputStream, FileOutputStream}
-    import grizzled.io.withCloseable
+    import grizzled.util.withResource
 
     val targetFile =
       if (target.isDirectory)
@@ -838,8 +838,8 @@ object util {
         target
 
     Try {
-      withCloseable(new BufferedInputStream(new FileInputStream(source))) { in =>
-        withCloseable(new BufferedOutputStream(new FileOutputStream(targetFile))) { out =>
+      withResource(new BufferedInputStream(new FileInputStream(source))) { in =>
+        withResource(new BufferedOutputStream(new FileOutputStream(targetFile))) { out =>
           in.copyTo(out)
           targetFile
         }

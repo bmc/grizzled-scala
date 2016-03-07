@@ -41,7 +41,7 @@ import java.util.regex.PatternSyntaxException
 import org.scalatest.{FlatSpec, Matchers}
 import grizzled.file.util._
 import grizzled.file.GrizzledFile._
-import grizzled.io.withCloseable
+import grizzled.util.withResource
 
 import java.io.File
 
@@ -288,11 +288,10 @@ class FileUtilSpec extends FlatSpec with Matchers {
   it should "work if the source file and directory exist" in {
     withTemporaryDirectory("copy") { d =>
       import java.io._
-      import grizzled.io.withCloseable
 
       val sourceFile = File.createTempFile("foo", "txt")
       try {
-        withCloseable(new FileWriter(sourceFile)) { f =>
+        withResource(new FileWriter(sourceFile)) { f =>
           f.write("This is a test.\n")
         }
         val sourceSize = sourceFile.length
