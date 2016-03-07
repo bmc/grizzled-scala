@@ -28,12 +28,10 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="GrizzledSource.html" title="See companion class"><img alt="Object/Class" src="../../lib/object_to_class_big.png" /></a>
+        <img alt="Object" src="../../lib/object_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.io">io</a></p>
-        <h1><a href="GrizzledSource.html" title="See companion class">GrizzledSource</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="GrizzledSource.html" title="See companion class">class GrizzledSource</a>
-            | <a href="package.html" class="extype" name="grizzled.io">package io</a>
+        <h1>GrizzledSource</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="grizzled.io">package io</a>
           </div></span></h3><span class="permalink">
       <a href="../../index.html#grizzled.io.GrizzledSource$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
@@ -51,9 +49,8 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object for <code>GrizzledSource</code>. To get implicit functions that
-define automatic conversions between <code>GrizzledSource</code> and <code>scala.io.Source</code>,
-import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledSource._</pre></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Deprecated companion object for <code>GrizzledSource</code>.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -263,23 +260,6 @@ import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledS
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.io.GrizzledSource#grizzledSourceToSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="grizzledSourceToSource(gs:grizzled.io.GrizzledSource):scala.io.Source"></a>
-      <a id="grizzledSourceToSource(GrizzledSource):Source"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">grizzledSourceToSource</span><span class="params">(<span name="gs">gs: <a href="GrizzledSource.html" class="extype" name="grizzled.io.GrizzledSource">GrizzledSource</a></span>)</span><span class="result">: <span class="extype" name="scala.io.Source">Source</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.GrizzledSource$@grizzledSourceToSource(gs:grizzled.io.GrizzledSource):scala.io.Source" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -365,23 +345,6 @@ import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledS
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.io.GrizzledSource#sourceToGrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="sourceToGrizzledSource(s:scala.io.Source):grizzled.io.GrizzledSource"></a>
-      <a id="sourceToGrizzledSource(Source):GrizzledSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">sourceToGrizzledSource</span><span class="params">(<span name="s">s: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <a href="GrizzledSource.html" class="extype" name="grizzled.io.GrizzledSource">GrizzledSource</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.GrizzledSource$@sourceToGrizzledSource(s:scala.io.Source):grizzled.io.GrizzledSource" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -490,7 +453,50 @@ import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledS
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.io.GrizzledSource#grizzledSourceToSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="grizzledSourceToSource(gs:grizzled.io.Implicits.GrizzledSource):scala.io.Source"></a>
+      <a id="grizzledSourceToSource(GrizzledSource):Source"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Please import grizzled.io.GrizzledSource.Implicits._">grizzledSourceToSource</span><span class="params">(<span name="gs">gs: <a href="Implicits$$GrizzledSource.html" class="extype" name="grizzled.io.Implicits.GrizzledSource">GrizzledSource</a></span>)</span><span class="result">: <span class="extype" name="scala.io.Source">Source</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.GrizzledSource$@grizzledSourceToSource(gs:grizzled.io.Implicits.GrizzledSource):scala.io.Source" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Please import grizzled.io.GrizzledSource.Implicits._</p></dd></dl></div>
+    </li><li name="grizzled.io.GrizzledSource#sourceToGrizzledSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sourceToGrizzledSource(s:scala.io.Source):grizzled.io.Implicits.GrizzledSource"></a>
+      <a id="sourceToGrizzledSource(Source):GrizzledSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Please import grizzled.io.GrizzledSource.Implicits._">sourceToGrizzledSource</span><span class="params">(<span name="s">s: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <a href="Implicits$$GrizzledSource.html" class="extype" name="grizzled.io.Implicits.GrizzledSource">GrizzledSource</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.GrizzledSource$@sourceToGrizzledSource(s:scala.io.Source):grizzled.io.Implicits.GrizzledSource" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Please import grizzled.io.GrizzledSource.Implicits._</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

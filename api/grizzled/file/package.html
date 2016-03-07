@@ -108,28 +108,6 @@ paths, not on open streams or sources.
       </a>
     </span>
       
-    </li><li name="grizzled.file.GrizzledFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="GrizzledFileextendsAnyRef"></a>
-      <a id="GrizzledFile:GrizzledFile"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="GrizzledFile.html"><span class="name">GrizzledFile</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.package@GrizzledFileextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">A wrapper for <code>java.io.File</code> that provides additional methods.</p><div class="fullcomment"><div class="comment cmt"><p>A wrapper for <code>java.io.File</code> that provides additional methods.
-By importing the implicit conversion functions, you can use the methods
-in this class transparently from a <code>java.io.File</code> object.</p><pre><span class="kw">import</span> grizzled.file.GrizzledFile._
-
-<span class="kw">val</span> file = <span class="kw">new</span> File(<span class="lit">"/tmp/foo/bar"</span>)
-println(file.split) <span class="cmt">// prints: List(/tmp, foo, bar)</span></pre></div></div>
     </li><li name="grizzled.file.Includer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="IncluderextendsIterator[String]"></a>
       <a id="Includer:Includer"></a>
@@ -203,6 +181,23 @@ object:</p><pre><span class="kw">import</span> grizzled.file.includer.Includer
       <p class="shortcomment cmt">Companion object for <code>GrizzledFile</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledFile</code>. To get implicit functions that
 define automatic conversions between <code>GrizzledFile</code> and <code>java.io.File</code>,
 import this module:</p><pre><span class="kw">import</span> grizzled.file.GrizzledFile._</pre></div></div>
+    </li><li name="grizzled.file.Implicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Implicits"></a>
+      <a id="Implicits:Implicits"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$.html"><span class="name">Implicits</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.package@Implicits" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Enrichment classes for <code>File</code> objects and the like.</p>
     </li><li name="grizzled.file.Includer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Includer"></a>
       <a id="Includer:Includer"></a>

@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>GrizzledString - grizzled.string.GrizzledString</title>
-          <meta name="description" content="GrizzledString - grizzled.string.GrizzledString" />
-          <meta name="keywords" content="GrizzledString grizzled.string.GrizzledString" />
+          <title>String - grizzled.string.Implicits.String</title>
+          <meta name="description" content="String - grizzled.string.Implicits.String" />
+          <meta name="keywords" content="String grizzled.string.Implicits.String" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.string.GrizzledString';
+            var hash = 'grizzled.string.Implicits$$String$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,16 +26,14 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <a href="GrizzledString$.html" title="See companion object"><img alt="Class/Object" src="../../lib/class_to_object_big.png" /></a>
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.string">string</a></p>
-        <h1><a href="GrizzledString$.html" title="See companion object">GrizzledString</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="GrizzledString$.html" title="See companion object">object GrizzledString</a>
-            | <a href="package.html" class="extype" name="grizzled.string">package string</a>
+        <img alt="Object" src="../../lib/object_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.string">string</a>.<a href="Implicits$.html" class="extype" name="grizzled.string.Implicits">Implicits</a></p>
+        <h1>String</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="Implicits$.html" class="extype" name="grizzled.string.Implicits">package Implicits</a>
           </div></span></h3><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -43,22 +41,16 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
+        <span class="modifier"></span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">GrizzledString</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">String</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An analog to Scala's <code>RichString</code> class, providing some methods
-that neither <code>RichString</code> nor <code>String</code> provide. By
-importing the implicit conversion functions, you can use the methods in
-this class transparently from a <code>String</code> or <code>RichString</code>
-object.</p><pre><span class="kw">import</span> grizzled.string.implicits._
-
-<span class="kw">val</span> s = <span class="lit">"a  b          c"</span>
-println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>String enrichment classes.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -78,7 +70,7 @@ println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.string.GrizzledString"><span>GrizzledString</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.string.Implicits.String"><span>String</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -95,29 +87,37 @@ println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="grizzled.string.GrizzledString#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(string:String):grizzled.string.GrizzledString"></a>
-      <a id="&lt;init&gt;:GrizzledString"></a>
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.string.Implicits.String.GrizzledString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="GrizzledStringextendsAnyRef"></a>
+      <a id="GrizzledString:GrizzledString"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">GrizzledString</span><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
+        <a href="Implicits$$String$$GrizzledString.html"><span class="name">GrizzledString</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@&lt;init&gt;(string:String):grizzled.string.GrizzledString" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@GrizzledStringextendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">An analog to Scala's <code>RichString</code> class, providing some methods
+that neither <code>RichString</code> nor <code>String</code> provide.</p><div class="fullcomment"><div class="comment cmt"><p>An analog to Scala's <code>RichString</code> class, providing some methods
+that neither <code>RichString</code> nor <code>String</code> provide. By
+importing the implicit conversion functions, you can use the methods in
+this class transparently from a <code>String</code> or <code>RichString</code>
+object.</p><pre><span class="kw">import</span> grizzled.string.Implicits.<span class="std">String</span>._
+
+<span class="kw">val</span> s = <span class="lit">"a  b          c"</span>
+println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div></div>
     </li></ol>
             </div>
-
-        
 
         
 
@@ -135,7 +135,7 @@ println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -152,7 +152,7 @@ println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@##():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@##():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -169,11 +169,28 @@ println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.string.Implicits.String#ScalaString_GrizzledString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ScalaString_GrizzledString(rs:scala.collection.immutable.StringLike[String]):grizzled.string.Implicits.String.GrizzledString"></a>
+      <a id="ScalaString_GrizzledString(StringLike[String]):GrizzledString"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ScalaString_GrizzledString</span><span class="params">(<span name="rs">rs: <span class="extype" name="scala.collection.immutable.StringLike">StringLike</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="Implicits$$String$$GrizzledString.html" class="extype" name="grizzled.string.Implicits.String.GrizzledString">GrizzledString</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@ScalaString_GrizzledString(rs:scala.collection.immutable.StringLike[String]):grizzled.string.Implicits.String.GrizzledString" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -186,31 +203,11 @@ println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#chomp" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chomp:String"></a>
-      <a id="chomp:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">chomp</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@chomp:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Like perl's <code>chomp()</code>: Remove any newline at the end of the
-line.</p><div class="fullcomment"><div class="comment cmt"><p>Like perl's <code>chomp()</code>: Remove any newline at the end of the
-line.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the possibly modified line</p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -223,7 +220,7 @@ line.
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@clone():Object" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@clone():Object" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -246,7 +243,7 @@ line.
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -263,7 +260,7 @@ line.
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -280,7 +277,7 @@ line.
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@finalize():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -303,7 +300,7 @@ line.
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -320,7 +317,7 @@ line.
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@hashCode():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -337,29 +334,11 @@ line.
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#ltrim" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ltrim:String"></a>
-      <a id="ltrim:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">ltrim</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@ltrim:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Trim white space from the front (left) of a string.</p><div class="fullcomment"><div class="comment cmt"><p>Trim white space from the front (left) of a string.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>possibly modified string</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -372,7 +351,7 @@ line.
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -389,7 +368,7 @@ line.
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@notify():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@notify():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -406,46 +385,11 @@ line.
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#rtrim" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="rtrim:String"></a>
-      <a id="rtrim:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">rtrim</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@rtrim:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Trim white space from the back (right) of a string.</p><div class="fullcomment"><div class="comment cmt"><p>Trim white space from the back (right) of a string.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>possibly modified string</p></dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#string" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="string:String"></a>
-      <a id="string:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">string</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@string:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -458,7 +402,7 @@ line.
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -475,116 +419,11 @@ line.
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@toString():String" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@toString():String" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#toTokens" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toTokens:List[grizzled.parsing.StringToken]"></a>
-      <a id="toTokens:List[StringToken]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toTokens</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="../parsing/StringToken.html" class="extype" name="grizzled.parsing.StringToken">StringToken</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@toTokens:List[grizzled.parsing.StringToken]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Tokenize the string on white space, returning <code>Token</code>
-objects.</p><div class="fullcomment"><div class="comment cmt"><p>Tokenize the string on white space, returning <code>Token</code>
-objects. This method is useful when you need to keep track of the
-locations of the tokens within the original string.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of tokens, or <code>Nil</code> if there aren't any.</p></dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#toTokens" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toTokens(delims:String):List[grizzled.parsing.StringToken]"></a>
-      <a id="toTokens(String):List[StringToken]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toTokens</span><span class="params">(<span name="delims">delims: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="../parsing/StringToken.html" class="extype" name="grizzled.parsing.StringToken">StringToken</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@toTokens(delims:String):List[grizzled.parsing.StringToken]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Tokenize the string on a set of delimiter characters, returning
-<code>Token</code> objects.</p><div class="fullcomment"><div class="comment cmt"><p>Tokenize the string on a set of delimiter characters, returning
-<code>Token</code> objects. This method is useful when you need to keep
-track of the locations of the tokens within the original string.
-</p></div><dl class="paramcmts block"><dt class="param">delims</dt><dd class="cmt"><p>the delimiter characters</p></dd><dt>returns</dt><dd class="cmt"><p>A list of tokens, or <code>Nil</code> if there aren't any.</p></dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#tokenize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tokenize(delims:String):List[String]"></a>
-      <a id="tokenize(String):List[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tokenize</span><span class="params">(<span name="delims">delims: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@tokenize(delims:String):List[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Tokenize the string on a set of delimiter characters.</p><div class="fullcomment"><div class="comment cmt"><p>Tokenize the string on a set of delimiter characters.
-</p></div><dl class="paramcmts block"><dt class="param">delims</dt><dd class="cmt"><p>the delimiter characters</p></dd><dt>returns</dt><dd class="cmt"><p>A list of tokens, or <code>Nil</code> if there aren't any.</p></dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#tokenize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tokenize:List[String]"></a>
-      <a id="tokenize:List[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tokenize</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@tokenize:List[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Tokenize the string on white space.</p><div class="fullcomment"><div class="comment cmt"><p>Tokenize the string on white space. An empty string and a string
-with only white space are treated the same. Note that doing a
-<code>split(&quot;&quot;&quot;\s+&quot;&quot;&quot;).toList</code> on an empty string (&quot;&quot;) yields a
-list of one item, an empty string. Doing the same operation on a
-blank string (&quot; &quot;, for example) yields an empty list. This method
-differs from <code>split(&quot;&quot;&quot;\s+&quot;&quot;&quot;).toList</code>, in that both cases are
-treated the same, returning a <code>Nil</code>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of tokens, or <code>Nil</code> if there aren't any.</p></dd></dl></div>
-    </li><li name="grizzled.string.GrizzledString#translateMetachars" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="translateMetachars:String"></a>
-      <a id="translateMetachars:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">translateMetachars</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@translateMetachars:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Translate any metacharacters (e.g,.</p><div class="fullcomment"><div class="comment cmt"><p>Translate any metacharacters (e.g,. \t, \n, ™) into their real
-characters, and return the translated string. Metacharacter sequences
-that cannot be parsed (because they're unrecognized, because the Unicode
-number isn't four digits, etc.) are passed along unchanged.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the possibly translated string</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -597,7 +436,7 @@ number isn't four digits, etc.) are passed along unchanged.
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@wait():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@wait():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -620,7 +459,7 @@ number isn't four digits, etc.) are passed along unchanged.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -643,7 +482,7 @@ number isn't four digits, etc.) are passed along unchanged.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.GrizzledString@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.string.Implicits$$String$@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

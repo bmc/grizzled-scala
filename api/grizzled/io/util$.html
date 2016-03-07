@@ -89,27 +89,7 @@
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="grizzled.io.util.Closeable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Closeable=AnyRef{defclose():Unit}"></a>
-      <a id="Closeable:Closeable"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">Closeable</span><span class="result"> = <span class="extype" name="scala.AnyRef">AnyRef</span> { def close(): Unit }</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.util$@Closeable=AnyRef{defclose():Unit}" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li></ol>
-            </div>
+        
 
         
 
@@ -468,19 +448,26 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.io.util#withCloseable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withCloseable[C,T](closeable:C)(block:C=&gt;T)(implicitevidence$1:C=&gt;grizzled.io.util.Closeable):T"></a>
-      <a id="withCloseable[C,T](C)((C)⇒T)((C)⇒Closeable):T"></a>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.io.util#withCloseable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withCloseable[T&lt;:AnyRef{defclose():Unit},R](closeable:T)(code:T=&gt;R):R"></a>
+      <a id="withCloseable[T&lt;:AnyRef{defclose():Unit},R](T)((T)⇒R):R"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withCloseable</span><span class="tparams">[<span name="C">C</span>, <span name="T">T</span>]</span><span class="params">(<span name="closeable">closeable: <span class="extype" name="grizzled.io.util.withCloseable.C">C</span></span>)</span><span class="params">(<span name="block">block: (<span class="extype" name="grizzled.io.util.withCloseable.C">C</span>) ⇒ <span class="extype" name="grizzled.io.util.withCloseable.T">T</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: (<span class="extype" name="grizzled.io.util.withCloseable.C">C</span>) ⇒ <a href="#Closeable=AnyRef{defclose():Unit}" class="extmbr" name="grizzled.io.util.Closeable">Closeable</a></span>)</span><span class="result">: <span class="extype" name="grizzled.io.util.withCloseable.T">T</span></span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Use grizzled.io.withCloseable">withCloseable</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.AnyRef">AnyRef</span> { def close(): Unit }</span>, <span name="R">R</span>]</span><span class="params">(<span name="closeable">closeable: <span class="extype" name="grizzled.io.util.withCloseable.T">T</span></span>)</span><span class="params">(<span name="code">code: (<span class="extype" name="grizzled.io.util.withCloseable.T">T</span>) ⇒ <span class="extype" name="grizzled.io.util.withCloseable.R">R</span></span>)</span><span class="result">: <span class="extype" name="grizzled.io.util.withCloseable.R">R</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.util$@withCloseable[C,T](closeable:C)(block:C=&gt;T)(implicitevidence$1:C=&gt;grizzled.io.util.Closeable):T" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.util$@withCloseable[T&lt;:AnyRef{defclose():Unit},R](closeable:T)(code:T=&gt;R):R" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -492,13 +479,12 @@ that have <code>close()</code> methods that do not extend or implement
     in <span class="kw">=&gt;</span> ...
 }</pre><p>The closeable object is not passed into the block, because its type
 is useless to the block.
-</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <code>Closeable</code></p></dd><dt class="param">block</dt><dd class="cmt"><p>the code block to execute with the <code>Closeable</code></p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the object that implements <code>Closeable</code></p></dd><dt class="param">code</dt><dd class="cmt"><p>the code block to execute with the <code>Closeable</code></p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Use grizzled.io.withCloseable</p></dd></dl></div>
     </li></ol>
             </div>
-
-        
-
-        
         </div>
 
         <div id="inheritedMembers">

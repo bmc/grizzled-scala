@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>GrizzledLinearSeq - grizzled.collection.GrizzledLinearSeq</title>
-          <meta name="description" content="GrizzledLinearSeq - grizzled.collection.GrizzledLinearSeq" />
-          <meta name="keywords" content="GrizzledLinearSeq grizzled.collection.GrizzledLinearSeq" />
+          <title>GrizzledSource - grizzled.io.Implicits.GrizzledSource</title>
+          <meta name="description" content="GrizzledSource - grizzled.io.Implicits.GrizzledSource" />
+          <meta name="keywords" content="GrizzledSource grizzled.io.Implicits.GrizzledSource" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.collection.GrizzledLinearSeq$';
+            var hash = 'grizzled.io.Implicits$$GrizzledSource';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,14 +26,14 @@
    	  </script>
     
         </head>
-        <body class="value">
+        <body class="type">
       <div id="definition">
-        <img alt="Object" src="../../lib/object_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.collection">collection</a></p>
-        <h1>GrizzledLinearSeq</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="grizzled.collection">package collection</a>
+        <img alt="Class" src="../../lib/class_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.io">io</a>.<a href="Implicits$.html" class="extype" name="grizzled.io.Implicits">Implicits</a></p>
+        <h1>GrizzledSource</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="Implicits$.html" class="extype" name="grizzled.io.Implicits">package Implicits</a>
           </div></span></h3><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -41,16 +41,20 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">GrizzledLinearSeq</span>
+        <span class="name">GrizzledSource</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implicit conversions specific to GrizzledLinearSeq.
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A wrapper for <code>scala.io.Source</code> that provides additional methods.
+By importing the implicit conversion functions, you can use the methods
+in this class transparently from a <code>java.io.File</code> object.</p><pre><span class="kw">import</span> grizzled.io.Implicits._
+
+<span class="kw">val</span> source = Source.fromFile(<span class="kw">new</span> java.io.File(<span class="lit">"/tmp/foo/bar"</span>))
+source.firstNonblankLine.getOrElse(<span class="lit">""</span>)</pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -70,7 +74,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.collection.GrizzledLinearSeq"><span>GrizzledLinearSeq</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.io.Implicits.GrizzledSource"><span>GrizzledSource</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -87,7 +91,27 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="grizzled.io.Implicits.GrizzledSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(source:scala.io.Source):grizzled.io.Implicits.GrizzledSource"></a>
+      <a id="&lt;init&gt;:GrizzledSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">GrizzledSource</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@&lt;init&gt;(source:scala.io.Source):grizzled.io.Implicits.GrizzledSource" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
 
         
 
@@ -107,7 +131,7 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -124,7 +148,7 @@
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@##():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@##():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -141,7 +165,7 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -158,7 +182,7 @@
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -175,7 +199,7 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@clone():Object" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@clone():Object" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -198,7 +222,7 @@
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -215,7 +239,7 @@
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -232,7 +256,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@finalize():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -243,6 +267,27 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="grizzled.io.Implicits.GrizzledSource#firstNonblankLine" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="firstNonblankLine:Option[String]"></a>
+      <a id="firstNonblankLine:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">firstNonblankLine</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@firstNonblankLine:Option[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Find and return the first non-blank line (without trailing newline)
+in the source.</p><div class="fullcomment"><div class="comment cmt"><p>Find and return the first non-blank line (without trailing newline)
+in the source. Uses <code>Source.getLines()</code>, which may or may not start
+at the beginning of the source, depending on the source's state.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>None</code> if there is no nonblank line, <code>Some(line)</code> if there is.</p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -255,7 +300,7 @@
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -272,7 +317,7 @@
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@hashCode():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -289,11 +334,52 @@
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.io.Implicits.GrizzledSource#linesBetween" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="linesBetween(start:String,finish:String):Iterator[String]"></a>
+      <a id="linesBetween(String,String):Iterator[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">linesBetween</span><span class="params">(<span name="start">start: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="finish">finish: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@linesBetween(start:String,finish:String):Iterator[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Find the lines between two marker lines in the source.</p><div class="fullcomment"><div class="comment cmt"><p>Find the lines between two marker lines in the source. For instance,
+to get all lines between the next occurrence of &quot;</p><pre><span class="lit">" (on a line by
+itself and "</span></pre><p>&quot; (or end of file), use:</p><pre><span class="kw">import</span> grizzled.io.Implicits._
+<span class="kw">import</span> scala.io.Source
+<span class="kw">import</span> java.io.File
+
+<span class="kw">val</span> path = <span class="lit">"/path/to/some/file"</span>
+<span class="kw">val</span> lines = Source.fromFile(<span class="kw">new</span> File(path)).linesBetween(<span class="lit">"{{{"</span>, <span class="lit">"</span></pre><p>&quot;)
+}}}</p><p>This method uses <code>Source.getLines()</code>, which may or may not start
+at the beginning of the source, depending on the source's state.</p><p>val lines = Source.fromFile(new File(path)).linesBetween(&quot;{{{&quot;, &quot;
+}}}
+}}}</p><p>This method uses <code>Source.getLines()</code>, which may or may not start
+at the beginning of the source, depending on the source's state.</p><p>itself and &quot;
+}}}</p><pre><span class="kw">import</span> grizzled.io.Implicits._
+<span class="kw">import</span> scala.io.Source
+<span class="kw">import</span> java.io.File
+
+<span class="kw">val</span> path = <span class="lit">"/path/to/some/file"</span>
+<span class="kw">val</span> lines = Source.fromFile(<span class="kw">new</span> File(path)).linesBetween(<span class="lit">"{{{"</span>, <span class="lit">"</span></pre><p>&quot;)
+}}}</p><p>This method uses <code>Source.getLines()</code>, which may or may not start
+at the beginning of the source, depending on the source's state.</p><p>val lines = Source.fromFile(new File(path)).linesBetween(&quot;{{{&quot;, &quot;
+}}}
+}}}</p><p>This method uses <code>Source.getLines()</code>, which may or may not start
+at the beginning of the source, depending on the source's state.
+</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>the starting line marker</p></dd><dt class="param">finish</dt><dd class="cmt"><p>the ending line marker</p></dd><dt>returns</dt><dd class="cmt"><p>a iterator of lines, or an empty iterator if none found</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -306,7 +392,7 @@
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -323,7 +409,7 @@
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@notify():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@notify():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -340,11 +426,28 @@
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.io.Implicits.GrizzledSource#source" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="source:scala.io.Source"></a>
+      <a id="source:Source"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">source</span><span class="result">: <span class="extype" name="scala.io.Source">Source</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@source:scala.io.Source" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -357,7 +460,7 @@
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -374,7 +477,7 @@
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@toString():String" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@toString():String" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -391,7 +494,7 @@
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@wait():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@wait():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -414,7 +517,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -437,7 +540,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.Implicits$$GrizzledSource@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -453,73 +556,7 @@
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.collection.GrizzledLinearSeq#grizzledLinearSeqToScalaSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="grizzledLinearSeqToScalaSeq[T](seq:grizzled.collection.Implicits.GrizzledLinearSeq[T]):scala.collection.immutable.LinearSeq[T]"></a>
-      <a id="grizzledLinearSeqToScalaSeq[T](GrizzledLinearSeq[T]):LinearSeq[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Please import grizzled.collection.Implicits._">grizzledLinearSeqToScalaSeq</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="seq">seq: <a href="Implicits$$GrizzledLinearSeq.html" class="extype" name="grizzled.collection.Implicits.GrizzledLinearSeq">GrizzledLinearSeq</a>[<span class="extype" name="grizzled.collection.GrizzledLinearSeq.grizzledLinearSeqToScalaSeq.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.LinearSeq">LinearSeq</span>[<span class="extype" name="grizzled.collection.GrizzledLinearSeq.grizzledLinearSeqToScalaSeq.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@grizzledLinearSeqToScalaSeq[T](seq:grizzled.collection.Implicits.GrizzledLinearSeq[T]):scala.collection.immutable.LinearSeq[T]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Convert GrizzledLinearSeq a object to a Scala Seq.</p><div class="fullcomment"><div class="comment cmt"><p>Convert GrizzledLinearSeq a object to a Scala Seq.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Please import grizzled.collection.Implicits._</p></dd></dl></div>
-    </li><li name="grizzled.collection.GrizzledLinearSeq#listToGrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="listToGrizzledLinearSeq[T](list:List[T]):grizzled.collection.Implicits.GrizzledLinearSeq[T]"></a>
-      <a id="listToGrizzledLinearSeq[T](List[T]):GrizzledLinearSeq[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Please import grizzled.collection.Implicits._">listToGrizzledLinearSeq</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="list">list: <span class="extype" name="scala.List">List</span>[<span class="extype" name="grizzled.collection.GrizzledLinearSeq.listToGrizzledLinearSeq.T">T</span>]</span>)</span><span class="result">: <a href="Implicits$$GrizzledLinearSeq.html" class="extype" name="grizzled.collection.Implicits.GrizzledLinearSeq">GrizzledLinearSeq</a>[<span class="extype" name="grizzled.collection.GrizzledLinearSeq.listToGrizzledLinearSeq.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@listToGrizzledLinearSeq[T](list:List[T]):grizzled.collection.Implicits.GrizzledLinearSeq[T]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Convert a Scala List object to a GrizzledLinearSeq.</p><div class="fullcomment"><div class="comment cmt"><p>Convert a Scala List object to a GrizzledLinearSeq.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Please import grizzled.collection.Implicits._</p></dd></dl></div>
-    </li><li name="grizzled.collection.GrizzledLinearSeq#scalaSeqToGrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="scalaSeqToGrizzledLinearSeq[T](seq:scala.collection.immutable.LinearSeq[T]):grizzled.collection.Implicits.GrizzledLinearSeq[T]"></a>
-      <a id="scalaSeqToGrizzledLinearSeq[T](LinearSeq[T]):GrizzledLinearSeq[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Please import grizzled.collection.Implicits._">scalaSeqToGrizzledLinearSeq</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="seq">seq: <span class="extype" name="scala.collection.immutable.LinearSeq">LinearSeq</span>[<span class="extype" name="grizzled.collection.GrizzledLinearSeq.scalaSeqToGrizzledLinearSeq.T">T</span>]</span>)</span><span class="result">: <a href="Implicits$$GrizzledLinearSeq.html" class="extype" name="grizzled.collection.Implicits.GrizzledLinearSeq">GrizzledLinearSeq</a>[<span class="extype" name="grizzled.collection.GrizzledLinearSeq.scalaSeqToGrizzledLinearSeq.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.GrizzledLinearSeq$@scalaSeqToGrizzledLinearSeq[T](seq:scala.collection.immutable.LinearSeq[T]):grizzled.collection.Implicits.GrizzledLinearSeq[T]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Convert a Scala Seq object to a GrizzledLinearSeq.</p><div class="fullcomment"><div class="comment cmt"><p>Convert a Scala Seq object to a GrizzledLinearSeq.
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Please import grizzled.collection.Implicits._</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">

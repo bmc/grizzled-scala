@@ -92,29 +92,7 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="../file/pa
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="GrizzledSourceextendsAnyRef"></a>
-      <a id="GrizzledSource:GrizzledSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="GrizzledSource.html"><span class="name">GrizzledSource</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.package@GrizzledSourceextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">A wrapper for <code>scala.io.Source</code> that provides additional methods.</p><div class="fullcomment"><div class="comment cmt"><p>A wrapper for <code>scala.io.Source</code> that provides additional methods.
-By importing the implicit conversion functions, you can use the methods
-in this class transparently from a <code>java.io.File</code> object.</p><pre><span class="kw">import</span> grizzled.io.GrizzledSource._
-
-<span class="kw">val</span> source = Source.fromFile(<span class="kw">new</span> java.io.File(<span class="lit">"/tmp/foo/bar"</span>))
-source.firstNonblankLine.getOrElse(<span class="lit">""</span>)</pre></div></div>
-    </li><li name="grizzled.io.MultiSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="grizzled.io.MultiSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MultiSourceextendsSource"></a>
       <a id="MultiSource:MultiSource"></a>
       <h4 class="signature">
@@ -218,7 +196,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="grizzled.io.GrizzledSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="GrizzledSource"></a>
       <a id="GrizzledSource:GrizzledSource"></a>
       <h4 class="signature">
@@ -234,9 +212,24 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Companion object for <code>GrizzledSource</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledSource</code>. To get implicit functions that
-define automatic conversions between <code>GrizzledSource</code> and <code>scala.io.Source</code>,
-import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledSource._</pre></div></div>
+      <p class="shortcomment cmt">Deprecated companion object for <code>GrizzledSource</code>.</p>
+    </li><li name="grizzled.io.Implicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Implicits"></a>
+      <a id="Implicits:Implicits"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$.html"><span class="name">Implicits</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@Implicits" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RichInputStream"></a>
       <a id="RichInputStream:RichInputStream"></a>

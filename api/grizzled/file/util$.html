@@ -641,7 +641,11 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
       </a>
     </span>
       <p class="shortcomment cmt">Return a list of paths matching a pathname pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Return a list of paths matching a pathname pattern. The pattern may
-contain simple shell-style wildcards. See <code>fnmatch()</code>.
+contain simple shell-style wildcards. See <code>fnmatch()</code>. This function
+is essentially a direct port of the Python <code>glob.glob()</code> function.</p><p>Restrictions:</p><p>- There's currently no way to escape a wildcard character. That is,
+  if you need to match a '*' character or a '?' character exactly,
+  you can't do that with this library. (You can't do it with the
+  <code>glob</code> library in Python 2 or Python 3, either.)
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The path to expand.</p></dd><dt>returns</dt><dd class="cmt"><p>a list of possibly expanded file names</p></dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>

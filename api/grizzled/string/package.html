@@ -89,57 +89,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.string.GrizzledChar" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="GrizzledCharextendsAnyRef"></a>
-      <a id="GrizzledChar:GrizzledChar"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="GrizzledChar.html"><span class="name">GrizzledChar</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.package@GrizzledCharextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">An analog to Scala's <code>RichChar</code> class, providing some methods
-that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
-<code>java.lang.Character</code>) provide.</p><div class="fullcomment"><div class="comment cmt"><p>An analog to Scala's <code>RichChar</code> class, providing some methods
-that neither <code>RichChar</code> nor <code>Char</code> (nor, for that matter,
-<code>java.lang.Character</code>) provide. By importing the implicit conversion
-functions, you can use the methods in this class transparently from a
-<code>Char</code>, <code>RichChar</code> or <code>Character</code> object.</p><pre><span class="kw">import</span> grizzled.string.implicits._
-<span class="kw">val</span> ch = <span class="lit">'a'</span>
-println(ch.isHexDigit) <span class="cmt">// prints: true</span></pre></div></div>
-    </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="GrizzledStringextendsAnyRef"></a>
-      <a id="GrizzledString:GrizzledString"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="GrizzledString.html"><span class="name">GrizzledString</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.string.package@GrizzledStringextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">An analog to Scala's <code>RichString</code> class, providing some methods
-that neither <code>RichString</code> nor <code>String</code> provide.</p><div class="fullcomment"><div class="comment cmt"><p>An analog to Scala's <code>RichString</code> class, providing some methods
-that neither <code>RichString</code> nor <code>String</code> provide. By
-importing the implicit conversion functions, you can use the methods in
-this class transparently from a <code>String</code> or <code>RichString</code>
-object.</p><pre><span class="kw">import</span> grizzled.string.implicits._
-
-<span class="kw">val</span> s = <span class="lit">"a  b          c"</span>
-println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div></div>
-    </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="WordWrapperextendsAnyRef"></a>
       <a id="WordWrapper:WordWrapper"></a>
       <h4 class="signature">
@@ -202,7 +152,7 @@ character.</p><h4> Notes </h4><p>- The class does not do any special processing 
     </span>
       <p class="shortcomment cmt">Companion object for <code>GrizzledChar</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledChar</code>. To get implicit functions that
 define automatic conversions between <code>GrizzledChar</code> and <code>Char</code>,
-import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledChar._</pre></div></div>
+import this module:</p><pre><span class="kw">import</span> grizzled.string.Implicits.<span class="std">Char</span>._</pre></div></div>
     </li><li name="grizzled.string.GrizzledString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GrizzledString"></a>
       <a id="GrizzledString:GrizzledString"></a>
@@ -222,6 +172,23 @@ import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledC
       <p class="shortcomment cmt">Companion object for <code>GrizzledString</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>GrizzledString</code>. To get implicit functions that
 define automatic conversions between <code>GrizzledString</code> and <code>String</code>,
 import this module:</p><pre><span class="kw">import</span> grizzled.io.GrizzledString._</pre></div></div>
+    </li><li name="grizzled.string.Implicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Implicits"></a>
+      <a id="Implicits:Implicits"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$.html"><span class="name">Implicits</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.string.package@Implicits" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">String and character implicits.</p>
     </li><li name="grizzled.string.WordWrapper" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="WordWrapper"></a>
       <a id="WordWrapper:WordWrapper"></a>
