@@ -37,16 +37,6 @@
 
 package grizzled.string
 
-import scala.language.implicitConversions
-
-/** Companion object for `GrizzledChar`. To get implicit functions that
-  * define automatic conversions between `GrizzledChar` and `Char`,
-  * import this module:
-  *
-  * {{{
-  * import grizzled.string.Implicits.Char._
-  * }}}
-  */
 object GrizzledChar {
   import scala.runtime.RichChar
   import scala.language.implicitConversions

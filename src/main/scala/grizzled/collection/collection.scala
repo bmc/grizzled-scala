@@ -154,8 +154,6 @@ object GrizzledIterable {
     it.realIterable
 }
 
-/** Implicit conversions specific to GrizzledLinearSeq.
-  */
 object GrizzledLinearSeq {
   import Implicits._
 

@@ -266,14 +266,6 @@ object Implicits {
   implicit def grizzledFileToJavaIoFile(gf: GrizzledFile): File = gf.file
 }
 
-/** Companion object for `GrizzledFile`. To get implicit functions that
-  * define automatic conversions between `GrizzledFile` and `java.io.File`,
-  * import this module:
-  *
-  * {{{
-  * import grizzled.file.GrizzledFile._
-  * }}}
-  */
 object GrizzledFile {
   import scala.language.implicitConversions
   import Implicits._

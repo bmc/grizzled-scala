@@ -37,14 +37,6 @@
 
 package grizzled.string
 
-/** Companion object for `GrizzledString`. To get implicit functions that
-  * define automatic conversions between `GrizzledString` and `String`,
-  * import this module:
-  *
-  * {{{
-  * import grizzled.io.GrizzledString._
-  * }}}
-  */
 object GrizzledString {
   import scala.collection.immutable.{StringOps, StringLike}
   import scala.language.implicitConversions
