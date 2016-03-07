@@ -36,13 +36,16 @@
 
 package grizzled
 
-import org.scalatest.{FlatSpec, Matchers}
 import grizzled.either.Implicits._
+
+import org.scalatest.{Inside, FlatSpec, Matchers}
+
+import scala.util.{Failure, Success, Try}
 
 /**
  * Tests the grizzled.either class.
  */
-class EitherSpec extends FlatSpec with Matchers {
+class EitherSpec extends FlatSpec with Matchers with Inside {
   "map" should "work on a Right" in {
     val r = Right(true)
     r.map(_ => false) shouldBe Right(false)
@@ -95,5 +98,21 @@ class EitherSpec extends FlatSpec with Matchers {
     val rv2: Either[String, Int] = Left("foo")
 
     (for { v1 <- rv1; v2 <- rv2 } yield v1 + v2) shouldBe expected
+  }
+
+  "toTry" should "convert a Right to a Success" in {
+    Right(10).toTry shouldBe Success(10)
+  }
+
+  it should "convert a Left(String) to a Failure" in {
+    inside(Left("Oops").toTry) {
+      case Failure(e: Exception) => e.getMessage shouldBe "Oops"
+    }
+  }
+
+  it should "convert a Left(Int) to a Failure" in {
+    inside(Left(-1).toTry) {
+      case Failure(e: Exception) => e.getMessage shouldBe "-1"
+    }
   }
 }

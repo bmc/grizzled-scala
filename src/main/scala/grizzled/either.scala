@@ -51,7 +51,7 @@ object either {
       * that map over and `Either` object if its value is `Right` (and
       * permit easier use of `Either` objects in `for` comprehensions).
       */
-    implicit class RichEither[L,R](val e: Either[L, R]) {
+    implicit class RichEither[L,R](val e: Either[L, R]) extends AnyVal {
 
       /** Map an `Either` value only if it's a `Right`. If it's a
         * `Left`, just return the `Left` unmodified.
