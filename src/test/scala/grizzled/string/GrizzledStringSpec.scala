@@ -98,4 +98,25 @@ class GrizzledStringSpec extends FlatSpec with Matchers {
       input.translateMetachars shouldBe expected
     }
   }
+
+  "escapeNonPrintables" should "return an entirely printable string as is" in {
+    val s = "\u2122This is a \u00a9 string"
+    s.escapeNonPrintables should be (s)
+  }
+
+  it should "escape ISO non-printables properly" in {
+    val iso = (0x7f to 0xff).map(_.toChar).filter{c => Character.isISOControl(c)}
+    iso should not be empty
+
+    iso.mkString("").escapeNonPrintables should be (
+      "\\u007f\\u0080\\u0081\\u0082\\u0083\\u0084\\u0085\\u0086\\u0087\\u0088" +
+      "\\u0089\\u008a\\u008b\\u008c\\u008d\\u008e\\u008f\\u0090\\u0091\\u0092" +
+      "\\u0093\\u0094\\u0095\\u0096\\u0097\\u0098\\u0099\\u009a\\u009b\\u009c" +
+      "\\u009d\\u009e\\u009f"
+    )
+  }
+
+  it should "handle special metacharacters" in  {
+    "\n\r\t\f".escapeNonPrintables should be ("""\n\r\t\f""")
+  }
 }

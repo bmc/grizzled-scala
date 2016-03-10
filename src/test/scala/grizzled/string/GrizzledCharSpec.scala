@@ -76,4 +76,37 @@ class GrizzledCharSpec extends FlatSpec with Matchers {
       c.isHexDigit shouldBe expected
     }
   }
+
+  val AsciiFirstPrintable = 0x20
+  val AsciiLastPrintable  = 0x7e
+
+  "isPrintable" should "return true for ASCII printables" in {
+    for (b <- AsciiFirstPrintable to AsciiLastPrintable)
+      b.toChar.isPrintable should be (true)
+  }
+
+  it should "return false for ASCII non-printables" in {
+    for (b <- 0 until AsciiFirstPrintable)
+      b.toChar.isPrintable should be (false)
+
+    0x7f.toChar.isPrintable should be (false)
+  }
+
+  it should "return false for ISO control characters" in {
+    val iso = (0 to 0xff).map(_.toChar).filter { c => Character.isISOControl(c) }
+    iso should not be empty
+
+    for (c <- iso)
+      c.isPrintable should be (false)
+  }
+
+  it should "return true for select non-ASCII Unicode printables" in {
+    val tm   = '\u2122' // ™
+    val copy = '\u00a9' // ©
+    val p    = '\u2117' // ℗
+
+    for (c <- Seq(tm, p, copy))
+      c.isPrintable should be (true)
+  }
+
 }

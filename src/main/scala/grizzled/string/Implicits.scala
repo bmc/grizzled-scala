@@ -1,13 +1,11 @@
 package grizzled.string
 
-import scala.collection.immutable.StringLike
-
 /** String and character implicits.
   */
 object Implicits {
+  import scala.collection.immutable.StringLike
   import scala.language.implicitConversions
   import grizzled.parsing.StringToken
-  import scala.util.matching.Regex
   import scala.util.matching.Regex.Match
 
   /** `Char` enrichments
@@ -58,6 +56,26 @@ object Implicits {
           case _: NumberFormatException => false
         }
       }
+
+      /** Determine if a character is non-printable. Note that the notion
+        * of "non-printable" in Unicode can be problematic, depending on the
+        * encoding. A printable Unicode character, printed in UTF-8 on a
+        * terminal that only handles ISO-8859.1 may not, strictly speaking,
+        * be "printable" on that terminal.
+        *
+        * This method's notion of "printable" assumes that the output device
+        * is capable of displaying Unicode encodings (e.g., UTF-8). In other
+        * words, this method could also be called `isUnicodePrintable()`.
+        *
+        * See also http://stackoverflow.com/q/220547
+        *
+        * @return `true` if printable, `false` if not.
+        */
+      def isPrintable: Boolean = {
+        val block = Option(Character.UnicodeBlock.of(character))
+        (!Character.isISOControl(character)) &&
+        block.isDefined && (block.get != Character.UnicodeBlock.SPECIALS)
+      }
     }
   }
 
@@ -81,7 +99,14 @@ object Implicits {
       * }}}
       */
     implicit class GrizzledString(val string: String) {
-      private lazy val LTrimRegex = """^\s*(.*)$""".r
+      private val LTrimRegex = """^\s*(.*)$""".r
+
+      private val SpecialMetachars = Map(
+        '\n' -> """\n""",
+        '\f' -> """\f""",
+        '\t' -> """\t""",
+        '\r' -> """\r"""
+      )
 
       /** Trim white space from the front (left) of a string.
         *
@@ -170,18 +195,33 @@ object Implicits {
         find(this.string, 0)
       }
 
-      /** Tokenize the string on white space, returning `Token`
-        * objects. This method is useful when you need to keep track of the
-        * locations of the tokens within the original string.
+      /** Tokenize the string on white space, returning `Token` objects. This
+        * method is useful when you need to keep track of the locations of
+        * the tokens within the original string.
         *
         * @return A list of tokens, or `Nil` if there aren't any.
         */
       def toTokens: List[StringToken] = toTokens(""" \t""")
 
-      /** Translate any metacharacters (e.g,. \t, \n, \u2122) into their real
+      /** Escape any non-printable characters by converting them to
+        * metacharacter sequences.
+        *
+        * @return the possibly translated string
+        */
+      def escapeNonPrintables: String = {
+        import Char._
+
+        string.map {
+          case c if SpecialMetachars.get(c).isDefined => SpecialMetachars(c)
+          case c if c.isPrintable => c
+          case c                    => f"\\u${c.toLong}%04x"
+        }.mkString("")
+      }
+
+      /** Translate any metacharacters (e.g,. \t, \n, \\u2122) into their real
         * characters, and return the translated string. Metacharacter sequences
-        * that cannot be parsed (because they're unrecognized, because the Unicode
-        * number isn't four digits, etc.) are passed along unchanged.
+        * that cannot be parsed (because they're unrecognized, because the
+        * Unicode number isn't four digits, etc.) are passed along unchanged.
         *
         * @return the possibly translated string
         */
