@@ -1,5 +1,8 @@
 Version 1.6.0:
 
+* Now compiles against Scala 2.12, as well as 2.11 and 2.10.
+* Added `activator`, for a self-bootstrapping build.
+* Removed unused dependency on `scala-async` and `scala-actors`.
 * Added a better message when a `CanReleaseResource` implicit evidence
   parameter cannot be found for `grizzled.util.withCloseable()`.
 * Added `GrizzledString.escapeNonPrintables` and `GrizzledChar.isPrintable`
