@@ -14,18 +14,13 @@ object Implicits {
     *
     * @return the `IPAddress`
     */
-  implicit def inetToIPAddress(addr: InetAddress): IPAddress = {
-    IPAddress(addr.getAddress).get
-  }
+  implicit def inetToIPAddress(addr: InetAddress): IPAddress = IPAddress(addr)
 
   /** Implicitly converts an `IPAddress` to a
     * `java.net.InetAddress`.
     *
-    * @param ipAddr  the `IPAddress`
-    *
+    * @param ip  the `IPAddress`
     * @return the corresponding `java.net.InetAddress`
     */
-  implicit def ipToInetAddress(ipAddr: IPAddress): InetAddress = {
-    InetAddress.getByAddress(ipAddr.address)
-  }
+  implicit def ipToInetAddress(ip: IPAddress): InetAddress = ip.toInetAddress
 }

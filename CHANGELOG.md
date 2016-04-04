@@ -1,3 +1,9 @@
+Version 1.6.1
+
+* Added an explicit conversion from `grizzled.net.IPAddress` to
+  `java.net.InetAddress`. An explicit conversion already exists for the
+  other direction, and implicit conversions already exist in both directions.
+
 Version 1.6.0:
 
 * Now compiles against Scala 2.12, as well as 2.11 and 2.10.

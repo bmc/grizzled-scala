@@ -48,6 +48,9 @@ class IPAddressSpec extends FlatSpec with Matchers {
   def byte(thing: Int): Byte = thing.toByte
   def bytes(data: Int*): List[Byte] = data.map(_.toByte).toList
 
+  // NOTE: Must use List[Byte], not Array[Byte]. Two identical arrays
+  // are not "equal", according to "==". Two identical lists are.
+  // (Scala array quirk.)
   val Data = List(
     // input                   expected result and expected string
 
@@ -76,9 +79,6 @@ class IPAddressSpec extends FlatSpec with Matchers {
   }
 
   "IPAddress constructors" should "behave as expected" in {
-    // NOTE: Must use List[Byte], not Array[Byte]. Two identical arrays
-    // are not "equal", according to "==". Two identical lists are.
-    // (Scala array quirk.)
 
     for ((input, expected, expectedString) <- Data) {
       // Map the expected value into a list of bytes
@@ -141,6 +141,23 @@ class IPAddressSpec extends FlatSpec with Matchers {
     val ipAddress = IPAddress(inetAddress)
 
     ipAddress.toString shouldBe ("127.0.0.1")
+  }
+
+  "IPAddress.toInetAddress" should "produce a proper InetAddress" in {
+    // NOTE: Must use List[Byte], not Array[Byte]. Two identical arrays
+    // are not "equal", according to "==". Two identical lists are.
+    // (Scala array quirk.)
+
+    for ((input, expected, expectedString) <- Data) {
+      // Map the expected value into a list of bytes
+      val expectedBytes = expected.map(_.toByte)
+
+      val ipAddrRes = getIPAddress(input)
+      assert(ipAddrRes.isSuccess)
+
+      val ipAddr = ipAddrRes.get
+      ipAddr.toInetAddress.getAddress.toList shouldBe expectedBytes
+    }
   }
 
   "java.net.InetAddress call-throughs" should "work on an IPAddress" in {

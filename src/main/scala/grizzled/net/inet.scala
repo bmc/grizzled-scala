@@ -108,6 +108,14 @@ class IPAddress(val address: Array[Byte]) {
     }
   }
 
+  /** Convert this `IPAddress` to its corresponding `java.net.InetAddress`
+    * object. Note that you can _also_ use the implicit conversions provided
+    * by `grizzled.net.Implicits`.
+    *
+    * @return the corresponding `InetAddress`
+    */
+  def toInetAddress = InetAddress.getByAddress(this.address)
+
   /** Return a printable version of this IP address.
     *
     * @return the printable version
@@ -257,7 +265,8 @@ object IPAddress {
     fullAddressRes.map { bytes => new IPAddress(bytes.toArray) }
   }
 
-  /** Create an `IPAddress` from a `java.net.InetAddress`.
+  /** Create an `IPAddress` from a `java.net.InetAddress`. You can also
+    * use the implicit conversions in `grizzled.net.Implicits`.
     *
     * @param inetAddress the `InetAddress`
     *
