@@ -116,11 +116,17 @@ To clone the repository, run this command:
 
 ## Building from Source
 
-Building the Grizzled Scala Library requires [SBT][] 0.13.2 or better.
-Install SBT, as described at the SBT web site. Then, assuming you have an
-`sbt` shell script (or .BAT file, for Windows), run:
+Building the Grizzled Scala Library requires [SBT][] 0.13.x or better.
+Building the library requires [SBT][] 0.13.x, but you don't have to
+install it (unless you're building on Windows). Instead, just use the
+`./activator` script at the top level of the repository. The script,
+part of [Lightbend Activator)(https://www.lightbend.com/activator/download),
+automatically downloads the appropriate versions of SBT and Scala for
+you. (You _do_ need to have an installed Java JDK. I recommend 1.8.)
 
-    sbt compile test package
+You can build with this one simple command:
+
+    ./activator +compile +test +package
 
 The resulting jar file will be under the top-level `target` directory.
 
