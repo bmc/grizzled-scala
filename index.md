@@ -47,6 +47,7 @@ automatically linked to Bintray's [JCenter](https://bintray.com/bintray/jcenter)
 repository. (From JCenter, it's eventually pushed to the
 [Maven Central Repository][].
 
+- Version 1.6.0 supports Scala 2.10, 2.11 and 2.12-M1.
 - Versions 1.5.1, 1.5.0, 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
 - Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
 - Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
@@ -67,7 +68,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.11</artifactId>
-      <version>1.5.1</version>
+      <version>1.6.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -89,23 +90,9 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 ### Using with SBT
 
-With SBT 0.13.x, you can just use [Doug Tangren's](https://github.com/softprops/)
-`bintray-sbt` plugin. In your `project/plugins.sbt` file, add:
+Add the following to your SBT build:
 
-    resolvers += Resolver.url(
-      "bintray-sbt-plugin-releases",
-      url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
-        Resolver.ivyStylePatterns)
-
-    addSbtPlugin("me.lessis" % "bintray-sbt" % "0.1.1")
-
-Then, in your `build.sbt` file, add:
-
-    seq(bintrayResolverSettings:_*)
-
-That automatically adds the appropriate Bintray repositories. Finally, add:
-
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.5.1"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.6.0"
 
 ## Source Code Repository
 
@@ -116,7 +103,6 @@ To clone the repository, run this command:
 
 ## Building from Source
 
-Building the Grizzled Scala Library requires [SBT][] 0.13.x or better.
 Building the library requires [SBT][] 0.13.x, but you don't have to
 install it (unless you're building on Windows). Instead, just use the
 `./activator` script at the top level of the repository. The script,
