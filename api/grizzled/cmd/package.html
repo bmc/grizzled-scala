@@ -1,0 +1,465 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>cmd - grizzled.cmd</title>
+          <meta name="description" content="cmd - grizzled.cmd" />
+          <meta name="keywords" content="cmd grizzled.cmd" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.cmd.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
+        <h1>cmd</h1><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cmd</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Classes and objects to aid in the construction of line-oriented command
+interpreters. This package is very similar, in concept, to the Python
+<code>cmd</code> module (though its implementation differs quite a bit).
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.cmd"><span>cmd</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.cmd.BlockCommandHandler" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="BlockCommandHandlerextendsNoCompletionsHandler"></a>
+      <a id="BlockCommandHandler:BlockCommandHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="BlockCommandHandler.html"><span class="name">BlockCommandHandler</span></a><span class="result"> extends <a href="NoCompletionsHandler.html" class="extype" name="grizzled.cmd.NoCompletionsHandler">NoCompletionsHandler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@BlockCommandHandlerextendsNoCompletionsHandler" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A block command is one that consists of multiple input lines between
+some sort of start and end indicator.</p><div class="fullcomment"><div class="comment cmt"><p>A block command is one that consists of multiple input lines between
+some sort of start and end indicator. Mixing this trait into a command
+handler changes the behavior of the command reader when it see the
+command. Instead of calling <code>moreInputNeeded()</code> to determine when to
+stop reading, the command reader just keeps reading until it sees a
+line matching the <code>EndCommand</code> regular expression.
+</p></div></div>
+    </li><li name="grizzled.cmd.Command" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CommandextendsAnyRef"></a>
+      <a id="Command:Command"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Command.html"><span class="name">Command</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@CommandextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Mapped commands.</p>
+    </li><li name="grizzled.cmd.CommandAction" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CommandActionextendsAnyRef"></a>
+      <a id="CommandAction:CommandAction"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CommandAction.html"><span class="name">CommandAction</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@CommandActionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Actions returned by handlers.</p>
+    </li><li name="grizzled.cmd.CommandHandler" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="CommandHandlerextendsAnyRef"></a>
+      <a id="CommandHandler:CommandHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="CommandHandler.html"><span class="name">CommandHandler</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@CommandHandlerextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Trait for an object (or class) that handles a single command.</p><div class="fullcomment"><div class="comment cmt"><p>Trait for an object (or class) that handles a single command. All logic
+for a given command is embodied in a single object that mixes in this
+trait.
+</p></div></div>
+    </li><li name="grizzled.cmd.CommandInterpreter" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="CommandInterpreterextendsAnyRef"></a>
+      <a id="CommandInterpreter:CommandInterpreter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CommandInterpreter.html"><span class="name">CommandInterpreter</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@CommandInterpreterextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Base class for command interpreters.</p><div class="fullcomment"><div class="comment cmt"><p>Base class for command interpreters.</p><p><code>CommandInterpreter</code> is the base class of any command interpreter. This
+class and the <code>CommandHandler</code> trait provide a simple framework for
+writing line-oriented command-interpreters. This framework is
+conceptually similar to the Python <code>cmd</code> module and its <code>Cmd</code> class,
+though the implementation differs substantially in places.</p><p>For reading input from the console, <code>CommandInterpreter</code> will use of
+any of the readline libraries supported by the <code>grizzled.readline</code>
+package. All of those libraries support a persistent command history,
+and most support command completion and command editing.</p><p>A command line consists of an initial command name, followed by a list
+of arguments to that command. The <code>CommandInterpreter</code> class's
+command reader automatically separates the command and the remaining
+arguments, via the <code>splitCommandAndArgs()</code> method. Parsing the
+arguments is left to the actual command implementation. The rules for how
+the command is split from the remainder of the input line are outlined
+in the documentation for the <code>splitCommandAndArgs()</code> method.
+</p></div></div>
+    </li><li name="grizzled.cmd.HiddenCommandHandler" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="HiddenCommandHandlerextendsNoCompletionsHandler"></a>
+      <a id="HiddenCommandHandler:HiddenCommandHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="HiddenCommandHandler.html"><span class="name">HiddenCommandHandler</span></a><span class="result"> extends <a href="NoCompletionsHandler.html" class="extype" name="grizzled.cmd.NoCompletionsHandler">NoCompletionsHandler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@HiddenCommandHandlerextendsNoCompletionsHandler" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The handler trait for a hidden command.</p><div class="fullcomment"><div class="comment cmt"><p>The handler trait for a hidden command. Hidden commands don't show up in
+the help or the history.
+</p></div></div>
+    </li><li name="grizzled.cmd.HistoryHandler" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="HistoryHandlerextendsCommandHandler"></a>
+      <a id="HistoryHandler:HistoryHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="HistoryHandler.html"><span class="name">HistoryHandler</span></a><span class="result"> extends <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@HistoryHandlerextendsCommandHandler" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Simple history command handler.</p><div class="fullcomment"><div class="comment cmt"><p>Simple history command handler.</p><p>A simple &quot;history&quot; (alias: &quot;h&quot;) handler that displays the history to
+standard output. This history handler supports the following usage:</p><pre>history [n]</pre><p>Where <i>n</i> is the number of (most recent) history entries to show.
+If absent, <i>n</i> defaults to the size of the history buffer.</p><p>This handler is <i>not</i> installed by default. It is provided as a
+convenience, for command interpreters to use if desired.
+</p></div></div>
+    </li><li name="grizzled.cmd.KnownCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="KnownCommandextendsCommandwithProductwithSerializable"></a>
+      <a id="KnownCommand:KnownCommand"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="KnownCommand.html"><span class="name">KnownCommand</span></a><span class="params">(<span name="handler">handler: <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></span>, <span name="fullInputLine">fullInputLine: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="args">args: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Command.html" class="extype" name="grizzled.cmd.Command">Command</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@KnownCommandextendsCommandwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="grizzled.cmd.NoCompletionsHandler" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="NoCompletionsHandlerextendsCommandHandler"></a>
+      <a id="NoCompletionsHandler:NoCompletionsHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="NoCompletionsHandler.html"><span class="name">NoCompletionsHandler</span></a><span class="result"> extends <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@NoCompletionsHandlerextendsCommandHandler" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Mixed in to indicate no completions are available.</p>
+    </li><li name="grizzled.cmd.RedoHandler" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RedoHandlerextendsCommandHandler"></a>
+      <a id="RedoHandler:RedoHandler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RedoHandler.html"><span class="name">RedoHandler</span></a><span class="result"> extends <a href="CommandHandler.html" class="extype" name="grizzled.cmd.CommandHandler">CommandHandler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@RedoHandlerextendsCommandHandler" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Simple &quot;redo command&quot; handler.</p><div class="fullcomment"><div class="comment cmt"><p>Simple &quot;redo command&quot; handler.</p><p>A simple &quot;redo&quot; command handler that supports re-issuing a numbered
+command from the history or the last command with a given prefix. For
+example, it supports the following syntaxes:</p><p>Input: <code>!10</code>, <code>! 10</code>, or <code>r 10</code>
+Meaning: Repeat the 10th command in the history.</td>
+
+Input: `!ec`, `! ec`, or `r ec`
+Meaning: Repeat the most recent command whose name begins with "ec"
+
+Input: `!!`, `! !`, `r`
+Meaning: Repeat the last command.
+
+This handler is ''not'' installed by default. It is provided as a
+convenience, for command interpreters to use if desired.
+</p></div></div>
+    </li><li name="grizzled.cmd.UnknownCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnknownCommandextendsCommandwithProductwithSerializable"></a>
+      <a id="UnknownCommand:UnknownCommand"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="UnknownCommand.html"><span class="name">UnknownCommand</span></a><span class="params">(<span name="fullInputLine">fullInputLine: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="args">args: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Command.html" class="extype" name="grizzled.cmd.Command">Command</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@UnknownCommandextendsCommandwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.cmd.CmdUtil" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CmdUtil"></a>
+      <a id="CmdUtil:CmdUtil"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="CmdUtil$.html"><span class="name">CmdUtil</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@CmdUtil" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Miscellaneous useful utility functions.</p>
+    </li><li name="grizzled.cmd.EOFCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EOFCommand"></a>
+      <a id="EOFCommand:EOFCommand"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EOFCommand$.html"><span class="name">EOFCommand</span></a><span class="result"> extends <a href="Command.html" class="extype" name="grizzled.cmd.Command">Command</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@EOFCommand" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="grizzled.cmd.EmptyCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EmptyCommand"></a>
+      <a id="EmptyCommand:EmptyCommand"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="EmptyCommand$.html"><span class="name">EmptyCommand</span></a><span class="result"> extends <a href="Command.html" class="extype" name="grizzled.cmd.Command">Command</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@EmptyCommand" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="grizzled.cmd.KeepGoing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="KeepGoing"></a>
+      <a id="KeepGoing:KeepGoing"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="KeepGoing$.html"><span class="name">KeepGoing</span></a><span class="result"> extends <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@KeepGoing" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="grizzled.cmd.Stop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Stop"></a>
+      <a id="Stop:Stop"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Stop$.html"><span class="name">Stop</span></a><span class="result"> extends <a href="CommandAction.html" class="extype" name="grizzled.cmd.CommandAction">CommandAction</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@Stop" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="grizzled.cmd#error" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="error(msg:String):Unit"></a>
+      <a id="error(String):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">error</span><span class="params">(<span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.cmd.package@error(msg:String):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

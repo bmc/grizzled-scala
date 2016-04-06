@@ -1,174 +1,42 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-          <title></title>
-          <meta name="description" content="" />
-          <meta name="keywords" content="" />
+          <title>util - grizzled.file.util</title>
+          <meta name="description" content="util - grizzled.file.util" />
+          <meta name="keywords" content="util grizzled.file.util" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js"></script>
-      <script type="text/javascript" src="../../lib/jquery.panzoom.min.js"></script>
-      <script type="text/javascript" src="../../lib/jquery.mousewheel.min.js"></script>
-      <script type="text/javascript" src="../../lib/index.js"></script>
-      <script type="text/javascript" src="../../index.js"></script>
-      <script type="text/javascript" src="../../lib/scheduler.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
       
       <script type="text/javascript">
-        /* this variable can be used by the JS to determine the path to the root document */
-        var toRoot = '../../';
-      </script>
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.file.util$';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
     
         </head>
-        <body>
-      <div id="search">
-        <span id="doc-title">
-          
-          <span id="doc-version">
-          
-          </span>
-        </span>
-        <span class="close-results"><span class="left">&lt;</span> Back</span>
-        <div id="textfilter">
-          <span class="input">
-            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
-            <i class="clear material-icons"></i>
-            <i id="search-icon" class="material-icons"></i>
-          </span>
-        </div>
-    </div>
-      <div id="search-results">
-        <div id="search-progress">
-          <div id="progress-fill"></div>
-        </div>
-        <div id="results-content">
-          <div id="entity-results"></div>
-          <div id="member-results"></div>
-        </div>
-      </div>
-      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
-        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
-          <div id="subpackage-spacer">
-            <div id="packages">
-              <h1>Packages</h1>
-              <ul>
-                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="_root_"></a><a id="root:_root_"></a>
-      <span class="permalink">
-      <a href="index.html#_root_" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">package</span>
-      </span>
-      <span class="symbol">
-        <a title="" href="../../index.html">
-              <span class="name">root</span>
-            </a>
-      </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
-    </li><li name="_root_.grizzled" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="grizzled"></a><a id="grizzled:grizzled"></a>
-      <span class="permalink">
-      <a href="index.html#grizzled" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">package</span>
-      </span>
-      <span class="symbol">
-        <a title="The Grizzled Scala Library contains a variety of miscellaneous,
-general purpose utility classes and objects." href="../index.html">
-              <span class="name">grizzled</span>
-            </a>
-      </span>
-      
-      <p class="shortcomment cmt">The Grizzled Scala Library contains a variety of miscellaneous,
-general purpose utility classes and objects.</p><div class="fullcomment"><div class="comment cmt"><p>The Grizzled Scala Library contains a variety of miscellaneous,
-general purpose utility classes and objects.</p><p>The home page for the Grizzled Scala Library is
-<a href="http://software.clapper.org/grizzled-scala/" target="_blank">http://software.clapper.org/grizzled-scala/</a>. Please see that page for
-complete details, including installation instructions.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
-    </li><li name="grizzled.file" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="file"></a><a id="file:file"></a>
-      <span class="permalink">
-      <a href="../grizzled/index.html#file" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">package</span>
-      </span>
-      <span class="symbol">
-        <a title="File-related classes and utilities." href="index.html">
-              <span class="name">file</span>
-            </a>
-      </span>
-      
-      <p class="shortcomment cmt">File-related classes and utilities.</p><div class="fullcomment"><div class="comment cmt"><p>File-related classes and utilities. This package is distinguished from
-the <code>grizzled.io</code> package in that this package operates on files and
-paths, not on open streams or sources.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="../io/index.html" class="extype" name="grizzled.io">grizzled.io</a></p></span></dd></dl></div>
-    </li><li name="grizzled.file.filter" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="filter"></a><a id="filter:filter"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/index.html#filter" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">package</span>
-      </span>
-      <span class="symbol">
-        <a title="Contains various file- and I/O-related filter classes." href="filter/index.html">
-              <span class="name">filter</span>
-            </a>
-      </span>
-      
-      <p class="shortcomment cmt">Contains various file- and I/O-related filter classes.</p><div class="fullcomment"><div class="comment cmt"><p>Contains various file- and I/O-related filter classes.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="grizzled.file">file</a></dd></dl></div>
-    </li><li class="current-entities indented2">
-                      <span class="separator"></span>
-                      <a class="class" href="FileDoesNotExistException.html" title=""></a>
-                      <a href="FileDoesNotExistException.html" title="">
-                        FileDoesNotExistException
-                      </a>
-                    </li><li class="current-entities indented2">
-                      <a class="object" href="Includer$.html" title="Companion object for the Includer class."></a>
-                      <a class="class" href="Includer.html" title="Process &quot;include&quot; directives in files, returning an iterator over
-lines from the flattened files."></a>
-                      <a href="Includer.html" title="Process &quot;include&quot; directives in files, returning an iterator over
-lines from the flattened files.">
-                        Includer
-                      </a>
-                    </li>
-              </ul>
-            </div>
-          </div>
-          <div id="content">
-            <body class="object value">
+        <body class="value">
       <div id="definition">
-        <div class="big-circle object">o</div>
-        <p id="owner"><a href="../index.html" class="extype" name="grizzled">grizzled</a>.<a href="index.html" class="extype" name="grizzled.file">file</a></p>
-        <h1>util<span class="permalink">
-      <a href="../../grizzled/file/util$.html" title="Permalink">
-        <i class="material-icons"></i>
+        <img alt="Object" src="../../lib/object_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.file">file</a></p>
+        <h1>util</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="grizzled.file">package file</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
-    </span></h1>
-        <h3><span class="morelinks"></span></h3>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -180,53 +48,41 @@ lines from the flattened files.">
         <span class="name">util</span>
       </span>
       </h4>
-
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Useful file-related utility functions.
 </p></div><div class="toggleContainer block">
-          <span class="toggle">
-            Linear Supertypes
-          </span>
+          <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
       <div id="mbrsel">
-        <div class="toggle"></div>
-        <div id="memberfilter">
-          <i class="material-icons arrow"></i>
-          <span class="input">
-            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
-          </span>
-          <i class="clear material-icons"></i>
-        </div>
-        <div id="filterby">
-          <div id="order">
-            <span class="filtertype">Ordering</span>
-            <ol>
-              
-              <li class="alpha in"><span>Alphabetic</span></li>
-              <li class="inherit out"><span>By Inheritance</span></li>
-            </ol>
-          </div>
-          <div class="ancestors">
-                  <span class="filtertype">Inherited<br />
-                  </span>
-                  <ol id="linearization">
-                    <li class="in" name="grizzled.file.util"><span>util</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
-                  </ol>
-                </div><div class="ancestors">
-              <span class="filtertype"></span>
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
               <ol>
-                <li class="hideall out"><span>Hide All</span></li>
-                <li class="showall in"><span>Show All</span></li>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
               </ol>
             </div>
-          <div id="visbl">
-              <span class="filtertype">Visibility</span>
-              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-            </div>
-        </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.file.util"><span>util</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
       </div>
 
       <div id="template">
@@ -237,16 +93,12 @@ lines from the flattened files.">
 
         
 
-        <div class="values members">
+        <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol>
-                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#!=(x$1:Any):Boolean" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -254,15 +106,16 @@ lines from the flattened files.">
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="##():Int"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html###():Int" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -270,15 +123,16 @@ lines from the flattened files.">
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#==(x$1:Any):Boolean" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -286,15 +140,16 @@ lines from the flattened files.">
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="asInstanceOf[T0]:T0"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#asInstanceOf[T0]:T0" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -302,15 +157,16 @@ lines from the flattened files.">
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.file.util#basename" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="basename(path:String,fileSep:String):String"></a><a id="basename(String,String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#basename(path:String,fileSep:String):String" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.file.util#basename" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="basename(path:String,fileSep:String):String"></a>
+      <a id="basename(String,String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -318,17 +174,18 @@ lines from the flattened files.">
       <span class="symbol">
         <span class="name">basename</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#fileSeparator:String">fileSeparator</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@basename(path:String,fileSep:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Get the basename (file name only) part of a path.</p><div class="fullcomment"><div class="comment cmt"><p>Get the basename (file name only) part of a path.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path (absolute or relative)</p></dd><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use. Defaults to the value of
                 the &quot;file.separator&quot; property.</p></dd><dt>returns</dt><dd class="cmt"><p>the file name portion</p></dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#clone():Object" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -336,7 +193,11 @@ lines from the flattened files.">
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -344,13 +205,10 @@ lines from the flattened files.">
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.util#copy" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copy(file:String,targetDir:String):scala.util.Try[Boolean]"></a><a id="copy(String,String):Try[Boolean]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copy(file:String,targetDir:String):scala.util.Try[Boolean]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copy(file:String,targetDir:String):scala.util.Try[Boolean]"></a>
+      <a id="copy(String,String):Try[Boolean]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -358,18 +216,19 @@ lines from the flattened files.">
       <span class="symbol">
         <span class="name">copy</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="targetDir">targetDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copy(file:String,targetDir:String):scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Copy a file to a directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a file to a directory. If the target directory does not exist,
 it is created.
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>Path name of the file to copy</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#copy" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copy(file:String,targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]"></a><a id="copy(String,String,Boolean):Try[Boolean]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copy(file:String,targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copy(file:String,targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]"></a>
+      <a id="copy(String,String,Boolean):Try[Boolean]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -377,19 +236,20 @@ it is created.
       <span class="symbol">
         <span class="name">copy</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="targetDir">targetDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="createTarget">createTarget: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copy(file:String,targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Copy a file to a directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a file to a directory.
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>Path name of the file to copy</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><code>true</code> to create the target directory,
                     <code>false</code> to throw an exception if the
                     directory doesn't already exist.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#copy" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copy(files:Iterable[String],targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]"></a><a id="copy(Iterable[String],String,Boolean):Try[Boolean]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copy(files:Iterable[String],targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copy(files:Iterable[String],targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]"></a>
+      <a id="copy(Iterable[String],String,Boolean):Try[Boolean]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -397,20 +257,21 @@ it is created.
       <span class="symbol">
         <span class="name">copy</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="targetDir">targetDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="createTarget">createTarget: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copy(files:Iterable[String],targetDir:String,createTarget:Boolean):scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Copy multiple files to a target directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy multiple files to a target directory. Also see the version of this
 method that takes only one file.
 </p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>An <code>Iterable</code> of file names to be copied</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><code>true</code> to create the target directory,
                     <code>false</code> to throw an exception if the
                     directory doesn't already exist.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyFile" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copyFile(source:java.io.File,target:java.io.File):scala.util.Try[java.io.File]"></a><a id="copyFile(File,File):Try[File]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copyFile(source:java.io.File,target:java.io.File):scala.util.Try[java.io.File]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyFile(source:java.io.File,target:java.io.File):scala.util.Try[java.io.File]"></a>
+      <a id="copyFile(File,File):Try[File]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -418,20 +279,21 @@ method that takes only one file.
       <span class="symbol">
         <span class="name">copyFile</span><span class="params">(<span name="source">source: <span class="extype" name="java.io.File">File</span></span>, <span name="target">target: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="java.io.File">File</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copyFile(source:java.io.File,target:java.io.File):scala.util.Try[java.io.File]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Copy a source file to a target file, using binary copying.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a source file to a target file, using binary copying. The source
 file must be a file. The target path can be a file or a directory; if
 it is a directory, the target file will have the same base name as
 as the source file.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> containing the full path of the target file,
         or <code>Failure(exception)</code></p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyFile" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copyFile(sourcePath:String,targetPath:String):scala.util.Try[String]"></a><a id="copyFile(String,String):Try[String]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copyFile(sourcePath:String,targetPath:String):scala.util.Try[String]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyFile(sourcePath:String,targetPath:String):scala.util.Try[String]"></a>
+      <a id="copyFile(String,String):Try[String]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -439,20 +301,21 @@ as the source file.
       <span class="symbol">
         <span class="name">copyFile</span><span class="params">(<span name="sourcePath">sourcePath: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="targetPath">targetPath: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copyFile(sourcePath:String,targetPath:String):scala.util.Try[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Copy a source file to a target file, using binary copying.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a source file to a target file, using binary copying. The source
 file must be a file. The target path can be a file or a directory; if
 it is a directory, the target file will have the same base name as
 as the source file.
 </p></div><dl class="paramcmts block"><dt class="param">sourcePath</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">targetPath</dt><dd class="cmt"><p>path to the target file or directory</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with the full path of the target file, or
         <code>Failure(exception)</code></p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyTree" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copyTree(sourceDir:java.io.File,targetDir:java.io.File):scala.util.Try[Boolean]"></a><a id="copyTree(File,File):Try[Boolean]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copyTree(sourceDir:java.io.File,targetDir:java.io.File):scala.util.Try[Boolean]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTree(sourceDir:java.io.File,targetDir:java.io.File):scala.util.Try[Boolean]"></a>
+      <a id="copyTree(File,File):Try[Boolean]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -460,19 +323,20 @@ as the source file.
       <span class="symbol">
         <span class="name">copyTree</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="java.io.File">File</span></span>, <span name="targetDir">targetDir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copyTree(sourceDir:java.io.File,targetDir:java.io.File):scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Recursively copy a source directory and its contents to a target
 directory.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively copy a source directory and its contents to a target
 directory. Creates the target directory if it does not exist.
 </p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#copyTree" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copyTree(sourceDir:String,targetDir:String):scala.util.Try[Boolean]"></a><a id="copyTree(String,String):Try[Boolean]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#copyTree(sourceDir:String,targetDir:String):scala.util.Try[Boolean]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="copyTree(sourceDir:String,targetDir:String):scala.util.Try[Boolean]"></a>
+      <a id="copyTree(String,String):Try[Boolean]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -480,19 +344,20 @@ directory. Creates the target directory if it does not exist.
       <span class="symbol">
         <span class="name">copyTree</span><span class="params">(<span name="sourceDir">sourceDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="targetDir">targetDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@copyTree(sourceDir:String,targetDir:String):scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Recursively copy a source directory and its contents to a target
 directory.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively copy a source directory and its contents to a target
 directory. Creates the target directory if it does not exist.
 </p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#createTemporaryDirectory" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File"></a><a id="createTemporaryDirectory(String,Int):File"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#createTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File"></a>
+      <a id="createTemporaryDirectory(String,Int):File"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -500,18 +365,19 @@ directory. Creates the target directory if it does not exist.
       <span class="symbol">
         <span class="name">createTemporaryDirectory</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">3</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Create a temporary directory.</p><div class="fullcomment"><div class="comment cmt"><p>Create a temporary directory.
 </p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>Prefix for directory name</p></dd><dt class="param">maxTries</dt><dd class="cmt"><p>Maximum number of times to try creating the
                  directory before giving up.</p></dd><dt>returns</dt><dd class="cmt"><p>the directory. Throws an IOException if it can't create
         the directory.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#deleteTree" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="deleteTree(dir:java.io.File):scala.util.Try[Int]"></a><a id="deleteTree(File):Try[Int]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#deleteTree(dir:java.io.File):scala.util.Try[Int]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deleteTree(dir:java.io.File):scala.util.Try[Int]"></a>
+      <a id="deleteTree(File):Try[Int]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -519,18 +385,19 @@ directory. Creates the target directory if it does not exist.
       <span class="symbol">
         <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@deleteTree(dir:java.io.File):scala.util.Try[Int]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Recursively remove a directory tree.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively remove a directory tree. This function is conceptually
 equivalent to <code>rm -r</code> on a Unix system.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Failure(exception)</code> on error, <code>Success(total)</code> on success. <code>total</code>
         is the total number of deleted files.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#deleteTree" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="deleteTree(dir:String):Unit"></a><a id="deleteTree(String):Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#deleteTree(dir:String):Unit" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#deleteTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deleteTree(dir:String):Unit"></a>
+      <a id="deleteTree(String):Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -538,17 +405,18 @@ equivalent to <code>rm -r</code> on a Unix system.
       <span class="symbol">
         <span class="name">deleteTree</span><span class="params">(<span name="dir">dir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@deleteTree(dir:String):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Recursively remove a directory tree.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively remove a directory tree. This function is conceptually
 equivalent to <code>rm -r</code> on a Unix system.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>The directory</p></dd></dl></div>
-    </li><li name="grizzled.file.util#dirname" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dirname(path:String,fileSep:String):String"></a><a id="dirname(String,String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#dirname(path:String,fileSep:String):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#dirname" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirname(path:String,fileSep:String):String"></a>
+      <a id="dirname(String,String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -556,17 +424,18 @@ equivalent to <code>rm -r</code> on a Unix system.
       <span class="symbol">
         <span class="name">dirname</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#fileSeparator:String">fileSeparator</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@dirname(path:String,fileSep:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Get the directory name of a pathname.</p><div class="fullcomment"><div class="comment cmt"><p>Get the directory name of a pathname.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path (absolute or relative)</p></dd><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use. Defaults to the value of
                 the &quot;file.separator&quot; property.</p></dd><dt>returns</dt><dd class="cmt"><p>the directory portion</p></dd></dl></div>
-    </li><li name="grizzled.file.util#dirnameBasename" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dirnameBasename(path:String,fileSep:String):(String,String)"></a><a id="dirnameBasename(String,String):(String,String)"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#dirnameBasename(path:String,fileSep:String):(String,String)" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#dirnameBasename" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirnameBasename(path:String,fileSep:String):(String,String)"></a>
+      <a id="dirnameBasename(String,String):(String,String)"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -574,18 +443,19 @@ equivalent to <code>rm -r</code> on a Unix system.
       <span class="symbol">
         <span class="name">dirnameBasename</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#fileSeparator:String">fileSeparator</a></span></span></span>)</span><span class="result">: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@dirnameBasename(path:String,fileSep:String):(String,String)" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Split a path into directory (dirname) and file (basename) components.</p><div class="fullcomment"><div class="comment cmt"><p>Split a path into directory (dirname) and file (basename) components.
 Analogous to Python's <code>os.path.pathsplit()</code> function.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to split</p></dd><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use. Defaults to the value of
                 the &quot;file.separator&quot; property.</p></dd><dt>returns</dt><dd class="cmt"><p>a (dirname, basename) tuple of strings</p></dd></dl></div>
-    </li><li name="grizzled.file.util#dirnameBasenameExtension" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="dirnameBasenameExtension(pathname:String,fileSep:String):(String,String,String)"></a><a id="dirnameBasenameExtension(String,String):(String,String,String)"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#dirnameBasenameExtension(pathname:String,fileSep:String):(String,String,String)" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#dirnameBasenameExtension" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dirnameBasenameExtension(pathname:String,fileSep:String):(String,String,String)"></a>
+      <a id="dirnameBasenameExtension(String,String):(String,String,String)"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -593,19 +463,20 @@ Analogous to Python's <code>os.path.pathsplit()</code> function.
       <span class="symbol">
         <span class="name">dirnameBasenameExtension</span><span class="params">(<span name="pathname">pathname: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#fileSeparator:String">fileSeparator</a></span></span></span>)</span><span class="result">: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@dirnameBasenameExtension(pathname:String,fileSep:String):(String,String,String)" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Split a pathname into the directory name, basename, and extension
 pieces.</p><div class="fullcomment"><div class="comment cmt"><p>Split a pathname into the directory name, basename, and extension
 pieces.
 </p></div><dl class="paramcmts block"><dt class="param">pathname</dt><dd class="cmt"><p>the pathname</p></dd><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use. Defaults to the value of
                 the &quot;file.separator&quot; property.</p></dd><dt>returns</dt><dd class="cmt"><p>a 3-tuple of (dirname, basename, extension)</p></dd></dl></div>
-    </li><li name="grizzled.file.util#eglob" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="eglob(pattern:String):List[String]"></a><a id="eglob(String):List[String]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#eglob(pattern:String):List[String]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#eglob" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eglob(pattern:String):List[String]"></a>
+      <a id="eglob(String):List[String]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -613,19 +484,20 @@ pieces.
       <span class="symbol">
         <span class="name">eglob</span><span class="params">(<span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@eglob(pattern:String):List[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">An extended <i>glob</i> function that supports all the wildcards of
 the <code>glob()</code> function, in addition to:</p><div class="fullcomment"><div class="comment cmt"><p>An extended <i>glob</i> function that supports all the wildcards of
 the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</code>, signifying the user's home directory</li><li>a special <code>**</code> wildcard that recursively matches any directory.
    (Think &quot;ant&quot;.)</li></ul><p><i>~user</i> is not supported, however.
 </p></div><dl class="paramcmts block"><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern</p></dd><dt>returns</dt><dd class="cmt"><p>list of matches, or an empty list for none</p></dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -633,15 +505,16 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#equals(x$1:Any):Boolean" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -649,15 +522,16 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.util#fileSeparator" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="fileSeparator:String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#fileSeparator:String" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.file.util#fileSeparator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fileSeparator:String"></a>
+      <a id="fileSeparator:String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
@@ -665,15 +539,16 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
       <span class="symbol">
         <span class="name">fileSeparator</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      
-      
-    </li><li name="grizzled.file.util#fileSeparatorChar" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="fileSeparatorChar:Char"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#fileSeparatorChar:Char" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@fileSeparator:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      
+    </li><li name="grizzled.file.util#fileSeparatorChar" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fileSeparatorChar:Char"></a>
+      <a id="fileSeparatorChar:Char"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
@@ -681,15 +556,16 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
       <span class="symbol">
         <span class="name">fileSeparatorChar</span><span class="result">: <span class="extype" name="scala.Char">Char</span></span>
       </span>
-      
-      
-    </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="finalize():Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#finalize():Unit" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@fileSeparatorChar:Char" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -697,7 +573,11 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -705,13 +585,10 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.util#fnmatch" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="fnmatch(name:String,pattern:String):Boolean"></a><a id="fnmatch(String,String):Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#fnmatch(name:String,pattern:String):Boolean" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#fnmatch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fnmatch(name:String,pattern:String):Boolean"></a>
+      <a id="fnmatch(String,String):Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -719,20 +596,21 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
       <span class="symbol">
         <span class="name">fnmatch</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pattern">pattern: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@fnmatch(name:String,pattern:String):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Similar to Python's <code>fnmatch()</code> function, this function determines
 whether a string matches a wildcard pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Similar to Python's <code>fnmatch()</code> function, this function determines
 whether a string matches a wildcard pattern. Patterns are Unix-style
 shell-style wildcards:</p><ul><li><code>*</code> matches everything</li><li><code>?</code> matches any single character</li><li><code>[set]</code> matches any character in <i>set</i></li><li><code>[!set]</code> matches any character not in <i>set</i></li></ul><p>An initial period in <code>filename</code> is not special. Matches are
 case-sensitive on Posix operating systems, case-insensitive elsewhere.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name to match</p></dd><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern</p></dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#getClass():Class[_]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -740,15 +618,16 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.util#glob" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="glob(path:String):List[String]"></a><a id="glob(String):List[String]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#glob(path:String):List[String]" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.file.util#glob" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="glob(path:String):List[String]"></a>
+      <a id="glob(String):List[String]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -756,7 +635,11 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
       <span class="symbol">
         <span class="name">glob</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@glob(path:String):List[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Return a list of paths matching a pathname pattern.</p><div class="fullcomment"><div class="comment cmt"><p>Return a list of paths matching a pathname pattern. The pattern may
 contain simple shell-style wildcards. See <code>fnmatch()</code>. This function
 is essentially a direct port of the Python <code>glob.glob()</code> function.</p><p>Restrictions:</p><p>- There's currently no way to escape a wildcard character. That is,
@@ -764,13 +647,10 @@ is essentially a direct port of the Python <code>glob.glob()</code> function.</p
   you can't do that with this library. (You can't do it with the
   <code>glob</code> library in Python 2 or Python 3, either.)
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The path to expand.</p></dd><dt>returns</dt><dd class="cmt"><p>a list of possibly expanded file names</p></dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#hashCode():Int" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -778,15 +658,16 @@ is essentially a direct port of the Python <code>glob.glob()</code> function.</p
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#isInstanceOf[T0]:Boolean" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -794,15 +675,16 @@ is essentially a direct port of the Python <code>glob.glob()</code> function.</p
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.file.util#joinPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="joinPath(pieces:java.io.File*):java.io.File"></a><a id="joinPath(File*):File"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#joinPath(pieces:java.io.File*):java.io.File" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joinPath(pieces:java.io.File*):java.io.File"></a>
+      <a id="joinPath(File*):File"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -810,19 +692,20 @@ is essentially a direct port of the Python <code>glob.glob()</code> function.</p
       <span class="symbol">
         <span class="name">joinPath</span><span class="params">(<span name="pieces">pieces: <span class="extype" name="java.io.File">File</span>*</span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@joinPath(pieces:java.io.File*):java.io.File" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Join components of a path together, using the file separator of the
 currently running system
 </p><div class="fullcomment"><div class="comment cmt"><p>Join components of a path together, using the file separator of the
 currently running system
 </p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite path</p></dd></dl></div>
-    </li><li name="grizzled.file.util#joinPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="joinPath(pieces:String*):String"></a><a id="joinPath(String*):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#joinPath(pieces:String*):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joinPath(pieces:String*):String"></a>
+      <a id="joinPath(String*):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -830,19 +713,20 @@ currently running system
       <span class="symbol">
         <span class="name">joinPath</span><span class="params">(<span name="pieces">pieces: <span class="extype" name="scala.Predef.String">String</span>*</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@joinPath(pieces:String*):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Join components of a path together, using the file separator of the
 currently running system
 </p><div class="fullcomment"><div class="comment cmt"><p>Join components of a path together, using the file separator of the
 currently running system
 </p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite path</p></dd></dl></div>
-    </li><li name="grizzled.file.util#joinPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="joinPath(fileSep:String,pieces:List[String]):String"></a><a id="joinPath(String,List[String]):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#joinPath(fileSep:String,pieces:List[String]):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#joinPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joinPath(fileSep:String,pieces:List[String]):String"></a>
+      <a id="joinPath(String,List[String]):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -850,16 +734,17 @@ currently running system
       <span class="symbol">
         <span class="name">joinPath</span><span class="params">(<span name="fileSep">fileSep: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pieces">pieces: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
-      <p class="shortcomment cmt">Join components of a path together.</p><div class="fullcomment"><div class="comment cmt"><p>Join components of a path together.
-</p></div><dl class="paramcmts block"><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use</p></dd><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite path</p></dd></dl></div>
-    </li><li name="grizzled.file.util#listRecursively" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="listRecursively(file:java.io.File,topdown:Boolean):Stream[java.io.File]"></a><a id="listRecursively(File,Boolean):Stream[File]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#listRecursively(file:java.io.File,topdown:Boolean):Stream[java.io.File]" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@joinPath(fileSep:String,pieces:List[String]):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <p class="shortcomment cmt">Join components of a path together.</p><div class="fullcomment"><div class="comment cmt"><p>Join components of a path together.
+</p></div><dl class="paramcmts block"><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use</p></dd><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite path</p></dd></dl></div>
+    </li><li name="grizzled.file.util#listRecursively" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listRecursively(file:java.io.File,topdown:Boolean):Stream[java.io.File]"></a>
+      <a id="listRecursively(File,Boolean):Stream[File]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -867,20 +752,21 @@ currently running system
       <span class="symbol">
         <span class="name">listRecursively</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Stream">Stream</span>[<span class="extype" name="java.io.File">File</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@listRecursively(file:java.io.File,topdown:Boolean):Stream[java.io.File]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found.</p><div class="fullcomment"><div class="comment cmt"><p>List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found. This method does lazy evaluation, instead
 of calculating everything up-front, as <code>walk()</code> does.
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The <code>File</code> object, presumed to represent a directory.</p></dd><dt class="param">topdown</dt><dd class="cmt"><p>If <code>true</code> (the default), the stream will be generated
                top down. If <code>false</code>, it'll be generated bottom-up.</p></dd><dt>returns</dt><dd class="cmt"><p>a stream of <code>File</code> objects.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#nativePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="nativePath(path:String):String"></a><a id="nativePath(String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#nativePath(path:String):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#nativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="nativePath(path:String):String"></a>
+      <a id="nativePath(String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -888,7 +774,11 @@ of calculating everything up-front, as <code>walk()</code> does.
       <span class="symbol">
         <span class="name">nativePath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@nativePath(path:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Converts a path name from universal path notation to the operating
 system-specific format.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a path name from universal path notation to the operating
 system-specific format. Universal path notation always uses a
@@ -897,13 +787,10 @@ converted to a universal path via the <code>universal_path()</code>
 function. Note that on POSIX-compliant systems, this function simply
 returns the <code>path</code> parameter unmodified.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to convert from universtal to native path notation</p></dd><dt>returns</dt><dd class="cmt"><p>the native path</p></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -911,15 +798,16 @@ returns the <code>path</code> parameter unmodified.
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.util#normalizePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="normalizePath(path:String):String"></a><a id="normalizePath(String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#normalizePath(path:String):String" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.file.util#normalizePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="normalizePath(path:String):String"></a>
+      <a id="normalizePath(String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -927,19 +815,20 @@ returns the <code>path</code> parameter unmodified.
       <span class="symbol">
         <span class="name">normalizePath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@normalizePath(path:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Normalize a path, eliminating double slashes, resolving embedded
 &quot;..&quot; strings (e.g., &quot;/foo/../bar&quot; becomes &quot;/bar&quot;), etc.</p><div class="fullcomment"><div class="comment cmt"><p>Normalize a path, eliminating double slashes, resolving embedded
 &quot;..&quot; strings (e.g., &quot;/foo/../bar&quot; becomes &quot;/bar&quot;), etc. Works for
 Windows and Posix operating systems.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path</p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path</p></dd></dl></div>
-    </li><li name="grizzled.file.util#normalizePosixPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="normalizePosixPath(path:String):String"></a><a id="normalizePosixPath(String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#normalizePosixPath(path:String):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#normalizePosixPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="normalizePosixPath(path:String):String"></a>
+      <a id="normalizePosixPath(String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -947,18 +836,19 @@ Windows and Posix operating systems.
       <span class="symbol">
         <span class="name">normalizePosixPath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@normalizePosixPath(path:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Adapted from the Python version of normpath() in Python's
  <code>os.posixpath</code> module.</p><div class="fullcomment"><div class="comment cmt"><p>Adapted from the Python version of normpath() in Python's
  <code>os.posixpath</code> module.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path</p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path</p></dd></dl></div>
-    </li><li name="grizzled.file.util#normalizeWindowsPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="normalizeWindowsPath(path:String):String"></a><a id="normalizeWindowsPath(String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#normalizeWindowsPath(path:String):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#normalizeWindowsPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="normalizeWindowsPath(path:String):String"></a>
+      <a id="normalizeWindowsPath(String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -966,17 +856,18 @@ Windows and Posix operating systems.
       <span class="symbol">
         <span class="name">normalizeWindowsPath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@normalizeWindowsPath(path:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Normalize a Windows path name.</p><div class="fullcomment"><div class="comment cmt"><p>Normalize a Windows path name. Handles UNC paths. Adapted from the
 Python version of normpath() in Python's <code>os.ntpath</code> module.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path</p></dd><dt>returns</dt><dd class="cmt"><p>the normalized path</p></dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#notify():Unit" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -984,15 +875,16 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notifyAll():Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#notifyAll():Unit" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -1000,15 +892,16 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.util#pwd" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="pwd:String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#pwd:String" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.file.util#pwd" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="pwd:String"></a>
+      <a id="pwd:String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1016,16 +909,17 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
       <span class="symbol">
         <span class="name">pwd</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
-      <p class="shortcomment cmt">Return the current working directory, as an absolute path.</p><div class="fullcomment"><div class="comment cmt"><p>Return the current working directory, as an absolute path.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the current working directory</p></dd></dl></div>
-    </li><li name="grizzled.file.util#relativePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="relativePath(from:java.io.File,to:java.io.File):String"></a><a id="relativePath(File,File):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#relativePath(from:java.io.File,to:java.io.File):String" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@pwd:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <p class="shortcomment cmt">Return the current working directory, as an absolute path.</p><div class="fullcomment"><div class="comment cmt"><p>Return the current working directory, as an absolute path.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the current working directory</p></dd></dl></div>
+    </li><li name="grizzled.file.util#relativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="relativePath(from:java.io.File,to:java.io.File):String"></a>
+      <a id="relativePath(File,File):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1033,16 +927,17 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
       <span class="symbol">
         <span class="name">relativePath</span><span class="params">(<span name="from">from: <span class="extype" name="java.io.File">File</span></span>, <span name="to">to: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
-      <p class="shortcomment cmt">Calculate the relative path between two files.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the relative path between two files.
-</p></div><dl class="paramcmts block"><dt class="param">from</dt><dd class="cmt"><p>the starting file</p></dd><dt class="param">to</dt><dd class="cmt"><p>the file to be converted to a relative path</p></dd><dt>returns</dt><dd class="cmt"><p>the (String) relative path</p></dd></dl></div>
-    </li><li name="grizzled.file.util#splitDrivePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="splitDrivePath(path:String):(String,String)"></a><a id="splitDrivePath(String):(String,String)"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#splitDrivePath(path:String):(String,String)" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@relativePath(from:java.io.File,to:java.io.File):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <p class="shortcomment cmt">Calculate the relative path between two files.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the relative path between two files.
+</p></div><dl class="paramcmts block"><dt class="param">from</dt><dd class="cmt"><p>the starting file</p></dd><dt class="param">to</dt><dd class="cmt"><p>the file to be converted to a relative path</p></dd><dt>returns</dt><dd class="cmt"><p>the (String) relative path</p></dd></dl></div>
+    </li><li name="grizzled.file.util#splitDrivePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="splitDrivePath(path:String):(String,String)"></a>
+      <a id="splitDrivePath(String):(String,String)"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1050,17 +945,18 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
       <span class="symbol">
         <span class="name">splitDrivePath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@splitDrivePath(path:String):(String,String)" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Split a Windows-style path into drive name and path portions.</p><div class="fullcomment"><div class="comment cmt"><p>Split a Windows-style path into drive name and path portions.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path</p></dd><dt>returns</dt><dd class="cmt"><p>a (drive, path) tuple, either component of which can be
 *       an empty string</p></dd></dl></div>
-    </li><li name="grizzled.file.util#splitPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="splitPath(path:String,fileSep:String):List[String]"></a><a id="splitPath(String,String):List[String]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#splitPath(path:String,fileSep:String):List[String]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#splitPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="splitPath(path:String,fileSep:String):List[String]"></a>
+      <a id="splitPath(String,String):List[String]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1068,7 +964,11 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
       <span class="symbol">
         <span class="name">splitPath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileSep">fileSep: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#fileSeparator:String">fileSeparator</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@splitPath(path:String,fileSep:String):List[String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Split a path into its constituent components.</p><div class="fullcomment"><div class="comment cmt"><p>Split a path into its constituent components. If the path is
 absolute, the first piece will have a file separator in the
 beginning. Examples:</p><p><table border="1">
@@ -1119,13 +1019,10 @@ beginning. Examples:</p><p><table border="1">
 </table>
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path</p></dd><dt class="param">fileSep</dt><dd class="cmt"><p>the file separator to use. Defaults to the value of
                the &quot;file.separator&quot; property.</p></dd><dt>returns</dt><dd class="cmt"><p>the component pieces.</p></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -1133,15 +1030,16 @@ beginning. Examples:</p><p><table border="1">
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.file.util#temporaryDirectory" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="temporaryDirectory:java.io.File"></a><a id="temporaryDirectory:File"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#temporaryDirectory:java.io.File" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.file.util#temporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="temporaryDirectory:java.io.File"></a>
+      <a id="temporaryDirectory:File"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1149,16 +1047,17 @@ beginning. Examples:</p><p><table border="1">
       <span class="symbol">
         <span class="name">temporaryDirectory</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
-      
-      <p class="shortcomment cmt">Determine the temporary directory to use.</p><div class="fullcomment"><div class="comment cmt"><p>Determine the temporary directory to use.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the temporary directory</p></dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#toString():String" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@temporaryDirectory:java.io.File" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <p class="shortcomment cmt">Determine the temporary directory to use.</p><div class="fullcomment"><div class="comment cmt"><p>Determine the temporary directory to use.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the temporary directory</p></dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1166,15 +1065,16 @@ beginning. Examples:</p><p><table border="1">
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.file.util#touch" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="touch(path:String,time:Long):scala.util.Try[Boolean]"></a><a id="touch(String,Long):Try[Boolean]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#touch(path:String,time:Long):scala.util.Try[Boolean]" title="Permalink">
-        <i class="material-icons"></i>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@toString():String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.file.util#touch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="touch(path:String,time:Long):scala.util.Try[Boolean]"></a>
+      <a id="touch(String,Long):Try[Boolean]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1182,17 +1082,18 @@ beginning. Examples:</p><p><table border="1">
       <span class="symbol">
         <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@touch(path:String,time:Long):scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Similar to the Unix <code>touch</code> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <code>touch</code> command, this function:</p><ul><li>updates the access and modification times for a file</li><li>creates the file if it does not exist</li></ul><p>If the file is a directory, this method will return an error.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>The file to touch</p></dd><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
              time if this parameter is negative.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Failure(exception)</code> on error, <code>Success(true)</code> on success</p></dd></dl></div>
-    </li><li name="grizzled.file.util#touchMany" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="touchMany(files:Iterable[String],time:Long):scala.util.Try[Int]"></a><a id="touchMany(Iterable[String],Long):Try[Int]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#touchMany(files:Iterable[String],time:Long):scala.util.Try[Int]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#touchMany" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="touchMany(files:Iterable[String],time:Long):scala.util.Try[Int]"></a>
+      <a id="touchMany(Iterable[String],Long):Try[Int]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1200,18 +1101,19 @@ beginning. Examples:</p><p><table border="1">
       <span class="symbol">
         <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@touchMany(files:Iterable[String],time:Long):scala.util.Try[Int]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for any existing files
    in a list of files</li><li>creates an nonexistent files in the list</li></ul><p>If any file in the list is a directory, this method will return an error.
 </p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>Iterable of files to touch</p></dd><dt class="param">time</dt><dd class="cmt"><p>Set the last-modified time to this time, or to the current
               time if this parameter is negative.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Failure(exception)</code> on error. <code>Success(total)</code> on success.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#universalPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="universalPath(path:String):String"></a><a id="universalPath(String):String"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#universalPath(path:String):String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#universalPath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="universalPath(path:String):String"></a>
+      <a id="universalPath(String):String"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1219,7 +1121,11 @@ beginning. Examples:</p><p><table border="1">
       <span class="symbol">
         <span class="name">universalPath</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@universalPath(path:String):String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Converts a path name from its operating system-specific format to a
 universal path notation.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a path name from its operating system-specific format to a
 universal path notation. Universal path notation always uses a
@@ -1228,13 +1134,10 @@ converted to a native (operating system-specific) path via the
 <code>native_path()</code> function. Note that on POSIX-compliant systems,
 this function simply returns the <code>path</code> parameter unmodified.
 </p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path to convert to universal path notation</p></dd><dt>returns</dt><dd class="cmt"><p>the universal path</p></dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#wait():Unit" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -1242,7 +1145,11 @@ this function simply returns the <code>path</code> parameter unmodified.
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1250,13 +1157,10 @@ this function simply returns the <code>path</code> parameter unmodified.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -1264,7 +1168,11 @@ this function simply returns the <code>path</code> parameter unmodified.
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1272,13 +1180,10 @@ this function simply returns the <code>path</code> parameter unmodified.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#wait(x$1:Long):Unit" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -1286,7 +1191,11 @@ this function simply returns the <code>path</code> parameter unmodified.
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1294,13 +1203,10 @@ this function simply returns the <code>path</code> parameter unmodified.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.util#walk" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="walk(top:String,topdown:Boolean):List[(String,List[String],List[String])]"></a><a id="walk(String,Boolean):List[(String,List[String],List[String])]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#walk(top:String,topdown:Boolean):List[(String,List[String],List[String])]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#walk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="walk(top:String,topdown:Boolean):List[(String,List[String],List[String])]"></a>
+      <a id="walk(String,Boolean):List[(String,List[String],List[String])]"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1308,7 +1214,11 @@ this function simply returns the <code>path</code> parameter unmodified.
       <span class="symbol">
         <span class="name">walk</span><span class="params">(<span name="top">top: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>])]</span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@walk(top:String,topdown:Boolean):List[(String,List[String],List[String])]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Directory tree generator, adapted from Python's <code>os.walk()</code>
 function.</p><div class="fullcomment"><div class="comment cmt"><p>Directory tree generator, adapted from Python's <code>os.walk()</code>
 function.</p><p>For each directory in the directory tree rooted at top (including top
@@ -1325,13 +1235,10 @@ after the triples for all of its subdirectories (directories are generated
 bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!
 </p></div><dl class="paramcmts block"><dt class="param">top</dt><dd class="cmt"><p>name of starting directory</p></dd><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code>
                otherwise.</p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#withTemporaryDirectory" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withTemporaryDirectory[T](prefix:String)(action:java.io.File=&gt;T):T"></a><a id="withTemporaryDirectory[T](String)((File)⇒T):T"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#withTemporaryDirectory[T](prefix:String)(action:java.io.File=&gt;T):T" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
+    </li><li name="grizzled.file.util#withTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withTemporaryDirectory[T](prefix:String)(action:java.io.File=&gt;T):T"></a>
+      <a id="withTemporaryDirectory[T](String)((File)⇒T):T"></a>
+      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -1339,14 +1246,17 @@ bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic link
       <span class="symbol">
         <span class="name">withTemporaryDirectory</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span name="action">action: (<span class="extype" name="java.io.File">File</span>) ⇒ <span class="extype" name="grizzled.file.util.withTemporaryDirectory.T">T</span></span>)</span><span class="result">: <span class="extype" name="grizzled.file.util.withTemporaryDirectory.T">T</span></span>
       </span>
-      
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.util$@withTemporaryDirectory[T](prefix:String)(action:java.io.File=&gt;T):T" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Allow execution of a block of code within the context of a temporary
 directory.</p><div class="fullcomment"><div class="comment cmt"><p>Allow execution of a block of code within the context of a temporary
 directory. The temporary directory is cleaned up after the operation
 completes.
 </p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>file name prefix to use</p></dd><dt class="param">action</dt><dd class="cmt"><p>action to perform</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the action returns</p></dd></dl></div>
-    </li>
-              </ol>
+    </li></ol>
             </div>
 
         
@@ -1375,9 +1285,7 @@ completes.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-    </body>
-          </div>
-        </div>
-      </div>
+
+
     </body>
       </html>

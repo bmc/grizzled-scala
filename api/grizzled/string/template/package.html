@@ -1,0 +1,210 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>template - grizzled.string.template</title>
+          <meta name="description" content="template - grizzled.string.template" />
+          <meta name="keywords" content="template grizzled.string.template" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'grizzled.string.template.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../../lib/package_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="grizzled">grizzled</a>.<a href="../package.html" class="extype" name="grizzled.string">string</a></p>
+        <h1>template</h1><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">template</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Scala classes that provide for variable substitution within strings,
+akin to the Python <code>StringTemplate</code> library. Several syntaxes are
+supported.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.string.template"><span>template</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.string.template.StringTemplate" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="StringTemplateextendsAnyRef"></a>
+      <a id="StringTemplate:StringTemplate"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="StringTemplate.html"><span class="name">StringTemplate</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@StringTemplateextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A simple, configurable string template that substitutes variable references
+within a string.</p>
+    </li><li name="grizzled.string.template.UnixShellStringTemplate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="UnixShellStringTemplateextendsStringTemplate"></a>
+      <a id="UnixShellStringTemplate:UnixShellStringTemplate"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="UnixShellStringTemplate.html"><span class="name">UnixShellStringTemplate</span></a><span class="result"> extends <a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@UnixShellStringTemplateextendsStringTemplate" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A string template that uses the Unix shell-like syntax <code>${varname}</code>
+(or <code>$varname</code>) for variable references.</p><div class="fullcomment"><div class="comment cmt"><p>A string template that uses the Unix shell-like syntax <code>${varname}</code>
+(or <code>$varname</code>) for variable references. A variable's name may consist
+of alphanumerics and underscores. To include a literal &quot;$&quot; in a string,
+escape it with a backslash.</p><p>For this class, the general form of a variable reference is:</p><pre>${varname?default}</pre><p>}</p><p>The <code>?default</code> suffix is optional and specifies a default value
+to be used if the variable has no value.</p><p>A shorthand form of a variable reference is:</p><pre>$varname</pre><p>The <i>default</i> capability is not available in the shorthand form.
+</p></div></div>
+    </li><li name="grizzled.string.template.Variable" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="VariableextendsAnyRef"></a>
+      <a id="Variable:Variable"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Variable.html"><span class="name">Variable</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@VariableextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Information about a parsed variable name.</p>
+    </li><li name="grizzled.string.template.WindowsCmdStringTemplate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="WindowsCmdStringTemplateextendsStringTemplate"></a>
+      <a id="WindowsCmdStringTemplate:WindowsCmdStringTemplate"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="WindowsCmdStringTemplate.html"><span class="name">WindowsCmdStringTemplate</span></a><span class="result"> extends <a href="StringTemplate.html" class="extype" name="grizzled.string.template.StringTemplate">StringTemplate</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#grizzled.string.template.package@WindowsCmdStringTemplateextendsStringTemplate" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A string template that uses the cmd Windows.exe syntax <code>%varname%</code> for
+variable references.</p><div class="fullcomment"><div class="comment cmt"><p>A string template that uses the cmd Windows.exe syntax <code>%varname%</code> for
+variable references. A variable's name may consist of alphanumerics and
+underscores. To include a literal &quot;%&quot; in a string, use two in a row
+(&quot;%%&quot;).
+</p></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

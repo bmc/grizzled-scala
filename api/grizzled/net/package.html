@@ -1,0 +1,351 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>net - grizzled.net</title>
+          <meta name="description" content="net - grizzled.net" />
+          <meta name="keywords" content="net grizzled.net" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.net.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
+        <h1>net</h1><span class="permalink">
+      <a href="../../index.html#grizzled.net.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">net</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Network-related utility methods and classes.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.net"><span>net</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.net.IPAddress" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="IPAddressextendsAnyRef"></a>
+      <a id="IPAddress:IPAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="IPAddress.html"><span class="name">IPAddress</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@IPAddressextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Represents an IP address.</p><div class="fullcomment"><div class="comment cmt"><p>Represents an IP address. This class is similar to <code>java.net.InetAddress</code>,
+but it's designed to be more intuitive and easier to use from Scala.
+This package provides implicit converters to make this class compatible
+with <code>java.net.InetAddress</code>. The converters ensure that all the
+(non-static) methods defined in the <code>java.net.InetAddress</code> class are
+directly callable from an instance of the Scala <code>IPAddress</code> class. For
+instance, the following code is perfectly legal:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="num">192</span>, <span class="num">168</span>, <span class="num">2</span>, <span class="num">5</span>)
+
+<span class="cmt">// Test if the address is reachable within 1 second.</span>
+println(ip + <span class="lit">" is reachable? "</span> + ip.isReachable(<span class="num">1000</span>))
+
+<span class="cmt">// Get the canonical host name for (i.e., do a reverse lookup on) the</span>
+<span class="cmt">// address.</span>
+println(ip + <span class="lit">" -> "</span> + ip.getCanonicalHostName)
+
+<span class="cmt">// Determine whether it's the loopback address.</span>
+println(ip + <span class="lit">" == loopback? "</span> + ip.isLoopbackAddress)</pre><p>Here's an IPv6 example:</p><pre><span class="kw">val</span> ip = IPAddress(<span class="lit">"fe80::21d:9ff:fea7:53e3"</span>)
+
+<span class="cmt">// Test if the address is reachable within 1 second.</span>
+println(ip + <span class="lit">" is reachable? "</span> + ip.isReachable(<span class="num">1000</span>))
+
+<span class="cmt">// Get the canonical host name for (i.e., do a reverse lookup on) the</span>
+<span class="cmt">// address.</span>
+println(ip + <span class="lit">" -> "</span> + ip.getCanonicalHostName)
+
+<span class="cmt">// Determine whether it's the loopback address.</span>
+println(ip + <span class="lit">" == loopback? "</span> + ip.isLoopbackAddress)</pre></div></div>
+    </li><li name="grizzled.net.UDPDatagramSocket" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="UDPDatagramSocketextendsAnyRef"></a>
+      <a id="UDPDatagramSocket:UDPDatagramSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="UDPDatagramSocket.html"><span class="name">UDPDatagramSocket</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@UDPDatagramSocketextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A <code>UDPDatagramSocket</code> object represents a UDP datagram socket,
+providing a simpler interface to sending and receiving UDP packets than
+the one provided by the Java JDK.</p><div class="fullcomment"><div class="comment cmt"><p>A <code>UDPDatagramSocket</code> object represents a UDP datagram socket,
+providing a simpler interface to sending and receiving UDP packets than
+the one provided by the Java JDK.</p><h4> Sending UDP Datagrams </h4><p>The easiest way to explain how to use this API is with some code. So,
+without further ado, the following example shows how you might send the
+string &quot;foo&quot; to port 2003 on host &quot;foo.example.com&quot;.</p><pre><span class="cmt">// Import the appropriate stuff.</span>
+<span class="kw">import</span> grizzled.net._
+
+<span class="cmt">// First, create an grizzled.net.IPAddress object for the destination</span>
+<span class="cmt">// machine.</span>
+<span class="kw">val</span> address = IPAddress(<span class="lit">"foo.example.com"</span>)
+
+<span class="cmt">// Next, create the socket object. Since we're sending the packet,</span>
+<span class="cmt">// we don't care what the local port is. By not specifying one, we allow</span>
+<span class="cmt">// the operating system to choose one one for us. Similarly, by not</span>
+<span class="cmt">// passing an explicit address, we indicate that the API should bind to a</span>
+<span class="cmt">// wildcard address, so that the packet can go out over any appropriate</span>
+<span class="cmt">// interface.</span>
+<span class="kw">val</span> socket = UDPDatagramSocket()
+
+<span class="cmt">// Next, use the sendString() method to send the string</span>
+socket.sendString(<span class="lit">"foo"</span>, address, <span class="num">2003</span>)
+
+<span class="cmt">// Finally, close the socket.</span>
+socket.close()</pre><p>That's pretty simple. However, using the utility methods provided by the
+<code>UDPDatagramSocket</code> companion object, we can further simplify the
+above code:</p><pre><span class="cmt">// Import the appropriate stuff.</span>
+<span class="kw">import</span> grizzled.net._
+
+UDPDatagramSocket.sendString(<span class="lit">"foo"</span>, IPAddress(<span class="lit">"foo.example.com"</span>), <span class="num">2003</span>)</pre><p>The <code>sendString()</code> method in the companion object takes care
+of allocating the socket, sending the packet, and closing the socket.
+Obviously, if you're planning on sending multiple packets at once, you'll
+want to use the first example (perhaps in a loop), so you're not constantly
+allocating and deallocating sockets. But sending a one-shot UDP packet
+can be as simple as one line of code, as shown in the second example.</p><p>Sending binary data is not much more complicated. You have to convert
+the data to a stream of bytes, which the server must then decode. After
+that, however, sending the bytes isn't much more difficult than sending
+a string. Here's an example, which assumes that you have already encoded
+the data to be send into an array of bytes.</p><pre><span class="cmt">// Import the appropriate stuff.</span>
+<span class="kw">import</span> grizzled.net._
+
+<span class="cmt">// Encode the data into bytes. (Not shown.)</span>
+<span class="kw">val</span> data: <span class="std">Array</span>[<span class="std">Byte</span>] = encodeTheData()
+
+<span class="cmt">// Create the socket object.</span>
+<span class="kw">val</span> socket = UDPDatagramSocket()
+
+<span class="cmt">// Send the data.</span>
+socket.send(data, IPAddress(<span class="lit">"foo.example.com"</span>), <span class="num">2003</span>)
+
+<span class="cmt">// Finally, close the socket.</span>
+socket.close()</pre><p>Once again, there's a simple utility method that does most of the work
+for you:</p><pre><span class="cmt">// Import the appropriate stuff.</span>
+<span class="kw">import</span> grizzled.net._
+
+<span class="cmt">// Encode the data into bytes. (Not shown.)</span>
+<span class="kw">val</span> data: <span class="std">Array</span>[<span class="std">Byte</span>] = encodeTheData()
+
+<span class="cmt">// Send the data.</span>
+UDPDatagramSocket.send(data, IPAddress(<span class="lit">"foo.example.com"</span>), <span class="num">2003</span>)</pre><h4> Receiving UDP Datagrams </h4><p>When receiving UDP datagrams, you must first bind to an incoming
+socket. That is, you must listen on the port to which clients are sending
+their packets. In this example, we create the socket object with the
+receiving port, and we allow the wildcard address to be used on the
+local machine (permitting us to receive packets on any interface).</p><pre><span class="cmt">// Import the appropriate stuff.</span>
+<span class="kw">import</span> grizzled.net._
+
+<span class="cmt">// Create the socket object.</span>
+<span class="kw">val</span> socket = UDPDatagramSocket(<span class="num">2003</span>)</pre><p>Next, we want to receive and process the incoming data. Let's assume
+that we're receiving the &quot;foo&quot; string (or, for that matter, any string)
+being sent by the sample sender, above.</p><pre><span class="cmt">// Receive and print strings.</span>
+<span class="kw">while</span> (<span class="kw">true</span>)
+    println(socket.receiveString(<span class="num">1024</span>))</pre><p>That code says, &quot;Wait for incoming strings, using a 1024-byte buffer.
+Then, decode the strings and print them to standard output.</p><p>Receiving bytes isn't much more difficult.</p><pre><span class="cmt">// Allocate a byte buffer. For efficiency, we'll re-use the same buffer</span>
+<span class="cmt">// on every incoming message.</span>
+<span class="kw">val</span> buf = <span class="std">Array</span>.make[<span class="std">Byte</span>](<span class="num">1024</span>, <span class="num">0</span>)
+
+<span class="cmt">// Receive and process the incoming bytes. The process() method isn't</span>
+<span class="cmt">// shown.</span>
+<span class="kw">while</span> (<span class="kw">true</span>)
+{
+    <span class="kw">val</span> totalRead = socket.receive(buf)
+    process(buf, totalRead)
+}</pre><p>The above loop can be made even simpler (though a little more obscure),
+since the <code>receive()</code> method is filling <i>our</i> buffer and
+returning a count of the number of bytes it put into the buffer:</p><pre><span class="kw">while</span> (<span class="kw">true</span>)
+    process(buf, socket.receive(buf))</pre></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.net.IPAddress" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IPAddress"></a>
+      <a id="IPAddress:IPAddress"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="IPAddress$.html"><span class="name">IPAddress</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@IPAddress" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object to <code>IPAddress</code> class.</p>
+    </li><li name="grizzled.net.Implicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Implicits"></a>
+      <a id="Implicits:Implicits"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$.html"><span class="name">Implicits</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@Implicits" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Implicit conversions for network classes and types.</p>
+    </li><li name="grizzled.net.UDPDatagramSocket" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="UDPDatagramSocket"></a>
+      <a id="UDPDatagramSocket:UDPDatagramSocket"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="UDPDatagramSocket$.html"><span class="name">UDPDatagramSocket</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@UDPDatagramSocket" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for the <code>UDPDatagramSocket</code> trait, containing
+methods to simplify creation of <code>UDPDatagramSocket</code> objects, as
+well as some useful utility methods.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for the <code>UDPDatagramSocket</code> trait, containing
+methods to simplify creation of <code>UDPDatagramSocket</code> objects, as
+well as some useful utility methods. See the documentation for the
+<code>UDPDatagramSocket</code> trait for a full treatment on this API.
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>UDPDatagramSocket</p></span></dd></dl></div>
+    </li><li name="grizzled.net.url" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="url"></a>
+      <a id="url:url"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="url$.html"><span class="name">url</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@url" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">URL-related utility methods.</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

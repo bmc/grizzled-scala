@@ -1,0 +1,356 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>readline - grizzled.readline</title>
+          <meta name="description" content="readline - grizzled.readline" />
+          <meta name="keywords" content="readline grizzled.readline" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.readline.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
+        <h1>readline</h1><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: Use JLine2 &lt;https://github.com/jline/jline2&gt;">readline</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This package is deprecated and will be removed in a future version of
+this library. <a href="https://github.com/jline/jline2" target="_blank">JLine2</a> is a better
+alternative, and it's more consistent with other Scala tools.</p><p>The <code>grizzled.readline</code> package provides a common front-end API to
+various underlying readline and readline-like implementations, including
+<a href="http://tiswww.case.edu/php/chet/readline/rltop.html" target="_blank">GNU Readline</a>,
+<a href="http://www.thrysoee.dk/editline/" target="_blank">Editline</a>, and
+<a href="http://jline.sourceforge.net/" target="_blank">JLine</a>.
+</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine2 &lt;https://github.com/jline/jline2&gt;</p></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.readline"><span>readline</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.readline.Completer" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="CompleterextendsAnyRef"></a>
+      <a id="Completer:Completer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Completer.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">Completer</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@CompleterextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Models a completer: An object that, given a line of input and a token
+within that line, finds possible completions for the token.</p><div class="fullcomment"><div class="comment cmt"><p>Models a completer: An object that, given a line of input and a token
+within that line, finds possible completions for the token.
+</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.CompleterHelper" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="CompleterHelperextendsAnyRef"></a>
+      <a id="CompleterHelper:CompleterHelper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="CompleterHelper.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">CompleterHelper</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@CompleterHelperextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.CompletionToken" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="CompletionTokenextendsAnyRef"></a>
+      <a id="CompletionToken:CompletionToken"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CompletionToken.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">CompletionToken</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@CompletionTokenextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.History" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="HistoryextendsAnyRef"></a>
+      <a id="History:History"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="History.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">History</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@HistoryextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Models a Readline history: an object that holds previously read
+lines.</p><div class="fullcomment"><div class="comment cmt"><p>Models a Readline history: an object that holds previously read
+lines.
+</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.LineToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LineTokenextendsCompletionTokenwithProductwithSerializable"></a>
+      <a id="LineToken:LineToken"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LineToken.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">LineToken</span></a><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@LineTokenextendsCompletionTokenwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.ListCompleter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ListCompleterextendsCompleter"></a>
+      <a id="ListCompleter:ListCompleter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ListCompleter.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">ListCompleter</span></a><span class="result"> extends <a href="Completer.html" class="extype" name="grizzled.readline.Completer">Completer</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@ListCompleterextendsCompleter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A completer that completes from a list of items.</p><div class="fullcomment"><div class="comment cmt"><p>A completer that completes from a list of items.
+</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.NullCompleter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="NullCompleterextendsCompleter"></a>
+      <a id="NullCompleter:NullCompleter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NullCompleter.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">NullCompleter</span></a><span class="result"> extends <a href="Completer.html" class="extype" name="grizzled.readline.Completer">Completer</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@NullCompleterextendsCompleter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A completer that doesn't do anything.</p><div class="fullcomment"><div class="comment cmt"><p>A completer that doesn't do anything. Useful as a default.</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.PathnameCompleter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PathnameCompleterextendsCompleter"></a>
+      <a id="PathnameCompleter:PathnameCompleter"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="PathnameCompleter.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">PathnameCompleter</span></a><span class="result"> extends <a href="Completer.html" class="extype" name="grizzled.readline.Completer">Completer</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@PathnameCompleterextendsCompleter" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A completer that completes path names.</p><div class="fullcomment"><div class="comment cmt"><p>A completer that completes path names. Handles &quot;~&quot; expansion, but only
+for the current user.</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ReadlineextendsAnyRef"></a>
+      <a id="Readline:Readline"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Readline.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">Readline</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@ReadlineextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Defines the readline-like functionality supported by this API.</p><div class="fullcomment"><div class="comment cmt"><p>Defines the readline-like functionality supported by this API. A
+<code>Readline</code> class provides:</p><p>- a means to read lines of input from (presumably) a terminal
+- a history mechanism
+- an optional tab-completion capability
+</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.readline.Cursor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Cursor"></a>
+      <a id="Cursor:Cursor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Cursor$.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">Cursor</span></a><span class="result"> extends <a href="CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@Cursor" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.Delim" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Delim"></a>
+      <a id="Delim:Delim"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Delim$.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">Delim</span></a><span class="result"> extends <a href="CompletionToken.html" class="extype" name="grizzled.readline.CompletionToken">CompletionToken</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@Delim" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li><li name="grizzled.readline.Readline" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Readline"></a>
+      <a id="Readline:Readline"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Readline$.html"><span class="name deprecated" title="Deprecated: Use JLine &lt;https://github.com/jline/jline2&gt;">Readline</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.readline.package@Readline" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion factory object, used to instantiate particular readline
+implementations.</p><div class="fullcomment"><div class="comment cmt"><p>Companion factory object, used to instantiate particular readline
+implementations.
+</p></div><dl class="attributes block"> <dt>Deprecated</dt><dd class="cmt"><p>Use JLine &lt;https://github.com/jline/jline2&gt;</p></dd></dl></div>
+    </li></ol>
+            </div>
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

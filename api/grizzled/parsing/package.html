@@ -1,0 +1,191 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>parsing - grizzled.parsing</title>
+          <meta name="description" content="parsing - grizzled.parsing" />
+          <meta name="keywords" content="parsing grizzled.parsing" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'grizzled.parsing.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a></p>
+        <h1>parsing</h1><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parsing</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Methods and classes useful for parsing various things.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="grizzled.parsing"><span>parsing</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="IteratorStream[T]extendsAnyRef"></a>
+      <a id="IteratorStream[T]:IteratorStream[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="IteratorStream.html"><span class="name">IteratorStream</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@IteratorStream[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>IteratorStream</code> places a simple stream on top of an iterator,
+returning <code>Option</code>-wrapped instances from the underlying iterator.</p><div class="fullcomment"><div class="comment cmt"><p><code>IteratorStream</code> places a simple stream on top of an iterator,
+returning <code>Option</code>-wrapped instances from the underlying iterator.
+When the stream is exhausted, the <code>Iterator</code> stream returns
+<code>None</code>. Differences from a plain <code>Iterator</code> include:</p><p>- An <code>IteratorStream</code> will not throw an exception if you try to read
+  past the end of it. Instead, it will just keep returning <code>None</code>.</p><p>Example of use with a string:</p><pre><span class="kw">import</span> grizzled.parsing.IteratorStream
+
+<span class="kw">val</span> s = ...
+<span class="kw">val</span> istream = <span class="kw">new</span> IteratorStream[<span class="std">Char</span>](s.elements)</pre></div></div>
+    </li><li name="grizzled.parsing.Pushback" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Pushback[T]extendsIteratorStream[T]"></a>
+      <a id="Pushback[T]:Pushback[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Pushback.html"><span class="name">Pushback</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@Pushback[T]extendsIteratorStream[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
+to permit arbitrary pushback.</p>
+    </li><li name="grizzled.parsing.StringToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StringTokenextendsProductwithSerializable"></a>
+      <a id="StringToken:StringToken"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="StringToken.html"><span class="name">StringToken</span></a><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@StringTokenextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A simple string token class, consisting of:</p><div class="fullcomment"><div class="comment cmt"><p>A simple string token class, consisting of:</p><p>- a string token
+- the starting position of the token in the original string from which
+  the token was parsed
+</p></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
