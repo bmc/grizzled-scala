@@ -8,7 +8,7 @@ licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
 scalaVersion := "2.11.7"
-crossScalaVersions := Seq("2.10.5", "2.11.7", "2.12.0-M1")
+crossScalaVersions := Seq("2.10.5", "2.11.7", "2.12.0-M4")
 
 // Incremental compilation performance improvement. See
 // http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
@@ -27,18 +27,20 @@ bintrayPackageLabels := Seq("library", "grizzled", "scala")
 
 // Take a dependency and map its cross-compiled version, creating a new
 // dependency. Temporary, until Scala 2.12 is for real.
+/*
 def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
   dep cross CrossVersion.binaryMapped {
     case v if v startsWith "2.12" => "2.11"
     case v => v.split("""\.""").take(2).mkString(".")
   }
 }
+*/
 
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
 
 libraryDependencies ++= Seq(
-  mappedDep("org.scalatest" %% "scalatest" % "2.2.6" % "test")
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
 
 // ---------------------------------------------------------------------------
