@@ -1,44 +1,165 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>Configuration - grizzled.config.Configuration</title>
-          <meta name="description" content="Configuration - grizzled.config.Configuration" />
-          <meta name="keywords" content="Configuration grizzled.config.Configuration" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title></title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
+      <link href="../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../lib/index.js"></script>
+      <script type="text/javascript" src="../../index.js"></script>
+      <script type="text/javascript" src="../../lib/scheduler.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
       
       <script type="text/javascript">
-         if(top === self) {
-            var url = '../../index.html';
-            var hash = 'grizzled.config.Configuration';
-            var anchor = window.location.hash;
-            var anchor_opt = '';
-            if (anchor.length >= 1)
-              anchor_opt = '@' + anchor.substring(1);
-            window.location.href = url + '#' + hash + anchor_opt;
-         }
-   	  </script>
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../';
+      </script>
     
         </head>
-        <body class="type">
-      <div id="definition">
-        <a href="Configuration$.html" title="See companion object"><img alt="Class/Object" src="../../lib/class_to_object_big.png" /></a>
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.config">config</a></p>
-        <h1><a href="Configuration$.html" title="See companion object">Configuration</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="Configuration$.html" title="See companion object">object Configuration</a>
-            | <a href="package.html" class="extype" name="grizzled.config">package config</a>
-          </div></span></h3><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+        <body>
+      <div id="search">
+        <span id="doc-title">
+          
+          <span id="doc-version">
+          
+          </span>
+        </span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="index.html#_root_" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html">
+              <span class="name">root</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.grizzled" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="grizzled"></a><a id="grizzled:grizzled"></a>
+      <span class="permalink">
+      <a href="index.html#grizzled" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="The Grizzled Scala Library contains a variety of miscellaneous,
+general purpose utility classes and objects." href="../index.html">
+              <span class="name">grizzled</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">The Grizzled Scala Library contains a variety of miscellaneous,
+general purpose utility classes and objects.</p><div class="fullcomment"><div class="comment cmt"><p>The Grizzled Scala Library contains a variety of miscellaneous,
+general purpose utility classes and objects.</p><p>The home page for the Grizzled Scala Library is
+<a href="http://software.clapper.org/grizzled-scala/" target="_blank">http://software.clapper.org/grizzled-scala/</a>. Please see that page for
+complete details, including installation instructions.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="grizzled.config" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="config"></a><a id="config:config"></a>
+      <span class="permalink">
+      <a href="../grizzled/index.html#config" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="Classes and objects to aid in the parsing of INI-style configuration
+files." href="index.html">
+              <span class="name">config</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">Classes and objects to aid in the parsing of INI-style configuration
+files.</p><div class="fullcomment"><div class="comment cmt"><p>Classes and objects to aid in the parsing of INI-style configuration
+files. This package is similar, in concept, to the Python
+<code>ConfigParser</code> module (though its implementation and capabilities
+differ quite a bit).
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
+    </li><li class="current-entities indented2">
+                      <a class="object" href="Configuration$.html" title="Companion object for the Configuration class
+"></a>
+                      <a class="class" href="" title="An INI-style configuration file parser."></a>
+                      <a href="" title="An INI-style configuration file parser.">
+                        Configuration
+                      </a>
+                    </li><li class="current-entities indented2">
+                      <span class="separator"></span>
+                      <a class="class" href="Section.html" title="Used as a wrapper to pass a section to callbacks."></a>
+                      <a href="Section.html" title="Used as a wrapper to pass a section to callbacks.">
+                        Section
+                      </a>
+                    </li><li class="current-entities indented2">
+                      <span class="separator"></span>
+                      <a class="trait" href="ValueConverter.html" title="To create your own value converter, implement this trait."></a>
+                      <a href="ValueConverter.html" title="To create your own value converter, implement this trait.">
+                        ValueConverter
+                      </a>
+                    </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="class type">
+      <div id="definition">
+        <a href="Configuration$.html" title="See companion object"><div class="big-circle companion cl">c</div></a>
+        <p id="owner"><a href="../index.html" class="extype" name="grizzled">grizzled</a>.<a href="index.html" class="extype" name="grizzled.config">config</a></p>
+        <h1><a href="Configuration$.html" title="See companion object">Configuration</a><span class="permalink">
+      <a href="../../grizzled/config/Configuration.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"><div>
+            Companion <a href="Configuration$.html" title="See companion object">object Configuration</a>
+          </div></span></h3>
       </div>
 
       <h4 id="signature" class="signature">
@@ -50,6 +171,7 @@
         <span class="name">Configuration</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
+
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An INI-style configuration file parser.</p><p><code>Configuration</code> implements an in-memory store for a configuration file
 whose syntax is reminiscent of classic Windows .INI files, though with
@@ -188,38 +310,49 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
 }
 
 <span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div><div class="toggleContainer block">
-          <span class="toggle">Linear Supertypes</span>
+          <span class="toggle">
+            Linear Supertypes
+          </span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
       <div id="mbrsel">
-        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
-        <div id="order">
-              <span class="filtertype">Ordering</span>
-              <ol>
-                
-                <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
-              </ol>
-            </div>
-        <div id="ancestors">
-                <span class="filtertype">Inherited<br />
-                </span>
-                <ol id="linearization">
-                  <li class="in" name="grizzled.config.Configuration"><span>Configuration</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
-                </ol>
-              </div><div id="ancestors">
-            <span class="filtertype"></span>
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
             <ol>
-              <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
             </ol>
           </div>
-        <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="grizzled.config.Configuration"><span>Configuration</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
       </div>
 
       <div id="template">
@@ -230,12 +363,16 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
 
         
 
-        <div id="values" class="values members">
+        <div class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:Any):Boolean"></a>
-      <a id="!=(Any):Boolean"></a>
-      <h4 class="signature">
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -243,16 +380,15 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@!=(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="##():Int"></a>
-      <a id="##():Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -260,16 +396,15 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@##():Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#+" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="+(section:String,option:String,value:String):grizzled.config.Configuration"></a><a id="+(String,String,String):Configuration"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#+(section:String,option:String,value:String):grizzled.config.Configuration" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#+" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="+(section:String,option:String,value:String):grizzled.config.Configuration"></a>
-      <a id="+(String,String,String):Configuration"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -277,20 +412,19 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
       <span class="symbol">
         <span title="gt4s: $plus" class="name">+</span><span class="params">(<span name="section">section: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="option">option: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@+(section:String,option:String,value:String):grizzled.config.Configuration" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Add a value to the configuration, returning a new object.</p><div class="fullcomment"><div class="comment cmt"><p>Add a value to the configuration, returning a new object. If the
 option already exists in the specified section, it is replaced in
 the new configuration. Otherwise, it's added. If the section doesn't
 exist, it's created and the option is added.</p><p>Example:</p><pre><span class="kw">val</span> cfg = Configuration(...)
 <span class="kw">val</span> newCfg = cfg + (<span class="lit">"myNewSection"</span>, <span class="lit">"optionName"</span>, <span class="lit">"value"</span>)</pre></div><dl class="paramcmts block"><dt class="param">section</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">option</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">value</dt><dd class="cmt"><p>the value</p></dd><dt>returns</dt><dd class="cmt"><p>a new <code>Configuration</code> object with the change applied.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="++(newValues:Map[String,Map[String,String]]):grizzled.config.Configuration"></a>
-      <a id="++(Map[String,Map[String,String]]):Configuration"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#++" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++(newValues:Map[String,Map[String,String]]):grizzled.config.Configuration"></a><a id="++(Map[String,Map[String,String]]):Configuration"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#++(newValues:Map[String,Map[String,String]]):grizzled.config.Configuration" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -298,21 +432,20 @@ exist, it's created and the option is added.</p><p>Example:</p><pre><span class=
       <span class="symbol">
         <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="newValues">newValues: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@++(newValues:Map[String,Map[String,String]]):grizzled.config.Configuration" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Add new sections to the configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Add new sections to the configuration. Example usage:</p><pre><span class="kw">val</span> cfg = Configuration(...)
 <span class="kw">val</span> newCfg = cfg ++ <span class="std">Map</span>(
   <span class="lit">"newSection1"</span> -&gt; <span class="std">Map</span>(<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>,
                        <span class="lit">"option2"</span> -&gt; <span class="lit">"value2"</span>),
   <span class="lit">"newSection2"</span> -&gt; <span class="std">Map</span>(<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>)
 )</pre></div><dl class="paramcmts block"><dt class="param">newValues</dt><dd class="cmt"><p>A map of (section -&gt; Map(option -&gt; value)) values</p></dd><dt>returns</dt><dd class="cmt"><p>new configuration</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="++(values:(String,(String,String))*):grizzled.config.Configuration"></a>
-      <a id="++((String,(String,String))*):Configuration"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#++" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="++(values:(String,(String,String))*):grizzled.config.Configuration"></a><a id="++((String,(String,String))*):Configuration"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#++(values:(String,(String,String))*):grizzled.config.Configuration" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -320,21 +453,20 @@ exist, it's created and the option is added.</p><p>Example:</p><pre><span class=
       <span class="symbol">
         <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="values">values: (<span class="extype" name="scala.Predef.String">String</span>, (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>))*</span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@++(values:(String,(String,String))*):grizzled.config.Configuration" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Add multiple (section -&gt; (option -&gt; value)) triplets to the configuration,
 returning the new configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Add multiple (section -&gt; (option -&gt; value)) triplets to the configuration,
 returning the new configuration. Example use:</p><pre><span class="kw">val</span> cfg = Configuration(...)
 <span class="kw">val</span> newCfg = cfg ++ ((<span class="lit">"newSection1"</span> -&gt; (<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>)),
                      (<span class="lit">"newSection2"</span> -&gt; (<span class="lit">"option1"</span> -&gt; <span class="lit">"value1"</span>)),
                      (<span class="lit">"newSection1"</span> -&gt; (<span class="lit">"option3"</span> -&gt; <span class="lit">"value3"</span>)))</pre></div><dl class="paramcmts block"><dt class="param">values</dt><dd class="cmt"><p>one or more (section -&gt; (option -&gt; value)) triplets</p></dd><dt>returns</dt><dd class="cmt"><p>new configuration</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#-" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="-(section:String,option:String):grizzled.config.Configuration"></a>
-      <a id="-(String,String):Configuration"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#-" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="-(section:String,option:String):grizzled.config.Configuration"></a><a id="-(String,String):Configuration"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#-(section:String,option:String):grizzled.config.Configuration" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -342,11 +474,7 @@ returning the new configuration. Example use:</p><pre><span class="kw">val</span
       <span class="symbol">
         <span title="gt4s: $minus" class="name">-</span><span class="params">(<span name="section">section: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="option">option: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@-(section:String,option:String):grizzled.config.Configuration" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Remove a value from the configuration, returning a new object.</p><div class="fullcomment"><div class="comment cmt"><p>Remove a value from the configuration, returning a new object. If the
 section or option don't exist, the original configuration is returned
 (not a copy). If the section and option exist, the option is removed.
@@ -354,10 +482,13 @@ If the section is then empty, it's also removed.
 </p></div><dl class="paramcmts block"><dt class="param">section</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">option</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p>a new <code>Configuration</code> object with the change applied, or the
         original configuration if the section or option weren't
         there.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#--" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="--(values:Seq[(String,String)]):grizzled.config.Configuration"></a>
-      <a id="--(Seq[(String,String)]):Configuration"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#--" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="--(values:Seq[(String,String)]):grizzled.config.Configuration"></a><a id="--(Seq[(String,String)]):Configuration"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#--(values:Seq[(String,String)]):grizzled.config.Configuration" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -365,21 +496,20 @@ If the section is then empty, it's also removed.
       <span class="symbol">
         <span title="gt4s: $minus$minus" class="name">--</span><span class="params">(<span name="values">values: <span class="extype" name="scala.Seq">Seq</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>)</span><span class="result">: <a href="" class="extype" name="grizzled.config.Configuration">Configuration</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@--(values:Seq[(String,String)]):grizzled.config.Configuration" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Remove multiple (section -&gt; option) pairs from the configuration,
 returning the new configuration.</p><div class="fullcomment"><div class="comment cmt"><p>Remove multiple (section -&gt; option) pairs from the configuration,
 returning the new configuration. Example use:</p><pre><span class="kw">val</span> cfg = Configuration(...)
 <span class="kw">val</span> newCfg = cfg -- ((<span class="lit">"newSection1"</span> -&gt; <span class="lit">"option1"</span>),
                      (<span class="lit">"newSection2"</span> -&gt; <span class="lit">"option1"</span>),
                      (<span class="lit">"newSection1"</span> -&gt; <span class="lit">"option3"</span>))</pre></div><dl class="paramcmts block"><dt class="param">values</dt><dd class="cmt"><p>sequence of (section, option) pairs</p></dd><dt>returns</dt><dd class="cmt"><p>new configuration</p></dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:Any):Boolean"></a>
-      <a id="==(Any):Boolean"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -387,16 +517,15 @@ returning the new configuration. Example use:</p><pre><span class="kw">val</span
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@==(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#asEither" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asEither[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Either[String,Option[T]]"></a><a id="asEither[T](String,String)(ValueConverter[T]):Either[String,Option[T]]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#asEither[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Either[String,Option[T]]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#asEither" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="asEither[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Either[String,Option[T]]"></a>
-      <a id="asEither[T](String,String)(ValueConverter[T]):Either[String,Option[T]]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -404,11 +533,7 @@ returning the new configuration. Example use:</p><pre><span class="kw">val</span
       <span class="symbol">
         <span class="name">asEither</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="converter">converter: <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="grizzled.config.Configuration.asEither.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="grizzled.config.Configuration.asEither.T">T</span>]]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@asEither[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Either[String,Option[T]]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Get a value as an instance of specified type.</p><div class="fullcomment"><div class="comment cmt"><p>Get a value as an instance of specified type. This method retrieves the
 value of an option from a section and, using the specified (or implicit)
 converter, attempts to convert the option's to the specified type. If you
@@ -421,10 +546,13 @@ of nonexistent values will result in an error (i.e., a <code>Left</code> result)
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the desired type of the result</p></dd><dt class="param">sectionName</dt><dd class="cmt"><p>the section from which to retrieve the value</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the name of the option whose value is to be returned</p></dd><dt class="param">converter</dt><dd class="cmt"><p>a <code>ValueConverter</code> object that will handle the
                     actual conversion.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on conversion error. <code>Right(None)</code> if not found.
         <code>Right(Some(value))</code> if found and converted.</p></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
-      <a id="asInstanceOf[T0]:T0"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -432,16 +560,15 @@ of nonexistent values will result in an error (i.e., a <code>Left</code> result)
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@asInstanceOf[T0]:T0" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#asOpt" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asOpt[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Option[T]"></a><a id="asOpt[T](String,String)(ValueConverter[T]):Option[T]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#asOpt[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Option[T]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#asOpt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="asOpt[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Option[T]"></a>
-      <a id="asOpt[T](String,String)(ValueConverter[T]):Option[T]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -449,11 +576,7 @@ of nonexistent values will result in an error (i.e., a <code>Left</code> result)
       <span class="symbol">
         <span class="name">asOpt</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="converter">converter: <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="grizzled.config.Configuration.asOpt.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="grizzled.config.Configuration.asOpt.T">T</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@asOpt[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):Option[T]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Get a value as an instance of specified type.</p><div class="fullcomment"><div class="comment cmt"><p>Get a value as an instance of specified type. This method retrieves the
 value of an option from a section and, using the specified (or implicit)
 converter, attempts to convert the option's to the specified type. If you
@@ -463,10 +586,13 @@ converters for various common types into scope.
                     actual conversion.</p></dd><dt>returns</dt><dd class="cmt"><p><code>None</code> if not found or not convertible, <code>Some(value)</code> if found
         and converted. If you want to distinguish between &quot;not found&quot; and
         &quot;cannot convert&quot;, use <code>asEither()</code>.</p></dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="clone():Object"></a>
-      <a id="clone():AnyRef"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -474,11 +600,7 @@ converters for various common types into scope.
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@clone():Object" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -486,10 +608,13 @@ converters for various common types into scope.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="eq(x$1:AnyRef):Boolean"></a>
-      <a id="eq(AnyRef):Boolean"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -497,16 +622,15 @@ converters for various common types into scope.
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -514,16 +638,15 @@ converters for various common types into scope.
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@equals(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="finalize():Unit"></a>
-      <a id="finalize():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -531,11 +654,7 @@ converters for various common types into scope.
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@finalize():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -543,10 +662,13 @@ converters for various common types into scope.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.config.Configuration#forMatchingSections" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="forMatchingSections(regex:scala.util.matching.Regex)(code:grizzled.config.Section=&gt;Unit):Unit"></a>
-      <a id="forMatchingSections(Regex)((Section)⇒Unit):Unit"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#forMatchingSections" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="forMatchingSections(regex:scala.util.matching.Regex)(code:grizzled.config.Section=&gt;Unit):Unit"></a><a id="forMatchingSections(Regex)((Section)⇒Unit):Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#forMatchingSections(regex:scala.util.matching.Regex)(code:grizzled.config.Section=&gt;Unit):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -554,19 +676,18 @@ converters for various common types into scope.
       <span class="symbol">
         <span class="name">forMatchingSections</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="params">(<span name="code">code: (<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@forMatchingSections(regex:scala.util.matching.Regex)(code:grizzled.config.Section=&gt;Unit):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Invoke a code block on each section whose name matches a regular
 expression.</p><div class="fullcomment"><div class="comment cmt"><p>Invoke a code block on each section whose name matches a regular
 expression.
 </p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match</p></dd><dt class="param">code</dt><dd class="cmt"><p>the block of code to invoke with each section</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#get" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="get(sectionName:String,optionName:String):Option[String]"></a>
-      <a id="get(String,String):Option[String]"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#get" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="get(sectionName:String,optionName:String):Option[String]"></a><a id="get(String,String):Option[String]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#get(sectionName:String,optionName:String):Option[String]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -574,20 +695,19 @@ expression.
       <span class="symbol">
         <span class="name">get</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@get(sectionName:String,optionName:String):Option[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Works like <code>Map.get()</code>, returning <code>Some(string)</code> if the value
 is found, <code>None</code> if not.</p><div class="fullcomment"><div class="comment cmt"><p>Works like <code>Map.get()</code>, returning <code>Some(string)</code> if the value
 is found, <code>None</code> if not. Does not throw exceptions.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(value)</code> if the section and option exist, <code>None</code> if
         either the section or option cannot be found.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getAsList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getAsList(sectionName:String,optionName:String,separators:scala.util.matching.Regex):Option[List[String]]"></a>
-      <a id="getAsList(String,String,Regex):Option[List[String]]"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#getAsList" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getAsList(sectionName:String,optionName:String,separators:scala.util.matching.Regex):Option[List[String]]"></a><a id="getAsList(String,String,Regex):Option[List[String]]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#getAsList(sectionName:String,optionName:String,separators:scala.util.matching.Regex):Option[List[String]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -595,18 +715,17 @@ is found, <code>None</code> if not. Does not throw exceptions.
       <span class="symbol">
         <span class="name">getAsList</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="separators">separators: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="symbol">&quot;&quot;&quot;[\s,]&quot;&quot;&quot;.r</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getAsList(sectionName:String,optionName:String,separators:scala.util.matching.Regex):Option[List[String]]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Retrieve a value, splitting it into a list of strings.</p><div class="fullcomment"><div class="comment cmt"><p>Retrieve a value, splitting it into a list of strings.
 Returns <code>Some(list)</code> if the key is found, and <code>None</code> otherwise.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">separators</dt><dd class="cmt"><p>separator regex to use. Default: [\s,]</p></dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
-      <a id="getClass():Class[_]"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -614,16 +733,15 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getClass():Class[_]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#getEither" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getEither(sectionName:String,optionName:String):Either[String,Option[String]]"></a><a id="getEither(String,String):Either[String,Option[String]]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#getEither(sectionName:String,optionName:String):Either[String,Option[String]]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getEither" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getEither(sectionName:String,optionName:String):Either[String,Option[String]]"></a>
-      <a id="getEither(String,String):Either[String,Option[String]]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -631,20 +749,19 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
       <span class="symbol">
         <span class="name">getEither</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getEither(sectionName:String,optionName:String):Either[String,Option[String]]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Like <code>get()</code>, except that this method returns an <code>Either</code>, allowing
 errors to be captured and processed.</p><div class="fullcomment"><div class="comment cmt"><p>Like <code>get()</code>, except that this method returns an <code>Either</code>, allowing
 errors to be captured and processed.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error. <code>Right(None)</code> if not found.
         <code>Right(Some(value))</code> if found and processed.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getOrElse(sectionName:String,optionName:String,default:String):String"></a>
-      <a id="getOrElse(String,String,String):String"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#getOrElse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getOrElse(sectionName:String,optionName:String,default:String):String"></a><a id="getOrElse(String,String,String):String"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#getOrElse(sectionName:String,optionName:String,default:String):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -652,20 +769,19 @@ errors to be captured and processed.
       <span class="symbol">
         <span class="name">getOrElse</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="default">default: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getOrElse(sectionName:String,optionName:String,default:String):String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Works like <code>Map.getOrElse()</code>, returning an option value or a
 default, if the option has no value.</p><div class="fullcomment"><div class="comment cmt"><p>Works like <code>Map.getOrElse()</code>, returning an option value or a
 default, if the option has no value. Does not throw exceptions.
 Calling this function is the same as:</p><pre>get(sectionName, optionName).getOrElse(default)</pre></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt class="param">default</dt><dd class="cmt"><p>the default value</p></dd><dt>returns</dt><dd class="cmt"><p>The option's value if the section and option exist, the
         default if either the section or option cannot be found.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#getSection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getSection(name:String):Option[grizzled.config.Section]"></a>
-      <a id="getSection(String):Option[Section]"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#getSection" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getSection(name:String):Option[grizzled.config.Section]"></a><a id="getSection(String):Option[Section]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#getSection(name:String):Option[grizzled.config.Section]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -673,18 +789,17 @@ Calling this function is the same as:</p><pre>get(sectionName, optionName).getOr
       <span class="symbol">
         <span class="name">getSection</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@getSection(name:String):Option[grizzled.config.Section]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Get a section.</p><div class="fullcomment"><div class="comment cmt"><p>Get a section. Similar to <code>Map.get</code>, this method returns <code>Some(Section)</code>
 if the section exists, and <code>None</code> if it does not.
 </p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the section to get</p></dd><dt>returns</dt><dd class="cmt"><p><code>Some(Section)</code> or <code>None</code></p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#hasSection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hasSection(sectionName:String):Boolean"></a>
-      <a id="hasSection(String):Boolean"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#hasSection" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hasSection(sectionName:String):Boolean"></a><a id="hasSection(String):Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#hasSection(sectionName:String):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -692,18 +807,17 @@ if the section exists, and <code>None</code> if it does not.
       <span class="symbol">
         <span class="name">hasSection</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@hasSection(sectionName:String):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Determine whether the configuration contains a named section.</p><div class="fullcomment"><div class="comment cmt"><p>Determine whether the configuration contains a named section.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the new section's name</p></dd><dt>returns</dt><dd class="cmt"><p><code>true</code> if the configuration has a section with that name,
         <code>false</code> otherwise</p></dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -711,16 +825,15 @@ if the section exists, and <code>None</code> if it does not.
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@hashCode():Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -728,16 +841,15 @@ if the section exists, and <code>None</code> if it does not.
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#matchingSections" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="matchingSections(regex:scala.util.matching.Regex):Seq[grizzled.config.Section]"></a><a id="matchingSections(Regex):Seq[Section]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#matchingSections(regex:scala.util.matching.Regex):Seq[grizzled.config.Section]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#matchingSections" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="matchingSections(regex:scala.util.matching.Regex):Seq[grizzled.config.Section]"></a>
-      <a id="matchingSections(Regex):Seq[Section]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -745,19 +857,18 @@ if the section exists, and <code>None</code> if it does not.
       <span class="symbol">
         <span class="name">matchingSections</span><span class="params">(<span name="regex">regex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="Section.html" class="extype" name="grizzled.config.Section">Section</a>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@matchingSections(regex:scala.util.matching.Regex):Seq[grizzled.config.Section]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Return a sequence of sections whose name match matches a regular
 expression.</p><div class="fullcomment"><div class="comment cmt"><p>Return a sequence of sections whose name match matches a regular
 expression.
 </p></div><dl class="paramcmts block"><dt class="param">regex</dt><dd class="cmt"><p>the regular expression to match</p></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ne(x$1:AnyRef):Boolean"></a>
-      <a id="ne(AnyRef):Boolean"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -765,16 +876,15 @@ expression.
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notify():Unit"></a>
-      <a id="notify():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -782,16 +892,15 @@ expression.
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@notify():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notifyAll():Unit"></a>
-      <a id="notifyAll():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -799,16 +908,15 @@ expression.
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@notifyAll():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#optionNames" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="optionNames(sectionName:String):Iterator[String]"></a><a id="optionNames(String):Iterator[String]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#optionNames(sectionName:String):Iterator[String]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.config.Configuration#optionNames" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="optionNames(sectionName:String):Iterator[String]"></a>
-      <a id="optionNames(String):Iterator[String]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -816,18 +924,17 @@ expression.
       <span class="symbol">
         <span class="name">optionNames</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@optionNames(sectionName:String):Iterator[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Get the list of option names.</p><div class="fullcomment"><div class="comment cmt"><p>Get the list of option names.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section's name</p></dd><dt>returns</dt><dd class="cmt"><p>a list of option names in that section. The iterator will be
         empty if the section doesn't exist.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#options" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="options(sectionName:String):Map[String,String]"></a>
-      <a id="options(String):Map[String,String]"></a>
-      <h4 class="signature">
+    </li><li name="grizzled.config.Configuration#options" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="options(sectionName:String):Map[String,String]"></a><a id="options(String):Map[String,String]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#options(sectionName:String):Map[String,String]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -835,18 +942,17 @@ expression.
       <span class="symbol">
         <span class="name">options</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@options(sectionName:String):Map[String,String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Get all options in a section.</p><div class="fullcomment"><div class="comment cmt"><p>Get all options in a section.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt>returns</dt><dd class="cmt"><p>a map of all options and their values for the section. If
         the section doesn't exist, an empty map is returned.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#sectionNames" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="grizzled.config.Configuration#sectionNames" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="sectionNames:Iterator[String]"></a>
-      <a id="sectionNames:Iterator[String]"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#sectionNames:Iterator[String]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -854,17 +960,16 @@ expression.
       <span class="symbol">
         <span class="name">sectionNames</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@sectionNames:Iterator[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Get the list of section names.</p><div class="fullcomment"><div class="comment cmt"><p>Get the list of section names.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the section names, in a iterator</p></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
-      <a id="synchronized[T0](⇒T0):T0"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -872,16 +977,15 @@ expression.
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -889,16 +993,15 @@ expression.
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@toString():String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait():Unit"></a>
-      <a id="wait():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -906,11 +1009,7 @@ expression.
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@wait():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -918,10 +1017,13 @@ expression.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
-      <a id="wait(Long,Int):Unit"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -929,11 +1031,7 @@ expression.
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -941,10 +1039,13 @@ expression.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long):Unit"></a>
-      <a id="wait(Long):Unit"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/config/Configuration.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -952,11 +1053,7 @@ expression.
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration@wait(x$1:Long):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -964,7 +1061,8 @@ expression.
     </span>)</span>
               
         </dd></dl></div>
-    </li></ol>
+    </li>
+              </ol>
             </div>
 
         
@@ -993,7 +1091,9 @@ expression.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+    </body>
+          </div>
+        </div>
+      </div>
     </body>
       </html>
