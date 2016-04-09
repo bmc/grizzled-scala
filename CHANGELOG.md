@@ -1,6 +1,8 @@
 # Grizzled Scala Change Log
 
-Version 1.7.0
+Version 2.0.0
+
+**Incompatible API changes**
 
 * Removed deprecated `grizzled.readline` package. Use
   [JLine2](https://jline.github.io/jline2), instead.
