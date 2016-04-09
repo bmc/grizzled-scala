@@ -1,3 +1,10 @@
+# Grizzled Scala Change Log
+
+Version 1.7.0
+
+* Removed deprecated `grizzled.readline` package. Use
+  [JLine2](https://jline.github.io/jline2), instead.
+
 Version 1.6.1
 
 * Added an explicit conversion from `grizzled.net.IPAddress` to
