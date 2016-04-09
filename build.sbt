@@ -46,7 +46,7 @@ libraryDependencies ++= Seq(
 // ---------------------------------------------------------------------------
 // Other dependendencies
 
-libraryDependencies += "jline" % "jline" % "2.6"
+libraryDependencies += "jline" % "jline" % "2.12.1"
 
 // ---------------------------------------------------------------------------
 // Publishing criteria
