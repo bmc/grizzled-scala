@@ -265,15 +265,3 @@ object Implicits {
 
   implicit def grizzledFileToJavaIoFile(gf: GrizzledFile): File = gf.file
 }
-
-object GrizzledFile {
-  import scala.language.implicitConversions
-  import Implicits._
-
-  @deprecated("Please import grizzled.file.Implicits._", "1.5.1")
-  implicit def javaIoFileToGrizzledFile(f: File): GrizzledFile =
-    new GrizzledFile(f)
-
-  @deprecated("Please import grizzled.file.Implicits._", "1.5.1")
-  implicit def grizzledFileToJavaIoFile(gf: GrizzledFile): File = gf.file
-}

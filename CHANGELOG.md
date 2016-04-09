@@ -4,6 +4,26 @@ Version 1.7.0
 
 * Removed deprecated `grizzled.readline` package. Use
   [JLine2](https://jline.github.io/jline2), instead.
+* Removed `grizzled.cmd`. It was a nice idea (based on the concepts in the
+  Python [cmd](https://docs.python.org/2/library/cmd.html) module), but
+  it's not being used, really.
+* Deprecated `grizzled.sys.systemProperties`. Use [scala.sys.SystemProperties][]
+  or [scala.util.Properties][], instead.
+* Removed deprecated versions of `withCloseable`. Use
+  `grizzled.util.withResource`, instead.
+* Remove the following deprecated objects. The corresponding implicit classes
+  remain, but they're enabled by importing from a corresponding `Implicits`
+  object (for consistency).
+    * `grizzled.collection.GrizzledIterable`
+    * `grizzled.collection.GrizzledLinearSeq`
+    * `grizzled.collection.CollectionIterator`
+    * `grizzled.file.GrizzledFile`
+    * `grizzled.io.GrizzledSource`
+    * `grizzled.string.GrizzledChar`
+    * `grizzled.string.GrizzledString`
+
+[scala.sys.SystemProperties]: http://www.scala-lang.org/api/current/#scala.sys.SystemProperties
+[scala.util.Properties]: http://www.scala-lang.org/api/current/#scala.util.Properties$
 
 Version 1.6.1
 

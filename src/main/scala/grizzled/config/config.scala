@@ -46,7 +46,6 @@ package grizzled.config
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
-import grizzled.string.GrizzledString._
 import grizzled.either.Implicits._
 
 import scala.annotation.tailrec

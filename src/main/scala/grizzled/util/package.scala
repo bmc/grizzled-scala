@@ -44,46 +44,6 @@ import scala.language.reflectiveCalls
 /** Miscellaneous utility functions and methods not otherwise categorized.
   */
 package object util {
-
-  /** Used with any object that contains a `close()` method that
-    * returns nothing, `withCloseable()` executes a block of code
-    * with the closeable object, ensuring that the object is closed no
-    * matter what. It allows you to replace code like this:
-    *
-    * {{{
-    * val closeableObject = ...
-    * try {
-    *   doSomethingWith(closeableObject)
-    * }
-    * finally {
-    *   closeableObject.close
-    * }
-    * }}}
-    *
-    * with:
-    *
-    * {{{
-    * withCloseable(closeableObject) { closeable =>
-    *   doSomethingWith(closeable)
-    * }
-    * }}}
-    *
-    * @param closeable  the closeable object
-    * @param code       the block of code, which will take the closeable object
-    *                   and return some arbitrary type `R`.
-    * @return whatever the code block returns,if anything.
-    */
-  @deprecated("Use grizzled.util.withResource", "1.5.1")
-  def withCloseable[T <: {def close(): Unit}, R](closeable: T)(code: T => R) = {
-    try {
-      code(closeable)
-    }
-
-    finally {
-      closeable.close()
-    }
-  }
-
   /** `withResource()` needs an implicit evidence parameter of this type
     * to know how to release what's passed to it.
     *

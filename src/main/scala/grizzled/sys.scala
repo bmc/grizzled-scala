@@ -90,6 +90,8 @@ object sys {
     * will produce a (name, value) tuple.
     *
     * @return the system properties as an iterable
+    *
+    * @deprecated("Use scala.util.Properties or scala.sys.SystemProperties", "1.7.0)
     */
   def systemProperties: Iterable[(String, String)] = {
     // System.properties aren't for-loopable by themselves.

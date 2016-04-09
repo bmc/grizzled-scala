@@ -95,18 +95,3 @@ object Implicits {
     }
   }
 }
-
-/** Deprecated companion object for `GrizzledSource`.
-  */
-object GrizzledSource {
-
-  import grizzled.io.Implicits.GrizzledSource
-
-  @deprecated("Please import grizzled.io.GrizzledSource.Implicits._", "1.5.1")
-  implicit def sourceToGrizzledSource(s: Source): GrizzledSource =
-    new GrizzledSource(s)
-
-  @deprecated("Please import grizzled.io.GrizzledSource.Implicits._", "1.5.1")
-  implicit def grizzledSourceToSource(gs: GrizzledSource): Source = gs.source
-
-}
