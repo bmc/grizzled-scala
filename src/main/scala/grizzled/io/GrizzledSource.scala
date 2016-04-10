@@ -86,10 +86,7 @@ object Implicits {
       * @return `None` if there is no nonblank line, `Some(line)` if there is.
       */
     def firstNonblankLine: Option[String] = {
-      source.getLines().dropWhile(_.trim.length == 0).take(1).toList match {
-        case Nil          => None
-        case line :: tail => Some(line)
-      }
+      source.getLines().dropWhile(_.trim.length == 0).take(1).toSeq.headOption
     }
   }
 }
