@@ -46,13 +46,13 @@ import java.lang.Math.sqrt
  */
 class StatsSpec extends FlatSpec with Matchers {
   private def dList[T](l: T*)(implicit x: Numeric[T]): List[Double] =
-    l.map (x.toDouble(_)).toList
+    l.map (x.toDouble).toList
 
   "geometric mean" should "produce proper values" in {
     val Data = List(
       (8.15193109605923,   dList(1, 10, 30, 10, 12)),
       (5.78182338862232,   dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-      (12.04449703813164,  dList((1 to 30): _*)),
+      (12.04449703813164,  dList(1 to 30: _*)),
       (100.0,              List(100.0))
     )
 
@@ -65,7 +65,7 @@ class StatsSpec extends FlatSpec with Matchers {
     val Data = List(
       (3.797468354430379,  dList(1, 10, 30, 10, 12)),
       (3.2558139534883717, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-      (7.509410923456069,  dList((1 to 30): _*)),
+      (7.509410923456069,  dList(1 to 30: _*)),
       (100.0,              List(100.0))
     )
 
@@ -78,7 +78,7 @@ class StatsSpec extends FlatSpec with Matchers {
     val Data = List(
       (12.6,              dList(1, 10, 30, 10, 12)),
       (9.714285714285714, dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-      (15.5,              dList((1 to 30): _*)),
+      (15.5,              dList(1 to 30: _*)),
       (100.0,             dList(100, 150, 50)),
       (100.0,             List(100.0))
     )
@@ -92,7 +92,7 @@ class StatsSpec extends FlatSpec with Matchers {
     val Data = List(
       (10.0,  dList(1, 10, 30, 10, 12)),
       (10.0,  dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-      (15.5,  dList((1 to 30): _*)),
+      (15.5,  dList(1 to 30: _*)),
       (100.0, dList(100, 150, 50)),
       (2.0,   dList(1, 1, 1, 2, 10, 30, 1000)),
       (16.0,  dList(2, 2, 2, 2, 2, 30, 30, 30, 30, 30))
@@ -194,9 +194,9 @@ class StatsSpec extends FlatSpec with Matchers {
   "range" should "produce proper values" in {
     // Must be all the same type
     val Data1 = List[(Double, List[Double])](
-      (29.0,  dList((1 to 30): _*)),
+      (29.0,  dList(1 to 30: _*)),
       (100.0, dList(1, 100, 30, 28.8, 101)),
-      (999.0, dList((1 to 1000): _*))
+      (999.0, dList(1 to 1000: _*))
     )
     val Data2 = List[(Int, List[Int])](
       (29,  (1 to 30).toList),
