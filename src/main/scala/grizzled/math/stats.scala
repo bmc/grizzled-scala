@@ -51,7 +51,6 @@ package grizzled.math
   * }}}
   */
 object stats {
-  // See http://scala-programming-language.1934581.n4.nabble.com/How-to-use-scala-math-Numeric-td2013703.html
 
   /** Calculates the geometric mean of the values of the passed-in
     * numbers, namely, the n-th root of (x1 * x2 * ... * xn). Note that
@@ -78,7 +77,7 @@ object stats {
 
       case _ =>
         val recip = 1.0 / len.toDouble
-        (1.0 /: itemList) ((a, b) => a * math.pow(n.toDouble(b), recip))
+        (1.0 /: itemList)((a, b) => a * math.pow(n.toDouble(b), recip))
     }
   }
 
@@ -96,7 +95,7 @@ object stats {
 
     len match {
       case 1 => n.toDouble(itemList(0))
-      case _ => len / ((0.0 /: itemList) ((a, b) => a + (1.0 / n.toDouble(b))))
+      case _ => len / (0.0 /: itemList)((a, b) => a + (1.0 / n.toDouble(b)))
     }
   }
 
@@ -114,7 +113,7 @@ object stats {
 
     len match {
       case 1 => n.toDouble(itemList(0))
-      case _ => ((0.0 /: itemList) ((a, b) => a + n.toDouble(b))) / len
+      case _ => (0.0 /: itemList)((a, b) => a + n.toDouble(b)) / len
     }
   }
 

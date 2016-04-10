@@ -90,12 +90,12 @@ class StatsSpec extends FlatSpec with Matchers {
 
   "median" should "produce proper values" in {
     val Data = List(
-      (10.0,              dList(1, 10, 30, 10, 12)),
-      (10.0,              dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
-      (15.5,              dList((1 to 30): _*)),
-      (100.0,             dList(100, 150, 50)),
-      (2.0,               dList(1, 1, 1, 2, 10, 30, 1000)),
-      (16.0,              dList(2, 2, 2, 2, 2, 30, 30, 30, 30, 30))
+      (10.0,  dList(1, 10, 30, 10, 12)),
+      (10.0,  dList(1.0, 10.0, 30.0, 10.0, 12.0, 2.0, 3.0)),
+      (15.5,  dList((1 to 30): _*)),
+      (100.0, dList(100, 150, 50)),
+      (2.0,   dList(1, 1, 1, 2, 10, 30, 1000)),
+      (16.0,  dList(2, 2, 2, 2, 2, 30, 30, 30, 30, 30))
 
     )
 
@@ -120,11 +120,11 @@ class StatsSpec extends FlatSpec with Matchers {
 
   "sample variance" should "produce proper values" in {
     val Data = List(
-      (50.0,               dList(10, 20)),
-      (1866.5,             dList(1, 10, 3, 1, 100)),
-      (1.0,                dList(1, 2, 3, 1, 3)),
-      (100.0,              dList(10.5, 20.5, 30.5)),
-      (212937.125,         dList(1, 2, 3, 1, 3, 1000, 1000, 9))
+      (50.0,       dList(10, 20)),
+      (1866.5,     dList(1, 10, 3, 1, 100)),
+      (1.0,        dList(1, 2, 3, 1, 3)),
+      (100.0,      dList(10.5, 20.5, 30.5)),
+      (212937.125, dList(1, 2, 3, 1, 3, 1000, 1000, 9))
     )
 
     for ((expected, values) <- Data) {
@@ -194,14 +194,14 @@ class StatsSpec extends FlatSpec with Matchers {
   "range" should "produce proper values" in {
     // Must be all the same type
     val Data1 = List[(Double, List[Double])](
-      (29.0,            dList((1 to 30): _*)),
-      (100.0,           dList(1, 100, 30, 28.8, 101)),
-      (999.0,           dList((1 to 1000): _*))
+      (29.0,  dList((1 to 30): _*)),
+      (100.0, dList(1, 100, 30, 28.8, 101)),
+      (999.0, dList((1 to 1000): _*))
     )
     val Data2 = List[(Int, List[Int])](
-      (29,            (1 to 30).toList),
-      (100,           List(1, 100, 30, 28, 101)),
-      (999,           (1 to 1000).toList)
+      (29,  (1 to 30).toList),
+      (100, List(1, 100, 30, 28, 101)),
+      (999, (1 to 1000).toList)
     )
 
     for ((expected, values) <- Data1) {

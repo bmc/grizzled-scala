@@ -77,7 +77,7 @@ object Implicits {
       * @return a iterator of lines, or an empty iterator if none found
       */
     def linesBetween(start: String, finish: String): Iterator[String] =
-      source.getLines().dropWhile(_ != start).drop(1).takeWhile(_ != finish)
+      source.getLines.dropWhile(_ != start).drop(1).takeWhile(_ != finish)
 
     /** Find and return the first non-blank line (without trailing newline)
       * in the source. Uses `Source.getLines()`, which may or may not start
@@ -86,7 +86,7 @@ object Implicits {
       * @return `None` if there is no nonblank line, `Some(line)` if there is.
       */
     def firstNonblankLine: Option[String] = {
-      source.getLines().dropWhile(_.trim.length == 0).take(1).toSeq.headOption
+      source.getLines.dropWhile(_.trim.length == 0).take(1).toSeq.headOption
     }
   }
 }
