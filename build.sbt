@@ -44,11 +44,7 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 lazy val http4sVersion = "0.13.1a"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
-  // http4s is only used for testing. Using this library will NOT haul
-  // http4s or its dependencies into your application.
-  "org.http4s" %% "http4s-dsl"          % http4sVersion % "test",
-  "org.http4s" %% "http4s-blaze-server" % http4sVersion % "test"
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
 
 // ---------------------------------------------------------------------------

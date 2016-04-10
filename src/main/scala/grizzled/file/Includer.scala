@@ -192,11 +192,17 @@ extends Iterator[String] {
 
           val curURI =  sourceStack.top.uri
           val parentURI = getParent(curURI)
+          val parentPath = parentURI.getPath
+          val newPath = parentPath match {
+            case "/" => s"$parentPath$inc"
+            case _   => s"$parentPath/$inc"
+          }
+
           val newURI    = new URI(parentURI.getScheme,
                                   parentURI.getUserInfo,
                                   parentURI.getHost,
                                   parentURI.getPort,
-                                  s"${parentURI.getPath}/$inc",
+                                  newPath,
                                   parentURI.getQuery,
                                   parentURI.getFragment)
 

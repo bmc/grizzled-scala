@@ -43,12 +43,6 @@ import grizzled.sys._
   * Tests the grizzled.file functions.
   */
 class SysSpec extends FlatSpec with Matchers {
-  "systemProperties" should "retrieve Java system properties" in {
-    for ((k, v) <- systemProperties) {
-      val javaVal = System.getProperty(k)
-      javaVal shouldBe v
-    }
-  }
 
   "operating system name" should "be correct" in {
     import OperatingSystem._

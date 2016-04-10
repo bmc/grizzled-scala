@@ -1,20 +1,15 @@
 package grizzled.file
 
 import java.io.{FileWriter, PrintWriter, File}
-import java.net.URL
 
-import org.http4s.server.Server
-import org.http4s.{Response, Request}
-
+import grizzled.testutil.BrainDeadHTTP._
 import org.scalatest.{FlatSpec, Matchers}
 
 import grizzled.file.{util => FileUtil}
 import FileUtil.withTemporaryDirectory
 import grizzled.util.withResource
 
-import scala.io.Source
 import scala.util.Success
-import scalaz.concurrent.Task
 
 /** Created by bmc on 4/10/16
   *
@@ -64,9 +59,10 @@ class IncluderSpec extends FlatSpec with Matchers {
   }
 
   it should "allow a file to include from an HTTP server" in {
-    val server = serveHTTP("foo") {
-      """foo"""
-    }
+    val server = new Server(
+      HTTPServerPort,
+      Handler("foo", { req => Response(ResultCode.OK, Some("foo")) })
+    )
 
     withTemporaryDirectory("incl") { dir =>
       val input = createFile(dir, "main.txt",
@@ -82,18 +78,24 @@ class IncluderSpec extends FlatSpec with Matchers {
   }
 
   it should "read and include from an HTTP server" in {
-    import org.http4s.dsl._
+    val handlers = Vector(
+      Handler("foo.txt", { req =>
+        Response(ResultCode.OK,
+          Some(
+            """|line 1
+               |%include "bar.txt"
+               |line 3""".stripMargin
+          )
+        )
+      }),
+      Handler("bar.txt", { req =>
+        Response(ResultCode.OK,
+          Some("inside bar.txt")
+        )
+      })
+    )
 
-    val handler: PartialFunction[Request, Task[Response]] = {
-      case GET -> Root / "foo.txt" =>
-        Ok("""|line 1
-              |%include "bar.txt"
-              |line 3""".stripMargin)
-      case GET -> Root / "bar.txt" =>
-        Ok("""inside bar.txt""")
-    }
-
-    val server = serveHTTP(handler)
+    val server = new Server(HTTPServerPort, handlers)
     withHTTPServer(server) {
       val includer = Includer(s"http://localhost:$HTTPServerPort/foo.txt").map(_.toVector)
       includer shouldBe Success(Vector("line 1",
@@ -177,12 +179,11 @@ class IncluderSpec extends FlatSpec with Matchers {
   // Helpers
   // --------------------------------------------------------------------------
 
-  /** Create a file in a given directory, with the specified contents.
+    /** Create a file in a given directory, with the specified contents.
     *
     * @param dir    the directory
     * @param file   the file
     * @param lines  the lines in the file
-    *
     * @return the created file
     */
   private def createFile(dir: File, file: String, lines: Array[String]): File = {
@@ -191,63 +192,6 @@ class IncluderSpec extends FlatSpec with Matchers {
       lines.foreach(w.println)
     }
     new File(path)
-  }
-
-  /** Create an HTTP server on "localhost", listening to the default port
-    * (HTTPServerPort) that responds to the specified path with the specified
-    * string.
-    *
-    * Use with `withHTTPServer()` to ensure server shutdown.
-    *
-    * @param path   the path the server should response to. This is a relative
-    *               path. e.g., Specify "foo" to have the server respond to
-    *               "/foo".
-    * @param result the string the server should send back when the path is
-    *               requested
-    *
-    * @return the `Server` object, already running.
-    */
-  private def serveHTTP(path: String)(result: => String): Server = {
-    import org.http4s.dsl._
-    serveHTTP {
-      case GET -> Root / path =>
-        Ok(result)
-    }
-  }
-
-  /** Create an HTTP server on "localhost", listening to the default port
-    * (HTTPServerPort) that uses the specified http4s partial function to
-    * define how to respond.
-    *
-    * Use with `withHTTPServer()` to ensure server shutdown.
-    *
-    * @param pf  the partial function representing the body of the server
-    *
-    * @return the `Server` object, already running.
-    */
-  private def serveHTTP(pf: PartialFunction[Request, Task[Response]]): Server = {
-    import org.http4s._
-    import org.http4s.server.blaze._
-
-    val service = HttpService(pf)
-    val builder = BlazeBuilder.bindHttp(HTTPServerPort, "localhost")
-                              .mountService(service)
-    builder.run
-  }
-
-  /** Given an already running HTTP server, execute the specified code, and
-    * shut the server down.
-    *
-    * @param server The already-running server. (See `serveHTTP`.)
-    * @param code   The code to run before shutting the server down.
-    */
-  private def withHTTPServer(server: Server)(code: => Unit): Unit = {
-    try {
-      code
-    }
-    finally {
-      server.shutdownNow()
-    }
   }
 
 }
