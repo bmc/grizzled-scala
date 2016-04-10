@@ -7,13 +7,15 @@ organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.11.7"
-crossScalaVersions := Seq("2.10.5", "2.11.7", "2.12.0-M4")
+scalaVersion := "2.11.8"
+crossScalaVersions := Seq("2.10.5", "2.11.8", "2.12.0-M4")
 
 // Incremental compilation performance improvement. See
 // http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
 
 incOptions := incOptions.value.withNameHashing(true)
+
+ivyScala := ivyScala.value.map { _.copy(overrideScalaVersion = true) }
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
@@ -39,8 +41,14 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 // ---------------------------------------------------------------------------
 // ScalaTest dependendency
 
+lazy val http4sVersion = "0.13.1a"
+
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
+  // http4s is only used for testing. Using this library will NOT haul
+  // http4s or its dependencies into your application.
+  "org.http4s" %% "http4s-dsl"          % http4sVersion % "test",
+  "org.http4s" %% "http4s-blaze-server" % http4sVersion % "test"
 )
 
 // ---------------------------------------------------------------------------
@@ -54,7 +62,7 @@ libraryDependencies ++= Seq(
 publishMavenStyle := true
 publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
-pomExtra := (
+pomExtra :=
   <scm>
     <url>git@github.com:bmc/grizzled-scala.git/</url>
     <connection>scm:git:git@github.com:bmc/grizzled-scala.git</connection>
@@ -66,4 +74,4 @@ pomExtra := (
       <url>http://www.clapper.org/bmc</url>
     </developer>
   </developers>
-)
+

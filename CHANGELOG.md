@@ -4,6 +4,18 @@ Version 2.0.0
 
 **Incompatible API changes**
 
+* Fixes to `grizzled.file.Includer`:
+    * Fixed some problems with URI parsing.
+    * Fixed uses of `scala.io.Source` and `java.net.URI`, to correct problems
+      with detecting the parent location for a relative include.
+    * Added comments indicating that doing an `include` from a
+      `scala.io.Source` can make it difficult to infer the location of a
+      relative include, depending on the underlying resource the `Source`
+      is reading.
+    * Changed `Includer` companion object constructors to return
+      `scala.util.Try`, instead of throwing an exception.
+    * Made class constructor private. Use the `Includer.apply()` functions.
+    * Added unit tester.
 * Removed deprecated `grizzled.readline` package. Use
   [JLine2](https://jline.github.io/jline2), instead.
 * Removed `grizzled.cmd`. It was a nice idea (based on the concepts in the

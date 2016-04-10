@@ -349,7 +349,7 @@ trait ValueConverter[T] {
   *                            names. The section name portion must be in
   *                            a group. Default: ([a-zA-Z0-9_]+)
   * @param commentPattern      Regular expression that matches comment lines.
-  *                            Default: ^\s*(#.*)$
+  *                            Default: "^\s*(#.*)$"
   * @param normalizeOptionName function to call to convert an option name to
   *                            a key
   * @param notFoundFunction    function to call if an option is not found,
@@ -930,7 +930,7 @@ object Configuration {
     * @param sectionNamePattern  Regular expression that matches legal section
     *                            names. Defaults as described above.
     * @param commentPattern      Regular expression that matches comment lines.
-    *                            Default: ^\s*(#.*)$
+    *                            Default: "^\s*(#.*)$"
     * @param normalizeOptionName Partial function used to transform option names
     *                            into keys. The default function transforms
     *                            the names to lower case.
@@ -1242,7 +1242,7 @@ object Configuration {
       }
     }
 
-    processLines(new BackslashContinuedLineIterator(Includer(source)), None,
+    processLines(new BackslashContinuedLineIterator(Includer(source).get), None,
                  Map.empty[String, Map[String, Value]])
   }
 
