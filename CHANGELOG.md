@@ -14,6 +14,7 @@ Version 2.0.0
       is reading.
     * Changed `Includer` companion object constructors to return
       `scala.util.Try`, instead of throwing an exception.
+    * Added constructors that take `java.io.File`.
     * Made class constructor private. Use the `Includer.apply()` functions.
     * Added unit tester.
 * Removed deprecated `grizzled.readline` package. Use
