@@ -23,6 +23,9 @@ Version 2.0.0
     * `grizzled.io.GrizzledSource`
     * `grizzled.string.GrizzledChar`
     * `grizzled.string.GrizzledString`
+* Fixed implementation of `grizzled.math.stats.mode` to be purely immutable
+  (i.e., not to use a mutable `Map` under the covers) and to use the
+  `Collection` API's `max` method, instead of rolling its own.
 
 [scala.sys.SystemProperties]: http://www.scala-lang.org/api/current/#scala.sys.SystemProperties
 [scala.util.Properties]: http://www.scala-lang.org/api/current/#scala.util.Properties$
