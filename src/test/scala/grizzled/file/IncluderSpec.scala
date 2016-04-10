@@ -99,8 +99,8 @@ class IncluderSpec extends FlatSpec with Matchers {
     withHTTPServer(server) {
       val includer = Includer(s"http://localhost:$HTTPServerPort/foo.txt").map(_.toVector)
       includer shouldBe Success(Vector("line 1",
-                                      "inside bar.txt",
-                                      "line 3"))
+                                       "inside bar.txt",
+                                       "line 3"))
     }
   }
 
