@@ -94,7 +94,7 @@ object stats {
     require (len > 0)
 
     len match {
-      case 1 => n.toDouble(itemList(0))
+      case 1 => n.toDouble(itemList.head)
       case _ => len / (0.0 /: itemList)((a, b) => a + (1.0 / n.toDouble(b)))
     }
   }
@@ -112,7 +112,7 @@ object stats {
     require (len > 0)
 
     len match {
-      case 1 => n.toDouble(itemList(0))
+      case 1 => n.toDouble(itemList.head)
       case _ => (0.0 /: itemList)((a, b) => a + n.toDouble(b)) / len
     }
   }
@@ -137,7 +137,7 @@ object stats {
     require (len > 0)
 
     if (len == 1)
-      n.toDouble(itemList(0))
+      n.toDouble(itemList.head)
 
     else {
       val sorted = itemList sortWith (n.compare(_, _) < 0)
@@ -167,15 +167,13 @@ object stats {
       itemList take 1
 
     else {
-      import scala.collection.mutable.{Map => MutableMap}
-
-      val m = MutableMap.empty[T, Int]
-
-      // Count the occurrences of each value.
-      itemList.foreach(t => m += t -> (m.getOrElse(t, 0) + 1))
+       // Count the occurrences of each value. This is a reduceByKey operation.
+      val m = itemList.map { n => n -> 1 }
+                      .groupBy(_._1)
+                      .map { case (n, counts) => n -> counts.map(_._2).sum }
 
       // Find the maximum count.
-      val max = (0 /: m.values)(scala.math.max)
+      val max = m.values.max
 
       // Extract the keys with values that match
       m.filter { case (k, v) => v == max }.keys.toList
@@ -236,8 +234,7 @@ object stats {
     *
     * @return the standard deviation
     */
-  def populationStandardDeviation[T](items: T*)
-  (implicit n: Numeric[T]): Double =
+  def populationStandardDeviation[T](items: T*)(implicit n: Numeric[T]): Double =
     java.lang.Math.sqrt(populationVariance(items.toList: _*))
 
   /** Shorter synonym for `populationStandardDeviation`.
