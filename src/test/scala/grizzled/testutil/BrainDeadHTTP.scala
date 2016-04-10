@@ -116,7 +116,7 @@ object BrainDeadHTTP {
 
     private def acceptAndHandle(socket: ServerSocket): Unit = {
       val connection = socket.accept()
-      handle(connection).andThen { case t: Try[Unit] => connection.close }
+      handle(connection).andThen { case t: Try[Unit] => connection.close() }
     }
 
     private val GetRequest = """^GET\s+(\S+)\s+HTTP/1.\d\s*$""".r

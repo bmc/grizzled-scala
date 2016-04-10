@@ -4,6 +4,13 @@ Version 2.0.0
 
 **Incompatible API changes**
 
+* Added `grizzled.net.URI` and `grizzled.net.URL` front-end case class
+  wrappers for the Java equivalents.
+* Renamed `grizzled.net.url` to `grizzled.net.URLUtil`. Modified the
+  various `download()` methods to return `Future`, and added versions that
+  take `grizzled.net.URL`.
+* Modified the synchronous `grizzled.net.URLUtil.withDownloadedFile()` to take
+  a `timeout` parameter. Added a version that takes `grizzled.net.URL`.
 * Fixes to `grizzled.file.Includer`:
     * Fixed some problems with URI parsing.
     * Fixed uses of `scala.io.Source` and `java.net.URI`, to correct problems
