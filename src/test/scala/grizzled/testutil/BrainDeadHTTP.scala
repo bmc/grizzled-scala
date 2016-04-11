@@ -46,7 +46,7 @@ object BrainDeadHTTP {
     * @param handle  the handler. Takes a Request and returns a Response.
     */
   case class Handler(path: String, handle: Request => Response) {
-    require(path.headOption.isDefined)
+    require(path.nonEmpty)
     require(path.head != '/')
   }
 
@@ -87,6 +87,19 @@ object BrainDeadHTTP {
       * @param handler  the handler
       */
     def this(bindPort: Int, handler: Handler) = this(bindPort, Vector(handler))
+
+    /** Create a server that listens on the default port.
+      *
+      * @param handlers the handlers
+      */
+    def this(handlers: Seq[Handler]) = this(Server.DefaultBindPort, handlers)
+
+    /** Create a server that listens on the default port and has only one
+      * handler.
+      *
+      * @param handler the handler
+      */
+    def this(handler: Handler) = this(Server.DefaultBindPort, handler)
 
     import java.net._
 
@@ -182,4 +195,11 @@ object BrainDeadHTTP {
       w.flush()
     }
   }
+
+  /** The companion object for the server.
+    */
+  object Server {
+    val DefaultBindPort = 10000
+  }
 }
+
