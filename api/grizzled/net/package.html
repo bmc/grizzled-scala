@@ -61,7 +61,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -74,7 +74,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -235,6 +235,44 @@ Then, decode the strings and print them to standard output.</p><p>Receiving byte
 since the <code>receive()</code> method is filling <i>our</i> buffer and
 returning a count of the number of bytes it put into the buffer:</p><pre><span class="kw">while</span> (<span class="kw">true</span>)
     process(buf, socket.receive(buf))</pre></div></div>
+    </li><li name="grizzled.net.URI" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="URIextendsProductwithSerializable"></a>
+      <a id="URI:URI"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="URI.html"><span class="name">URI</span></a><span class="params">(<span name="scheme">scheme: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="userInfo">userInfo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="host">host: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="port">port: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="path">path: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="query">query: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="fragment">fragment: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@URIextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Convenient Scala case-class wrapper for a <code>java.net.URI</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Convenient Scala case-class wrapper for a <code>java.net.URI</code>.
+</p></div><dl class="paramcmts block"><dt class="param">scheme</dt><dd class="cmt"><p>the scheme, if defined</p></dd><dt class="param">userInfo</dt><dd class="cmt"><p>the user info, if defined</p></dd><dt class="param">host</dt><dd class="cmt"><p>the host, if defined</p></dd><dt class="param">port</dt><dd class="cmt"><p>the port, if defined</p></dd><dt class="param">path</dt><dd class="cmt"><p>the path, if defined</p></dd><dt class="param">query</dt><dd class="cmt"><p>the query string, if defined</p></dd><dt class="param">fragment</dt><dd class="cmt"><p>the fragment, if defined</p></dd></dl></div>
+    </li><li name="grizzled.net.URL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="URLextendsProductwithSerializable"></a>
+      <a id="URL:URL"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="URL.html"><span class="name">URL</span></a><span class="params">(<span name="protocol">protocol: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="host">host: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="port">port: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>, <span name="path">path: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="query">query: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="userInfo">userInfo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="fragment">fragment: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@URLextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Convenient Scala case-class wrapper for a <code>java.net.URL</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Convenient Scala case-class wrapper for a <code>java.net.URL</code>. This class
+doesn't include all the capabilities. For example, it lacks the equivalent
+of <code>getContent()</code>, as that's better handled through other means.
+</p></div><dl class="paramcmts block"><dt class="param">protocol</dt><dd class="cmt"><p>the protocol, if defined</p></dd><dt class="param">host</dt><dd class="cmt"><p>the host, if defined</p></dd><dt class="param">port</dt><dd class="cmt"><p>the port, if defined</p></dd><dt class="param">path</dt><dd class="cmt"><p>the path</p></dd><dt class="param">query</dt><dd class="cmt"><p>the query string, if any</p></dd><dt class="param">userInfo</dt><dd class="cmt"><p>the URL's user info, if any</p></dd><dt class="param">fragment</dt><dd class="cmt"><p>the fragment, if any</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -299,19 +337,55 @@ methods to simplify creation of <code>UDPDatagramSocket</code> objects, as
 well as some useful utility methods. See the documentation for the
 <code>UDPDatagramSocket</code> trait for a full treatment on this API.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>UDPDatagramSocket</p></span></dd></dl></div>
-    </li><li name="grizzled.net.url" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="url"></a>
-      <a id="url:url"></a>
+    </li><li name="grizzled.net.URI" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="URI"></a>
+      <a id="URI:URI"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="url$.html"><span class="name">url</span></a>
+        <a href="URI$.html"><span class="name">URI</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.net.package@url" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.net.package@URI" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object, adding some functions that aren't available in the
+generated one.</p>
+    </li><li name="grizzled.net.URL" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="URL"></a>
+      <a id="URL:URL"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="URL$.html"><span class="name">URL</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@URL" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object, adding some functions that aren't available in the
+generated one.</p>
+    </li><li name="grizzled.net.URLUtil" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="URLUtil"></a>
+      <a id="URLUtil:URLUtil"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="URLUtil$.html"><span class="name">URLUtil</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.net.package@URLUtil" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

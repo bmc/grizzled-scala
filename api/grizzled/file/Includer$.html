@@ -66,7 +66,7 @@ utility methods, such as the <code>preprocess()</code> method.
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -79,7 +79,7 @@ utility methods, such as the <code>preprocess()</code> method.
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -184,129 +184,267 @@ utility methods, such as the <code>preprocess()</code> method.
     </span>
       <p class="shortcomment cmt">The default maximum nesting level for includes.</p>
     </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(pathOrURI:String):grizzled.file.Includer"></a>
-      <a id="apply(String):Includer"></a>
+      <a id="apply(pathOrURI:String,includeRegex:scala.util.matching.Regex,maxNesting:Int):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(String,Regex,Int):Try[Includer]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a></span>
+        <span class="name">apply</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@apply(pathOrURI:String):grizzled.file.Includer" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.file.Includer$@apply(pathOrURI:String,includeRegex:scala.util.matching.Regex,maxNesting:Int):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Allocate an includer, using the default values for the
-<code>maxNesting</code> and <code>includeRegex</code> parameters.</p><div class="fullcomment"><div class="comment cmt"><p>Allocate an includer, using the default values for the
+      <p class="shortcomment cmt">Create an includer.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer.
+</p></div><dl class="paramcmts block"><dt class="param">pathOrURI</dt><dd class="cmt"><p>the path or URI string to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
+                    directive. Must contain a group that surrounds the
+                    file or URL part.</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(pathOrURI:String):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(String):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(pathOrURI:String):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer from a path, using the default values for the
+<code>maxNesting</code> and <code>includeRegex</code> parameters.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a path, using the default values for the
 <code>maxNesting</code> and <code>includeRegex</code> parameters.
 </p></div><dl class="paramcmts block"><dt class="param">pathOrURI</dt><dd class="cmt"><p>the path or URI string to read</p></dd></dl></div>
     </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(pathOrURI:String,includeRegex:scala.util.matching.Regex):grizzled.file.Includer"></a>
-      <a id="apply(String,Regex):Includer"></a>
+      <a id="apply(path:String,maxNesting:Int):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(String,Int):Try[Includer]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a></span>
+        <span class="name">apply</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@apply(pathOrURI:String,includeRegex:scala.util.matching.Regex):grizzled.file.Includer" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.file.Includer$@apply(path:String,maxNesting:Int):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Allocate an includer, using the default value for the
-<code>maxNesting</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Allocate an includer, using the default value for the
+      <p class="shortcomment cmt">Create an includer from a path, using the default value for the
+<code>includeRegex</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a path, using the default value for the
+<code>includeRegex</code> parameter.
+</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path or URI string to read</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(pathOrURI:String,includeRegex:scala.util.matching.Regex):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(String,Regex):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(pathOrURI:String,includeRegex:scala.util.matching.Regex):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer, using the default value for the
+<code>maxNesting</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer, using the default value for the
 <code>maxNesting</code> parameter.
 </p></div><dl class="paramcmts block"><dt class="param">pathOrURI</dt><dd class="cmt"><p>the path or URI string to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
                     directive. Must contain a group that surrounds the
-                    file or URL part.</p></dd></dl></div>
+                    file or URL part.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
     </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(pathOrURI:String,includeRegex:scala.util.matching.Regex,maxNesting:Int):grizzled.file.Includer"></a>
-      <a id="apply(String,Regex,Int):Includer"></a>
+      <a id="apply(source:scala.io.Source):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(Source):Try[Includer]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a></span>
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@apply(pathOrURI:String,includeRegex:scala.util.matching.Regex,maxNesting:Int):grizzled.file.Includer" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Allocate an includer.</p><div class="fullcomment"><div class="comment cmt"><p>Allocate an includer.
-</p></div><dl class="paramcmts block"><dt class="param">pathOrURI</dt><dd class="cmt"><p>the path or URI string to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
-                    directive. Must contain a group that surrounds the
-                    file or URL part.</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd></dl></div>
+      <p class="shortcomment cmt">Create an includer from a <code>scala.io.Source</code>, using the default values
+for the <code>maxNesting</code> and <code>includeRegex</code> parameters.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>scala.io.Source</code>, using the default values
+for the <code>maxNesting</code> and <code>includeRegex</code> parameters.</p><p><b>WARNING</b>: When you read from a <code>Source</code>, <code>Includer</code> has no
+reliable way to determine the base URI or file, so <i>all</i> include
+references must be absolute. Relative includes <i>may</i> be supported,
+depending on what the <code>Source</code> is (file, URL, etc.), but you shouldn't
+count on it.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to read</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
     </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(source:scala.io.Source):grizzled.file.Includer"></a>
-      <a id="apply(Source):Includer"></a>
+      <a id="apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(Source,Regex):Try[Includer]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a></span>
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source):grizzled.file.Includer" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Allocate an includer, using the default values for the
-<code>maxNesting</code> and <code>includeRegex</code> parameters.</p><div class="fullcomment"><div class="comment cmt"><p>Allocate an includer, using the default values for the
-<code>maxNesting</code> and <code>includeRegex</code> parameters.
-</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to read</p></dd></dl></div>
-    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex):grizzled.file.Includer"></a>
-      <a id="apply(Source,Regex):Includer"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex):grizzled.file.Includer" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Allocate an includer, using the default value for the
-<code>maxNesting</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Allocate an includer, using the default value for the
-<code>maxNesting</code> parameter.
+      <p class="shortcomment cmt">Create an includer from a <code>scala.io.Source</code>, using the default value
+for the <code>maxNesting</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>scala.io.Source</code>, using the default value
+for the <code>maxNesting</code> parameter.</p><p><b>WARNING</b>: When you read from a <code>Source</code>, <code>Includer</code> has no
+reliable way to determine the base URI or file, so <i>all</i> include
+references must be absolute. Relative includes <i>may</i> be supported,
+depending on what the <code>Source</code> is (file, URL, etc.), but you shouldn't
+count on it.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
                     directive. Must contain a group that surrounds the
-                    file or URL part.</p></dd></dl></div>
+                    file or URL part.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
     </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex,maxNesting:Int):grizzled.file.Includer"></a>
-      <a id="apply(Source,Regex,Int):Includer"></a>
+      <a id="apply(source:scala.io.Source,maxNesting:Int):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(Source,Int):Try[Includer]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a></span>
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex,maxNesting:Int):grizzled.file.Includer" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source,maxNesting:Int):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Allocate an includer.</p><div class="fullcomment"><div class="comment cmt"><p>Allocate an includer.
+      <p class="shortcomment cmt">Create an includer from a <code>scala.io.Source</code>, using the default value
+for the <code>includeRegex</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>scala.io.Source</code>, using the default value
+for the <code>includeRegex</code> parameter.</p><p><b>WARNING</b>: When you read from a <code>Source</code>, <code>Includer</code> has no
+reliable way to determine the base URI or file, so <i>all</i> include
+references must be absolute. Relative includes <i>may</i> be supported,
+depending on what the <code>Source</code> is (file, URL, etc.), but you shouldn't
+count on it.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to read</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex,maxNesting:Int):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(Source,Regex,Int):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(source:scala.io.Source,includeRegex:scala.util.matching.Regex,maxNesting:Int):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer from a <code>scala.io.Source</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>scala.io.Source</code>.</p><p><b>WARNING</b>: When you read from a <code>Source</code>, <code>Includer</code> has no
+reliable way to determine the base URI or file, so <i>all</i> include
+references must be absolute. Relative includes <i>may</i> be supported,
+depending on what the <code>Source</code> is (file, URL, etc.), but you shouldn't
+count on it.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
                     directive. Must contain a group that surrounds the
-                    file or URL part.</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd></dl></div>
+                    file or URL part.</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(file:java.io.File,includeRegex:scala.util.matching.Regex,maxNesting:Int):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(File,Regex,Int):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(file:java.io.File,includeRegex:scala.util.matching.Regex,maxNesting:Int):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer from a <code>java.io.File</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>java.io.File</code>.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the <code>File</code> from which to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
+                    directive. Must contain a group that surrounds the
+                    file or URL part.</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(file:java.io.File,maxNesting:Int):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(File,Int):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="maxNesting">maxNesting: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(file:java.io.File,maxNesting:Int):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer from a <code>java.io.File</code>, using the default value
+for the <code>includeRegex</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>java.io.File</code>, using the default value
+for the <code>includeRegex</code> parameter.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the <code>File</code> to read</p></dd><dt class="param">maxNesting</dt><dd class="cmt"><p>the maximum nesting level</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(file:java.io.File,includeRegex:scala.util.matching.Regex):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(File,Regex):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>, <span name="includeRegex">includeRegex: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(file:java.io.File,includeRegex:scala.util.matching.Regex):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer from a <code>java.io.File</code>, using the default value for
+the <code>maxNesting</code> parameter.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>java.io.File</code>, using the default value for
+the <code>maxNesting</code> parameter.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the <code>File</code> from which to read</p></dd><dt class="param">includeRegex</dt><dd class="cmt"><p>the regular expression that defines an include
+                    directive. Must contain a group that surrounds the
+                    file or URL part.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
+    </li><li name="grizzled.file.Includer#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(file:java.io.File):scala.util.Try[grizzled.file.Includer]"></a>
+      <a id="apply(File):Try[Includer]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Includer.html" class="extype" name="grizzled.file.Includer">Includer</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Includer$@apply(file:java.io.File):scala.util.Try[grizzled.file.Includer]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create an includer from a <code>java.io.File</code>, using the default values for
+the <code>maxNesting</code> and <code>includeRegex</code> parameters.</p><div class="fullcomment"><div class="comment cmt"><p>Create an includer from a <code>java.io.File</code>, using the default values for
+the <code>maxNesting</code> and <code>includeRegex</code> parameters.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the <code>File</code> from which to read</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(Includer)</code> or <code>Failure(Exception)</code></p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -507,18 +645,18 @@ utility methods, such as the <code>preprocess()</code> method.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="grizzled.file.Includer#preprocess" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="preprocess(pathOrURI:String,tempPrefix:String,tempSuffix:String):String"></a>
-      <a id="preprocess(String,String,String):String"></a>
+      <a id="preprocess(pathOrURI:String,tempPrefix:String,tempSuffix:String):scala.util.Try[String]"></a>
+      <a id="preprocess(String,String,String):Try[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">preprocess</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tempPrefix">tempPrefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tempSuffix">tempSuffix: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">preprocess</span><span class="params">(<span name="pathOrURI">pathOrURI: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tempPrefix">tempPrefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tempSuffix">tempSuffix: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.file.Includer$@preprocess(pathOrURI:String,tempPrefix:String,tempSuffix:String):String" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.file.Includer$@preprocess(pathOrURI:String,tempPrefix:String,tempSuffix:String):scala.util.Try[String]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -532,7 +670,8 @@ needed.
                    temporary file prefix used by
                    <code>java.io.File.createTempFile()</code></p></dd><dt class="param">tempSuffix</dt><dd class="cmt"><p>temporary file suffix, with the same meaning as the
                    temporary file suffix used by
-                   <code>java.io.File.createTempFile()</code></p></dd><dt>returns</dt><dd class="cmt"><p>the path to the temporary file</p></dd></dl></div>
+                   <code>java.io.File.createTempFile()</code></p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(path)</code> where <code>path</code> is the path to the temporary file,
+        or <code>Failure(exception)</code></p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

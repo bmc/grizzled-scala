@@ -14,8 +14,6 @@ classes. Currently, the library is broken into the following modules:
 Currently, the library is broken into a number of modules:
 
 * `grizzled.binary`: Some code that's useful when dealing with binary
-* `grizzled.cmd`: A framework for building command interpreters, similar (in
-  concept) to Python's `cmd` module.
 * `grizzled.collection`: Helpers for Scala collections.
 * `grizzed.config`: An enhanced INI-style configuration parser, with
   support for include files and variable substitution.
@@ -26,7 +24,6 @@ Currently, the library is broken into a number of modules:
 * `grizzled.net`: Network-related stuff, mostly Scala wrappers to simplify or
   extend the Java `java.net` classes.
 * `grizzled.parsing`: Classes that aid in certain kinds of parsing.
-* `grizzled.readline`: Front-end API for various readline-like libraries.
 * `grizzled.reflect`: Some utility functions to help with Scala reflection.
 * `grizzled.security`: Some utility front-ends to `java.security`.
 * `grizzled.string`: Useful string- and text-related functions.
@@ -47,6 +44,9 @@ automatically linked to Bintray's [JCenter](https://bintray.com/bintray/jcenter)
 repository. (From JCenter, it's eventually pushed to the
 [Maven Central Repository][].
 
+**NOTE**: This library uses [semantic versioning](http://semver.org).
+
+- Version 2.0.0 supports Scala 2.10, 2.11 and 2.12-M4.
 - Version 1.6.1 supports Scala 2.10, 2.11 and 2.12-M4.
 - Version 1.6.0 supports Scala 2.10, 2.11 and 2.12-M1.
 - Versions 1.5.1, 1.5.0, 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
@@ -69,7 +69,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.11</artifactId>
-      <version>1.6.1</version>
+      <version>2.0.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -93,7 +93,7 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 Add the following to your SBT build:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "1.6.1"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "2.0.0"
 
 ## Source Code Repository
 

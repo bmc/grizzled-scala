@@ -61,7 +61,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -74,7 +74,7 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
           </div>
         <div id="visbl">
@@ -141,6 +141,23 @@ to know how to release what's passed to it.
     </span>
       <p class="shortcomment cmt">Companion object for <code>CanReleaseResource</code>, providing predefined implicit
 evidence parameters for <code>withResource()</code>.</p>
+    </li><li name="grizzled.util.Implicits" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Implicits"></a>
+      <a id="Implicits:Implicits"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$.html"><span class="name">Implicits</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.util.package@Implicits" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Enrichment classes, generally for things in <code>scala.util</code>.</p>
     </li><li name="grizzled.util#withResource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="withResource[T,R](resource:T)(code:T=&gt;R)(implicitmgr:grizzled.util.package.CanReleaseResource[T]):R"></a>
       <a id="withResource[T,R](T)((T)⇒R)(CanReleaseResource[T]):R"></a>
@@ -168,45 +185,7 @@ ones are provided automatically.</p><p>Sample use:</p><pre>withResource(<span cl
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.util#withCloseable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withCloseable[T&lt;:AnyRef{defclose():Unit},R](closeable:T)(code:T=&gt;R):R"></a>
-      <a id="withCloseable[T&lt;:AnyRef{defclose():Unit},R](T)((T)⇒R):R"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 1.5.1) Use grizzled.util.withResource">withCloseable</span><span class="tparams">[<span name="T">T &lt;: <span class="extype" name="scala.AnyRef">AnyRef</span> { def close(): Unit }</span>, <span name="R">R</span>]</span><span class="params">(<span name="closeable">closeable: <span class="extype" name="grizzled.util.withCloseable.T">T</span></span>)</span><span class="params">(<span name="code">code: (<span class="extype" name="grizzled.util.withCloseable.T">T</span>) ⇒ <span class="extype" name="grizzled.util.withCloseable.R">R</span></span>)</span><span class="result">: <span class="extype" name="grizzled.util.withCloseable.R">R</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.util.package@withCloseable[T&lt;:AnyRef{defclose():Unit},R](closeable:T)(code:T=&gt;R):R" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Used with any object that contains a <code>close()</code> method that
-returns nothing, <code>withCloseable()</code> executes a block of code
-with the closeable object, ensuring that the object is closed no
-matter what.</p><div class="fullcomment"><div class="comment cmt"><p>Used with any object that contains a <code>close()</code> method that
-returns nothing, <code>withCloseable()</code> executes a block of code
-with the closeable object, ensuring that the object is closed no
-matter what. It allows you to replace code like this:</p><pre><span class="kw">val</span> closeableObject = ...
-<span class="kw">try</span> {
-  doSomethingWith(closeableObject)
-}
-<span class="kw">finally</span> {
-  closeableObject.close
-}</pre><p>with:</p><pre>withCloseable(closeableObject) { closeable <span class="kw">=&gt;</span>
-  doSomethingWith(closeable)
-}</pre></div><dl class="paramcmts block"><dt class="param">closeable</dt><dd class="cmt"><p>the closeable object</p></dd><dt class="param">code</dt><dd class="cmt"><p>the block of code, which will take the closeable object
-                  and return some arbitrary type <code>R</code>.</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the code block returns,if anything.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.5.1)</i> Use grizzled.util.withResource</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
