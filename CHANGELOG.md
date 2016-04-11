@@ -1,6 +1,6 @@
 # Grizzled Scala Change Log
 
-Version 2.0.0 (Incompatible API changes)
+Version 2.0.0 (Incompatible API changes):
 
 * Added `grizzled.net.URI` and `grizzled.net.URL` front-end case class
   wrappers for the Java equivalents.
