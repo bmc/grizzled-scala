@@ -15,4 +15,3 @@ Grizzled Scala is copyright &copy; 2009-2016 [Brian M. Clapper][] and
 is released under a new [BSD license][LICENSE.md].
 
 [Brian M. Clapper]: mailto:bmc@clapper.org
-[Grizzled Python]: http://software.clapper.org/grizzled-python/
