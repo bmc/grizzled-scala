@@ -51,6 +51,8 @@ import scala.util.control.NonFatal
 /** URL-related utility methods.
   */
 object URLUtil {
+  import grizzled.util.Implicits.RichTry
+
   private lazy val ExtRegexp = """^(.*)(\.[^.]+)$""".r
 
   /** Download the specified URL to a file. The name of the file is
@@ -62,7 +64,7 @@ object URLUtil {
     * @return a `Future` of the file to which the download was written
     */
   def download(url: String)(implicit ctx: ExecutionContext): Future[File] = {
-    for { u   <- Future.fromTry(URL(url))
+    for { u   <- URL(url).toFuture
           res <- download(u)(ctx) }
       yield res
   }
@@ -89,7 +91,7 @@ object URLUtil {
     */
   def download(url: URL)
               (implicit ctx: ExecutionContext): Future[File] = {
-    for { output <- Future.fromTry(getOutputFile(url))
+    for { output <- getOutputFile(url).toFuture
           _      <- download(url, output.getPath)(ctx) }
       yield output
   }
@@ -107,7 +109,7 @@ object URLUtil {
     */
   def download(url: String, pathOut: String)
               (implicit ctx: ExecutionContext): Future[String] = {
-    for { u <- Future.fromTry(URL(url))
+    for { u <- URL(url).toFuture
           f <- download(u, new File(pathOut))(ctx) }
     yield f.getPath
   }
@@ -157,7 +159,7 @@ object URLUtil {
     */
   def download(url: String, pathOut: File)
               (implicit ctx: ExecutionContext): Future[String] = {
-    for { u <- Future.fromTry(URL(url))
+    for { u <- URL(url).toFuture
           _ <- download(u, pathOut)(ctx) }
       yield pathOut.getPath
   }
@@ -203,10 +205,10 @@ object URLUtil {
     def openInputAndOutput(url: URL, path: File):
       Future[(InputStream, OutputStream)] = {
 
-      for { urlIn <- Future.fromTry(url.openStream())
-            in    <- Future.fromTry(Try { new BufferedInputStream(urlIn) })
-            out   <- Future.fromTry(Try { new BufferedOutputStream(
-                                            new FileOutputStream(pathOut)) }) }
+      for { urlIn <- url.openStream().toFuture
+            in    <- Try { new BufferedInputStream(urlIn) }.toFuture
+            out   <- Try { new BufferedOutputStream(
+                             new FileOutputStream(pathOut)) }.toFuture }
         yield (in, out)
     }
 

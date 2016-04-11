@@ -10,6 +10,7 @@ Version 2.0.0 (Incompatible API changes):
 * Modified the synchronous `grizzled.net.URLUtil.withDownloadedFile()` to take
   a `timeout` parameter. Added a version that takes `grizzled.net.URL`.
 * Added unit tests for `grizzled.net.URLUtil` download functions.
+* Added `grizzled.util.Implicits.RichTry` enrichment class.
 * Fixes to `grizzled.file.Includer`:
     * Fixed some problems with URI parsing.
     * Fixed uses of `scala.io.Source` and `java.net.URI`, to correct problems
