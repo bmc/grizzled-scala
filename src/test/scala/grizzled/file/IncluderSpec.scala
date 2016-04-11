@@ -61,7 +61,7 @@ class IncluderSpec extends FlatSpec with Matchers {
   it should "allow a file to include from an HTTP server" in {
     val server = new Server(
       HTTPServerPort,
-      Handler("foo", { req => Response(ResultCode.OK, Some("foo")) })
+      Handler("foo", { req => Response(ResponseCode.OK, Some("foo")) })
     )
 
     withTemporaryDirectory("incl") { dir =>
@@ -80,7 +80,7 @@ class IncluderSpec extends FlatSpec with Matchers {
   it should "read and include from an HTTP server" in {
     val handlers = Vector(
       Handler("foo.txt", { req =>
-        Response(ResultCode.OK,
+        Response(ResponseCode.OK,
           Some(
             """|line 1
                |%include "bar.txt"
@@ -89,7 +89,7 @@ class IncluderSpec extends FlatSpec with Matchers {
         )
       }),
       Handler("bar.txt", { req =>
-        Response(ResultCode.OK,
+        Response(ResponseCode.OK,
           Some("inside bar.txt")
         )
       })

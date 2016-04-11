@@ -8,7 +8,7 @@ import scala.util.Try
   * @param userInfo   the user info, if defined
   * @param host       the host, if defined
   * @param port       the port, if defined
-  * @param path       the path
+  * @param path       the path, if defined
   * @param query      the query string, if defined
   * @param fragment   the fragment, if defined
   */
@@ -16,7 +16,7 @@ case class URI(scheme:    Option[String],
                userInfo:  Option[String],
                host:      Option[String],
                port:      Option[Int],
-               path:      String,
+               path:      Option[String],
                query:     Option[String] = None,
                fragment:  Option[String] = None) {
 
@@ -26,7 +26,7 @@ case class URI(scheme:    Option[String],
                                  userInfo.orNull,
                                  host.orNull,
                                  port.getOrElse(-1),
-                                 path,
+                                 path.orNull,
                                  query.orNull,
                                  fragment.orNull)
 
@@ -88,7 +88,7 @@ case class URI(scheme:    Option[String],
     *
     * @return the string
     */
-  def toURIString = javaURI.toString
+  def toExternalForm = javaURI.toString
 
   /** Convert to a URL object.
     *
@@ -106,13 +106,13 @@ object URI {
     * @param uri the `java.net.URI`
     */
   def apply(uri: java.net.URI): URI = {
-    URI(scheme   = Option(uri.getScheme),
-      userInfo = Option(uri.getUserInfo),
-      host     = Option(uri.getHost),
-      port     = if (uri.getPort < 0) None else Some(uri.getPort),
-      path     = Option(uri.getPath).getOrElse(""),
-      query    = Option(uri.getQuery),
-      fragment = Option(uri.getFragment))
+    URI(scheme   = Option(uri.getScheme).filter(_.length > 0),
+        userInfo = Option(uri.getUserInfo).filter(_.length > 0),
+        host     = Option(uri.getHost).filter(_.length > 0),
+        port     = if (uri.getPort < 0) None else Some(uri.getPort),
+        path     = Option(uri.getPath).filter(_.length > 0),
+        query    = Option(uri.getQuery).filter(_.length > 0),
+        fragment = Option(uri.getFragment).filter(_.length > 0))
   }
 
   /** Construct a URI from a string.

@@ -45,7 +45,10 @@ object BrainDeadHTTP {
     * @param path    the path, minus any leading "/"
     * @param handle  the handler. Takes a Request and returns a Response.
     */
-  case class Handler(path: String, handle: Request => Response)
+  case class Handler(path: String, handle: Request => Response) {
+    require(path.headOption.isDefined)
+    require(path.head != '/')
+  }
 
   /** The incoming request. Minimalist.
     *
@@ -58,18 +61,18 @@ object BrainDeadHTTP {
     * @param code    the code
     * @param content the text content, if any
     */
-  case class Response(code: ResultCode.Value, content: Option[String] = None)
+  case class Response(code: ResponseCode.Value, content: Option[String] = None)
 
   /** Minimalist. Only the ones we're using.
     */
-  object ResultCode extends Enumeration {
-    type ResultCode = Value
+  object ResponseCode extends Enumeration {
+    type ResponseCode = Value
 
     val OK       = Value("200 OK")
     val NotFound = Value("404 Not Found")
   }
 
-  import ResultCode._
+  import ResponseCode._
 
   /** The actual server, which operates purely at the socket level.
     *
@@ -89,29 +92,35 @@ object BrainDeadHTTP {
 
     private val loopback = InetAddress.getLoopbackAddress
     private val socket = new ServerSocket(bindPort, 5, loopback)
+    private val runner = new Thread() {
+      override def run(): Unit = {
+        try {
+          while (! socket.isClosed) {
+            acceptAndHandle(socket)
+          }
+        }
+        catch {
+          case _: SocketException =>
+        }
+      }
+    }
 
     /** Start the server.
       */
     def start(): Unit = {
-      new Thread() {
-        override def run(): Unit = {
-          try {
-            while (! socket.isClosed) {
-              acceptAndHandle(socket)
-            }
-          }
-          catch {
-            case _: SocketException =>
-          }
-        }
-      }
-      .start()
+      runner.start()
     }
 
     /** Stop the server.
       */
     def stop(): Unit = {
       socket.close()
+    }
+
+    /** Pretty string representation.
+      */
+    override val toString = {
+      s"Server(port=$bindPort, running=${runner.isAlive})"
     }
 
     private def acceptAndHandle(socket: ServerSocket): Unit = {
