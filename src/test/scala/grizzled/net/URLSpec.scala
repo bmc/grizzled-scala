@@ -143,16 +143,12 @@ class URLSpec extends FlatSpec with Matchers {
   "URL.openStream" should "open a readable InputStream for contents" in {
     import grizzled.testutil.BrainDeadHTTP._
 
-    val port = 10000
-
-    val server = new Server(port,
-      Handler("foo.txt", { _ =>
-        Response(ResponseCode.OK, Some("foo\n"))
-      })
-    )
+    val server = new Server(Handler("foo.txt", { _ =>
+      Response(ResponseCode.OK, Some("foo\n"))
+    }))
 
     withHTTPServer(server) {
-      val r = URL(s"http://localhost:${port}/foo.txt")
+      val r = URL(s"http://localhost:${Server.DefaultBindPort}/foo.txt")
       r.isSuccess shouldBe true
       val url = r.get
       val t = url.openStream()
