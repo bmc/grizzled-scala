@@ -16,7 +16,7 @@ import scala.util.Success
   */
 class IncluderSpec extends FlatSpec with Matchers {
 
-  private val HTTPServerPort = 10000
+  private val HTTPServerPort = Server.DefaultBindPort
 
   "Includer" should "handle a file including another file" in {
     withTemporaryDirectory("incl") { dir =>
