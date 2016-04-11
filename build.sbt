@@ -39,7 +39,7 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 */
 
 // ---------------------------------------------------------------------------
-// ScalaTest dependendency
+// ScalaTest
 
 lazy val http4sVersion = "0.13.1a"
 
