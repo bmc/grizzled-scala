@@ -147,8 +147,8 @@ class URLSpec extends FlatSpec with Matchers {
       Response(ResponseCode.OK, Some("foo\n"))
     }))
 
-    withHTTPServer(server) {
-      val r = URL(s"http://localhost:${Server.DefaultBindPort}/foo.txt")
+    withHTTPServer(server) { _ =>
+      val r = URL(s"http://localhost:${server.bindPort}/foo.txt")
       r.isSuccess shouldBe true
       val url = r.get
       val t = url.openStream()

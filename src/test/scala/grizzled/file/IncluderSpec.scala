@@ -16,8 +16,6 @@ import scala.util.Success
   */
 class IncluderSpec extends FlatSpec with Matchers {
 
-  private val HTTPServerPort = Server.DefaultBindPort
-
   "Includer" should "handle a file including another file" in {
     withTemporaryDirectory("incl") { dir =>
       val input = createFile(dir, "outer.txt",
@@ -60,16 +58,15 @@ class IncluderSpec extends FlatSpec with Matchers {
 
   it should "allow a file to include from an HTTP server" in {
     val server = new Server(
-      HTTPServerPort,
       Handler("foo", { req => Response(ResponseCode.OK, Some("foo")) })
     )
 
     withTemporaryDirectory("incl") { dir =>
       val input = createFile(dir, "main.txt",
         Array("main line 1",
-              s"""%include "http://localhost:${HTTPServerPort}/foo"""",
+              s"""%include "http://localhost:${server.bindPort}/foo"""",
               "main line 3"))
-      withHTTPServer(server) {
+      withHTTPServer(server) { _ =>
         Includer(input).map(_.toVector) shouldBe Success(
           Vector("main line 1", "foo", "main line 3")
         )
@@ -95,12 +92,13 @@ class IncluderSpec extends FlatSpec with Matchers {
       })
     )
 
-    val server = new Server(HTTPServerPort, handlers)
-    withHTTPServer(server) {
-      val includer = Includer(s"http://localhost:$HTTPServerPort/foo.txt").map(_.toVector)
-      includer shouldBe Success(Vector("line 1",
-                                       "inside bar.txt",
-                                       "line 3"))
+    val server = new Server(handlers)
+    withHTTPServer(server) { _ =>
+      val t = Includer(s"http://localhost:${server.bindPort}/foo.txt")
+                  .map(_.toVector)
+      t shouldBe Success(Vector("line 1",
+                                "inside bar.txt",
+                                "line 3"))
     }
   }
 

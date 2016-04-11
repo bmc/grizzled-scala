@@ -30,10 +30,10 @@ object BrainDeadHTTP {
     * @param server The not-running server.
     * @param code   The code to run before shutting the server down.
     */
-  def withHTTPServer(server: Server)(code: => Unit): Unit = {
+  def withHTTPServer(server: Server)(code: Server => Unit): Unit = {
     try {
       server.start()
-      code
+      code(server)
     }
     finally {
       server.stop()
@@ -79,7 +79,7 @@ object BrainDeadHTTP {
     * @param bindPort Bind to the specified TCP port
     * @param handlers Sequence of handlers to process requests
     */
-  class Server(bindPort: Int, handlers: Seq[Handler]) {
+  class Server(val bindPort: Int, handlers: Seq[Handler]) {
 
     /** Create a server with only a single handler.
       *
@@ -88,18 +88,18 @@ object BrainDeadHTTP {
       */
     def this(bindPort: Int, handler: Handler) = this(bindPort, Vector(handler))
 
-    /** Create a server that listens on the default port.
+    /** Create a server that listens on a random port.
       *
       * @param handlers the handlers
       */
-    def this(handlers: Seq[Handler]) = this(Server.DefaultBindPort, handlers)
+    def this(handlers: Seq[Handler]) = this(Server.randomPort, handlers)
 
     /** Create a server that listens on the default port and has only one
       * handler.
       *
       * @param handler the handler
       */
-    def this(handler: Handler) = this(Server.DefaultBindPort, handler)
+    def this(handler: Handler) = this(Server.randomPort, handler)
 
     import java.net._
 
@@ -199,7 +199,8 @@ object BrainDeadHTTP {
   /** The companion object for the server.
     */
   object Server {
-    val DefaultBindPort = 10000
+    private val rng = new java.security.SecureRandom
+    def randomPort = rng.nextInt(100) + 10000
   }
 }
 

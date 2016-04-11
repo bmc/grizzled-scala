@@ -45,19 +45,21 @@ class URLUtilSpec extends FlatSpec with Matchers {
     Response(ResponseCode.OK, Some(Contents))
   })
 
-  val DownloadURL = URL(s"http://localhost:${Server.DefaultBindPort}/thing.txt").get
+  val DownloadURL = "http://localhost:@PORT@/thing.txt"
 
   "download" should "download from a URL object" in {
-    withHTTPServer(new Server(DownloadHandler)) {
-      val fut = URLUtil.download(DownloadURL)
+    withHTTPServer(new Server(DownloadHandler)) { server =>
+      val url = URL(DownloadURL.replace("@PORT@", server.bindPort.toString)).get
+      val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
     }
   }
 
   it should "download from a string URL" in {
-    withHTTPServer(new Server(DownloadHandler)) {
-      val fut = URLUtil.download(DownloadURL)
+    withHTTPServer(new Server(DownloadHandler)) { server =>
+      val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+      val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
     }
@@ -69,8 +71,9 @@ class URLUtilSpec extends FlatSpec with Matchers {
 
     withTemporaryDirectory("download") { dir =>
       val file = FileUtil.joinPath(dir.getPath, "lorem.txt")
-      withHTTPServer(new Server(DownloadHandler)) {
-        val fut = URLUtil.download(DownloadURL, file)
+      withHTTPServer(new Server(DownloadHandler)) { server =>
+        val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+        val fut = URLUtil.download(url, file)
         Await.result(fut, 10.seconds)
         Source.fromFile(file).mkString shouldBe Contents
       }
@@ -80,8 +83,9 @@ class URLUtilSpec extends FlatSpec with Matchers {
   "withDownloadedFile" should "download synchronously" in {
     import URLUtil._
 
-    withHTTPServer(new Server(DownloadHandler)) {
-      val t = withDownloadedFile(DownloadURL, 10.seconds) { f =>
+    withHTTPServer(new Server(DownloadHandler)) { server =>
+      val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+      val t = withDownloadedFile(url, 10.seconds) { f =>
         f.exists shouldBe true
         Source.fromFile(f).mkString
       }
@@ -99,8 +103,9 @@ class URLUtilSpec extends FlatSpec with Matchers {
       Response(ResponseCode.OK, Some(Contents))
     })
 
-    withHTTPServer(new Server(handler)) {
-      val t = withDownloadedFile(DownloadURL, 50.milliseconds) { f =>
+    withHTTPServer(new Server(handler)) { server =>
+      val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+      val t = withDownloadedFile(url, 50.milliseconds) { f =>
         Source.fromFile(f).mkString
       }
 
