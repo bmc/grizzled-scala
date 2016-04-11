@@ -41,8 +41,6 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 // ---------------------------------------------------------------------------
 // ScalaTest
 
-lazy val http4sVersion = "0.13.1a"
-
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
