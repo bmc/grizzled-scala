@@ -289,18 +289,12 @@ object URLUtil {
     */
   def withDownloadedFile[T](url: URL, timeout: Duration)(block: File => T)
                            (implicit ctx: ExecutionContext): Try[T] = {
-    val file = File.createTempFile("grizzled", ".dat")
     val fut = download(url).map { res =>
-      block(file)
+      block(res)
     }
 
     Try {
       Await.result(fut, timeout)
-    }
-    .recoverWith {
-      case NonFatal(e) =>
-        file.delete()
-        Failure(e)
     }
   }
 
