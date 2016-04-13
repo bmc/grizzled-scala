@@ -234,16 +234,27 @@ object Implicits {
 
         val stream = new IteratorStream[Char](string) with Pushback[Char]
 
-        def parseHexDigits: List[Char] = {
-          stream.next match {
-            case Some(c) if c.isHexDigit => c :: parseHexDigits
-            case Some(c)                 => stream.pushback(c); Nil
-            case None                    => Nil
+        def parseHexDigits(buf: List[Char]): List[Char] = {
+          if (buf.length == 4)
+            buf
+
+          else {
+            stream.next match {
+              case Some(c) if c.isHexDigit =>
+                val newBuf = buf :+ c
+                parseHexDigits(newBuf)
+
+              case Some(c) =>
+                stream.pushback(c)
+                buf
+
+              case None => buf
+            }
           }
         }
 
         def parseUnicode: List[Char] = {
-          val digits = parseHexDigits
+          val digits = parseHexDigits(List.empty[Char])
           if (digits == Nil)
             Nil
 

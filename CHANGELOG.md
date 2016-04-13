@@ -2,6 +2,9 @@
 
 Version 2.0.1:
 
+* Fixed `GrizzledString.translateMetachars`. It was not properly parsing
+  Unicode escapes that are embedded in other strings. It would fail on
+  "Here\u0160123", for instance.
 * Added a `CanReleaseResource` object for `scala.io.Source`, which doesn't
   extend `java.io.Closeable`. This allows `withResource()` to work with
   `scala.io.Source` objects, without the user having to write a custom
