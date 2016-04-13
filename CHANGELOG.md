@@ -1,5 +1,12 @@
 # Grizzled Scala Change Log
 
+Version 2.0.1:
+
+* Added a `CanReleaseResource` object for `scala.io.Source`, which doesn't
+  extend `java.io.Closeable`. This allows `withResource()` to work with
+  `scala.io.Source` objects, without the user having to write a custom
+  `CanReleaseResource[Source]` object.
+
 Version 2.0.0 (Incompatible API changes):
 
 * Added `grizzled.net.URI` and `grizzled.net.URL` front-end case class
