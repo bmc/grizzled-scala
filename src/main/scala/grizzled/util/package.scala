@@ -60,11 +60,18 @@ package object util {
     */
   object CanReleaseResource {
     import java.io.Closeable
+    import scala.io.Source
 
     /** Defines evidence for type `Closeable`.
       */
     implicit object CanReleaseCloseable extends CanReleaseResource[Closeable] {
       def release(c: Closeable) = c.close()
+    }
+    
+    /** Defines evidence for type `Source`.
+      */
+    implicit object CanReleaseSource extends CanReleaseResource[Source] {
+      def release(s: Source) = s.close()
     }
   }
 
