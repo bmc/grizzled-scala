@@ -39,7 +39,7 @@ package grizzled.file
 
 import scala.annotation.tailrec
 
-import grizzled.io.RichInputStream._
+import grizzled.io.Implicits.RichInputStream
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
 
@@ -139,7 +139,7 @@ object util {
       val components = (path split fileSep(0)).toList
 
       if (components.length == 1)
-        (components(0), "")
+        (components.head, "")
 
       else {
         val listTuple = components splitAt (components.length - 1)
@@ -373,7 +373,6 @@ object util {
 
     matches map normalizePath
   }
-
 
   /** List a directory recursively, returning `File` objects for each file
     * (and subdirectory) found. This method does lazy evaluation, instead

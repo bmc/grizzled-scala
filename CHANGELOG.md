@@ -6,6 +6,10 @@ Version 2.1.0:
 * `grizzled.string.WordWrapper` is now a case class.
 * Fixed wrapping in `grizzled.string.WordWrapper` to handle specified "ignore"
   characters in the prefix, not just in the wrapped text.
+* Deprecated the implicit conversions in `grizzled.io.RichReader` and
+  `grizzled.io.RichInputStream`. Import `grizzled.io.Implicits._` to get the
+  same conversions.
+* Refactored some of the test classes.
 
 Version 2.0.1:
 

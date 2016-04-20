@@ -36,18 +36,14 @@
 
 package grizzled.io
 
-import grizzled.io.RichReader._
-import grizzled.io.RichInputStream._
-
-import java.io.{ByteArrayInputStream, StringReader}
+import java.io.StringReader
 
 import org.scalatest.{FlatSpec, Matchers}
 
-/**
- * Tests the grizzled.io functions.
- */
-class MiscIOSpec extends FlatSpec with Matchers {
-  "RichReader.readSome" should "stop reading when it hits the max" in {
+class RichReaderSpec extends FlatSpec with Matchers {
+
+  "readSome" should "stop reading when it hits the max" in {
+    import grizzled.io.Implicits.RichReader
 
     val data = List(
       ("12345678901234567890", 10, "1234567890"),
@@ -62,45 +58,23 @@ class MiscIOSpec extends FlatSpec with Matchers {
   }
 
   it should "handle a max that's larger than the input" in {
+    import grizzled.io.Implicits.RichReader
+
     val s = "1234"
     val r = new StringReader(s)
     r.readSome(1000).mkString shouldBe s
   }
 
   it should "handle an empty input" in {
+    import grizzled.io.Implicits.RichReader
+
     val r = new StringReader("")
     r.readSome(1000).mkString shouldBe ""
   }
 
-  "RichInputStream.readSome" should "stop reading when it hits the max" in {
-    val input = Array[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
-                            11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-    val data = List(
-      (10, input.slice(0, 10)),
-      (20, input),
-      (30, input)
-    )
-
-    for((max, expected) <- data) {
-      val is = new ByteArrayInputStream(input)
-      is.readSome(max) shouldBe expected
-    }
-  }
-
-  it should "handle a max that's larger than the input" in {
-    val input = Array[Byte](1, 2, 3, 4)
-    val is = new ByteArrayInputStream(input)
-    is.readSome(1000) shouldBe input
-  }
-
-  it should "handle an empty input" in {
-    val input = Array.empty[Byte]
-    val is = new ByteArrayInputStream(input)
-    is.readSome(1000) shouldBe input
-  }
-
-  "RichReader.copyTo" should "copy chars from a reader to a writer" in {
+  "copyTo" should "copy chars from a reader to a writer" in {
     import java.io.{StringReader, StringWriter}
+    import grizzled.io.Implicits.RichReader
 
     val data = List("12345678901234567890",
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -112,57 +86,6 @@ class MiscIOSpec extends FlatSpec with Matchers {
       val w = new StringWriter
       r.copyTo(w)
       w.toString shouldBe s
-    }
-  }
-
-  "RichInputStream.copyTo" should "copy bytes from an InputStream to an OutputStream" in {
-    import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
-
-    val input = List[Byte]( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
-                           11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-    val data = List(input.slice(0, 10),
-                    input,
-                    input.slice(0, 1))
-
-    for(bytes <- data) {
-      val is = new ByteArrayInputStream(bytes.toArray)
-      val os = new ByteArrayOutputStream
-      is.copyTo(os)
-      os.toByteArray.toList shouldBe bytes
-    }
-  }
-
-  it should "work fine with with big input" in {
-    // will fail with java.lang.StackOverflowError if copyTo was
-    // not tail-call optimized
-
-    import java.io.{InputStream, OutputStream}
-    import java.util.Random
-
-    val rnd = new Random()
-    val inp = new InputStream {
-      var countDown = 5000
-
-      override def read(): Int = {
-        if (countDown > 0) {
-          countDown -= 1
-          rnd.nextInt(256)
-        }
-        else
-          -1
-      }
-    }
-
-    val nul = new OutputStream {
-      override def write(b: Int) = {}
-    }
-
-    try {
-      inp.copyTo(nul)
-    }
-    catch {
-      case e: StackOverflowError =>
-        fail("StackOverflowError - copyTo not tail-call optimized?")
     }
   }
 }

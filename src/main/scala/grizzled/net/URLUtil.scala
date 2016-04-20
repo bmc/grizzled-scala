@@ -43,10 +43,8 @@ import java.io.{OutputStream, InputStream, File, IOException}
 import java.net.{URL => JavaURL}
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.util.{Failure, Try}
-import scala.util.control.NonFatal
+import scala.util.Try
 
 /** URL-related utility methods.
   */
@@ -179,7 +177,7 @@ object URLUtil {
               (implicit ctx: ExecutionContext): Future[File] = {
     import java.io.{BufferedInputStream, BufferedOutputStream}
     import java.io.FileOutputStream
-    import grizzled.io.RichInputStream._
+    import grizzled.io.Implicits.RichInputStream
 
     def validateAndGetParentDir(path: File): Future[File] = {
       if (path.isDirectory) {

@@ -37,8 +37,6 @@
 
 package grizzled.io
 
-import grizzled.io.Implicits.RichReader
-
 import java.io.Reader
 
 import scala.language.implicitConversions
@@ -48,6 +46,8 @@ import scala.language.implicitConversions
   */
 @deprecated("Use the grizzled.io.Implicits.RichReader class, instead.", "2.1.0")
 object RichReader {
+  import grizzled.io.Implicits.RichReader
+
   implicit def readerToRichReader(reader: Reader): RichReader =
     new RichReader(reader)
   implicit def richReaderToReader(richReader: RichReader): Reader =

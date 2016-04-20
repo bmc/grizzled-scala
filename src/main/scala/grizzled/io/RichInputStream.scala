@@ -37,8 +37,6 @@
 
 package grizzled.io
 
-import grizzled.io.Implicits.RichInputStream
-
 import java.io.InputStream
 
 import scala.language.implicitConversions
@@ -48,6 +46,8 @@ import scala.language.implicitConversions
   */
 @deprecated("Use the grizzled.io.Implicits.RichInputStream class, instead.", "2.1.0")
 object RichInputStream {
+  import grizzled.io.Implicits.RichInputStream
+
   implicit def isToRichInputStream(inputStream: InputStream): RichInputStream =
     new RichInputStream(inputStream)
 
