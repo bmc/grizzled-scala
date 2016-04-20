@@ -37,47 +37,16 @@
 
 package grizzled.io
 
-import scala.annotation.tailrec
+import grizzled.io.Implicits.RichInputStream
+
+import java.io.InputStream
+
 import scala.language.implicitConversions
-
-import java.io.{InputStream, OutputStream}
-
-/** Provides additional methods, over and above those already present in
-  * the Java `InputStream` class. The `implicits` object contains implicit
-  * conversions between `RichInputStream` and `InputStream`.
-  *
-  * @param inputStream  the input stream to wrap
-  */
-class RichInputStream(val inputStream: InputStream)
-extends PartialReader[Byte] {
-  val reader = inputStream
-
-  protected def convert(b: Int) = b.asInstanceOf[Byte]
-
-  /** Copy the input stream to an output stream, stopping on EOF.
-    * This method does not close either stream.
-    *
-    * @param out  the output stream
-    */
-  def copyTo(out: OutputStream): Unit = {
-      val buffer = new Array[Byte](8192)
-
-      @tailrec def doCopyTo(): Unit = {
-          val read = reader.read(buffer)
-          if (read > 0) {
-            out.write(buffer, 0, read)
-            // Tail recursion means never having to use a var.
-            doCopyTo()
-          }
-        }
-
-      doCopyTo()
-    }
-}
 
 /** Companion object to `RichInputStream` class. Importing this object brings
   * the implicit conversations into scope.
   */
+@deprecated("Use the grizzled.io.Implicits.RichInputStream class, instead.", "2.1.0")
 object RichInputStream {
   implicit def isToRichInputStream(inputStream: InputStream): RichInputStream =
     new RichInputStream(inputStream)

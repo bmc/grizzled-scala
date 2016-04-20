@@ -37,44 +37,16 @@
 
 package grizzled.io
 
-import scala.annotation.tailrec
+import grizzled.io.Implicits.RichReader
+
+import java.io.Reader
+
 import scala.language.implicitConversions
-
-import java.io.{Reader, Writer}
-
-/** Provides additional methods, over and above those already present in
-  * the Java `Reader` class. The `implicits` object contains implicit
-  * conversions between `RichReader` and `Reader`.
-  *
-  * @param reader  the reader to wrap
-  */
-class RichReader(val reader: Reader) extends PartialReader[Char] {
-  protected def convert(b: Int) = b.asInstanceOf[Char]
-
-  /** Copy the reader to a writer, stopping on EOF. This method does no
-    * buffering. If you want buffering, make sure you use a
-    * `java.io.BufferedReader` and a `java.io.BufferedWriter`. This method
-    * does not close either object.
-    *
-    * @param out  the output stream
-    */
-  def copyTo(out: Writer): Unit = {
-    @tailrec def doCopyTo(): Unit = {
-      val c: Int = reader.read()
-      if (c != -1) {
-        out.write(c)
-        // Tail recursion means never having to use a var.
-        doCopyTo()
-      }
-    }
-
-    doCopyTo()
-  }
-}
 
 /** Companion object to `RichReader` class. Importing this object brings the
   * implicit conversations into scope.
   */
+@deprecated("Use the grizzled.io.Implicits.RichReader class, instead.", "2.1.0")
 object RichReader {
   implicit def readerToRichReader(reader: Reader): RichReader =
     new RichReader(reader)

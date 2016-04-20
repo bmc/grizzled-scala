@@ -34,13 +34,78 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   ---------------------------------------------------------------------------
 */
-
 package grizzled.io
 
-import scala.io.Source
-import scala.language.implicitConversions
+import java.io.{InputStream, OutputStream, Reader, Writer}
 
+import scala.annotation.tailrec
+import scala.io.Source
+
+/** Implicits that add enrichments to `java.io` and `scala.io` classes.
+  */
 object Implicits {
+
+  /** Provides additional methods, over and above those already present in
+  * the Java `InputStream` class. The `implicits` object contains implicit
+  * conversions between `RichInputStream` and `InputStream`.
+  *
+  * @param inputStream  the input stream to wrap
+  */
+  implicit class RichInputStream(val inputStream: InputStream)
+    extends PartialReader[Byte] {
+
+    val reader = inputStream
+
+    protected def convert(b: Int) = b.asInstanceOf[Byte]
+
+    /** Copy the input stream to an output stream, stopping on EOF.
+      * This method does not close either stream.
+      *
+      * @param out  the output stream
+      */
+    def copyTo(out: OutputStream): Unit = {
+      val buffer = new Array[Byte](8192)
+
+      @tailrec def doCopyTo(): Unit = {
+        val read = reader.read(buffer)
+        if (read > 0) {
+          out.write(buffer, 0, read)
+          doCopyTo()
+        }
+      }
+
+      doCopyTo()
+    }
+  }
+
+  /** Provides additional methods, over and above those already present in
+    * the Java `Reader` class. The `implicits` object contains implicit
+    * conversions between `RichReader` and `Reader`.
+    *
+    * @param reader  the reader to wrap
+    */
+  implicit class RichReader(val reader: Reader) extends PartialReader[Char] {
+    protected def convert(b: Int) = b.asInstanceOf[Char]
+
+    /** Copy the reader to a writer, stopping on EOF. This method does no
+      * buffering. If you want buffering, make sure you use a
+      * `java.io.BufferedReader` and a `java.io.BufferedWriter`. This method
+      * does not close either object.
+      *
+      * @param out  the output stream
+      */
+    def copyTo(out: Writer): Unit = {
+      @tailrec def doCopyTo(): Unit = {
+        val c: Int = reader.read()
+        if (c != -1) {
+          out.write(c)
+          doCopyTo()
+        }
+      }
+
+      doCopyTo()
+    }
+  }
 
   /** A wrapper for `scala.io.Source` that provides additional methods.
     * By importing the implicit conversion functions, you can use the methods
