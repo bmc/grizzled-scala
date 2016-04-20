@@ -1,6 +1,6 @@
 # Grizzled Scala Change Log
 
-Version 2.0.2:
+Version 2.1.0:
 
 * Removed unused `lib` directory and its contained `jar` files.
 * `grizzled.string.WordWrapper` is now a case class.

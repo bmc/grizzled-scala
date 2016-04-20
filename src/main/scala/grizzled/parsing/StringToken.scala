@@ -37,8 +37,7 @@
 
 package grizzled.parsing
 
-/**
-  * A simple string token class, consisting of:
+/** A simple string token class, consisting of:
   *
   * - a string token
   * - the starting position of the token in the original string from which
