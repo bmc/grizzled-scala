@@ -474,6 +474,8 @@ final class Configuration private[config](
   /** Like `get()`, except that this method returns an `Either`, allowing
     * errors to be captured and processed.
     *
+    * NOTE: Prefer `tryGet()`, as this method may eventually go away.
+    *
     * @param sectionName  the section name
     * @param optionName   the option name
     *
@@ -499,6 +501,36 @@ final class Configuration private[config](
 
         res.map { resolveEither(sectionName, _) }.getOrElse(Right(None))
       }
+    }
+  }
+
+  /** Like `get()`, except that this method returns a `Try`, allowing
+    * errors to be captured and processed.
+    *
+    * @param sectionName  the section name
+    * @param optionName   the option name
+    *
+    * @return `Failure(error)` on error. `Success(None)` if not found.
+    *         `Success(Some(value))` if found and processed.
+    */
+  def tryGet(sectionName: String, optionName: String): Try[Option[String]] = {
+
+    sectionName match {
+      case "env" =>
+        Success(Option(System.getenv(optionName)))
+
+      case "system" =>
+        Success(Option(System.getProperties.getProperty(optionName)))
+
+      case _ if ! hasSection(sectionName) =>
+        Success(None)
+
+      case _ =>
+        val key = OptionKey(optionName)
+        val res = sections(sectionName).get(key).map(_.value)
+
+        res.map { tryResolving(sectionName, _) }
+           .getOrElse(Success(None))
     }
   }
 
@@ -810,8 +842,7 @@ final class Configuration private[config](
     * @return `true` if the configuration has a section with that name,
     *         `false` otherwise
     */
-  def hasSection(sectionName: String): Boolean =
-    sections contains sectionName
+  def hasSection(sectionName: String): Boolean = sections contains sectionName
 
   /** Get all options in a section.
     *
@@ -848,7 +879,7 @@ final class Configuration private[config](
     * @param code   the block of code to invoke with each section
     */
   def forMatchingSections(regex: Regex)(code: Section => Unit) = {
-    for (name <- sectionNames; if (regex.findFirstIn(name) != None))
+    for (name <- sectionNames; if regex.findFirstIn(name).nonEmpty)
       code(new Section(name, options(name)))
   }
 
@@ -858,7 +889,7 @@ final class Configuration private[config](
     * @param regex  the regular expression to match
     */
   def matchingSections(regex: Regex): Seq[Section] = {
-    sectionNames.filter { name => regex.findFirstIn(name) != None }
+    sectionNames.filter { name => regex.findFirstIn(name).nonEmpty }
                 .map { name => new Section(name, options(name)) }
                 .toSeq
   }
@@ -886,6 +917,24 @@ final class Configuration private[config](
     }
   }
 
+  private def tryResolving(sectionName: String, value: String):
+    Try[Option[String]] = {
+
+    val template = new UnixShellStringTemplate(templateResolve(sectionName, _),
+                                               "[a-zA-Z0-9_.]+",
+                                               safe)
+    template.sub(value) match {
+      case Right(s) => Success(Some(s))
+      case Left(e)  => Failure(
+        new ConfigurationOptionException(
+          section = sectionName,
+          option  = value,
+          message = s"Can't get '$value' from $sectionName: $e"
+        )
+      )
+    }
+  }
+
   private def templateResolve(sectionName:  String,
                               variableName: String): Option[String] = {
     variableName match {
@@ -899,12 +948,11 @@ final class Configuration private[config](
     sectionName match {
       case "env" => Option(System.getenv(optionName))
       case "system" => Option(System.getProperties.getProperty(optionName))
-      case _ if (!hasSection(sectionName)) => None
-      case _ => {
+      case _ if !hasSection(sectionName) => None
+      case _ =>
         val key = OptionKey(optionName)
         sections(sectionName).get(key).flatMap { value =>
           resolveOpt(sectionName, value.value)
-        }
       }
     }
   }
@@ -1059,10 +1107,9 @@ object Configuration {
         import grizzled.string.util._
 
         strToBoolean(value) match {
-          case Left(error) => {
+          case Left(error) =>
             Left(s"Section '$sectionName', option '$optionName': '$value' is " +
                  "not boolean: $error")
-          }
 
           case Right(b) => Right(b)
         }
@@ -1250,4 +1297,21 @@ object Configuration {
 
 private[config] case class Value(value: String, isRaw: Boolean = false) {
   override val toString = s"Value<value=$value, isRaw=$isRaw>"
+}
+
+/** Indicates a configuration exception. Used in `Failure` results.
+  */
+class ConfigurationException(val message:   String,
+                             val exception: Throwable = null)
+  extends Exception(message, exception)
+
+/** A specific kind of configuration exception, tied to a specific section
+  * and option.
+  */
+class ConfigurationOptionException(message:     String,
+                                   val section: String,
+                                   val option:  String,
+                                   exception:   Throwable = null)
+  extends ConfigurationException(message, exception) {
+
 }

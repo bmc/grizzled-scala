@@ -10,6 +10,8 @@ Version 2.1.0:
   `grizzled.io.RichInputStream`. Import `grizzled.io.Implicits._` to get the
   same conversions.
 * Refactored some of the test classes.
+* Added a `tryGet()` method to `grizzled.config.Configuration`, as a move
+  toward getting rid of `Either`.
 
 Version 2.0.1:
 
