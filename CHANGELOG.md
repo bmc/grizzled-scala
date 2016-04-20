@@ -1,5 +1,12 @@
 # Grizzled Scala Change Log
 
+Version 2.0.2:
+
+* Removed unused `lib` directory and its contained `jar` files.
+* `grizzled.string.WordWrapper` is now a case class.
+* Fixed wrapping in `grizzled.string.WordWrapper` to handle specified "ignore"
+  characters in the prefix, not just in the wrapped text.
+
 Version 2.0.1:
 
 * Fixed `GrizzledString.translateMetachars`. It was not properly parsing

@@ -97,14 +97,14 @@ package grizzled.string
   *                    post-process the wrapped string.
   * @param indentChar  the indentation character to use.
   */
-class WordWrapper(val wrapWidth:    Int = 79,
-                  val indentation:  Int = 0,
-                  val prefix:       String = "",
-                  val ignore:       Set[Char] = Set.empty[Char],
-                  val indentChar:   Char = ' ') {
+case class WordWrapper(wrapWidth:    Int = 79,
+                       indentation:  Int = 0,
+                       prefix:       String = "",
+                       ignore:       Set[Char] = Set.empty[Char],
+                       indentChar:   Char = ' ') {
   require(prefix != null)
 
-  private val prefixLength = prefix.length
+  private val prefixLength = wordLen(prefix)
 
   /** Wrap a string, using the wrap width, prefix, indentation and indentation
     * character that were specified to the `WordWrapper` constructor.
@@ -126,8 +126,6 @@ class WordWrapper(val wrapWidth:    Int = 79,
     def assembleLine(prefix: String, buf: ArrayBuffer[String]): String =
       prefix + indentChars + buf.mkString(" ")
 
-    def wordLen(word: String) = word.filter(! ignore.contains(_)).length
-
     def wrapOneLine(line: String, prefix: String): String = {
       val lineOut = new ArrayBuffer[String]
       val result  = new ArrayBuffer[String]
@@ -135,6 +133,7 @@ class WordWrapper(val wrapWidth:    Int = 79,
 
       for (word <- line.split("[\t ]")) {
         val wordLength = word.length
+        val prefixLength = wordLen(localPrefix)
 
         // Current length is the length of each word in the lineOut
         // buffer, plus a single blank between them, plus the prefix
@@ -144,7 +143,7 @@ class WordWrapper(val wrapWidth:    Int = 79,
         val totalBlanks = lineOut.length - 1
         val wordLengths = (0 /: lineOut.map(wordLen(_))) (_ + _)
         val currentLength = totalBlanks + wordLengths +
-        localPrefix.length + indentation
+                            localPrefix.length + indentation
         if ((wordLength + currentLength + 1) > wrapWidth) {
           result += assembleLine(localPrefix, lineOut)
           lineOut.clear
@@ -154,7 +153,7 @@ class WordWrapper(val wrapWidth:    Int = 79,
         lineOut += word
       }
 
-      if (lineOut.length > 0)
+      if (lineOut.nonEmpty)
         result += assembleLine(localPrefix, lineOut)
 
       result.mkString("\n").rtrim
@@ -167,27 +166,7 @@ class WordWrapper(val wrapWidth:    Int = 79,
 
     buf mkString "\n"
   }
-}
 
-/** Companion object for `WordWrapper`.
-  */
-object WordWrapper {
-  /** Create a `WordWrapper`.
-    *
-    * @param wrapWidth   the number of characters after which to wrap each line
-    * @param indentation how many characters to indent
-    * @param prefix      the prefix to use, or "" for none. Cannot be null.
-    * @param ignore      set of characters to ignore when calculating wrapping.
-    *                    This feature can be useful when certain characters
-    *                    represent escape characters, and you intend to
-    *                    post-process the wrapped string.
-    * @param indentChar  the indentation character to use.
-    */
-  def apply(wrapWidth:    Int = 79,
-            indentation:  Int = 0,
-            prefix:       String = "",
-            ignore:       Set[Char] = Set.empty[Char],
-            indentChar:   Char = ' ') = {
-    new WordWrapper(wrapWidth, indentation, prefix, ignore, indentChar)
-  }
+  private def wordLen(word: String) = word.filter(! ignore.contains(_)).length
+
 }
