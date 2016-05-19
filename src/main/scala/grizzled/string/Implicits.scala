@@ -118,7 +118,10 @@ object Implicits {
   /** String enrichment classes.
     */
   object String {
-    implicit def ScalaString_GrizzledString(rs: StringLike[String]) =
+    // Used by translateMetachars().
+    private val Hex = """([\dabcdef])""".r
+
+    implicit def String_GrizzledString(rs: StringLike[String]): GrizzledString =
       new GrizzledString(rs.toString)
 
     /** An analog to Scala's `RichString` class, providing some methods
@@ -184,7 +187,7 @@ object Implicits {
       def tokenize: List[String] = {
         string.trim.split("""\s+""").toList match {
           case Nil                   => Nil
-          case s :: Nil if (s == "") => Nil
+          case s :: Nil if s.isEmpty => Nil
           case s :: Nil              => List(s)
           case s :: rest             => s :: rest
         }
@@ -262,70 +265,38 @@ object Implicits {
         * @return the possibly translated string
         */
       def translateMetachars: String = {
-        // NOTE: Direct matching against Some/None is done here, because it's
-        // actually more readable than the (generally preferred) alternatives.
+        import scala.annotation.tailrec
 
-        import grizzled.parsing.{IteratorStream, Pushback}
-        import grizzled.string.Implicits.Char._
 
-        val stream = new IteratorStream[Char](string) with Pushback[Char]
+        @tailrec
+        def doParse(chars: List[Char], buf: String): String = {
 
-        def parseHexDigits(buf: List[Char]): List[Char] = {
-          if (buf.length == 4)
-            buf
+          chars match {
+            case Nil => buf
+            case '\\' :: 't' :: rest  => doParse(rest, buf + "\t")
+            case '\\' :: 'n' :: rest  => doParse(rest, buf + "\n")
+            case '\\' :: 'r' :: rest  => doParse(rest, buf + "\r")
+            case '\\' :: 'f' :: rest  => doParse(rest, buf + "\f")
+            case '\\' :: '\\' :: rest => doParse(rest, buf + "\\")
 
-          else {
-            stream.next match {
-              case Some(c) if c.isHexDigit =>
-                val newBuf = buf :+ c
-                parseHexDigits(newBuf)
+            case List('\\', 'u', Hex(a), Hex(b), Hex(c), Hex(d), rest @ _*) =>
+              val chars = Integer.parseInt(Array(a, b, c, d).mkString(""), 16)
+              doParse(rest.toList, buf + Character.toChars(chars).mkString(""))
 
-              case Some(c) =>
-                stream.pushback(c)
-                buf
+            case '\\' :: 'u' :: rest =>
+              doParse(rest, buf + "\\u")
 
-              case None => buf
-            }
+            case '\\' :: c :: rest =>
+              doParse(rest, buf + s"\\$c")
+
+            case '\\' :: Nil =>
+              buf + "\\"
+
+            case c :: rest => doParse(rest, buf :+ c)
           }
         }
 
-        def parseUnicode: List[Char] = {
-          val digits = parseHexDigits(List.empty[Char])
-          if (digits == Nil)
-            Nil
-
-          else if (digits.length != 4) {
-            // Invalid Unicode string.
-
-            List('\\', 'u') ++ digits
-          }
-
-          else
-            List(Integer.parseInt(digits mkString "", 16).asInstanceOf[Char])
-        }
-
-        def parseMeta: List[Char] = {
-          stream.next match {
-            case Some('t')  => List('\t')
-            case Some('f')  => List('\f')
-            case Some('n')  => List('\n')
-            case Some('r')  => List('\r')
-            case Some('\\') => List('\\')
-            case Some('u')  => parseUnicode
-            case Some(c)    => List('\\', c)
-            case None       => Nil
-          }
-        }
-
-        def translate: List[Char] = {
-          stream.next match {
-            case Some('\\') => parseMeta ::: translate
-            case Some(c)    => c :: translate
-            case None       => Nil
-          }
-        }
-
-        translate mkString ""
+        doParse(this.string.toList, "")
       }
     }
   }

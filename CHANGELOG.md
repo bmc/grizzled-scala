@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 2.2.0:
+
+* Implemented a simpler, more elegant version of
+  `GrizzledString.translateMetachars()`.
+
 Version 2.1.0:
 
 * Removed unused `lib` directory and its contained `jar` files.

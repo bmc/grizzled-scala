@@ -183,7 +183,7 @@ object util {
 
     else if (QUOTE_SET.contains(trimmed(0))) {
       val mOpt = QUOTED_REGEX.findFirstMatchIn(trimmed)
-      if (mOpt == None)  // to eol
+      if (mOpt.isEmpty)  // to eol
         List(trimmed)
 
       else {
@@ -197,7 +197,7 @@ object util {
 
     else {
       val mOpt = WHITE_SPACE_REGEX.findFirstMatchIn(trimmed)
-      if (mOpt == None) // to eol
+      if (mOpt.isEmpty) // to eol
         List(trimmed)
 
       else {
