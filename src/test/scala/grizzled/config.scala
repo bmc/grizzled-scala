@@ -2,7 +2,7 @@ package grizzled.config
 
 import org.scalatest.{Matchers, FlatSpec}
 import scala.io.Source
-import grizzled.config._
+import scala.util.{Success, Try}
 
 /** Test the Configuration class.
   */
@@ -21,9 +21,14 @@ class ConfigSpec extends FlatSpec with Matchers {
         |o5: ${section2.o1}
         |intOpt: ${section3.intOpt}
         |longOpt: ${section3.longOpt}
+        |valueWithNewline: line 1\nline 2
+        |endsWithTrademark: Foobar\u2122
+        |rawValue -> \tShould not expand\n
+        |
         |[section2]
         |o1: foo
         |substError: $x
+        |
         |[section3]
         |intOpt: 10
         |boolOptTrue: true
@@ -33,7 +38,7 @@ class ConfigSpec extends FlatSpec with Matchers {
         |charOpt: c
       """.stripMargin
 
-    val cfg = Configuration(Source.fromString(TestConfig)).right.get
+    val cfg = Configuration.read(Source.fromString(TestConfig)).get
 
     val TestConfigWithExoticSection =
       """
@@ -62,10 +67,10 @@ class ConfigSpec extends FlatSpec with Matchers {
   }
 
   it should "allow + to replace an option without mutating the original" in {
-    val eCfg = Configuration(Source.fromString(Fixture.TestConfig))
-    eCfg.isRight shouldBe true
+    val eCfg = Configuration.read(Source.fromString(Fixture.TestConfig))
+    eCfg.isSuccess shouldBe true
 
-    val cfg: Configuration = eCfg.right.get
+    val cfg: Configuration = eCfg.get
     val newCfg = cfg + ("section2", "o1", "bar")
 
     cfg.asOpt[String]("section2", "o1") shouldBe Some("foo")
@@ -111,9 +116,9 @@ class ConfigSpec extends FlatSpec with Matchers {
 
   it should "allow addition of multiple new sections and options with ++" in {
     val cfg = Fixture.cfg
-    val newCfg = cfg ++ (("section999" -> ("opt1" -> "value1")),
-                         ("section888" -> ("opt2" -> "value2")),
-                         ("section999" -> ("opt3" -> "value3")))
+    val newCfg = cfg ++ ("section999" -> ("opt1" -> "value1"),
+                         "section888" -> ("opt2" -> "value2"),
+                         "section999" -> ("opt3" -> "value3"))
     cfg.hasSection("section999") should === (false)
     cfg.hasSection("section888") should === (false)
 
@@ -125,9 +130,9 @@ class ConfigSpec extends FlatSpec with Matchers {
 
   it should "allow addition of new options to existing sections with ++" in {
     val cfg = Fixture.cfg
-    val newCfg = cfg ++ (("section1" -> ("newOption1" -> "value1")),
-                         ("section2" -> ("newOption2" -> "value2")),
-                         ("section1" -> ("newOption3" -> "value3")))
+    val newCfg = cfg ++ ("section1" -> ("newOption1" -> "value1"),
+                         "section2" -> ("newOption2" -> "value2"),
+                         "section1" -> ("newOption3" -> "value3"))
 
     cfg.hasSection("section1") should === (true)
     cfg.hasSection("section2") should === (true)
@@ -145,8 +150,8 @@ class ConfigSpec extends FlatSpec with Matchers {
 
   it should "allow replacing options in existing sections with ++" in {
     val cfg = Fixture.cfg
-    val newCfg = cfg ++ (("section1" -> ("o1" -> "newValue1")),
-                         ("section1" -> ("o2" -> "newValue2")))
+    val newCfg = cfg ++ ("section1" -> ("o1" -> "newValue1"),
+                         "section1" -> ("o2" -> "newValue2"))
 
     cfg.hasSection("section1") should === (true)
     newCfg.hasSection("section1") should === (true)
@@ -204,14 +209,12 @@ class ConfigSpec extends FlatSpec with Matchers {
   }
 
   it should "support a 'not found' function" in {
-    def notFound(section: String, option: String):
-      Either[String, Option[String]] = {
-
-      Right(Some(s"NF:$section.$option"))
+    def notFound(section: String, option: String): Try[Option[String]] = {
+      Success(Some(s"NF:$section.$option"))
     }
 
-    val cfg = Configuration(Source.fromString(Fixture.TestConfig),
-                            notFoundFunction = Some(notFound _)).right.get
+    val cfg = Configuration.read(Source.fromString(Fixture.TestConfig),
+                                 notFoundFunction = Some(notFound _)).get
 
     assert(Some("val1") === cfg.get("section1", "o1"))
     assert(Some("NF:section1.foo") === cfg.get("section1", "foo"))
@@ -222,7 +225,7 @@ class ConfigSpec extends FlatSpec with Matchers {
     val cfg = Fixture.cfg
     val section1 = cfg.getSection("section1")
 
-    assert(section1 != None)
+    assert(section1.isDefined)
     assert(section1.get.options.get("o2") !== None)
     assert(section1.get.options.get("o2") === Some("val2"))
     assert(section1.get.options.get("o99") === None)
@@ -233,6 +236,22 @@ class ConfigSpec extends FlatSpec with Matchers {
 
     assert(cfg.getSection("section1").get.options.get("o4") === Some("val1"))
     assert(cfg.getSection("section1").get.options.get("o5") === Some("foo"))
+  }
+
+  it should "properly expand metacharacters in values" in {
+    val cfg = Fixture.cfg
+
+    cfg.asOpt[String]("section1", "valueWithNewline") shouldBe
+      Some("line 1\nline 2")
+    cfg.asOpt[String]("section1", "endsWithTrademark") shouldBe
+      Some("Foobar\u2122")
+  }
+
+  it should "not expand metachars in raw values" in {
+    val cfg = Fixture.cfg
+
+    cfg.asOpt[String]("section1", "rawValue") shouldBe
+      Some("\\tShould not expand\\n")
   }
 
   it should "support asOpt[Int]" in {
@@ -329,24 +348,26 @@ class ConfigSpec extends FlatSpec with Matchers {
   }
 
   it should "handle unsafe substitutions" in {
-    val cfg = Configuration(Source.fromString(Fixture.TestConfig),
-                            safe = false).right.get
+    val cfg = Configuration.read(Source.fromString(Fixture.TestConfig),
+                                 safe = false).get
 
-    assert(cfg.asEither[String]("section2", "substError").isLeft)
-    assert(cfg.asEither[Int]("section3", "intOpt") === Right(Some(10)))
-    assert(cfg.asEither[Int]("section1", "intOpt") === Right(Some(10)))
+    assert(cfg.tryGet("section2", "substError").isFailure)
+    assert(cfg.asTry[Int]("section3", "intOpt") === Success(Some(10)))
+    assert(cfg.asTry[Int]("section1", "intOpt") === Success(Some(10)))
   }
 
   it should "detect illegal characters in section names" in {
-    val cfg = Configuration(Source.fromString(Fixture.TestConfigWithExoticSection))
-    assert(cfg.isLeft)
+    val cfg = Configuration.read(Source.fromString(Fixture.TestConfigWithExoticSection))
+    assert(cfg.isFailure)
   }
 
   it should "honor given SectionNamePattern when loading data" in {
-    val cfg = Configuration(Source.fromString(Fixture.TestConfigWithExoticSection),
-      sectionNamePattern = """([a-zA-Z0-9_\.]+)""".r)
-    assert(cfg.isRight)
-    val loadedCfg = cfg.right.get
+    val cfg = Configuration.read(
+      Source.fromString(Fixture.TestConfigWithExoticSection),
+      sectionNamePattern = """([a-zA-Z0-9_\.]+)""".r
+    )
+    assert(cfg.isSuccess)
+    val loadedCfg = cfg.get
     assert(loadedCfg.get("section1.1", "bar") === Some("baz"))
   }
 }

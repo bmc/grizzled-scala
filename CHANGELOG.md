@@ -4,6 +4,15 @@ Version 2.2.0:
 
 * Implemented a simpler, more elegant version of
   `GrizzledString.translateMetachars()`.
+* `grizzled.config.Configuration` changes:
+  - Restored ability of `grizzled.config.Configuration` to expand metacharacters
+    in non-raw values.
+  - Deprecated the `grizzled.config.Configuration.apply()` functions, in favor
+    of `read()` functions that return `Try` (instead of `Either`).
+  - Changed `grizzled.config.ValueConverter` to require overriding a `Try`-based
+    function, rather than an `Either`-based function.
+  - Added implicit value converters for `Double` and `Float`.
+  - Restored (broken) ability to specify a "not found" function.
 
 Version 2.1.0:
 
