@@ -176,7 +176,7 @@ def main(args: Array[String]): Unit = {
 }
 </pre></p><p>Note that contents of the configuration file can override the predefined
 sections.</p><p>Applications may also provide a &quot;not found&quot; function that is called to
-resolveOpt options that are not found in the table. Such a function can be
+resolve options that are not found in the table. Such a function can be
 used to supply on-demand sections and values. For example, suppose you
 want to do something crazy, such as look up any not-found values in a
 database. (This is probably a very bad idea, but it makes a good example.)
@@ -463,6 +463,34 @@ converters for various common types into scope.
                     actual conversion.</p></dd><dt>returns</dt><dd class="cmt"><p><code>None</code> if not found or not convertible, <code>Some(value)</code> if found
         and converted. If you want to distinguish between &quot;not found&quot; and
         &quot;cannot convert&quot;, use <code>asEither()</code>.</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#asTry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asTry[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):scala.util.Try[Option[T]]"></a>
+      <a id="asTry[T](String,String)(ValueConverter[T]):Try[Option[T]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asTry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="converter">converter: <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="grizzled.config.Configuration.asTry.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="grizzled.config.Configuration.asTry.T">T</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@asTry[T](sectionName:String,optionName:String)(implicitconverter:grizzled.config.ValueConverter[T]):scala.util.Try[Option[T]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Get a value as an instance of specified type.</p><div class="fullcomment"><div class="comment cmt"><p>Get a value as an instance of specified type. This method retrieves the
+value of an option from a section and, using the specified (or implicit)
+converter, attempts to convert the option's to the specified type. If you
+import <code>grizzled.config.Configuration.Implicits._</code>, you'll bring implicit
+converters for various common types into scope.</p><p>If <code>safe</code> is <code>true</code> (as defined when the <code>Configuration</code> object is built),
+substitutions of nonexistent variables will result in empty strings for
+where the substitutions were specified (e.g., <code>val${section1.notValid}</code>
+will result in the string &quot;val&quot;). If <code>safe</code> is <code>false</code>, substitutions
+of nonexistent values will result in an error (i.e., a <code>Left</code> result).
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the desired type of the result</p></dd><dt class="param">sectionName</dt><dd class="cmt"><p>the section from which to retrieve the value</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the name of the option whose value is to be returned</p></dd><dt class="param">converter</dt><dd class="cmt"><p>a <code>ValueConverter</code> object that will handle the
+                    actual conversion.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Failure(error)</code> on conversion error. <code>Success(None)</code> if not
+        found. <code>Success(Some(value))</code> if found and converted.</p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -638,7 +666,7 @@ Returns <code>Some(list)</code> if the key is found, and <code>None</code> other
     </span>
       <p class="shortcomment cmt">Like <code>get()</code>, except that this method returns an <code>Either</code>, allowing
 errors to be captured and processed.</p><div class="fullcomment"><div class="comment cmt"><p>Like <code>get()</code>, except that this method returns an <code>Either</code>, allowing
-errors to be captured and processed.
+errors to be captured and processed.</p><p>NOTE: Prefer <code>tryGet()</code>, as this method may eventually go away.
 </p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p><code>Left(error)</code> on error. <code>Right(None)</code> if not found.
         <code>Right(Some(value))</code> if found and processed.</p></dd></dl></div>
     </li><li name="grizzled.config.Configuration#getOrElse" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -895,6 +923,27 @@ expression.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.config.Configuration#tryGet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tryGet(sectionName:String,optionName:String):scala.util.Try[Option[String]]"></a>
+      <a id="tryGet(String,String):Try[Option[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tryGet</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration@tryGet(sectionName:String,optionName:String):scala.util.Try[Option[String]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Like <code>get()</code>, except that this method returns a <code>Try</code>, allowing
+errors to be captured and processed.</p><div class="fullcomment"><div class="comment cmt"><p>Like <code>get()</code>, except that this method returns a <code>Try</code>, allowing
+errors to be captured and processed.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the section name</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the option name</p></dd><dt>returns</dt><dd class="cmt"><p><code>Failure(error)</code> on error. <code>Success(None)</code> if not found.
+        <code>Success(Some(value))</code> if found and processed.</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

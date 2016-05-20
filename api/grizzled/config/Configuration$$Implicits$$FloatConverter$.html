@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>RichInputStream - grizzled.io.RichInputStream</title>
-          <meta name="description" content="RichInputStream - grizzled.io.RichInputStream" />
-          <meta name="keywords" content="RichInputStream grizzled.io.RichInputStream" />
+          <title>FloatConverter - grizzled.config.Configuration.Implicits.FloatConverter</title>
+          <meta name="description" content="FloatConverter - grizzled.config.Configuration.Implicits.FloatConverter" />
+          <meta name="keywords" content="FloatConverter grizzled.config.Configuration.Implicits.FloatConverter" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.io.RichInputStream';
+            var hash = 'grizzled.config.Configuration$$Implicits$$FloatConverter$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,16 +26,14 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <a href="RichInputStream$.html" title="See companion object"><img alt="Class/Object" src="../../lib/class_to_object_big.png" /></a>
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.io">io</a></p>
-        <h1><a href="RichInputStream$.html" title="See companion object">RichInputStream</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="RichInputStream$.html" title="See companion object">object RichInputStream</a>
-            | <a href="package.html" class="extype" name="grizzled.io">package io</a>
+        <img alt="Object" src="../../lib/object_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.config">config</a>.<a href="Configuration$.html" class="extype" name="grizzled.config.Configuration">Configuration</a>.<a href="Configuration$$Implicits$.html" class="extype" name="grizzled.config.Configuration.Implicits">Implicits</a></p>
+        <h1>FloatConverter</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="Configuration$$Implicits$.html" class="extype" name="grizzled.config.Configuration.Implicits">package Implicits</a>
           </div></span></h3><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -43,20 +41,19 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
+        <span class="modifier">implicit </span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">RichInputStream</span><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+        <span class="name">FloatConverter</span><span class="result"> extends <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="scala.Float">Float</span>]</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
-the Java <code>InputStream</code> class. The <code>implicits</code> object contains implicit
-conversions between <code>RichInputStream</code> and <code>InputStream</code>.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Value converter for float values, for use with
+<code>Configuration.asEither()</code>, <code>Configuration.asOpt()</code>, and <code>asTry()</code>.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="scala.Float">Float</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -74,7 +71,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.io.RichInputStream"><span>RichInputStream</span></li><li class="in" name="grizzled.io.PartialReader"><span>PartialReader</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.config.Configuration.Implicits.FloatConverter"><span>FloatConverter</span></li><li class="in" name="grizzled.config.ValueConverter"><span>ValueConverter</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -91,27 +88,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="grizzled.io.RichInputStream#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(inputStream:java.io.InputStream):grizzled.io.RichInputStream"></a>
-      <a id="&lt;init&gt;:RichInputStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">RichInputStream</span><span class="params">(<span name="inputStream">inputStream: <span class="extype" name="java.io.InputStream">InputStream</span></span>)</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@&lt;init&gt;(inputStream:java.io.InputStream):grizzled.io.RichInputStream" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">inputStream</dt><dd class="cmt"><p>the input stream to wrap</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -131,7 +108,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -148,7 +125,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@##():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@##():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -165,7 +142,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -182,7 +159,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -199,7 +176,7 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@clone():Object" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@clone():Object" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -210,42 +187,24 @@ conversions between <code>RichInputStream</code> and <code>InputStream</code>.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.io.RichInputStream#convert" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="convert(b:Int):Byte"></a>
-      <a id="convert(Int):Byte"></a>
+    </li><li name="grizzled.config.Configuration.Implicits.FloatConverter#convert" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convert(sectionName:String,optionName:String,value:String):scala.util.Try[Float]"></a>
+      <a id="convert(String,String,String):Try[Float]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">convert</span><span class="params">(<span name="b">b: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Byte">Byte</span></span>
+        <span class="name">convert</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Float">Float</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@convert(b:Int):Byte" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@convert(sectionName:String,optionName:String,value:String):scala.util.Try[Float]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.RichInputStream">RichInputStream</a> → <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a></dd></dl></div>
-    </li><li name="grizzled.io.RichInputStream#copyTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copyTo(out:java.io.OutputStream):Unit"></a>
-      <a id="copyTo(OutputStream):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">copyTo</span><span class="params">(<span name="out">out: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@copyTo(out:java.io.OutputStream):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Copy the input stream to an output stream, stopping on EOF.</p><div class="fullcomment"><div class="comment cmt"><p>Copy the input stream to an output stream, stopping on EOF.
-This method does not close either stream.
-</p></div><dl class="paramcmts block"><dt class="param">out</dt><dd class="cmt"><p>the output stream</p></dd></dl></div>
+      <p class="shortcomment cmt">Convert an option value to the appropriate type.</p><div class="fullcomment"><div class="comment cmt"><p>Convert an option value to the appropriate type.
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the name of the section, for error messages</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the name of the option, for error messages</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value, as a string</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(value)</code> on success; <code>Failure(error)</code> on error</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.config.Configuration.Implicits.FloatConverter">FloatConverter</a> → <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -258,7 +217,7 @@ This method does not close either stream.
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -275,7 +234,7 @@ This method does not close either stream.
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -292,7 +251,7 @@ This method does not close either stream.
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@finalize():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -315,7 +274,7 @@ This method does not close either stream.
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -332,28 +291,11 @@ This method does not close either stream.
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@hashCode():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.io.RichInputStream#inputStream" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="inputStream:java.io.InputStream"></a>
-      <a id="inputStream:InputStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">inputStream</span><span class="result">: <span class="extype" name="java.io.InputStream">InputStream</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@inputStream:java.io.InputStream" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">the input stream to wrap</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -366,7 +308,7 @@ This method does not close either stream.
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -383,7 +325,7 @@ This method does not close either stream.
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -400,7 +342,7 @@ This method does not close either stream.
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@notify():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@notify():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -417,46 +359,11 @@ This method does not close either stream.
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="grizzled.io.PartialReader#readSome" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="readSome(max:Int):List[T]"></a>
-      <a id="readSome(Int):List[Byte]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">readSome</span><span class="params">(<span name="max">max: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@readSome(max:Int):List[T]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Read up to <code>max</code> items from the reader.</p><div class="fullcomment"><div class="comment cmt"><p>Read up to <code>max</code> items from the reader.
-</p></div><dl class="paramcmts block"><dt class="param">max</dt><dd class="cmt"><p>maximum number of items to read</p></dd><dt>returns</dt><dd class="cmt"><p>a list of the items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a></dd></dl></div>
-    </li><li name="grizzled.io.RichInputStream#reader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="reader:java.io.InputStream"></a>
-      <a id="reader:InputStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">reader</span><span class="result">: <span class="extype" name="java.io.InputStream">InputStream</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@reader:java.io.InputStream" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.RichInputStream">RichInputStream</a> → <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -469,7 +376,7 @@ This method does not close either stream.
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -486,7 +393,7 @@ This method does not close either stream.
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@toString():String" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@toString():String" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -503,7 +410,7 @@ This method does not close either stream.
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@wait():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@wait():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -526,7 +433,7 @@ This method does not close either stream.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -549,7 +456,7 @@ This method does not close either stream.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.RichInputStream@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$FloatConverter$@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -569,8 +476,8 @@ This method does not close either stream.
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="grizzled.io.PartialReader">
-              <h3>Inherited from <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>]</h3>
+        <div class="parent" name="grizzled.config.ValueConverter">
+              <h3>Inherited from <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="scala.Float">Float</span>]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

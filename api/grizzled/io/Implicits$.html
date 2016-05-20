@@ -49,7 +49,8 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implicits that add enrichments to <code>java.io</code> and <code>scala.io</code> classes.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -112,6 +113,48 @@ in this class transparently from a <code>java.io.File</code> object.</p><pre><sp
 
 <span class="kw">val</span> source = Source.fromFile(<span class="kw">new</span> java.io.File(<span class="lit">"/tmp/foo/bar"</span>))
 source.firstNonblankLine.getOrElse(<span class="lit">""</span>)</pre></div></div>
+    </li><li name="grizzled.io.Implicits.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RichInputStreamextendsPartialReader[Byte]"></a>
+      <a id="RichInputStream:RichInputStream"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$$RichInputStream.html"><span class="name">RichInputStream</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.Implicits$@RichInputStreamextendsPartialReader[Byte]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
+the Java <code>InputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
+the Java <code>InputStream</code> class. The <code>implicits</code> object contains implicit
+conversions between <code>RichInputStream</code> and <code>InputStream</code>.
+</p></div></div>
+    </li><li name="grizzled.io.Implicits.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RichReaderextendsPartialReader[Char]"></a>
+      <a id="RichReader:RichReader"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$$RichReader.html"><span class="name">RichReader</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Char">Char</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.Implicits$@RichReaderextendsPartialReader[Char]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
+the Java <code>Reader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
+the Java <code>Reader</code> class. The <code>implicits</code> object contains implicit
+conversions between <code>RichReader</code> and <code>Reader</code>.
+</p></div></div>
     </li></ol>
             </div>
 

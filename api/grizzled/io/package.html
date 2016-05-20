@@ -130,48 +130,6 @@ objects and satisfies reads from them serially. Once composed, a
       </a>
     </span>
       <p class="shortcomment cmt">Contains methods that can read part of a stream or reader.</p>
-    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RichInputStreamextendsPartialReader[Byte]"></a>
-      <a id="RichInputStream:RichInputStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="RichInputStream.html"><span class="name">RichInputStream</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.package@RichInputStreamextendsPartialReader[Byte]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
-the Java <code>InputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
-the Java <code>InputStream</code> class. The <code>implicits</code> object contains implicit
-conversions between <code>RichInputStream</code> and <code>InputStream</code>.
-</p></div></div>
-    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RichReaderextendsPartialReader[Char]"></a>
-      <a id="RichReader:RichReader"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="RichReader.html"><span class="name">RichReader</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Char">Char</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.package@RichReaderextendsPartialReader[Char]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
-the Java <code>Reader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
-the Java <code>Reader</code> class. The <code>implicits</code> object contains implicit
-conversions between <code>RichReader</code> and <code>Reader</code>.
-</p></div></div>
     </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SourceReaderextendsReader"></a>
       <a id="SourceReader:SourceReader"></a>
@@ -212,45 +170,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RichInputStream"></a>
-      <a id="RichInputStream:RichInputStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="RichInputStream$.html"><span class="name">RichInputStream</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.package@RichInputStream" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Companion object to <code>RichInputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object to <code>RichInputStream</code> class. Importing this object brings
-the implicit conversations into scope.
-</p></div></div>
-    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RichReader"></a>
-      <a id="RichReader:RichReader"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="RichReader$.html"><span class="name">RichReader</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.package@RichReader" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Companion object to <code>RichReader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object to <code>RichReader</code> class. Importing this object brings the
-implicit conversations into scope.
-</p></div></div>
+      <p class="shortcomment cmt">Implicits that add enrichments to <code>java.io</code> and <code>scala.io</code> classes.</p>
     </li><li name="grizzled.io.SourceReader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SourceReader"></a>
       <a id="SourceReader:SourceReader"></a>
@@ -273,7 +193,54 @@ implicit conversations into scope.
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.io.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RichInputStream"></a>
+      <a id="RichInputStream:RichInputStream"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RichInputStream$.html"><span class="name deprecated" title="Deprecated: (Since version 2.1.0) Use the grizzled.io.Implicits.RichInputStream class, instead.">RichInputStream</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@RichInputStream" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object to <code>RichInputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object to <code>RichInputStream</code> class. Importing this object brings
+the implicit conversations into scope.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.1.0)</i> Use the grizzled.io.Implicits.RichInputStream class, instead.</p></dd></dl></div>
+    </li><li name="grizzled.io.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RichReader"></a>
+      <a id="RichReader:RichReader"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RichReader$.html"><span class="name deprecated" title="Deprecated: (Since version 2.1.0) Use the grizzled.io.Implicits.RichReader class, instead.">RichReader</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.package@RichReader" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object to <code>RichReader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object to <code>RichReader</code> class. Importing this object brings the
+implicit conversations into scope.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.1.0)</i> Use the grizzled.io.Implicits.RichReader class, instead.</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

@@ -233,7 +233,7 @@ def main(args: Array[String]): Unit = {
 }
 </pre></p><p>Note that contents of the configuration file can override the predefined
 sections.</p><p>Applications may also provide a &quot;not found&quot; function that is called to
-resolveOpt options that are not found in the table. Such a function can be
+resolve options that are not found in the table. Such a function can be
 used to supply on-demand sections and values. For example, suppose you
 want to do something crazy, such as look up any not-found values in a
 database. (This is probably a very bad idea, but it makes a good example.)
@@ -245,6 +245,42 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
 }
 
 <span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div></div>
+    </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationExceptionextendsException"></a>
+      <a id="ConfigurationException:ConfigurationException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationException.html"><span class="name">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.package@ConfigurationExceptionextendsException" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A configuration-related exception, used primarily inside <code>Failure</code>
+objects.</p>
+    </li><li name="grizzled.config.ConfigurationOptionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationOptionExceptionextendsConfigurationException"></a>
+      <a id="ConfigurationOptionException:ConfigurationOptionException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationOptionException.html"><span class="name">ConfigurationOptionException</span></a><span class="result"> extends <a href="ConfigurationException.html" class="extype" name="grizzled.config.ConfigurationException">ConfigurationException</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.package@ConfigurationOptionExceptionextendsConfigurationException" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A specific kind of configuration exception, tied to a specific section
+and option.</p>
     </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SectionextendsAnyRef"></a>
       <a id="Section:Section"></a>
@@ -305,6 +341,23 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
     </span>
       <p class="shortcomment cmt">Companion object for the <code>Configuration</code> class
 </p>
+    </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfigurationException"></a>
+      <a id="ConfigurationException:ConfigurationException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfigurationException$.html"><span class="name">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.package@ConfigurationException" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li></ol>
             </div>
 

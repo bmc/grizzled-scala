@@ -50,7 +50,7 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Value converter for Boolean values, for use with
-<code>Configuration.asEither()</code> and <code>Configuration.asOpt()</code>.
+<code>Configuration.asEither()</code>, <code>Configuration.asOpt()</code>, and <code>asTry()</code>.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a>[<span class="extype" name="scala.Boolean">Boolean</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -188,23 +188,23 @@
               
         </dd></dl></div>
     </li><li name="grizzled.config.Configuration.Implicits.BooleanValueConverter#convert" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="convert(sectionName:String,optionName:String,value:String):Either[String,Boolean]"></a>
-      <a id="convert(String,String,String):Either[String,Boolean]"></a>
+      <a id="convert(sectionName:String,optionName:String,value:String):scala.util.Try[Boolean]"></a>
+      <a id="convert(String,String,String):Try[Boolean]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">convert</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Boolean">Boolean</span>]</span>
+        <span class="name">convert</span><span class="params">(<span name="sectionName">sectionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="optionName">optionName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$BooleanValueConverter$@convert(sectionName:String,optionName:String,value:String):Either[String,Boolean]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.config.Configuration$$Implicits$$BooleanValueConverter$@convert(sectionName:String,optionName:String,value:String):scala.util.Try[Boolean]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Convert an option value to the appropriate type.</p><div class="fullcomment"><div class="comment cmt"><p>Convert an option value to the appropriate type.
-</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the name of the section, for error messages</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the name of the option, for error messages</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value, as a string</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(value)</code> on success; <code>Left(error)</code> on error</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.config.Configuration.Implicits.BooleanValueConverter">BooleanValueConverter</a> → <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">sectionName</dt><dd class="cmt"><p>the name of the section, for error messages</p></dd><dt class="param">optionName</dt><dd class="cmt"><p>the name of the option, for error messages</p></dd><dt class="param">value</dt><dd class="cmt"><p>the option's value, as a string</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(value)</code> on success; <code>Failure(error)</code> on error</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.config.Configuration.Implicits.BooleanValueConverter">BooleanValueConverter</a> → <a href="ValueConverter.html" class="extype" name="grizzled.config.ValueConverter">ValueConverter</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
