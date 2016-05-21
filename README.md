@@ -1,5 +1,6 @@
-Grizzled Scala: A general-purpose library of Scala classes and objects
-======================================================================
+# Grizzled Scala: A general-purpose library of Scala classes and objects
+
+[![Build Status](https://travis-ci.org/bmc/grizzled-scala.svg?branch=master)](https://travis-ci.org/bmc/grizzled-scala)
 
 ## Introduction
 
