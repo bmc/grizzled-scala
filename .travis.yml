@@ -18,6 +18,10 @@ before_cache:
   - find $HOME/.sbt -name "*.lock" | xargs rm
   - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
 
+jdk:
+  - oraclejdk8
+
 scala:
   - 2.10.6
   - 2.11.8
+  - "2.12.0-M4"
