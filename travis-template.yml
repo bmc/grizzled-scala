@@ -1,0 +1,26 @@
+# <META> Template for Travis CI configuration file. The rebuild-travis task in
+# <META> SBT reads this file. Substitutions are of the form %var% and should
+# <META> be obvious from context. Lines with <META> in them are stripped.
+# <META>
+# Travis CI configuration file. Generated from build.sbt on %date%
+
+sudo: false
+
+# These directories are cached to S3 at the end of the build.
+cache:
+  directories:
+    - $HOME/.ivy/cache
+    - $HOME/.sbt/boot
+
+language: scala
+
+script:
+  - sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
+
+before_cache:
+  # Tricks to avoid unnecessary cache updates
+  - find $HOME/.sbt -name "*.lock" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+
+scala:
+%scalaVersions%
