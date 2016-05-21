@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 2.2.1:
+
+* Rearranged some code to fix a compilation bug (JDK 1.7, Scala 2.11, on Ubuntu)
+  that appears to be related to SI-2905.
+
 Version 2.2.0:
 
 * Implemented a simpler, more elegant version of

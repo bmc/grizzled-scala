@@ -40,10 +40,34 @@ package grizzled
 import scala.annotation.implicitNotFound
 import scala.language.implicitConversions
 import scala.language.reflectiveCalls
+import scala.concurrent.Future
+import scala.util.{Failure, Success, Try}
 
 /** Miscellaneous utility functions and methods not otherwise categorized.
   */
 package object util {
+  object Implicits {
+    /** Enriched `Try` class, containing some helper methods.
+      *
+      * @param t the underlying `Try`
+      */
+    implicit class RichTry[T](t: Try[T]) {
+  
+      /** Replacement for `scala.concurrent.Future.fromTry()`, which can't be
+        * used here, because we still compile on Scala 2.10, and 2.10 doesn't
+        * have that function. Converts a `Try` to a `Future`. A successful
+        * `Try` (a `Success`) becomes a completed and successful `Future`.
+        * A failed `Try` (a `Failure`) becomes a completed and failed `Future`.
+        *
+        * @return the corresponding `Future`.
+        */
+      def toFuture = t match {
+        case Success(value) => Future.successful(value)
+        case Failure(ex)    => Future.failed(ex)
+      }
+    }
+  }
+
   /** `withResource()` needs an implicit evidence parameter of this type
     * to know how to release what's passed to it.
     *
