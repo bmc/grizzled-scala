@@ -118,8 +118,6 @@ object Implicits {
   /** String enrichment classes.
     */
   object String {
-    // Used by translateMetachars().
-    private val Hex = """([\dabcdef])""".r
 
     implicit def String_GrizzledString(rs: StringLike[String]): GrizzledString =
       new GrizzledString(rs.toString)
@@ -266,7 +264,9 @@ object Implicits {
         */
       def translateMetachars: String = {
         import scala.annotation.tailrec
+	import Char._
 
+        def isHexString(s: String): Boolean = s.count(_.isHexDigit) == s.length
 
         @tailrec
         def doParse(chars: List[Char], buf: String): String = {
@@ -279,7 +279,7 @@ object Implicits {
             case '\\' :: 'f' :: rest  => doParse(rest, buf + "\f")
             case '\\' :: '\\' :: rest => doParse(rest, buf + "\\")
 
-            case List('\\', 'u', Hex(a), Hex(b), Hex(c), Hex(d), rest @ _*) =>
+            case '\\' :: 'u' :: a :: b :: c :: d :: rest if isHexString(s"$a$b$c$d") =>
               val chars = Integer.parseInt(Array(a, b, c, d).mkString(""), 16)
               doParse(rest.toList, buf + Character.toChars(chars).mkString(""))
 

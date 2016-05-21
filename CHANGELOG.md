@@ -4,6 +4,9 @@ Version 2.2.1:
 
 * Rearranged some code to fix a compilation bug (JDK 1.7, Scala 2.11, on Ubuntu)
   that appears to be related to SI-2905.
+* Fixed `GrizzledString.translateMetachars` so that it compiles in the Travis CI
+  environment. The pattern match was too complicated for that environment, which means it
+  might have failed elsewhere, too.
 
 Version 2.2.0:
 

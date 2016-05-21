@@ -87,8 +87,8 @@ class GrizzledStringSpec extends FlatSpec with Matchers {
   "translateMetachars" should "translate metacharacter sequences into chars" in {
     val data = Array(
       "a b c"            -> "a b c",
-      "\\u2122"          -> "\u2122",
       "\\t\\n\\afooness" -> "\t\n\\afooness",
+      "\\u2122"          -> "\u2122",
       "\\u212a"          -> "\u212a",
       "\\u212x"          -> "\\u212x",
       "\\\\t"            -> "\\t"
