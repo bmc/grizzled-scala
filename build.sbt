@@ -48,47 +48,6 @@ libraryDependencies ++= Seq(
 // ---------------------------------------------------------------------------
 // Other tasks
 
-val doRebuildTravis = taskKey[Unit]("Recreate the .travis.yml file")
-doRebuildTravis := {
-  import java.io.{BufferedReader, FileInputStream, FileWriter, InputStreamReader}
-  import scala.io.Source
-
-  val scalaVersions = crossScalaVersions.value
-  val template = Source.fromInputStream(
-    new FileInputStream(baseDirectory.value / "travis-template.yml"),
-    "UTF-8"
-  )
-  .getLines
-
-  val Meta = """\s*<META>\s*""".r
-  val VarRef = """^([^%]*)%(\w+)%([^%]*)$""".r
-  val now = new java.util.Date
-
-  val yaml = for (line <- template if Meta.findFirstIn(line).isEmpty) yield {
-    line match {
-      case VarRef(start, v, end) =>
-        val s = v match {
-          case "date"          => now.toString
-          case "scalaVersions" => scalaVersions.map(s => s"  - $s").mkString("\n")
-          case _               => line
-        }
-        s"$start$s$end\n"
-      case _ => s"$line\n"
-    }
-  }
-
-  val output = baseDirectory.value / ".travis.yml"
-  println(s"Rewriting $output")
-  val out = new FileWriter(output)
-  try {
-    out.write(yaml.mkString(""))
-  }
-  finally {
-    out.close()
-  }
-}
-addCommandAlias("rebuild-travis", ";doRebuildTravis")
-
 // ---------------------------------------------------------------------------
 // Publishing criteria
 

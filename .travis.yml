@@ -10,8 +10,8 @@ cache:
 
 language: scala
 
-script:
-  - sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
+#script:
+#  - sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
 
 before_cache:
   # Tricks to avoid unnecessary cache updates
@@ -21,4 +21,3 @@ before_cache:
 scala:
   - 2.10.6
   - 2.11.8
-  - 2.12.0-M4
