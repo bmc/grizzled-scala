@@ -42,7 +42,7 @@ Grizzled Scala is published to the
 [Bintray Maven repository](https://bintray.com/bmc/maven), which is
 automatically linked to Bintray's [JCenter](https://bintray.com/bintray/jcenter)
 repository. (From JCenter, it's eventually pushed to the
-[Maven Central Repository][].
+[Maven Central Repository](http://search.maven.org/).)
 
 **NOTE**: This library uses [semantic versioning](http://semver.org).
 
