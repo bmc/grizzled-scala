@@ -1,5 +1,9 @@
 # Grizzled Scala Change Log
 
+Version 2.2.2
+
+* Miscellaneous cleanup of unit tests.
+
 Version 2.2.1:
 
 * Rearranged some code to fix a compilation bug (JDK 1.7, Scala 2.11, on Ubuntu)

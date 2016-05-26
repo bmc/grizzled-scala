@@ -2,11 +2,11 @@ package grizzled.util
 
 import java.io.IOException
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 
 import scala.util.{Failure, Success}
 
-class RichTrySpec extends FlatSpec with Matchers {
+class RichTrySpec extends BaseSpec {
   import grizzled.util.Implicits.RichTry
 
   "toFuture" should "convert a successful Try into a succeeded Future" in {

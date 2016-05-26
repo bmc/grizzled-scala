@@ -1,12 +1,11 @@
 package grizzled.file
 
-import java.io.{FileWriter, PrintWriter, File}
+import java.io.{File, FileWriter, PrintWriter}
 
 import grizzled.testutil.BrainDeadHTTP._
-import org.scalatest.{FlatSpec, Matchers}
-
 import grizzled.file.{util => FileUtil}
 import FileUtil.withTemporaryDirectory
+import grizzled.BaseSpec
 import grizzled.util.withResource
 
 import scala.util.Success
@@ -14,7 +13,7 @@ import scala.util.Success
 /** Created by bmc on 4/10/16
   *
   */
-class IncluderSpec extends FlatSpec with Matchers {
+class IncluderSpec extends BaseSpec {
 
   "Includer" should "handle a file including another file" in {
     withTemporaryDirectory("incl") { dir =>

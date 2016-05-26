@@ -1,13 +1,12 @@
 
 package grizzled
 
-import org.scalatest.{FlatSpec, Matchers}
 import grizzled.binary._
 
 /**
  * Tests the grizzled.binary functions.
  */
-class BinarySpec extends FlatSpec with Matchers {
+class BinarySpec extends BaseSpec {
   "bitCount" should "properly count bits" in {
     val intData = Map[Int, Int](
       0                -> 0,

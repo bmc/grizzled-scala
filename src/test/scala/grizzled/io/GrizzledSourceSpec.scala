@@ -36,13 +36,13 @@
 
 package grizzled.io
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 import scala.io.Source
 
 /**
   * Tests the grizzled.file.GrizzledSource functions.
   */
-class GrizzledSourceSpec extends FlatSpec with Matchers {
+class GrizzledSourceSpec extends BaseSpec {
   "First nonblank line" should "skip blank lines" in {
     import grizzled.io.Implicits._
 

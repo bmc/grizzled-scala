@@ -1,7 +1,6 @@
 package grizzled.net
 
-import org.scalatest.{FlatSpec, Matchers}
-
+import grizzled.BaseSpec
 import grizzled.testutil.BrainDeadHTTP._
 
 import scala.concurrent.Await
@@ -9,7 +8,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 import scala.io.Source
 
-class URLUtilSpec extends FlatSpec with Matchers {
+class URLUtilSpec extends BaseSpec {
 
   val Contents =
     """|Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -90,7 +89,7 @@ class URLUtilSpec extends FlatSpec with Matchers {
         Source.fromFile(f).mkString
       }
 
-      t.isSuccess shouldBe true
+      t shouldBe success
       t.get shouldBe Contents
     }
   }

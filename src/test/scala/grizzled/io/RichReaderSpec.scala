@@ -38,9 +38,9 @@ package grizzled.io
 
 import java.io.StringReader
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 
-class RichReaderSpec extends FlatSpec with Matchers {
+class RichReaderSpec extends BaseSpec {
 
   "readSome" should "stop reading when it hits the max" in {
     import grizzled.io.Implicits.RichReader

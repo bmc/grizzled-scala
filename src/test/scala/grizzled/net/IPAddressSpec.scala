@@ -1,50 +1,16 @@
-/*
-  ---------------------------------------------------------------------------
-  Copyright © 2009-2016, Brian M. Clapper. All rights reserved.
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are
-  met:
-
-  * Redistributions of source code must retain the above copyright notice,
-    this list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
-
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
-    names of its contributors may be used to endorse or promote products
-    derived from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  ---------------------------------------------------------------------------
-*/
-
 package grizzled.net
 
 import java.net.InetAddress
 
-import org.scalatest.{FlatSpec, Matchers, FunSuite}
-import grizzled.net._
+import grizzled.BaseSpec
 import grizzled.net.Implicits._
 
 import scala.util.{Failure, Try}
 
 /**
- * Tests the grizzled.net functions in inet.scala
+ * Tests the grizzled.net functions in IPAddressSpec.scala
  */
-class IPAddressSpec extends FlatSpec with Matchers {
+class IPAddressSpec extends BaseSpec {
   def byte(thing: Int): Byte = thing.toByte
   def bytes(data: Int*): List[Byte] = data.map(_.toByte).toList
 
@@ -84,21 +50,16 @@ class IPAddressSpec extends FlatSpec with Matchers {
       // Map the expected value into a list of bytes
       val mappedExpected = expected.map(_.toByte)
       val ipAddrRes = getIPAddress(input)
-      assert(ipAddrRes.isSuccess)
+      ipAddrRes shouldBe success
 
       val ipAddr = ipAddrRes.get
 
       // Run the test
-      assertResult(mappedExpected, "IPAddress(" + input + ")") {
-        ipAddr.address.toList
-      }
-
-      assertResult(expectedString, "IPAddress(" + input + ")") {
-        ipAddr.toString
-      }
+      ipAddr.address.toList shouldBe mappedExpected
+      ipAddr.toString shouldBe expectedString
     }
 
-    assert(IPAddress(Nil).isFailure)
+    IPAddress(Nil) shouldBe failure
   }
 
   "IPAddress implicits" should "properly convert" in {
@@ -111,28 +72,16 @@ class IPAddressSpec extends FlatSpec with Matchers {
       val mappedExpected = expected.map(_.toByte)
 
       val ipAddrRes = getIPAddress(input)
-      assert(ipAddrRes.isSuccess)
+      ipAddrRes shouldBe success
 
       val ipAddr = ipAddrRes.get
       val jdkInetAddress: java.net.InetAddress = ipAddr
       val ipAddr2: IPAddress = jdkInetAddress
 
-      assertResult(mappedExpected, "IPAddress(" + input + ")") {
-        jdkInetAddress.getAddress.toList
-      }
-
-      assertResult(expectedString, "IPAddress(" + input + ")") {
-        jdkInetAddress.getHostAddress
-      }
-
-      assertResult(ipAddr, "IPAddress -> java.net.InetAddress -> IPAddress") {
-        ipAddr2
-      }
-
-      assertResult(ipAddr.hashCode,
-             "IPAddress -> java.net.InetAddress -> IPAddress") {
-        ipAddr2.hashCode
-      }
+      jdkInetAddress.getAddress.toList shouldBe mappedExpected
+      jdkInetAddress.getHostAddress shouldBe expectedString
+      ipAddr2 shouldBe ipAddr
+      ipAddr2.hashCode shouldBe ipAddr.hashCode
     }
   }
 
@@ -153,7 +102,7 @@ class IPAddressSpec extends FlatSpec with Matchers {
       val expectedBytes = expected.map(_.toByte)
 
       val ipAddrRes = getIPAddress(input)
-      assert(ipAddrRes.isSuccess)
+      ipAddrRes shouldBe success
 
       val ipAddr = ipAddrRes.get
       ipAddr.toInetAddress.getAddress.toList shouldBe expectedBytes
@@ -161,35 +110,31 @@ class IPAddressSpec extends FlatSpec with Matchers {
   }
 
   "java.net.InetAddress call-throughs" should "work on an IPAddress" in {
-    assertResult(true, "127.0.0.1 is loopback")  {
-      val ipAddrRes = IPAddress(127, 0, 0, 1)
-      assert(ipAddrRes.isSuccess)
+    val ipAddrRes1 = IPAddress(127, 0, 0, 1)
+    ipAddrRes1 shouldBe success
 
-      val ipAddr = ipAddrRes.get
+    val ipAddr1 = ipAddrRes1.get
+    ipAddr1.isLoopbackAddress shouldBe true
 
-      ipAddr.isLoopbackAddress
-    }
 
-    assertResult(false, "192.168.1.100 is not loopback")  {
-      val ipAddrRes = IPAddress(192, 168, 0, 1)
-      assert(ipAddrRes.isSuccess)
-      val ipAddr = ipAddrRes.get
-      ipAddr.isLoopbackAddress
-    }
+    val ipAddrRes2 = IPAddress(192, 168, 0, 1)
+    ipAddrRes2 shouldBe success
+    val ipAddr2 = ipAddrRes2.get
+    ipAddr2.isLoopbackAddress shouldBe false
   }
 
   "IPAddress.parseAddress" should "handle a valid IPv4 address" in {
     val addresses = Array("192.168.12.0", "200.30.99.254", "127.0.0.1")
     for (a <- addresses)
-      IPAddress.parseAddress(a).isSuccess shouldBe (true)
+      IPAddress.parseAddress(a) shouldBe success
   }
 
   it should "fail on a nonsense string" in {
-    IPAddress.parseAddress("foobar").isFailure shouldBe (true)
+    IPAddress.parseAddress("foobar") shouldBe failure
   }
 
   it should "fail on an invalid IPv4 address" in {
-    IPAddress.parseAddress("256.0.0.1").isFailure shouldBe (true)
+    IPAddress.parseAddress("256.0.0.1") shouldBe failure
   }
 
   it should "handle a valid IPv6 address" in {
@@ -201,7 +146,7 @@ class IPAddressSpec extends FlatSpec with Matchers {
     )
 
     for (a <- addresses)
-      IPAddress.parseAddress(a).isSuccess shouldBe (true)
+      IPAddress.parseAddress(a) shouldBe success
   }
 
   private val IPv4sAndNumbers = Array(
@@ -220,29 +165,29 @@ class IPAddressSpec extends FlatSpec with Matchers {
 
   "IPAddress.apply(BigInt)" should "handle a valid IPv6 address" in {
     for ((_, addrNum) <- IPv6sAndNumbers) {
-      IPAddress(addrNum).isSuccess shouldBe (true)
+      IPAddress(addrNum) shouldBe success
     }
   }
 
   it should "handle a valid IPv4 address" in {
     for ((_, addrNum) <- IPv4sAndNumbers) {
-      IPAddress(addrNum).isSuccess shouldBe (true)
+      IPAddress(addrNum) shouldBe success
     }
   }
 
   "IPAddress.toNumber" should "return valid numbers for IPv6 addresses" in {
     for ((s, expected) <- IPv6sAndNumbers) {
       val res = IPAddress.parseAddress(s)
-      res.isSuccess shouldBe (true)
-      IPAddress.parseAddress(s).get.toNumber shouldBe (expected)
+      res shouldBe success
+      IPAddress.parseAddress(s).get.toNumber shouldBe expected
     }
   }
 
   it should "return value numbers for IPv4 addresses" in {
     for ((s, expected) <- IPv4sAndNumbers) {
       val res = IPAddress.parseAddress(s)
-      res.isSuccess shouldBe (true)
-      IPAddress.parseAddress(s).get.toNumber shouldBe (expected)
+      res shouldBe success
+      IPAddress.parseAddress(s).get.toNumber shouldBe expected
     }
   }
 }

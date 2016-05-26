@@ -34,32 +34,33 @@
   ---------------------------------------------------------------------------
 */
 
-package grizzled
+package grizzled.file
 
-import org.scalatest.{FlatSpec, Matchers}
-import grizzled.sys._
+import grizzled.BaseSpec
+import grizzled.file.filter._
 
 /**
-  * Tests the grizzled.file functions.
+  * Tests the grizzled.file.filter functions.
   */
-class SysSpec extends FlatSpec with Matchers {
+class FileFilterSpec extends BaseSpec {
+  "BackslashContinuedLineIterator" should "properly join lines" in {
+    val data = List[(List[String], List[String])](
+      (List("Lorem ipsum dolor sit amet, consectetur \\",
+            "adipiscing elit.",
+            "In congue tincidunt fringilla. \\",
+            "Sed interdum nibh vitae \\",
+            "libero",
+            "fermentum id dictum risus facilisis."),
 
-  "operating system name" should "be correct" in {
-    import OperatingSystem._
+       List("Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "In congue tincidunt fringilla. Sed interdum nibh vitae libero",
+            "fermentum id dictum risus facilisis."))
+    )
 
-    val data = Map("mac"        -> Mac,
-                   "windows ce" -> WindowsCE,
-                   "windows"    -> Windows,
-                   "windows xp" -> Windows,
-                   "os/2"       -> OS2,
-                   "netware"    -> NetWare,
-                   "openvms"    -> VMS,
-                   "linux"      -> Posix,
-                   "foo"        -> Posix)
-
-    for ((osName, osType) <- data;
-         name <- List(osName.capitalize, osName.toUpperCase, osName)) {
-      getOS(osName) shouldBe osType
+    for((input, expected) <- data) {
+      val iterator = input.iterator
+      val result = new BackslashContinuedLineIterator(iterator).toList
+      result shouldBe expected
     }
   }
 }

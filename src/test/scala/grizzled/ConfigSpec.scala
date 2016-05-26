@@ -1,12 +1,12 @@
 package grizzled.config
 
-import org.scalatest.{Matchers, FlatSpec}
+import grizzled.BaseSpec
 import scala.io.Source
 import scala.util.{Success, Try}
 
 /** Test the Configuration class.
   */
-class ConfigSpec extends FlatSpec with Matchers {
+class ConfigSpec extends BaseSpec {
 
   import Configuration.Implicits._
 
@@ -62,13 +62,13 @@ class ConfigSpec extends FlatSpec with Matchers {
     )
 
     for (((section, option), expected) <- testData) {
-      assert(cfg.get(section, option) === expected)
+      cfg.get(section, option) shouldBe expected
     }
   }
 
   it should "allow + to replace an option without mutating the original" in {
     val eCfg = Configuration.read(Source.fromString(Fixture.TestConfig))
-    eCfg.isSuccess shouldBe true
+    eCfg shouldBe success
 
     val cfg: Configuration = eCfg.get
     val newCfg = cfg + ("section2", "o1", "bar")
@@ -88,16 +88,16 @@ class ConfigSpec extends FlatSpec with Matchers {
   it should "allow - to remove a non-existing section" in {
     val cfg = Fixture.cfg
     val newCfg = cfg - ("section-xxx", "option")
-    cfg should === (newCfg)
+    cfg shouldBe newCfg
   }
 
   it should "allow - to remove a section with only one option" in {
     val cfg = Fixture.cfg + ("section999", "option", "value")
     val newCfg = cfg - ("section999", "option")
 
-    cfg.hasSection("section999") should === (true)
+    cfg.hasSection("section999") shouldBe true
     cfg.get("section999", "option") shouldBe Some("value")
-    newCfg.hasSection("section999") should === (false)
+    newCfg.hasSection("section999") shouldBe false
     newCfg.get("section999", "option") shouldBe None
   }
 
@@ -105,13 +105,13 @@ class ConfigSpec extends FlatSpec with Matchers {
     val cfg = Fixture.cfg
     val newCfg = cfg - ("section1", "o1")
 
-    cfg.hasSection("section1") should === (true)
-    newCfg.hasSection("section1") should === (true)
+    cfg.hasSection("section1") shouldBe true
+    newCfg.hasSection("section1") shouldBe true
     val cfgOptionNames = cfg.optionNames("section1").toSet
-    cfgOptionNames.contains("o1") should === (true)
+    cfgOptionNames.contains("o1") shouldBe true
     val newCfgOptionNames = newCfg.optionNames("section1").toSet
-    newCfgOptionNames.contains("o1") should === (false)
-    newCfgOptionNames.size should === (cfgOptionNames.size - 1)
+    newCfgOptionNames.contains("o1") shouldBe false
+    newCfgOptionNames.size shouldBe (cfgOptionNames.size - 1)
   }
 
   it should "allow addition of multiple new sections and options with ++" in {
@@ -119,8 +119,8 @@ class ConfigSpec extends FlatSpec with Matchers {
     val newCfg = cfg ++ ("section999" -> ("opt1" -> "value1"),
                          "section888" -> ("opt2" -> "value2"),
                          "section999" -> ("opt3" -> "value3"))
-    cfg.hasSection("section999") should === (false)
-    cfg.hasSection("section888") should === (false)
+    cfg.hasSection("section999") shouldBe false
+    cfg.hasSection("section888") shouldBe false
 
     newCfg.get("section999", "opt1") shouldBe Some("value1")
     newCfg.get("section999", "opt2") shouldBe None
@@ -134,18 +134,18 @@ class ConfigSpec extends FlatSpec with Matchers {
                          "section2" -> ("newOption2" -> "value2"),
                          "section1" -> ("newOption3" -> "value3"))
 
-    cfg.hasSection("section1") should === (true)
-    cfg.hasSection("section2") should === (true)
-    newCfg.hasSection("section1") should === (true)
-    newCfg.hasSection("section2") should === (true)
+    cfg.hasSection("section1") shouldBe true
+    cfg.hasSection("section2") shouldBe true
+    newCfg.hasSection("section1") shouldBe true
+    newCfg.hasSection("section2") shouldBe true
 
     val oldSection1Keys = cfg.options("section1").keySet
     val oldSection2Keys = cfg.options("section2").keySet
     val newSection1Keys = newCfg.options("section1").keySet
     val newSection2Keys = newCfg.options("section2").keySet
 
-    (newSection1Keys -- oldSection1Keys) should === (Set("newOption1", "newOption3"))
-    (newSection2Keys -- oldSection2Keys) should === (Set("newOption2"))
+    (newSection1Keys -- oldSection1Keys) shouldBe Set("newOption1", "newOption3")
+    (newSection2Keys -- oldSection2Keys) shouldBe Set("newOption2")
   }
 
   it should "allow replacing options in existing sections with ++" in {
@@ -153,13 +153,13 @@ class ConfigSpec extends FlatSpec with Matchers {
     val newCfg = cfg ++ ("section1" -> ("o1" -> "newValue1"),
                          "section1" -> ("o2" -> "newValue2"))
 
-    cfg.hasSection("section1") should === (true)
-    newCfg.hasSection("section1") should === (true)
+    cfg.hasSection("section1") shouldBe true
+    newCfg.hasSection("section1") shouldBe true
 
     val oldSection1Keys = cfg.options("section1").keySet
     val newSection1Keys = newCfg.options("section1").keySet
 
-    newSection1Keys should === (oldSection1Keys)
+    newSection1Keys shouldBe oldSection1Keys
     cfg.get("section1", "o1") shouldBe Some("val1")
     newCfg.get("section1", "o1") shouldBe Some("newValue1")
     newCfg.get("section1", "o2") shouldBe Some("newValue2")
@@ -173,8 +173,8 @@ class ConfigSpec extends FlatSpec with Matchers {
       "section1000" -> Map("opt3" -> "value3")
     )
 
-    cfg.hasSection("section999") should === (false)
-    cfg.hasSection("section888") should === (false)
+    cfg.hasSection("section999") shouldBe false
+    cfg.hasSection("section888") shouldBe false
 
     newCfg.get("section999", "opt1") shouldBe Some("value1")
     newCfg.get("section999", "opt2") shouldBe Some("value2")
@@ -195,7 +195,7 @@ class ConfigSpec extends FlatSpec with Matchers {
     val cfg = Fixture.cfg
     val newCfg = cfg -- Seq("section1" -> "o99999", "section1" -> "x99999")
 
-    cfg should === (newCfg)
+    cfg shouldBe newCfg
   }
 
   it should "remove sections that are empty after --" in {
@@ -216,149 +216,146 @@ class ConfigSpec extends FlatSpec with Matchers {
     val cfg = Configuration.read(Source.fromString(Fixture.TestConfig),
                                  notFoundFunction = Some(notFound _)).get
 
-    assert(Some("val1") === cfg.get("section1", "o1"))
-    assert(Some("NF:section1.foo") === cfg.get("section1", "foo"))
-    assert(Some("NF:section9999.foobar") === cfg.get("section9999", "foobar"))
+    Some("val1") shouldBe cfg.get("section1", "o1")
+    Some("NF:section1.foo") shouldBe cfg.get("section1", "foo")
+    Some("NF:section9999.foobar") shouldBe cfg.get("section9999", "foobar")
   }
 
   it should "handle getSection() calls" in {
     val cfg = Fixture.cfg
     val section1 = cfg.getSection("section1")
 
-    assert(section1.isDefined)
-    assert(section1.get.options.get("o2") !== None)
-    assert(section1.get.options.get("o2") === Some("val2"))
-    assert(section1.get.options.get("o99") === None)
+    section1.isDefined
+    section1.get.options.get("o2") !== None
+    section1.get.options.get("o2") shouldBe Some("val2")
+    section1.get.options.get("o99") shouldBe None
   }
 
   it should "properly expand variables in getSection()" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.getSection("section1").get.options.get("o4") === Some("val1"))
-    assert(cfg.getSection("section1").get.options.get("o5") === Some("foo"))
+    cfg.getSection("section1").get.options.get("o4") shouldBe Some("val1")
+    cfg.getSection("section1").get.options.get("o5") shouldBe Some("foo")
   }
 
   it should "properly expand metacharacters in values" in {
     val cfg = Fixture.cfg
 
-    cfg.asOpt[String]("section1", "valueWithNewline") shouldBe
-      Some("line 1\nline 2")
-    cfg.asOpt[String]("section1", "endsWithTrademark") shouldBe
-      Some("Foobar\u2122")
+    cfg.asOpt[String]("section1", "valueWithNewline") shouldBe Some("line 1\nline 2")
+    cfg.asOpt[String]("section1", "endsWithTrademark") shouldBe Some("Foobar\u2122")
   }
 
   it should "not expand metachars in raw values" in {
     val cfg = Fixture.cfg
 
-    cfg.asOpt[String]("section1", "rawValue") shouldBe
-      Some("\\tShould not expand\\n")
+    cfg.asOpt[String]("section1", "rawValue") shouldBe Some("\\tShould not expand\\n")
   }
 
   it should "support asOpt[Int]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asOpt[Int]("section3", "intOpt") === Some(10))
-    assert(cfg.asOpt[Int]("section3", "noSuchOption") === None)
-    assert(cfg.asOpt[Int]("section3", "boolOptTrue") === None)
+    cfg.asOpt[Int]("section3", "intOpt") shouldBe Some(10)
+    cfg.asOpt[Int]("section3", "noSuchOption") shouldBe None
+    cfg.asOpt[Int]("section3", "boolOptTrue") shouldBe None
   }
 
   it should "support asOpt[Long]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asOpt[Long]("section3", "intOpt") === Some(10L))
-    assert(cfg.asOpt[Long]("section3", "noSuchOption") === None)
-    assert(cfg.asOpt[Long]("section3", "boolOptTrue") === None)
-    assert(cfg.asOpt[Long]("section3", "longOpt") === Some(9223372036854775807L))
-    assert(cfg.asOpt[Long]("section1", "longOpt") === Some(9223372036854775807L))
+    cfg.asOpt[Long]("section3", "intOpt") shouldBe Some(10L)
+    cfg.asOpt[Long]("section3", "noSuchOption") shouldBe None
+    cfg.asOpt[Long]("section3", "boolOptTrue") shouldBe None
+    cfg.asOpt[Long]("section3", "longOpt") shouldBe Some(9223372036854775807L)
+    cfg.asOpt[Long]("section1", "longOpt") shouldBe Some(9223372036854775807L)
   }
 
   it should "support asOpt[Boolean]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asOpt[Boolean]("section3", "intOpt") === None)
-    assert(cfg.asOpt[Boolean]("section3", "noSuchOption") === None)
-    assert(cfg.asOpt[Boolean]("section3", "boolOptTrue") === Some(true))
-    assert(cfg.asOpt[Boolean]("section3", "boolOptFalse") === Some(false))
+    cfg.asOpt[Boolean]("section3", "intOpt") shouldBe None
+    cfg.asOpt[Boolean]("section3", "noSuchOption") shouldBe None
+    cfg.asOpt[Boolean]("section3", "boolOptTrue") shouldBe Some(true)
+    cfg.asOpt[Boolean]("section3", "boolOptFalse") shouldBe Some(false)
   }
 
   it should "support asOpt[String]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asOpt[String]("section3", "intOpt") === Some("10"))
-    assert(cfg.asOpt[String]("section3", "noSuchOption") === None)
-    assert(cfg.asOpt[String]("section3", "boolOptTrue") === Some("true"))
-    assert(cfg.asOpt[String]("section3", "boolOptFalse") === Some("false"))
+    cfg.asOpt[String]("section3", "intOpt") shouldBe Some("10")
+    cfg.asOpt[String]("section3", "noSuchOption") shouldBe None
+    cfg.asOpt[String]("section3", "boolOptTrue") shouldBe Some("true")
+    cfg.asOpt[String]("section3", "boolOptFalse") shouldBe Some("false")
   }
 
   it should "support asOpt[Character]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asOpt[Character]("section3", "charOpt") === Some('c'))
-    assert(cfg.asOpt[Character]("section3", "intOpt") === None)
-    assert(cfg.asOpt[Character]("section3", "noSuchOption") === None)
-    assert(cfg.asOpt[Character]("section3", "boolOptTrue") === None)
-    assert(cfg.asOpt[Character]("section3", "boolOptFalse") === None)
+    cfg.asOpt[Character]("section3", "charOpt") shouldBe Some('c')
+    cfg.asOpt[Character]("section3", "intOpt") shouldBe None
+    cfg.asOpt[Character]("section3", "noSuchOption") shouldBe None
+    cfg.asOpt[Character]("section3", "boolOptTrue") shouldBe None
+    cfg.asOpt[Character]("section3", "boolOptFalse") shouldBe None
   }
 
   it should "support asEither[Int]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asEither[Int]("section3", "intOpt") === Right(Some(10)))
-    assert(cfg.asEither[Int]("section1", "intOpt") === Right(Some(10)))
-    assert(cfg.asEither[Int]("section3", "noSuchOption") === Right(None))
-    assert(cfg.asEither[Int]("section3", "boolOptTrue").isLeft === true)
+    cfg.asEither[Int]("section3", "intOpt") shouldBe Right(Some(10))
+    cfg.asEither[Int]("section1", "intOpt") shouldBe Right(Some(10))
+    cfg.asEither[Int]("section3", "noSuchOption") shouldBe Right(None)
+    cfg.asEither[Int]("section3", "boolOptTrue").isLeft shouldBe true
   }
 
   it should "support asEither[Long]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asEither[Long]("section3", "intOpt") === Right(Some(10)))
-    assert(cfg.asEither[Long]("section1", "intOpt") === Right(Some(10)))
-    assert(cfg.asEither[Long]("section3", "noSuchOption") === Right(None))
-    assert(cfg.asEither[Long]("section3", "boolOptTrue").isLeft === true)
-    assert(cfg.asEither[Long]("section3", "longOpt") === Right(Some(9223372036854775807L)))
+    cfg.asEither[Long]("section3", "intOpt") shouldBe Right(Some(10))
+    cfg.asEither[Long]("section1", "intOpt") shouldBe Right(Some(10))
+    cfg.asEither[Long]("section3", "noSuchOption") shouldBe Right(None)
+    cfg.asEither[Long]("section3", "boolOptTrue").isLeft shouldBe true
+    cfg.asEither[Long]("section3", "longOpt") shouldBe Right(Some(9223372036854775807L))
   }
 
   it should "support asEither[Boolean]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asEither[Boolean]("section3", "intOpt").isLeft === true)
-    assert(cfg.asEither[Boolean]("section3", "noSuchOption") === Right(None))
-    assert(cfg.asEither[Boolean]("section3", "boolOptTrue") === Right(Some(true)))
-    assert(cfg.asEither[Boolean]("section3", "boolOptFalse") === Right(Some(false)))
+    cfg.asEither[Boolean]("section3", "intOpt").isLeft shouldBe true
+    cfg.asEither[Boolean]("section3", "noSuchOption") shouldBe Right(None)
+    cfg.asEither[Boolean]("section3", "boolOptTrue") shouldBe Right(Some(true))
+    cfg.asEither[Boolean]("section3", "boolOptFalse") shouldBe Right(Some(false))
   }
 
   it should "support asEither[String]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asEither[String]("section3", "intOpt") === Right(Some("10")))
-    assert(cfg.asEither[String]("section3", "noSuchOption") === Right(None))
-    assert(cfg.asEither[String]("section3", "boolOptTrue") === Right(Some("true")))
-    assert(cfg.asEither[String]("section3", "boolOptFalse") === Right(Some("false")))
+    cfg.asEither[String]("section3", "intOpt") shouldBe Right(Some("10"))
+    cfg.asEither[String]("section3", "noSuchOption") shouldBe Right(None)
+    cfg.asEither[String]("section3", "boolOptTrue") shouldBe Right(Some("true"))
+    cfg.asEither[String]("section3", "boolOptFalse") shouldBe Right(Some("false"))
   }
 
   it should "support asEither[Character]" in {
     val cfg = Fixture.cfg
 
-    assert(cfg.asEither[Character]("section3", "charOpt") === Right(Some('c')))
-    assert(cfg.asEither[Character]("section3", "intOpt").isLeft)
-    assert(cfg.asEither[Character]("section3", "noSuchOption") === Right(None))
-    assert(cfg.asEither[Character]("section3", "boolOptTrue").isLeft)
-    assert(cfg.asEither[Character]("section3", "boolOptFalse").isLeft)
+    cfg.asEither[Character]("section3", "charOpt") shouldBe Right(Some('c'))
+    cfg.asEither[Character]("section3", "intOpt").isLeft shouldBe true
+    cfg.asEither[Character]("section3", "noSuchOption") shouldBe Right(None)
+    cfg.asEither[Character]("section3", "boolOptTrue").isLeft shouldBe true
+    cfg.asEither[Character]("section3", "boolOptFalse").isLeft shouldBe true
   }
 
   it should "handle unsafe substitutions" in {
     val cfg = Configuration.read(Source.fromString(Fixture.TestConfig),
                                  safe = false).get
 
-    assert(cfg.tryGet("section2", "substError").isFailure)
-    assert(cfg.asTry[Int]("section3", "intOpt") === Success(Some(10)))
-    assert(cfg.asTry[Int]("section1", "intOpt") === Success(Some(10)))
+    cfg.tryGet("section2", "substError") shouldBe failure
+    cfg.asTry[Int]("section3", "intOpt") shouldBe Success(Some(10))
+    cfg.asTry[Int]("section1", "intOpt") shouldBe Success(Some(10))
   }
 
   it should "detect illegal characters in section names" in {
     val cfg = Configuration.read(Source.fromString(Fixture.TestConfigWithExoticSection))
-    assert(cfg.isFailure)
+    cfg shouldBe failure
   }
 
   it should "honor given SectionNamePattern when loading data" in {
@@ -366,8 +363,8 @@ class ConfigSpec extends FlatSpec with Matchers {
       Source.fromString(Fixture.TestConfigWithExoticSection),
       sectionNamePattern = """([a-zA-Z0-9_\.]+)""".r
     )
-    assert(cfg.isSuccess)
+    cfg shouldBe success
     val loadedCfg = cfg.get
-    assert(loadedCfg.get("section1.1", "bar") === Some("baz"))
+    loadedCfg.get("section1.1", "bar") shouldBe Some("baz")
   }
 }

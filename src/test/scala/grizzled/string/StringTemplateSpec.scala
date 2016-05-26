@@ -33,13 +33,13 @@
 
 package grizzled.string
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 import grizzled.string.template._
 
 /**
  * Tests the grizzled.string.StringTemplate functions.
  */
-class StringTemplateSpec extends FlatSpec with Matchers {
+class StringTemplateSpec extends BaseSpec {
   "UnixShellStringTemplate" should
     "substitute empty strings for bad vars in safe mode" in {
 

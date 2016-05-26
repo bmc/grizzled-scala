@@ -31,14 +31,14 @@
   --------------------------------------------------------------------------
 */
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 import grizzled.string._
 import grizzled.string.util._
 
 /**
  * Tests the grizzled.string functions.
  */
-class StringUtilSpec extends FlatSpec with Matchers {
+class StringUtilSpec extends BaseSpec {
   "strToBoolean" should "succeed on valid input" in {
     val data = Map(
       "true"  -> Right(true),

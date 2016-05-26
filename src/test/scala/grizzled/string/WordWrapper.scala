@@ -1,8 +1,8 @@
 package grizzled.string
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 
-class WordWrapperSpec extends FlatSpec with Matchers {
+class WordWrapperSpec extends BaseSpec {
 
   "WordWrapper" should "wrap strings to 79 columns by default" in {
     val w = new WordWrapper()

@@ -1,15 +1,15 @@
 package grizzled.net
 
-import java.net.{URISyntaxException, MalformedURLException}
+import java.net.{MalformedURLException, URISyntaxException}
 
-import org.scalatest.{Matchers, FlatSpec}
+import grizzled.BaseSpec
 
 import scala.io.Source
 
-class URLSpec extends FlatSpec with Matchers {
+class URLSpec extends BaseSpec {
   "URL" should "properly parse a simple HTTP URL string" in {
     val r = URL("http://localhost/foo/bar")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.host shouldBe Some("localhost")
     u.protocol shouldBe "http"
@@ -21,42 +21,42 @@ class URLSpec extends FlatSpec with Matchers {
 
   it should "return 80 as the default HTTP port" in {
     val r = URL("http://localhost/foo/bar")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.defaultPort shouldBe Some(80)
   }
 
   it should "properly parse a query string from an HTTP URL" in {
     val r = URL("http://localhost/foo.html?q=hello&lang=en_US")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.query shouldBe Some("q=hello&lang=en_US")
   }
 
   it should "properly parse a fragment from an HTTP URL" in {
     val r = URL("http://localhost/foo.html#section1")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.fragment shouldBe Some("section1")
   }
 
   it should "properly parse a port from an HTTP URL" in {
     val r = URL("http://localhost:9988/foo.html#section1")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.port shouldBe Some(9988)
   }
 
   it should "properly parse user info from an HTTP URL" in {
     val r = URL("http://user@localhost/foo.html#section1")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.userInfo shouldBe Some("user")
   }
 
   it should "properly parse user and password info from an HTTP URL" in {
     val r = URL("http://user:mypass@localhost/foo.html#section1")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.userInfo shouldBe Some("user:mypass")
   }
@@ -64,7 +64,7 @@ class URLSpec extends FlatSpec with Matchers {
   it should "properly handle an HTTPS URL" in {
     val us = "https://user:mypass@localhost/foo.zip"
     val r = URL(us)
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.userInfo shouldBe Some("user:mypass")
     u.protocol shouldBe "https"
@@ -78,7 +78,7 @@ class URLSpec extends FlatSpec with Matchers {
   it should "properly handle an FTP URL" in {
     val us = "ftp://user:mypass@localhost/foo.zip"
     val r = URL(us)
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.userInfo shouldBe Some("user:mypass")
     u.protocol shouldBe "ftp"
@@ -91,7 +91,7 @@ class URLSpec extends FlatSpec with Matchers {
 
   it should "properly handle a file URL" in {
     val r = URL("file:///this/is/a/path")
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.userInfo shouldBe None
     u.protocol shouldBe "file"
@@ -105,7 +105,7 @@ class URLSpec extends FlatSpec with Matchers {
   it should "properly handle a jar URL" in {
     val us = "jar:file:///this/is/a/path.jar!/foo/bar.class"
     val r = URL(us)
-    r.isSuccess shouldBe true
+    r shouldBe success
     val u = r.get
     u.userInfo shouldBe None
     u.protocol shouldBe "jar"
@@ -149,10 +149,10 @@ class URLSpec extends FlatSpec with Matchers {
 
     withHTTPServer(server) { _ =>
       val r = URL(s"http://localhost:${server.bindPort}/foo.txt")
-      r.isSuccess shouldBe true
+      r shouldBe success
       val url = r.get
       val t = url.openStream()
-      t.isSuccess shouldBe true
+      t shouldBe success
       val source = Source.fromInputStream(t.get)
       source.mkString shouldBe "foo\n"
     }

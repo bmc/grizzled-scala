@@ -33,11 +33,11 @@
 
 package grizzled.string
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 /**
  * Tests the GrizzledString class.
  */
-class GrizzledStringSpec extends FlatSpec with Matchers {
+class GrizzledStringSpec extends BaseSpec {
   import grizzled.string.Implicits.String._
 
   "ltrim" should "properly trim from the beginning of a string" in {

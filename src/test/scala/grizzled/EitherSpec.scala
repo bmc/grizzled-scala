@@ -37,15 +37,14 @@
 package grizzled
 
 import grizzled.either.Implicits._
-
-import org.scalatest.{Inside, FlatSpec, Matchers}
+import org.scalatest.Inside
 
 import scala.util.{Failure, Success, Try}
 
 /**
  * Tests the grizzled.either class.
  */
-class EitherSpec extends FlatSpec with Matchers with Inside {
+class EitherSpec extends BaseSpec with Inside {
   "map" should "work on a Right" in {
     val r = Right(true)
     r.map(_ => false) shouldBe Right(false)

@@ -36,11 +36,11 @@
 
 package grizzled.io
 
-import java.io.{ByteArrayInputStream, StringReader}
+import java.io.ByteArrayInputStream
 
-import org.scalatest.{FlatSpec, Matchers}
+import grizzled.BaseSpec
 
-class RichInputStreamSpec extends FlatSpec with Matchers {
+class RichInputStreamSpec extends BaseSpec {
   import grizzled.io.Implicits.RichInputStream
 
   "readSome" should "stop reading when it hits the max" in {
