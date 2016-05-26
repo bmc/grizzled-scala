@@ -1,6 +1,6 @@
 package grizzled.net
 
-import java.net.{MalformedURLException, URISyntaxException}
+import java.net.{BindException, MalformedURLException, URISyntaxException}
 
 import grizzled.BaseSpec
 
@@ -143,9 +143,19 @@ class URLSpec extends BaseSpec {
   "URL.openStream" should "open a readable InputStream for contents" in {
     import grizzled.testutil.BrainDeadHTTP._
 
-    val server = new Server(Handler("foo.txt", { _ =>
-      Response(ResponseCode.OK, Some("foo\n"))
-    }))
+    def tryBind(n: Int = 3): Server = {
+      try {
+        new Server(Handler("foo.txt", { _ =>
+          Response(ResponseCode.OK, Some("foo\n"))
+        }))
+      }
+      catch {
+        case _: Exception if n > 0 =>
+          tryBind(n - 1)
+      }
+    }
+
+    val server = tryBind(5)
 
     withHTTPServer(server) { _ =>
       val r = URL(s"http://localhost:${server.bindPort}/foo.txt")
