@@ -121,8 +121,9 @@ class ZipperSpec extends BaseSpec {
     withTemporaryDirectory("Zipper") { dir =>
       val abs = dir.getAbsolutePath
       val toStore = Array(
-        ("hello.txt", fooContents),
-        ("world.txt", barContents),
+        ("goof/hello.txt", fooContents),
+        ("goof/ball/world.txt", barContents),
+        ("baz.txt", bazContents),
         ("a/very/deeply/nested/directory/foo.txt", fooContents),
         ("a/very/shallow/baz.txt", bazContents)
       )
@@ -146,6 +147,14 @@ class ZipperSpec extends BaseSpec {
       for ((path, contents) <- toStore) {
         entries.exists(_.getName == path) shouldBe true
         readEntryAsChars(zipFile, path) shouldBe contents
+      }
+
+      val dirs = toStore.map(t => fileutil.dirname(t._1) + "/")
+                        .filter(s => ! (s startsWith ".") )
+      for (i <- dirs) {
+        val e = entries.filter(_.getName == i).headOption
+        e.map(_.getName) shouldBe Some(i)
+        e.map(_.isDirectory) shouldBe Some(true)
       }
     }
   }
@@ -343,12 +352,16 @@ class ZipperSpec extends BaseSpec {
 
   def makeFiles(directory: String, pathsAndContents: Array[(String, String)]): Unit = {
     for ((path, contents) <- pathsAndContents) {
-      val fullPath = fileutil.joinPath(directory, path)
-      new File(fileutil.dirname(fullPath)).mkdirs
-      withResource(new FileWriter(fullPath)) { w =>
-        w.write(contents)
-      }
+      makeFile(directory, path, contents)
     }
+  }
+
+  def makeFile(directory: String, path: String, contents: String): File = {
+    val fullPath = fileutil.joinPath(directory, path)
+    val f = new File(fullPath)
+    f.dirname.mkdirs
+    withResource(new FileWriter(f)) { _.write(contents) }
+    f
   }
 
   def readEntryAsChars(zipFile: ZipFile, entryName: String): String = {

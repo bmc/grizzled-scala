@@ -458,6 +458,13 @@ class Zipper private(items:           Map[String, ZipSource],
   /** Write the contents of this `Zipper` to a jar file. The jar file will
     * not have a jar manifest. You can call this method more than once.
     *
+    * '''Warning''': While you can call this method multiple times (to write
+    * a single `Zipper` to multiple zip files, for instance), some entry
+    * sources cannot be read multiple times. For instance, `Zipper` does
+    * not attempt to rewind `Reader`, `InputStream` or `Source` objects, so
+    * they cannot be read more than once; reusing a `Zipper` containing those
+    * types of sources will result in an error.
+    *
     * @param path the path to the jar file to write. If it exists, it will be
     *             overwritten
     *
@@ -469,6 +476,13 @@ class Zipper private(items:           Map[String, ZipSource],
   /** Write the contents of this `Zipper` to a jar file. The jar file will
     * not have a jar manifest. You can call this method more than once.
     *
+    * '''Warning''': While you can call this method multiple times (to write
+    * a single `Zipper` to multiple zip files, for instance), some entry
+    * sources cannot be read multiple times. For instance, `Zipper` does
+    * not attempt to rewind `Reader`, `InputStream` or `Source` objects, so
+    * they cannot be read more than once; reusing a `Zipper` containing those
+    * types of sources will result in an error.
+    *
     * @param jarFile  the jar file to write. If it exists, it will be
     *                 overwritten.
     *
@@ -479,6 +493,13 @@ class Zipper private(items:           Map[String, ZipSource],
 
   /** Write the contents of this `Zipper` to a jar file, with or without a jar
     * manifest. You can call this method more than once.
+    *
+    * '''Warning''': While you can call this method multiple times (to write
+    * a single `Zipper` to multiple zip files, for instance), some entry
+    * sources cannot be read multiple times. For instance, `Zipper` does
+    * not attempt to rewind `Reader`, `InputStream` or `Source` objects, so
+    * they cannot be read more than once; reusing a `Zipper` containing those
+    * types of sources will result in an error.
     *
     * @param jarFile  the jar file to write. If it exists, it will be
     *                 overwritten.
@@ -509,6 +530,13 @@ class Zipper private(items:           Map[String, ZipSource],
   /** Write the contents of this `Zipper` to a zip file. You can call this
     * method more than once.
     *
+    * '''Warning''': While you can call this method multiple times (to write
+    * a single `Zipper` to multiple zip files, for instance), some entry
+    * sources cannot be read multiple times. For instance, `Zipper` does
+    * not attempt to rewind `Reader`, `InputStream` or `Source` objects, so
+    * they cannot be read more than once; reusing a `Zipper` containing those
+    * types of sources will result in an error.
+    *
     * @param path the path to the zip file to write. If it exists, it will be
     *             overwritten
     *
@@ -519,6 +547,13 @@ class Zipper private(items:           Map[String, ZipSource],
 
   /** Write the contents of this `Zipper` to a zip file. You can call this
     * method more than once.
+    *
+    * '''Warning''': While you can call this method multiple times (to write
+    * a single `Zipper` to multiple zip files, for instance), some entry
+    * sources cannot be read multiple times. For instance, `Zipper` does
+    * not attempt to rewind `Reader`, `InputStream` or `Source` objects, so
+    * they cannot be read more than once; reusing a `Zipper` containing those
+    * types of sources will result in an error.
     *
     * @param zipFile  the zip file to write. If it exists, it will be
     *                 overwritten.
@@ -580,7 +615,7 @@ class Zipper private(items:           Map[String, ZipSource],
           components match {
             case Nil      => Nil
             case c :: Nil => List(List(c))
-            case c        => for { i <- c.indices } yield c.slice(0, i)
+            case c        => for { i <- c.indices } yield c.slice(0, i + 1)
           }
         }
         .toSet // weed out duplicates
@@ -616,7 +651,7 @@ class Zipper private(items:           Map[String, ZipSource],
           // Make the entire zipPath, but not the top-level directory.
           val entry = new ZipEntry(dir)
           zo.putNextEntry(entry)
-          zo.closeEntry()
+          //zo.closeEntry()
         }
       }
     }
@@ -625,16 +660,13 @@ class Zipper private(items:           Map[String, ZipSource],
     def makeFiles(): Try[Int] = {
       val tries = for (i <- items.values.toList) yield {
         val entry = new ZipEntry(i.zipPath)
-        for { _ <- Try { zo.putNextEntry(entry) }
-              _ <- i.source.copyToZip(zo)
-              _ <- Try { zo.closeEntry() } }
-          yield ()
+        i.source.copyToZip(i.zipPath, zo)
       }
 
       tries.filter(_.isFailure) match {
-        case Nil => Success(items.size)
+        case Nil => Try { zo.closeEntry() }.map(_ => items.size)
         case failures =>
-          val messages: List[String] = failures.map { f: Try[Unit] =>
+          val messages: List[String] = failures.map { f: Try[Int] =>
             f.map {
               // should never get here
               _.toString
@@ -849,15 +881,25 @@ private[zip] sealed trait ItemSource {
   /** Utility function that uses the `read()` function to copy the contents of
     * this item source to a `ZipOutputStream`.
     *
-    * @param zo the `ZipOutputStream` to which to write
+    * @param path the path for the entry in the zip file
+    * @param zo   the `ZipOutputStream` to which to write
     *
     * @return A `Success` of the total number of bytes written to the stream,
     *         or a `Failure` on error.
     */
-  def copyToZip(zo: ZipOutputStream): Try[Int] = {
-    read { case (bytes, n) =>
-      Try { zo.write(bytes, 0, n) }.map { _ =>  n }
+  def copyToZip(path: String, zo: ZipOutputStream): Try[Int] = {
+    def doCopy() = {
+      read { case (bytes, n) =>
+        Try { zo.write(bytes, 0, n) }.map { _ =>  n }
+      }
     }
+
+    val entry = new ZipEntry(path)
+    for { _   <- Try { zo.putNextEntry(entry) }
+          n   <- doCopy()
+          _   <- Try { entry.setSize(n) } }
+    yield n
+
   }
 }
 
@@ -918,7 +960,7 @@ private[zip] case class FileSource(file: File) extends ItemSource
                                                with InputStreamHelper {
   def read(consumer: (Array[Byte], Int) => Try[Int]) = {
     for { is <- Try { new FileInputStream(file) }
-          n  <- readInputStream(is)(consumer) }
+          n  <- readInputStream(is)(consumer)  }
     yield n
   }
 }
@@ -951,7 +993,7 @@ private[zip] case class ReaderSource(r: Reader) extends ItemSource {
       Try { r.read(buf, 0, buf.length) } match {
         case Failure(ex) => Failure(ex)
 
-        case Success(n) if n == -1 => Success(n)
+        case Success(n) if n == -1 => Success(readSoFar)
 
         case Success(n) =>
           consumer(buf.map(_.toByte), n)
