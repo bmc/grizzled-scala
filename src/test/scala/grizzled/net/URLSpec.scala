@@ -90,20 +90,20 @@ class URLSpec extends BaseSpec {
   }
 
   it should "properly handle a file URL" in {
-    val r = URL("file:///this/is/a/path")
+    val r = URL("file:///this/is/a/zipPath")
     r shouldBe success
     val u = r.get
     u.userInfo shouldBe None
     u.protocol shouldBe "file"
     u.host shouldBe None
     u.port shouldBe None
-    u.path shouldBe Some("/this/is/a/path")
+    u.path shouldBe Some("/this/is/a/zipPath")
     u.defaultPort shouldBe None
-    u.toExternalForm shouldBe "file:/this/is/a/path"
+    u.toExternalForm shouldBe "file:/this/is/a/zipPath"
   }
 
   it should "properly handle a jar URL" in {
-    val us = "jar:file:///this/is/a/path.jar!/foo/bar.class"
+    val us = "jar:file:///this/is/a/zipPath.jar!/foo/bar.class"
     val r = URL(us)
     r shouldBe success
     val u = r.get
@@ -111,7 +111,7 @@ class URLSpec extends BaseSpec {
     u.protocol shouldBe "jar"
     u.host shouldBe None
     u.port shouldBe None
-    u.path shouldBe Some("file:///this/is/a/path.jar!/foo/bar.class")
+    u.path shouldBe Some("file:///this/is/a/zipPath.jar!/foo/bar.class")
     u.defaultPort shouldBe None
     u.toExternalForm shouldBe us
   }
@@ -128,7 +128,7 @@ class URLSpec extends BaseSpec {
     }
   }
 
-  it should "abort if there's no path in a file URL" in {
+  it should "abort if there's no zipPath in a file URL" in {
     intercept[URISyntaxException] {
       URL("file:").get
     }

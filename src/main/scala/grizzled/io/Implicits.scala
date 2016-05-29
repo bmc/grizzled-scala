@@ -129,8 +129,8 @@ object Implicits {
       * import scala.io.Source
       * import java.io.File
       *
-      * val path = "/path/to/some/file"
-      * val lines = Source.fromFile(new File(path)).linesBetween("{{{", "}}}")
+      * val zipPath = "/zipPath/to/some/file"
+      * val lines = Source.fromFile(new File(zipPath)).linesBetween("{{{", "}}}")
       * }}}
       *
       * This method uses `Source.getLines()`, which may or may not start

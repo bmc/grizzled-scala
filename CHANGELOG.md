@@ -1,6 +1,15 @@
 # Grizzled Scala Change Log
 
-Version 2.2.2
+Version 2.3.0:
+
+* Added `grizzled.zip.Zipper` class, which makes creating zip files and jar
+  files easier than using the JDK classes or the
+  [Apache Commons Compress](https://commons.apache.org/proper/commons-compress/zip.html)
+  classes. In particular, `Zipper` simplifies the handling and creation of
+  the intermediate directories that contain zip entries. See the docs for
+  details.
+
+Version 2.2.2:
 
 * Miscellaneous cleanup of unit tests.
 

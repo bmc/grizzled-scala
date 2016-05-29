@@ -297,7 +297,7 @@ class ConfigurationOptionException(message:     String,
   * configuration file. The include directive takes two forms:
   *
   * {{{
-  * %include "path"
+  * %include "zipPath"
   * %include "URL"
   * }}}
   *
@@ -308,7 +308,7 @@ class ConfigurationOptionException(message:     String,
   * %include "http://configs.example.com/mytools/common.cfg"
   * }}}
   *
-  * If the include path is not a URL, and is not an absolute path, its
+  * If the include zipPath is not a URL, and is not an absolute zipPath, its
   * location is relative to the file that's trying to include it.
   *
   * The included file may contain any content that is valid for this

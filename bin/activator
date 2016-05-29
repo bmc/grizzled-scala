@@ -27,7 +27,7 @@ realpath () {
     TARGET_FILEPATH=/$TARGET_FILE
   fi
 
-  # make sure we grab the actual windows path, instead of cygwin's path.
+  # make sure we grab the actual windows zipPath, instead of cygwin's zipPath.
   if ! is_cygwin; then
     echo "$(pwd -P)/$TARGET_FILE"
   else
@@ -182,14 +182,14 @@ process_args () {
     -v|-verbose) verbose=1 && shift ;;
       -d|-debug) debug=1 && shift ;;
            -mem) require_arg integer "$1" "$2" && app_mem="$2" && shift 2 ;;
-     -jvm-debug) 
-        if echo "$2" | grep -E ^[0-9]+$ > /dev/null; then 
-            addDebugger "$2" && shift 
+     -jvm-debug)
+        if echo "$2" | grep -E ^[0-9]+$ > /dev/null; then
+            addDebugger "$2" && shift
         else
             addDebugger 9999
-        fi 
+        fi
         shift ;;
-     -java-home) require_arg path "$1" "$2" && java_cmd="$2/bin/java" && shift 2 ;;
+     -java-home) require_arg zipPath "$1" "$2" && java_cmd="$2/bin/java" && shift 2 ;;
             -D*) addJava "$1" && shift ;;
             -J*) addJava "${1:2}" && shift ;;
               *) addResidual "$1" && shift ;;
@@ -229,7 +229,7 @@ run() {
     -jar "$app_launcher" \
     "${app_commands[@]}" \
     "${residual_args[@]}"
-    
+
   local exit_code=$?
   if is_cygwin; then
     stty icanon echo > /dev/null 2>&1
@@ -262,7 +262,7 @@ Usage: $script_name <command> [options]
   -jvm-debug <port>  Turn on JVM debugging, open at the given port.
 
   # java version (default: java from PATH, currently $(java -version 2>&1 | grep version))
-  -java-home <path>  Alternate JAVA_HOME
+  -java-home <zipPath>  Alternate JAVA_HOME
 
   # jvm options and output control
   -Dkey=val          Pass -Dkey=val directly to the java runtime

@@ -10,9 +10,6 @@ import grizzled.util.withResource
 
 import scala.util.Success
 
-/** Created by bmc on 4/10/16
-  *
-  */
 class IncluderSpec extends BaseSpec {
 
   "Includer" should "handle a file including another file" in {

@@ -244,7 +244,7 @@ class FileUtilSpec extends BaseSpec {
     copy(Seq("foo.c"), "/etc/foo/bar/baz") shouldBe failure
   }
 
-  it should "fail if the source path doesn't exist" in {
+  it should "fail if the source zipPath doesn't exist" in {
     withTemporaryDirectory("copy") { d =>
       copy(Seq("foo.c"), d.getPath) shouldBe failure
     }

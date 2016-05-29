@@ -42,7 +42,7 @@ object BrainDeadHTTP {
 
   /** Defines a handler for a request.
     *
-    * @param path    the path, minus any leading "/"
+    * @param path    the zipPath, minus any leading "/"
     * @param handle  the handler. Takes a Request and returns a Response.
     */
   case class Handler(path: String, handle: Request => Response) {

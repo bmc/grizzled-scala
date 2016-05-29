@@ -17,8 +17,8 @@ trait CustomMatchers {
     def apply(t: Try[_]) = {
       MatchResult(
         t.isSuccess,
-        t.toString + " is Success",
-        t.toString + " is Failure"
+        t.toString + " is not Success",
+        t.toString + " is not Failure"
       )
     }
   }

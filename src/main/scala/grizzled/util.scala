@@ -52,7 +52,7 @@ package object util {
       * @param t the underlying `Try`
       */
     implicit class RichTry[T](t: Try[T]) {
-  
+
       /** Replacement for `scala.concurrent.Future.fromTry()`, which can't be
         * used here, because we still compile on Scala 2.10, and 2.10 doesn't
         * have that function. Converts a `Try` to a `Future`. A successful
@@ -91,7 +91,7 @@ package object util {
     implicit object CanReleaseCloseable extends CanReleaseResource[Closeable] {
       def release(c: Closeable) = c.close()
     }
-    
+
     /** Defines evidence for type `Source`.
       */
     implicit object CanReleaseSource extends CanReleaseResource[Source] {
@@ -107,7 +107,7 @@ package object util {
     * Sample use:
     *
     * {{{
-    * withResource(new java.io.FileInputStream("/path/to/file")) {
+    * withResource(new java.io.FileInputStream("/zipPath/to/file")) {
     *     in => ...
     * }
     * }}}

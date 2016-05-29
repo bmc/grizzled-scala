@@ -63,7 +63,7 @@ object util {
 
   /** Get the directory name of a pathname.
     *
-    * @param path     path (absolute or relative)
+    * @param path     zipPath (absolute or relative)
     * @param fileSep  the file separator to use. Defaults to the value of
     *                 the "file.separator" property.
     *
@@ -91,9 +91,9 @@ object util {
     }
   }
 
-  /** Get the basename (file name only) part of a path.
+  /** Get the basename (file name only) part of a zipPath.
     *
-    * @param path     the path (absolute or relative)
+    * @param path     the zipPath (absolute or relative)
     * @param fileSep  the file separator to use. Defaults to the value of
     *                 the "file.separator" property.
     *
@@ -113,10 +113,10 @@ object util {
     }
   }
 
-  /** Split a path into directory (dirname) and file (basename) components.
-    * Analogous to Python's `os.path.pathsplit()` function.
+  /** Split a zipPath into directory (dirname) and file (basename) components.
+    * Analogous to Python's `os.zipPath.pathsplit()` function.
     *
-    * @param path     the path to split
+    * @param path     the zipPath to split
     * @param fileSep  the file separator to use. Defaults to the value of
     *                 the "file.separator" property.
     *
@@ -178,19 +178,19 @@ object util {
     (dirname, basename, extension)
   }
 
-  /** Return the current working directory, as an absolute path.
+  /** Return the current working directory, as an absolute zipPath.
     *
     * @return the current working directory
     */
   def pwd: String = new File(".").getCanonicalPath
 
   /**
-   * Calculate the relative path between two files.
+   * Calculate the relative zipPath between two files.
    *
    * @param from  the starting file
-   * @param to    the file to be converted to a relative path
+   * @param to    the file to be converted to a relative zipPath
    *
-   * @return the (String) relative path
+   * @return the (String) relative zipPath
    */
   def relativePath(from: File, to: File): String = {
     if (from.getAbsolutePath == to.getAbsolutePath)
@@ -202,7 +202,7 @@ object util {
       val commonLength = commonPrefix(fromPath, toPath)
       val relativeTo = toPath.drop(commonLength)
       if (fromPath.length == commonLength)
-        // It's right under the from path.
+        // It's right under the from zipPath.
         relativeTo mkString fileSeparator
       else {
         val commonParentsTotal = fromPath.length - commonLength - 1
@@ -224,7 +224,7 @@ object util {
     *   you can't do that with this library. (You can't do it with the
     *   `glob` library in Python 2 or Python 3, either.)
     *
-    * @param path  The path to expand.
+    * @param path  The zipPath to expand.
     *
     * @return a list of possibly expanded file names
     */
@@ -448,11 +448,11 @@ object util {
     * (dirpath, dirnames, filenames)
     * }}}
     *
-    * ''dirpath'' is a string, the path to the directory. ''dirnames'' is a
+    * ''dirpath'' is a string, the zipPath to the directory. ''dirnames'' is a
     * list of the names of the subdirectories in ''dirpath'' (excluding '.'
     * and '..'). ''filenames'' is a list of the names of the non-directory
     * files in ''dirpath''. Note that the names in the lists are just names,
-    * with no path components. To get a full path (which begins with top) to a
+    * with no zipPath components. To get a full zipPath (which begins with top) to a
     * file or directory in ''dirpath'', use `dirpath + java.io.fileSeparator +
     * name`, or use `joinPath()`.
     *
@@ -503,7 +503,7 @@ object util {
     result.toList
   }
 
-  /** Split a path into its constituent components. If the path is
+  /** Split a zipPath into its constituent components. If the zipPath is
     * absolute, the first piece will have a file separator in the
     * beginning. Examples:
     *
@@ -554,14 +554,14 @@ object util {
     *   </tr>
     * </table>
     *
-    * @param path    the path
+    * @param path    the zipPath
     * @param fileSep the file separator to use. Defaults to the value of
     *                the "file.separator" property.
     *
     * @return the component pieces.
     */
   def splitPath(path: String, fileSep: String = fileSeparator): List[String] = {
-    // Split with the path separator character, rather than the path
+    // Split with the zipPath separator character, rather than the zipPath
     // separator string. Using the string causes Scala to interpret it
     // as a regular expression, which causes problems when the separator
     // is a backslash (as on Windows). We could escape the backslash,
@@ -608,32 +608,32 @@ object util {
       pieces
   }
 
-  /** Join components of a path together.
+  /** Join components of a zipPath together.
     *
     * @param fileSep the file separator to use
-    * @param pieces  path pieces
+    * @param pieces  zipPath pieces
     *
-    * @return a composite path
+    * @return a composite zipPath
     */
   def joinPath(fileSep: String, pieces: List[String]): String =
     pieces mkString fileSep
 
-  /** Join components of a path together, using the file separator of the
+  /** Join components of a zipPath together, using the file separator of the
     * currently running system
     *
-    * @param pieces  path pieces
+    * @param pieces  zipPath pieces
     *
-    * @return a composite path
+    * @return a composite zipPath
     */
   def joinPath(pieces: String*): String =
     joinPath(fileSeparator, pieces.toList)
 
-  /** Join components of a path together, using the file separator of the
+  /** Join components of a zipPath together, using the file separator of the
     * currently running system
     *
-    * @param pieces  path pieces
+    * @param pieces  zipPath pieces
     *
-    * @return a composite path
+    * @return a composite zipPath
     */
   def joinPath(pieces: File*): File =
     new File(joinPath(fileSeparator, pieces.toList.map(_.getName)))
@@ -803,14 +803,14 @@ object util {
   }
 
   /** Copy a source file to a target file, using binary copying. The source
-    * file must be a file. The target path can be a file or a directory; if
+    * file must be a file. The target zipPath can be a file or a directory; if
     * it is a directory, the target file will have the same base name as
     * as the source file.
     *
-    * @param sourcePath  path to the source file
-    * @param targetPath  path to the target file or directory
+    * @param sourcePath  zipPath to the source file
+    * @param targetPath  zipPath to the target file or directory
     *
-    * @return A `Success` with the full path of the target file, or
+    * @return A `Success` with the full zipPath of the target file, or
     *         `Failure(exception)`
     */
   def copyFile(sourcePath: String, targetPath: String): Try[String] = {
@@ -818,14 +818,14 @@ object util {
   }
 
   /** Copy a source file to a target file, using binary copying. The source
-    * file must be a file. The target path can be a file or a directory; if
+    * file must be a file. The target zipPath can be a file or a directory; if
     * it is a directory, the target file will have the same base name as
     * as the source file.
     *
-    * @param source  path to the source file
-    * @param target  path to the target file or directory
+    * @param source  zipPath to the source file
+    * @param target  zipPath to the target file or directory
     *
-    * @return A `Success` containing the full path of the target file,
+    * @return A `Success` containing the full zipPath of the target file,
     *         or `Failure(exception)`
     */
   def copyFile(source: File, target: File): Try[File] = {
@@ -1000,11 +1000,11 @@ object util {
 
   private lazy val DrivePathPattern = "^([A-Za-z]?:)?(.*)$".r
 
-  /** Split a Windows-style path into drive name and path portions.
+  /** Split a Windows-style zipPath into drive name and zipPath portions.
     *
-    * @param path  the path
+    * @param path  the zipPath
     *
-    * @return a (drive, path) tuple, either component of which can be
+    * @return a (drive, zipPath) tuple, either component of which can be
     * *       an empty string
     */
   def splitDrivePath(path: String): (String, String) = {
@@ -1020,52 +1020,52 @@ object util {
     }
   }
 
-  /** Converts a path name from its operating system-specific format to a
-    * universal path notation. Universal path notation always uses a
-    * Unix-style "/" to separate path elements. A universal path can be
-    * converted to a native (operating system-specific) path via the
+  /** Converts a zipPath name from its operating system-specific format to a
+    * universal zipPath notation. Universal zipPath notation always uses a
+    * Unix-style "/" to separate zipPath elements. A universal zipPath can be
+    * converted to a native (operating system-specific) zipPath via the
     * `native_path()` function. Note that on POSIX-compliant systems,
-    * this function simply returns the `path` parameter unmodified.
+    * this function simply returns the `zipPath` parameter unmodified.
     *
-    * @param path the path to convert to universal path notation
+    * @param path the zipPath to convert to universal zipPath notation
     *
-    * @return the universal path
+    * @return the universal zipPath
     */
   def universalPath(path: String): String = makeUniversalPath(path)
 
-  /** Converts a path name from universal path notation to the operating
-     * system-specific format. Universal path notation always uses a
-     * Unix-style "/" to separate path elements. A native path can be
-     * converted to a universal path via the `universal_path()`
+  /** Converts a zipPath name from universal zipPath notation to the operating
+     * system-specific format. Universal zipPath notation always uses a
+     * Unix-style "/" to separate zipPath elements. A native zipPath can be
+     * converted to a universal zipPath via the `universal_path()`
      * function. Note that on POSIX-compliant systems, this function simply
-     * returns the `path` parameter unmodified.
+     * returns the `zipPath` parameter unmodified.
      *
-     * @param path the path to convert from universtal to native path notation
+     * @param path the zipPath to convert from universtal to native zipPath notation
      *
-     * @return the native path
+     * @return the native zipPath
      */
   def nativePath(path: String): String = makeNativePath(path)
 
-  /** Normalize a path, eliminating double slashes, resolving embedded
+  /** Normalize a zipPath, eliminating double slashes, resolving embedded
     * ".." strings (e.g., "/foo/../bar" becomes "/bar"), etc. Works for
     * Windows and Posix operating systems.
     *
-    * @param path  the path
+    * @param path  the zipPath
     *
-    * @return the normalized path
+    * @return the normalized zipPath
     */
   def normalizePath(path: String): String = doPathNormalizing(path)
 
-  /** Normalize a Windows path name. Handles UNC paths. Adapted from the
+  /** Normalize a Windows zipPath name. Handles UNC paths. Adapted from the
     * Python version of normpath() in Python's `os.ntpath` module.
     *
-    * @param path   the path
+    * @param path   the zipPath
     *
-    * @return the normalized path
+    * @return the normalized zipPath
     */
   def normalizeWindowsPath(path: String): String = {
-    // We need to be careful here. If the prefix is empty, and the path
-    // starts with a backslash, it could either be an absolute path on
+    // We need to be careful here. If the prefix is empty, and the zipPath
+    // starts with a backslash, it could either be an absolute zipPath on
     // the current drive (\dir1\dir2\file) or a UNC filename
     // (\\server\mount\dir1\file). It is therefore imperative NOT to
     // collapse multiple backslashes blindly in that case. The code
@@ -1086,8 +1086,8 @@ object util {
         (pfx + "\\", subPath dropWhile (_ == '\\') mkString "")
     }
 
-    // Normalize the path pieces. Note: normalizePathPieces() doesn't
-    // handle leading ".." in an absolute path, such as "\\..\\..". We
+    // Normalize the zipPath pieces. Note: normalizePathPieces() doesn't
+    // handle leading ".." in an absolute zipPath, such as "\\..\\..". We
     // handle that later.
     val piecesTemp = normalizePathPieces(newPath.split("\\\\").toList)
 
@@ -1098,7 +1098,7 @@ object util {
       else
         piecesTemp
 
-    // If the path is now empty, substitute ".".
+    // If the zipPath is now empty, substitute ".".
     if ((prefix.length == 0) && newPieces.isEmpty)
       "."
     else
@@ -1108,9 +1108,9 @@ object util {
   /** Adapted from the Python version of normpath() in Python's
     *  `os.posixpath` module.
     *
-    * @param path   the path
+    * @param path   the zipPath
     *
-    * @return the normalized path
+    * @return the normalized zipPath
     */
   def normalizePosixPath(path: String): String = {
     path match {
@@ -1127,8 +1127,8 @@ object util {
           else
             0
 
-        // Normalize the path pieces. Note: normalizePathPieces()
-        // doesn't handle leading ".." in an absolute path, such as
+        // Normalize the zipPath pieces. Note: normalizePathPieces()
+        // doesn't handle leading ".." in an absolute zipPath, such as
         // "/../..". We handle that later.
         //
         // Note: Must also account for a single leading ".", which
@@ -1164,7 +1164,7 @@ object util {
                               Private Methods
   \* ---------------------------------------------------------------------- */
 
-  /** Convert a file into a path array. Borrowed from SBT source code.
+  /** Convert a file into a zipPath array. Borrowed from SBT source code.
     */
   private def toPathArray(file: File): Array[String] = {
     @tailrec def toPathList(f: File, current: List[String]): List[String] = {
@@ -1254,7 +1254,7 @@ object util {
   }
 
   /** Path normalization is operating system-specific. This value
-    * holds the real path normalizer, determined once.
+    * holds the real zipPath normalizer, determined once.
     */
   private lazy val doPathNormalizing = os match {
     case (Mac | Posix) => normalizePosixPath(_)
@@ -1263,13 +1263,13 @@ object util {
   }
 
   /** Shared between normalizeWindowsPath() and normalizePosixPath(),
-    * this function normalizes the pieces of a path, handling embedded "..",
+    * this function normalizes the pieces of a zipPath, handling embedded "..",
     * empty elements (from splitting when there are adjacent file separators),
     * etc.
     *
-    * @param pieces  path components, with no separators
+    * @param pieces  zipPath components, with no separators
     *
-    * @return sanitized list of path components
+    * @return sanitized list of zipPath components
     */
   private def normalizePathPieces(pieces: List[String]): List[String] = {
     pieces match {
@@ -1290,7 +1290,7 @@ object util {
     }
   }
 
-  /** Native-to-universal path conversion is operating system-specific.
+  /** Native-to-universal zipPath conversion is operating system-specific.
     * These values hold the real converters, determined once.
     */
   private lazy val makeUniversalPath: (String) => String = os match {

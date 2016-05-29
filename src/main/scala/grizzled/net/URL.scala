@@ -48,7 +48,7 @@ import scala.util.Try
   * @param protocol   the protocol, if defined
   * @param host       the host, if defined
   * @param port       the port, if defined
-  * @param path       the path
+  * @param path       the zipPath
   * @param query      the query string, if any
   * @param userInfo   the URL's user info, if any
   * @param fragment   the fragment, if any

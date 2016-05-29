@@ -81,15 +81,15 @@ class URISpec extends BaseSpec {
   }
 
   it should "properly handle a file URL" in {
-    val r = URI("file:///this/is/a/path")
+    val r = URI("file:///this/is/a/zipPath")
     r shouldBe success
     val u = r.get
     u.userInfo shouldBe None
     u.scheme shouldBe Some("file")
     u.host shouldBe None
     u.port shouldBe None
-    u.path shouldBe Some("/this/is/a/path")
-    u.toExternalForm shouldBe "file:/this/is/a/path"
+    u.path shouldBe Some("/this/is/a/zipPath")
+    u.toExternalForm shouldBe "file:/this/is/a/zipPath"
   }
 
   it should "properly handle a plain file (with no protocol)" in {
@@ -117,7 +117,7 @@ class URISpec extends BaseSpec {
     }
   }
 
-  it should "abort if there's no path in a file URL" in {
+  it should "abort if there's no zipPath in a file URL" in {
     intercept[URISyntaxException] {
       URL("file:").get
     }
@@ -234,7 +234,7 @@ class URISpec extends BaseSpec {
     ur.path shouldBe Some("CoolApp.dmg")
   }
 
-  "URI.resolve" should "properly resolve a simple path against an HTTP URL" in {
+  "URI.resolve" should "properly resolve a simple zipPath against an HTTP URL" in {
     val base = "http://www.example.net/index.html"
     val file = "README.txt"
 
@@ -247,7 +247,7 @@ class URISpec extends BaseSpec {
     resolved.get.toExternalForm shouldBe "http://www.example.net/README.txt"
   }
 
-  it should "properly resolve a .. path in an HTTP URL" in {
+  it should "properly resolve a .. zipPath in an HTTP URL" in {
     val base = "http://www.example.net/main/index.html"
     val file = "../downloads/CoolApp.tgz"
 
