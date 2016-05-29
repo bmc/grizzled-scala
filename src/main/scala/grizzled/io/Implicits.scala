@@ -40,6 +40,7 @@ import java.io.{InputStream, OutputStream, Reader, Writer}
 
 import scala.annotation.tailrec
 import scala.io.Source
+import scala.util.{Failure, Success, Try}
 
 /** Implicits that add enrichments to `java.io` and `scala.io` classes.
   */
@@ -63,18 +64,21 @@ object Implicits {
       *
       * @param out  the output stream
       */
-    def copyTo(out: OutputStream): Unit = {
+    def copyTo(out: OutputStream): Try[Int] = {
       val buffer = new Array[Byte](8192)
 
-      @tailrec def doCopyTo(): Unit = {
-        val read = reader.read(buffer)
-        if (read > 0) {
-          out.write(buffer, 0, read)
-          doCopyTo()
+      @tailrec
+      def doCopyTo(copiedSoFar: Int): Try[Int] = {
+        Try { reader.read(buffer) } match {
+          case Success(n) if n <= 0 => Success(copiedSoFar)
+          case Success(n) => Try { out.write(buffer, 0, n) } match {
+            case Failure(ex) => Failure(ex)
+            case Success(_)  => doCopyTo(copiedSoFar + n)
+          }
         }
       }
 
-      doCopyTo()
+      doCopyTo(0)
     }
   }
 
@@ -95,15 +99,19 @@ object Implicits {
       * @param out  the output stream
       */
     def copyTo(out: Writer): Unit = {
-      @tailrec def doCopyTo(): Unit = {
-        val c: Int = reader.read()
-        if (c != -1) {
-          out.write(c)
-          doCopyTo()
+      val buffer = new Array[Char](8192)
+      @tailrec
+      def doCopyTo(copiedSoFar: Int): Try[Int] = {
+        Try { reader.read(buffer) } match {
+          case Success(n) if n <= 0 => Success(copiedSoFar)
+          case Success(n) => Try { out.write(buffer, 0, n) } match {
+            case Failure(ex) => Failure(ex)
+            case Success(_)  => doCopyTo(copiedSoFar + n)
+          }
         }
       }
 
-      doCopyTo()
+      doCopyTo(0)
     }
   }
 
