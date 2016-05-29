@@ -8,6 +8,9 @@ Version 2.3.0:
   classes. In particular, `Zipper` simplifies the handling and creation of
   the intermediate directories that contain zip entries. See the docs for
   details.
+* `grizzled.io.RichReader` and `grizzled.io.RichInputStream` have `copyTo()`
+  methods that previously returned Unit and threw exceptions on error. They
+  now return `Try` objects.
 
 Version 2.2.2:
 
