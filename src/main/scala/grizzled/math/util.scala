@@ -37,8 +37,6 @@
 
 package grizzled.math
 
-import scala.math
-
 /** Useful math-related utility functions.
   */
 object util {
