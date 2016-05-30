@@ -51,14 +51,15 @@ object sys {
     * - Mac - Mac OS, prior to Mac OS X
     * - Posix - Anything Unix-like, including Mac OS X
     */
-  object OperatingSystem extends Enumeration {
-    val Posix = Value("Posix")
-    val Mac = Value("Mac OS")
-    val Windows = Value("Windows")
-    val WindowsCE = Value("Windows CE")
-    val OS2 = Value("OS/2")
-    val NetWare = Value("NetWare")
-    val VMS = Value("VMS")
+  sealed abstract class OperatingSystem(val name: String)
+  object OperatingSystem { // For backward compatibility
+    case object Posix extends OperatingSystem("Posix")
+    case object Mac extends OperatingSystem("Mac OS")
+    case object Windows extends OperatingSystem("Windows")
+    case object WindowsCE extends OperatingSystem("Windows CE")
+    case object OS2 extends OperatingSystem("OS/2")
+    case object NetWare extends OperatingSystem("NetWare")
+    case object VMS extends OperatingSystem("VMS")
   }
 
   import OperatingSystem._

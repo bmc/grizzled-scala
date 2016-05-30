@@ -48,13 +48,13 @@ import scala.util.Try
   * @param query      the query string, if defined
   * @param fragment   the fragment, if defined
   */
-case class URI(scheme:    Option[String],
-               userInfo:  Option[String],
-               host:      Option[String],
-               port:      Option[Int],
-               path:      Option[String],
-               query:     Option[String] = None,
-               fragment:  Option[String] = None) {
+final case class URI(scheme:    Option[String],
+                     userInfo:  Option[String],
+                     host:      Option[String],
+                     port:      Option[Int],
+                     path:      Option[String],
+                     query:     Option[String] = None,
+                     fragment:  Option[String] = None) {
 
   /** The underlying `java.net.URI`.
     */

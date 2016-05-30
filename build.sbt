@@ -24,6 +24,22 @@ autoCompilerPlugins := true
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 bintrayPackageLabels := Seq("library", "grizzled", "scala")
 
+/* Wart Remover doesn't yet work with 2.12. Disabled for now.
+wartremoverErrors in (Compile, compile) ++= Seq(
+  Wart.Any2StringAdd,
+  Wart.AsInstanceOf,
+  Wart.EitherProjectionPartial,
+  Wart.Enumeration,
+  Wart.FinalCaseClass,
+  Wart.IsInstanceOf,
+  Wart.JavaConversions,
+  Wart.Null,
+  Wart.OptionPartial,
+  Wart.Return,
+  Wart.Var
+)
+*/
+
 // ---------------------------------------------------------------------------
 // Helpers
 

@@ -53,13 +53,13 @@ import scala.util.Try
   * @param userInfo   the URL's user info, if any
   * @param fragment   the fragment, if any
   */
-case class URL(protocol: String,
-               host:     Option[String],
-               port:     Option[Int],
-               path:     Option[String],
-               query:    Option[String] = None,
-               userInfo: Option[String] = None,
-               fragment: Option[String] = None) {
+final case class URL(protocol: String,
+                     host:     Option[String],
+                     port:     Option[Int],
+                     path:     Option[String],
+                     query:    Option[String] = None,
+                     userInfo: Option[String] = None,
+                     fragment: Option[String] = None) {
 
   /** The underlying `java.net.URL`.
     */

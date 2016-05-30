@@ -5,6 +5,7 @@ package grizzled.collection
   *
   * @param iterators  the iterators to wrap
   */
+@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
 class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
   private[this] val iteratorList: List[Iterator[T]] = iterators.toList
   private[this] var current = iteratorList.head

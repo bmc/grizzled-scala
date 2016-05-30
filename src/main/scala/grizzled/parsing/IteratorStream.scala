@@ -56,6 +56,7 @@ package grizzled.parsing
   *
   * @param iterator  the iterator to wrap
   */
+@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
 class IteratorStream[T](private val iterator: Iterator[T]) {
   private var count = 0
 

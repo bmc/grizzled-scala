@@ -107,6 +107,7 @@ object util {
     */
   def hexStringToBytes(hexString: String): Option[Array[Byte]] = {
 
+    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.AsInstanceOf"))
     def parse(chars: Seq[Char], accum: Array[Byte]): Option[Array[Byte]] = {
       chars match {
         case upper :: lower :: rest => {
@@ -183,29 +184,27 @@ object util {
 
     else if (QUOTE_SET.contains(trimmed(0))) {
       val mOpt = QUOTED_REGEX.findFirstMatchIn(trimmed)
-      if (mOpt.isEmpty)  // to eol
-        List(trimmed)
-
-      else {
-        val matched = mOpt.get
+      mOpt.map { matched =>
         val matchedString = matched.toString
         val token = fixedQuotedString(matchedString)
         val past = trimmed.substring(matched.end)
         List(token) ++ tokenizeWithQuotes(past)
       }
+      .getOrElse( // to EOL
+        List(trimmed)
+      )
     }
 
     else {
       val mOpt = WHITE_SPACE_REGEX.findFirstMatchIn(trimmed)
-      if (mOpt.isEmpty) // to eol
-        List(trimmed)
-
-      else {
-        val matched = mOpt.get
+      mOpt.map { matched =>
         val token = trimmed.substring(0, matched.start)
         val past = trimmed.substring(matched.end)
         List(token) ++ tokenizeWithQuotes(past)
       }
+      .getOrElse( // to EOL
+        List(trimmed)
+      )
     }
   }
 }

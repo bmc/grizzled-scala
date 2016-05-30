@@ -43,6 +43,6 @@ package grizzled.parsing
   * - the starting position of the token in the original string from which
   *   the token was parsed
   */
-case class StringToken(val string: String, val start: Int) {
+final case class StringToken(string: String, start: Int) {
   override def toString = string
 }

@@ -97,12 +97,12 @@ package grizzled.string
   *                    post-process the wrapped string.
   * @param indentChar  the indentation character to use.
   */
-case class WordWrapper(wrapWidth:    Int = 79,
-                       indentation:  Int = 0,
-                       prefix:       String = "",
-                       ignore:       Set[Char] = Set.empty[Char],
-                       indentChar:   Char = ' ') {
-  require(prefix != null)
+final case class WordWrapper(wrapWidth:    Int = 79,
+                             indentation:  Int = 0,
+                             prefix:       String = "",
+                             ignore:       Set[Char] = Set.empty[Char],
+                             indentChar:   Char = ' ') {
+  require(Option(prefix).isDefined) // null check
 
   private val prefixLength = wordLen(prefix)
 
@@ -126,6 +126,7 @@ case class WordWrapper(wrapWidth:    Int = 79,
     def assembleLine(prefix: String, buf: ArrayBuffer[String]): String =
       prefix + indentChars + buf.mkString(" ")
 
+    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
     def wrapOneLine(line: String, prefix: String): String = {
       val lineOut = new ArrayBuffer[String]
       val result  = new ArrayBuffer[String]

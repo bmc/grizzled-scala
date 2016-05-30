@@ -10,3 +10,6 @@ resolvers += Resolver.url(
 
 addSbtPlugin("me.lessis" % "bintray-sbt" % "0.3.0")
 
+// Not built for 2.12. Can't use it yet.
+//addSbtPlugin("org.brianmckenna" % "sbt-wartremover" % "0.14")
+

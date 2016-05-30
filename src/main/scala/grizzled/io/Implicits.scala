@@ -57,6 +57,7 @@ object Implicits {
 
     val reader = inputStream
 
+    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.AsInstanceOf"))
     protected def convert(b: Int) = b.asInstanceOf[Byte]
 
     /** Copy the input stream to an output stream, stopping on EOF.
@@ -89,6 +90,7 @@ object Implicits {
     * @param reader  the reader to wrap
     */
   implicit class RichReader(val reader: Reader) extends PartialReader[Char] {
+    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.AsInstanceOf"))
     protected def convert(b: Int) = b.asInstanceOf[Char]
 
     /** Copy the reader to a writer, stopping on EOF. This method does no

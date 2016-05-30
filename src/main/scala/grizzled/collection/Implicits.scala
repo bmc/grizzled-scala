@@ -39,7 +39,7 @@ package grizzled.collection
 
 import scala.collection.immutable.LinearSeq
 import scala.language.implicitConversions
-import java.util.{Collection, Iterator => JIterator}
+import java.util.{Collection => JCollection, Iterator => JIterator}
 
 /** Enrichment classes for collections.
   */
@@ -50,7 +50,7 @@ object Implicits {
   implicit class CollectionIterator[T](val iterator: JIterator[T])
     extends Iterator[T] {
 
-    def this(c: Collection[T]) = this(c.iterator)
+    def this(c: JCollection[T]) = this(c.iterator)
 
     def hasNext: Boolean = iterator.hasNext
 
@@ -83,7 +83,7 @@ object Implicits {
       val buf = new ArrayBuffer[Char]
 
       // Lay them out in columns. Simple-minded for now.
-      val strings = underlying.map(_.toString).toList
+      val strings: List[String] = underlying.map(_.toString).toList
       val colSize = maxnum(strings.map(_.length): _*) + 2
       val colsPerLine = width / colSize
 

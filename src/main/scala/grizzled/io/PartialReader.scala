@@ -42,7 +42,8 @@ import scala.annotation.tailrec
 /** Contains methods that can read part of a stream or reader.
   */
 trait PartialReader[T] {
-  val reader: {def read(): Int}
+  type HasRead = {def read(): Int}
+  val reader: HasRead
 
   protected def convert(b: Int): T
 
@@ -55,22 +56,19 @@ trait PartialReader[T] {
   def readSome(max: Int): List[T] = {
     import scala.language.reflectiveCalls
 
-    @tailrec def doRead(partialList: List[T], cur: Int): List[T] = {
+    @tailrec def doRead(r: HasRead, partialList: List[T], cur: Int): List[T] = {
       if (cur >= max)
         partialList
 
       else {
-        val b = reader.read()
+        val b = r.read()
         if (b == -1)
           partialList
         else
-          doRead(partialList :+ convert(b), cur + 1)
+          doRead(r, partialList :+ convert(b), cur + 1)
       }
     }
 
-    if (reader == null)
-      Nil
-    else
-      doRead(List.empty[T], 0)
+    Option(reader).map(r => doRead(r, List.empty[T], 0)).getOrElse(Nil)
   }
 }

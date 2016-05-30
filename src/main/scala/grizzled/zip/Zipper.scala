@@ -802,6 +802,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
     *                    are used.
     * @return A `Success` with the new path, or a `Failure` on error.
     */
+  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.OptionPartial"))
   private def stripRoot(path: String, forceRoot: Option[String]): Try[String] = {
     val f = new File(path)
 
@@ -999,8 +1000,8 @@ private[zip] trait InputStreamHelper {
   *
   * @param url the URL
   */
-private[zip] case class URLSource(url: URL) extends ItemSource
-                                            with InputStreamHelper {
+private[zip] final case class URLSource(url: URL) extends ItemSource
+                                                  with InputStreamHelper {
   def read(consumer: (Array[Byte], Int) => Try[Int]) = {
     for { is <- Try { url.openStream() }
           n  <- readInputStream(is)(consumer) }
@@ -1012,8 +1013,8 @@ private[zip] case class URLSource(url: URL) extends ItemSource
   *
   * @param file the `File`
   */
-private[zip] case class FileSource(file: File) extends ItemSource
-                                               with InputStreamHelper {
+private[zip] final case class FileSource(file: File) extends ItemSource
+                                                     with InputStreamHelper {
   def read(consumer: (Array[Byte], Int) => Try[Int]) = {
     for { is <- Try { new FileInputStream(file) }
           n  <- readInputStream(is)(consumer)  }
@@ -1025,7 +1026,7 @@ private[zip] case class FileSource(file: File) extends ItemSource
   *
   * @param is the input stream
   */
-private[zip] case class InputStreamSource(is: InputStream)
+private[zip] final case class InputStreamSource(is: InputStream)
   extends ItemSource
   with InputStreamHelper {
 
@@ -1038,7 +1039,7 @@ private[zip] case class InputStreamSource(is: InputStream)
   *
   * @param r  the reader
   */
-private[zip] case class ReaderSource(r: Reader) extends ItemSource {
+private[zip] final case class ReaderSource(r: Reader) extends ItemSource {
   def read(consumer: (Array[Byte], Int) => Try[Int]) = {
     val buf = new Array[Char](BufSize)
 
@@ -1066,7 +1067,7 @@ private[zip] case class ReaderSource(r: Reader) extends ItemSource {
   *
   * @param source  the source
   */
-private[zip] case class SourceSource(source: Source) extends ItemSource {
+private[zip] final case class SourceSource(source: Source) extends ItemSource {
   def read(consumer: (Array[Byte], Int) => Try[Int]) = {
 
     @tailrec
@@ -1088,7 +1089,9 @@ private[zip] case class SourceSource(source: Source) extends ItemSource {
   *
   * @param bytes  the byte array
   */
-private[zip] case class BytesSource(bytes: Array[Byte]) extends ItemSource {
+private[zip] final case class BytesSource(bytes: Array[Byte])
+  extends ItemSource {
+
   def read(consumer: (Array[Byte], Int) => Try[Int]): Try[Int] =
     consumer(bytes, bytes.length)
 }
@@ -1098,7 +1101,7 @@ private[zip] case class BytesSource(bytes: Array[Byte]) extends ItemSource {
   * @param source   the `ItemSource` container for the resource to be read
   * @param zipPath  the path in the zip file
   */
-private[zip] case class ZipSource(source: ItemSource, zipPath: String)
+private[zip] final case class ZipSource(source: ItemSource, zipPath: String)
 
 private[zip] object ZipSourceOrdering extends Ordering[ZipSource] {
   def compare(a: ZipSource, b: ZipSource) = a.zipPath compare b.zipPath

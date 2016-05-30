@@ -110,7 +110,7 @@ object Implicits {
       def isPrintable: Boolean = {
         val block = Option(Character.UnicodeBlock.of(character))
         (!Character.isISOControl(character)) &&
-        block.isDefined && (block.get != Character.UnicodeBlock.SPECIALS)
+        block.exists(_ != Character.UnicodeBlock.SPECIALS)
       }
     }
   }

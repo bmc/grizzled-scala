@@ -3,6 +3,7 @@
 Version 2.3.1:
 
 * Fixed bug in `Zipper (incorrect comparison between `String` and `Char`).
+* Cleaned up various unused imports.
 
 Version 2.3.0:
 

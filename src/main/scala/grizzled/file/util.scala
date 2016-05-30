@@ -122,9 +122,9 @@ object util {
     *
     * @return a (dirname, basename) tuple of strings
     */
-  def dirnameBasename(path: String,
+  def dirnameBasename(path:    String,
                       fileSep: String = fileSeparator): (String, String) = {
-    if ((path == null) || (path.length == 0))
+    if (Option(path).isEmpty || path.isEmpty)
       ("", "")
     else if ((path == ".") || (path == ".."))
       (path, "")
@@ -232,9 +232,10 @@ object util {
 
     def glob1(dirname: String, pattern: String): List[String] = {
       val dir = if (dirname.length == 0) pwd else dirname
-      val names = new File(dir).list.toList
+      val names = Option(new File(dir).list).map(_.toList)
+                                            .getOrElse(List.empty[String])
 
-      if (names == null)
+      if (names.isEmpty)
         Nil
 
       else {
@@ -487,9 +488,9 @@ object util {
     val nondirs = new ArrayBuffer[String]()
     val result = new ArrayBuffer[(String, List[String], List[String])]()
     val fTop = new File(top)
-    val names = fTop.list
+    val names = Option(fTop.list).getOrElse(Array.empty[String])
 
-    if (names != null) {
+    if (names.nonEmpty) {
       for (name <- names) {
         val f = new File(top + fileSeparator + name)
         if (f.isDirectory)
@@ -577,7 +578,7 @@ object util {
 
     // Null guard.
 
-    val nonNullPath = if (path == null) "" else path
+    val nonNullPath = Option(path).getOrElse("")
 
     // Special case for Windows. (Stupid drive letters.)
 
@@ -663,7 +664,7 @@ object util {
     }
 
     val sysProp = System getProperty "java.io.tmpdir"
-    val tempDirName = if (sysProp == null) guess else sysProp
+    val tempDirName = Option(sysProp).getOrElse(guess)
     new File(tempDirName)
   }
 
@@ -703,7 +704,7 @@ object util {
           " attempts."
         )
 
-      val usePrefix = if (prefix == null) "" else prefix
+      val usePrefix = Option(prefix).getOrElse("")
       val randomName = usePrefix + JInt.toHexString(random.nextInt)
       val dir = new File (temporaryDirectory, randomName)
 
@@ -1188,10 +1189,11 @@ object util {
     */
   private def toPathArray(file: File): Array[String] = {
     @tailrec def toPathList(f: File, current: List[String]): List[String] = {
-      if (f == null)
-        current
-      else
-        toPathList(f.getParentFile, f.getName :: current)
+      // Can't use map, to preserve tail-recursion.
+      Option(f) match {
+        case Some(f2) => toPathList(f2.getParentFile, f2.getName :: current)
+        case None => current
+      }
     }
 
     toPathList(file.getCanonicalFile, Nil).toArray

@@ -91,18 +91,22 @@ trait ValueConverter[T] {
   * @param message   the exception message
   * @param exception a nested exception
   */
+@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
 class ConfigurationException(val message:   String,
                              val exception: Throwable = null)
   extends Exception(message, exception)
 
 object ConfigurationException {
-  def apply(message: String, exception: Throwable = null) =
+  def apply(message: String) =
+    new ConfigurationException(message)
+  def apply(message: String, exception: Throwable) =
     new ConfigurationException(message, exception)
 }
 
 /** A specific kind of configuration exception, tied to a specific section
   * and option.
   */
+@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
 class ConfigurationOptionException(message:     String,
                                    val section: String,
                                    val option:  String,
@@ -1451,6 +1455,6 @@ object Configuration {
 
 }
 
-private[config] case class Value(value: String, isRaw: Boolean = false) {
+private[config] final case class Value(value: String, isRaw: Boolean = false) {
   override val toString = s"Value<value=$value, isRaw=$isRaw>"
 }

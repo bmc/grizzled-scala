@@ -86,7 +86,7 @@ extends Iterator[String] {
     *
     * @return `true` if input remains, `false` if not
     */
-  def hasNext: Boolean = source.hasNext || (buf.length > 0)
+  def hasNext: Boolean = source.hasNext || buf.nonEmpty
 
   /** Get the next logical line of input, which may represent a concatenation
     * of physical input lines. Any trailing newlines are stripped.
@@ -95,7 +95,7 @@ extends Iterator[String] {
     */
   def next: String = {
     def makeLine(line: String): String = {
-      if (buf.length > 0) {
+      if (buf.nonEmpty) {
         val res = (buf mkString "") + line
         buf.clear()
         res
@@ -110,8 +110,7 @@ extends Iterator[String] {
 
     @tailrec def readNext: String = {
       if (! source.hasNext) {
-        if (buf.length == 0)
-          assert(false);
+        assert(buf.nonEmpty)
         val res = buf mkString ""
         buf.clear()
         res
@@ -125,14 +124,17 @@ extends Iterator[String] {
 
         // Odd number of backslashes at the end of a line means
         // it's a continuation line.
-        if (m == None)
+        if (m.isEmpty)
           makeLine(line)
 
-        else if ((m.get.group(1).length % 2) == 0)
+        else if (m.exists(x => (x.group(1).length % 2) == 0))
           makeLine(line)
 
         else {
-          buf ++= m.get.group(2).reverse
+          m.foreach { x =>
+            buf ++= x.group(2).reverse
+          }
+
           readNext
         }
       }

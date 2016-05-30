@@ -75,6 +75,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     * @return `Right(substitutedValue)` or `Left(error)`
     */
   def sub(s: String): Either[String, String] = {
+    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
     def doSub(s2: String): Either[String, String] = {
 
       def subVariable(variable: Variable): Either[String, String] = {
@@ -125,12 +126,9 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     Either[String, String] = {
 
     def handleDefault: Either[String, String] = {
-      if (default.isDefined)
-        Right(default.get)
-      else if (safe)
-        Right("")
-      else
-        Left(s"Variable not found: $name")
+      default.map(Right(_)).getOrElse {
+        if (safe) Right("") else Left(s"Variable not found: $name")
+      }
     }
 
     resolveVar(name).map {s => Right(s)}.getOrElse(handleDefault)
@@ -169,6 +167,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
   *                     a blank string for an unknown variable, `false`
   *                     for one that throws an exception.
   */
+@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
 class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
                               namePattern: String,
                               safe:        Boolean)

@@ -1,7 +1,7 @@
 package grizzled
 
 import org.scalatest.{FlatSpec, Matchers}
-import org.scalatest.matchers.{BeMatcher, MatchResult, Matcher}
+import org.scalatest.matchers.{BeMatcher, MatchResult}
 
 import scala.util.Try
 
