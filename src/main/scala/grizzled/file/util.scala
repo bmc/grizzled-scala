@@ -378,6 +378,10 @@ object util {
     * (and subdirectory) found. This method does lazy evaluation, instead
     * of calculating everything up-front, as `walk()` does.
     *
+    * The JDK's [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-int-java.nio.file.FileVisitOption...- java.nio.file.Files.walk()]]
+    * function provides a similar capability in JDK 8. Prior to JDK 8, you can
+    * also use  [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor) java.nio.file.Files.walkFileTree()]]
+    *
     * @param file    The `File` object, presumed to represent a directory.
     * @param topdown If `true` (the default), the stream will be generated
     *                top down. If `false`, it'll be generated bottom-up.
@@ -463,6 +467,10 @@ object util {
     * bottom up).
     *
     * '''WARNING!''' This method does ''not'' grok symbolic links!
+    *
+    * The JDK's [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-int-java.nio.file.FileVisitOption...- java.nio.file.Files.walk()]]
+    * function provides a similar capability in JDK 8. Prior to JDK 8, you can
+    * also use  [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor) java.nio.file.Files.walkFileTree()]]
     *
     * @param top     name of starting directory
     * @param topdown `true` to do a top-down traversal, `false`
@@ -772,7 +780,9 @@ object util {
     }
   }
 
-  /** Copy a file to a directory.
+  /** Copy a file to a directory. The JDK's
+    * [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...) java.nio.file.Files.copy()]]
+    * function provides a similar capability.
     *
     * @param file         Path name of the file to copy
     * @param targetDir    Path name to target directory
@@ -790,7 +800,9 @@ object util {
   }
 
   /** Copy a file to a directory. If the target directory does not exist,
-    * it is created.
+    * it is created. The JDK's
+    * [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...) java.nio.file.Files.copy()]]
+    * function provides a similar capability.
     *
     * @param file         Path name of the file to copy
     * @param targetDir    Path name to target directory
@@ -807,6 +819,10 @@ object util {
     * it is a directory, the target file will have the same base name as
     * as the source file.
     *
+    * The JDK's
+    * [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...) java.nio.file.Files.copy()]]
+    * function provides a similar capability.
+    *
     * @param sourcePath  path to the source file
     * @param targetPath  path to the target file or directory
     *
@@ -821,6 +837,10 @@ object util {
     * file must be a file. The target path can be a file or a directory; if
     * it is a directory, the target file will have the same base name as
     * as the source file.
+    *
+    * The JDK's
+    * [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...) java.nio.file.Files.copy()]]
+    * function provides a similar capability.
     *
     * @param source  path to the source file
     * @param target  path to the target file or directory
