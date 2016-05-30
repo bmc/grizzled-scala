@@ -253,13 +253,31 @@ class ZipperSpec extends BaseSpec {
       val entryName = "foobar/bytes.dat"
       val t = z.addInputStream(new ByteArrayInputStream(buf), entryName)
       t shouldBe success
-      val z2 = t.get
       val zipPath = new File(fileutil.joinPath(abs, "bin.zip"))
-      z2.writeZip(zipPath) shouldBe success
+      t.get.writeZip(zipPath) shouldBe success
 
       val zipFile = new ZipFile(zipPath)
       val bytes = readEntryAsBytes(zipFile, entryName)
-      bytes.length shouldBe buf.length
+      bytes should have length buf.length
+      bytes shouldBe buf
+    }
+  }
+
+  it should "accept a binary entry from a byte array" in {
+    withTemporaryDirectory("Zipper") { dir =>
+      val abs = dir.getAbsolutePath
+      val buf = randomByteArray(1024 * 1024)
+
+      val z = Zipper()
+      val entryName = "foo/bar/bytes.dat"
+      val t = z.addBytes(buf, entryName)
+      t shouldBe success
+      val zipPath = new File(fileutil.joinPath(abs, "binary.zip"))
+      t.get.writeZip(zipPath) shouldBe success
+
+      val zipFile = new ZipFile(zipPath)
+      val bytes = readEntryAsBytes(zipFile, entryName)
+      bytes should have length buf.length
       bytes shouldBe buf
     }
   }
@@ -353,7 +371,7 @@ class ZipperSpec extends BaseSpec {
 
       val zipFile = new ZipFile(zip)
       val matches = zipFile.entries.toSeq.filter(_.getName == "foo/")
-      matches.length shouldBe 1
+      matches should have length 1
 
       val entry = matches.head
       entry.getName shouldBe "foo/"

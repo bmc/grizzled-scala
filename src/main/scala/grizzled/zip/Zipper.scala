@@ -412,6 +412,18 @@ class Zipper private(items:           Map[String, ZipSource],
     addItem(ReaderSource(reader), zipPath, flatten)
   }
 
+  /** Add an array of bytes to the `Zipper`. The bytes constitute an eventual
+    * entry in a zip file; a reference to the byte array is held within this
+    * `Zipper` until it is garbage-collected.
+    *
+    * @param bytes    the array of bytes representing the entry to be written
+    *                 to the zip file
+    * @param zipPath  the path for the entry in the zip file
+    */
+  def addBytes(bytes: Array[Byte], zipPath: String): Try[Zipper] = {
+    addItem(BytesSource(bytes), zipPath, flatten = false)
+  }
+
   /** Recursively add all the files in a directory to the `Zipper`.
     *
     * @param dir       the directory, which must exist
@@ -1059,6 +1071,15 @@ private[zip] case class SourceSource(source: Source) extends ItemSource {
 
     readNext(0)
   }
+}
+
+/** An `ItemSource` that reads from a buffer of bytes.
+  *
+  * @param bytes  the byte array
+  */
+private[zip] case class BytesSource(bytes: Array[Byte]) extends ItemSource {
+  def read(consumer: (Array[Byte], Int) => Try[Int]): Try[Int] =
+    consumer(bytes, bytes.length)
 }
 
 /** The class for items that are added to a `Zipper`.
