@@ -32,7 +32,7 @@ Currently, the library is broken into a number of modules:
 * `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
 * `grizzled.util`: Miscellaneous utility functions and methods not otherwise
   categorized.
-* `grizzled.zip`: Miscellaneous utility functions for writing zip and jar files
+* `grizzled.zip`: Miscellaneous utility functions for writing zip and jar files.
 
 For a more detailed description of what's available, see the
 [API documentation][].
@@ -47,7 +47,7 @@ repository. (From JCenter, it's eventually pushed to the
 
 **NOTE**: This library uses [semantic versioning](http://semver.org).
 
-- Versions 2.3.0, 2.2.x, 2.1.0 and 2.0.0 support Scala 2.10, 2.11 and 2.12-M4.
+- Versions 2.3.x, 2.2.x, 2.1.0 and 2.0.0 support Scala 2.10, 2.11 and 2.12-M4.
 - Version 1.6.1 supports Scala 2.10, 2.11 and 2.12-M4.
 - Version 1.6.0 supports Scala 2.10, 2.11 and 2.12-M1.
 - Versions 1.5.1, 1.5.0, 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
@@ -70,7 +70,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.11</artifactId>
-      <version>2.3.0</version>
+      <version>2.3.1</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -94,7 +94,7 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 Add the following to your SBT build:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "2.3.0"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "2.3.1"
 
 ## Source Code Repository
 
