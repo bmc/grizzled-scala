@@ -42,7 +42,7 @@ import scala.annotation.tailrec
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
-/** Implicits that add enrichments to `java.io` and `scala.io` classes.
+/** Implicits that addFile enrichments to `java.io` and `scala.io` classes.
   */
 object Implicits {
 

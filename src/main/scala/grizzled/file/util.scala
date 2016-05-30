@@ -369,7 +369,7 @@ object util {
 
     // Do the actual globbing.
     val pieces = splitPath(relativePattern)
-    val matches = doGlob(pieces.toList, directory)
+    val matches = doGlob(pieces, directory)
 
     matches map normalizePath
   }

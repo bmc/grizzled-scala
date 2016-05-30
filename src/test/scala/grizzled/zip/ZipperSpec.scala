@@ -52,10 +52,10 @@ class ZipperSpec extends BaseSpec {
         ("bar.txt", barContents)
       ))
 
-      val t1 = z.add(f1, flatten = true)
+      val t1 = z.addFile(f1, flatten = true)
       t1 shouldBe success
 
-      val t2 = t1.get.add(f2, flatten = true)
+      val t2 = t1.get.addFile(f2, flatten = true)
       t2 shouldBe success
 
       val zipPath = new File(fileutil.joinPath(abs, "out.zip"))
@@ -92,10 +92,10 @@ class ZipperSpec extends BaseSpec {
         w.write(barContents)
       }
 
-      val t1 = z.add(f1, f1Path)
+      val t1 = z.addFile(f1, f1Path)
       t1 shouldBe success
 
-      val t2 = t1.get.add(f2, f2Path)
+      val t2 = t1.get.addFile(f2, f2Path)
       t2 shouldBe success
 
       val zipPath = new File(fileutil.joinPath(abs, "out.zip"))
@@ -120,7 +120,7 @@ class ZipperSpec extends BaseSpec {
 
     withTemporaryDirectory("Zipper") { dir =>
       val abs = dir.getAbsolutePath
-      val toStore = Array(
+      val filesToCreate = Array(
         ("goof/hello.txt", fooContents),
         ("goof/ball/world.txt", barContents),
         ("baz.txt", bazContents),
@@ -128,9 +128,9 @@ class ZipperSpec extends BaseSpec {
         ("a/very/shallow/baz.txt", bazContents)
       )
 
-      makeFiles(abs, toStore)
+      makeFiles(abs, filesToCreate)
 
-      val files = toStore.map { case (path, _) =>
+      val files = filesToCreate.map { case (path, _) =>
         (new File(fileutil.joinPath(abs, path)), path)
       }
       val t = Zipper(files)
@@ -144,12 +144,12 @@ class ZipperSpec extends BaseSpec {
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.toSeq
 
-      for ((path, contents) <- toStore) {
+      for ((path, contents) <- filesToCreate) {
         entries.exists(_.getName == path) shouldBe true
         readEntryAsChars(zipFile, path) shouldBe contents
       }
 
-      val dirs = toStore.map(t => fileutil.dirname(t._1) + "/")
+      val dirs = filesToCreate.map(t => fileutil.dirname(t._1) + "/")
                         .filter(s => ! (s startsWith ".") )
       for (i <- dirs) {
         val e = entries.filter(_.getName == i).headOption
@@ -164,16 +164,16 @@ class ZipperSpec extends BaseSpec {
 
     withTemporaryDirectory("Zipper") { dir =>
       val abs = dir.getAbsolutePath
-      val toStore = Array(
+      val filesToCreate = Array(
         ("a/hello.txt", fooContents),
         ("a/subdir/world.txt", barContents),
         ("b/very/deeply/nested/directory/foo.txt", fooContents),
         ("b/very/shallow/baz.txt", bazContents)
       )
 
-      makeFiles(abs, toStore)
+      makeFiles(abs, filesToCreate)
 
-      val files = toStore.map { case (path, _) =>
+      val files = filesToCreate.map { case (path, _) =>
         fileutil.joinPath(abs, path)
       }
       val t = Zipper(files, flatten = true)
@@ -185,7 +185,7 @@ class ZipperSpec extends BaseSpec {
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.toSeq
 
-      for ((path, contents) <- toStore) {
+      for ((path, contents) <- filesToCreate) {
         entries.exists(_.getName == path) shouldBe false
         val base = fileutil.basename(path)
         entries.exists(_.getName == base) shouldBe true
@@ -199,14 +199,14 @@ class ZipperSpec extends BaseSpec {
 
     withTemporaryDirectory("Zipper") { dir =>
       val abs = dir.getAbsolutePath
-      val toStore = Array(
+      val filesToCreate = Array(
         ("a/hello.txt", fooContents),
         ("b/c/d/hello.txt", barContents)
       )
 
-      makeFiles(abs, toStore)
+      makeFiles(abs, filesToCreate)
 
-      val files = toStore.map(_._1)
+      val files = filesToCreate.map(_._1)
       val t = Zipper(files, flatten = true)
 
       t shouldBe failure
@@ -228,9 +228,9 @@ class ZipperSpec extends BaseSpec {
       val abs = dir.getAbsolutePath
       withHTTPServer(server) { _ =>
         val z = Zipper()
-        val t1 = z.add(new URL(s"http://localhost:${server.bindPort}/foo.txt"))
+        val t1 = z.addURL(new URL(s"http://localhost:${server.bindPort}/foo.txt"))
         t1 shouldBe success
-        val t2 = t1.get.add(new URL(s"http://localhost:${server.bindPort}/bar.txt"))
+        val t2 = t1.get.addURL(new URL(s"http://localhost:${server.bindPort}/bar.txt"))
         t2 shouldBe success
         val fullZipper = t2.get
 
@@ -251,7 +251,7 @@ class ZipperSpec extends BaseSpec {
 
       val z = Zipper()
       val entryName = "foobar/bytes.dat"
-      val t = z.add(new ByteArrayInputStream(buf), entryName)
+      val t = z.addInputStream(new ByteArrayInputStream(buf), entryName)
       t shouldBe success
       val z2 = t.get
       val zipPath = new File(fileutil.joinPath(abs, "bin.zip"))
@@ -270,9 +270,9 @@ class ZipperSpec extends BaseSpec {
       val reader = new StringReader(fooContents)
       val z = Zipper()
       val entryName = "baz/bar/foo.txt"
-      val t = z.add(reader, entryName)
+      val t = z.addReader(reader, entryName)
       t shouldBe success
-      val t2 = t.get.add(new StringReader(bazContents), "baz.txt")
+      val t2 = t.get.addReader(new StringReader(bazContents), "baz.txt")
       t2 shouldBe success
 
       val zipPath = new File(fileutil.joinPath(abs, "bin.zip"))
@@ -307,7 +307,7 @@ class ZipperSpec extends BaseSpec {
       val z = Zipper()
       val entryName = "grizzled/NotValidClass.class"
 
-      val t = z.add(new ByteArrayInputStream(binaryFile), entryName)
+      val t = z.addInputStream(new ByteArrayInputStream(binaryFile), entryName)
       t shouldBe success
 
       val jarPath = new File(fileutil.joinPath(dir.getAbsolutePath, "foo.jar"))
@@ -320,28 +320,147 @@ class ZipperSpec extends BaseSpec {
     }
   }
 
-  it should "allow adding an explicit directory" in {
+  it should "allow adding an explicit zip directory entry" in {
     val z = Zipper()
     val zip = fileutil.joinPath(System.getProperty("java.io.tmpdir"), "out.zip")
-    val t = z.addDirectory("foo")
+    val t = z.addZipDirectory("foo/")
     t shouldBe success
     t.get.writeZip(zip)
     val zipFile = new ZipFile(zip)
-    import scala.sys.process._
+
     val entryOpt = zipFile.entries.toSeq.find(_.getName == "foo/")
     entryOpt.map(_.getName) shouldBe Some("foo/")
     entryOpt.map(_.isDirectory) shouldBe Some(true)
   }
 
+  it should "fail to add an zip directory entry if it doesn't end in /" in {
+    val z = Zipper()
+    z.addZipDirectory("foo") shouldBe failure
+  }
+
+  it should "allow adding an explicit zip directory that's also implied" in {
+    withTemporaryDirectory("Zipper") { dir =>
+      val abs = dir.getAbsolutePath
+      val z = Zipper()
+      val zip = fileutil.joinPath(abs, "out.zip")
+      val t1 = z.addZipDirectory("foo/")
+      t1 shouldBe success
+
+      val t2 = t1.get.addFile(new File("build.sbt"), "foo/bar/build.sbt")
+      t2 shouldBe success
+
+      t2.get.writeZip(zip) shouldBe success
+
+      val zipFile = new ZipFile(zip)
+      val matches = zipFile.entries.toSeq.filter(_.getName == "foo/")
+      matches.length shouldBe 1
+
+      val entry = matches.head
+      entry.getName shouldBe "foo/"
+      entry.isDirectory shouldBe true
+    }
+  }
+
   it should "allow retrieving the list of paths to be written" in {
     val z = Zipper()
-    val t = z.addDirectory("foo")
+    val t = z.addZipDirectory("foo/")
     t shouldBe success
-    val t2 = t.get.add("build.sbt")
+    val t2 = t.get.addFile("build.sbt")
     t2 shouldBe success
-    val t3 = t2.get.add("project/build.properties")
+    val t3 = t2.get.addFile("project/build.properties")
     t3 shouldBe success
     t3.get.paths shouldBe Set("foo/", "build.sbt", "project/build.properties")
+  }
+
+  it should " recursively add all files in a directory, stripped" in {
+    testAddDirectory { (dir: File, files: Array[(String, String)]) =>
+
+      val dirPath = dir.getPath
+      val z = Zipper()
+      val t = z.addDirectory(dir   = new File(fileutil.joinPath(dirPath, "src")),
+                             strip = Some(dirPath))
+      t shouldBe success
+      val z2 = t.get
+      val paths = z2.paths
+      for (path <- files.map(_._1)) {
+        paths should contain (path)
+      }
+    }
+  }
+
+  it should "recursively add all files in a directory, not stripped" in {
+    testAddDirectory { (dir: File, files: Array[(String, String)]) =>
+
+      val dirPath = dir.getPath
+      val z = Zipper()
+      val t = z.addDirectory(new File(fileutil.joinPath(dirPath, "src")))
+      t shouldBe success
+      val z2 = t.get
+      val paths = z2.paths
+      val prefix = dirPath.tail
+      for (path <- files.map(_._1)) {
+        paths should contain (prefix + "/" + path)
+      }
+    }
+  }
+
+  it should "recursively add all files in a directory, flattened" in {
+    testAddDirectory { (dir: File, files: Array[(String, String)]) =>
+
+      val dirPath = dir.getPath
+      val z = Zipper()
+      val t = z.addDirectory(
+        dir     = new File(fileutil.joinPath(dirPath, "src")),
+        flatten = true
+      )
+      t shouldBe success
+      val z2 = t.get
+      val paths = z2.paths
+      val prefix = dirPath.tail
+      for (path <- files.map(_._1)) {
+        paths should contain (fileutil.basename(path))
+      }
+    }
+  }
+
+  it should "recursively add all files in a directory that match a pattern" in {
+    testAddDirectory { (dir: File, files: Array[(String, String)]) =>
+
+      val dirPath = dir.getPath
+      val z = Zipper()
+      val pattern = "*.txt"
+      val t = z.addDirectory(
+        dir      = new File(fileutil.joinPath(dirPath, "src")),
+        wildcard = Some(pattern)
+      )
+      t shouldBe success
+      val z2 = t.get
+      val paths = z2.paths
+      val prefix = dirPath.tail
+      val fileNames = files.map(_._1)
+      for (path <- fileNames.filter(fileutil.fnmatch(_, pattern)))
+        paths should contain (prefix + "/" + path)
+      for (path <- fileNames.filter(! fileutil.fnmatch(_, pattern))) {
+        paths should not contain (prefix + "/" + path)
+      }
+    }
+  }
+
+  def testAddDirectory(code: (File, Array[(String, String)]) => Unit): Unit = {
+    withTemporaryDirectory("Zipper") { dir =>
+      val abs = dir.getAbsoluteFile
+      val filesToCreate = Array(
+        ("src/goof/hello.md", fooContents),
+        ("src/goof/ball/world", barContents),
+        ("src/bar.txt", barContents),
+        ("src/a/very/deeply/nested/directory/foo.txt", fooContents),
+        ("src/a/very/shallow/baz.txt", bazContents)
+      )
+
+      makeFiles(abs.getPath, filesToCreate)
+
+      code(abs, filesToCreate)
+    }
   }
 
   def randomByteArray(size: Int) = {

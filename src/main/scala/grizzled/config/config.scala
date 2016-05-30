@@ -727,7 +727,7 @@ final class Configuration private[config](
     val newContents = t2.map { case (sectionName, optionsMap) =>
       val optExistingOptions = contents.get(sectionName)
 
-      // If there's an existing map, add the new map to the existing one.
+      // If there's an existing map, addFile the new map to the existing one.
       // Otherwise, just use the new one.
       val newOptionsMap = optExistingOptions.map { existingOptionsMap =>
         existingOptionsMap ++ optionsMap

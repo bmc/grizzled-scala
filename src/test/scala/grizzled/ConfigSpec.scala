@@ -77,7 +77,7 @@ class ConfigSpec extends BaseSpec {
     newCfg.asOpt[String]("section2", "o1") shouldBe Some("bar")
   }
 
-  it should "allow + to add an option without mutating the original" in {
+  it should "allow + to addFile an option without mutating the original" in {
     val cfg = Fixture.cfg
     val newCfg = cfg + ("section99", "opt1", "something")
 

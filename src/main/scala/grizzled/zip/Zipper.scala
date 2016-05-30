@@ -1,6 +1,6 @@
 package grizzled.zip
 
-import grizzled.file.{util => fileutil}
+import grizzled.file.{FileDoesNotExistException, util => fileutil}
 import grizzled.file.Implicits.GrizzledFile
 import java.io._
 import java.net.URL
@@ -10,6 +10,7 @@ import java.util.zip.{ZipEntry, ZipOutputStream}
 import scala.annotation.tailrec
 import scala.collection.Set
 import scala.io.Source
+import scala.util.control.NonFatal
 import scala.util.{Failure, Success, Try}
 
 /** ==Zipper: Write zip and jar files more easily==
@@ -28,18 +29,18 @@ import scala.util.{Failure, Success, Try}
   * On Unix-like systems, this means stripping the leading "/"; on Windows, it
   * means stripping any leading drive letter and the leading "\". (See
   * java.io.File.listRoots() for more information.) For instance, if you're not
-  * flattening pathnames, and you add `C:\Temp\hello.txt` to a `Zipper` on
+  * flattening pathnames, and you addFile `C:\Temp\hello.txt` to a `Zipper` on
   * Windows, the `Zipper` will strip the `C:\`, adding `Temp/hello.txt`. to the
   * zip or jar file. If you're on a Unix-like system, including Mac OS X, and
-  * you add `/tmp/foo/bar.txt`, the `Zipper` will add `tmp/foo/bar.txt` to the
+  * you addFile `/tmp/foo/bar.txt`, the `Zipper` will addFile `tmp/foo/bar.txt` to the
   * file.
   *
   * ==Directories==
   *
-  * You can explicitly add directory entries to a `Zipper`, using
-  * `addDirectory()`. When you're not flattening entries, a `Zipper` object will
+  * You can explicitly addFile directory entries to a `Zipper`, using
+  * `addZipDirectory()`. When you're not flattening entries, a `Zipper` object will
   * also ensure that any intermediate directories in a pathname are created in
-  * the zip file. For instance, if you add file `/tmp/foo/bar/baz.txt` to a
+  * the zip file. For instance, if you addFile file `/tmp/foo/bar/baz.txt` to a
   * `Zipper`, without flattening it, the `Zipper` will create the following
   * entries in the underlying zip file:
   *
@@ -60,18 +61,18 @@ import scala.util.{Failure, Success, Try}
   *
   * ==Using a Zipper object==
   *
-  * The `add()` methods all return `Try` objects, and they do not modify
+  * The `addFile()` methods all return `Try` objects, and they do not modify
   * the original `Zipper` object. On success, they return a `Success` object
   * that contains a ''new'' `Zipper`.
   *
-  * Because the `add()` methods return `Try`, they are unsuitable for use
+  * Because the `addFile()` methods return `Try`, they are unsuitable for use
   * in traditional "builder" patterns. For instance, the following will ''not''
   * work:
   *
   * {{{
   * // Will NOT work
   * val zipper = Zipper()
-  * zipper.add("/tmp/foo/bar.txt").add("/tmp/baz.txt")
+  * zipper.addFile("/tmp/foo/bar.txt").addFile("/tmp/baz.txt")
   * }}}
   *
   * There are other patterns you can use, however. Since `Try` is monadic, a
@@ -79,14 +80,14 @@ import scala.util.{Failure, Success, Try}
   *
   * {{{
   * val zipper = Zipper()
-  * val newZipper = for { z1 <- zipper.add("/tmp/foo/bar.txt")
-  *                       z2 <- z1.add("/tmp/baz.txt")
-  *                       z3 <- z2.add("hello.txt") }
+  * val newZipper = for { z1 <- zipper.addFile("/tmp/foo/bar.txt")
+  *                       z2 <- z1.addFile("/tmp/baz.txt")
+  *                       z3 <- z2.addFile("hello.txt") }
   *                 yield z3
   * // newZipper is a Try[Zipper]
   * }}}
   *
-  * If you're trying to add a collection of objects, a `for` comprehension
+  * If you're trying to addFile a collection of objects, a `for` comprehension
   * can be problematic. If you're not averse to using a local `var`, you
   * can just use a traditional imperative loop:
   *
@@ -96,8 +97,8 @@ import scala.util.{Failure, Success, Try}
   * val paths: List[String] = ...
   *
   * for (zipPath <- paths) {
-  *   val t = z.add(zipPath)
-  *   z = t.get // will throw an exception if the add failed
+  *   val t = z.addFile(zipPath)
+  *   z = t.get // will throw an exception if the addFile failed
   * }
   * }}}
   *
@@ -108,7 +109,7 @@ import scala.util.{Failure, Success, Try}
   * val zipper = Zipper()
   * val paths: List[String] = ...
   * paths.foldLeft(zipper) { case (z, zipPath) =>
-  *   z.add(zipPath).get // throws an exception if the add fails
+  *   z.addFile(zipPath).get // throws an exception if the addFile fails
   * }
   * }}}
   *
@@ -123,9 +124,9 @@ import scala.util.{Failure, Success, Try}
   *   paths match {
   *     case Nil => Success(currentZipper)
   *     case zipPath :: rest =>
-  *       // Can't use currentZipper.add(zipPath).map(), because the recursion
+  *       // Can't use currentZipper.addFile(zipPath).map(), because the recursion
   *       // will then be invoked within the lambda, violating tail-recursion.
-  *       currentZipper.add(zipPath) match {
+  *       currentZipper.addFile(zipPath) match {
   *         case Failure(ex) => Failure(ex)
   *         case Success(z)  => addNext(rest, z)
   *       }
@@ -158,12 +159,11 @@ class Zipper private(items:           Map[String, ZipSource],
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
-    * @param path zipPath to the file to add
-    *
+    * @param path zipPath to the file to addFile
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(path: String): Try[Zipper] = add(path, flatten = false)
+  def addFile(path: String): Try[Zipper] = addFile(path, flatten = false)
 
   /** Add a file to the `Zipper`. The entry in the zip file will be the
     * base name of the file, if `flatten` is specified. Otherwise, it'll
@@ -173,13 +173,12 @@ class Zipper private(items:           Map[String, ZipSource],
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
-    * @param path     zipPath to the file to add
+    * @param path     zipPath to the file to addFile
     * @param flatten  whether or not to flatten the zipPath in the zip file
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(path: String, flatten: Boolean): Try[Zipper] = {
+  def addFile(path: String, flatten: Boolean): Try[Zipper] = {
     addItem(FileSource(new File(path)), path, flatten)
   }
 
@@ -188,14 +187,13 @@ class Zipper private(items:           Map[String, ZipSource],
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
-    * @param path     zipPath to the file to add
+    * @param path     zipPath to the file to addFile
     * @param zipPath  the zipPath of the entry in the zip or jar file. Any file
     *                 system root will be stripped.
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(path: String, zipPath: String): Try[Zipper] = {
+  def addFile(path: String, zipPath: String): Try[Zipper] = {
     addItem(FileSource(new File(path)), zipPath, flatten = false)
   }
 
@@ -207,12 +205,10 @@ class Zipper private(items:           Map[String, ZipSource],
     * until you call `writeZip()` or `writeJar()`.
     *
     * @param f  the `File` to be added
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(f: File): Try[Zipper] = add(f, flatten = false)
-
+  def addFile(f: File): Try[Zipper] = addFile(f, flatten = false)
 
   /** Add a file to the `Zipper`. The entry in the zip file will be the
     * base name of the file, if `flatten` is specified. Otherwise, it'll
@@ -224,11 +220,11 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * @param f        the `File` to be added
     * @param flatten  whether or not to flatten the zipPath in the zip file
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(f: File, flatten: Boolean): Try[Zipper] = add(f.getPath, flatten)
+  def addFile(f: File, flatten: Boolean): Try[Zipper] =
+    addFile(f.getPath, flatten)
 
   /** Add a file to the `Zipper`, specifying the zip file entry name explicitly.
     *
@@ -238,42 +234,41 @@ class Zipper private(items:           Map[String, ZipSource],
     * @param f        the `File` to be added
     * @param zipPath  the zipPath of the entry in the zip or jar file. Any file
     *                 system root will be stripped.
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(f: File, zipPath: String): Try[Zipper] = add(f.getPath, zipPath)
+  def addFile(f: File, zipPath: String): Try[Zipper] =
+    addFile(f.getPath, zipPath)
 
   /** Add a URL to the `Zipper`. The zipPath in the zip file will be taken from
     * the zipPath component of the URL. That means the URL ''must'' have a
-    * file name component. For instance, if you add the URL
+    * file name component. For instance, if you addFile the URL
     * `http://www.example.com/`, you'll get an error, because the zipPath
     * component is "/", and the corresponding relative zipPath is "". In other
-    * words, `Zipper` does ''not'' add `index.html` for you automatically. A
+    * words, `Zipper` does ''not'' addFile `index.html` for you automatically. A
     * URL like `http://www.example.com/index.html` will work fine, resulting
     * in `index.html` being added to the resulting zip file. Similarly, using
-    * this method to add `http://www.example.com/music/My-Song.mp3` will write
+    * this method to addFile `http://www.example.com/music/My-Song.mp3` will write
     * `music/My-Song.mp3` to the zip or jar file.
     *
     * '''Note''': The URL is not validated (i.e., no connection is made) until
     * you call `writeZip()` or `writeJar()`.
     *
     * @param url  the URL to the resource to be added
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(url: URL): Try[Zipper] = add(url, flatten = false)
+  def addURL(url: URL): Try[Zipper] = addURL(url, flatten = false)
 
   /** Add a URL to the `Zipper`. The zipPath in the zip file will be taken from
     * the zipPath component of the URL, and all directories will be stripped from
     * the zipPath. That means the URL ''must'' have a file name component. For
-    * instance, if you add the URL `http://www.example.com/`, you'll get an
+    * instance, if you addFile the URL `http://www.example.com/`, you'll get an
     * error, because the zipPath component is "/", and the corresponding relative
-    * zipPath is "". In other words, `Zipper` does ''not'' add `index.html` for you
+    * zipPath is "". In other words, `Zipper` does ''not'' addFile `index.html` for you
     * automatically. A URL like `http://www.example.com/index.html` will work
     * fine, resulting in `index.html` being added to the resulting zip file.
-    * Using this method to add
+    * Using this method to addFile
     * `http://www.example.com/music/My-Song.mp3` will write `music/My-Song.mp3`
     * to the zip or jar file, if `flatten` is `false`; if `flatten` is `true`,
     * `My-Song.mp3` will be written.
@@ -282,11 +277,10 @@ class Zipper private(items:           Map[String, ZipSource],
     * you call `writeZip()` or `writeJar()`.
     *
     * @param url  the URL to the resource to be added
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(url: URL, flatten: Boolean): Try[Zipper] = {
+  def addURL(url: URL, flatten: Boolean): Try[Zipper] = {
     addItem(item          = URLSource(url),
             path          = url.getPath,
             flatten       = flatten,
@@ -298,18 +292,17 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * '''Warning''': A `Source` represents an open resource (e.g., an open
     * file descriptor). Those resources are held open until you call
-    * `writeZip()` or `writeJar()`. If you add too many `Source` objects
+    * `writeZip()` or `writeJar()`. If you addFile too many `Source` objects
     * (or `Reader` or `InputStream` objects) to a `Zipper`, you could
     * theoretically, run out of open file descriptors.
     *
-    * @param source   the `Source` to add
+    * @param source   the `Source` to addFile
     * @param zipPath  the path to use within the zip file. Any file system
     *                 root is removed from this path.
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(source: Source, zipPath: String): Try[Zipper] = {
+  def addSource(source: Source, zipPath: String): Try[Zipper] = {
     addItem(SourceSource(source), zipPath, flatten = false)
   }
 
@@ -320,19 +313,20 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * '''Warning''': A `Source` represents an open resource (e.g., an open
     * file descriptor). Those resources are held open until you call
-    * `writeZip()` or `writeJar()`. If you add too many `Source` objects
+    * `writeZip()` or `writeJar()`. If you addFile too many `Source` objects
     * (or `Reader` or `InputStream` objects) to a `Zipper`, you could
     * theoretically, run out of open file descriptors.
     *
-    * @param source   the `Source` to add
+    * @param source   the `Source` to addFile
     * @param zipPath  the path to use within the zip file. Any file system
     *                 root is removed from this path.
     * @param flatten  whether or not to flatten the zip path
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(source: Source, zipPath: String, flatten: Boolean): Try[Zipper] = {
+  def addSource(source:  Source,
+                zipPath: String,
+                flatten: Boolean): Try[Zipper] = {
     addItem(SourceSource(source), zipPath, flatten)
   }
 
@@ -341,18 +335,17 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * '''Warning''': An `InputStream` represents an open resource (e.g., an open
     * file descriptor). Those resources are held open until you call
-    * `writeZip()` or `writeJar()`. If you add too many `InputStream` objects
+    * `writeZip()` or `writeJar()`. If you addFile too many `InputStream` objects
     * (or `Reader` or `Source` objects) to a `Zipper`, you could theoretically,
     * run out of open file descriptors.
     *
-    * @param inputStream  the `InputStream` to add
+    * @param inputStream  the `InputStream` to addFile
     * @param zipPath      the path to use within the zip file. Any file system
     *                     root is removed from this path.
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(inputStream: InputStream, zipPath: String): Try[Zipper] = {
+  def addInputStream(inputStream: InputStream, zipPath: String): Try[Zipper] = {
     addItem(InputStreamSource(inputStream), zipPath, flatten = false)
   }
 
@@ -363,21 +356,20 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * '''Warning''': An `InputStream` represents an open resource (e.g., an open
     * file descriptor). Those resources are held open until you call
-    * `writeZip()` or `writeJar()`. If you add too many `InputStream` objects
+    * `writeZip()` or `writeJar()`. If you addFile too many `InputStream` objects
     * (or `Reader` or `Source` objects) to a `Zipper`, you could theoretically,
     * run out of open file descriptors.
     *
-    * @param inputStream  the `InputStream` to add
+    * @param inputStream  the `InputStream` to addFile
     * @param zipPath      the path to use within the zip file. Any file system
     *                     root is removed from this path.
     * @param flatten      whether or not to flatten the zip path
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(inputStream: InputStream,
-          zipPath:     String,
-          flatten:     Boolean): Try[Zipper] = {
+  def addInputStream(inputStream: InputStream,
+                     zipPath:     String,
+                     flatten:     Boolean): Try[Zipper] = {
     addItem(InputStreamSource(inputStream), zipPath, flatten)
   }
 
@@ -385,18 +377,17 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * '''Warning''': A `Reader` represents an open resource (e.g., an open file
     * descriptor). Those resources are held open until you call `writeZip()` or
-    * `writeJar()`. If you add too many `InputStream` objects (or `InputStream`
+    * `writeJar()`. If you addFile too many `InputStream` objects (or `InputStream`
     * or `Source` objects) to a `Zipper`, you could theoretically, run out of
     * open file descriptors.
     *
-    * @param reader   the `Reader` to add
+    * @param reader   the `Reader` to addFile
     * @param zipPath  the path to use within the zip file. Any file system
     *                 root is removed from this path.
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(reader: Reader, zipPath: String): Try[Zipper] = {
+  def addReader(reader: Reader, zipPath: String): Try[Zipper] = {
     addItem(ReaderSource(reader), zipPath, flatten = false)
   }
 
@@ -406,32 +397,100 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * '''Warning''': A `Reader` represents an open resource (e.g., an open file
     * descriptor). Those resources are held open until you call `writeZip()` or
-    * `writeJar()`. If you add too many `InputStream` objects (or `InputStream`
+    * `writeJar()`. If you addFile too many `InputStream` objects (or `InputStream`
     * or `Source` objects) to a `Zipper`, you could theoretically, run out of
     * open file descriptors.
     *
-    * @param reader   the `Reader` to add
+    * @param reader   the `Reader` to addFile
     * @param zipPath  the path to use within the zip file. Any file system
     *                 root is removed from this path.
     * @param flatten  whether or not to flatten the zip path
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def add(reader: Reader, zipPath: String, flatten: Boolean): Try[Zipper] = {
+  def addReader(reader: Reader, zipPath: String, flatten: Boolean): Try[Zipper] = {
     addItem(ReaderSource(reader), zipPath, flatten)
+  }
+
+  /** Recursively add all the files in a directory to the `Zipper`.
+    *
+    * @param dir       the directory, which must exist
+    * @param strip     optional leading path to strip. If not specified,
+    *                  the full path to each file (minus file system root)
+    *                  is used.
+    * @param flatten   whether or not to flatten the entries. Note that a
+    *                  `true` value can cause errors if files in different
+    *                  directories have the same name.
+    * @param wildcard  optional wildcard to match files against. If `None`,
+    *                  all files found are added. This is a simple glob
+    *                  pattern, acceptable to [[grizzled.file.util.fnmatch]].
+    *
+    * @return A `Success` with the number of files found and added, or
+    *         `Failure` on error.
+    */
+  def addDirectory(dir:      File,
+                   strip:    Option[String] = None,
+                   flatten:  Boolean = false,
+                   wildcard: Option[String] = None): Try[Zipper] = {
+
+    def dirExists(): Try[Unit] = {
+      if (dir.exists) {
+        Success(())
+      }
+      else {
+        Failure(new FileDoesNotExistException(
+          s"""Directory "$dir" does not exist."""
+        ))
+      }
+    }
+
+    def addRecursively(dir: File, flatten: Boolean): Try[Zipper] = {
+
+      @tailrec
+      def addNext(stream: Stream[File], currentZipper: Zipper): Try[Zipper] = {
+
+        def wildcardMatch(f: File): Boolean = {
+          wildcard.forall(pat => fileutil.fnmatch(f.getName, pat))
+        }
+
+        stream match {
+          case s if s.isEmpty               => Success(currentZipper)
+          case s if s.head.isDirectory      => addNext(s.tail, currentZipper)
+          case s if ! wildcardMatch(s.head) => addNext(s.tail, currentZipper)
+          case s =>
+            val f = s.head
+            val path = f.getPath
+            val t = if (flatten)
+              currentZipper.addFile(f, true)
+            else if (strip.isDefined && strip.exists(p => path.startsWith(p)))
+              currentZipper.addFile(f, path.substring(strip.get.length))
+            else
+              currentZipper.addFile(f)
+
+            t match {
+              case Failure(ex) => Failure(ex)
+              case Success(z)  => addNext(s.tail, z)
+            }
+        }
+      }
+
+      addNext(fileutil.listRecursively(dir), this)
+    }
+
+    for { _         <- dirExists()
+          newZipper <- addRecursively(dir, flatten) }
+    yield newZipper
   }
 
   /** Add a directory entry to the `Zipper`. The path should be in "/" form,
     * even on Windows, since zip and jar files always use "/". Any leading
     * "/" will be removed, converting it to a relative path.
     *
-    * @param path the path of the directory entry to add
-    *
+    * @param path the path of the directory entry to addFile
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def addDirectory(path: String): Try[Zipper] = {
+  def addZipDirectory(path: String): Try[Zipper] = {
     def ensureNotThere(path: String): Try[Unit] = {
       if (bareDirectories contains path) {
         Failure(new Exception(s"""Zipper already contains directory "$path""""))
@@ -441,9 +500,19 @@ class Zipper private(items:           Map[String, ZipSource],
       }
     }
 
-    for { path <- stripRoot(path, forceRoot = Some("/"))
-          _    <- ensureNotThere(path) }
-      yield new Zipper(items = items, bareDirectories = bareDirectories + path)
+    if (path.isEmpty) {
+      Failure(new IOException("Cannot addFile empty directory entry."))
+    }
+    else if (path.last != '/') {
+      Failure(new IOException(
+        s"""Zip directory entry $path doesn't end in '/'."""
+      ))
+    }
+    else {
+      for { p <- stripRoot(path, forceRoot = Some("/"))
+            _   <- ensureNotThere(p) }
+      yield new Zipper(items = items, bareDirectories = bareDirectories + p)
+    }
   }
 
   /** The unique paths in the `Zipper`. The directory entries will be
@@ -452,7 +521,7 @@ class Zipper private(items:           Map[String, ZipSource],
     * added are represented.
     */
   val paths = {
-    bareDirectories.map { _ + "/" } ++ items.keySet
+    bareDirectories ++ items.keySet
   }
 
   /** Write the contents of this `Zipper` to a jar file. The jar file will
@@ -467,7 +536,6 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * @param path the path to the jar file to write. If it exists, it will be
     *             overwritten
-    *
     * @return A `Success` with a `File` of the written jar, on success. A
     *         `Failure` on error.
     */
@@ -485,7 +553,6 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * @param jarFile  the jar file to write. If it exists, it will be
     *                 overwritten.
-    *
     * @return A `Success` containing the `jarFile` parameter, on success. A
     *         `Failure` on error.
     */
@@ -504,7 +571,6 @@ class Zipper private(items:           Map[String, ZipSource],
     * @param jarFile  the jar file to write. If it exists, it will be
     *                 overwritten.
     * @param manifest optional jar manifest
-    *
     * @return A `Success` containing the `jarFile` parameter, on success. A
     *         `Failure` on error.
     */
@@ -539,7 +605,6 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * @param path the path to the zip file to write. If it exists, it will be
     *             overwritten
-    *
     * @return A `Success` with a `File` of the written zip, on success. A
     *         `Failure` on error.
     */
@@ -557,7 +622,6 @@ class Zipper private(items:           Map[String, ZipSource],
     *
     * @param zipFile  the zip file to write. If it exists, it will be
     *                 overwritten.
-    *
     * @return A `Success` containing the `zipFile` parameter, on success. A
     *         `Failure` on error.
     */
@@ -577,126 +641,100 @@ class Zipper private(items:           Map[String, ZipSource],
     * ZipOutputStream, this method will work for both.
     *
     * @param zo  the open ZipOutputStream
-    *
-    * @return `Success` or `Failure`
+    * @return  or
     */
   private def writeZipOutputStream(zo: ZipOutputStream): Try[Unit] = {
 
-    // Make all directory entries in the zip file, explicit or intermediate
-    // (implied).
-    def makeDirectories(): Try[Unit] = {
+    // Create the directories for a given path (like mkdir -p), skipping any
+    // that have already been created. There's no need for this function to
+    // be tail-recursive; there aren't likely to be enough directories to
+    // blow the stack. Making it tail-recursive complicates (uglifies) the
+    // logic.
+    def makeDirs(path: String, existing: Set[String]): Try[Set[String]] = {
 
-      Try {
-        // Zip files need explicit directories. The following transformation
-        // extracts all the parent directory names, breaks them into their
-        // individual directory pieces, weeds out the duplicates, and sorts by
-        // number of components (so that top-level directories are created
-        // first). So, for instance, given these entries:
-        //
-        // - foo/bar/one.txt
-        // - foo/two.txt
-        // - foo/bar/baz/three.txt
-        //
-        // this transformation will produce a list with:
-        // - foo
-        // - foo/bar
-        // - foo/bar/baz
-        val directories = (bareDirectories ++ items.keySet.map { s =>
-          fileutil.dirname(s)
-        })
-        .toList
+      def makeNext(subdirs: List[String], existing: Set[String]):
+        Try[Set[String]] = {
 
-        val uniqueDirs = directories.map { path =>
-          fileutil.splitPath(path)
+        subdirs match {
+          case Nil => Success(existing)
+          case subdir :: rest =>
+            val dir = if (subdir endsWith "/") subdir else subdir + "/"
+            if (existing contains dir) {
+              makeNext(rest, existing)
+            }
+            else {
+              val entry = new ZipEntry(dir)
+              for { _   <- Try { zo.putNextEntry(entry) }
+                    _   <- Try { zo.closeEntry() }
+                    res <- makeNext(rest, existing + dir) }
+              yield res
+            }
         }
-        .flatMap { components =>
-          // This takes a component like "foo/bar/baz" and breaks it up into
-          // "foo", "foo/bar", "foo/bar/baz"
-          components match {
-            case Nil      => Nil
-            case c :: Nil => List(List(c))
-            case c        => for { i <- c.indices } yield c.slice(0, i + 1)
-          }
-        }
-        .toSet // weed out duplicates
-        .filter { p =>
-          // Get rid of paths with "." or ".."
-          val first = p.headOption
-          // Can't use Option.contains() as long as we're still compiling
-          // against 2.10. It didn't show up until 2.11. exists() is a
-          // reasonable substitute.
-          /*
-          ! (first.isEmpty || first.contains(".") || first.contains(".."))
-          */
-          ! (first.isEmpty || first.exists(_ == ".") || first.exists(_ == ".."))
-        }
-        .toSeq    // back to sequence
-        .sortBy { pieces: List[String] =>
-          // Sort by size
-          pieces.size
-        }
-        .map(_.mkString("/") + "/") // reassemble
+      }
 
-        // Now, use that information to create the directories. In a zip file,
-        // there must be an entry for each intermediate directory. Thus, if
-        // we're storing file "foo/bar/baz/nb.scala", we need to create the
-        // following directory entries in the zip file, before adding the file
-        // notebook itself:
-        //
-        // - foo
-        // - foo/bar
-        // - foo/bar/baz
-        //
-        for (dir <- uniqueDirs) {
-          // Make the entire zipPath, but not the top-level directory.
-          val entry = new ZipEntry(dir)
-          zo.putNextEntry(entry)
-          //zo.closeEntry()
-        }
+      val components = new File(path).dirname.split
+      val subdirs = for (i <- components.indices)
+        yield fileutil.joinPath(components.slice(0, i + 1): _*)
+
+      makeNext(subdirs.toList, existing)
+    }
+
+    // Zip all the files, creating their directories as necessary.
+    def zipItems(entries:      List[ZipSource],
+                 countSoFar:   Int,
+                 existingDirs: Set[String]): Try[(Int, Set[String])] = {
+      def makeEntry(s: ZipSource): Try[Int] = {
+        val entry = new ZipEntry(s.zipPath)
+        s.source.copyToZip(s.zipPath, zo)
+      }
+
+      entries match {
+        case Nil => Success((countSoFar, existingDirs))
+        case e :: rest =>
+          for { newDirs <- makeDirs(e.zipPath, existingDirs)
+                n       <- makeEntry(e)
+                res     <- zipItems(rest, n + countSoFar, newDirs) }
+          yield res
+
       }
     }
 
-    // Add all the files to the zip or jar.
-    def makeFiles(): Try[Int] = {
-      val tries = for (i <- items.values.toList) yield {
-        val entry = new ZipEntry(i.zipPath)
-        i.source.copyToZip(i.zipPath, zo)
-      }
+    // Create the explicitly-specified directory entries.
 
-      tries.filter(_.isFailure) match {
-        case Nil => Try { zo.closeEntry() }.map(_ => items.size)
-        case failures =>
-          val messages: List[String] = failures.map { f: Try[Int] =>
-            f.map {
-              // should never get here
-              _.toString
-            }
-            .recover {
-              case e: Exception => e.getMessage
-            }
-            .get
+    def makeBareDirectories(dirs:         List[String],
+                            countSoFar:   Int,
+                            existingDirs: Set[String]): Try[Int] = {
+      dirs match {
+        case Nil => Success(countSoFar)
+        case dir :: rest =>
+          val d = if (dir endsWith "/") dir else dir + "/"
+          if (existingDirs contains d)
+            makeBareDirectories(rest, countSoFar, existingDirs)
+          else {
+            val entry = new ZipEntry(d)
+            for { _   <- Try { zo.putNextEntry(entry) }
+                  _   <- Try { zo.closeEntry() }
+                  res <- makeBareDirectories(rest, countSoFar + 1,
+                                             existingDirs + d) }
+            yield res
           }
-
-          Failure(new IOException(s"Errors occurred writing zip: $messages"))
       }
     }
 
-    // Main logic
-
-    for { _  <- makeDirectories()
-          _  <- makeFiles() }
-    yield ()
+    val sortedItems = items.values.toList.sorted(ZipSourceOrdering)
+    for { (n1, dirs) <- zipItems(sortedItems, 0, Set.empty[String])
+          n2         <- makeBareDirectories(bareDirectories.toList, 0, dirs) }
+    yield n1 + n2
   }
 
   /** Add a wrapped item to the Zipper.
     *
-    * @param item      the item to add, wrapped in an `ItemSource`
+    * @param item      the item to addFile, wrapped in an `ItemSource`
     * @param path      the zipPath for the item in the zip file
     * @param flatten   whether or not to flatten the zipPath
     * @param forceRoot if not None, bypass the file system root, using this one
     *                  instead. (Useful with URLs, which always use a root of
     *                  "/", regardless of the current operating system.)
-    *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
@@ -739,7 +777,6 @@ class Zipper private(items:           Map[String, ZipSource],
     * @param path        the path
     * @param forceRoot   the root to strip. If None, the file system roots
     *                    are used.
-    *
     * @return A `Success` with the new path, or a `Failure` on error.
     */
   private def stripRoot(path: String, forceRoot: Option[String]): Try[String] = {
@@ -800,11 +837,10 @@ object Zipper {
     * This function is a convenience method; you can always create an empty
     * `Zipper` and fill it yourself.
     *
-    * @param paths    the list of path names to add to the `Zipper`. The
+    * @param paths    the list of path names to addFile to the `Zipper`. The
     *                 existence of these files isn't verified until the zip
     *                 or jar file is written.
     * @param flatten  whether or not to flatten the paths.
-    *
     * @return A `Success` with the filled `Zipper`, or a `Failure` if one or
     *         more of the paths could not be added.
     */
@@ -828,7 +864,6 @@ object Zipper {
     *                 each tuple, the `File` element is the resource to be read
     *                 and added; the pathname is the path to use in the zip
     *                 or jar file.
-    *
     * @return A `Success` with the filled `Zipper`, or a `Failure` if one or
     *         more of the paths could not be added.
     */
@@ -840,7 +875,7 @@ object Zipper {
         case Nil => Success(z)
         case (f, p) :: rest =>
           // Match match, not map, to ensure tail-recursion.
-          z.add(f, p) match {
+          z.addFile(f, p) match {
             case Failure(ex) => Failure(ex)
             case Success(z2) => addNext(rest, z2)
           }
@@ -872,7 +907,6 @@ private[zip] sealed trait ItemSource {
     * @param consumer the consumer lambda, which must process the buffer of
     *                 bytes, returning a `Success` of the number of bytes
     *                 processed, or a `Failure` on error.
-    *
     * @return A `Success` of the total number of bytes read and passed to
     *         the consumer, or a `Failure` on error.
     */
@@ -883,7 +917,6 @@ private[zip] sealed trait ItemSource {
     *
     * @param path the path for the entry in the zip file
     * @param zo   the `ZipOutputStream` to which to write
-    *
     * @return A `Success` of the total number of bytes written to the stream,
     *         or a `Failure` on error.
     */
@@ -906,7 +939,7 @@ private[zip] sealed trait ItemSource {
 /** Trait to mix into ItemSource classes that have to read an underlying
   * `InputStream`
   */
-trait InputStreamHelper {
+private[zip] trait InputStreamHelper {
   self: ItemSource =>
 
   /** Utility function to read an `InputStream` and copy it to a consumer.
@@ -1034,3 +1067,7 @@ private[zip] case class SourceSource(source: Source) extends ItemSource {
   * @param zipPath  the path in the zip file
   */
 private[zip] case class ZipSource(source: ItemSource, zipPath: String)
+
+private[zip] object ZipSourceOrdering extends Ordering[ZipSource] {
+  def compare(a: ZipSource, b: ZipSource) = a.zipPath compare b.zipPath
+}
