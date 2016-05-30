@@ -149,8 +149,9 @@ import scala.util.{Failure, Success, Try}
   * and uncompressed entries. If necessary, the `Zipper` class can be extended
   * to support storing uncompressed data.
   **/
-class Zipper private(items:           Map[String, ZipSource],
-                     bareDirectories: Set[String]) {
+class Zipper private(private val items:           Map[String, ZipSource],
+                     private val bareDirectories: Set[String],
+                             val comment:         Option[String] = None) {
 
   /** Add a file to the `Zipper`. The path in the resulting zip or jar file
     * will be the path (if it's relative) or the path with the file system root
@@ -527,6 +528,19 @@ class Zipper private(items:           Map[String, ZipSource],
     bareDirectories ++ items.keySet
   }
 
+  /** Set the comment to be written to the zip or jar file.
+    *
+    * @param comment the comment.
+    *
+    * @return a new `Zipper` with the comment. This operation cannot fail,
+    *         so the new value is returned without being wrapped in a `Try`.
+    */
+  def setComment(comment: String): Zipper = {
+    new Zipper(items           = this.items,
+               bareDirectories = this.bareDirectories,
+               comment         = Some(comment))
+  }
+
   /** Write the contents of this `Zipper` to a jar file. The jar file will
     * not have a jar manifest. You can call this method more than once.
     *
@@ -646,7 +660,7 @@ class Zipper private(items:           Map[String, ZipSource],
     * @param zo  the open ZipOutputStream
     * @return  or
     */
-  private def writeZipOutputStream(zo: ZipOutputStream): Try[Unit] = {
+  private def writeZipOutputStream(zo: ZipOutputStream): Try[Int] = {
 
     // Create the directories for a given path (like mkdir -p), skipping any
     // that have already been created. There's no need for this function to
@@ -724,9 +738,16 @@ class Zipper private(items:           Map[String, ZipSource],
       }
     }
 
-    val sortedItems = items.values.toList.sorted(ZipSourceOrdering)
-    for { (n1, dirs) <- zipItems(sortedItems, 0, Set.empty[String])
-          n2         <- makeBareDirectories(bareDirectories.toList, 0, dirs) }
+    def maybeAddComment(): Try[Unit] = {
+      Try {
+        this.comment.foreach(zo.setComment)
+      }
+    }
+
+    for { _           <- maybeAddComment()
+          sortedItems  = items.values.toList.sorted(ZipSourceOrdering)
+          (n1, dirs)  <- zipItems(sortedItems, 0, Set.empty[String])
+          n2          <- makeBareDirectories(bareDirectories.toList, 0, dirs) }
     yield n1 + n2
   }
 
