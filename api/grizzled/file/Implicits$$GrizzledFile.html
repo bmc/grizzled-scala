@@ -562,6 +562,27 @@ bottom up).
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.file.Implicits.GrizzledFile#pathExists" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="pathExists:scala.util.Try[Boolean]"></a>
+      <a id="pathExists:Try[Boolean]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">pathExists</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.file.Implicits$$GrizzledFile@pathExists:scala.util.Try[Boolean]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A version of <code>java.io.File.exists</code> that returns a <code>Try</code>, this
+method tests the existence of the file.</p><div class="fullcomment"><div class="comment cmt"><p>A version of <code>java.io.File.exists</code> that returns a <code>Try</code>, this
+method tests the existence of the file.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the file exists, and
+        <code>Failure(FileDoesNotExistException)</code> if it does not.</p></dd></dl></div>
     </li><li name="grizzled.file.Implicits.GrizzledFile#relativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="relativePath(relativeTo:java.io.File):String"></a>
       <a id="relativePath(File):String"></a>
@@ -769,7 +790,14 @@ will return an error.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.file.Implicits.GrizzledFile#walk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.file.Implicits.GrizzledFile#walk" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="walk(topdown:Boolean):List[(String,List[String],List[String])]"></a>
       <a id="walk(Boolean):List[(String,List[String],List[String])]"></a>
       <h4 class="signature">
@@ -778,7 +806,7 @@ will return an error.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">walk</span><span class="params">(<span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>])]</span>
+        <span class="name deprecated" title="Deprecated: (Since version 2.3.0) Use grizzled.file.util.walk">walk</span><span class="params">(<span name="topdown">topdown: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>])]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.file.Implicits$$GrizzledFile@walk(topdown:Boolean):List[(String,List[String],List[String])]" title="Permalink" target="_top">
@@ -802,13 +830,12 @@ before the triplets for any of its subdirectories (directories are
 generated top down). If <code>topdown</code> is <code>false</code>, the triplet for a
 directory is generated after the triples for all of its
 subdirectories (directories are generated bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!
-</p></div><dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code> otherwise.</p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code> otherwise.</p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.3.0)</i> Use grizzled.file.util.walk</p></dd></dl></div>
     </li></ol>
             </div>
-
-        
-
-        
         </div>
 
         <div id="inheritedMembers">

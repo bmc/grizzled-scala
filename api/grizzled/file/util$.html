@@ -222,7 +222,9 @@
       </a>
     </span>
       <p class="shortcomment cmt">Copy a file to a directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a file to a directory. If the target directory does not exist,
-it is created.
+it is created. The JDK's
+<a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...)" target="_blank">java.nio.file.Files.copy()</a>
+function provides a similar capability.
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>Path name of the file to copy</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
     </li><li name="grizzled.file.util#copy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -241,7 +243,9 @@ it is created.
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Copy a file to a directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a file to a directory.
+      <p class="shortcomment cmt">Copy a file to a directory.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a file to a directory. The JDK's
+<a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...)" target="_blank">java.nio.file.Files.copy()</a>
+function provides a similar capability.
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>Path name of the file to copy</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><code>true</code> to create the target directory,
                     <code>false</code> to throw an exception if the
                     directory doesn't already exist.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
@@ -287,7 +291,9 @@ method that takes only one file.
       <p class="shortcomment cmt">Copy a source file to a target file, using binary copying.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a source file to a target file, using binary copying. The source
 file must be a file. The target path can be a file or a directory; if
 it is a directory, the target file will have the same base name as
-as the source file.
+as the source file.</p><p>The JDK's
+<a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...)" target="_blank">java.nio.file.Files.copy()</a>
+function provides a similar capability.
 </p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">target</dt><dd class="cmt"><p>path to the target file or directory</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> containing the full path of the target file,
         or <code>Failure(exception)</code></p></dd></dl></div>
     </li><li name="grizzled.file.util#copyFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -309,7 +315,9 @@ as the source file.
       <p class="shortcomment cmt">Copy a source file to a target file, using binary copying.</p><div class="fullcomment"><div class="comment cmt"><p>Copy a source file to a target file, using binary copying. The source
 file must be a file. The target path can be a file or a directory; if
 it is a directory, the target file will have the same base name as
-as the source file.
+as the source file.</p><p>The JDK's
+<a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...)" target="_blank">java.nio.file.Files.copy()</a>
+function provides a similar capability.
 </p></div><dl class="paramcmts block"><dt class="param">sourcePath</dt><dd class="cmt"><p>path to the source file</p></dd><dt class="param">targetPath</dt><dd class="cmt"><p>path to the target file or directory</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with the full path of the target file, or
         <code>Failure(exception)</code></p></dd></dl></div>
     </li><li name="grizzled.file.util#copyTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -760,7 +768,9 @@ currently running system
       <p class="shortcomment cmt">List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found.</p><div class="fullcomment"><div class="comment cmt"><p>List a directory recursively, returning <code>File</code> objects for each file
 (and subdirectory) found. This method does lazy evaluation, instead
-of calculating everything up-front, as <code>walk()</code> does.
+of calculating everything up-front, as <code>walk()</code> does.</p><p>The JDK's <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-int-java.nio.file.FileVisitOption...-" target="_blank">java.nio.file.Files.walk()</a>
+function provides a similar capability in JDK 8. Prior to JDK 8, you can
+also use  <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor)" target="_blank">java.nio.file.Files.walkFileTree()</a>
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The <code>File</code> object, presumed to represent a directory.</p></dd><dt class="param">topdown</dt><dd class="cmt"><p>If <code>true</code> (the default), the stream will be generated
                top down. If <code>false</code>, it'll be generated bottom-up.</p></dd><dt>returns</dt><dd class="cmt"><p>a stream of <code>File</code> objects.</p></dd></dl></div>
     </li><li name="grizzled.file.util#nativePath" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1232,7 +1242,9 @@ name</code>, or use <code>joinPath()</code>.</p><p>If <i>topdown</i> is <code>tr
 the triples for any of its subdirectories (directories are generated top
 down). If <code>topdown</code> is <code>false</code>, the triple for a directory is generated
 after the triples for all of its subdirectories (directories are generated
-bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!
+bottom up).</p><p><b>WARNING!</b> This method does <i>not</i> grok symbolic links!</p><p>The JDK's <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-int-java.nio.file.FileVisitOption...-" target="_blank">java.nio.file.Files.walk()</a>
+function provides a similar capability in JDK 8. Prior to JDK 8, you can
+also use  <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor)" target="_blank">java.nio.file.Files.walkFileTree()</a>
 </p></div><dl class="paramcmts block"><dt class="param">top</dt><dd class="cmt"><p>name of starting directory</p></dd><dt class="param">topdown</dt><dd class="cmt"><p><code>true</code> to do a top-down traversal, <code>false</code>
                otherwise.</p></dd><dt>returns</dt><dd class="cmt"><p>List of triplets, as described above.</p></dd></dl></div>
     </li><li name="grizzled.file.util#withTemporaryDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">

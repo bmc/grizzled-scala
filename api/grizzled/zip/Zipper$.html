@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>Implicits - grizzled.io.Implicits</title>
-          <meta name="description" content="Implicits - grizzled.io.Implicits" />
-          <meta name="keywords" content="Implicits grizzled.io.Implicits" />
+          <title>Zipper - grizzled.zip.Zipper</title>
+          <meta name="description" content="Zipper - grizzled.zip.Zipper" />
+          <meta name="keywords" content="Zipper grizzled.zip.Zipper" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
-            var hash = 'grizzled.io.Implicits$';
+            var hash = 'grizzled.zip.Zipper$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -28,12 +28,14 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img alt="Object" src="../../lib/object_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.io">io</a></p>
-        <h1>Implicits</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="grizzled.io">package io</a>
+        <a href="Zipper.html" title="See companion class"><img alt="Object/Class" src="../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../package.html" class="extype" name="grizzled">grizzled</a>.<a href="package.html" class="extype" name="grizzled.zip">zip</a></p>
+        <h1><a href="Zipper.html" title="See companion class">Zipper</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="Zipper.html" title="See companion class">class Zipper</a>
+            | <a href="package.html" class="extype" name="grizzled.zip">package zip</a>
           </div></span></h3><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -45,11 +47,12 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Implicits</span>
+        <span class="name">Zipper</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implicits that addFile enrichments to <code>java.io</code> and <code>scala.io</code> classes.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object to the <code>Zipper</code> class. You can only instantiate <code>Zipper</code>
+objects via this companion.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -70,7 +73,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.io.Implicits"><span>Implicits</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.zip.Zipper"><span>Zipper</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -89,74 +92,7 @@
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="grizzled.io.Implicits.GrizzledSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="GrizzledSourceextendsAnyRef"></a>
-      <a id="GrizzledSource:GrizzledSource"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="Implicits$$GrizzledSource.html"><span class="name">GrizzledSource</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@GrizzledSourceextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">A wrapper for <code>scala.io.Source</code> that provides additional methods.</p><div class="fullcomment"><div class="comment cmt"><p>A wrapper for <code>scala.io.Source</code> that provides additional methods.
-By importing the implicit conversion functions, you can use the methods
-in this class transparently from a <code>java.io.File</code> object.</p><pre><span class="kw">import</span> grizzled.io.Implicits._
-
-<span class="kw">val</span> source = Source.fromFile(<span class="kw">new</span> java.io.File(<span class="lit">"/tmp/foo/bar"</span>))
-source.firstNonblankLine.getOrElse(<span class="lit">""</span>)</pre></div></div>
-    </li><li name="grizzled.io.Implicits.RichInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RichInputStreamextendsPartialReader[Byte]"></a>
-      <a id="RichInputStream:RichInputStream"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="Implicits$$RichInputStream.html"><span class="name">RichInputStream</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Byte">Byte</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@RichInputStreamextendsPartialReader[Byte]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
-the Java <code>InputStream</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
-the Java <code>InputStream</code> class. The <code>implicits</code> object contains implicit
-conversions between <code>RichInputStream</code> and <code>InputStream</code>.
-</p></div></div>
-    </li><li name="grizzled.io.Implicits.RichReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="RichReaderextendsPartialReader[Char]"></a>
-      <a id="RichReader:RichReader"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="Implicits$$RichReader.html"><span class="name">RichReader</span></a><span class="result"> extends <a href="PartialReader.html" class="extype" name="grizzled.io.PartialReader">PartialReader</a>[<span class="extype" name="scala.Char">Char</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@RichReaderextendsPartialReader[Char]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Provides additional methods, over and above those already present in
-the Java <code>Reader</code> class.</p><div class="fullcomment"><div class="comment cmt"><p>Provides additional methods, over and above those already present in
-the Java <code>Reader</code> class. The <code>implicits</code> object contains implicit
-conversions between <code>RichReader</code> and <code>Reader</code>.
-</p></div></div>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -174,7 +110,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -191,7 +127,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@##():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@##():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -208,11 +144,76 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="grizzled.zip.Zipper#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(paths:Array[(java.io.File,String)]):scala.util.Try[grizzled.zip.Zipper]"></a>
+      <a id="apply(Array[(File,String)]):Try[Zipper]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="paths">paths: <span class="extype" name="scala.Array">Array</span>[(<span class="extype" name="java.io.File">File</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Zipper.html" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.zip.Zipper$@apply(paths:Array[(java.io.File,String)]):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create a new empty <code>Zipper</code> object and fill it with the specified files.</p><div class="fullcomment"><div class="comment cmt"><p>Create a new empty <code>Zipper</code> object and fill it with the specified files.
+This function is a convenience method; you can always create an empty
+<code>Zipper</code> and fill it yourself.
+</p></div><dl class="paramcmts block"><dt class="param">paths</dt><dd class="cmt"><p>the list of (<code>File</code>, pathname) tuples to be added. In
+                each tuple, the <code>File</code> element is the resource to be read
+                and added; the pathname is the path to use in the zip
+                or jar file.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with the filled <code>Zipper</code>, or a <code>Failure</code> if one or
+        more of the paths could not be added.</p></dd></dl></div>
+    </li><li name="grizzled.zip.Zipper#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(paths:Array[String],flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]"></a>
+      <a id="apply(Array[String],Boolean):Try[Zipper]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="paths">paths: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="flatten">flatten: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="Zipper.html" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.zip.Zipper$@apply(paths:Array[String],flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create a new empty <code>Zipper</code> object and fill it with the specified files.</p><div class="fullcomment"><div class="comment cmt"><p>Create a new empty <code>Zipper</code> object and fill it with the specified files.
+This function is a convenience method; you can always create an empty
+<code>Zipper</code> and fill it yourself.
+</p></div><dl class="paramcmts block"><dt class="param">paths</dt><dd class="cmt"><p>the list of path names to addFile to the <code>Zipper</code>. The
+                existence of these files isn't verified until the zip
+                or jar file is written.</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the paths.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with the filled <code>Zipper</code>, or a <code>Failure</code> if one or
+        more of the paths could not be added.</p></dd></dl></div>
+    </li><li name="grizzled.zip.Zipper#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply():grizzled.zip.Zipper"></a>
+      <a id="apply():Zipper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">()</span><span class="result">: <a href="Zipper.html" class="extype" name="grizzled.zip.Zipper">Zipper</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.zip.Zipper$@apply():grizzled.zip.Zipper" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create a new, empty <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Create a new, empty <code>Zipper</code>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the new <code>Zipper</code> object.</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -225,7 +226,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -242,7 +243,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@clone():Object" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@clone():Object" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -265,7 +266,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -282,7 +283,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -299,7 +300,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@finalize():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -322,7 +323,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -339,7 +340,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@hashCode():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -356,7 +357,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -373,7 +374,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -390,7 +391,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@notify():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@notify():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -407,7 +408,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -424,7 +425,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -441,7 +442,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@toString():String" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@toString():String" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -458,7 +459,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@wait():Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@wait():Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -481,7 +482,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -504,7 +505,7 @@ conversions between <code>RichReader</code> and <code>Reader</code>.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.Implicits$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper$@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
