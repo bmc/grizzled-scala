@@ -8,6 +8,9 @@ Version 2.3.2:
   the Scala `Iterator` class's `++` operator to combine multiple iterators
   lazily.
 * Added tester for `grizzled.io.MultiSource`.
+* Reimplemented `grizzled.math.max()` and `grizzled.math.min()` to work
+  with any type for which there is an `Ordering`. Added a unit tester for
+  them.
 * DOCS: Added package description for `grizzled.zip`.
 
 Version 2.3.1:

@@ -43,67 +43,43 @@ import scala.math
   */
 object util {
 
-  /** A `max` method that works with any number of integers.
+  /** A `max` function that will take any number of arguments for which an
+    * `Ordering` is defined, returning the "largest" one, as defined by the
+    * `Ordering`.
     *
-    * @param args  integers from which to find the max
+    * @param args  the items for which to find the maximum
+    * @tparam T    the argument type
     *
-    * @return the maximum
+    * @return the maximum value
     */
-  def max(args: Int*) = (0 /: args)((a, b) => math.max(a, b))
+  def max[T: Ordering](args: T*): T = {
+    args.reduce { (a: T, b: T) =>
+      val ev = implicitly[Ordering[T]]
+      ev.compare(a, b) match {
+        case i if i < 0 => b
+        case i if i > 0 => a
+        case _          => a
+      }
+    }
+  }
 
-  /** A `max` method that works with any number of longs.
+  /** A `max` function that will take any number of arguments for which an
+    * `Ordering` is defined, returning the "largest" one, as defined by the
+    * `Ordering`.
     *
-    * @param args  longs from which to find the max
+    * @param args  the items for which to find the maximum
+    * @tparam T    the argument type
     *
-    * @return the maximum
+    * @return the maximum value
     */
-  def max(args: Long*) = (0L /: args)((a, b) => math.max(a, b))
-
-  /** A `max` method that works with any number of floats.
-    *
-    * @param args  floats from which to find the max
-    *
-    * @return the maximum
-    */
-  def max(args: Float*) = (0.0f /: args)((a, b) => math.max(a, b))
-
-  /** A `max` method that works with any number of doubles.
-    *
-    * @param args  doubles from which to find the max
-    *
-    * @return the maximum
-    */
-  def max(args: Double*) = (0.0 /: args)((a, b) => math.max(a, b))
-
-  /** A `min` method that works with any number of integers.
-    *
-    * @param args  integers from which to find the min
-    *
-    * @return the minimum
-    */
-  def min(args: Int*) = (0 /: args)((a, b) => math.min(a, b))
-
-  /** A `min` method that works with any number of longs.
-    *
-    * @param args  longs from which to find the min
-    *
-    * @return the minimum
-    */
-  def min(args: Long*) = (0L /: args)((a, b) => math.min(a, b))
-
-  /** A `min` method that works with any number of floats.
-    *
-    * @param args  floats from which to find the min
-    *
-    * @return the minimum
-    */
-  def min(args: Float*) = (0.0f /: args)((a, b) => math.min(a, b))
-
-  /** A `min` method that works with any number of doubles.
-    *
-    * @param args  doubles from which to find the min
-    *
-    * @return the minimum
-    */
-  def min(args: Double*) = (0.0 /: args)((a, b) => math.min(a, b))
+  def min[T: Ordering](args: T*): T = {
+    args.reduce { (a: T, b: T) =>
+      val ev = implicitly[Ordering[T]]
+      ev.compare(a, b) match {
+        case i if i < 0 => a
+        case i if i > 0 => b
+        case _          => a
+      }
+    }
+  }
 }
