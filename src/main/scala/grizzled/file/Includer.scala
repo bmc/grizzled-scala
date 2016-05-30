@@ -64,10 +64,10 @@ import java.net.{URL, MalformedURLException, URI, URISyntaxException}
   * matches include directives like this:
   *
   * {{{
-  * %include "/absolute/zipPath/to/file"
-  * %include "../relative/zipPath/to/file"
+  * %include "/absolute/path/to/file"
+  * %include "../relative/path/to/file"
   * %include "local_reference"
-  * %include "http://localhost/zipPath/to/my.config"
+  * %include "http://localhost/path/to/my.config"
   * }}}
   *
   * Relative and local file references are relative to the including file
@@ -95,7 +95,7 @@ import java.net.{URL, MalformedURLException, URI, URISyntaxException}
   *
   * The package also provides a `preprocess()` convenience function, via a
   * companion object, that can be used to preprocess a file; it returns the
-  * zipPath to the resulting preprocessed file.
+  * path to the resulting preprocessed file.
   *
   * <h3>Examples</h3>
   *
@@ -104,7 +104,7 @@ import java.net.{URL, MalformedURLException, URI, URISyntaxException}
   * {{{
   * import grizzled.file.Includer
   *
-  * Includer(zipPath).foreach(println(_))
+  * Includer(path).foreach(println(_))
   * }}}
   *
   * Use an include-enabled file with a Scala `scala.io.Source`
@@ -114,7 +114,7 @@ import java.net.{URL, MalformedURLException, URI, URISyntaxException}
   * import grizzled.file.includer.Includer
   * import scala.io.Source
   *
-  * val source = Source.fromFile(Includer.preprocess("/zipPath/to/file"))
+  * val source = Source.fromFile(Includer.preprocess("/path/to/file"))
   * }}}
   *
   * @param source       the source to read
@@ -399,7 +399,7 @@ object Includer {
   /** Create an includer, using the default value for the
     * `maxNesting` parameter.
     *
-    * @param pathOrURI    the zipPath or URI string to read
+    * @param pathOrURI    the path or URI string to read
     * @param includeRegex the regular expression that defines an include
     *                     directive. Must contain a group that surrounds the
     *                     file or URL part.
@@ -409,10 +409,10 @@ object Includer {
     apply(pathOrURI, includeRegex, DefaultMaxNesting)
   }
 
-  /** Create an includer from a zipPath, using the default value for the
+  /** Create an includer from a path, using the default value for the
     * `includeRegex` parameter.
     *
-    * @param path        the zipPath or URI string to read
+    * @param path        the path or URI string to read
     * @param maxNesting  the maximum nesting level
     *
     * @return `Success(Includer)` or `Failure(Exception)`
@@ -421,10 +421,10 @@ object Includer {
     apply(path, DefaultIncludeRegex, maxNesting)
   }
 
-  /** Create an includer from a zipPath, using the default values for the
+  /** Create an includer from a path, using the default values for the
     * `maxNesting` and `includeRegex` parameters.
     *
-    * @param pathOrURI    the zipPath or URI string to read
+    * @param pathOrURI    the path or URI string to read
     */
   def apply(pathOrURI: String): Try[Includer] = {
     apply(pathOrURI, DefaultIncludeRegex, DefaultMaxNesting)
@@ -432,7 +432,7 @@ object Includer {
 
   /** Create an includer.
     *
-    * @param pathOrURI    the zipPath or URI string to read
+    * @param pathOrURI    the path or URI string to read
     * @param includeRegex the regular expression that defines an include
     *                     directive. Must contain a group that surrounds the
     *                     file or URL part.
@@ -458,19 +458,19 @@ object Includer {
   }
 
   /** Process all include directives in the specified file, returning a
-    * zipPath to a temporary file that contains the results of the expansion.
+    * path to a temporary file that contains the results of the expansion.
     * The temporary file is automatically removed when the program exits,
     * though the caller is free to remove it whenever it is no longer
     * needed.
     *
-    * @param pathOrURI   the zipPath or URI string to read
+    * @param pathOrURI   the path or URI string to read
     * @param tempPrefix  temporary file prefix, with the same meaning as the
     *                    temporary file prefix used by
     *                    `java.io.File.createTempFile()`
     * @param tempSuffix  temporary file suffix, with the same meaning as the
     *                    temporary file suffix used by
     *                    `java.io.File.createTempFile()`
-    * @return `Success(zipPath)` where `zipPath` is the zipPath to the temporary file,
+    * @return `Success(path)` where `path` is the path to the temporary file,
     *         or `Failure(exception)`
     */
   def preprocess(pathOrURI:  String,

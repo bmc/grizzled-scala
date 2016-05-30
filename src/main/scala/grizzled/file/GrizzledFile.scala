@@ -39,7 +39,7 @@ package grizzled.file
 
 import java.io.File
 
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 
 /** Enrichment classes for `File` objects and the like.
   */
@@ -59,29 +59,42 @@ object Implicits {
     */
   implicit class GrizzledFile(val file: File) {
 
+    /** A version of `java.io.File.exists` that returns a `Try`, this
+      * method tests the existence of the file.
+      *
+      * @return `Success(true)` if the file exists, and
+      *         `Failure(FileDoesNotExistException)` if it does not.
+      */
+    def pathExists: Try[Boolean] = {
+      if (file.exists)
+        Success(true)
+      else
+        Failure(new FileDoesNotExistException(s""""$file" does not exist."""))
+    }
+
     /** Get the directory name of the file.
       *
       * @return the directory portion, as a `File`.
       */
     def dirname = new File(util.dirname(file.getPath))
 
-    /** Get the basename (file name only) part of a zipPath.
+    /** Get the basename (file name only) part of a path.
       *
       * @return the file name portion, as a `File`
       */
     def basename = new File(util.basename(file.getPath))
 
-    /** Get the zipPath of this file, relative to some other file.
+    /** Get the path of this file, relative to some other file.
       *
       * @param relativeTo  the other file
       *
-      * @return the zipPath of this file, relative to the other file.
+      * @return the path of this file, relative to the other file.
       */
     def relativePath(relativeTo: File): String =
       grizzled.file.util.relativePath(this, relativeTo)
 
-    /** Split the file's zipPath into directory (dirname) and file (basename)
-      * components. Analogous to Python's `os.zipPath.pathsplit()` function.
+    /** Split the file's path into directory (dirname) and file (basename)
+      * components. Analogous to Python's `os.path.pathsplit()` function.
       *
       * @return a (dirname, basename) tuple of `File` objects.
       */
@@ -108,7 +121,7 @@ object Implicits {
       (new File(dir), base, ext)
     }
 
-    /** Split this file's zipPath into its constituent components. If the zipPath
+    /** Split this file's path into its constituent components. If the path
       * is absolute, the first piece will have a file separator in the
       * beginning. Examples:
       *
@@ -165,9 +178,9 @@ object Implicits {
 
     /** Similar to the Unix ''touch'' command, this function:
       *
-      *  - updates the access and modification time for the zipPath
+      *  - updates the access and modification time for the path
       *    represented by this object
-      *  - creates the zipPath (as a file), if it does not exist
+      *  - creates the path (as a file), if it does not exist
       *
       * If the file corresponds to an existing directory, this method
       * will return an error.
@@ -195,11 +208,11 @@ object Implicits {
       * dirpath, dirnames, filenames
       * }}}
       *
-      * `dirpath` is a string, the zipPath to the directory. `dirnames`is a
+      * `dirpath` is a string, the path to the directory. `dirnames`is a
       * list of the names of the subdirectories in `dirpath` (excluding '.'
       * and '..'). `filenames` is a list of the names of the non-directory
       * files in `dirpath`. Note that the names in the lists are just names,
-      * with no zipPath components. To get a full zipPath (which begins with this
+      * with no path components. To get a full path (which begins with this
       * directory) to a file or directory in `dirpath`, use `dirpath +
       * java.io.fileSeparator + name`, or use
       * `grizzled.file.util.joinPath()`.
@@ -248,7 +261,7 @@ object Implicits {
 
     /** Copy the file to a target directory or file.
       *
-      * @param target  zipPath to the target file or directory
+      * @param target  path to the target file or directory
       *
       * @return A `Success` containing the target file, or `Failure(exception)`
       */
@@ -256,7 +269,7 @@ object Implicits {
 
     /** Copy the file to a target directory or file.
       *
-      * @param target  zipPath to the target file or directory
+      * @param target  path to the target file or directory
       *
       * @return A `Success` containing the target file, or `Failure(exception)`
       */

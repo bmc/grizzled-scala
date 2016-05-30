@@ -1,6 +1,6 @@
 package grizzled.zip
 
-import grizzled.file.{FileDoesNotExistException, util => fileutil}
+import grizzled.file.{util => fileutil}
 import grizzled.file.Implicits.GrizzledFile
 import java.io._
 import java.net.URL
@@ -96,8 +96,8 @@ import scala.util.{Failure, Success, Try}
   * var z = zipper
   * val paths: List[String] = ...
   *
-  * for (zipPath <- paths) {
-  *   val t = z.addFile(zipPath)
+  * for (path <- paths) {
+  *   val t = z.addFile(path)
   *   z = t.get // will throw an exception if the addFile failed
   * }
   * }}}
@@ -108,8 +108,8 @@ import scala.util.{Failure, Success, Try}
   * {{{
   * val zipper = Zipper()
   * val paths: List[String] = ...
-  * paths.foldLeft(zipper) { case (z, zipPath) =>
-  *   z.addFile(zipPath).get // throws an exception if the addFile fails
+  * paths.foldLeft(zipper) { case (z, path) =>
+  *   z.addFile(path).get // throws an exception if the addFile fails
   * }
   * }}}
   *
@@ -123,10 +123,10 @@ import scala.util.{Failure, Success, Try}
   * def addNext(paths: List[String], currentZipper: Zipper): Try[Zipper] = {
   *   paths match {
   *     case Nil => Success(currentZipper)
-  *     case zipPath :: rest =>
-  *       // Can't use currentZipper.addFile(zipPath).map(), because the recursion
+  *     case path :: rest =>
+  *       // Can't use currentZipper.addFile(path).map(), because the recursion
   *       // will then be invoked within the lambda, violating tail-recursion.
-  *       currentZipper.addFile(zipPath) match {
+  *       currentZipper.addFile(path) match {
   *         case Failure(ex) => Failure(ex)
   *         case Success(z)  => addNext(rest, z)
   *       }
@@ -152,14 +152,14 @@ import scala.util.{Failure, Success, Try}
 class Zipper private(items:           Map[String, ZipSource],
                      bareDirectories: Set[String]) {
 
-  /** Add a file to the `Zipper`. The zipPath in the resulting zip or jar file
-    * will be the zipPath (if it's relative) or the zipPath with the file system root
+  /** Add a file to the `Zipper`. The path in the resulting zip or jar file
+    * will be the path (if it's relative) or the path with the file system root
     * removed (if it's absolute).
     *
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
-    * @param path zipPath to the file to addFile
+    * @param path path to the file to addFile
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
@@ -167,14 +167,14 @@ class Zipper private(items:           Map[String, ZipSource],
 
   /** Add a file to the `Zipper`. The entry in the zip file will be the
     * base name of the file, if `flatten` is specified. Otherwise, it'll
-    * be the zipPath itself (if the zipPath is relative) or the zipPath with the file
+    * be the path itself (if the path is relative) or the path with the file
     * system root removed (if it's absolute).
     *
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
-    * @param path     zipPath to the file to addFile
-    * @param flatten  whether or not to flatten the zipPath in the zip file
+    * @param path     path to the file to addFile
+    * @param flatten  whether or not to flatten the path in the zip file
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
@@ -187,8 +187,8 @@ class Zipper private(items:           Map[String, ZipSource],
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
-    * @param path     zipPath to the file to addFile
-    * @param zipPath  the zipPath of the entry in the zip or jar file. Any file
+    * @param path     path to the file to addFile
+    * @param zipPath  the path of the entry in the zip or jar file. Any file
     *                 system root will be stripped.
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
@@ -197,8 +197,8 @@ class Zipper private(items:           Map[String, ZipSource],
     addItem(FileSource(new File(path)), zipPath, flatten = false)
   }
 
-  /** Add a file to the `Zipper`. The zipPath in the resulting zip or jar file
-    * will be the zipPath (if it's relative) or the zipPath with the file system root
+  /** Add a file to the `Zipper`. The path in the resulting zip or jar file
+    * will be the path (if it's relative) or the path with the file system root
     * removed (if it's absolute).
     *
     * '''Note''': The existence or non-existence of the file isn't checked
@@ -212,14 +212,14 @@ class Zipper private(items:           Map[String, ZipSource],
 
   /** Add a file to the `Zipper`. The entry in the zip file will be the
     * base name of the file, if `flatten` is specified. Otherwise, it'll
-    * be the zipPath itself (if the zipPath is relative) or the zipPath with the file
+    * be the path itself (if the path is relative) or the path with the file
     * system root removed (if it's absolute).
     *
     * '''Note''': The existence or non-existence of the file isn't checked
     * until you call `writeZip()` or `writeJar()`.
     *
     * @param f        the `File` to be added
-    * @param flatten  whether or not to flatten the zipPath in the zip file
+    * @param flatten  whether or not to flatten the path in the zip file
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
@@ -232,7 +232,7 @@ class Zipper private(items:           Map[String, ZipSource],
     * until you call `writeZip()` or `writeJar()`.
     *
     * @param f        the `File` to be added
-    * @param zipPath  the zipPath of the entry in the zip or jar file. Any file
+    * @param zipPath  the path of the entry in the zip or jar file. Any file
     *                 system root will be stripped.
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
@@ -240,11 +240,11 @@ class Zipper private(items:           Map[String, ZipSource],
   def addFile(f: File, zipPath: String): Try[Zipper] =
     addFile(f.getPath, zipPath)
 
-  /** Add a URL to the `Zipper`. The zipPath in the zip file will be taken from
-    * the zipPath component of the URL. That means the URL ''must'' have a
+  /** Add a URL to the `Zipper`. The path in the zip file will be taken from
+    * the path component of the URL. That means the URL ''must'' have a
     * file name component. For instance, if you addFile the URL
-    * `http://www.example.com/`, you'll get an error, because the zipPath
-    * component is "/", and the corresponding relative zipPath is "". In other
+    * `http://www.example.com/`, you'll get an error, because the path
+    * component is "/", and the corresponding relative path is "". In other
     * words, `Zipper` does ''not'' addFile `index.html` for you automatically. A
     * URL like `http://www.example.com/index.html` will work fine, resulting
     * in `index.html` being added to the resulting zip file. Similarly, using
@@ -260,12 +260,12 @@ class Zipper private(items:           Map[String, ZipSource],
     */
   def addURL(url: URL): Try[Zipper] = addURL(url, flatten = false)
 
-  /** Add a URL to the `Zipper`. The zipPath in the zip file will be taken from
-    * the zipPath component of the URL, and all directories will be stripped from
-    * the zipPath. That means the URL ''must'' have a file name component. For
+  /** Add a URL to the `Zipper`. The path in the zip file will be taken from
+    * the path component of the URL, and all directories will be stripped from
+    * the path. That means the URL ''must'' have a file name component. For
     * instance, if you addFile the URL `http://www.example.com/`, you'll get an
-    * error, because the zipPath component is "/", and the corresponding relative
-    * zipPath is "". In other words, `Zipper` does ''not'' addFile `index.html` for you
+    * error, because the path component is "/", and the corresponding relative
+    * path is "". In other words, `Zipper` does ''not'' addFile `index.html` for you
     * automatically. A URL like `http://www.example.com/index.html` will work
     * fine, resulting in `index.html` being added to the resulting zip file.
     * Using this method to addFile
@@ -445,17 +445,6 @@ class Zipper private(items:           Map[String, ZipSource],
                    flatten:  Boolean = false,
                    wildcard: Option[String] = None): Try[Zipper] = {
 
-    def dirExists(): Try[Unit] = {
-      if (dir.exists) {
-        Success(())
-      }
-      else {
-        Failure(new FileDoesNotExistException(
-          s"""Directory "$dir" does not exist."""
-        ))
-      }
-    }
-
     def addRecursively(dir: File, flatten: Boolean): Try[Zipper] = {
 
       @tailrec
@@ -470,10 +459,10 @@ class Zipper private(items:           Map[String, ZipSource],
           case s if s.head.isDirectory      => addNext(s.tail, currentZipper)
           case s if ! wildcardMatch(s.head) => addNext(s.tail, currentZipper)
           case s =>
-            val f = s.head
-            val path = f.getPath
+            val f = s.head       // the next file or directory (File)
+            val path = f.getPath // its path (String)
             val t = if (flatten)
-              currentZipper.addFile(f, true)
+              currentZipper.addFile(f, flatten = true)
             else if (strip.isDefined && strip.exists(p => path.startsWith(p)))
               currentZipper.addFile(f, path.substring(strip.get.length))
             else
@@ -489,7 +478,9 @@ class Zipper private(items:           Map[String, ZipSource],
       addNext(fileutil.listRecursively(dir), this)
     }
 
-    for { _         <- dirExists()
+    // Main logic
+
+    for { _         <- dir.pathExists
           newZipper <- addRecursively(dir, flatten) }
     yield newZipper
   }
@@ -742,8 +733,8 @@ class Zipper private(items:           Map[String, ZipSource],
   /** Add a wrapped item to the Zipper.
     *
     * @param item      the item to addFile, wrapped in an `ItemSource`
-    * @param path      the zipPath for the item in the zip file
-    * @param flatten   whether or not to flatten the zipPath
+    * @param path      the path for the item in the zip file
+    * @param flatten   whether or not to flatten the path
     * @param forceRoot if not None, bypass the file system root, using this one
     *                  instead. (Useful with URLs, which always use a root of
     *                  "/", regardless of the current operating system.)
@@ -816,7 +807,7 @@ class Zipper private(items:           Map[String, ZipSource],
 
       if (matchingRoot.isEmpty) {
         Failure(new IllegalArgumentException(
-          s"""Absolute zipPath "$path" does not match a file system root."""
+          s"""Absolute path "$path" does not match a file system root."""
         ))
       }
       else {

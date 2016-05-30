@@ -107,7 +107,7 @@ package object util {
     * Sample use:
     *
     * {{{
-    * withResource(new java.io.FileInputStream("/zipPath/to/file")) {
+    * withResource(new java.io.FileInputStream("/path/to/file")) {
     *     in => ...
     * }
     * }}}

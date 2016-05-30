@@ -100,10 +100,10 @@ object URLUtil {
     * @param pathOut  Path of file to receive the output. If the file
     *                 exists, it is overwritten. If the file does not
     *                 exist, it is created. If any of the directories in
-    *                 the zipPath do not exist, they are created.
+    *                 the path do not exist, they are created.
     * @param ctx      The concurrent execution content to use
     *
-    * @return a `Future` of the zipPath
+    * @return a `Future` of the path
     */
   def download(url: String, pathOut: String)
               (implicit ctx: ExecutionContext): Future[String] = {
@@ -118,10 +118,10 @@ object URLUtil {
     * @param pathOut  Path of file to receive the output. If the file
     *                 exists, it is overwritten. If the file does not
     *                 exist, it is created. If any of the directories in
-    *                 the zipPath do not exist, they are created.
+    *                 the path do not exist, they are created.
     * @param ctx      The concurrent execution content to use
     *
-    * @return a `Future` of the zipPath
+    * @return a `Future` of the path
     */
   def download(url: JavaURL, pathOut: String)
               (implicit ctx: ExecutionContext): Future[String] = {
@@ -134,10 +134,10 @@ object URLUtil {
     * @param pathOut  Path of file to receive the output. If the file
     *                 exists, it is overwritten. If the file does not
     *                 exist, it is created. If any of the directories in
-    *                 the zipPath do not exist, they are created.
+    *                 the path do not exist, they are created.
     * @param ctx      The concurrent execution content to use
     *
-    * @return a `Future` of the zipPath
+    * @return a `Future` of the path
     */
   def download(url: URL, pathOut: String)
               (implicit ctx: ExecutionContext): Future[String] = {
@@ -149,11 +149,11 @@ object URLUtil {
     * @param url      The string containing the URI/URL
     * @param pathOut  File to receive the output. If the file exists, it
     *                 is overwritten. If the file does not exist, it is
-    *                 created. If any of the directories in the zipPath do not
+    *                 created. If any of the directories in the path do not
     *                 exist, they are created.
     * @param ctx      The concurrent execution content to use
     *
-    * @return a `Future` of the zipPath
+    * @return a `Future` of the path
     */
   def download(url: String, pathOut: File)
               (implicit ctx: ExecutionContext): Future[String] = {
@@ -167,11 +167,11 @@ object URLUtil {
     * @param url      The URL
     * @param pathOut  File to receive the output. If the file exists, it
     *                 is overwritten. If the file does not exist, it is
-    *                 created. If any of the directories in the zipPath do not
+    *                 created. If any of the directories in the path do not
     *                 exist, they are created.
     * @param ctx      The concurrent execution content to use
     *
-    * @return A `Future` of the zipPath.
+    * @return A `Future` of the path.
     */
   def download(url: URL, pathOut: File)
               (implicit ctx: ExecutionContext): Future[File] = {

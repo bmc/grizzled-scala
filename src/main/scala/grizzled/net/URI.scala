@@ -44,7 +44,7 @@ import scala.util.Try
   * @param userInfo   the user info, if defined
   * @param host       the host, if defined
   * @param port       the port, if defined
-  * @param path       the zipPath, if defined
+  * @param path       the path, if defined
   * @param query      the query string, if defined
   * @param fragment   the fragment, if defined
   */
@@ -111,7 +111,7 @@ case class URI(scheme:    Option[String],
     */
   val isOpaque = javaURI.isOpaque
 
-  /** Normalize the URI's zipPath, returning a new URI.
+  /** Normalize the URI's path, returning a new URI.
     *
     * @return a possibly normalized URI.
     */
