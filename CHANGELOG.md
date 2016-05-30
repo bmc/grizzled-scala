@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 2.3.2:
+
+* Removed use of `asInstanceOf` in `grizzled.io.Implicits.RichReader` and
+  `grizzled.io.Implicits.RichInputStream`.
+
 Version 2.3.1:
 
 * Fixed bug in `Zipper (incorrect comparison between `String` and `Char`).
