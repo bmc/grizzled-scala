@@ -672,20 +672,21 @@ class Zipper private(private val items:           Map[String, ZipSource],
       def makeNext(subdirs: List[String], existing: Set[String]):
         Try[Set[String]] = {
 
+        def mapDir(dir: String) = if (dir.tail == '/') dir else dir + "/"
+
         subdirs match {
           case Nil => Success(existing)
-          case subdir :: rest =>
-            val dir = if (subdir endsWith "/") subdir else subdir + "/"
-            if (existing contains dir) {
-              makeNext(rest, existing)
-            }
-            else {
-              val entry = new ZipEntry(dir)
-              for { _   <- Try { zo.putNextEntry(entry) }
-                    _   <- Try { zo.closeEntry() }
-                    res <- makeNext(rest, existing + dir) }
-              yield res
-            }
+
+          case dir :: rest if existing contains mapDir(dir) =>
+            makeNext(rest, existing)
+
+          case dir :: rest =>
+            val dir2 = mapDir(dir)
+            val entry = new ZipEntry(dir2)
+            for { _   <- Try { zo.putNextEntry(entry) }
+                  _   <- Try { zo.closeEntry() }
+                  res <- makeNext(rest, existing + dir2) }
+            yield res
         }
       }
 
