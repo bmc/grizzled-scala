@@ -1,5 +1,9 @@
 # Grizzled Scala Change Log
 
+Version 2.3.1:
+
+* Fixed bug in `Zipper (incorrect comparison between `String` and `Char`).
+
 Version 2.3.0:
 
 * Added `grizzled.zip.Zipper` class, which makes creating zip files and jar

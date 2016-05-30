@@ -10,7 +10,6 @@ import java.util.zip.{ZipEntry, ZipOutputStream}
 import scala.annotation.tailrec
 import scala.collection.Set
 import scala.io.Source
-import scala.util.control.NonFatal
 import scala.util.{Failure, Success, Try}
 
 /** ==Zipper: Write zip and jar files more easily==
@@ -672,7 +671,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
       def makeNext(subdirs: List[String], existing: Set[String]):
         Try[Set[String]] = {
 
-        def mapDir(dir: String) = if (dir.tail == '/') dir else dir + "/"
+        def mapDir(dir: String) = if (dir.last == '/') dir else dir + "/"
 
         subdirs match {
           case Nil => Success(existing)
@@ -702,7 +701,6 @@ class Zipper private(private val items:           Map[String, ZipSource],
                  countSoFar:   Int,
                  existingDirs: Set[String]): Try[(Int, Set[String])] = {
       def makeEntry(s: ZipSource): Try[Int] = {
-        val entry = new ZipEntry(s.zipPath)
         s.source.copyToZip(s.zipPath, zo)
       }
 
