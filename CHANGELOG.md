@@ -11,6 +11,8 @@ Version 2.3.0:
 * `grizzled.io.RichReader` and `grizzled.io.RichInputStream` have `copyTo()`
   methods that previously returned Unit and threw exceptions on error. They
   now return `Try` objects.
+* `grizzled.file.GrizzledFile` (an enrichment of `java.io.File`) now supports a
+  `pathExists` method that returns a `Try`.
 
 Version 2.2.2:
 
