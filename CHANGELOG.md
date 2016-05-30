@@ -7,6 +7,7 @@ Version 2.3.2:
 * Deprecated `grizzled.collection.MultiIterator`. It's not necessary: Use
   the Scala `Iterator` class's `++` operator to combine multiple iterators
   lazily.
+* Added tester for `grizzled.io.MultiSource`.
 
 Version 2.3.1:
 
