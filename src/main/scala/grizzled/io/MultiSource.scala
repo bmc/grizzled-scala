@@ -46,9 +46,6 @@ import scala.io.Source
   * @param sources  the sources to wrap
   */
 class MultiSource(sources: List[Source]) extends Source {
-  import grizzled.collection.MultiIterator
-
-  private val sourceList = sources.toList
 
   /** Version of constructor that takes multiple arguments, instead of a list.
     *
@@ -58,9 +55,11 @@ class MultiSource(sources: List[Source]) extends Source {
 
   /** The actual iterator.
     */
-  protected val iter: Iterator[Char] = new MultiIterator[Char](sourceList: _*)
+  protected val iter: Iterator[Char] = {
+    sources.map(_.toIterator).foldLeft(Iterator[Char]())(_ ++ _)
+  }
 
   /** Reset, returning a new source.
     */
-  override def reset: Source = new MultiSource(sourceList)
+  override def reset: Source = new MultiSource(sources.map(_.reset()))
 }

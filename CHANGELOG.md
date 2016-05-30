@@ -4,6 +4,9 @@ Version 2.3.2:
 
 * Removed use of `asInstanceOf` in `grizzled.io.Implicits.RichReader` and
   `grizzled.io.Implicits.RichInputStream`.
+* Deprecated `grizzled.collection.MultiIterator`. It's not necessary: Use
+  the Scala `Iterator` class's `++` operator to combine multiple iterators
+  lazily.
 
 Version 2.3.1:
 
