@@ -8,6 +8,7 @@ Version 2.3.2:
   the Scala `Iterator` class's `++` operator to combine multiple iterators
   lazily.
 * Added tester for `grizzled.io.MultiSource`.
+* DOCS: Added package description for `grizzled.zip`.
 
 Version 2.3.1:
 
