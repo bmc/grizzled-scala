@@ -229,6 +229,7 @@ object Implicits {
       *
       * @return List of triplets, as described above.
       */
+    @deprecated("Use grizzled.file.util.walk", "2.3.0")
     def walk(topdown: Boolean = true): List[(String, List[String], List[String])] =
       util.walk(file.getPath, topdown)
 
