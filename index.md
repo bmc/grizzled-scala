@@ -31,8 +31,8 @@ Currently, the library is broken into a number of modules:
   string. Supports both ${var} (Unix-like) and %var% (Windows-like) syntaxes.
 * `grizzled.sys`: System-related utilities, akin to Python's `sys` module.
 * `grizzled.util`: Miscellaneous utility functions and methods not otherwise
-* `grizzled.zip`: Miscellaneous utility functions for writing zip and jar files
   categorized.
+* `grizzled.zip`: Miscellaneous utility functions for writing zip and jar files
 
 For a more detailed description of what's available, see the
 [API documentation][].
