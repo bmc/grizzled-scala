@@ -120,8 +120,7 @@ class SourceReader(sourceToWrap: Source) extends Reader {
 
   /** Tells whether the `Reader` is ready to be read. The `Reader` APi states
     * that this method "returns `true` if the next `read()` is guaranteed not to
- *
-    * block for input, `false`` otherwise. Note that returning `false` does not
+    * block for input, `false` otherwise. Note that returning `false` does not
     * guarantee that the next read will block."
     *
     * There's no simple mapping of `ready()` to a `Source`, so this method
