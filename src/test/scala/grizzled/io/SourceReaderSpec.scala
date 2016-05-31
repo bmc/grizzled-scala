@@ -11,7 +11,7 @@ import scala.util.Random
 
 class SourceReaderSpec extends BaseSpec {
   "read()" should "behave like Reader.read()" in {
-    val sr = new SourceReader(Source.fromString("abc"))
+    val sr = SourceReader(Source.fromString("abc"))
     sr.read() shouldBe 'a'
     sr.read() shouldBe 'b'
     sr.read() shouldBe 'c'
@@ -21,7 +21,7 @@ class SourceReaderSpec extends BaseSpec {
 
   it should "fill a buffer, if the buffer is smaller than the remaining data" in {
     val s = (1 to 64).map { _ => Random.nextPrintableChar() }.mkString
-    val sr = new SourceReader(Source.fromString(s))
+    val sr = SourceReader(Source.fromString(s))
     val buf = new Array[Char](s.length / 2)
     sr.read(buf, 0, buf.length) shouldBe buf.length
     buf.mkString shouldBe s.take(s.length / 2)
@@ -40,7 +40,7 @@ class SourceReaderSpec extends BaseSpec {
     val s = "0123456789"
     val bufContents = "abcdefghijklmnopqrstuvwxyz"
     val buf: Array[Char] = bufContents.toArray
-    val sr = new SourceReader(Source.fromString(s))
+    val sr = SourceReader(Source.fromString(s))
     val offset = 10
     val total = 3
     val n = sr.read(buf, offset, total)
@@ -51,19 +51,19 @@ class SourceReaderSpec extends BaseSpec {
   }
 
   "skip()" should "skip 0 characters" in {
-    val sr = new SourceReader(Source.fromString("abc"))
+    val sr = SourceReader(Source.fromString("abc"))
     sr.skip(0) shouldBe 0
     sr.read() shouldBe 'a'
   }
 
   it should "skip only as many characters as there are in the Source" in {
-    val sr = new SourceReader(Source.fromString("abc"))
+    val sr = SourceReader(Source.fromString("abc"))
     sr.skip(4) shouldBe 3
     sr.read() shouldBe -1
   }
 
   it should "skip the right number of characters" in {
-    val sr = new SourceReader(Source.fromString("abcdefghijklmnopqrstuvwxyz"))
+    val sr = SourceReader(Source.fromString("abcdefghijklmnopqrstuvwxyz"))
     sr.skip(10) shouldBe 10
     sr.read() shouldBe 'k'
   }
@@ -85,7 +85,7 @@ class SourceReaderSpec extends BaseSpec {
       withResource(new FileWriter(file)) { w =>
         w.write(s)
       }
-      val sr = new SourceReader(Source.fromFile(file))
+      val sr = SourceReader(Source.fromFile(file))
       val buf = new Array[Char](s.length)
       sr.read(buf, 0, buf.length) shouldBe buf.length
       sr.reset()
@@ -95,8 +95,13 @@ class SourceReaderSpec extends BaseSpec {
 
   "mark()" should "throw an unconditional IOException" in {
     val s = "abcdefghijklmnopqrstuvwxyz"
-    val sr = new SourceReader(Source.fromString(s))
+    val sr = SourceReader(Source.fromString(s))
     an [IOException] should be thrownBy { sr.mark(10) }
+  }
+
+  "markSupported()" should "unconditionally return false" in {
+    SourceReader(Source.fromFile("build.sbt")).markSupported shouldBe false
+    SourceReader(Source.fromString("abc")).markSupported shouldBe false
   }
 
   "close()" should "close the underlying Source" in {
@@ -108,7 +113,7 @@ class SourceReaderSpec extends BaseSpec {
         w.write(s)
       }
 
-      val src = new SourceReader(Source.fromFile(file))
+      val src = SourceReader(Source.fromFile(file))
       src.close()
       an [IOException] should be thrownBy { src.read() }
     }

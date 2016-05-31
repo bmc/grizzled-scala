@@ -103,6 +103,12 @@ class SourceReader(sourceToWrap: Source) extends Reader {
     skipNext(0)
   }
 
+  /** Return whether `mark()` is supported. This version always returns `false`.
+    *
+    * @return `false`
+    */
+  override def markSupported(): Boolean = false
+
   /** `mark()` is not supported. This method unconditionally throws
     * `IOException`.
     *
