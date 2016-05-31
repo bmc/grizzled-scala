@@ -128,11 +128,26 @@ object Implicits {
       * this class transparently from a `String` or `RichString`
       * object.
       *
-      * {{{
-      * import grizzled.string.Implicits.String._
+      * ===Examples===
       *
+      * These examples assume you've included this import:
+      *
+      * {{{import grizzled.string.Implicits.String._}}}
+      *
+      * These are just a few of the enrichments available. See below for
+      * the entire set.
+      *
+      * {{{
       * val s = "a  b          c"
       * println(s.tokenize) // prints: List(a, b, c)
+      * }}}
+      *
+      * {{{
+      * "    abc   def      ".rtrim // yields "    abc   def"
+      * }}}
+      *
+      * {{{
+      * "\u00a9 2016 The Example Company"  // yields "© 2016 The Example Company™
       * }}}
       */
     implicit class GrizzledString(val string: String) {
