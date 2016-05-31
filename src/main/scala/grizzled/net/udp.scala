@@ -209,9 +209,9 @@ trait UDPDatagramSocket {
     */
   def broadcast_=(enable: Boolean)
 
-    /** The local port to which the socket is bound.
-      */
-    def port: Int
+  /** The local port to which the socket is bound.
+    */
+  def port: Int
 
   /** The local address to which the socket is bound.
     *
