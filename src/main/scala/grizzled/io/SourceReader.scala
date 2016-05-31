@@ -47,6 +47,7 @@ import scala.annotation.tailrec
   */
 class SourceReader(sourceToWrap: Source) extends Reader {
   // A var is used only to support reset().
+  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
   private var source: Source = sourceToWrap
 
   /** Reads characters into a portion of an array. This method will block until

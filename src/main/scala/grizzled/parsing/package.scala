@@ -40,4 +40,8 @@ package grizzled
 /** Methods and classes useful for parsing various things.
  */
 package object parsing {
+
+  @deprecated("Use SafeIterator, instead", "2.4.0")
+  type IteratorStream[T] = SafeIterator[T]
+
 }

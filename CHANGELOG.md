@@ -1,6 +1,6 @@
 # Grizzled Scala Change Log
 
-Version 2.3.2:
+Version 2.4.0:
 
 * Removed use of `asInstanceOf` in `grizzled.io.Implicits.RichReader` and
   `grizzled.io.Implicits.RichInputStream`.
@@ -14,6 +14,10 @@ Version 2.3.2:
 * Fleshed out `grizzled.io.SourceReader` implementation and added unit test.
 * Converted `grizzled.string.WordWrapper` to be more functional (i.e., got
   rid of all `var` usages).
+* Renamed `IteratorStream` to `SafeIterator`, to avoid confusion with Scala
+  streams. `IteratorStream` is now a deprecated alias.
+* Deprecated `IteratorStream.count()`, as its functionality is better handled
+  by callers that care.
 * DOCS: Added package description for `grizzled.zip`.
 
 Version 2.3.1:

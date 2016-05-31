@@ -37,27 +37,27 @@
 
 package grizzled.parsing
 
-/** `IteratorStream` places a simple stream on top of an iterator,
+/** `SafeIterator` places a simple stream on top of an iterator,
   * returning `Option`-wrapped instances from the underlying iterator.
   * When the stream is exhausted, the `Iterator` stream returns
   * `None`. Differences from a plain `Iterator` include:
   *
-  * - An `IteratorStream` will not throw an exception if you try to read
+  * - An `SafeIterator` will not throw an exception if you try to read
   *   past the end of it. Instead, it will just keep returning `None`.
   *
   * Example of use with a string:
   *
   * {{{
-  * import grizzled.parsing.IteratorStream
+  * import grizzled.parsing.SafeIterator
   *
   * val s = ...
-  * val istream = new IteratorStream[Char](s.elements)
+  * val istream = new SafeIterator[Char](s.elements)
   * }}}
   *
   * @param iterator  the iterator to wrap
   */
 @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
-class IteratorStream[T](private val iterator: Iterator[T]) {
+class SafeIterator[+T](private val iterator: Iterator[T]) {
   private var count = 0
 
   /** Alternate constructor that takes an `Iterable`.
@@ -85,13 +85,28 @@ class IteratorStream[T](private val iterator: Iterator[T]) {
     *
     * @return the count
     */
+  @deprecated("Will not be supported in future versions.", "2.4.0")
   def totalRead: Int = count
 }
 
-/** The `Pushback` trait can be mixed into an `IteratorStream`
+/** Companion object for `SafeIterator`.
+  */
+object SafeIterator {
+  /** Create a new `SafeIterator` from an `Iterable`.
+    *
+    * @param iterable  the `Iterable``
+    * @tparam T        the type of the `Iterable`
+    *
+    * @return the allocated `SafeIterator`
+    */
+  def apply[T](iterable: Iterable[T]): SafeIterator[T] =
+    new SafeIterator(iterable)
+}
+
+/** The `Pushback` trait can be mixed into an `SafeIterator`
   * to permit arbitrary pushback.
   */
-trait Pushback[T] extends IteratorStream[T] {
+trait Pushback[T] extends SafeIterator[T] {
 
   private val pushbackStack = new scala.collection.mutable.Stack[T]
 
@@ -125,7 +140,7 @@ trait Pushback[T] extends IteratorStream[T] {
     * they were retrieved from the stream. For example:
     *
     * {{{
-    * val stream = new IteratorStream[Char]("foobar") with Pushback[Char]
+    * val stream = new SafeIterator[Char]("foobar") with Pushback[Char]
     * val list = List(stream.next.get, stream.next.get)
     *
     * // At this point, the list contains ('f', 'o'), and the stream
