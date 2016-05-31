@@ -37,6 +37,8 @@
 
 package grizzled.string
 
+import scala.annotation.tailrec
+
 /** Wraps strings on word boundaries to fit within a proscribed output
   * width. The wrapped string may have a prefix or not; prefixes are useful
   * for error messages, for instance. You tell a `WordWrapper` about
@@ -111,7 +113,6 @@ final case class WordWrapper(wrapWidth:    Int = 79,
     * The resulting string may have embedded newlines in it.
     *
     * @param s the string to wrap
-    *
     * @return the wrapped string
     */
   def wrap(s: String): String = {
@@ -123,41 +124,57 @@ final case class WordWrapper(wrapWidth:    Int = 79,
     val indentChars = indentString * indentation
     val buf = new ArrayBuffer[String]
 
-    def assembleLine(prefix: String, buf: ArrayBuffer[String]): String =
+    def assembleLine(prefix: String, buf: Vector[String]): String =
       prefix + indentChars + buf.mkString(" ")
 
-    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
     def wrapOneLine(line: String, prefix: String): String = {
-      val lineOut = new ArrayBuffer[String]
-      val result  = new ArrayBuffer[String]
-      var localPrefix = prefix
 
-      for (word <- line.split("[\t ]")) {
-        val wordLength = word.length
-        val prefixLength = wordLen(localPrefix)
+      @tailrec
+      def wrapNext(words:     List[String],
+                   curLine:   Vector[String],
+                   curPrefix: String,
+                   lines:     Vector[String]): (Vector[String], String) = {
+        words match {
+          case Nil if curLine.isEmpty => (lines, curPrefix)
+          case Nil => (lines :+ assembleLine(curPrefix, curLine), curPrefix)
+          case word :: rest =>
+            val wordLength   = word.length
+            val prefixLength = wordLen(curPrefix)
 
-        // Current length is the length of each word in the lineOut
-        // buffer, plus a single blank between them, plus the prefix
-        // length and indentation length, if any. Use a map operation
-        // to map the words to their lengths, and a fold-left operation
-        // to sum them up.
-        val totalBlanks = lineOut.length - 1
-        val wordLengths = (0 /: lineOut.map(wordLen(_))) (_ + _)
-        val currentLength = totalBlanks + wordLengths +
-                            localPrefix.length + indentation
-        if ((wordLength + currentLength + 1) > wrapWidth) {
-          result += assembleLine(localPrefix, lineOut)
-          lineOut.clear
-          localPrefix = prefixIndentChars
+            // Total number of blanks between words in this line = number of
+            // words - 1 (since we don't put a blank at the end of the line).
+            val totalBlanks  = scala.math.max(curLine.length - 1, 0)
+
+            // Combined length of all words in the current line.
+            val wordLengths = curLine.map(wordLen).sum
+
+            // The length of the line being assembled is the length of each
+            // word in the curLine buffer, plus a single blank between them,
+            // plus any prefix and indentation. to map the words to their
+            // lengths, and a fold-left operation to sum them up.
+            val currentLength = totalBlanks + wordLengths +
+                                curPrefix.length + indentation
+            if ((wordLength + currentLength + 1) > wrapWidth) {
+              // Adding this word to the current line would exceed the wrap
+              // width. Put the line together, save it, and start a new one.
+              val line = assembleLine(curPrefix, curLine)
+              wrapNext(rest, Vector(word), prefixIndentChars, lines :+ line)
+            }
+            else {
+              // It's safe to put this word in the current line.
+              wrapNext(rest, curLine :+ word, curPrefix, lines)
+            }
         }
-
-        lineOut += word
       }
 
+      val (lineOut, curPrefix) = wrapNext(line.split("""\s""").toList,
+                                          Vector.empty[String],
+                                          prefix,
+                                          Vector.empty[String])
       if (lineOut.nonEmpty)
-        result += assembleLine(localPrefix, lineOut)
-
-      result.mkString("\n").rtrim
+        lineOut.mkString("\n").rtrim
+      else
+        ""
     }
 
     val lines = s.split("\n")

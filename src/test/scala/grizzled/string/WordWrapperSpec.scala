@@ -8,10 +8,9 @@ class WordWrapperSpec extends BaseSpec {
     val w = new WordWrapper()
 
     w.wrap("This is a long string that should wrap at a 79-column boundary " +
-           "when passed through WordWrapper") shouldBe (
+           "when passed through WordWrapper") shouldBe
       """This is a long string that should wrap at a 79-column boundary when passed
         |through WordWrapper""".stripMargin
-    )
   }
 
   it should "wrap strings to a specified column boundary" in {
@@ -19,12 +18,10 @@ class WordWrapperSpec extends BaseSpec {
     val w = new WordWrapper(wrapWidth = Column)
 
     w.wrap(s"This is a long string that will wrap at column $Column, when " +
-            "passed to an appropriately configured WordWrapper.") shouldBe (
-
+            "passed to an appropriately configured WordWrapper.") shouldBe
       s"""This is a long string that will wrap at
          |column $Column, when passed to an
          |appropriately configured WordWrapper.""".stripMargin
-    )
   }
 
   it should "handle indentation" in {
@@ -32,10 +29,9 @@ class WordWrapperSpec extends BaseSpec {
     val Indent = 4
     val w = new WordWrapper(wrapWidth = Column, indentation = Indent)
     w.wrap(s"This is a string that will wrap at column $Column and will be " +
-           s"indented $Indent characters.") shouldBe (
+           s"indented $Indent characters.") shouldBe
       s"""    This is a string that will wrap at column 50
          |    and will be indented 4 characters.""".stripMargin
-    )
   }
 
   it should "allow a different indentation character" in {
@@ -44,10 +40,9 @@ class WordWrapperSpec extends BaseSpec {
     val w = new WordWrapper(wrapWidth = Column, indentation = Indent,
                             indentChar = '-')
     w.wrap(s"This is a string that will wrap at column $Column and will be " +
-      s"indented $Indent characters.") shouldBe (
+      s"indented $Indent characters.") shouldBe
       s"""----This is a string that will wrap at column 50
          |----and will be indented 4 characters.""".stripMargin
-      )
   }
 
   it should "handle indenting properly past a prefix" in {
@@ -55,11 +50,10 @@ class WordWrapperSpec extends BaseSpec {
     val w = new WordWrapper(wrapWidth = Column, prefix = "error: ")
     w.wrap(s"This is a string that will wrap at column $Column and be " +
            "indented past a prefix string. Each line that wraps should " +
-           "be indented properly.") shouldBe (
+           "be indented properly.") shouldBe
       s"""error: This is a string that will wrap at column 60 and be
          |       indented past a prefix string. Each line that wraps
          |       should be indented properly.""".stripMargin
-    )
   }
 
   it should "ignore specified characters when calculating wrapping" in {
@@ -73,7 +67,7 @@ class WordWrapperSpec extends BaseSpec {
     val r = s"""[${Ignore.mkString}]""".r
     val expected = r.replaceAllIn(s, "")
     val postProcessed = r.replaceAllIn(w.wrap(s), "")
-    postProcessed shouldBe (w2.wrap(expected))
+    postProcessed shouldBe w2.wrap(expected)
   }
 
   it should "wrap words appropriately on column boundaries" in {

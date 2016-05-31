@@ -12,6 +12,8 @@ Version 2.3.2:
   with any type for which there is an `Ordering`. Added a unit tester for
   them.
 * Fleshed out `grizzled.io.SourceReader` implementation and added unit test.
+* Converted `grizzled.string.WordWrapper` to be more functional (i.e., got
+  rid of all `var` usages).
 * DOCS: Added package description for `grizzled.zip`.
 
 Version 2.3.1:
