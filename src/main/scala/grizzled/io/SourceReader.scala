@@ -55,6 +55,15 @@ class SourceReader(val source: Source) extends Reader {
   def close(): Unit = source.close()
 }
 
+/** Companion to `SourceReader` class.
+  */
 object SourceReader {
+  /** Create a `SourceReader` from a `Source`. The result is compatible
+    * with the `java.io.Reader` interface.
+    *
+    * @param source  the `scala.io.Source`
+    *
+    * @return the `SourceReader`
+    */
   def apply(source: Source): SourceReader = new SourceReader(source)
 }
