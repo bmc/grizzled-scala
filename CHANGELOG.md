@@ -11,6 +11,7 @@ Version 2.3.2:
 * Reimplemented `grizzled.math.max()` and `grizzled.math.min()` to work
   with any type for which there is an `Ordering`. Added a unit tester for
   them.
+* Fleshed out `grizzled.io.SourceReader` implementation and added unit test.
 * DOCS: Added package description for `grizzled.zip`.
 
 Version 2.3.1:
