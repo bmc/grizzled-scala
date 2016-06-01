@@ -18,6 +18,7 @@ Version 2.4.0:
   confusion with Scala streams. `IteratorStream` is now a deprecated alias.
 * Deprecated `IteratorStream.count()`, as its functionality is better handled
   by callers that care.
+* Converted uses of `var` in `grizzled.string.template` classes to `val`.
 * Added some unit tests for the classes in `grizzled.parsing`.
 * DOCS: Added package description for `grizzled.zip`.
 

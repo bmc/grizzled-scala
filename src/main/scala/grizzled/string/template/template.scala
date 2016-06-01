@@ -79,7 +79,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     def doSub(s2: String): Either[String, String] = {
 
       def subVariable(variable: Variable): Either[String, String] = {
-        var endString = if (variable.end == s2.length) ""
+        val endString = if (variable.end == s2.length) ""
                         else s2.substring(variable.end)
         val before = s2.substring(0, variable.start)
 
@@ -87,13 +87,6 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
           doSub(before + subbed + endString)
         }
       }
-
-      // Note to self:
-      //
-      // - findVariableReferences() returns an Option[Variable].
-      // - flatMap() on an option invokes the supplied function on the
-      //   option's value, if it's not None; otherwise, it returns None.
-      // - The getOrElse() is invoked on the result.
 
       findVariableReference(s2).map { v => subVariable(v) }
                                .getOrElse(Right(s2))
@@ -174,12 +167,12 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
   extends StringTemplate(resolveVar, safe) {
 
   // ${foo} or ${foo?default}
-  private var LongFormVariable = ("""\$\{(""" +
+  private val LongFormVariable = ("""\$\{(""" +
                                   namePattern +
                                   """)(\?[^}]*)?\}""").r
 
   // $foo
-  private var ShortFormVariable = ("""\$(""" + namePattern + ")").r
+  private val ShortFormVariable = ("""\$(""" + namePattern + ")").r
 
   private val EscapedDollar = """(\\*)(\\\$)""".r
   private val RealEscapeToken = "\u0001"
