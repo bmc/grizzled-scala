@@ -12,7 +12,11 @@ package grizzled.collection
 @deprecated("Use Iterator++. See http://stackoverflow.com/a/16315251/53495", "2.3.2")
 class MultiIterator[+T](iterators: Iterator[T]*) extends Iterator[T] {
   private[this] val iteratorList: List[Iterator[T]] = iterators.toList
+
+  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
   private[this] var current = iteratorList.head
+
+  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Var"))
   private[this] var nextIterators = iteratorList.tail
 
   /** Determines whether the iterator is empty. A `MultiIterator`
