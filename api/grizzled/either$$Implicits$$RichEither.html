@@ -321,7 +321,8 @@ expects the supplied partial function to return an <code>Either</code>.</p><p>Th
       <p class="shortcomment cmt">Convert an <code>Either</code> to a <code>Try</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Convert an <code>Either</code> to a <code>Try</code>. If the <code>Either</code> is a <code>Right</code>, then
 the value is extracted from the <code>Right</code> and wrapped in a <code>Success</code>.
 If the <code>Either</code> is a <code>Left</code>, then the value is extracted from the
-left, stored in an <code>Exception</code>, and wrapped in a <code>Failure</code>.</p><p>To convert the exception to another exception, you can use <code>.orElse</code>:</p><pre>either.toTry.orElse { e <span class="kw">=&gt;</span> Failure(<span class="kw">new</span> MyException(e)) }</pre></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <code>Either</code>, converted to a <code>Try</code></p></dd></dl></div>
+left, stored in an <code>Exception</code>, and wrapped in a <code>Failure</code>.</p><p>To convert the exception to another exception, you can use
+<code>.recoverWith</code>:</p><pre>either.toTry.recoverWith { <span class="kw">case</span> e <span class="kw">=&gt;</span> Failure(<span class="kw">new</span> MyException(e)) }</pre></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the <code>Either</code>, converted to a <code>Try</code></p></dd></dl></div>
     </li></ol>
             </div>
 
