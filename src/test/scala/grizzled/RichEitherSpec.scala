@@ -44,7 +44,7 @@ import scala.util.{Failure, Success, Try}
 /**
  * Tests the grizzled.either class.
  */
-class EitherSpec extends BaseSpec with Inside {
+class RichEitherSpec extends BaseSpec with Inside {
   "map" should "work on a Right" in {
     val r = Right(true)
     r.map(_ => false) shouldBe Right(false)

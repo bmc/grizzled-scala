@@ -94,10 +94,11 @@ object either {
         * If the `Either` is a `Left`, then the value is extracted from the
         * left, stored in an `Exception`, and wrapped in a `Failure`.
         *
-        * To convert the exception to another exception, you can use `.orElse`:
+        * To convert the exception to another exception, you can use
+        * `.recoverWith`:
         *
         * {{{
-        *   either.toTry.orElse { e => Failure(new MyException(e)) }
+        * either.toTry.recoverWith { case e => Failure(new MyException(e)) }
         * }}}
         *
         * @return the `Either`, converted to a `Try`
