@@ -513,7 +513,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
     }
     else {
       for { p <- stripRoot(path, forceRoot = Some("/"))
-            _   <- ensureNotThere(p) }
+            _ <- ensureNotThere(p) }
       yield new Zipper(items = items, bareDirectories = bareDirectories + p)
     }
   }
@@ -777,7 +777,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
         if (p.isEmpty)
           Failure(new Exception(s"""Cannot find a file name in "$p"."""))
         else
-          Success(p)
+          Success(p.replace(File.separatorChar, '/'))
       }
     }
 
