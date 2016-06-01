@@ -3,6 +3,8 @@ title: The Grizzled Scala Utility Library
 layout: withTOC
 ---
 
+[![Build Status](https://travis-ci.org/bmc/grizzled-scala.svg?branch=master)](https://travis-ci.org/bmc/grizzled-scala)
+
 ## Introduction
 
 The Grizzled Scala Library is a general-purpose [Scala][] library with a
