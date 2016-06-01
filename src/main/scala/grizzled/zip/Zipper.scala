@@ -802,37 +802,38 @@ class Zipper private(private val items:           Map[String, ZipSource],
     *                    are used.
     * @return A `Success` with the new path, or a `Failure` on error.
     */
-  @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.OptionPartial"))
   private def stripRoot(path: String, forceRoot: Option[String]): Try[String] = {
     val f = new File(path)
 
-    val strippedPath = if (! f.isAbsolute) {
-      // Already relative. Use as is.
-      Success(path)
-    }
-    else if (forceRoot.isDefined) {
-      val root = forceRoot.get
+    def stripThisRoot(root: String): Try[String] = {
       if (path startsWith root)
         Success(path.substring(root.length))
       else
         Failure(new Exception(s""""$path" does not start with root "$root"."""))
     }
+
+    val strippedPath = if (! f.isAbsolute) {
+      // Already relative. Use as is.
+      Success(path)
+    }
     else {
-      // Absolute. Strip any leading file system roots.
+      forceRoot.map(stripThisRoot).getOrElse {
+        // Absolute and no root defined. Strip any leading file system roots.
 
-      val lcPath = path.toLowerCase
-      val matchingRoot = File.listRoots().filter { root =>
-        val rootPath = root.getPath
-        lcPath startsWith rootPath.toLowerCase
-      }
+        val lcPath = path.toLowerCase
+        val matchingRoot = File.listRoots().filter { root =>
+          val rootPath = root.getPath
+          lcPath startsWith rootPath.toLowerCase
+        }
 
-      if (matchingRoot.isEmpty) {
-        Failure(new IllegalArgumentException(
-          s"""Absolute path "$path" does not match a file system root."""
-        ))
-      }
-      else {
-        Success(path.substring(matchingRoot.head.getPath.length))
+        if (matchingRoot.isEmpty) {
+          Failure(new IllegalArgumentException(
+            s"""Absolute path "$path" does not match a file system root."""
+          ))
+        }
+        else {
+          Success(path.substring(matchingRoot.head.getPath.length))
+        }
       }
     }
 
