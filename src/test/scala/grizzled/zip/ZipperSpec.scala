@@ -223,10 +223,9 @@ class ZipperSpec extends BaseSpec {
       })
     )
 
-    val server = new Server(handlers)
     withTemporaryDirectory("Zipper") { dir =>
       val absDir = dir.getAbsolutePath
-      withHTTPServer(server) { _ =>
+      withHTTPServer(handlers) { server =>
         val z = Zipper()
         val t1 = z.addURL(new URL(s"http://localhost:${server.bindPort}/foo.txt"))
         t1 shouldBe success

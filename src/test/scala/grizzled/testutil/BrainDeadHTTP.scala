@@ -1,6 +1,6 @@
 package grizzled.testutil
 
-import java.io.{PrintWriter, OutputStreamWriter}
+import java.io.{OutputStreamWriter, PrintWriter}
 import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -9,6 +9,7 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.io.Source
 import scala.util.Try
+import scala.util.control.NonFatal
 
 /** Brain dead HTTP server, solely for testing. I could use an external
   * package, but doing it this way reduces external dependencies, since I'm
@@ -38,6 +39,34 @@ object BrainDeadHTTP {
     finally {
       server.stop()
     }
+  }
+
+  /** Bring up a server on a random port, retrying with a new random port up to
+    * ''n'' times.
+    *
+    * @param handlers server handlers
+    * @param retries  number of retries. Defaults to 5.
+    * @param code     Code to run before shutting server down
+    */
+  def withHTTPServer(handlers: Seq[Handler], retries: Int = 5)
+                    (code: Server => Unit): Unit = {
+    def tryBind(n: Int): Server = {
+      try {
+        val server = new Server(handlers)
+        server.start()
+        server
+      }
+      catch {
+        case NonFatal(_) if n > 0 =>
+          tryBind(n - 1)
+
+        case NonFatal(e) =>
+          throw new Exception(s"Random port bind failed after $retries tries.")
+      }
+    }
+
+    val server = tryBind(retries)
+    code(server)
   }
 
   /** Defines a handler for a request.
@@ -94,12 +123,12 @@ object BrainDeadHTTP {
       */
     def this(handlers: Seq[Handler]) = this(Server.randomPort, handlers)
 
-    /** Create a server that listens on the default port and has only one
+    /** Create a server that listens on a random port and has only one
       * handler.
       *
       * @param handler the handler
       */
-    def this(handler: Handler) = this(Server.randomPort, handler)
+    def this(handler: Handler) = this(Seq(handler))
 
     import java.net._
 
@@ -118,10 +147,11 @@ object BrainDeadHTTP {
       }
     }
 
-    /** Start the server.
+    /** Start the server. Returns `this` for convenience.
       */
-    def start(): Unit = {
+    def start(): Server = {
       runner.start()
+      this
     }
 
     /** Stop the server.

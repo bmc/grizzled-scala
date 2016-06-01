@@ -53,16 +53,16 @@ class IncluderSpec extends BaseSpec {
   }
 
   it should "allow a file to include from an HTTP server" in {
-    val server = new Server(
+    val handlers = Seq(
       Handler("foo", { req => Response(ResponseCode.OK, Some("foo")) })
     )
 
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "main.txt",
-        Array("main line 1",
-              s"""%include "http://localhost:${server.bindPort}/foo"""",
-              "main line 3"))
-      withHTTPServer(server) { _ =>
+      withHTTPServer(handlers) { server =>
+        val input = createFile(dir, "main.txt",
+          Array("main line 1",
+                s"""%include "http://localhost:${server.bindPort}/foo"""",
+                "main line 3"))
         Includer(input).map(_.toVector) shouldBe Success(
           Vector("main line 1", "foo", "main line 3")
         )
@@ -89,7 +89,7 @@ class IncluderSpec extends BaseSpec {
     )
 
     val server = new Server(handlers)
-    withHTTPServer(server) { _ =>
+    withHTTPServer(handlers) { server =>
       val t = Includer(s"http://localhost:${server.bindPort}/foo.txt")
                   .map(_.toVector)
       t shouldBe Success(Vector("line 1",

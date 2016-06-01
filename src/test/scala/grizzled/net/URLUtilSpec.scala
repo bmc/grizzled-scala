@@ -47,7 +47,7 @@ class URLUtilSpec extends BaseSpec {
   val DownloadURL = "http://localhost:@PORT@/thing.txt"
 
   "download" should "download from a URL object" in {
-    withHTTPServer(new Server(DownloadHandler)) { server =>
+    withHTTPServer(Seq(DownloadHandler)) { server =>
       val url = URL(DownloadURL.replace("@PORT@", server.bindPort.toString)).get
       val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
@@ -56,7 +56,7 @@ class URLUtilSpec extends BaseSpec {
   }
 
   it should "download from a string URL" in {
-    withHTTPServer(new Server(DownloadHandler)) { server =>
+    withHTTPServer(Seq(DownloadHandler)) { server =>
       val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
       val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
@@ -70,7 +70,7 @@ class URLUtilSpec extends BaseSpec {
 
     withTemporaryDirectory("download") { dir =>
       val file = FileUtil.joinPath(dir.getPath, "lorem.txt")
-      withHTTPServer(new Server(DownloadHandler)) { server =>
+      withHTTPServer(Seq(DownloadHandler)) { server =>
         val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
         val fut = URLUtil.download(url, file)
         Await.result(fut, 10.seconds)
@@ -82,7 +82,7 @@ class URLUtilSpec extends BaseSpec {
   "withDownloadedFile" should "download synchronously" in {
     import URLUtil._
 
-    withHTTPServer(new Server(DownloadHandler)) { server =>
+    withHTTPServer(Seq(DownloadHandler)) { server =>
       val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
       val t = withDownloadedFile(url, 10.seconds) { f =>
         f.exists shouldBe true
@@ -102,7 +102,7 @@ class URLUtilSpec extends BaseSpec {
       Response(ResponseCode.OK, Some(Contents))
     })
 
-    withHTTPServer(new Server(handler)) { server =>
+    withHTTPServer(Seq(handler)) { server =>
       val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
       val t = withDownloadedFile(url, 50.milliseconds) { f =>
         Source.fromFile(f).mkString
