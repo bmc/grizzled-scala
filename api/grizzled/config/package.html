@@ -245,7 +245,7 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
 }
 
 <span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div></div>
-    </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ConfigurationExceptionextendsException"></a>
       <a id="ConfigurationException:ConfigurationException"></a>
       <h4 class="signature">
@@ -262,8 +262,13 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
       </a>
     </span>
       <p class="shortcomment cmt">A configuration-related exception, used primarily inside <code>Failure</code>
-objects.</p>
-    </li><li name="grizzled.config.ConfigurationOptionException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+objects.</p><div class="fullcomment"><div class="comment cmt"><p>A configuration-related exception, used primarily inside <code>Failure</code>
+objects.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="grizzled.config.ConfigurationOptionException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ConfigurationOptionExceptionextendsConfigurationException"></a>
       <a id="ConfigurationOptionException:ConfigurationOptionException"></a>
       <h4 class="signature">
@@ -280,7 +285,12 @@ objects.</p>
       </a>
     </span>
       <p class="shortcomment cmt">A specific kind of configuration exception, tied to a specific section
-and option.</p>
+and option.</p><div class="fullcomment"><div class="comment cmt"><p>A specific kind of configuration exception, tied to a specific section
+and option.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SectionextendsAnyRef"></a>
       <a id="Section:Section"></a>

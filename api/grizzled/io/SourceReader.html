@@ -92,7 +92,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="grizzled.io.SourceReader#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(source:scala.io.Source):grizzled.io.SourceReader"></a>
+      <a id="&lt;init&gt;(sourceToWrap:scala.io.Source):grizzled.io.SourceReader"></a>
       <a id="&lt;init&gt;:SourceReader"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -100,14 +100,14 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">SourceReader</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>)</span>
+        <span class="name">SourceReader</span><span class="params">(<span name="sourceToWrap">sourceToWrap: <span class="extype" name="scala.io.Source">Source</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.SourceReader@&lt;init&gt;(source:scala.io.Source):grizzled.io.SourceReader" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.SourceReader@&lt;init&gt;(sourceToWrap:scala.io.Source):grizzled.io.SourceReader" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the source to wrap</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">sourceToWrap</dt><dd class="cmt"><p>the source to wrap</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -224,7 +224,8 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader → Closeable → AutoCloseable</dd></dl></div>
+      <p class="shortcomment cmt">Closes the <code>Reader</code> by closing the underlying <code>Source</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Closes the <code>Reader</code> by closing the underlying <code>Source</code>.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader → Closeable → AutoCloseable</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -333,8 +334,8 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="java.io.Reader#mark" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mark(x$1:Int):Unit"></a>
+    </li><li name="grizzled.io.SourceReader#mark" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mark(readAheadLimit:Int):Unit"></a>
       <a id="mark(Int):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -342,21 +343,17 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mark</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">mark</span><span class="params">(<span name="readAheadLimit">readAheadLimit: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.SourceReader@mark(x$1:Int):Unit" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.SourceReader@mark(readAheadLimit:Int):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reader</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">(<span>
-      
-      <span class="symbol">classOf[java.io.IOException]</span>
-    </span>)</span>
-              
-        </dd></dl></div>
-    </li><li name="java.io.Reader#markSupported" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <p class="shortcomment cmt"><code>mark()</code> is not supported.</p><div class="fullcomment"><div class="comment cmt"><p><code>mark()</code> is not supported. This method unconditionally throws
+<code>IOException</code>.
+</p></div><dl class="paramcmts block"><dt class="param">readAheadLimit</dt><dd class="cmt"><p>the mark limit. Ignored.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
+    </li><li name="grizzled.io.SourceReader#markSupported" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="markSupported():Boolean"></a>
       <a id="markSupported():Boolean"></a>
       <h4 class="signature">
@@ -372,7 +369,8 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reader</dd></dl></div>
+      <p class="shortcomment cmt">Return whether <code>mark()</code> is supported.</p><div class="fullcomment"><div class="comment cmt"><p>Return whether <code>mark()</code> is supported. This version always returns <code>false</code>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>false</code></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -425,6 +423,26 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="grizzled.io.SourceReader#read" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="read():Int"></a>
+      <a id="read():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">read</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.io.SourceReader@read():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Reads a single character.</p><div class="fullcomment"><div class="comment cmt"><p>Reads a single character. This method will block until a character is
+available, an I/O error occurs, or the end of the stream is reached.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the character read, as an integer in the range 0x00 to 0xffff,
+        or -1 if at the end of the underlying <code>Source</code>.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
+    </li><li name="grizzled.io.SourceReader#read" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="read(buf:Array[Char],offset:Int,length:Int):Int"></a>
       <a id="read(Array[Char],Int,Int):Int"></a>
       <h4 class="signature">
@@ -440,7 +458,10 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
+      <p class="shortcomment cmt">Reads characters into a portion of an array.</p><div class="fullcomment"><div class="comment cmt"><p>Reads characters into a portion of an array. This method will block until
+some input is available, an I/O error occurs, or the end of the
+underlying <code>Source</code> is reached.
+</p></div><dl class="paramcmts block"><dt class="param">buf</dt><dd class="cmt"><p>the destination character buffer</p></dd><dt class="param">offset</dt><dd class="cmt"><p>offset at which to start reading into the buffer</p></dd><dt class="param">length</dt><dd class="cmt"><p>maximum number of characters to read</p></dd><dt>returns</dt><dd class="cmt"><p>total number of characters read, or -1 on EOF.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
     </li><li name="java.io.Reader#read" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="read(x$1:Array[Char]):Int"></a>
       <a id="read(Array[Char]):Int"></a>
@@ -454,29 +475,6 @@
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.io.SourceReader@read(x$1:Array[Char]):Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reader</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">(<span>
-      
-      <span class="symbol">classOf[java.io.IOException]</span>
-    </span>)</span>
-              
-        </dd></dl></div>
-    </li><li name="java.io.Reader#read" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="read():Int"></a>
-      <a id="read():Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">read</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.SourceReader@read():Int" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -510,7 +508,7 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="java.io.Reader#ready" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="grizzled.io.SourceReader#ready" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ready():Boolean"></a>
       <a id="ready():Boolean"></a>
       <h4 class="signature">
@@ -526,14 +524,13 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reader</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">(<span>
-      
-      <span class="symbol">classOf[java.io.IOException]</span>
-    </span>)</span>
-              
-        </dd></dl></div>
-    </li><li name="java.io.Reader#reset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <p class="shortcomment cmt">Tells whether the <code>Reader</code> is ready to be read.</p><div class="fullcomment"><div class="comment cmt"><p>Tells whether the <code>Reader</code> is ready to be read. The <code>Reader</code> APi states
+that this method &quot;returns <code>true</code> if the next <code>read()</code> is guaranteed not to
+block for input, <code>false</code> otherwise. Note that returning <code>false</code> does not
+guarantee that the next read will block.&quot;</p><p>There's no simple mapping of <code>ready()</code> to a <code>Source</code>, so this method
+always returns <code>false</code>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><code>false</code>, unconditionally.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
+    </li><li name="grizzled.io.SourceReader#reset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="reset():Unit"></a>
       <a id="reset():Unit"></a>
       <h4 class="signature">
@@ -549,15 +546,10 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reader</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">(<span>
-      
-      <span class="symbol">classOf[java.io.IOException]</span>
-    </span>)</span>
-              
-        </dd></dl></div>
-    </li><li name="java.io.Reader#skip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="skip(x$1:Long):Long"></a>
+      <p class="shortcomment cmt">Resets the <code>Reader</code> by resetting the underlying <code>Source</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Resets the <code>Reader</code> by resetting the underlying <code>Source</code>.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
+    </li><li name="grizzled.io.SourceReader#skip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="skip(n:Long):Long"></a>
       <a id="skip(Long):Long"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -565,37 +557,17 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">skip</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
+        <span class="name">skip</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.SourceReader@skip(x$1:Long):Long" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.io.SourceReader@skip(n:Long):Long" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reader</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">(<span>
-      
-      <span class="symbol">classOf[java.io.IOException]</span>
-    </span>)</span>
-              
-        </dd></dl></div>
-    </li><li name="grizzled.io.SourceReader#source" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="source:scala.io.Source"></a>
-      <a id="source:Source"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">source</span><span class="result">: <span class="extype" name="scala.io.Source">Source</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.io.SourceReader@source:scala.io.Source" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">the source to wrap</p>
+      <p class="shortcomment cmt">Skips characters.</p><div class="fullcomment"><div class="comment cmt"><p>Skips characters. This method will block until some characters are
+available, an I/O error occurs, or the end of the underlying <code>Source</code>
+is reached.
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the number of characters to skip</p></dd><dt>returns</dt><dd class="cmt"><p>the number of characters actually skipped</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.io.SourceReader">SourceReader</a> → Reader</dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

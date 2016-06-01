@@ -89,7 +89,34 @@
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="grizzled.sys.OperatingSystem" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="OperatingSystemextendsAnyRef"></a>
+      <a id="OperatingSystem:OperatingSystem"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="sys$$OperatingSystem.html"><span class="name">OperatingSystem</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#grizzled.sys$@OperatingSystemextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Indicator of current operating system.</p><div class="fullcomment"><div class="comment cmt"><p>Indicator of current operating system.</p><p>- VMS - OpenVMS
+- Windows - Microsoft Windows, other than Windows CE
+- WindowsCE - Microsoft Windows CE
+- OS2 - OS2
+- NetWare - NetWare
+- Mac - Mac OS, prior to Mac OS X
+- Posix - Anything Unix-like, including Mac OS X
+</p></div></div>
+    </li></ol>
+            </div>
 
         
 
@@ -146,7 +173,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.sys.OperatingSystem" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="grizzled.sys.OperatingSystem" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="OperatingSystem"></a>
       <a id="OperatingSystem:OperatingSystem"></a>
       <h4 class="signature">
@@ -155,21 +182,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="sys$$OperatingSystem$.html"><span class="name">OperatingSystem</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+        <a href="sys$$OperatingSystem$.html"><span class="name">OperatingSystem</span></a>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#grizzled.sys$@OperatingSystem" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Indicator of current operating system.</p><div class="fullcomment"><div class="comment cmt"><p>Indicator of current operating system.</p><p>- VMS - OpenVMS
-- Windows - Microsoft Windows, other than Windows CE
-- WindowsCE - Microsoft Windows CE
-- OS2 - OS2
-- NetWare - NetWare
-- Mac - Mac OS, prior to Mac OS X
-- Posix - Anything Unix-like, including Mac OS X
-</p></div></div>
+      
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -285,18 +305,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.sys#getOS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="getOS(name:String):grizzled.sys.OperatingSystem.Value"></a>
-      <a id="getOS(String):sys.OperatingSystem.Value"></a>
+      <a id="getOS(name:String):ProductwithSerializablewithgrizzled.sys.OperatingSystem"></a>
+      <a id="getOS(String):ProductwithSerializablewithOperatingSystem"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getOS</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="sys$$OperatingSystem$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.sys.OperatingSystem.Value">sys.OperatingSystem.Value</a></span>
+        <span class="name">getOS</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <a href="sys$$OperatingSystem.html" class="extype" name="grizzled.sys.OperatingSystem">OperatingSystem</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#grizzled.sys$@getOS(name:String):grizzled.sys.OperatingSystem.Value" title="Permalink" target="_top">
+      <a href="../index.html#grizzled.sys$@getOS(name:String):ProductwithSerializablewithgrizzled.sys.OperatingSystem" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -387,18 +407,18 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="grizzled.sys#os" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="os:grizzled.sys.OperatingSystem.Value"></a>
-      <a id="os:sys.OperatingSystem.Value"></a>
+      <a id="os:ProductwithSerializablewithgrizzled.sys.OperatingSystem"></a>
+      <a id="os:ProductwithSerializablewithOperatingSystem"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">os</span><span class="result">: <a href="sys$$OperatingSystem$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="grizzled.sys.OperatingSystem.Value">sys.OperatingSystem.Value</a></span>
+        <span class="name">os</span><span class="result">: <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <a href="sys$$OperatingSystem.html" class="extype" name="grizzled.sys.OperatingSystem">OperatingSystem</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#grizzled.sys$@os:grizzled.sys.OperatingSystem.Value" title="Permalink" target="_top">
+      <a href="../index.html#grizzled.sys$@os:ProductwithSerializablewithgrizzled.sys.OperatingSystem" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

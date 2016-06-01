@@ -45,15 +45,15 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">Pushback</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
+        <span class="name">Pushback</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
-to permit arbitrary pushback.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The <code>Pushback</code> trait can be mixed into an <code>SafeIterator</code> to permit
+arbitrary pushback.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -71,7 +71,7 @@ to permit arbitrary pushback.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="grizzled.parsing.Pushback"><span>Pushback</span></li><li class="in" name="grizzled.parsing.IteratorStream"><span>IteratorStream</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="grizzled.parsing.Pushback"><span>Pushback</span></li><li class="in" name="grizzled.parsing.SafeIterator"><span>SafeIterator</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -332,7 +332,7 @@ to permit arbitrary pushback.
 honoring previous calls to <code>pushback()</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Get the next item from the stream, advancing the cursor, while
 honoring previous calls to <code>pushback()</code>.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an <code>Option</code> containing the next item, or <code>None</code>
-        if the iterator is exhausted.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.parsing.Pushback">Pushback</a> → <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a></dd></dl></div>
+        if the iterator is exhausted.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.parsing.Pushback">Pushback</a> → <a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -368,24 +368,24 @@ honoring previous calls to <code>pushback()</code>.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="grizzled.parsing.Pushback#pushback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="pushback(items:List[T]):scala.collection.mutable.Stack[T]"></a>
-      <a id="pushback(List[T]):Stack[T]"></a>
+      <a id="pushback(items:List[T]):Unit"></a>
+      <a id="pushback(List[T]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">pushback</span><span class="params">(<span name="items">items: <span class="extype" name="scala.List">List</span>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
+        <span class="name">pushback</span><span class="params">(<span name="items">items: <span class="extype" name="scala.List">List</span>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.parsing.Pushback@pushback(items:List[T]):scala.collection.mutable.Stack[T]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.parsing.Pushback@pushback(items:List[T]):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Push a list of items back onto the stream.</p><div class="fullcomment"><div class="comment cmt"><p>Push a list of items back onto the stream. The items are pushed
 back in reverse order, so the items in the list should be in the order
-they were retrieved from the stream. For example:</p><pre><span class="kw">val</span> stream = <span class="kw">new</span> IteratorStream[<span class="std">Char</span>](<span class="lit">"foobar"</span>) <span class="kw">with</span> Pushback[<span class="std">Char</span>]
+they were retrieved from the stream. For example:</p><pre><span class="kw">val</span> stream = <span class="kw">new</span> SafeIterator[<span class="std">Char</span>](<span class="lit">"foobar"</span>) <span class="kw">with</span> Pushback[<span class="std">Char</span>]
 <span class="kw">val</span> list = <span class="std">List</span>(stream.next.get, stream.next.get)
 
 <span class="cmt">// At this point, the list contains ('f', 'o'), and the stream</span>
@@ -393,18 +393,18 @@ they were retrieved from the stream. For example:</p><pre><span class="kw">val</
 
 stream.pushback(list) <span class="cmt">// Stream now contains "foobar"</span></pre></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the items to push back.</p></dd></dl></div>
     </li><li name="grizzled.parsing.Pushback#pushback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="pushback(item:T):scala.collection.mutable.Stack[T]"></a>
-      <a id="pushback(T):Stack[T]"></a>
+      <a id="pushback(item:T):Unit"></a>
+      <a id="pushback(T):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">pushback</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.parsing.Pushback.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.mutable.Stack">Stack</span>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
+        <span class="name">pushback</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.parsing.Pushback.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.parsing.Pushback@pushback(item:T):scala.collection.mutable.Stack[T]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.parsing.Pushback@pushback(item:T):Unit" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -444,24 +444,6 @@ stream.pushback(list) <span class="cmt">// Stream now contains "foobar"</span></
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="grizzled.parsing.Pushback#totalRead" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="totalRead:Int"></a>
-      <a id="totalRead:Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">totalRead</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.parsing.Pushback@totalRead:Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Get the count of the number of items consumed so far.</p><div class="fullcomment"><div class="comment cmt"><p>Get the count of the number of items consumed so far.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the count</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.parsing.Pushback">Pushback</a> → <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -536,12 +518,36 @@ stream.pushback(list) <span class="cmt">// Stream now contains "foobar"</span></
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.parsing.Pushback#totalRead" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="totalRead:Int"></a>
+      <a id="totalRead:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.4.0) Will not be supported in future versions.">totalRead</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.Pushback@totalRead:Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Get the count of the number of items consumed so far.</p><div class="fullcomment"><div class="comment cmt"><p>Get the count of the number of items consumed so far.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the count</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.parsing.Pushback">Pushback</a> → <a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a></dd><dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.0)</i> Will not be supported in future versions.</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="grizzled.parsing.IteratorStream">
-              <h3>Inherited from <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</h3>
+        <div class="parent" name="grizzled.parsing.SafeIterator">
+              <h3>Inherited from <a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

@@ -89,7 +89,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.collection.MultiIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="grizzled.collection.MultiIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MultiIterator[+T]extendsIterator[T]"></a>
       <a id="MultiIterator[+T]:MultiIterator[T]"></a>
       <h4 class="signature">
@@ -98,7 +98,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="MultiIterator.html"><span class="name">MultiIterator</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>]</span>
+        <a href="MultiIterator.html"><span class="name deprecated" title="Deprecated: (Since version 2.3.2) Use Iterator++. See http://stackoverflow.com/a/16315251/53495">MultiIterator</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.collection.package@MultiIterator[+T]extendsIterator[T]" title="Permalink" target="_top">
@@ -106,7 +106,14 @@
       </a>
     </span>
       <p class="shortcomment cmt">An iterator that iterates, serially, over the contents of multiple other
-iterators.</p>
+iterators.</p><div class="fullcomment"><div class="comment cmt"><p>An iterator that iterates, serially, over the contents of multiple other
+iterators.</p><p><b>This class is no longer necessary.</b> Just use the <code>Iterator</code> operator
+<code>++</code>, as outlined in
+<a href="http://stackoverflow.com/a/16315251/53495" target="_blank">this StackOverflow answer</a>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.3.2)</i> Use Iterator++. See http://stackoverflow.com/a/16315251/53495</p></dd></dl></div>
     </li></ol>
             </div>
 

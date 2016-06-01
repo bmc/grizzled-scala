@@ -53,10 +53,9 @@
 that neither <code>RichString</code> nor <code>String</code> provide. By
 importing the implicit conversion functions, you can use the methods in
 this class transparently from a <code>String</code> or <code>RichString</code>
-object.</p><pre><span class="kw">import</span> grizzled.string.Implicits.<span class="std">String</span>._
-
-<span class="kw">val</span> s = <span class="lit">"a  b          c"</span>
-println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre></div><div class="toggleContainer block">
+object.</p><h5>Examples</h5><p>These examples assume you've included this import:</p><pre><span class="kw">import</span> grizzled.string.Implicits.<span class="std">String</span>._</pre><p>These are just a few of the enrichments available. See below for
+the entire set.</p><pre><span class="kw">val</span> s = <span class="lit">"a  b          c"</span>
+println(s.tokenize) <span class="cmt">// prints: List(a, b, c)</span></pre><pre><span class="lit">"    abc   def      "</span>.rtrim <span class="cmt">// yields "    abc   def"</span></pre><pre><span class="lit">"© 2016 The Example Company"</span>  <span class="cmt">// yields "© 2016 The Example Company™</span></pre></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>

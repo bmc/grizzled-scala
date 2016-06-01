@@ -89,33 +89,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="IteratorStream[T]extendsAnyRef"></a>
-      <a id="IteratorStream[T]:IteratorStream[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="IteratorStream.html"><span class="name">IteratorStream</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.parsing.package@IteratorStream[T]extendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt"><code>IteratorStream</code> places a simple stream on top of an iterator,
-returning <code>Option</code>-wrapped instances from the underlying iterator.</p><div class="fullcomment"><div class="comment cmt"><p><code>IteratorStream</code> places a simple stream on top of an iterator,
-returning <code>Option</code>-wrapped instances from the underlying iterator.
-When the stream is exhausted, the <code>Iterator</code> stream returns
-<code>None</code>. Differences from a plain <code>Iterator</code> include:</p><p>- An <code>IteratorStream</code> will not throw an exception if you try to read
-  past the end of it. Instead, it will just keep returning <code>None</code>.</p><p>Example of use with a string:</p><pre><span class="kw">import</span> grizzled.parsing.IteratorStream
-
-<span class="kw">val</span> s = ...
-<span class="kw">val</span> istream = <span class="kw">new</span> IteratorStream[<span class="std">Char</span>](s.elements)</pre></div></div>
-    </li><li name="grizzled.parsing.Pushback" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Pushback[T]extendsIteratorStream[T]"></a>
+              <ol><li name="grizzled.parsing.Pushback" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Pushback[T]extendsSafeIterator[T]"></a>
       <a id="Pushback[T]:Pushback[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -123,21 +98,49 @@ When the stream is exhausted, the <code>Iterator</code> stream returns
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Pushback.html"><span class="name">Pushback</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="IteratorStream.html" class="extype" name="grizzled.parsing.IteratorStream">IteratorStream</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
+        <a href="Pushback.html"><span class="name">Pushback</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a>[<span class="extype" name="grizzled.parsing.Pushback.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.parsing.package@Pushback[T]extendsIteratorStream[T]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.parsing.package@Pushback[T]extendsSafeIterator[T]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">The <code>Pushback</code> trait can be mixed into an <code>IteratorStream</code>
-to permit arbitrary pushback.</p>
+      <p class="shortcomment cmt">The <code>Pushback</code> trait can be mixed into an <code>SafeIterator</code> to permit
+arbitrary pushback.</p>
+    </li><li name="grizzled.parsing.SafeIterator" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SafeIterator[+T]extendsAnyRef"></a>
+      <a id="SafeIterator[+T]:SafeIterator[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SafeIterator.html"><span class="name">SafeIterator</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@SafeIterator[+T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><code>SafeIterator</code> places a simple stream on top of an iterator,
+returning <code>Option</code>-wrapped instances from the underlying iterator.</p><div class="fullcomment"><div class="comment cmt"><p><code>SafeIterator</code> places a simple stream on top of an iterator,
+returning <code>Option</code>-wrapped instances from the underlying iterator.
+When the stream is exhausted, the <code>Iterator</code> stream returns
+<code>None</code>. Differences from a plain <code>Iterator</code> include:</p><p>- An <code>SafeIterator</code> will not throw an exception if you try to read
+  past the end of it. Instead, it will just keep returning <code>None</code>.</p><p>Example of use with a string:</p><pre><span class="kw">import</span> grizzled.parsing.SafeIterator
+
+<span class="kw">val</span> s = ...
+<span class="kw">val</span> istream = <span class="kw">new</span> SafeIterator[<span class="std">Char</span>](s.elements)</pre></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.parsing.StringToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="StringTokenextendsProductwithSerializable"></a>
       <a id="StringToken:StringToken"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
@@ -150,14 +153,55 @@ to permit arbitrary pushback.</p>
     </span>
       <p class="shortcomment cmt">A simple string token class, consisting of:</p><div class="fullcomment"><div class="comment cmt"><p>A simple string token class, consisting of:</p><p>- a string token
 - the starting position of the token in the original string from which
-  the token was parsed
-</p></div></div>
+  the token was parsed</p><p>This class is used by the <code>toTokens()</code> method in
+<a href="../string/Implicits$$String$$GrizzledString.html" class="extype" name="grizzled.string.Implicits.String.GrizzledString">grizzled.string.Implicits.String.GrizzledString</a>.
+</p></div><dl class="paramcmts block"><dt class="param">string</dt><dd class="cmt"><p>the string token</p></dd><dt class="param">start</dt><dd class="cmt"><p>the start of the token within the original string</p></dd></dl></div>
+    </li><li name="grizzled.parsing.IteratorStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="IteratorStream[T]=grizzled.parsing.SafeIterator[T]"></a>
+      <a id="IteratorStream[T]:IteratorStream[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.4.0) Use SafeIterator, instead">IteratorStream</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> = <a href="SafeIterator.html" class="extype" name="grizzled.parsing.SafeIterator">SafeIterator</a>[<span class="extype" name="grizzled.parsing.IteratorStream.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@IteratorStream[T]=grizzled.parsing.SafeIterator[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.0)</i> Use SafeIterator, instead</p></dd></dl></div>
     </li></ol>
             </div>
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.parsing.SafeIterator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SafeIterator"></a>
+      <a id="SafeIterator:SafeIterator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SafeIterator$.html"><span class="name">SafeIterator</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.parsing.package@SafeIterator" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion object for <code>SafeIterator</code>.</p>
+    </li></ol>
+            </div>
 
         
 

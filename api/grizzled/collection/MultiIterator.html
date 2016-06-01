@@ -45,13 +45,18 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">MultiIterator</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>]</span>
+        <span class="name deprecated" title="Deprecated: (Since version 2.3.2) Use Iterator++. See http://stackoverflow.com/a/16315251/53495">MultiIterator</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>]</span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An iterator that iterates, serially, over the contents of multiple other
-iterators.
-</p></div><div class="toggleContainer block">
+iterators.</p><p><b>This class is no longer necessary.</b> Just use the <code>Iterator</code> operator
+<code>++</code>, as outlined in
+<a href="http://stackoverflow.com/a/16315251/53495" target="_blank">this StackOverflow answer</a>.
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.3.2)</i> Use Iterator++. See http://stackoverflow.com/a/16315251/53495</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.collection.Iterator">Iterator</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>], <span class="extype" name="scala.collection.TraversableOnce">TraversableOnce</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>], <span class="extype" name="scala.collection.GenTraversableOnce">GenTraversableOnce</span>[<span class="extype" name="grizzled.collection.MultiIterator.T">T</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
