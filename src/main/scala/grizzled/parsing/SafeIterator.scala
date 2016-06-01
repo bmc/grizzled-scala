@@ -101,6 +101,16 @@ object SafeIterator {
     */
   def apply[T](iterable: Iterable[T]): SafeIterator[T] =
     new SafeIterator(iterable)
+
+  /** Create a new `SafeIterator` from an `Iterator`.
+    *
+    * @param iterator  the `Iterator``
+    * @tparam T        the type of the `Iterable`
+    *
+    * @return the allocated `SafeIterator`
+    */
+  def apply[T](iterator: Iterator[T]): SafeIterator[T] =
+    new SafeIterator(iterator)
 }
 
 /** The `Pushback` trait can be mixed into an `SafeIterator`
@@ -127,13 +137,14 @@ trait Pushback[T] extends SafeIterator[T] {
     *
     * @return the count
     */
+  @deprecated("Will not be supported in future versions.", "2.4.0")
   override def totalRead: Int = super.totalRead - pushbackStack.length
 
   /** Push a single item back onto the stream.
     *
     * @param item  the item
     */
-  def pushback(item: T) = pushbackStack push item
+  def pushback(item: T): Unit = pushbackStack push item
 
   /** Push a list of items back onto the stream. The items are pushed
     * back in reverse order, so the items in the list should be in the order
@@ -151,5 +162,5 @@ trait Pushback[T] extends SafeIterator[T] {
     *
     * @param items  the items to push back.
     */
-  def pushback(items: List[T]) = pushbackStack.pushAll(items.reverse)
+  def pushback(items: List[T]): Unit = pushbackStack.pushAll(items.reverse)
 }

@@ -14,10 +14,11 @@ Version 2.4.0:
 * Fleshed out `grizzled.io.SourceReader` implementation and added unit test.
 * Converted `grizzled.string.WordWrapper` to be more functional (i.e., got
   rid of all `var` usages).
-* Renamed `IteratorStream` to `SafeIterator`, to avoid confusion with Scala
-  streams. `IteratorStream` is now a deprecated alias.
+* Renamed `IteratorStream` (in `grizzled.parsing`) to `SafeIterator`, to avoid
+  confusion with Scala streams. `IteratorStream` is now a deprecated alias.
 * Deprecated `IteratorStream.count()`, as its functionality is better handled
   by callers that care.
+* Added some unit tests for the classes in `grizzled.parsing`.
 * DOCS: Added package description for `grizzled.zip`.
 
 Version 2.3.1:
