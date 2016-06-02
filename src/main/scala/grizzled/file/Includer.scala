@@ -240,7 +240,7 @@ extends Iterator[String] {
             uri.getUserInfo,
             uri.getHost,
             uri.getPort,
-            FileUtil.dirname(uri.getPath),
+            uri.resolve(".").getPath,
             uri.getQuery,
             uri.getFragment)
   }
