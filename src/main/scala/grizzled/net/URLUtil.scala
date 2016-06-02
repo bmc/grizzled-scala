@@ -38,9 +38,9 @@
 package grizzled.net
 
 import grizzled.file.{util => FileUtil}
-
-import java.io.{OutputStream, InputStream, File, IOException}
+import java.io.{File, IOException, InputStream, OutputStream}
 import java.net.{URL => JavaURL}
+import java.nio.file.Paths
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}
@@ -178,6 +178,7 @@ object URLUtil {
     import java.io.{BufferedInputStream, BufferedOutputStream}
     import java.io.FileOutputStream
     import grizzled.io.Implicits.RichInputStream
+    import grizzled.file.Implicits.GrizzledFile
 
     def validateAndGetParentDir(path: File): Future[File] = {
       if (path.isDirectory) {
@@ -188,7 +189,7 @@ object URLUtil {
         )
       }
       else {
-        val dir = new File(FileUtil.dirname(pathOut.getAbsolutePath))
+        val dir = pathOut.dirname
         if ((! dir.exists) && (! dir.mkdirs())) {
           Future.failed(new IOException(
             s"Can't create target directory '$dir' or one of its parents."
@@ -299,20 +300,22 @@ object URLUtil {
   }
 
   private[net] def getOutputFile(url: URL): Try[File] = {
-    val urlPath = url.path.getOrElse("")
-    val extension = urlPath match {
+    // See http://stackoverflow.com/a/17870390/53495
+    val path = Paths.get(url.javaURL.toURI()).toFile()
+    val pathStr = path.getAbsolutePath
+    val extension = pathStr match {
       case ExtRegexp(pathNoExt, ext) => ext
       case _                         => ".dat"
     }
 
     Try {
-      urlPath(urlPath.length - 1) match {
+      pathStr.last match {
         case '/' =>
           File.createTempFile("urldownload", extension)
 
         case _   =>
           new File(FileUtil.joinPath(System.getProperty("java.io.tmpdir"),
-                                     FileUtil.basename(urlPath)))
+                                     FileUtil.basename(pathStr)))
       }
     }
   }
