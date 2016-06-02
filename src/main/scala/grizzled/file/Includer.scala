@@ -505,7 +505,7 @@ private[file] class IncludeSource(reader: Reader, val uri: URI) {
   val source = new BufferedReader(reader)
   var nextLine: Option[String] = None
 
-  val iterator = new AbstractIterator[String] {
+  val iterator = new Iterator[String] {
 
     def next(): String = {
       nextLine.map { s =>
@@ -514,7 +514,6 @@ private[file] class IncludeSource(reader: Reader, val uri: URI) {
       }
       .getOrElse(source.readLine)
     }
-
 
     def hasNext: Boolean = {
       try {
@@ -531,5 +530,8 @@ private[file] class IncludeSource(reader: Reader, val uri: URI) {
           false
       }
     }
+
+    def remove(): Unit =
+      throw new UnsupportedOperationException("remove() not supported")
   }
 }
