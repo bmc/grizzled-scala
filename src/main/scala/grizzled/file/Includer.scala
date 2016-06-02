@@ -192,8 +192,8 @@ extends Iterator[String] {
           val parentURI = getParent(curURI)
           val parentPath = parentURI.getPath
           val newPath = parentPath match {
-            case File.separator => s"$parentPath$inc"
-            case _              => s"$parentPath/$inc"
+            case s if s endsWith "/" => s"$parentPath$inc"
+            case _                   => s"$parentPath/$inc"
           }
 
           val newURI    = new URI(parentURI.getScheme,
