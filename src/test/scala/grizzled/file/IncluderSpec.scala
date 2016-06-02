@@ -8,6 +8,7 @@ import FileUtil.withTemporaryDirectory
 import grizzled.BaseSpec
 import grizzled.util.withResource
 
+import scala.sys.SystemProperties
 import scala.util.Success
 
 class IncluderSpec extends BaseSpec {
@@ -71,14 +72,13 @@ class IncluderSpec extends BaseSpec {
   }
 
   it should "read and include from an HTTP server" in {
+    val nl = (new SystemProperties).getOrElse("line.separator", "\n")
     val handlers = Vector(
       Handler("foo.txt", { req =>
         Response(ResponseCode.OK,
-          Some(
-            """|line 1
-               |%include "bar.txt"
-               |line 3""".stripMargin
-          )
+          Some(Array("line 1",
+                     """%include "bar.txt"""",
+                     "line 3").mkString(nl))
         )
       }),
       Handler("bar.txt", { req =>
