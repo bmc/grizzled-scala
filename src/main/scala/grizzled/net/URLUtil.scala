@@ -188,7 +188,7 @@ object URLUtil {
         )
       }
       else {
-        val dir = new File(FileUtil.dirname(pathOut.getCanonicalPath))
+        val dir = new File(FileUtil.dirname(pathOut.getAbsolutePath))
         if ((! dir.exists) && (! dir.mkdirs())) {
           Future.failed(new IOException(
             s"Can't create target directory '$dir' or one of its parents."
