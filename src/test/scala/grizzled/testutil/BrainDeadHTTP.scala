@@ -1,7 +1,7 @@
 package grizzled.testutil
 
 import java.io.{OutputStreamWriter, PrintWriter}
-import java.net.InetAddress
+import java.net.{BindException, InetAddress}
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -45,10 +45,10 @@ object BrainDeadHTTP {
     * ''n'' times.
     *
     * @param handlers server handlers
-    * @param retries  number of retries. Defaults to 5.
+    * @param retries  number of retries. Defaults to 20.
     * @param code     Code to run before shutting server down
     */
-  def withHTTPServer(handlers: Seq[Handler], retries: Int = 5)
+  def withHTTPServer(handlers: Seq[Handler], retries: Int = 20)
                     (code: Server => Unit): Unit = {
     def tryBind(n: Int): Server = {
       try {
@@ -57,11 +57,11 @@ object BrainDeadHTTP {
         server
       }
       catch {
-        case NonFatal(_) if n > 0 =>
-          tryBind(n - 1)
-
-        case NonFatal(e) =>
-          throw new Exception(s"Random port bind failed after $retries tries.")
+        case e: BindException =>
+          if (n > 0)
+            tryBind(n - 1)
+          else
+            throw new Exception(s"Random port bind failed after $retries tries.")
       }
     }
 
@@ -108,7 +108,7 @@ object BrainDeadHTTP {
     * @param bindPort Bind to the specified TCP port
     * @param handlers Sequence of handlers to process requests
     */
-  class Server(val bindPort: Int, handlers: Seq[Handler]) {
+  class Server(bindPort: Int, handlers: Seq[Handler]) {
 
     /** Create a server with only a single handler.
       *
@@ -121,7 +121,7 @@ object BrainDeadHTTP {
       *
       * @param handlers the handlers
       */
-    def this(handlers: Seq[Handler]) = this(Server.randomPort, handlers)
+    def this(handlers: Seq[Handler]) = this(0, handlers)
 
     /** Create a server that listens on a random port and has only one
       * handler.
@@ -129,6 +129,12 @@ object BrainDeadHTTP {
       * @param handler the handler
       */
     def this(handler: Handler) = this(Seq(handler))
+
+    /** Get the port on which the server is listening.
+      *
+      * @return The listen port
+      */
+    def listenPort = socket.getLocalPort
 
     import java.net._
 
@@ -224,13 +230,6 @@ object BrainDeadHTTP {
       result.content.foreach(w.print)
       w.flush()
     }
-  }
-
-  /** The companion object for the server.
-    */
-  object Server {
-    private val rng = new java.security.SecureRandom
-    def randomPort = rng.nextInt(100) + 10000
   }
 }
 

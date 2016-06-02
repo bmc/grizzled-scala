@@ -48,7 +48,7 @@ class URLUtilSpec extends BaseSpec {
 
   "download" should "download from a URL object" in {
     withHTTPServer(Seq(DownloadHandler)) { server =>
-      val url = URL(DownloadURL.replace("@PORT@", server.bindPort.toString)).get
+      val url = URL(DownloadURL.replace("@PORT@", server.listenPort.toString)).get
       val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
@@ -57,7 +57,7 @@ class URLUtilSpec extends BaseSpec {
 
   it should "download from a string URL" in {
     withHTTPServer(Seq(DownloadHandler)) { server =>
-      val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+      val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
       val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
@@ -71,7 +71,7 @@ class URLUtilSpec extends BaseSpec {
     withTemporaryDirectory("download") { dir =>
       val file = FileUtil.joinPath(dir.getPath, "lorem.txt")
       withHTTPServer(Seq(DownloadHandler)) { server =>
-        val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+        val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
         val fut = URLUtil.download(url, file)
         Await.result(fut, 10.seconds)
         Source.fromFile(file).mkString shouldBe Contents
@@ -83,7 +83,7 @@ class URLUtilSpec extends BaseSpec {
     import URLUtil._
 
     withHTTPServer(Seq(DownloadHandler)) { server =>
-      val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+      val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
       val t = withDownloadedFile(url, 10.seconds) { f =>
         f.exists shouldBe true
         Source.fromFile(f).mkString
@@ -103,7 +103,7 @@ class URLUtilSpec extends BaseSpec {
     })
 
     withHTTPServer(Seq(handler)) { server =>
-      val url = DownloadURL.replace("@PORT@", server.bindPort.toString)
+      val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
       val t = withDownloadedFile(url, 50.milliseconds) { f =>
         Source.fromFile(f).mkString
       }

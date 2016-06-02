@@ -62,7 +62,7 @@ class IncluderSpec extends BaseSpec {
       withHTTPServer(handlers) { server =>
         val input = createFile(dir, "main.txt",
           Array("main line 1",
-                s"""%include "http://localhost:${server.bindPort}/foo"""",
+                s"""%include "http://localhost:${server.listenPort}/foo"""",
                 "main line 3"))
         Includer(input).map(_.toVector) shouldBe Success(
           Vector("main line 1", "foo", "main line 3")
@@ -90,7 +90,7 @@ class IncluderSpec extends BaseSpec {
 
     val server = new Server(handlers)
     withHTTPServer(handlers) { server =>
-      val t = Includer(s"http://localhost:${server.bindPort}/foo.txt")
+      val t = Includer(s"http://localhost:${server.listenPort}/foo.txt")
                   .map(_.toVector)
       t shouldBe Success(Vector("line 1",
                                 "inside bar.txt",

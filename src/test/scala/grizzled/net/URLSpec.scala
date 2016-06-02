@@ -148,7 +148,7 @@ class URLSpec extends BaseSpec {
     }))
 
     withHTTPServer(handlers) { server =>
-      val r = URL(s"http://localhost:${server.bindPort}/foo.txt")
+      val r = URL(s"http://localhost:${server.listenPort}/foo.txt")
       r shouldBe success
       val url = r.get
       val t = url.openStream()

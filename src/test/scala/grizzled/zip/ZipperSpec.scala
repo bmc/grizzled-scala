@@ -227,9 +227,9 @@ class ZipperSpec extends BaseSpec {
       val absDir = dir.getAbsolutePath
       withHTTPServer(handlers) { server =>
         val z = Zipper()
-        val t1 = z.addURL(new URL(s"http://localhost:${server.bindPort}/foo.txt"))
+        val t1 = z.addURL(new URL(s"http://localhost:${server.listenPort}/foo.txt"))
         t1 shouldBe success
-        val t2 = t1.get.addURL(new URL(s"http://localhost:${server.bindPort}/bar.txt"))
+        val t2 = t1.get.addURL(new URL(s"http://localhost:${server.listenPort}/bar.txt"))
         t2 shouldBe success
         val fullZipper = t2.get
 
