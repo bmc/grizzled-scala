@@ -45,20 +45,20 @@ wartremoverErrors in (Compile, compile) ++= Seq(
 
 // Take a dependency and map its cross-compiled version, creating a new
 // dependency. Temporary, until Scala 2.12 is for real.
-/*
+
 def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
   dep cross CrossVersion.binaryMapped {
     case v if v startsWith "2.12" => "2.11"
     case v => v.split("""\.""").take(2).mkString(".")
   }
 }
-*/
+
 
 // ---------------------------------------------------------------------------
 // ScalaTest
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.0-RC1" % "test"
+  mappedDep("org.scalatest" %% "scalatest" % "3.0.0-RC1" % "test")
 )
 
 // ---------------------------------------------------------------------------
