@@ -245,7 +245,7 @@ object URLUtil {
     */
   def withDownloadedFile[T](url: String, timeout: Duration)(block: File => T)
                            (implicit ctx: ExecutionContext): Try[T] = {
-    for { u <- URL(url)
+    for { u   <- URL(url)
           res <- withDownloadedFile(u, timeout)(block) }
       yield res
   }

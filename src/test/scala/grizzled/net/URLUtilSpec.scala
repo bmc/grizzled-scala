@@ -1,7 +1,12 @@
 package grizzled.net
 
+import java.io.{File, FileWriter}
+import java.net.{URL => JavaURL}
+
+import grizzled.file.{util => fileutil}
+import fileutil.withTemporaryDirectory
 import grizzled.BaseSpec
-import grizzled.testutil.BrainDeadHTTP._
+import grizzled.util.withResource
 
 import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -40,15 +45,14 @@ class URLUtilSpec extends BaseSpec {
        |pariatur?
        |""".stripMargin
 
-  val DownloadHandler = Handler("thing.txt", { _ =>
-    Response(ResponseCode.OK, Some(Contents))
-  })
 
-  val DownloadURL = "http://localhost:@PORT@/thing.txt"
+  def urlForContents(dir: File, name: String): JavaURL = {
+    createTextFile(dir, name, Contents).toURI.toURL
+  }
 
   "download" should "download from a URL object" in {
-    withHTTPServer(Seq(DownloadHandler)) { server =>
-      val url = URL(DownloadURL.replace("@PORT@", server.listenPort.toString)).get
+    withTemporaryDirectory("URLUtil") { dir =>
+      val url = URL(urlForContents(dir, "foo.txt"))
       val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
@@ -56,34 +60,28 @@ class URLUtilSpec extends BaseSpec {
   }
 
   it should "download from a string URL" in {
-    withHTTPServer(Seq(DownloadHandler)) { server =>
-      val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
-      val fut = URLUtil.download(url)
+    withTemporaryDirectory("URLUtil") { dir =>
+      val urlString = urlForContents(dir, "bar.txt").toExternalForm
+      val fut = URLUtil.download(urlString)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
     }
   }
 
   it should "download to a file of my choosing" in {
-    import grizzled.file.{util => FileUtil}
-    import FileUtil.withTemporaryDirectory
-
     withTemporaryDirectory("download") { dir =>
-      val file = FileUtil.joinPath(dir.getPath, "lorem.txt")
-      withHTTPServer(Seq(DownloadHandler)) { server =>
-        val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
-        val fut = URLUtil.download(url, file)
-        Await.result(fut, 10.seconds)
-        Source.fromFile(file).mkString shouldBe Contents
-      }
+      val url = urlForContents(dir, "foobar.txt")
+      val file = fileutil.joinPath(dir.getAbsolutePath, "lorem.txt")
+      val fut = URLUtil.download(url, file)
+      Await.result(fut, 10.seconds)
+      Source.fromFile(file).mkString shouldBe Contents
     }
   }
 
   "withDownloadedFile" should "download synchronously" in {
     import URLUtil._
-
-    withHTTPServer(Seq(DownloadHandler)) { server =>
-      val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
+    withTemporaryDirectory("download") { dir =>
+      val url = urlForContents(dir, "foobar.txt")
       val t = withDownloadedFile(url, 10.seconds) { f =>
         f.exists shouldBe true
         Source.fromFile(f).mkString
@@ -92,26 +90,5 @@ class URLUtilSpec extends BaseSpec {
       t shouldBe success
       t.get shouldBe Contents
     }
-  }
-
-  it should "timeout if the server takes too long" in {
-    import URLUtil._
-
-    val handler = DownloadHandler.copy(handle = { _ =>
-      Thread.sleep(3000)
-      Response(ResponseCode.OK, Some(Contents))
-    })
-
-    withHTTPServer(Seq(handler)) { server =>
-      val url = DownloadURL.replace("@PORT@", server.listenPort.toString)
-      val t = withDownloadedFile(url, 50.milliseconds) { f =>
-        Source.fromFile(f).mkString
-      }
-
-      intercept[java.util.concurrent.TimeoutException] {
-        t.get
-      }
-    }
-
   }
 }

@@ -5,6 +5,9 @@ Version 2.4.1:
 * Various fixes for Windows, including:
     - Changed various classes to use use the `line.separator`
       property, rather than a hard-coded "\n", when adding line terminators.
+* Updated to ScalaTest 3.0.0-RC1.
+* Removed `BrainDeadHTTPServer` (used during testing) as it overly complicates
+  testing. `file:` URLs are now used instead.
 
 Version 2.4.0:
 

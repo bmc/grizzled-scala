@@ -2,26 +2,26 @@ package grizzled.file
 
 import java.io.{File, FileWriter, PrintWriter}
 
-import grizzled.testutil.BrainDeadHTTP._
-import grizzled.file.{util => FileUtil}
-import FileUtil.withTemporaryDirectory
+import grizzled.file.{util => fileutil}
+import fileutil.withTemporaryDirectory
 import grizzled.BaseSpec
 import grizzled.util.withResource
 
-import scala.sys.SystemProperties
 import scala.util.Success
 
 class IncluderSpec extends BaseSpec {
 
   "Includer" should "handle a file including another file" in {
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "outer.txt",
+      val input = createTextFile(dir, "outer.txt",
         Array("This is a normal line.",
               """%include "inner.txt"""",
-              "This is another normal line."))
-      createFile(dir, "inner.txt",
+              "This is another normal line.")
+      )
+      createTextFile(dir, "inner.txt",
         Array("Inner file line 1.",
-              "Inner file line 2."))
+              "Inner file line 2.")
+      )
       Includer(input.getPath).map(_.toVector) shouldBe
         Success(Vector("This is a normal line.",
                        "Inner file line 1.",
@@ -32,17 +32,19 @@ class IncluderSpec extends BaseSpec {
 
   it should "handle a file including another file including another file" in {
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "main.txt",
+      val input = createTextFile(dir, "main.txt",
         Array("main line 1",
               """%include "inner1.txt"""",
               "main line 3"))
-      createFile(dir, "inner1.txt",
+      createTextFile(dir, "inner1.txt",
         Array("inner 1.1",
               """%include "inner2.txt"""",
-              "inner 1.3"))
-      createFile(dir, "inner2.txt",
+              "inner 1.3")
+      )
+      createTextFile(dir, "inner2.txt",
         Array("inner 2.1",
-              "inner 2.2"))
+              "inner 2.2")
+      )
       Includer(input.getPath).map(_.toVector) shouldBe
         Success(Vector("main line 1",
                        "inner 1.1",
@@ -53,61 +55,18 @@ class IncluderSpec extends BaseSpec {
     }
   }
 
-  it should "allow a file to include from an HTTP server" in {
-    val handlers = Seq(
-      Handler("foo", { req => Response(ResponseCode.OK, Some("foo")) })
-    )
-
+  it should "handle an include from a URL" in {
     withTemporaryDirectory("incl") { dir =>
-      withHTTPServer(handlers) { server =>
-        val input = createFile(dir, "main.txt",
-          Array("main line 1",
-                s"""%include "http://localhost:${server.listenPort}/foo"""",
-                "main line 3"))
-        Includer(input).map(_.toVector) shouldBe Success(
-          Vector("main line 1", "foo", "main line 3")
-        )
-      }
-    }
-  }
-
-  it should "read and include from an HTTP server" in {
-    val nl = (new SystemProperties).getOrElse("line.separator", "\n")
-    val handlers = Vector(
-      Handler("foo.txt", { req =>
-        Response(ResponseCode.OK,
-          Some(Array("line 1",
-                     """%include "bar.txt"""",
-                     "line 3").mkString(nl))
-        )
-      }),
-      Handler("bar.txt", { req =>
-        Response(ResponseCode.OK,
-          Some("inside bar.txt")
-        )
-      })
-    )
-
-    val server = new Server(handlers)
-    withHTTPServer(handlers) { server =>
-      val t = Includer(s"http://localhost:${server.listenPort}/foo.txt")
-                  .map(_.toVector)
-      t shouldBe Success(Vector("line 1",
-                                "inside bar.txt",
-                                "line 3"))
-    }
-  }
-
-  it should "handle an include that uses a file:// URL" in {
-    withTemporaryDirectory("incl") { dir =>
-      val inner = createFile(dir, "inner1.txt",
+      val inner = createTextFile(dir, "inner1.txt",
         Array("inner 1",
-              "inner 2"))
+              "inner 2")
+      )
 
-      val input = createFile(dir, "main.txt",
+      val input = createTextFile(dir, "main.txt",
         Array("main line 1",
               s"""%include "${inner.toURI.toURL}"""",
-              "main line 3"))
+              "main line 3")
+      )
 
       Includer(input.getPath).map(_.toVector) shouldBe
         Success(Vector("main line 1",
@@ -119,7 +78,7 @@ class IncluderSpec extends BaseSpec {
 
   it should "abort with an exception on a direct recursive include" in {
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "main.txt", Array("""%include "main.txt""""))
+      val input = createTextFile(dir, "main.txt", Array("""%include "main.txt""""))
 
       intercept[IllegalStateException] {
         Includer(input.getPath).map(_.toVector).get
@@ -129,8 +88,8 @@ class IncluderSpec extends BaseSpec {
 
   it should "abort with an exception on an indirect recursive include" in {
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "main.txt", Array("""%include "inner.txt""""))
-      createFile(dir, "inner.txt", Array("""%include "main.txt""""))
+      val input = createTextFile(dir, "main.txt", Array("""%include "inner.txt""""))
+      createTextFile(dir, "inner.txt", Array("""%include "main.txt""""))
 
       intercept[IllegalStateException] {
         Includer(input.getPath).map(_.toVector).get
@@ -140,11 +99,11 @@ class IncluderSpec extends BaseSpec {
 
   it should "support an alternate include syntax" in {
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "main.txt",
+      val input = createTextFile(dir, "main.txt",
         Array("line 1", "#include 'foo.txt'", "#  include 'bar.txt'", "line 2")
       )
-      val foo = createFile(dir, "foo.txt", Array("foo"))
-      val bar = createFile(dir, "bar.txt", Array("bar"))
+      val foo = createTextFile(dir, "foo.txt", Array("foo"))
+      val bar = createTextFile(dir, "bar.txt", Array("bar"))
 
       val i = Includer(input, """^#\s*include\s*'(.*)'\s*$""".r)
       i.map(_.toVector) shouldBe Success(Vector("line 1", "foo", "bar", "line 2"))
@@ -153,11 +112,11 @@ class IncluderSpec extends BaseSpec {
 
   it should "support an alternate nesting level" in {
     withTemporaryDirectory("incl") { dir =>
-      val input = createFile(dir, "main.txt",
+      val input = createTextFile(dir, "main.txt",
         Array("line 1", """%include "foo.txt"""", "line 2")
       )
-      val foo = createFile(dir, "foo.txt", Array("""%include "bar.txt""""))
-      val bar = createFile(dir, "bar.txt", Array("bar"))
+      val foo = createTextFile(dir, "foo.txt", Array("""%include "bar.txt""""))
+      val bar = createTextFile(dir, "bar.txt", Array("bar"))
 
       // The default should work.
       Includer(input).map(_.toVector) shouldBe
@@ -172,20 +131,5 @@ class IncluderSpec extends BaseSpec {
   // --------------------------------------------------------------------------
   // Helpers
   // --------------------------------------------------------------------------
-
-    /** Create a file in a given directory, with the specified contents.
-    *
-    * @param dir    the directory
-    * @param file   the file
-    * @param lines  the lines in the file
-    * @return the created file
-    */
-  private def createFile(dir: File, file: String, lines: Array[String]): File = {
-    val path = FileUtil.joinPath(dir.getPath, file)
-    withResource(new PrintWriter(new FileWriter(path))) { w =>
-      lines.foreach(w.println)
-    }
-    new File(path)
-  }
 
 }

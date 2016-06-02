@@ -1,8 +1,12 @@
 package grizzled.net
 
-import java.net.{BindException, MalformedURLException, URISyntaxException}
+import java.io.{File, FileWriter}
+import java.net.{MalformedURLException, URISyntaxException}
 
 import grizzled.BaseSpec
+import grizzled.util.withResource
+import grizzled.file.util.withTemporaryDirectory
+import grizzled.file.{util => fileutil}
 
 import scala.io.Source
 
@@ -141,20 +145,20 @@ class URLSpec extends BaseSpec {
   }
 
   "URL.openStream" should "open a readable InputStream for contents" in {
-    import grizzled.testutil.BrainDeadHTTP._
-
-    val handlers = Seq(Handler("foo.txt", { _ =>
-          Response(ResponseCode.OK, Some("foo\n"))
-    }))
-
-    withHTTPServer(handlers) { server =>
-      val r = URL(s"http://localhost:${server.listenPort}/foo.txt")
-      r shouldBe success
-      val url = r.get
-      val t = url.openStream()
+    withTemporaryDirectory("URL") { dir =>
+      val abs = dir.getAbsolutePath
+      val file = new File(fileutil.joinPath(abs, "foo.txt"))
+      val contents = Array("foo", "bar").mkString(lineSep)
+      withResource(new FileWriter(file)) { w =>
+        w.write(contents)
+      }
+      val url = file.toURI.toURL
+      val t = URL(url).openStream()
       t shouldBe success
-      val source = Source.fromInputStream(t.get)
-      source.mkString shouldBe "foo\n"
+      withResource(t.get) { is =>
+        val source = Source.fromInputStream(t.get)
+        source.mkString shouldBe contents
+      }
     }
   }
 }

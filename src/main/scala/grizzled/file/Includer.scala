@@ -38,7 +38,7 @@
 package grizzled.file
 
 import grizzled.file.{util => FileUtil}
-import java.io.{File, FileWriter}
+import java.io._
 
 import scala.io.Source
 import scala.annotation.tailrec
@@ -46,6 +46,9 @@ import scala.util.Try
 import scala.util.matching.Regex
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
 
+import grizzled.io.SourceReader
+
+import scala.collection.AbstractIterator
 import scala.sys.SystemProperties
 
 /** Process "include" directives in files, returning an iterator over
@@ -179,7 +182,10 @@ extends Iterator[String] {
       line match {
         case includeRegex(inc) if isURL(inc) =>
           val url = new URL(inc)
-          sourceStack.push(new IncludeSource(Source.fromURL(url), url.toURI))
+          sourceStack.push(
+            new IncludeSource(new InputStreamReader(url.openStream(), "UTF-8"),
+                              url.toURI)
+          )
           processNext
 
         case includeRegex(inc) =>
@@ -205,8 +211,8 @@ extends Iterator[String] {
                                   parentURI.getFragment)
 
           val source = Option(newURI.getScheme).getOrElse("file") match {
-            case "file" => Source.fromFile(newURI.getPath)
-            case _      => Source.fromURL(newURI.toURL)
+            case "file" => new FileReader(newURI.getPath)
+            case _      => new InputStreamReader(newURI.toURL.openStream(), "UTF-8")
           }
 
           sourceStack.push(new IncludeSource(source, newURI))
@@ -311,7 +317,7 @@ object Includer {
             includeRegex: Regex,
             maxNesting:   Int): Try[Includer] = {
     Try {
-      new Includer(new IncludeSource(Source.fromFile(file), file.toURI),
+      new Includer(new IncludeSource(new FileReader(file), file.toURI),
                    includeRegex,
                    maxNesting)
     }
@@ -337,7 +343,7 @@ object Includer {
             includeRegex: Regex,
             maxNesting:   Int): Try[Includer] = {
     Try {
-      new Includer(new IncludeSource(source, new URI(".")),
+      new Includer(new IncludeSource(SourceReader(source), new URI(".")),
                    includeRegex,
                    maxNesting)
     }
@@ -447,7 +453,7 @@ object Includer {
       new URL(pathOrURI)
     }
     .map { url: URL =>
-      val source = Source.fromURL(url)
+      val source = new InputStreamReader(url.openStream(), "UTF-8")
       new Includer(new IncludeSource(source, url.toURI), includeRegex, maxNesting)
     }
     .recoverWith {
@@ -495,6 +501,35 @@ object Includer {
   * Used to maintain the stack of sources being read and to keep track of
   * the underlying URI.
   */
-private[file] class IncludeSource(val source: Source, val uri: URI) {
-  val iterator = source.getLines()
+private[file] class IncludeSource(reader: Reader, val uri: URI) {
+  val source = new BufferedReader(reader)
+  var nextLine: Option[String] = None
+
+  val iterator = new AbstractIterator[String] {
+
+    def next(): String = {
+      nextLine.map { s =>
+        nextLine = None
+        s
+      }
+      .getOrElse(source.readLine)
+    }
+
+
+    def hasNext: Boolean = {
+      try {
+        if (nextLine.isDefined)
+          true
+        else {
+          nextLine = Option(source.readLine)
+          nextLine.isDefined
+        }
+      }
+      catch {
+        case _: IOException =>
+          reader.close()
+          false
+      }
+    }
+  }
 }

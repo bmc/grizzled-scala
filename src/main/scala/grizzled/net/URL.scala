@@ -113,7 +113,6 @@ final case class URL(protocol: String,
     * @return the string
     */
   def toExternalForm = javaURL.toExternalForm
-
 }
 
 /** Companion object, adding some functions that aren't available in the

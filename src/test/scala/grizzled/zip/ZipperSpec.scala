@@ -5,9 +5,7 @@ import grizzled.file.{util => fileutil}
 import fileutil.withTemporaryDirectory
 import grizzled.file.Implicits.GrizzledFile
 import grizzled.BaseSpec
-import grizzled.testutil.BrainDeadHTTP._
 import java.io._
-import java.net.URL
 import java.util.zip.ZipFile
 
 import scala.annotation.tailrec
@@ -204,9 +202,7 @@ class ZipperSpec extends BaseSpec {
         ("b/c/d/hello.txt", barContents)
       )
 
-      makeFiles(absDir, filesToCreate)
-
-      val files = filesToCreate.map(_._1)
+      val files = makeFiles(absDir, filesToCreate)
       val t = Zipper(files, flatten = true)
 
       t shouldBe failure
@@ -214,32 +210,24 @@ class ZipperSpec extends BaseSpec {
   }
 
   it should "accept an entry from a URL" in {
-    val handlers = Vector(
-      Handler("foo.txt", { req =>
-        Response(ResponseCode.OK, Some(fooContents))
-      }),
-      Handler("bar.txt", { req =>
-        Response(ResponseCode.OK, Some(barContents))
-      })
-    )
-
     withTemporaryDirectory("Zipper") { dir =>
       val absDir = dir.getAbsolutePath
-      withHTTPServer(handlers) { server =>
-        val z = Zipper()
-        val t1 = z.addURL(new URL(s"http://localhost:${server.listenPort}/foo.txt"))
-        t1 shouldBe success
-        val t2 = t1.get.addURL(new URL(s"http://localhost:${server.listenPort}/bar.txt"))
-        t2 shouldBe success
-        val fullZipper = t2.get
+      val foo = createTextFile(dir, "foo.txt", fooContents)
+      val bar = createTextFile(dir, "bar.txt", barContents)
 
-        val zipPath = new File(fileutil.joinPath(absDir, "outurl.zip"))
-        fullZipper.writeZip(zipPath) shouldBe success
+      val z = Zipper()
+      val t1 = z.addURL(foo.toURI.toURL, flatten = true)
+      t1 shouldBe success
+      val t2 = t1.get.addURL(bar.toURI.toURL, flatten = true)
+      t2 shouldBe success
+      val fullZipper = t2.get
 
-        val zipFile = new ZipFile(zipPath)
-        readEntryAsChars(zipFile, "foo.txt") shouldBe fooContents
-        readEntryAsChars(zipFile, "bar.txt") shouldBe barContents
-      }
+      val zipPath = new File(fileutil.joinPath(absDir, "outurl.zip"))
+      fullZipper.writeZip(zipPath) shouldBe success
+
+      val zipFile = new ZipFile(zipPath)
+      readEntryAsChars(zipFile, "foo.txt") shouldBe fooContents
+      readEntryAsChars(zipFile, "bar.txt") shouldBe barContents
     }
   }
 
@@ -516,8 +504,9 @@ class ZipperSpec extends BaseSpec {
     buf
   }
 
-  def makeFiles(directory: String, pathsAndContents: Array[(String, String)]): Unit = {
-    for ((path, contents) <- pathsAndContents) {
+  def makeFiles(directory:        String,
+                pathsAndContents: Array[(String, String)]): Array[File] = {
+    for ((path, contents) <- pathsAndContents) yield {
       makeFile(directory, path, contents)
     }
   }
