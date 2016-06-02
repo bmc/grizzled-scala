@@ -41,6 +41,8 @@ import scala.collection.immutable.LinearSeq
 import scala.language.implicitConversions
 import java.util.{Collection => JCollection, Iterator => JIterator}
 
+import scala.sys.SystemProperties
+
 /** Enrichment classes for collections.
   */
 object Implicits {
@@ -80,6 +82,8 @@ object Implicits {
       import scala.collection.mutable.ArrayBuffer
       import grizzled.math.util.{max => maxnum}
 
+      val lineSep = (new SystemProperties).getOrElse("line.separator", "\n")
+
       val buf = new ArrayBuffer[Char]
 
       // Lay them out in columns. Simple-minded for now.
@@ -92,7 +96,7 @@ object Implicits {
         val padding = " " * (colSize - s.length)
         buf ++= (s + padding)
         if ((count % colsPerLine) == 0)
-          buf += '\n'
+          buf ++= lineSep
       }
 
       buf mkString ""
