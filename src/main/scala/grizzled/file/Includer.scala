@@ -170,8 +170,6 @@ extends Iterator[String] {
       }
     }
 
-    import grizzled.file.{util => futil}
-
     @tailrec def processNext: String = {
       val line = nextFromStack
 
@@ -194,8 +192,8 @@ extends Iterator[String] {
           val parentURI = getParent(curURI)
           val parentPath = parentURI.getPath
           val newPath = parentPath match {
-            case "/" => s"$parentPath$inc"
-            case _   => s"$parentPath/$inc"
+            case File.separator => s"$parentPath$inc"
+            case _              => s"$parentPath/$inc"
           }
 
           val newURI    = new URI(parentURI.getScheme,
