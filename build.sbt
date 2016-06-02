@@ -58,7 +58,7 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 // ScalaTest
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.0-RC1" % "test"
 )
 
 // ---------------------------------------------------------------------------
