@@ -38,6 +38,7 @@
 package grizzled.string
 
 import scala.annotation.tailrec
+import scala.sys.SystemProperties
 
 /** Wraps strings on word boundaries to fit within a proscribed output
   * width. The wrapped string may have a prefix or not; prefixes are useful
@@ -107,6 +108,7 @@ final case class WordWrapper(wrapWidth:    Int = 79,
   require(Option(prefix).isDefined) // null check
 
   private val prefixLength = wordLen(prefix)
+  private val lineSep = (new SystemProperties).getOrElse("line.separator", "\n")
 
   /** Wrap a string, using the wrap width, prefix, indentation and indentation
     * character that were specified to the `WordWrapper` constructor.
@@ -172,17 +174,17 @@ final case class WordWrapper(wrapWidth:    Int = 79,
                                           prefix,
                                           Vector.empty[String])
       if (lineOut.nonEmpty)
-        lineOut.mkString("\n").rtrim
+        lineOut.mkString(lineSep).rtrim
       else
         ""
     }
 
-    val lines = s.split("\n")
+    val lines = s.split(lineSep)
     buf += wrapOneLine(lines(0), prefix)
     for (line <- lines.drop(1))
       buf += wrapOneLine(line, prefixIndentChars)
 
-    buf mkString "\n"
+    buf mkString lineSep
   }
 
   private def wordLen(word: String) = word.filter(! ignore.contains(_)).length
