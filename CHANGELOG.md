@@ -3,10 +3,8 @@
 Version 2.4.1:
 
 * Various fixes for Windows, including:
-    - Fixed `grizzled.string.WordWrapper` to use the `line.separator`
-      property, rather than a hard-coded "\n", to wrap lines.
-    - Changes `GrizzledLinearSeq` to use the `line.separator` property
-      to wrap lines.
+    - Changed various classes to use use the `line.separator`
+      property, rather than a hard-coded "\n", when adding line terminators.
 
 Version 2.4.0:
 

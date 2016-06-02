@@ -38,15 +38,15 @@
 package grizzled.file
 
 import grizzled.file.{util => FileUtil}
-
-import java.io.{FileWriter, File}
+import java.io.{File, FileWriter}
 
 import scala.io.Source
 import scala.annotation.tailrec
 import scala.util.Try
 import scala.util.matching.Regex
+import java.net.{MalformedURLException, URI, URISyntaxException, URL}
 
-import java.net.{URL, MalformedURLException, URI, URISyntaxException}
+import scala.sys.SystemProperties
 
 /** Process "include" directives in files, returning an iterator over
   * lines from the flattened files.
@@ -215,8 +215,8 @@ extends Iterator[String] {
           processNext
 
         case _ =>
-          if (line.endsWith("\n"))
-            line.substring(0, line.length - 1)
+          if (line endsWith Includer.lineSep)
+            line.substring(0, line.length - Includer.lineSep.length)
           else
             line
       }
@@ -259,6 +259,8 @@ object Includer {
   /** The default maximum nesting level for includes.
     */
   val DefaultMaxNesting   = 100
+
+  private val lineSep = (new SystemProperties).getOrElse("line.separator", "\n")
 
   /** Create an includer from a `java.io.File`, using the default values for
     * the `maxNesting` and `includeRegex` parameters.
@@ -484,7 +486,7 @@ object Includer {
         fileOut.deleteOnExit()
 
         withResource(new FileWriter(fileOut)) { out =>
-          includer.foreach(s => out.write(s + "\n"))
+          includer.foreach(s => out.write(s + lineSep))
         }
 
         fileOut.getAbsolutePath
