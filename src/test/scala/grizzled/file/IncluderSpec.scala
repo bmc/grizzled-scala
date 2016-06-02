@@ -106,7 +106,7 @@ class IncluderSpec extends BaseSpec {
 
       val input = createFile(dir, "main.txt",
         Array("main line 1",
-              s"""%include "file://${inner.getAbsolutePath}"""",
+              s"""%include "${inner.toURI.toURL}"""",
               "main line 3"))
 
       Includer(input.getPath).map(_.toVector) shouldBe
