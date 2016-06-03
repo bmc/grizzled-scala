@@ -730,7 +730,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
 
       val components = new File(path).dirname.split
       val subdirs = for (i <- components.indices)
-        yield fileutil.joinPath(components.slice(0, i + 1): _*)
+        yield components.slice(0, i + 1).mkString("/")
 
       makeNext(subdirs.toList, existing)
     }
