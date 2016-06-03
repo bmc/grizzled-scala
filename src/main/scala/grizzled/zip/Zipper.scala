@@ -255,59 +255,17 @@ class Zipper private(private val items:           Map[String, ZipSource],
     * '''Note''': The URL is not validated (i.e., no connection is made) until
     * you call `writeZip()` or `writeJar()`.
     *
-    * @param url  the URL to the resource to be added
+    * @param url     the URL to the resource to be added
+    * @param zipPath the path within the zip file for the entry
     *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def addURL(url: JavaURL): Try[Zipper] = addURL(url, flatten = false)
-
-  /** Add a `java.net.URL` to the `Zipper`. The path in the zip file will be
-    * taken from the path component of the URL, and all directories will be
-    * stripped from the path. That means the URL ''must'' have a file name
-    * component. For instance, if you add the URL `http://www.example.com/`,
-    * you'll get an error, because the path component is "/", and the
-    * corresponding relative path is "". In other words, `Zipper` does ''not''
-    * add `index.html` for you automatically. A URL like
-    * `http://www.example.com/index.html` will work fine, resulting in
-    * `index.html` being added to the resulting zip file. Using this method to
-    * add `http://www.example.com/music/My-Song.mp3` will write
-    * `music/My-Song.mp3` to the zip or jar file, if `flatten` is `false`; if
-    * `flatten` is `true`, `My-Song.mp3` will be written.
-    *
-    * '''Note''': The URL is not validated (i.e., no connection is made) until
-    * you call `writeZip()` or `writeJar()`.
-    *
-    * @param url      the URL to the resource to be added
-    * @param flatten  whether or not to flatten the URL to a simple file name
-    *                 to create the zip path
-    *
-    * @return A `Success` with a new `Zipper` object, on success. A
-    *         `Failure` on error. The original `Zipper` is not modified.
-    */
-  def addURL(url: JavaURL, flatten: Boolean): Try[Zipper] = {
+  def addURL(url: JavaURL, zipPath: String): Try[Zipper] = {
     addItem(item          = URLSource(url),
-            path          = url.getPath,
-            flatten       = flatten,
+            path          = zipPath,
+            flatten       = false,
             forceRoot     = Some("/"))
-  }
-
-  /** Add a `grizzled.net.URL` to the `Zipper`. This method is just
-    * shorthand for:
-    *
-    * {{{
-    * val gurl = grizzled.net.URL(...)
-    * zipper.addURL(gurl.javaURL, flatten = ...)
-    * }}}
-    *
-    * @param url      the URL to the resource to be added
-    * @param flatten  whether or not to flatten the URL to a simple file name
-    *
-    * @return A `Success` with a new `Zipper` object, on success. A
-    *         `Failure` on error. The original `Zipper` is not modified.
-    */
-  def addURL(url: grizzled.net.URL, flatten: Boolean): Try[Zipper] = {
-    addURL(url.javaURL, flatten)
   }
 
   /** Add a `grizzled.net.URL` to the `Zipper`. This method is just
@@ -318,12 +276,15 @@ class Zipper private(private val items:           Map[String, ZipSource],
     * zipper.addURL(gurl.javaURL)
     * }}}
     *
-    * @param url  the URL to the resource to be added
+    * @param url     the URL to the resource to be added
+    * @param zipPath the path within the zip file for the entry
     *
     * @return A `Success` with a new `Zipper` object, on success. A
     *         `Failure` on error. The original `Zipper` is not modified.
     */
-  def addURL(url: grizzled.net.URL): Try[Zipper] = addURL(url.javaURL)
+  def addURL(url: grizzled.net.URL, zipPath: String): Try[Zipper] = {
+    addURL(url.javaURL, zipPath)
+  }
 
   /** Add a `scala.io.Source` to the `Zipper`, using the specified path in
     * the zip file.
@@ -463,7 +424,8 @@ class Zipper private(private val items:           Map[String, ZipSource],
     addItem(BytesSource(bytes), zipPath, flatten = false)
   }
 
-  /** Recursively add all the files in a directory to the `Zipper`.
+  /** Recursively add all the files in a directory to the `Zipper`. Does not
+    * currently work properly on Windows.
     *
     * @param dir       the directory, which must exist
     * @param strip     optional leading path to strip. If not specified,
@@ -934,7 +896,7 @@ object Zipper {
   def apply(files: Array[File], flatten: Boolean): Try[Zipper] = {
     val toAdd = files.map { f =>
       if (flatten)
-        (f, f.getName)
+        (f, fileutil.basename(f.getPath))
       else
         (f, f.getPath)
     }
@@ -961,7 +923,7 @@ object Zipper {
         case Nil => Success(z)
         case (f, p) :: rest =>
           // Match match, not map, to ensure tail-recursion.
-          z.addFile(f, p) match {
+          z.addFile(f, p.replace(File.pathSeparatorChar, '/')) match {
             case Failure(ex) => Failure(ex)
             case Success(z2) => addNext(rest, z2)
           }
