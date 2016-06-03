@@ -11,7 +11,6 @@ Version 2.4.1:
 * Removed `BrainDeadHTTPServer` (used during testing) as it overly complicates
   testing. `file:` URLs are now used instead.
 
-
 Version 2.4.0:
 
 * Removed use of `asInstanceOf` in `grizzled.io.Implicits.RichReader` and
