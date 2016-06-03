@@ -92,10 +92,12 @@ trait ValueConverter[T] {
   * @param exception a nested exception
   */
 @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
+@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 class ConfigurationException(val message:   String,
                              val exception: Throwable = null)
   extends Exception(message, exception)
 
+@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 object ConfigurationException {
   def apply(message: String) =
     new ConfigurationException(message)
@@ -107,6 +109,7 @@ object ConfigurationException {
   * and option.
   */
 @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
+@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 class ConfigurationOptionException(message:     String,
                                    val section: String,
                                    val option:  String,
@@ -116,6 +119,12 @@ class ConfigurationOptionException(message:     String,
 }
 
 /** An INI-style configuration file parser.
+  *
+  * '''WARNING: This class is deprecated.''' If you're looking for a decent
+  * configuration syntax, use YAML or
+  * [[https://github.com/typesafehub/config HOCON]].
+  *
+  * '''Documentation is for historical purposes only.'''
   *
   * `Configuration` implements an in-memory store for a configuration file
   * whose syntax is reminiscent of classic Windows .INI files, though with
@@ -392,6 +401,7 @@ class ConfigurationOptionException(message:     String,
   *                            functions, like `get()`, that return `Option`
   *                            values).
   */
+@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 final class Configuration private[config](
   private val contents:             Map[String, Map[String, Value]],
   private val sectionNamePattern:   Regex,
@@ -979,9 +989,8 @@ final class Configuration private[config](
 /**
   * Companion object for the `Configuration` class
   */
+@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 object Configuration {
-  import java.io.File
-
   final val DefaultSectionNamePattern = """([a-zA-Z0-9_]+)""".r
   final val DefaultCommentPattern     = """^\s*(#.*)$""".r
 
@@ -1016,7 +1025,6 @@ object Configuration {
     *
     * @return `Right(config)` on success, `Left(error)` on error.
     */
-  @deprecated("Use Configuration.read(), instead.", "2.2.0")
   def apply(source:              Source,
             sectionNamePattern:  Regex = Configuration.DefaultSectionNamePattern,
             commentPattern:      Regex = Configuration.DefaultCommentPattern,
@@ -1110,7 +1118,6 @@ object Configuration {
     *
     * @return `Right[Configuration]` on success, `Left(error)` on error.
     */
-  @deprecated("Use Configuration.read(), instead.", "2.2.0")
   def apply(source: Source, sections: Map[String, Map[String, String]]):
     Either[String, Configuration] = {
 
@@ -1181,7 +1188,6 @@ object Configuration {
     *
     * @return `Right(config)` on success, `Left(error)` on error.
     */
-  @deprecated("Use Configuration.read(), instead.", "2.2.0")
   def apply(source: Source,
             sections: Map[String, Map[String, String]],
             sectionNamePattern: Regex,
@@ -1376,12 +1382,10 @@ object Configuration {
     val RawAssignment    = ("""^\s*""" + VariableNameString + """\s*->\s*(.*)$""").r
     val Assignment       = ("""^\s*""" + VariableNameString + """\s*[:=]\s*(.*)$""").r
 
-
     def processLine(line: String,
                     curSection: Option[String],
                     curMap: Map[String, Map[String, Value]]):
       Try[(Option[String], Map[String, Map[String, Value]])] = {
-
       line match {
         case CommentLine(_) => Success((curSection, curMap))
 
@@ -1400,9 +1404,11 @@ object Configuration {
           Failure(ConfigurationException(s"""Bad section name: "$name"."""))
 
         case Assignment(optionName, value) =>
+          println(s"  ... $optionName=$value, curSection=$curSection")
           curSection.map { sectionName =>
             val sectionMap = curMap.getOrElse(sectionName, Map.empty[String, Value])
             val newSection = sectionMap + (optionName -> Value(value))
+            println(s"  ...newSection=$newSection")
             Success((curSection, curMap ++ Map(sectionName -> newSection)))
           }.
           getOrElse(
@@ -1439,9 +1445,15 @@ object Configuration {
       Try[Map[String, Map[String, Value]]] = {
 
       if (lines.hasNext) {
-        processLine(lines.next, curSection, curMap) match {
-          case Success((section, map)) => processLines(lines, section, map)
-          case Failure(ex)             => Failure(ex)
+        val h = lines.next
+
+        processLine(h, curSection, curMap) match {
+          case Success((section, map)) =>
+            if (lines.hasNext)
+              processLines(lines, section, curMap ++ map)
+            else
+              Success(curMap ++ map)
+          case Failure(ex) => Failure(ex)
         }
       }
       else {
@@ -1449,8 +1461,8 @@ object Configuration {
       }
     }
 
-    processLines(new BackslashContinuedLineIterator(Includer(source).get), None,
-                 Map.empty[String, Map[String, Value]])
+    val it = new BackslashContinuedLineIterator(Includer(source).get)
+    processLines(it, None, Map.empty[String, Map[String, Value]])
   }
 
 }

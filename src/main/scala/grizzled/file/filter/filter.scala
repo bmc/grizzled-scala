@@ -40,6 +40,7 @@ import grizzled.string.Implicits.String._
 
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
+import scala.sys.SystemProperties
 
 /** Assemble input lines, honoring backslash escapes for line continuation.
   * `BackslashContinuedLineIterator` takes an iterator over lines of
@@ -70,23 +71,13 @@ import scala.collection.mutable.ArrayBuffer
   */
 class BackslashContinuedLineIterator(val source: Iterator[String])
 extends Iterator[String] {
-  // Match this in reverse. Makes it easier for the backslashes to do a
-  // greedy match.
-  private val ReversedContinuedLine = """^(\\+)(.*)$""".r
-
-  private val buf = new ArrayBuffer[Char]
-
-  /** Alternate constructor that takes a `Source` object.
-    *
-    * @param source source from which to read lines
-    */
-  def this(source: Source) = this(source.getLines())
+  private val lineSep = (new SystemProperties).getOrElse("line.separator", "\n")
 
   /** Determine whether there's any input remaining.
     *
     * @return `true` if input remains, `false` if not
     */
-  def hasNext: Boolean = source.hasNext || buf.nonEmpty
+  def hasNext: Boolean = source.hasNext
 
   /** Get the next logical line of input, which may represent a concatenation
     * of physical input lines. Any trailing newlines are stripped.
@@ -94,52 +85,20 @@ extends Iterator[String] {
     * @return the next input line
     */
   def next: String = {
-    def makeLine(line: String): String = {
-      if (buf.nonEmpty) {
-        val res = (buf mkString "") + line
-        buf.clear()
-        res
-      }
-
-      else {
-        line
-      }
-    }
 
     import scala.annotation.tailrec
 
-    @tailrec def readNext: String = {
-      if (! source.hasNext) {
-        assert(buf.nonEmpty)
-        val res = buf mkString ""
-        buf.clear()
-        res
-      }
+    @tailrec def readNext(buf: String): String = {
 
-      else {
-        val line = source.next.chomp // chomp() is in GrizzledString
-        // Would like to use "match" here, but the ReversedContinuedLine
-        // regex doesn't work as an extractor. I should figure out why...
-        val m = ReversedContinuedLine.findFirstMatchIn(line.reverse)
-
-        // Odd number of backslashes at the end of a line means
-        // it's a continuation line.
-        if (m.isEmpty)
-          makeLine(line)
-
-        else if (m.exists(x => (x.group(1).length % 2) == 0))
-          makeLine(line)
-
-        else {
-          m.foreach { x =>
-            buf ++= x.group(2).reverse
-          }
-
-          readNext
-        }
+      val l = source.next
+      l match {
+        case line if line.lastOption == Some('\\') =>
+          readNext(buf + line.dropRight(1))
+        case line =>
+          buf + line
       }
     }
 
-    readNext
+    readNext("")
   }
 }

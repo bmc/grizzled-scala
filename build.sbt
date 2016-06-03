@@ -58,8 +58,10 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 // ScalaTest
 
 libraryDependencies ++= Seq(
-  mappedDep("org.scalatest" %% "scalatest" % "3.0.0-RC1" % "test")
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
+
+parallelExecution in Test := true
 
 // ---------------------------------------------------------------------------
 // Other tasks
