@@ -63,14 +63,14 @@ paths to relative paths by stripping any leading &quot;file system mount points.
 On Unix-like systems, this means stripping the leading &quot;/&quot;; on Windows, it
 means stripping any leading drive letter and the leading &quot;\&quot;. (See
 java.io.File.listRoots() for more information.) For instance, if you're not
-flattening pathnames, and you addFile <code>C:\Temp\hello.txt</code> to a <code>Zipper</code> on
+flattening pathnames, and you add <code>C:\Temp\hello.txt</code> to a <code>Zipper</code> on
 Windows, the <code>Zipper</code> will strip the <code>C:\</code>, adding <code>Temp/hello.txt</code>. to the
 zip or jar file. If you're on a Unix-like system, including Mac OS X, and
-you addFile <code>/tmp/foo/bar.txt</code>, the <code>Zipper</code> will addFile <code>tmp/foo/bar.txt</code> to the
-file.</p><h4>Directories</h4><p>You can explicitly addFile directory entries to a <code>Zipper</code>, using
+you add <code>/tmp/foo/bar.txt</code>, the <code>Zipper</code> will add <code>tmp/foo/bar.txt</code> to the
+file.</p><h4>Directories</h4><p>You can explicitly add directory entries to a <code>Zipper</code>, using
 <code>addZipDirectory()</code>. When you're not flattening entries, a <code>Zipper</code> object will
 also ensure that any intermediate directories in a pathname are created in
-the zip file. For instance, if you addFile file <code>/tmp/foo/bar/baz.txt</code> to a
+the zip file. For instance, if you add file <code>/tmp/foo/bar/baz.txt</code> to a
 <code>Zipper</code>, without flattening it, the <code>Zipper</code> will create the following
 entries in the underlying zip file:</p><ul><li><code>tmp</code> (directory)</li><li><code>tmp/foo</code> (directory)</li><li><code>tmp/foo/bar</code> (directory)</li><li><code>tmp/foo/bar/baz.txt</code> (the entry)</li></ul><p>If you use the JDK's zip or jar classes directly, you have to create those
 intermediate directory entries yourself. In addition, you have to be careful
@@ -88,7 +88,7 @@ zipper.addFile(<span class="lit">"/tmp/foo/bar.txt"</span>).addFile(<span class=
                       z2 <span class="kw">&lt;-</span> z1.addFile(<span class="lit">"/tmp/baz.txt"</span>)
                       z3 <span class="kw">&lt;-</span> z2.addFile(<span class="lit">"hello.txt"</span>) }
                 <span class="kw">yield</span> z3
-<span class="cmt">// newZipper is a Try[Zipper]</span></pre><p>If you're trying to addFile a collection of objects, a <code>for</code> comprehension
+<span class="cmt">// newZipper is a Try[Zipper]</span></pre><p>If you're trying to add a collection of objects, a <code>for</code> comprehension
 can be problematic. If you're not averse to using a local <code>var</code>, you
 can just use a traditional imperative loop:</p><pre><span class="kw">val</span> zipper = Zipper()
 <span class="kw">var</span> z = zipper
@@ -96,12 +96,12 @@ can just use a traditional imperative loop:</p><pre><span class="kw">val</span> 
 
 <span class="kw">for</span> (path <span class="kw">&lt;-</span> paths) {
   <span class="kw">val</span> t = z.addFile(path)
-  z = t.get <span class="cmt">// will throw an exception if the addFile failed</span>
+  z = t.get <span class="cmt">// will throw an exception if the add failed</span>
 }</pre><p>You can also avoid a <code>var</code> using <code>foldLeft()</code>, though you still have to
 contend with a thrown exception. (You can always wrap the code in a <code>Try</code>.)</p><pre><span class="kw">val</span> zipper = Zipper()
 <span class="kw">val</span> paths: <span class="std">List</span>[<span class="std">String</span>] = ...
 paths.foldLeft(zipper) { <span class="kw">case</span> (z, path) <span class="kw">=&gt;</span>
-  z.addFile(path).get <span class="cmt">// throws an exception if the addFile fails</span>
+  z.addFile(path).get <span class="cmt">// throws an exception if the add fails</span>
 }</pre><p>Finally, to avoid the exception <i>and</i> the <code>var</code>, use tail-recursion:</p><pre><span class="kw">import</span> scala.annnotation.tailrec
 <span class="kw">import</span> scala.util.{Failure, Success, Try}
 
@@ -353,7 +353,7 @@ until you call <code>writeZip()</code> or <code>writeJar()</code>.
     </span>
       <p class="shortcomment cmt">Add a file to the <code>Zipper</code>, specifying the zip file entry name explicitly.</p><div class="fullcomment"><div class="comment cmt"><p>Add a file to the <code>Zipper</code>, specifying the zip file entry name explicitly.</p><p><b>Note</b>: The existence or non-existence of the file isn't checked
 until you call <code>writeZip()</code> or <code>writeJar()</code>.
-</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path to the file to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path of the entry in the zip or jar file. Any file
+</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path to the file to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path of the entry in the zip or jar file. Any file
                 system root will be stripped.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -377,7 +377,7 @@ base name of the file, if <code>flatten</code> is specified. Otherwise, it'll
 be the path itself (if the path is relative) or the path with the file
 system root removed (if it's absolute).</p><p><b>Note</b>: The existence or non-existence of the file isn't checked
 until you call <code>writeZip()</code> or <code>writeJar()</code>.
-</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path to the file to addFile</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the path in the zip file</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path to the file to add</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the path in the zip file</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addFile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addFile(path:String):scala.util.Try[grizzled.zip.Zipper]"></a>
@@ -399,7 +399,7 @@ until you call <code>writeZip()</code> or <code>writeJar()</code>.
 will be the path (if it's relative) or the path with the file system root
 removed (if it's absolute).</p><p><b>Note</b>: The existence or non-existence of the file isn't checked
 until you call <code>writeZip()</code> or <code>writeJar()</code>.
-</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path to the file to addFile</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>path to the file to add</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addInputStream(inputStream:java.io.InputStream,zipPath:String,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]"></a>
@@ -423,10 +423,10 @@ the zip file. If <code>flatten</code> is specified, all directories will be remo
 from the zip path; otherwise, it will be used as-is, with any file system
 root removed.</p><p><b>Warning</b>: An <code>InputStream</code> represents an open resource (e.g., an open
 file descriptor). Those resources are held open until you call
-<code>writeZip()</code> or <code>writeJar()</code>. If you addFile too many <code>InputStream</code> objects
+<code>writeZip()</code> or <code>writeJar()</code>. If you add too many <code>InputStream</code> objects
 (or <code>Reader</code> or <code>Source</code> objects) to a <code>Zipper</code>, you could theoretically,
 run out of open file descriptors.
-</p></div><dl class="paramcmts block"><dt class="param">inputStream</dt><dd class="cmt"><p>the <code>InputStream</code> to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
+</p></div><dl class="paramcmts block"><dt class="param">inputStream</dt><dd class="cmt"><p>the <code>InputStream</code> to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
                     root is removed from this path.</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the zip path</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addInputStream" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -449,10 +449,10 @@ run out of open file descriptors.
 the zip file.</p><div class="fullcomment"><div class="comment cmt"><p>Add an <code>InputStream</code> to the <code>Zipper</code>, using the specified path in
 the zip file.</p><p><b>Warning</b>: An <code>InputStream</code> represents an open resource (e.g., an open
 file descriptor). Those resources are held open until you call
-<code>writeZip()</code> or <code>writeJar()</code>. If you addFile too many <code>InputStream</code> objects
+<code>writeZip()</code> or <code>writeJar()</code>. If you add too many <code>InputStream</code> objects
 (or <code>Reader</code> or <code>Source</code> objects) to a <code>Zipper</code>, you could theoretically,
 run out of open file descriptors.
-</p></div><dl class="paramcmts block"><dt class="param">inputStream</dt><dd class="cmt"><p>the <code>InputStream</code> to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
+</p></div><dl class="paramcmts block"><dt class="param">inputStream</dt><dd class="cmt"><p>the <code>InputStream</code> to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
                     root is removed from this path.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -475,10 +475,10 @@ run out of open file descriptors.
 If <code>flatten</code> is specified, all directories will be removed from the zip
 path; otherwise, it will be used as-is, with any file system root removed.</p><p><b>Warning</b>: A <code>Reader</code> represents an open resource (e.g., an open file
 descriptor). Those resources are held open until you call <code>writeZip()</code> or
-<code>writeJar()</code>. If you addFile too many <code>InputStream</code> objects (or <code>InputStream</code>
+<code>writeJar()</code>. If you add too many <code>InputStream</code> objects (or <code>InputStream</code>
 or <code>Source</code> objects) to a <code>Zipper</code>, you could theoretically, run out of
 open file descriptors.
-</p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the <code>Reader</code> to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
+</p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the <code>Reader</code> to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
                 root is removed from this path.</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the zip path</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addReader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -499,10 +499,10 @@ open file descriptors.
     </span>
       <p class="shortcomment cmt">Add a <code>Reader</code> to the <code>Zipper</code>, using the specified path in the zip file.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>Reader</code> to the <code>Zipper</code>, using the specified path in the zip file.</p><p><b>Warning</b>: A <code>Reader</code> represents an open resource (e.g., an open file
 descriptor). Those resources are held open until you call <code>writeZip()</code> or
-<code>writeJar()</code>. If you addFile too many <code>InputStream</code> objects (or <code>InputStream</code>
+<code>writeJar()</code>. If you add too many <code>InputStream</code> objects (or <code>InputStream</code>
 or <code>Source</code> objects) to a <code>Zipper</code>, you could theoretically, run out of
 open file descriptors.
-</p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the <code>Reader</code> to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
+</p></div><dl class="paramcmts block"><dt class="param">reader</dt><dd class="cmt"><p>the <code>Reader</code> to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
                 root is removed from this path.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -527,10 +527,10 @@ the zip file. If <code>flatten</code> is specified, all directories will be remo
 from the zip path; otherwise, it will be used as-is, with any file system
 root removed.</p><p><b>Warning</b>: A <code>Source</code> represents an open resource (e.g., an open
 file descriptor). Those resources are held open until you call
-<code>writeZip()</code> or <code>writeJar()</code>. If you addFile too many <code>Source</code> objects
+<code>writeZip()</code> or <code>writeJar()</code>. If you add too many <code>Source</code> objects
 (or <code>Reader</code> or <code>InputStream</code> objects) to a <code>Zipper</code>, you could
 theoretically, run out of open file descriptors.
-</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
                 root is removed from this path.</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the zip path</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -553,11 +553,51 @@ theoretically, run out of open file descriptors.
 the zip file.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>scala.io.Source</code> to the <code>Zipper</code>, using the specified path in
 the zip file.</p><p><b>Warning</b>: A <code>Source</code> represents an open resource (e.g., an open
 file descriptor). Those resources are held open until you call
-<code>writeZip()</code> or <code>writeJar()</code>. If you addFile too many <code>Source</code> objects
+<code>writeZip()</code> or <code>writeJar()</code>. If you add too many <code>Source</code> objects
 (or <code>Reader</code> or <code>InputStream</code> objects) to a <code>Zipper</code>, you could
 theoretically, run out of open file descriptors.
-</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to addFile</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p>the <code>Source</code> to add</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path to use within the zip file. Any file system
                 root is removed from this path.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+        <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
+    </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addURL(url:grizzled.net.URL):scala.util.Try[grizzled.zip.Zipper]"></a>
+      <a id="addURL(URL):Try[Zipper]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addURL</span><span class="params">(<span name="url">url: <a href="../net/URL.html" class="extype" name="grizzled.net.URL">URL</a></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:grizzled.net.URL):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>. This method is just
+shorthand for:</p><pre><span class="kw">val</span> gurl = grizzled.net.URL(...)
+zipper.addURL(gurl.javaURL)</pre></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+        <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
+    </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addURL(url:grizzled.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]"></a>
+      <a id="addURL(URL,Boolean):Try[Zipper]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addURL</span><span class="params">(<span name="url">url: <a href="../net/URL.html" class="extype" name="grizzled.net.URL">URL</a></span>, <span name="flatten">flatten: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:grizzled.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>. This method is just
+shorthand for:</p><pre><span class="kw">val</span> gurl = grizzled.net.URL(...)
+zipper.addURL(gurl.javaURL, flatten = ...)</pre></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the URL to a simple file name</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addURL(url:java.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]"></a>
@@ -575,20 +615,21 @@ theoretically, run out of open file descriptors.
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add a URL to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a URL to the <code>Zipper</code>. The path in the zip file will be taken from
-the path component of the URL, and all directories will be stripped from
-the path. That means the URL <i>must</i> have a file name component. For
-instance, if you addFile the URL <code>http://www.example.com/</code>, you'll get an
-error, because the path component is &quot;/&quot;, and the corresponding relative
-path is &quot;&quot;. In other words, <code>Zipper</code> does <i>not</i> addFile <code>index.html</code> for you
-automatically. A URL like <code>http://www.example.com/index.html</code> will work
-fine, resulting in <code>index.html</code> being added to the resulting zip file.
-Using this method to addFile
-<code>http://www.example.com/music/My-Song.mp3</code> will write <code>music/My-Song.mp3</code>
-to the zip or jar file, if <code>flatten</code> is <code>false</code>; if <code>flatten</code> is <code>true</code>,
-<code>My-Song.mp3</code> will be written.</p><p><b>Note</b>: The URL is not validated (i.e., no connection is made) until
+      <p class="shortcomment cmt">Add a <code>java.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>java.net.URL</code> to the <code>Zipper</code>. The path in the zip file will be
+taken from the path component of the URL, and all directories will be
+stripped from the path. That means the URL <i>must</i> have a file name
+component. For instance, if you add the URL <code>http://www.example.com/</code>,
+you'll get an error, because the path component is &quot;/&quot;, and the
+corresponding relative path is &quot;&quot;. In other words, <code>Zipper</code> does <i>not</i>
+add <code>index.html</code> for you automatically. A URL like
+<code>http://www.example.com/index.html</code> will work fine, resulting in
+<code>index.html</code> being added to the resulting zip file. Using this method to
+add <code>http://www.example.com/music/My-Song.mp3</code> will write
+<code>music/My-Song.mp3</code> to the zip or jar file, if <code>flatten</code> is <code>false</code>; if
+<code>flatten</code> is <code>true</code>, <code>My-Song.mp3</code> will be written.</p><p><b>Note</b>: The URL is not validated (i.e., no connection is made) until
 you call <code>writeZip()</code> or <code>writeJar()</code>.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the URL to a simple file name
+                to create the zip path</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addURL(url:java.net.URL):scala.util.Try[grizzled.zip.Zipper]"></a>
@@ -606,16 +647,16 @@ you call <code>writeZip()</code> or <code>writeJar()</code>.
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add a URL to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a URL to the <code>Zipper</code>. The path in the zip file will be taken from
-the path component of the URL. That means the URL <i>must</i> have a
-file name component. For instance, if you addFile the URL
+      <p class="shortcomment cmt">Add a <code>java.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>java.net.URL</code> to the <code>Zipper</code>. The path in the zip file will be
+taken from the path component of the URL. That means the URL <i>must</i>
+have a file name component. For instance, if you add the URL
 <code>http://www.example.com/</code>, you'll get an error, because the path
 component is &quot;/&quot;, and the corresponding relative path is &quot;&quot;. In other
-words, <code>Zipper</code> does <i>not</i> addFile <code>index.html</code> for you automatically. A
-URL like <code>http://www.example.com/index.html</code> will work fine, resulting
+words, <code>Zipper</code> does <i>not</i> add <code>index.html</code> for you automatically.
+A URL like <code>http://www.example.com/index.html</code> will work fine, resulting
 in <code>index.html</code> being added to the resulting zip file. Similarly, using
-this method to addFile <code>http://www.example.com/music/My-Song.mp3</code> will write
-<code>music/My-Song.mp3</code> to the zip or jar file.</p><p><b>Note</b>: The URL is not validated (i.e., no connection is made) until
+this method to add <code>http://www.example.com/music/My-Song.mp3</code> will
+write <code>music/My-Song.mp3</code> to the zip or jar file.</p><p><b>Note</b>: The URL is not validated (i.e., no connection is made) until
 you call <code>writeZip()</code> or <code>writeJar()</code>.
 </p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
@@ -638,7 +679,7 @@ you call <code>writeZip()</code> or <code>writeJar()</code>.
       <p class="shortcomment cmt">Add a directory entry to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a directory entry to the <code>Zipper</code>. The path should be in &quot;/&quot; form,
 even on Windows, since zip and jar files always use &quot;/&quot;. Any leading
 &quot;/&quot; will be removed, converting it to a relative path.
-</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path of the directory entry to addFile</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+</p></div><dl class="paramcmts block"><dt class="param">path</dt><dd class="cmt"><p>the path of the directory entry to add</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>

@@ -47,11 +47,13 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Configuration</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">Configuration</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An INI-style configuration file parser.</p><p><code>Configuration</code> implements an in-memory store for a configuration file
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An INI-style configuration file parser.</p><p><b>WARNING: This class is deprecated.</b> If you're looking for a decent
+configuration syntax, use YAML or
+<a href="https://github.com/typesafehub/config" target="_blank">HOCON</a>.</p><p><b>Documentation is for historical purposes only.</b></p><p><code>Configuration</code> implements an in-memory store for a configuration file
 whose syntax is reminiscent of classic Windows .INI files, though with
 many extensions.</p><p><b>Syntax</b></p><p>A configuration file is broken into sections, and each section is
 introduced by a section name in brackets. For example:</p><pre>[main]
@@ -187,7 +189,10 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
   ...
 }
 
-<span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div><div class="toggleContainer block">
+<span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>

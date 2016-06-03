@@ -120,14 +120,14 @@ paths to relative paths by stripping any leading &quot;file system mount points.
 On Unix-like systems, this means stripping the leading &quot;/&quot;; on Windows, it
 means stripping any leading drive letter and the leading &quot;\&quot;. (See
 java.io.File.listRoots() for more information.) For instance, if you're not
-flattening pathnames, and you addFile <code>C:\Temp\hello.txt</code> to a <code>Zipper</code> on
+flattening pathnames, and you add <code>C:\Temp\hello.txt</code> to a <code>Zipper</code> on
 Windows, the <code>Zipper</code> will strip the <code>C:\</code>, adding <code>Temp/hello.txt</code>. to the
 zip or jar file. If you're on a Unix-like system, including Mac OS X, and
-you addFile <code>/tmp/foo/bar.txt</code>, the <code>Zipper</code> will addFile <code>tmp/foo/bar.txt</code> to the
-file.</p><h4>Directories</h4><p>You can explicitly addFile directory entries to a <code>Zipper</code>, using
+you add <code>/tmp/foo/bar.txt</code>, the <code>Zipper</code> will add <code>tmp/foo/bar.txt</code> to the
+file.</p><h4>Directories</h4><p>You can explicitly add directory entries to a <code>Zipper</code>, using
 <code>addZipDirectory()</code>. When you're not flattening entries, a <code>Zipper</code> object will
 also ensure that any intermediate directories in a pathname are created in
-the zip file. For instance, if you addFile file <code>/tmp/foo/bar/baz.txt</code> to a
+the zip file. For instance, if you add file <code>/tmp/foo/bar/baz.txt</code> to a
 <code>Zipper</code>, without flattening it, the <code>Zipper</code> will create the following
 entries in the underlying zip file:</p><ul><li><code>tmp</code> (directory)</li><li><code>tmp/foo</code> (directory)</li><li><code>tmp/foo/bar</code> (directory)</li><li><code>tmp/foo/bar/baz.txt</code> (the entry)</li></ul><p>If you use the JDK's zip or jar classes directly, you have to create those
 intermediate directory entries yourself. In addition, you have to be careful
@@ -145,7 +145,7 @@ zipper.addFile(<span class="lit">"/tmp/foo/bar.txt"</span>).addFile(<span class=
                       z2 <span class="kw">&lt;-</span> z1.addFile(<span class="lit">"/tmp/baz.txt"</span>)
                       z3 <span class="kw">&lt;-</span> z2.addFile(<span class="lit">"hello.txt"</span>) }
                 <span class="kw">yield</span> z3
-<span class="cmt">// newZipper is a Try[Zipper]</span></pre><p>If you're trying to addFile a collection of objects, a <code>for</code> comprehension
+<span class="cmt">// newZipper is a Try[Zipper]</span></pre><p>If you're trying to add a collection of objects, a <code>for</code> comprehension
 can be problematic. If you're not averse to using a local <code>var</code>, you
 can just use a traditional imperative loop:</p><pre><span class="kw">val</span> zipper = Zipper()
 <span class="kw">var</span> z = zipper
@@ -153,12 +153,12 @@ can just use a traditional imperative loop:</p><pre><span class="kw">val</span> 
 
 <span class="kw">for</span> (path <span class="kw">&lt;-</span> paths) {
   <span class="kw">val</span> t = z.addFile(path)
-  z = t.get <span class="cmt">// will throw an exception if the addFile failed</span>
+  z = t.get <span class="cmt">// will throw an exception if the add failed</span>
 }</pre><p>You can also avoid a <code>var</code> using <code>foldLeft()</code>, though you still have to
 contend with a thrown exception. (You can always wrap the code in a <code>Try</code>.)</p><pre><span class="kw">val</span> zipper = Zipper()
 <span class="kw">val</span> paths: <span class="std">List</span>[<span class="std">String</span>] = ...
 paths.foldLeft(zipper) { <span class="kw">case</span> (z, path) <span class="kw">=&gt;</span>
-  z.addFile(path).get <span class="cmt">// throws an exception if the addFile fails</span>
+  z.addFile(path).get <span class="cmt">// throws an exception if the add fails</span>
 }</pre><p>Finally, to avoid the exception <i>and</i> the <code>var</code>, use tail-recursion:</p><pre><span class="kw">import</span> scala.annnotation.tailrec
 <span class="kw">import</span> scala.util.{Failure, Success, Try}
 

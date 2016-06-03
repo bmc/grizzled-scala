@@ -47,12 +47,15 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Configuration</span>
+        <span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">Configuration</span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object for the <code>Configuration</code> class
-</p></div><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -200,6 +203,111 @@
     </span>
       <p class="shortcomment cmt">Import this object's contents (<code>import Configuration.Implicits._</code>)
 to get the implicit converters.</p>
+    </li><li name="grizzled.config.Configuration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(source:scala.io.Source,sections:Map[String,Map[String,String]],sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex):Either[String,grizzled.config.Configuration]"></a>
+      <a id="apply(Source,Map[String,Map[String,String]],Regex,Regex):Either[String,Configuration]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sections">sections: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>, <span name="sectionNamePattern">sectionNamePattern: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="commentPattern">commentPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration$@apply(source:scala.io.Source,sections:Map[String,Map[String,String]],sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex):Either[String,grizzled.config.Configuration]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Read a configuration file, permitting some predefined sections to be
+added to the configuration before it is read.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, permitting some predefined sections to be
+added to the configuration before it is read. The predefined sections
+are defined in a map of maps. The outer map is keyed by predefined
+section name. The inner maps consist of options and their values.
+For instance, to read a configuration file, giving it access to
+certain command line parameters, you could do something like this:</p><pre><span class="kw">object</span> Foo {
+  <span class="kw">def</span> main(args: <span class="std">Array</span>[<span class="std">String</span>]) = {
+    <span class="cmt">// You'd obviously want to do some real argument checking here.</span>
+    <span class="kw">val</span> configFile = args(<span class="num">0</span>)
+    <span class="kw">val</span> name = args(<span class="num">1</span>)
+    <span class="kw">val</span> ipAddress = args(<span class="num">2</span>)
+    <span class="kw">val</span> sections = <span class="std">Map</span>(<span class="lit">"args"</span> -&gt; <span class="std">Map</span>(<span class="lit">"name"</span> -&gt; name, <span class="lit">"ip"</span> -&gt; ipAddress))
+    <span class="kw">val</span> config = Configuration(Source.fromFile(<span class="kw">new</span> File(configFile)), sections)
+    ...
+  }
+}</pre></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sections</dt><dd class="cmt"><p>the predefined sections. An empty map means
+                           there are no predefined sections.
+                           not (<code>true</code>). Default: <code>false</code></p></dd><dt class="param">sectionNamePattern</dt><dd class="cmt"><p>Regular expression that matches legal section
+                           names.</p></dd><dt class="param">commentPattern</dt><dd class="cmt"><p>Regular expression that matches comment lines.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(config)</code> on success, <code>Left(error)</code> on error.</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(source:scala.io.Source,sections:Map[String,Map[String,String]]):Either[String,grizzled.config.Configuration]"></a>
+      <a id="apply(Source,Map[String,Map[String,String]]):Either[String,Configuration]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sections">sections: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration$@apply(source:scala.io.Source,sections:Map[String,Map[String,String]]):Either[String,grizzled.config.Configuration]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Read a configuration file, permitting some predefined sections to be
+added to the configuration before it is read.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, permitting some predefined sections to be
+added to the configuration before it is read. The predefined sections
+are defined in a map of maps. The outer map is keyed by predefined
+section name. The inner maps consist of options and their values.
+For instance, to read a configuration file, giving it access to
+certain command line parameters, you could do something like this:</p><pre><span class="kw">object</span> Foo {
+  <span class="kw">def</span> main(args: <span class="std">Array</span>[<span class="std">String</span>]) = {
+    <span class="cmt">// You'd obviously want to do some real argument checking here.</span>
+    <span class="kw">val</span> configFile = args(<span class="num">0</span>)
+    <span class="kw">val</span> name = args(<span class="num">1</span>)
+    <span class="kw">val</span> ipAddress = args(<span class="num">2</span>)
+    <span class="kw">val</span> sections = <span class="std">Map</span>(<span class="lit">"args"</span> -&gt; <span class="std">Map</span>(<span class="lit">"name"</span> -&gt; name, <span class="lit">"ip"</span> -&gt; ipAddress))
+    <span class="kw">val</span> config = Configuration(Source.fromFile(<span class="kw">new</span> File(configFile)), sections)
+    ...
+  }
+}</pre></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sections</dt><dd class="cmt"><p>the predefined sections. An empty map means
+                           there are no predefined sections.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right[Configuration]</code> on success, <code>Left(error)</code> on error.</p></dd></dl></div>
+    </li><li name="grizzled.config.Configuration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(source:scala.io.Source,sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex,normalizeOptionName:String=&gt;String,notFoundFunction:Option[grizzled.config.Types.NotFoundFunction],safe:Boolean):Either[String,grizzled.config.Configuration]"></a>
+      <a id="apply(Source,Regex,Regex,(String)⇒String,Option[NotFoundFunction],Boolean):Either[String,Configuration]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sectionNamePattern">sectionNamePattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="defval" name='<span class="name"><a href="">Configuration.DefaultSectionNamePattern</a></span>'>...</span></span>, <span name="commentPattern">commentPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="symbol"><span class="name"><a href="">Configuration.DefaultCommentPattern</a></span></span></span>, <span name="normalizeOptionName">normalizeOptionName: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">DefaultOptionNameTransformer</span></span>, <span name="notFoundFunction">notFoundFunction: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="grizzled.config.Types.NotFoundFunction">NotFoundFunction</span>] = <span class="symbol">None</span></span>, <span name="safe">safe: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.Configuration$@apply(source:scala.io.Source,sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex,normalizeOptionName:String=&gt;String,notFoundFunction:Option[grizzled.config.Types.NotFoundFunction],safe:Boolean):Either[String,grizzled.config.Configuration]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Read a configuration file, returning an <code>Either</code>, instead of throwing
+an exception on error.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, returning an <code>Either</code>, instead of throwing
+an exception on error.
+</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sectionNamePattern</dt><dd class="cmt"><p>Regular expression that matches legal section
+                           names. Defaults as described above.</p></dd><dt class="param">commentPattern</dt><dd class="cmt"><p>Regular expression that matches comment lines.
+                           Default: &quot;^\s*(#.*)$&quot;</p></dd><dt class="param">normalizeOptionName</dt><dd class="cmt"><p>Partial function used to transform option names
+                           into keys. The default function transforms
+                           the names to lower case.</p></dd><dt class="param">notFoundFunction</dt><dd class="cmt"><p>a function to call if an option isn't found in
+                           the configuration, or None. The function
+                           must take a section name and an option name as
+                           parameters. It must return <code>Failure</code> on error,
+                           <code>Success(None)</code> if the value isn't found, and
+                           Success <code>Right(Some(string))</code> if the value is
+                           found.</p></dd><dt class="param">safe</dt><dd class="cmt"><p><code>true</code> does &quot;safe&quot; substitutions, with
+                           substitutions of nonexistent values replaced by
+                           empty strings. <code>false</code> ensures that bad
+                           substitutions result in errors (or <code>None</code> in
+                           functions, like <code>get()</code>, that return <code>Option</code>
+                           values).</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(config)</code> on success, <code>Left(error)</code> on error.</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -612,124 +720,7 @@ an exception on error.
 
         
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.config.Configuration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(source:scala.io.Source,sections:Map[String,Map[String,String]],sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex):Either[String,grizzled.config.Configuration]"></a>
-      <a id="apply(Source,Map[String,Map[String,String]],Regex,Regex):Either[String,Configuration]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 2.2.0) Use Configuration.read(), instead.">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sections">sections: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>, <span name="sectionNamePattern">sectionNamePattern: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>, <span name="commentPattern">commentPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration$@apply(source:scala.io.Source,sections:Map[String,Map[String,String]],sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex):Either[String,grizzled.config.Configuration]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Read a configuration file, permitting some predefined sections to be
-added to the configuration before it is read.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, permitting some predefined sections to be
-added to the configuration before it is read. The predefined sections
-are defined in a map of maps. The outer map is keyed by predefined
-section name. The inner maps consist of options and their values.
-For instance, to read a configuration file, giving it access to
-certain command line parameters, you could do something like this:</p><pre><span class="kw">object</span> Foo {
-  <span class="kw">def</span> main(args: <span class="std">Array</span>[<span class="std">String</span>]) = {
-    <span class="cmt">// You'd obviously want to do some real argument checking here.</span>
-    <span class="kw">val</span> configFile = args(<span class="num">0</span>)
-    <span class="kw">val</span> name = args(<span class="num">1</span>)
-    <span class="kw">val</span> ipAddress = args(<span class="num">2</span>)
-    <span class="kw">val</span> sections = <span class="std">Map</span>(<span class="lit">"args"</span> -&gt; <span class="std">Map</span>(<span class="lit">"name"</span> -&gt; name, <span class="lit">"ip"</span> -&gt; ipAddress))
-    <span class="kw">val</span> config = Configuration(Source.fromFile(<span class="kw">new</span> File(configFile)), sections)
-    ...
-  }
-}</pre></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sections</dt><dd class="cmt"><p>the predefined sections. An empty map means
-                           there are no predefined sections.
-                           not (<code>true</code>). Default: <code>false</code></p></dd><dt class="param">sectionNamePattern</dt><dd class="cmt"><p>Regular expression that matches legal section
-                           names.</p></dd><dt class="param">commentPattern</dt><dd class="cmt"><p>Regular expression that matches comment lines.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(config)</code> on success, <code>Left(error)</code> on error.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.2.0)</i> Use Configuration.read(), instead.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(source:scala.io.Source,sections:Map[String,Map[String,String]]):Either[String,grizzled.config.Configuration]"></a>
-      <a id="apply(Source,Map[String,Map[String,String]]):Either[String,Configuration]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 2.2.0) Use Configuration.read(), instead.">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sections">sections: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]]</span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration$@apply(source:scala.io.Source,sections:Map[String,Map[String,String]]):Either[String,grizzled.config.Configuration]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Read a configuration file, permitting some predefined sections to be
-added to the configuration before it is read.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, permitting some predefined sections to be
-added to the configuration before it is read. The predefined sections
-are defined in a map of maps. The outer map is keyed by predefined
-section name. The inner maps consist of options and their values.
-For instance, to read a configuration file, giving it access to
-certain command line parameters, you could do something like this:</p><pre><span class="kw">object</span> Foo {
-  <span class="kw">def</span> main(args: <span class="std">Array</span>[<span class="std">String</span>]) = {
-    <span class="cmt">// You'd obviously want to do some real argument checking here.</span>
-    <span class="kw">val</span> configFile = args(<span class="num">0</span>)
-    <span class="kw">val</span> name = args(<span class="num">1</span>)
-    <span class="kw">val</span> ipAddress = args(<span class="num">2</span>)
-    <span class="kw">val</span> sections = <span class="std">Map</span>(<span class="lit">"args"</span> -&gt; <span class="std">Map</span>(<span class="lit">"name"</span> -&gt; name, <span class="lit">"ip"</span> -&gt; ipAddress))
-    <span class="kw">val</span> config = Configuration(Source.fromFile(<span class="kw">new</span> File(configFile)), sections)
-    ...
-  }
-}</pre></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sections</dt><dd class="cmt"><p>the predefined sections. An empty map means
-                           there are no predefined sections.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right[Configuration]</code> on success, <code>Left(error)</code> on error.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.2.0)</i> Use Configuration.read(), instead.</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(source:scala.io.Source,sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex,normalizeOptionName:String=&gt;String,notFoundFunction:Option[grizzled.config.Types.NotFoundFunction],safe:Boolean):Either[String,grizzled.config.Configuration]"></a>
-      <a id="apply(Source,Regex,Regex,(String)⇒String,Option[NotFoundFunction],Boolean):Either[String,Configuration]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 2.2.0) Use Configuration.read(), instead.">apply</span><span class="params">(<span name="source">source: <span class="extype" name="scala.io.Source">Source</span></span>, <span name="sectionNamePattern">sectionNamePattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="defval" name='<span class="name"><a href="">Configuration.DefaultSectionNamePattern</a></span>'>...</span></span>, <span name="commentPattern">commentPattern: <span class="extype" name="scala.util.matching.Regex">Regex</span> = <span class="symbol"><span class="name"><a href="">Configuration.DefaultCommentPattern</a></span></span></span>, <span name="normalizeOptionName">normalizeOptionName: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">DefaultOptionNameTransformer</span></span>, <span name="notFoundFunction">notFoundFunction: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="grizzled.config.Types.NotFoundFunction">NotFoundFunction</span>] = <span class="symbol">None</span></span>, <span name="safe">safe: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[<span class="extype" name="scala.Predef.String">String</span>, <a href="Configuration.html" class="extype" name="grizzled.config.Configuration">Configuration</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.Configuration$@apply(source:scala.io.Source,sectionNamePattern:scala.util.matching.Regex,commentPattern:scala.util.matching.Regex,normalizeOptionName:String=&gt;String,notFoundFunction:Option[grizzled.config.Types.NotFoundFunction],safe:Boolean):Either[String,grizzled.config.Configuration]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Read a configuration file, returning an <code>Either</code>, instead of throwing
-an exception on error.</p><div class="fullcomment"><div class="comment cmt"><p>Read a configuration file, returning an <code>Either</code>, instead of throwing
-an exception on error.
-</p></div><dl class="paramcmts block"><dt class="param">source</dt><dd class="cmt"><p><code>scala.io.Source</code> object to read</p></dd><dt class="param">sectionNamePattern</dt><dd class="cmt"><p>Regular expression that matches legal section
-                           names. Defaults as described above.</p></dd><dt class="param">commentPattern</dt><dd class="cmt"><p>Regular expression that matches comment lines.
-                           Default: &quot;^\s*(#.*)$&quot;</p></dd><dt class="param">normalizeOptionName</dt><dd class="cmt"><p>Partial function used to transform option names
-                           into keys. The default function transforms
-                           the names to lower case.</p></dd><dt class="param">notFoundFunction</dt><dd class="cmt"><p>a function to call if an option isn't found in
-                           the configuration, or None. The function
-                           must take a section name and an option name as
-                           parameters. It must return <code>Failure</code> on error,
-                           <code>Success(None)</code> if the value isn't found, and
-                           Success <code>Right(Some(string))</code> if the value is
-                           found.</p></dd><dt class="param">safe</dt><dd class="cmt"><p><code>true</code> does &quot;safe&quot; substitutions, with
-                           substitutions of nonexistent values replaced by
-                           empty strings. <code>false</code> ensures that bad
-                           substitutions result in errors (or <code>None</code> in
-                           functions, like <code>get()</code>, that return <code>Option</code>
-                           values).</p></dd><dt>returns</dt><dd class="cmt"><p><code>Right(config)</code> on success, <code>Left(error)</code> on error.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.2.0)</i> Use Configuration.read(), instead.</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
