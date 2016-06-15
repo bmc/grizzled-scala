@@ -677,6 +677,9 @@ class Zipper private(private val items:           Map[String, ZipSource],
         subdirs match {
           case Nil => Success(existing)
 
+          case dir :: rest if (dir == ".") || (dir == "..") =>
+            makeNext(rest, existing)
+
           case dir :: rest if existing contains mapDir(dir) =>
             makeNext(rest, existing)
 

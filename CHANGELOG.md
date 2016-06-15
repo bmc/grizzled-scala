@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 2.4.2:
+
+* Fixed `grizzled.zip.Zipper` so that flattened zips don't end up with a
+  spurious "." directory.
+
 Version 2.4.1:
 
 * Deprecated `grizzled.config.Configuration`. If you need a good configuration

@@ -165,6 +165,29 @@ class ZipperSpec extends BaseSpec {
     }
   }
 
+  it should "ignore . as a directory" in {
+    val z = Zipper()
+
+    withTemporaryDirectory("Zipper") { dir =>
+      val absDir = dir.getAbsolutePath
+      val filesToCreate = Array(
+        (joinPath(".", "hello.txt"), fooContents)
+      )
+
+      val files = makeFiles(absDir, filesToCreate)
+
+      val t = Zipper(files, flatten = false)
+      t shouldBe success
+      val fullZipper = t.get
+      val zipPath = new File(joinPath(absDir, "out.zip"))
+      fullZipper.writeZip(zipPath) shouldBe success
+
+      val zipFile = new ZipFile(zipPath)
+      val entries = zipFile.entries.toSet
+      entries should not contain "."
+    }
+  }
+
   it should "properly flatten paths" in {
     val z = Zipper()
 
