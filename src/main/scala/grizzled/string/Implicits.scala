@@ -279,7 +279,7 @@ object Implicits {
         */
       def translateMetachars: String = {
         import scala.annotation.tailrec
-	import Char._
+        import Char._
 
         def isHexString(s: String): Boolean = s.count(_.isHexDigit) == s.length
 
