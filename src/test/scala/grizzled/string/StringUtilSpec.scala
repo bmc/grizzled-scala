@@ -127,6 +127,33 @@ class StringUtilSpec extends BaseSpec {
     }
   }
 
+  "longestCommonPrefix" should "properly find a common prefix" in {
+    longestCommonPrefix(Array("abc", "abcdef", "abcdefg")) shouldBe "abc"
+    longestCommonPrefix(Array("a", "abcdef", "abcdefg")) shouldBe "a"
+    longestCommonPrefix(Array("ab", "abcdef", "abcdefg")) shouldBe "ab"
+  }
+
+  it should "properly handle an array of length 1" in {
+    longestCommonPrefix(Array("a")) shouldBe "a"
+  }
+
+  it should "properly handle an array of length 0" in {
+    longestCommonPrefix(Array.empty[String]) shouldBe ""
+  }
+
+  it should "properly handle an array containing N of the same string" in {
+    val a = (1 to 20).map(_ => "xxx").toArray
+    longestCommonPrefix(a) shouldBe "xxx"
+  }
+
+  it should "properly handle an array with an empty string" in {
+    longestCommonPrefix(Array("abc", "abcdef", "abcdefg", "")) shouldBe ""
+  }
+
+  it should "properly handle an array with no common substring" in {
+    longestCommonPrefix(Array("abc", "abcdef", "abcdefg", "xyz")) shouldBe ""
+  }
+
   private def byteArray(b: Array[Int]) = b.map { _.asInstanceOf[Byte] }
 
 }

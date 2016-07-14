@@ -1,5 +1,11 @@
 # Grizzled Scala Change Log
 
+Version 2.5.0:
+
+* Added `grizzled.string.util.longestCommonPrefix()`.
+* Bumped cross-compiled build from Scala 2.12.0-M4 to 2.12.0.M5.
+* Upgraded [ScalaTest][] to 3.0.0-RC4.
+
 Version 2.4.2:
 
 * Fixed `grizzled.zip.Zipper` so that flattened zips don't end up with a
@@ -131,8 +137,7 @@ Version 2.0.0 (Incompatible API changes):
     * Added constructors that take `java.io.File`.
     * Made class constructor private. Use the `Includer.apply()` functions.
     * Added unit tester.
-* Removed deprecated `grizzled.readline` package. Use
-  [JLine2](https://jline.github.io/jline2), instead.
+* Removed deprecated `grizzled.readline` package. Use [JLine 2][], instead.
 * Removed `grizzled.cmd`. It was a nice idea (based on the concepts in the
   Python [cmd](https://docs.python.org/2/library/cmd.html) module), but
   it's not being used, really.
@@ -335,8 +340,6 @@ Version 1.0.12:
 * Readline implementation now uses [Jline 2][].
 * Cross-compiled for Scala 2.9.1-1.
 
-[Jline 2]: https://github.com/huynhjl/jline2
-
 Version 1.0.11.1:
 
 * Cross-compiled for Scala 2.8.2.
@@ -392,10 +395,6 @@ Version 1.0.6:
 * Removed various deprecated methods.
 * Corrected implementation of `grizzled.reflect.isOfType` for non-primitives.
 
-[ScalaTest]: http://www.scalatest.org/
-[SBT]: http://code.google.com/p/simple-build-tool/
-
-
 Version 1.0.5:
 
 * Miscellaneous internal cleanup of `Configuration` and `grizzled.readline`
@@ -432,21 +431,16 @@ Version 1.0.2:
   because of an inadvertent change of a constant from a `def` to a `val`.
 * Now compiles against [Scala][] 2.8.1 RC2, as well as 2.8.0.
 
-[Scala]: http://www.scala-lang.org/
 [http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html]: http://www.nmr.mgh.harvard.edu/Neural_Systems_Group/gary/python.html
 
 Version 1.0.1:
 
 * Now compiles against [Scala][] 2.8.1 RC1, as well as 2.8.0
 
-[Scala]: http://www.scala-lang.org/
-
 Version 1.0:
 
 * Now published to the [Scala Tools Nexus][] repository, so it's no
   longer necessary to specify a custom repository to find this artifact.
-
-[Scala Tools Nexus]: http://nexus.scala-tools.org/content/repositories/releases
 
 Version 0.7.4:
 
@@ -472,14 +466,10 @@ Version 0.7.4:
 * Updated to released 1.2 version of [ScalaTest][].
 * Changed dependency on [ScalaTest][] to be a test-only dependency.
 
-[ScalaTest]: http://scalatest.org/
-[MarkWrap]: http://bmc.github.com/markwrap/
-
 Version 0.7.3:
 
 * Updated to build with Scala 2.8.0.final *only*.
 
-[SBT]: http://code.google.com/p/simple-build-tool
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
 
 Version 0.7.2:
@@ -487,9 +477,6 @@ Version 0.7.2:
 * Updated to [Knockoff][] version 0.7.2-13, which corrects some Markdown
   translation bugs.
 * Updated to Scala 2.8.0.RC5. Now builds against RC3 and RC5 only.
-
-[SBT]: http://code.google.com/p/simple-build-tool
-[Knockoff]: http://tristanhunt.com/projects/knockoff/
 
 Version 0.7.1:
 
@@ -504,8 +491,6 @@ Version 0.7.1:
 * Changed SBT publishing to use an SSH key file, to eliminate the Ivy
   Swing prompt.
 
-[SBT]: http://code.google.com/p/simple-build-tool
-[Knockoff]: http://tristanhunt.com/projects/knockoff/
 [issue #1]: http://github.com/bmc/grizzled-scala/issues/issue/1
 
 Version 0.7:
@@ -529,13 +514,6 @@ Version 0.7:
   library for [Markdown][], rather than invoking the [Showdown][]
   JavaScript parser via [Rhino][].
 * Now compiles under Scala 2.8.0.RC3 and RC2. Dropped support for RC1.
-
-[Rhino]: http://www.mozilla.org/rhino/
-[Knockoff]: http://tristanhunt.com/projects/knockoff/
-[Showdown]: http://attacklab.net/showdown/
-[Markdown]: http://daringfireball.net/projects/markdown/
-[Textile]: http://textile.thresholdstate.com/
-[WikiText]: http://help.eclipse.org/ganymede/index.jsp?topic=/org.eclipse.mylyn.wikitext.help.ui/help/devguide/WikiText%20Developer%20Guide.html
 
 Version 0.6:
 
@@ -607,14 +585,10 @@ Version 0.4.2:
 * Added new `grizzled.io.SourceReader` class that wraps a `scala.io.Source`
   inside a `java.io.Reader`.
 
-[SBT]: http://code.google.com/p/simple-build-tool
-
 Version 0.4.1:
 
 * Fixed inadvertent bug in `grizzled.cmd` command handling, when commands
   span multiple lines.
-
-[sbt]: http://code.google.com/p/simple-build-tool
 
 Version 0.4:
 
@@ -636,7 +610,7 @@ Version 0.4:
 * Added `isEmpty` to `grizzled.file.GrizzledFile` (which can be implicitly
   converted to and from `java.io.File`).
 * Fixed problem with prefix handling in `grizzled.string.WordWrapper`.
-* Now uses [SBT][sbt] 0.7.2 to build from source.
+* Now uses [SBT][] 0.7.2 to build from source.
 
 [sbt]: http://code.google.com/p/simple-build-tool
 
@@ -665,8 +639,8 @@ Version 0.3:
 * Fixed tail call optimization problem in `grizzled.io.RichInputStream`.
   Thanks to Claudio Bley (*cbley /at/ av-test.de*)
 * Added grizzled.parsing.MarkdownParser, for parsing Markdown documents.
-  (Currently uses the [Showdown][showdown] Javascript library, via
-  [Mozilla Rhino][rhino].)
+  (Currently uses the [Showdown][Showdown] Javascript library, via
+  [Mozilla Rhino][Rhino].)
 * `grizzled.cmd.HelpHandler` now supports a ".help" alias.
 * Added `grizzled.util.withCloseable` control structure.
 * The grizzled.readline API now uses the [Java EditLine][javaeditline]
@@ -676,10 +650,6 @@ Version 0.3:
   implementation.
 * grizzled.cmd now tries to load EditLine first.
 
-[sbt]: http://code.google.com/p/simple-build-tool
-[javaeditline]: http://www.clapper.org/software/java/javaeditline/
-[showdown]: http://attacklab.net/showdown/
-[rhino]: http://www.mozilla.org/rhino/
 
 Version 0.2:
 
@@ -700,3 +670,17 @@ Version 0.1:
 * Converted code to confirm with standard Scala coding style.
 * Now builds for [Scala][] 2.9.1, as well as 2.9.0-1, 2.9.0, 2.8.1 and 2.8.0.
 
+
+[javaeditline]: http://www.clapper.org/software/java/javaeditline/
+[Jline 2]: https://github.com/huynhjl/jline2
+[Knockoff]: http://tristanhunt.com/projects/knockoff/
+[Showdown]: http://attacklab.net/showdown/
+[Markdown]: http://daringfireball.net/projects/markdown/
+[MarkWrap]: http://bmc.github.com/markwrap/
+[Rhino]: http://www.mozilla.org/rhino/
+[SBT]: http://www.scala-sbt.org/
+[Scala Tools Nexus]: http://nexus.scala-tools.org/content/repositories/releases
+[Scala]: http://www.scala-lang.org/
+[ScalaTest]: http://scalatest.org/
+[Textile]: http://textile.thresholdstate.com/
+[WikiText]: http://help.eclipse.org/ganymede/index.jsp?topic=/org.eclipse.mylyn.wikitext.help.ui/help/devguide/WikiText%20Developer%20Guide.html

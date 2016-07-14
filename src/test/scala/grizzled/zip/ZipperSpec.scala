@@ -10,7 +10,7 @@ import java.io._
 import java.util.zip.ZipFile
 
 import scala.annotation.tailrec
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.util.Random
 
@@ -61,7 +61,7 @@ class ZipperSpec extends BaseSpec {
       t2.get.writeZip(zipPath) shouldBe success
 
       val zipFile = new ZipFile(zipPath)
-      val entries = zipFile.entries.toSeq
+      val entries = zipFile.entries.asScala.toSeq
 
       entries.exists(ze => ze.getName == "foo.txt") should be (true)
       readEntryAsChars(zipFile, "foo.txt") shouldBe fooContents
@@ -104,7 +104,7 @@ class ZipperSpec extends BaseSpec {
       t2.get.writeZip(zipPath) shouldBe success
 
       val zipFile = new ZipFile(zipPath)
-      val entries = zipFile.entries.toSeq
+      val entries = zipFile.entries.asScala.toSeq
 
       entries.exists(ze => ze.getName == "foo.txt") should be (false)
       entries.exists(ze => ze.getName == "bar.txt") should be (false)
@@ -144,7 +144,7 @@ class ZipperSpec extends BaseSpec {
       fullZipper.writeZip(zipPath) shouldBe success
 
       val zipFile = new ZipFile(zipPath)
-      val entries = zipFile.entries.toSeq
+      val entries = zipFile.entries.asScala.toSeq
 
       for ((path, contents) <- filesToCreate) {
         val zipPath = path.replace(File.separatorChar, '/')
@@ -183,7 +183,7 @@ class ZipperSpec extends BaseSpec {
       fullZipper.writeZip(zipPath) shouldBe success
 
       val zipFile = new ZipFile(zipPath)
-      val entries = zipFile.entries.toSet
+      val entries = zipFile.entries.asScala.toSeq
       entries should not contain "."
     }
   }
@@ -209,7 +209,7 @@ class ZipperSpec extends BaseSpec {
       fullZipper.writeZip(zipPath) shouldBe success
 
       val zipFile = new ZipFile(zipPath)
-      val entries = zipFile.entries.toSeq
+      val entries = zipFile.entries.asScala.toSeq
 
       for ((path, contents) <- filesToCreate) {
         val base = fileutil.basename(path)
@@ -360,7 +360,8 @@ class ZipperSpec extends BaseSpec {
     t.get.writeZip(zip)
     val zipFile = new ZipFile(zip)
 
-    val entryOpt = zipFile.entries.toSeq.find(_.getName == "foo/")
+    val entryOpt: Option[java.util.zip.ZipEntry] =
+      zipFile.entries.asScala.find(_.getName == "foo/")
     entryOpt.map(_.getName) shouldBe Some("foo/")
     entryOpt.map(_.isDirectory) shouldBe Some(true)
   }
@@ -384,7 +385,7 @@ class ZipperSpec extends BaseSpec {
       t2.get.writeZip(zip) shouldBe success
 
       val zipFile = new ZipFile(zip)
-      val matches = zipFile.entries.toSeq.filter(_.getName == "foo/")
+      val matches = zipFile.entries.asScala.filter(_.getName == "foo/").toSeq
       matches should have length 1
 
       val entry = matches.head
@@ -550,12 +551,12 @@ class ZipperSpec extends BaseSpec {
   }
 
   def readEntryAsChars(zipFile: ZipFile, entryName: String): String = {
-    val e = zipFile.entries.toSeq.filter(_.getName == entryName).head
+    val e = zipFile.entries.asScala.filter(_.getName == entryName).toSeq.head
     Source.fromInputStream(zipFile.getInputStream(e), "UTF-8").mkString
   }
 
   def readEntryAsBytes(zipFile: ZipFile, entryName: String): Array[Byte] = {
-    val e = zipFile.entries.toSeq.filter(_.getName == entryName).head
+    val e = zipFile.entries.asScala.filter(_.getName == entryName).toSeq.head
     val buf = new Array[Byte](e.getSize.toInt)
     withResource(zipFile.getInputStream(e)) { is =>
       @tailrec

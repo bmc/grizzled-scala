@@ -2,13 +2,13 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "2.4.2"
+version := "2.5.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
 scalaVersion := "2.11.8"
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0-M4")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0-M5")
 
 // Incremental compilation performance improvement. See
 // http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
@@ -48,7 +48,7 @@ wartremoverErrors in (Compile, compile) ++= Seq(
 
 def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
   dep cross CrossVersion.binaryMapped {
-    case v if v startsWith "2.12" => "2.11"
+    case v if v startsWith "2.12" => "2.12.0-M4"
     case v => v.split("""\.""").take(2).mkString(".")
   }
 }
@@ -58,7 +58,7 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 // ScalaTest
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.0-RC4" % "test"
 )
 
 parallelExecution in Test := true

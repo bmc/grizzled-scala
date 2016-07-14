@@ -207,4 +207,46 @@ object util {
       )
     }
   }
+
+  /** Given a sequence of strings, find the longest common prefix.
+    *
+    * @param strings  the strings to compare
+    *
+    * @return the longest common prefix, which might be ""
+    */
+  def longestCommonPrefix(strings: Seq[String]): String = {
+
+    def isCommonPrefix(len: Int): Boolean = {
+      val prefix = strings.head.slice(0, len)
+
+      // If there's a single string in the list that doesn't start with this
+      // prefix, the first N characters of strings(0) is not a common prefix.
+      ! strings.exists { s => ! s.startsWith(prefix) }
+    }
+
+    @tailrec
+    def search(low: Int, high: Int): (Int, Int) = {
+      if (low > high)
+        (low, high)
+      else {
+        val middle = (low + high) / 2
+        if (isCommonPrefix(middle))
+          search(low = middle + 1, high = high)
+        else
+          search(low = low, high = middle - 1)
+      }
+
+    }
+
+    if (strings.isEmpty) {
+      ""
+    }
+
+    else {
+      val minLen = strings.map(_.length).min
+      val (low, high) = search(1, minLen)
+      strings.head.slice(0, (low + high) / 2)
+    }
+  }
+
 }
