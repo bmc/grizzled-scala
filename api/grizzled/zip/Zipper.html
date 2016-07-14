@@ -260,7 +260,8 @@ entry in a zip file; a reference to the byte array is held within this
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Recursively add all the files in a directory to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively add all the files in a directory to the <code>Zipper</code>.
+      <p class="shortcomment cmt">Recursively add all the files in a directory to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively add all the files in a directory to the <code>Zipper</code>. Does not
+currently work properly on Windows.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>the directory, which must exist</p></dd><dt class="param">strip</dt><dd class="cmt"><p>optional leading path to strip. If not specified,
                  the full path to each file (minus file system root)
                  is used.</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the entries. Note that a
@@ -560,90 +561,38 @@ theoretically, run out of open file descriptors.
                 root is removed from this path.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addURL(url:grizzled.net.URL):scala.util.Try[grizzled.zip.Zipper]"></a>
-      <a id="addURL(URL):Try[Zipper]"></a>
+      <a id="addURL(url:grizzled.net.URL,zipPath:String):scala.util.Try[grizzled.zip.Zipper]"></a>
+      <a id="addURL(URL,String):Try[Zipper]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addURL</span><span class="params">(<span name="url">url: <a href="../net/URL.html" class="extype" name="grizzled.net.URL">URL</a></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
+        <span class="name">addURL</span><span class="params">(<span name="url">url: <a href="../net/URL.html" class="extype" name="grizzled.net.URL">URL</a></span>, <span name="zipPath">zipPath: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:grizzled.net.URL):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:grizzled.net.URL,zipPath:String):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>. This method is just
 shorthand for:</p><pre><span class="kw">val</span> gurl = grizzled.net.URL(...)
-zipper.addURL(gurl.javaURL)</pre></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+zipper.addURL(gurl.javaURL)</pre></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path within the zip file for the entry</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addURL(url:grizzled.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]"></a>
-      <a id="addURL(URL,Boolean):Try[Zipper]"></a>
+      <a id="addURL(url:java.net.URL,zipPath:String):scala.util.Try[grizzled.zip.Zipper]"></a>
+      <a id="addURL(URL,String):Try[Zipper]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addURL</span><span class="params">(<span name="url">url: <a href="../net/URL.html" class="extype" name="grizzled.net.URL">URL</a></span>, <span name="flatten">flatten: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
+        <span class="name">addURL</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="zipPath">zipPath: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:grizzled.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>grizzled.net.URL</code> to the <code>Zipper</code>. This method is just
-shorthand for:</p><pre><span class="kw">val</span> gurl = grizzled.net.URL(...)
-zipper.addURL(gurl.javaURL, flatten = ...)</pre></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the URL to a simple file name</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
-        <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
-    </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addURL(url:java.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]"></a>
-      <a id="addURL(URL,Boolean):Try[Zipper]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addURL</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>, <span name="flatten">flatten: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:java.net.URL,flatten:Boolean):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Add a <code>java.net.URL</code> to the <code>Zipper</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Add a <code>java.net.URL</code> to the <code>Zipper</code>. The path in the zip file will be
-taken from the path component of the URL, and all directories will be
-stripped from the path. That means the URL <i>must</i> have a file name
-component. For instance, if you add the URL <code>http://www.example.com/</code>,
-you'll get an error, because the path component is &quot;/&quot;, and the
-corresponding relative path is &quot;&quot;. In other words, <code>Zipper</code> does <i>not</i>
-add <code>index.html</code> for you automatically. A URL like
-<code>http://www.example.com/index.html</code> will work fine, resulting in
-<code>index.html</code> being added to the resulting zip file. Using this method to
-add <code>http://www.example.com/music/My-Song.mp3</code> will write
-<code>music/My-Song.mp3</code> to the zip or jar file, if <code>flatten</code> is <code>false</code>; if
-<code>flatten</code> is <code>true</code>, <code>My-Song.mp3</code> will be written.</p><p><b>Note</b>: The URL is not validated (i.e., no connection is made) until
-you call <code>writeZip()</code> or <code>writeJar()</code>.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt class="param">flatten</dt><dd class="cmt"><p>whether or not to flatten the URL to a simple file name
-                to create the zip path</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
-        <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
-    </li><li name="grizzled.zip.Zipper#addURL" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addURL(url:java.net.URL):scala.util.Try[grizzled.zip.Zipper]"></a>
-      <a id="addURL(URL):Try[Zipper]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addURL</span><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<a href="" class="extype" name="grizzled.zip.Zipper">Zipper</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:java.net.URL):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.zip.Zipper@addURL(url:java.net.URL,zipPath:String):scala.util.Try[grizzled.zip.Zipper]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -658,7 +607,7 @@ in <code>index.html</code> being added to the resulting zip file. Similarly, usi
 this method to add <code>http://www.example.com/music/My-Song.mp3</code> will
 write <code>music/My-Song.mp3</code> to the zip or jar file.</p><p><b>Note</b>: The URL is not validated (i.e., no connection is made) until
 you call <code>writeZip()</code> or <code>writeJar()</code>.
-</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
+</p></div><dl class="paramcmts block"><dt class="param">url</dt><dd class="cmt"><p>the URL to the resource to be added</p></dd><dt class="param">zipPath</dt><dd class="cmt"><p>the path within the zip file for the entry</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> with a new <code>Zipper</code> object, on success. A
         <code>Failure</code> on error. The original <code>Zipper</code> is not modified.</p></dd></dl></div>
     </li><li name="grizzled.zip.Zipper#addZipDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addZipDirectory(path:String):scala.util.Try[grizzled.zip.Zipper]"></a>
