@@ -3,6 +3,11 @@
 Version 2.6.0:
 
 * Added an implicit `mapWhile()` function for use with collection types.
+* Un-deprecated `grizzled.config.Configuration`. It's still used by tools
+  like [AVSL](http://software.clapper.org/avsl)
+* Corrected a bug in `grizzled.file.Includer` that prevented the final read
+  from completing in certain circumstances.
+* 
  
 Version 2.5.0:
 
