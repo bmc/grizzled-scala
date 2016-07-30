@@ -92,42 +92,7 @@ differ quite a bit).
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SectionextendsAnyRef"></a>
-      <a id="Section:Section"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="Section.html"><span class="name">Section</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.package@SectionextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Used as a wrapper to pass a section to callbacks.</p>
-    </li><li name="grizzled.config.ValueConverter" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="ValueConverter[T]extendsAnyRef"></a>
-      <a id="ValueConverter[T]:ValueConverter[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="ValueConverter.html"><span class="name">ValueConverter</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.config.package@ValueConverter[T]extendsAnyRef" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">To create your own value converter, implement this trait.</p><div class="fullcomment"><div class="comment cmt"><p>To create your own value converter, implement this trait.
-</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type the converter returns</p></dd></dl></div>
-    </li><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ConfigurationextendsAnyRef"></a>
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
@@ -136,7 +101,7 @@ differ quite a bit).
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Configuration.html"><span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">Configuration</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="Configuration.html"><span class="name">Configuration</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.config.package@ConfigurationextendsAnyRef" title="Permalink" target="_top">
@@ -281,10 +246,7 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
   ...
 }
 
-<span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl></div>
+<span class="kw">val</span> config = Configuration(configFile, notFoundFunction = findInDatabase)</pre></div></div>
     </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ConfigurationExceptionextendsException"></a>
       <a id="ConfigurationException:ConfigurationException"></a>
@@ -294,7 +256,7 @@ You might do something like this:</p><pre><span class="kw">def</span> findInData
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="ConfigurationException.html"><span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
+        <a href="ConfigurationException.html"><span class="name">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.config.package@ConfigurationExceptionextendsException" title="Permalink" target="_top">
@@ -307,9 +269,7 @@ objects.
 </p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@SuppressWarnings</span><span class="args">()</span>
               
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl></div>
+        </dd></dl></div>
     </li><li name="grizzled.config.ConfigurationOptionException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ConfigurationOptionExceptionextendsConfigurationException"></a>
       <a id="ConfigurationOptionException:ConfigurationOptionException"></a>
@@ -319,7 +279,7 @@ objects.
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="ConfigurationOptionException.html"><span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">ConfigurationOptionException</span></a><span class="result"> extends <a href="ConfigurationException.html" class="extype" name="grizzled.config.ConfigurationException">ConfigurationException</a></span>
+        <a href="ConfigurationOptionException.html"><span class="name">ConfigurationOptionException</span></a><span class="result"> extends <a href="ConfigurationException.html" class="extype" name="grizzled.config.ConfigurationException">ConfigurationException</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.config.package@ConfigurationOptionExceptionextendsConfigurationException" title="Permalink" target="_top">
@@ -332,21 +292,50 @@ and option.
 </p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@SuppressWarnings</span><span class="args">()</span>
               
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl></div>
+        </dd></dl></div>
+    </li><li name="grizzled.config.Section" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SectionextendsAnyRef"></a>
+      <a id="Section:Section"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Section.html"><span class="name">Section</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.package@SectionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Used as a wrapper to pass a section to callbacks.</p>
+    </li><li name="grizzled.config.ValueConverter" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ValueConverter[T]extendsAnyRef"></a>
+      <a id="ValueConverter[T]:ValueConverter[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ValueConverter.html"><span class="name">ValueConverter</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.config.package@ValueConverter[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">To create your own value converter, implement this trait.</p><div class="fullcomment"><div class="comment cmt"><p>To create your own value converter, implement this trait.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type the converter returns</p></dd></dl></div>
     </li></ol>
             </div>
 
         
 
-        
-
-        
-
         <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <h3>Value Members</h3>
+              <ol><li name="grizzled.config.Configuration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Configuration"></a>
       <a id="Configuration:Configuration"></a>
       <h4 class="signature">
@@ -355,7 +344,7 @@ and option.
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Configuration$.html"><span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">Configuration</span></a>
+        <a href="Configuration$.html"><span class="name">Configuration</span></a>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.config.package@Configuration" title="Permalink" target="_top">
@@ -363,12 +352,8 @@ and option.
       </a>
     </span>
       <p class="shortcomment cmt">Companion object for the <code>Configuration</code> class
-</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for the <code>Configuration</code> class
-</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl></div>
-    </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+</p>
+    </li><li name="grizzled.config.ConfigurationException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ConfigurationException"></a>
       <a id="ConfigurationException:ConfigurationException"></a>
       <h4 class="signature">
@@ -377,19 +362,20 @@ and option.
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="ConfigurationException$.html"><span class="name deprecated" title="Deprecated: (Since version 2.4.1) Switch to HOCON or YAML (https://github.com/typesafehub/config)">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="ConfigurationException$.html"><span class="name">ConfigurationException</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.config.package@ConfigurationException" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.4.1)</i> Switch to HOCON or YAML (https://github.com/typesafehub/config)</p></dd></dl></div>
+      
     </li></ol>
             </div>
+
+        
+
+        
         </div>
 
         <div id="inheritedMembers">

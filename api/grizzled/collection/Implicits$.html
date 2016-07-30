@@ -118,7 +118,7 @@ Scala's <code>for</code> loop.</p>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Implicits$$GrizzledIterable.html"><span class="name">GrizzledIterable</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
+        <a href="Implicits$$GrizzledIterable.html"><span class="name">GrizzledIterable</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.collection.Implicits$@GrizzledIterable[+T]extendsIterable[T]" title="Permalink" target="_top">
@@ -128,23 +128,41 @@ Scala's <code>for</code> loop.</p>
       <p class="shortcomment cmt">An <code>Iterable</code> enrichment class.</p><div class="fullcomment"><div class="comment cmt"><p>An <code>Iterable</code> enrichment class.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the iterable type</p></dd></dl></div>
     </li><li name="grizzled.collection.Implicits.GrizzledLinearSeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="GrizzledLinearSeq[+T]extendsAnyVal"></a>
+      <a id="GrizzledLinearSeq[+T]extendsAnyRef"></a>
       <a id="GrizzledLinearSeq[+T]:GrizzledLinearSeq[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">implicit final </span>
+        <span class="modifier">implicit </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Implicits$$GrizzledLinearSeq.html"><span class="name">GrizzledLinearSeq</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+        <a href="Implicits$$GrizzledLinearSeq.html"><span class="name">GrizzledLinearSeq</span></a><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.Implicits$@GrizzledLinearSeq[+T]extendsAnyVal" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.collection.Implicits$@GrizzledLinearSeq[+T]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">An enrichment class that decorates a <code>LinearSeq</code>.</p><div class="fullcomment"><div class="comment cmt"><p>An enrichment class that decorates a <code>LinearSeq</code>.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type</p></dd></dl></div>
+    </li><li name="grizzled.collection.Implicits.MapWhile" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="MapWhile[+T,I&lt;:Iterable[T]]extendsAnyRef"></a>
+      <a id="MapWhile[+T,I&lt;:Iterable[T]]:MapWhile[T,I]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Implicits$$MapWhile.html"><span class="name">MapWhile</span></a><span class="tparams">[<span name="T">+T</span>, <span name="I">I &lt;: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.MapWhile.T">T</span>]</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.collection.Implicits$@MapWhile[+T,I&lt;:Iterable[T]]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Can be used to add a <code>mapWhile()</code> function to a collection type.</p><div class="fullcomment"><div class="comment cmt"><p>Can be used to add a <code>mapWhile()</code> function to a collection type.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>type of value contained in the collection</p></dd><dt class="tparam">I</dt><dd class="cmt"><p>the collection, which must be a subclass of <code>Iterable[T]</code></p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -351,6 +369,25 @@ Scala's <code>for</code> loop.</p>
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="grizzled.collection.Implicits#iterableMapWhile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="iterableMapWhile[T](i:Iterable[T]):grizzled.collection.Implicits.MapWhile[T,Iterable[T]]"></a>
+      <a id="iterableMapWhile[T](Iterable[T]):MapWhile[T,Iterable[T]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">iterableMapWhile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="i">i: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.iterableMapWhile.T">T</span>]</span>)</span><span class="result">: <a href="Implicits$$MapWhile.html" class="extype" name="grizzled.collection.Implicits.MapWhile">MapWhile</a>[<span class="extype" name="grizzled.collection.Implicits.iterableMapWhile.T">T</span>, <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.iterableMapWhile.T">T</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.collection.Implicits$@iterableMapWhile[T](i:Iterable[T]):grizzled.collection.Implicits.MapWhile[T,Iterable[T]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds a <code>mapWhile()</code> function to an <code>Iterable</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a <code>mapWhile()</code> function to an <code>Iterable</code>.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type of the iterable</p></dd><dt class="param">i</dt><dd class="cmt"><p>the iterable</p></dd><dt>returns</dt><dd class="cmt"><p>a <code>MapWhile</code> object with a <code>mapWhile()</code> function that returns a
+        new <code>Iterator[T]</code></p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -402,6 +439,25 @@ Scala's <code>for</code> loop.</p>
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.collection.Implicits#seqMapWhile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="seqMapWhile[T](seq:Seq[T]):grizzled.collection.Implicits.MapWhile[T,Seq[T]]"></a>
+      <a id="seqMapWhile[T](Seq[T]):MapWhile[T,Seq[T]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">seqMapWhile</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="seq">seq: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="grizzled.collection.Implicits.seqMapWhile.T">T</span>]</span>)</span><span class="result">: <a href="Implicits$$MapWhile.html" class="extype" name="grizzled.collection.Implicits.MapWhile">MapWhile</a>[<span class="extype" name="grizzled.collection.Implicits.seqMapWhile.T">T</span>, <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="grizzled.collection.Implicits.seqMapWhile.T">T</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.collection.Implicits$@seqMapWhile[T](seq:Seq[T]):grizzled.collection.Implicits.MapWhile[T,Seq[T]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Adds a <code>mapWhile()</code> function to a <code>Seq</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a <code>mapWhile()</code> function to a <code>Seq</code>.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type of the sequence</p></dd><dt class="param">seq</dt><dd class="cmt"><p>the sequence</p></dd><dt>returns</dt><dd class="cmt"><p>a <code>MapWhile</code> object with a <code>mapWhile()</code> function that returns a
+        new <code>Seq[T]</code></p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

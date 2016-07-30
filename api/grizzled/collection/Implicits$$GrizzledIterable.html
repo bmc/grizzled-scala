@@ -45,7 +45,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">GrizzledIterable</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
+        <span class="name">GrizzledIterable</span><span class="tparams">[<span name="T">+T</span>]</span><span class="result"> extends <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
       </span>
       </h4>
       
@@ -90,7 +90,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="grizzled.collection.Implicits.GrizzledIterable#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(underlying:Iterable[T]):grizzled.collection.Implicits.GrizzledIterable[T]"></a>
+      <a id="&lt;init&gt;(container:Iterable[T]):grizzled.collection.Implicits.GrizzledIterable[T]"></a>
       <a id="&lt;init&gt;:GrizzledIterable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,14 +98,14 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">GrizzledIterable</span><span class="params">(<span name="underlying">underlying: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>)</span>
+        <span class="name">GrizzledIterable</span><span class="params">(<span name="container">container: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.Implicits$$GrizzledIterable@&lt;init&gt;(underlying:Iterable[T]):grizzled.collection.Implicits.GrizzledIterable[T]" title="Permalink" target="_top">
+      <a href="../../index.html#grizzled.collection.Implicits$$GrizzledIterable@&lt;init&gt;(container:Iterable[T]):grizzled.collection.Implicits.GrizzledIterable[T]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">underlying</dt><dd class="cmt"><p>the underlying iterable</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">container</dt><dd class="cmt"><p>the underlying iterable</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -486,6 +486,23 @@ in columns.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Iterable → GenIterable → Traversable → GenTraversable → GenericTraversableTemplate</dd></dl></div>
+    </li><li name="grizzled.collection.Implicits.GrizzledIterable#container" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="container:Iterable[T]"></a>
+      <a id="container:Iterable[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">container</span><span class="result">: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#grizzled.collection.Implicits$$GrizzledIterable@container:Iterable[T]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">the underlying iterable</p>
     </li><li name="scala.collection.IterableLike#copyToArray" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="copyToArray[B&gt;:A](xs:Array[B],start:Int,len:Int):Unit"></a>
       <a id="copyToArray[B&gt;:T](Array[B],Int,Int):Unit"></a>
@@ -1436,7 +1453,7 @@ in columns.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">realIterable</span><span class="result">: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
+        <span class="name">realIterable</span><span class="result">: <span class="extype" name="scala.collection.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#grizzled.collection.Implicits$$GrizzledIterable@realIterable:Iterable[T]" title="Permalink" target="_top">
@@ -2233,23 +2250,6 @@ in columns.
                 <span class="name">@migration</span>
               
         </dd><dt>Migration</dt><dd class="cmt"><p><i>(Changed in version 2.9.0)</i> <code>transpose</code> throws an <code>IllegalArgumentException</code> if collections are not uniformly sized.</p></dd></dl></div>
-    </li><li name="grizzled.collection.Implicits.GrizzledIterable#underlying" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="underlying:Iterable[T]"></a>
-      <a id="underlying:Iterable[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">underlying</span><span class="result">: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="grizzled.collection.Implicits.GrizzledIterable.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#grizzled.collection.Implicits$$GrizzledIterable@underlying:Iterable[T]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">the underlying iterable</p><div class="fullcomment"><div class="comment cmt"><p>the underlying iterable</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#unzip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="unzip[A1&lt;:&lt;?&gt;,A2&lt;:&lt;?&gt;](implicitasPair:&lt;?&gt;):(CC[A1],CC[A2])"></a>
       <a id="unzip[A1,A2]((T)⇒(A1,A2)):(Iterable[A1],Iterable[A2])"></a>
