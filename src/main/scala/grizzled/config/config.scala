@@ -92,12 +92,10 @@ trait ValueConverter[T] {
   * @param exception a nested exception
   */
 @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
-@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 class ConfigurationException(val message:   String,
                              val exception: Throwable = null)
   extends Exception(message, exception)
 
-@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 object ConfigurationException {
   def apply(message: String) =
     new ConfigurationException(message)
@@ -109,7 +107,6 @@ object ConfigurationException {
   * and option.
   */
 @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
-@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 class ConfigurationOptionException(message:     String,
                                    val section: String,
                                    val option:  String,
@@ -401,7 +398,6 @@ class ConfigurationOptionException(message:     String,
   *                            functions, like `get()`, that return `Option`
   *                            values).
   */
-@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 final class Configuration private[config](
   private val contents:             Map[String, Map[String, Value]],
   private val sectionNamePattern:   Regex,
@@ -989,7 +985,6 @@ final class Configuration private[config](
 /**
   * Companion object for the `Configuration` class
   */
-@deprecated("Switch to HOCON or YAML (https://github.com/typesafehub/config)", "2.4.1")
 object Configuration {
   final val DefaultSectionNamePattern = """([a-zA-Z0-9_]+)""".r
   final val DefaultCommentPattern     = """^\s*(#.*)$""".r
@@ -1404,11 +1399,9 @@ object Configuration {
           Failure(ConfigurationException(s"""Bad section name: "$name"."""))
 
         case Assignment(optionName, value) =>
-          println(s"  ... $optionName=$value, curSection=$curSection")
           curSection.map { sectionName =>
             val sectionMap = curMap.getOrElse(sectionName, Map.empty[String, Value])
             val newSection = sectionMap + (optionName -> Value(value))
-            println(s"  ...newSection=$newSection")
             Success((curSection, curMap ++ Map(sectionName -> newSection)))
           }.
           getOrElse(
@@ -1439,15 +1432,15 @@ object Configuration {
       }
     }
 
-    @tailrec def processLines(lines: Iterator[String],
-                              curSection: Option[String],
-                              curMap: Map[String, Map[String, Value]]):
-      Try[Map[String, Map[String, Value]]] = {
+    @tailrec
+    def processLines(lines:      Iterator[String],
+                     curSection: Option[String],
+                     curMap:     Map[String, Map[String, Value]]):
+    Try[Map[String, Map[String, Value]]] = {
 
       if (lines.hasNext) {
-        val h = lines.next
-
-        processLine(h, curSection, curMap) match {
+        val line = lines.next
+        processLine(line, curSection, curMap) match {
           case Success((section, map)) =>
             if (lines.hasNext)
               processLines(lines, section, curMap ++ map)
