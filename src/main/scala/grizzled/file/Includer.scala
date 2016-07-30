@@ -46,6 +46,7 @@ import scala.util.Try
 import scala.util.matching.Regex
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
 
+import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.io.SourceReader
 
 import scala.collection.AbstractIterator
@@ -142,7 +143,8 @@ extends Iterator[String] {
     *         `false` otherwise
     */
   def hasNext: Boolean = {
-    @tailrec def somethingHasNext(stack: List[IncludeSource]): Boolean = {
+    @tailrec
+    def somethingHasNext(stack: List[IncludeSource]): Boolean = {
       if (stack.isEmpty)
         false
       else if (stack.head.iterator.hasNext)
@@ -161,7 +163,8 @@ extends Iterator[String] {
     * @return the next input line
     */
   def next: String = {
-    @tailrec def nextFromStack: String = {
+    @tailrec
+    def nextFromStack: String = {
       if (sourceStack.isEmpty)
         throw new IllegalStateException("No more data")
 
@@ -173,7 +176,8 @@ extends Iterator[String] {
       }
     }
 
-    @tailrec def processNext: String = {
+    @tailrec
+    def processNext: String = {
       val line = nextFromStack
 
       // NOTE: Could use flatMap(), et al, on the return from
@@ -183,7 +187,7 @@ extends Iterator[String] {
         case includeRegex(inc) if isURL(inc) =>
           val url = new URL(inc)
           sourceStack.push(
-            new IncludeSource(new InputStreamReader(url.openStream(), "UTF-8"),
+            new IncludeSource(Source.fromInputStream(url.openStream(), "UTF-8"),
                               url.toURI)
           )
           processNext
@@ -211,8 +215,9 @@ extends Iterator[String] {
                                   parentURI.getFragment)
 
           val source = Option(newURI.getScheme).getOrElse("file") match {
-            case "file" => new FileReader(newURI.getPath)
-            case _      => new InputStreamReader(newURI.toURL.openStream(), "UTF-8")
+            case "file" => Source.fromFile(newURI.getPath)
+            case _      => Source.fromInputStream(newURI.toURL.openStream(),
+                                                  "UTF-8")
           }
 
           sourceStack.push(new IncludeSource(source, newURI))
@@ -317,7 +322,7 @@ object Includer {
             includeRegex: Regex,
             maxNesting:   Int): Try[Includer] = {
     Try {
-      new Includer(new IncludeSource(new FileReader(file), file.toURI),
+      new Includer(new IncludeSource(Source.fromFile(file), file.toURI),
                    includeRegex,
                    maxNesting)
     }
@@ -343,7 +348,7 @@ object Includer {
             includeRegex: Regex,
             maxNesting:   Int): Try[Includer] = {
     Try {
-      new Includer(new IncludeSource(SourceReader(source), new URI(".")),
+      new Includer(new IncludeSource(source, new URI(".")),
                    includeRegex,
                    maxNesting)
     }
@@ -453,8 +458,10 @@ object Includer {
       new URL(pathOrURI)
     }
     .map { url: URL =>
-      val source = new InputStreamReader(url.openStream(), "UTF-8")
-      new Includer(new IncludeSource(source, url.toURI), includeRegex, maxNesting)
+      val source = Source.fromInputStream(url.openStream(), "UTF-8")
+      new Includer(new IncludeSource(source, url.toURI),
+                   includeRegex,
+                   maxNesting)
     }
     .recoverWith {
       case u: MalformedURLException =>
@@ -497,41 +504,11 @@ object Includer {
       }
   }
 }
+
 /**
   * Used to maintain the stack of sources being read and to keep track of
   * the underlying URI.
   */
-private[file] class IncludeSource(reader: Reader, val uri: URI) {
-  val source = new BufferedReader(reader)
-  var nextLine: Option[String] = None
-
-  val iterator = new Iterator[String] {
-
-    def next(): String = {
-      nextLine.map { s =>
-        nextLine = None
-        s
-      }
-      .getOrElse(source.readLine)
-    }
-
-    def hasNext: Boolean = {
-      try {
-        if (nextLine.isDefined)
-          true
-        else {
-          nextLine = Option(source.readLine)
-          nextLine.isDefined
-        }
-      }
-      catch {
-        case _: IOException =>
-          reader.close()
-          false
-      }
-    }
-
-    def remove(): Unit =
-      throw new UnsupportedOperationException("remove() not supported")
-  }
+private[file] class IncludeSource(source: Source, val uri: URI) {
+  val iterator = source.getLines
 }
