@@ -1,5 +1,9 @@
 # Grizzled Scala Change Log
 
+Version 2.6.0:
+
+* Added an implicit `mapWhile()` function for use with collection types.
+ 
 Version 2.5.0:
 
 * Added `grizzled.string.util.longestCommonPrefix()`.
