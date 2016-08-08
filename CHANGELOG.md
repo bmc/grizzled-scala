@@ -1,5 +1,11 @@
 # Grizzled Scala Change Log
 
+Version 2.7.0:
+
+* Added `tryWithResource`, a version of `grizzled.util.withResource` that
+  returns a `Try`.
+* Upgraded to ScalaTest 3.0.0, release version.  
+
 Version 2.6.0:
 
 * Added an implicit `mapWhile()` function for use with collection types.

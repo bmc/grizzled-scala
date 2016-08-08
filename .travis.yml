@@ -1,4 +1,4 @@
-# Travis CI configuration file. Generated from build.sbt on Sat May 21 14:15:26 EDT 2016
+# Travis CI configuration file. 
 
 sudo: false
 

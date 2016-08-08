@@ -2,7 +2,7 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "2.6.0"
+version := "2.7.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
@@ -58,7 +58,7 @@ def mappedDep(dep: sbt.ModuleID): sbt.ModuleID = {
 // ScalaTest
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.0-RC4" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.0" % "test"
 )
 
 parallelExecution in Test := true

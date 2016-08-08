@@ -112,9 +112,17 @@ package object util {
     * }
     * }}}
     *
+    * '''Note''': If the block throws an exception, `withResource` propagates
+    * the exception. If you want to capture the exception, instead, use
+    * [[grizzled.util.tryWithResource]].
+    *
     * @param resource  the object that holds a resource to be released
     * @param code      the code block to execute with the resource
     * @param mgr       the resource manager that can release the resource
+    *
+    * @tparam T    the type of the resource
+    * @tparam R    the return type of the code block
+    *
     * @return whatever the block returns
     */
   def withResource[T, R](resource: T)
@@ -126,6 +134,29 @@ package object util {
 
     finally {
       mgr.release(resource)
+    }
+  }
+
+  /** A version of [[grizzled.util.withResource]] that captures any thrown
+    * exception, instead of propagating it.
+    *
+    * @param open  the by-name parameter (code block) to open the resource.
+    *              This parameter is a by-name parameter so that this
+    *              function can capture any exceptions it throws.
+    * @param code  the code block to execute with the resource
+    * @param mgr   the resource manager that can release the resource
+    *
+    * @tparam T    the type of the resource
+    * @tparam R    the return type of the code block
+    *
+    * @return A `Success` containing the result of the code block, or a
+    *         `Failure` with any thrown exception.
+    */
+  def tryWithResource[T, R](open: => T)
+                           (code: T => R)
+                           (implicit mgr: CanReleaseResource[T]): Try[R] = {
+    Try {
+      withResource(open)(code)(mgr)
     }
   }
 }
