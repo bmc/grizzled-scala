@@ -617,18 +617,17 @@ object util {
       pieces
   }
 
-  /** Join components of a path together.
+  /** Join components of a path together, using the specified file separator.
     *
     * @param fileSep the file separator to use
     * @param pieces  path pieces
     *
     * @return a composite path
     */
-  def joinPath(fileSep: String, pieces: List[String]): String =
+  def joinPath(fileSep: String, pieces: Seq[String]): String =
     pieces mkString fileSep
 
-  /** Join components of a path together, using the file separator of the
-    * currently running system
+  /** Join components of a path together, using the current file separator.
     *
     * @param pieces  path pieces
     *
@@ -637,8 +636,7 @@ object util {
   def joinPath(pieces: String*): String =
     joinPath(fileSeparator, pieces.toList)
 
-  /** Join components of a path together, using the file separator of the
-    * currently running system
+  /** Join components of a path together, using the current file separator.
     *
     * @param pieces  path pieces
     *
@@ -646,6 +644,34 @@ object util {
     */
   def joinPath(pieces: File*): File =
     new File(joinPath(fileSeparator, pieces.toList.map(_.getName)))
+
+  /** Join components of a path together, using the current file separator;
+    * then, normalize the result.
+    *
+    * @param pieces  path pieces
+    *
+    * @return a composite, normalized path
+    *
+    * @see [[joinPath(pieces:String*):String*]]
+    * @see [[normalizePath]]
+    */
+  def joinAndNormalizePath(pieces: String*): String = {
+    normalizePath(joinPath(pieces: _*))
+  }
+
+  /** Join components of a path together, using the current file separator;
+    * then, normalize the result.
+    *
+    * @param pieces  path pieces
+    *
+    * @return a composite, normalized path
+    *
+    * @see [[joinPath(pieces:String*):String*]]
+    * @see [[normalizePath]]
+    */
+  def joinAndNormalizePath(pieces: File*): File = {
+    new File(normalizePath(joinPath(pieces: _*).getPath))
+  }
 
   /** Determine the temporary directory to use.
     *
@@ -922,15 +948,14 @@ object util {
     */
   def deleteTree(dir: String): Unit = deleteTree(new File(dir))
 
-  /**
-   * Recursively remove a directory tree. This function is conceptually
-   * equivalent to `rm -r` on a Unix system.
-   *
-   * @param dir The directory
-   *
-   * @return `Failure(exception)` on error, `Success(total)` on success. `total`
-   *         is the total number of deleted files.
-   */
+  /** Recursively remove a directory tree. This function is conceptually
+    * equivalent to `rm -r` on a Unix system.
+    *
+    * @param dir The directory
+    *
+    * @return `Failure(exception)` on error, `Success(total)` on success. `total`
+    *         is the total number of deleted files.
+    */
   def deleteTree(dir: File): Try[Int] = {
     def deleteOne(f: File): Try[Int] = {
       if (! f.delete)
@@ -939,7 +964,9 @@ object util {
         Success(1)
     }
 
-    if (! dir.isDirectory)
+    if (! dir.exists)
+      Success(0)
+    else if (! dir.isDirectory)
       Failure(new IOException(s""""$dir" is not a directory."""))
     else {
       val treeResults = dir.listFiles.map { f =>

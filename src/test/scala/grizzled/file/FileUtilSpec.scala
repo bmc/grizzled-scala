@@ -149,6 +149,21 @@ class FileUtilSpec extends BaseSpec {
     }
   }
 
+  "joinAndNormalizePath" should "normalize a joined path" in {
+    val data = Array(
+      (List(".", "..", "foo", "bar"), "../foo/bar"),
+      (List("..", ".", "foo", "..", "bar", "x"), "../bar/x")
+    )
+
+    for ((list, expected) <- data) {
+      val expected2 = expected.replaceAll("/", File.separator)
+      joinAndNormalizePath(list: _*) shouldBe expected2
+
+      val list2 = list.map(new File(_))
+      joinAndNormalizePath(list2: _*).getPath shouldBe expected2
+    }
+  }
+
   "splitDrivePath" should "handle all kinds of paths" in {
     val data = Map(
       ""                 -> ("", ""),

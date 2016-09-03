@@ -1,5 +1,12 @@
 # Grizzled Scala Change Log
 
+Version 2.8.0:
+
+* Added `grizzled.file.util.joinAndNormalizePath`, which combines the
+  functionality of `joinPath` with that of `normalizePath`.
+* Fixed `grizzed.file.util.deleteTree()` to return successfully if the
+  directory doesn't exist, instead of failing. 
+
 Version 2.7.0:
 
 * Added `tryWithResource`, a version of `grizzled.util.withResource` that
