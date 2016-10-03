@@ -86,25 +86,4 @@ object sys {
       case _                                   => Posix
     }
   }
-
-  /** Get the Java system properties as a Scala iterable. The iterable
-    * will produce a (name, value) tuple.
-    *
-    * @return the system properties as an iterable
-    */
-  @deprecated("Use scala.util.Properties or scala.sys.SystemProperties", "1.7.0")
-  def systemProperties: Iterable[(String, String)] = {
-    // System.properties aren't for-loopable by themselves.
-
-    import scala.collection.mutable.ArrayBuffer
-
-    val temp = new ArrayBuffer[(String, String)]()
-    val e = System.getProperties.propertyNames
-    while (e.hasMoreElements) {
-      val name = e.nextElement.toString
-      temp += ((name, System.getProperty(name)))
-    }
-
-    temp
-  }
 }

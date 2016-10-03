@@ -38,7 +38,12 @@
 package grizzled.string.template
 
 import scala.util.matching.Regex.Match
-import grizzled.either.Implicits._
+
+import scala.util.{Failure, Success, Try}
+
+/** An exception used to signal substitution errors.
+  */
+case class SubstitutionException(message: String) extends Exception(message)
 
 /** Information about a parsed variable name.
   */
@@ -72,12 +77,12 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     *
     * @param s  the string in which to replace variable references
     *
-    * @return `Right(substitutedValue)` or `Left(error)`
+    * @return `Success(substitutedValue)` or `Failure(error)`
     */
-  def sub(s: String): Either[String, String] = {
-    def doSub(s2: String): Either[String, String] = {
+  def sub(s: String): Try[String] = {
+    def doSub(s2: String): Try[String] = {
 
-      def subVariable(variable: Variable): Either[String, String] = {
+      def subVariable(variable: Variable): Try[String] = {
         val endString = if (variable.end == s2.length) ""
                         else s2.substring(variable.end)
         val before = s2.substring(0, variable.start)
@@ -88,7 +93,7 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
       }
 
       findVariableReference(s2).map { v => subVariable(v) }
-                               .getOrElse(Right(s2))
+                               .getOrElse(Success(s2))
     }
 
     doSub(s)
@@ -114,16 +119,16 @@ abstract class StringTemplate(val resolveVar: (String) => Option[String],
     *         if the variable doesn't exist and `safe` is `false`.
     *                                    and `safe` is `false`
     */
-  private def getVar(name: String, default: Option[String]):
-    Either[String, String] = {
+  private def getVar(name: String, default: Option[String]): Try[String] = {
 
-    def handleDefault: Either[String, String] = {
-      default.map(Right(_)).getOrElse {
-        if (safe) Right("") else Left(s"Variable not found: $name")
+    def handleDefault: Try[String] = {
+      default.map(Success(_)).getOrElse {
+        if (safe) Success("")
+        else Failure(SubstitutionException(s"Variable not found: $name"))
       }
     }
 
-    resolveVar(name).map {s => Right(s)}.getOrElse(handleDefault)
+    resolveVar(name).map {s => Success(s)}.getOrElse(handleDefault)
   }
 }
 
@@ -202,9 +207,9 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
     *
     * @param s  the string in which to replace variable references
     *
-    * @return On success, `Right(result)`. On failure, `Left(error)`
+    * @return `Success(substitutedValue)` or `Failure(error)`
     */
-  override def sub(s: String): Either[String, String] = {
+  override def sub(s: String): Try[String] = {
     // Kludge to handle escaped "$". Temporarily replace it with something
     // highly unlikely to be in the string. Then, put a single "$" in its
     // place, after the substitution. Must be sure to handle even versus
@@ -336,7 +341,7 @@ class WindowsCmdStringTemplate(resolveVar: (String) => Option[String],
     *
     * @return `Right(substitutedValue)` or `Left(error)`
     */
-  override def sub(s: String): Either[String, String] = {
+  override def sub(s: String): Try[String] = {
     // Kludge to handle escaped "%%". Temporarily replace it with something
     // highly unlikely to be in the string. Then, put a single "%" in its
     // place, after the substitution.

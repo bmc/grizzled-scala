@@ -2,10 +2,12 @@ package grizzled.parsing
 
 /** The `Pushback` trait can be mixed into an `SafeIterator` to permit
   * arbitrary pushback.
+  *
+  * NOTE: This trait it not thread-safe.
   */
 trait Pushback[T] extends SafeIterator[T] {
 
-  private val pushbackStack = new scala.collection.mutable.Stack[T]
+  private var pushbackStack = List.empty[T]
 
   /** Get the next item from the stream, advancing the cursor, while
     * honoring previous calls to `pushback()`.
@@ -14,24 +16,23 @@ trait Pushback[T] extends SafeIterator[T] {
     *         if the iterator is exhausted.
     */
   override def next: Option[T] = {
-    if (pushbackStack.isEmpty)
-      super.next
-    else
-      Some(pushbackStack.pop)
-  }
 
-  /** Get the count of the number of items consumed so far.
-    *
-    * @return the count
-    */
-  @deprecated("Will not be supported in future versions.", "2.4.0")
-  override def totalRead: Int = super.totalRead - pushbackStack.length
+    pushbackStack match {
+      case Nil => super.next
+
+      case head :: tail =>
+        pushbackStack = tail
+        Some(head)
+    }
+  }
 
   /** Push a single item back onto the stream.
     *
     * @param item  the item
     */
-  def pushback(item: T): Unit = pushbackStack push item
+  def pushback(item: T): Unit = {
+    pushbackStack = item :: pushbackStack
+  }
 
   /** Push a list of items back onto the stream. The items are pushed
     * back in reverse order, so the items in the list should be in the order
@@ -49,5 +50,7 @@ trait Pushback[T] extends SafeIterator[T] {
     *
     * @param items  the items to push back.
     */
-  def pushback(items: List[T]): Unit = pushbackStack.pushAll(items.reverse)
+  def pushbackMany(items: List[T]): Unit = {
+    pushbackStack = items ::: pushbackStack
+  }
 }

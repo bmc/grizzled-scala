@@ -1,5 +1,28 @@
 # Grizzled Scala Change Log
 
+Version 3.0.0:
+
+_Contains breaking API changes._
+
+* Bumped cross-compiled build from Scala 2.12.0-M5 to 2.12.0-RC1.
+* Removed `grizzled.either.Implicits.RichEither`. The methods it contains
+  are part of `Either` in Scala 2.12 (though are implemented somewhat
+  differently).
+* The `sub()` method in `grizzled.string.template.StringTemplate` now
+  returns a `Try`, instead of an `Either`. 
+* `grizzled.parsing.Pushback.pushback(List[T])` is now called 
+  `pushbackMany()`.
+* Removed the following classes, which have been deprecated for some time:
+    - `grizzled.io.RichInputStream`
+    - `grizzled.io.RichReader`
+    - `grizzled.parsing.IteratorStream`
+    - `grizzled.collection.MultiIterator`
+* Removed the following methods/functions, which have deprecated for some time:
+    - `grizzled.parsing.Pushback.totalRead`
+    - `grizzled.parsing.SafeIterator.totalRead`.
+    - `grizzled.file.Implicits.GrizzledFile.walk` 
+    - `grizzled.sys.systemProperties`
+
 Version 2.8.0:
 
 * Added `grizzled.file.util.joinAndNormalizePath`, which combines the
@@ -11,7 +34,7 @@ Version 2.7.0:
 
 * Added `tryWithResource`, a version of `grizzled.util.withResource` that
   returns a `Try`.
-* Upgraded to ScalaTest 3.0.0, release version.  
+* Upgraded to ScalaTest 3.0.0, release version.
 
 Version 2.6.0:
 
@@ -25,7 +48,7 @@ Version 2.6.0:
 Version 2.5.0:
 
 * Added `grizzled.string.util.longestCommonPrefix()`.
-* Bumped cross-compiled build from Scala 2.12.0-M4 to 2.12.0.M5.
+* Bumped cross-compiled build from Scala 2.12.0-M4 to 2.12.0-M5.
 * Upgraded [ScalaTest][] to 3.0.0-RC4.
 
 Version 2.4.2:

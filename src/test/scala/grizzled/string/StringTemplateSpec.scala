@@ -36,6 +36,8 @@ package grizzled.string
 import grizzled.BaseSpec
 import grizzled.string.template._
 
+import scala.util.Success
+
 /**
  * Tests the grizzled.string.StringTemplate functions.
  */
@@ -48,27 +50,27 @@ class StringTemplateSpec extends BaseSpec {
       ("$foo bar $bar ${baz} $",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN $"),
+           "baz" -> "YAWN")) -> Success("FOO bar BARSKI YAWN $"),
 
       ("$foo bar $bar ${baz} $_",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN "),
+           "baz" -> "YAWN")) -> Success("FOO bar BARSKI YAWN "),
 
       ("$foo bar $bar ${baz} $frodo$",
        Map("foo" -> "FOO",
            "bar" -> "$foo",
-           "baz" -> "YAWN")) -> Right("FOO bar FOO YAWN $"),
+           "baz" -> "YAWN")) -> Success("FOO bar FOO YAWN $"),
 
       ("""$foo bar $bar ${baz} \$""",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN $"),
+           "baz" -> "YAWN")) -> Success("FOO bar BARSKI YAWN $"),
 
       ("""$foo ${foobar?blitz}""",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO blitz")
+           "baz" -> "YAWN")) -> Success("FOO blitz")
     )
 
     for {(input, expected) <- data
@@ -105,7 +107,7 @@ class StringTemplateSpec extends BaseSpec {
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
       val template = new UnixShellStringTemplate(vars.get, false)
-      template.sub(str).isLeft shouldBe true
+      template.sub(str).isSuccess shouldBe false
     }
   }
 
@@ -117,22 +119,22 @@ class StringTemplateSpec extends BaseSpec {
       ("%foo% bar %bar% %baz% %",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN %"),
+           "baz" -> "YAWN")) -> Success("FOO bar BARSKI YAWN %"),
 
       ("%foo% bar %bar% %baz% %_%",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN "),
+           "baz" -> "YAWN")) -> Success("FOO bar BARSKI YAWN "),
 
       ("%foo% bar %bar% %baz% %frodo%x",
        Map("foo" -> "FOO",
            "bar" -> "%foo%",
-           "baz" -> "YAWN")) -> Right("FOO bar FOO YAWN x"),
+           "baz" -> "YAWN")) -> Success("FOO bar FOO YAWN x"),
 
       ("%foo% bar %bar% %baz% %%",
        Map("foo" -> "FOO",
            "bar" -> "BARSKI",
-           "baz" -> "YAWN")) -> Right("FOO bar BARSKI YAWN %")
+           "baz" -> "YAWN")) -> Success("FOO bar BARSKI YAWN %")
     )
 
     for {(input, expected) <- data
@@ -169,7 +171,7 @@ class StringTemplateSpec extends BaseSpec {
     for {(input, expected) <- data
          (str, vars) = (input._1, input._2)} {
       val template = new WindowsCmdStringTemplate(vars.get, false)
-      template.sub(str).isLeft shouldBe true
+      template.sub(str).isSuccess shouldBe false
     }
   }
 }

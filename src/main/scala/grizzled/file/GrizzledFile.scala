@@ -194,45 +194,6 @@ object Implicits {
       util.touch(file.getPath, time)
     }
 
-    /**
-      * Directory tree lister, adapted from Python's `os.walk()` function.
-      * NOTE: This function generates the entire directory tree in memory,
-      * before returning. If you want a lazy generator, with optional filtering,
-      * use the `listRecursively()` method.
-      *
-      * For each directory in the directory tree rooted at this object
-      * (including the directory itself, but excluding '.' and '..'), yields
-      * a 3-tuple.
-      *
-      * {{{
-      * dirpath, dirnames, filenames
-      * }}}
-      *
-      * `dirpath` is a string, the path to the directory. `dirnames`is a
-      * list of the names of the subdirectories in `dirpath` (excluding '.'
-      * and '..'). `filenames` is a list of the names of the non-directory
-      * files in `dirpath`. Note that the names in the lists are just names,
-      * with no path components. To get a full path (which begins with this
-      * directory) to a file or directory in `dirpath`, use `dirpath +
-      * java.io.fileSeparator + name`, or use
-      * `grizzled.file.util.joinPath()`.
-      *
-      * If `topdown` is `true`, the triplet for a directory is generated
-      * before the triplets for any of its subdirectories (directories are
-      * generated top down). If `topdown` is `false`, the triplet for a
-      * directory is generated after the triples for all of its
-      * subdirectories (directories are generated bottom up).
-      *
-      * '''WARNING!''' This method does ''not'' grok symbolic links!
-
-      * @param topdown `true` to do a top-down traversal, `false` otherwise.
-      *
-      * @return List of triplets, as described above.
-      */
-    @deprecated("Use grizzled.file.util.walk", "2.3.0")
-    def walk(topdown: Boolean = true): List[(String, List[String], List[String])] =
-      util.walk(file.getPath, topdown)
-
     /** List a directory recursively, returning `File` objects for each file
       * (and subdirectory) found. This method does lazy evaluation, instead
       * of calculating everything up-front, as `walk()` does.

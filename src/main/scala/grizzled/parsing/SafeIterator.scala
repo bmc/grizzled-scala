@@ -80,13 +80,6 @@ class SafeIterator[+T](private val iterator: Iterator[T]) {
       Some(iterator.next)
     }
   }
-
-  /** Get the count of the number of items consumed so far.
-    *
-    * @return the count
-    */
-  @deprecated("Will not be supported in future versions.", "2.4.0")
-  def totalRead: Int = count
 }
 
 /** Companion object for `SafeIterator`.

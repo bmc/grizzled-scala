@@ -46,7 +46,6 @@ package grizzled.config
 import grizzled.file.Includer
 import grizzled.file.filter.BackslashContinuedLineIterator
 import grizzled.string.template.UnixShellStringTemplate
-import grizzled.either.Implicits._
 
 import scala.annotation.tailrec
 import scala.io.Source
@@ -116,12 +115,6 @@ class ConfigurationOptionException(message:     String,
 }
 
 /** An INI-style configuration file parser.
-  *
-  * '''WARNING: This class is deprecated.''' If you're looking for a decent
-  * configuration syntax, use YAML or
-  * [[https://github.com/typesafehub/config HOCON]].
-  *
-  * '''Documentation is for historical purposes only.'''
   *
   * `Configuration` implements an in-memory store for a configuration file
   * whose syntax is reminiscent of classic Windows .INI files, though with
@@ -837,8 +830,6 @@ final class Configuration private[config](
       (section, seq.map(_._2))
     }
 
-    val emptyMapPlaceholder = Map.empty[String, Value]
-
     // Create a new content map by subtracting the options from existing
     // sections. Note that we may well end up with empty sections.
     val newContents1 = contents.map { case (sectionName, optionsMap) =>
@@ -948,12 +939,13 @@ final class Configuration private[config](
                                                "[a-zA-Z0-9_.]+",
                                                safe)
     template.sub(value.translateMetachars) match {
-      case Right(s) => Success(Some(s))
-      case Left(e)  => Failure(
+      case Success(s) => Success(Some(s))
+      case Failure(e)  => Failure(
         new ConfigurationOptionException(
-          section = sectionName,
-          option  = value,
-          message = s"Can't get '$value' from $sectionName: $e"
+          section   = sectionName,
+          option    = value,
+          message   = s"Can't get '$value' from $sectionName: ${e.getMessage}",
+          exception = e
         )
       )
     }
@@ -988,8 +980,6 @@ final class Configuration private[config](
 object Configuration {
   final val DefaultSectionNamePattern = """([a-zA-Z0-9_]+)""".r
   final val DefaultCommentPattern     = """^\s*(#.*)$""".r
-
-  private val SpecialSections  = Set("env", "system")
 
   private def DefaultOptionNameTransformer(name: String) = name.toLowerCase()
 
@@ -1349,7 +1339,7 @@ object Configuration {
     Map[String, Map[String, Value]] = {
 
     sectionMap.map { case (sectionName: String, values: Map[String, String]) =>
-      sectionName -> values.map { case (k, v) => k -> Value(v, true) }
+      sectionName -> values.map { case (k, v) => k -> Value(v, isRaw = true) }
     }
   }
 
@@ -1400,7 +1390,8 @@ object Configuration {
 
         case Assignment(optionName, value) =>
           curSection.map { sectionName =>
-            val sectionMap = curMap.getOrElse(sectionName, Map.empty[String, Value])
+            val sectionMap = curMap.getOrElse(sectionName,
+                                              Map.empty[String, Value])
             val newSection = sectionMap + (optionName -> Value(value))
             Success((curSection, curMap ++ Map(sectionName -> newSection)))
           }.
@@ -1413,8 +1404,10 @@ object Configuration {
 
         case RawAssignment(optionName, value) =>
           curSection.map { sectionName =>
-            val sectionMap = curMap.getOrElse(sectionName, Map.empty[String, Value])
-            val newSection = sectionMap + (optionName -> Value(value, true))
+            val sectionMap = curMap.getOrElse(sectionName,
+                                              Map.empty[String, Value])
+            val newSection = sectionMap +
+                             (optionName -> Value(value, isRaw = true))
             val newMap = curMap + (sectionName -> newSection)
             Success((curSection, newMap))
           }.

@@ -16,7 +16,7 @@ class PushbackSpec extends BaseSpec {
     val p = new SafeIterator[String]((1 to 10).map(_.toString)) with Pushback[String]
     p.next shouldBe Some("1")
     p.next shouldBe Some("2")
-    p.pushback(List("1", "2"))
+    p.pushbackMany(List("1", "2"))
     p.next shouldBe Some("1")
     p.next shouldBe Some("2")
   }
@@ -31,7 +31,7 @@ class PushbackSpec extends BaseSpec {
 
   it should "allow arbitrarily large pushback" in {
     val p = new SafeIterator[Int](50 to 60) with Pushback[Int]
-    p.pushback((1 to 49).toList)
+    p.pushbackMany((1 to 49).toList)
     for (i <- 1 to 60)
       p.next shouldBe Some(i)
 
