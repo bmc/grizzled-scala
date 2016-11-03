@@ -15,6 +15,8 @@ import scala.io.Source
 
 class URLUtilSpec extends BaseSpec {
 
+  val WebURL = "https://raw.githubusercontent.com/bmc/grizzled-scala/master/README.md"
+
   val Contents =
     """|Lorem ipsum dolor sit amet, consectetur adipiscing
        |elit, sed do eiusmod tempor incididunt ut labore et
@@ -50,12 +52,22 @@ class URLUtilSpec extends BaseSpec {
     createTextFile(dir, name, Contents).toURI.toURL
   }
 
-  "download" should "download from a URL object" in {
+  "download" should "download from a file URL object" in {
     withTemporaryDirectory("URLUtil") { dir =>
       val url = URL(urlForContents(dir, "foo.txt"))
       val fut = URLUtil.download(url)
       val result = Await.result(fut, 10.seconds)
       Source.fromFile(result).mkString shouldBe Contents
+    }
+  }
+
+  it should "download from a web server" in {
+    withTemporaryDirectory("URLUtil") { dir =>
+      val url = URL(WebURL).get
+      val fut = URLUtil.download(url)
+      val result = Await.result(fut, 10.seconds)
+      val contents = Source.fromFile(result).mkString
+      contents.length should be > 0
     }
   }
 
@@ -78,7 +90,7 @@ class URLUtilSpec extends BaseSpec {
     }
   }
 
-  "withDownloadedFile" should "download synchronously" in {
+  "withDownloadedFile" should "download synchronously from a file" in {
     import URLUtil._
     withTemporaryDirectory("download") { dir =>
       val url = urlForContents(dir, "foobar.txt")
@@ -90,5 +102,17 @@ class URLUtilSpec extends BaseSpec {
       t shouldBe success
       t.get shouldBe Contents
     }
+  }
+
+  "withDownloadedFile" should "download synchronously from a web server" in {
+    import URLUtil._
+    val url = URL(WebURL).get
+    val t = withDownloadedFile(url, 10.seconds) { f =>
+      f.exists shouldBe true
+      Source.fromFile(f).mkString
+    }
+
+    t shouldBe success
+    t.get.length should be > 0
   }
 }

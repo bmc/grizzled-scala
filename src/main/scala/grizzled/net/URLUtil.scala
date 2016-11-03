@@ -54,7 +54,8 @@ object URLUtil {
   private lazy val ExtRegexp = """^(.*)(\.[^.]+)$""".r
 
   /** Download the specified URL to a file. The name of the file is
-    * taken from the URL, if possible, or generated otherwise.
+    * a generated temporary file name. If you want to control the file name,
+    * use one of the other versions of this function.
     *
     * @param url  The string containing the URI/URL
     * @param ctx  The concurrent execution content to use
@@ -68,7 +69,8 @@ object URLUtil {
   }
 
   /** Download the specified URL to a file. The name of the file is
-    * taken from the URL, if possible, or generated otherwise.
+    * a generated temporary file name. If you want to control the file name,
+    * use one of the other versions of this function.
     *
     * @param url  The `java.net.URL`
     * @param ctx  The concurrent execution content to use
@@ -80,7 +82,8 @@ object URLUtil {
   }
 
   /** Download the specified URL to a file. The name of the file is
-    * taken from the URL, if possible, or generated otherwise.
+    * a generated temporary file name. If you want to control the file name,
+    * use one of the other versions of this function.
     *
     * @param url  The `grizzled.net.URL`
     * @param ctx  The concurrent execution content to use
@@ -300,22 +303,25 @@ object URLUtil {
   }
 
   private[net] def getOutputFile(url: URL): Try[File] = {
-    // See http://stackoverflow.com/a/17870390/53495
-    val path = Paths.get(url.javaURL.toURI()).toFile()
-    val pathStr = path.getAbsolutePath
-    val extension = pathStr match {
-      case ExtRegexp(pathNoExt, ext) => ext
-      case _                         => ".dat"
-    }
-
     Try {
-      pathStr.last match {
-        case '/' =>
-          File.createTempFile("urldownload", extension)
+      url.path.map { pathStr =>
+        // URL paths are always /-separated
+        val extension = pathStr match {
+          case ExtRegexp(pathNoExt, ext) => ext
+          case _                         => ".dat"
+        }
 
-        case _   =>
-          new File(FileUtil.joinPath(System.getProperty("java.io.tmpdir"),
-                                     FileUtil.basename(pathStr)))
+        pathStr.last match {
+          case '/' =>
+            File.createTempFile("urldownload", extension)
+
+          case _   =>
+            new File(FileUtil.joinPath(System.getProperty("java.io.tmpdir"),
+                                       FileUtil.basename(pathStr)))
+        }
+      }
+      .getOrElse {
+        File.createTempFile("urldownload", ".dat")
       }
     }
   }
