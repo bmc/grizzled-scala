@@ -7,8 +7,8 @@ organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.11.8"
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0-RC1")
+scalaVersion := "2.12.0"
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
 
 // Incremental compilation performance improvement. See
 // http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
