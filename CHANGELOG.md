@@ -1,5 +1,11 @@
 # Grizzled Scala Change Log
 
+Version 3.1.0:
+
+* Built for Scala 2.12.0.
+* Fixed `grizzled.net.URLUtil` so that downloads don't bail with a
+  `java.nio.file.FileSystemNotFoundException` for non-file URLs.
+
 Version 3.0.0:
 
 _Contains breaking API changes._
