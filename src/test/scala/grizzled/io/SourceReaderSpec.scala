@@ -5,6 +5,7 @@ import java.io.{FileWriter, IOException}
 import grizzled.BaseSpec
 import grizzled.file.util.{joinPath, withTemporaryDirectory}
 import grizzled.util.withResource
+import grizzled.util.CanReleaseResource.Implicits.CanReleaseAutoCloseable
 
 import scala.io.Source
 import scala.util.Random

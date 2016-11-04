@@ -5,9 +5,8 @@ import Implicits.GrizzledFile
 import grizzled.file.util.withTemporaryDirectory
 import grizzled.file.{util => fileutil}
 import grizzled.util.withResource
+import grizzled.util.CanReleaseResource.Implicits.CanReleaseAutoCloseable
 import java.io.{File, FileWriter}
-import java.util.Date
-
 
 class GrizzledFileSpec extends BaseSpec {
 

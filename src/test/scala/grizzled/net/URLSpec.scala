@@ -5,6 +5,7 @@ import java.net.{MalformedURLException, URISyntaxException}
 
 import grizzled.BaseSpec
 import grizzled.util.withResource
+import grizzled.util.CanReleaseResource.Implicits.CanReleaseAutoCloseable
 import grizzled.file.util.withTemporaryDirectory
 import grizzled.file.{util => fileutil}
 

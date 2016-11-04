@@ -79,29 +79,40 @@ package object util {
     def release(a: T): Unit
   }
 
-  /** Companion object for `CanReleaseResource`, providing predefined implicit
-    * evidence parameters for `withResource()`.
-    *
-    * Note: Do _not_ import `grizzled.util.CanReleaseResource._` in Scala
-    * 2.12.x. Doing so will cause compiler errors if you then attempt to use
-    * `withResource` on a `scala.io.Source`, since `Source` is also a
-    * `Closeable` in 2.12, and this object provides implicit evidence objects
-    * for both. Use explicit imports for the evidence objects you need.
+  /** Companion object for `CanReleaseResource`.
     */
   object CanReleaseResource {
-    import java.io.Closeable
-    import scala.io.Source
 
-    /** Defines evidence for type `Closeable`.
+    /**
+      * Note: Do _not_ import `grizzled.util.CanReleaseResource._` in Scala
+      * 2.12.x. Doing so will cause compiler errors if you then attempt to use
+      * `withResource` on a `scala.io.Source`, since `Source` is also a
+      * `Closeable` in 2.12, and this object provides implicit evidence objects
+      * for both. Use explicit imports for the evidence objects you need.
       */
-    implicit object CanReleaseCloseable extends CanReleaseResource[Closeable] {
-      def release(c: Closeable) = c.close()
-    }
+    object Implicits {
+      import java.io.Closeable
+      import scala.io.Source
 
-    /** Defines evidence for type `Source`.
-      */
-    implicit object CanReleaseSource extends CanReleaseResource[Source] {
-      def release(s: Source) = s.close()
+      /** Defines evidence for type `Closeable`.
+        */
+      implicit object CanReleaseCloseable
+        extends CanReleaseResource[Closeable] {
+
+        def release(c: Closeable) = c.close()
+      }
+
+      /** Defines evidence for type `Source`.
+        */
+      implicit object CanReleaseSource extends CanReleaseResource[Source] {
+        def release(s: Source) = s.close()
+      }
+
+      implicit object CanReleaseAutoCloseable
+        extends CanReleaseResource[AutoCloseable] {
+
+        def release(c: AutoCloseable) = c.close()
+      }
     }
   }
 

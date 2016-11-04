@@ -3,6 +3,7 @@ package grizzled.file
 import java.util.regex.PatternSyntaxException
 
 import grizzled.file.util._
+import grizzled.util.CanReleaseResource.Implicits.CanReleaseAutoCloseable
 import grizzled.util.withResource
 import java.io.File
 

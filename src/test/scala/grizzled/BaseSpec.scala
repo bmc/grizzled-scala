@@ -35,6 +35,7 @@ trait CustomMatchers {
 class BaseSpec extends FlatSpec with Matchers with CustomMatchers {
   import grizzled.file.util.joinPath
   import grizzled.util.withResource
+  import grizzled.util.CanReleaseResource.Implicits.CanReleaseAutoCloseable
 
   val lineSep = (new SystemProperties).getOrElse("line.separator", "\n")
 

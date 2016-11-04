@@ -37,19 +37,14 @@
 
 package grizzled.file
 
-import grizzled.file.{util => FileUtil}
 import java.io._
 
 import scala.io.Source
 import scala.annotation.tailrec
 import scala.util.Try
 import scala.util.matching.Regex
-import java.net.{MalformedURLException, URI, URISyntaxException, URL}
+import java.net.{MalformedURLException, URI, URL}
 
-import grizzled.file.filter.BackslashContinuedLineIterator
-import grizzled.io.SourceReader
-
-import scala.collection.AbstractIterator
 import scala.sys.SystemProperties
 
 /** Process "include" directives in files, returning an iterator over
@@ -495,6 +490,8 @@ object Includer {
       .map { includer =>
         val fileOut = File.createTempFile(tempPrefix, tempSuffix)
         fileOut.deleteOnExit()
+
+        import grizzled.util.CanReleaseResource.Implicits.CanReleaseCloseable
 
         withResource(new FileWriter(fileOut)) { out =>
           includer.foreach(s => out.write(s + lineSep))

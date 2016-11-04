@@ -1,11 +1,13 @@
 package grizzled.zip
 
 import grizzled.util.withResource
+import grizzled.util.CanReleaseResource.Implicits.CanReleaseCloseable
 import grizzled.file.{util => fileutil}
 import fileutil.joinPath
 import fileutil.withTemporaryDirectory
 import grizzled.file.Implicits.GrizzledFile
 import grizzled.BaseSpec
+
 import java.io._
 import java.util.zip.ZipFile
 

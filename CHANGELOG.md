@@ -1,5 +1,16 @@
 # Grizzled Scala Change Log
 
+Version 4.0.0
+
+_Contains breaking API changes._
+
+* Moved implicit evidence objects for `CanReleaseResource` into a sub-object
+  (`Implicits`) within the `CanReleaseResource` companion, to alleviate
+  confusion in Scala 2.12.0. They should be imported explicitly, not with a
+  wildcard import, e.g.,
+  `import grizzled.util.CanReleaseResource.Implicits.CanReleaseCloseable`.
+* Added a `CanReleaseResource` evidence parameter for `java.lang.AutoCloseable`.
+
 Version 3.1.0:
 
 * Built for Scala 2.12.0.

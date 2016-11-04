@@ -57,9 +57,9 @@ object util {
 
   private lazy val random = new Random()
 
-  /* ---------------------------------------------------------------------- *\
-   Public Methods
-   \* ---------------------------------------------------------------------- */
+  // -------------------------------------------------------------------------
+  // Public Methods
+  // -------------------------------------------------------------------------
 
   /** Get the directory name of a pathname.
     *
@@ -887,6 +887,8 @@ object util {
         target
 
     Try {
+      import grizzled.util.CanReleaseResource.Implicits.CanReleaseCloseable
+
       withResource(new BufferedInputStream(new FileInputStream(source))) { in =>
         withResource(new BufferedOutputStream(new FileOutputStream(targetFile))) { out =>
           in.copyTo(out)
@@ -1208,9 +1210,9 @@ object util {
     }
   }
 
-  /* ---------------------------------------------------------------------- *\
-                              Private Methods
-  \* ---------------------------------------------------------------------- */
+  // -------------------------------------------------------------------------
+  // Private Methods
+  // -------------------------------------------------------------------------
 
   /** Convert a file into a path array. Borrowed from SBT source code.
     */
