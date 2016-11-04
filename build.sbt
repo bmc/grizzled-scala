@@ -2,7 +2,7 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "3.1.0"
+version := "4.0.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
