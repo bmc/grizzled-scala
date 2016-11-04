@@ -134,7 +134,11 @@ evidence parameters for withResource()." href="package$$CanReleaseResource$.html
       
       <p class="shortcomment cmt">Companion object for <code>CanReleaseResource</code>, providing predefined implicit
 evidence parameters for <code>withResource()</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>CanReleaseResource</code>, providing predefined implicit
-evidence parameters for <code>withResource()</code>.
+evidence parameters for <code>withResource()</code>.</p><p>Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
+2.12.x. Doing so will cause compiler errors if you then attempt to use
+<code>withResource</code> on a <code>scala.io.Source</code>, since <code>Source</code> is also a
+<code>Closeable</code> in 2.12, and this object provides implicit evidence objects
+for both. Use explicit imports for the evidence objects you need.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="grizzled.util">util</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>

@@ -493,7 +493,7 @@ ones are provided automatically.</p><p>Sample use:</p><pre>withResource(<span cl
 the exception. If you want to capture the exception, instead, use
 <a href="#tryWithResource[T,R](open:=&gt;T)(code:T=&gt;R)(implicitmgr:grizzled.util.package.CanReleaseResource[T]):scala.util.Try[R]" class="extmbr" name="grizzled.util#tryWithResource">grizzled.util.tryWithResource</a>.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type of the resource</p></dd><dt class="tparam">R</dt><dd class="cmt"><p>the return type of the code block</p></dd><dt class="param">resource</dt><dd class="cmt"><p>the object that holds a resource to be released</p></dd><dt class="param">code</dt><dd class="cmt"><p>the code block to execute with the resource</p></dd><dt class="param">mgr</dt><dd class="cmt"><p>the resource manager that can release the resource</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the block returns</p></dd></dl></div>
-    </li><li name="grizzled.util.CanReleaseResource" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="grizzled.util.CanReleaseResource" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="CanReleaseResource"></a><a id="CanReleaseResource:CanReleaseResource"></a>
       <span class="permalink">
       <a href="../../grizzled/util/index.html#CanReleaseResource" title="Permalink">
@@ -512,7 +512,13 @@ evidence parameters for withResource()." href="package$$CanReleaseResource$.html
       </span>
       
       <p class="shortcomment cmt">Companion object for <code>CanReleaseResource</code>, providing predefined implicit
-evidence parameters for <code>withResource()</code>.</p>
+evidence parameters for <code>withResource()</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>CanReleaseResource</code>, providing predefined implicit
+evidence parameters for <code>withResource()</code>.</p><p>Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
+2.12.x. Doing so will cause compiler errors if you then attempt to use
+<code>withResource</code> on a <code>scala.io.Source</code>, since <code>Source</code> is also a
+<code>Closeable</code> in 2.12, and this object provides implicit evidence objects
+for both. Use explicit imports for the evidence objects you need.
+</p></div></div>
     </li><li name="grizzled.util.Implicits" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Implicits"></a><a id="Implicits:Implicits"></a>
       <span class="permalink">
