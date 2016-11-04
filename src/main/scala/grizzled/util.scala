@@ -81,6 +81,12 @@ package object util {
 
   /** Companion object for `CanReleaseResource`, providing predefined implicit
     * evidence parameters for `withResource()`.
+    *
+    * Note: Do _not_ import `grizzled.util.CanReleaseResource._` in Scala
+    * 2.12.x. Doing so will cause compiler errors if you then attempt to use
+    * `withResource` on a `scala.io.Source`, since `Source` is also a
+    * `Closeable` in 2.12, and this object provides implicit evidence objects
+    * for both. Use explicit imports for the evidence objects you need.
     */
   object CanReleaseResource {
     import java.io.Closeable
