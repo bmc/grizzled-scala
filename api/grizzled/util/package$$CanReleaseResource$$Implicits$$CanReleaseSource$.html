@@ -114,19 +114,71 @@ complete details, including installation instructions.
       
       <p class="shortcomment cmt">Miscellaneous utility functions and methods not otherwise categorized.</p><div class="fullcomment"><div class="comment cmt"><p>Miscellaneous utility functions and methods not otherwise categorized.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
-    </li><li class="current-entities indented2">
-                        <a class="object" href="package$$CanReleaseResource$.html" title="Companion object for CanReleaseResource."></a>
-                        <a class="trait" href="package$$CanReleaseResource.html" title="withResource() needs an implicit evidence parameter of this type
-to know how to release what's passed to it."></a>
-                        <a href="package$$CanReleaseResource.html" title="withResource() needs an implicit evidence parameter of this type
-to know how to release what's passed to it.">
-                          CanReleaseResource
-                        </a>
-                      </li><li class="current-entities indented2">
+    </li><li name="grizzled.util.CanReleaseResource" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="CanReleaseResource"></a><a id="CanReleaseResource:CanReleaseResource"></a>
+      <span class="permalink">
+      <a href="../../grizzled/util/index.html#CanReleaseResource" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="Companion object for CanReleaseResource." href="package$$CanReleaseResource$.html">
+              <span class="name">CanReleaseResource</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">Companion object for <code>CanReleaseResource</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Companion object for <code>CanReleaseResource</code>.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="grizzled.util">util</a></dd></dl></div>
+    </li><li name="grizzled.util.CanReleaseResource.Implicits" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Implicits"></a><a id="Implicits:Implicits"></a>
+      <span class="permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$.html#Implicits" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="Note: Do _not_ import grizzled.util.CanReleaseResource._ in Scala
+2.12.x." href="package$$CanReleaseResource$$Implicits$.html">
+              <span class="name">Implicits</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
+2.12.x.</p><div class="fullcomment"><div class="comment cmt"><p>Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
+2.12.x. Doing so will cause compiler errors if you then attempt to use
+<code>withResource</code> on a <code>scala.io.Source</code>, since <code>Source</code> is also a
+<code>Closeable</code> in 2.12, and this object provides implicit evidence objects
+for both. Use explicit imports for the evidence objects you need.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="package$$CanReleaseResource$.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a></dd></dl></div>
+    </li><li class="current-entities indented4">
                         <span class="separator"></span>
-                        <a class="object" href="" title=""></a>
-                        <a href="" title="">
-                          Implicits
+                        <a class="object" href="package$$CanReleaseResource$$Implicits$$CanReleaseAutoCloseable$.html" title="Evidence for type AutoCloseable, which allows the use of
+withResource and tryWithResource with types such as
+java.sql.Connection."></a>
+                        <a href="package$$CanReleaseResource$$Implicits$$CanReleaseAutoCloseable$.html" title="Evidence for type AutoCloseable, which allows the use of
+withResource and tryWithResource with types such as
+java.sql.Connection.">
+                          CanReleaseAutoCloseable
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="object" href="package$$CanReleaseResource$$Implicits$$CanReleaseCloseable$.html" title="Evidence for type Closeable."></a>
+                        <a href="package$$CanReleaseResource$$Implicits$$CanReleaseCloseable$.html" title="Evidence for type Closeable.">
+                          CanReleaseCloseable
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="object" href="" title="Evidence for type Source."></a>
+                        <a href="" title="Evidence for type Source.">
+                          CanReleaseSource
                         </a>
                       </li>
               </ul>
@@ -136,9 +188,9 @@ to know how to release what's passed to it.">
             <body class="object value">
       <div id="definition">
         <div class="big-circle object">o</div>
-        <p id="owner"><a href="../index.html" class="extype" name="grizzled">grizzled</a>.<a href="index.html" class="extype" name="grizzled.util">util</a></p>
-        <h1>Implicits<span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html" title="Permalink">
+        <p id="owner"><a href="../index.html" class="extype" name="grizzled">grizzled</a>.<a href="index.html" class="extype" name="grizzled.util">util</a>.<a href="package$$CanReleaseResource$.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a>.<a href="package$$CanReleaseResource$$Implicits$.html" class="extype" name="grizzled.util.CanReleaseResource.Implicits">Implicits</a></p>
+        <h1>CanReleaseSource<span class="permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -147,20 +199,22 @@ to know how to release what's passed to it.">
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">implicit </span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Implicits</span>
+        <span class="name">CanReleaseSource</span><span class="result"> extends <a href="package$$CanReleaseResource.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a>[<span class="extype" name="scala.io.Source">Source</span>]</span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Evidence for type <code>Source</code>. Note that, in Scala 2.12.0,
+<code>Source</code> is also <code>Closeable</code>.
+</p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="package$$CanReleaseResource.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a>[<span class="extype" name="scala.io.Source">Source</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -186,7 +240,7 @@ to know how to release what's passed to it.">
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="grizzled.util.Implicits"><span>Implicits</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="grizzled.util.CanReleaseResource.Implicits.CanReleaseSource"><span>CanReleaseSource</span></li><li class="in" name="grizzled.util.CanReleaseResource"><span>CanReleaseResource</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -206,28 +260,7 @@ to know how to release what's passed to it.">
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="grizzled.util.Implicits.RichTry" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichTry[T]extendsAnyRef"></a><a id="RichTry[T]:RichTry[T]"></a>
-      <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#RichTry[T]extendsAnyRef" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a title="Enriched Try class, containing some helper methods." href="package$$Implicits$$RichTry.html">
-              <span class="name">RichTry</span>
-            </a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Enriched <code>Try</code> class, containing some helper methods.</p>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -237,7 +270,7 @@ to know how to release what's passed to it.">
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -253,7 +286,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html###():Int" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -269,7 +302,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -285,7 +318,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -301,7 +334,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#clone():Object" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -323,7 +356,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -339,7 +372,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#equals(x$1:Any):Boolean" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#equals(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -355,7 +388,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#finalize():Unit" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -377,7 +410,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#getClass():Class[_]" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -393,7 +426,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#hashCode():Int" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#hashCode():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -409,7 +442,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -425,7 +458,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -441,7 +474,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#notify():Unit" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -457,7 +490,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#notifyAll():Unit" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -470,10 +503,26 @@ to know how to release what's passed to it.">
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="grizzled.util.CanReleaseResource.Implicits.CanReleaseSource#release" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="release(s:scala.io.Source):Unit"></a><a id="release(Source):Unit"></a>
+      <span class="permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#release(s:scala.io.Source):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">release</span><span class="params">(<span name="s">s: <span class="extype" name="scala.io.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="grizzled.util.CanReleaseResource.Implicits.CanReleaseSource">CanReleaseSource</a> → <a href="package$$CanReleaseResource.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -489,7 +538,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#toString():String" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#toString():String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -505,7 +554,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#wait():Unit" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -527,7 +576,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -549,7 +598,7 @@ to know how to release what's passed to it.">
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$Implicits$.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$$Implicits$$CanReleaseSource$.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -578,7 +627,9 @@ to know how to release what's passed to it.">
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="grizzled.util.CanReleaseResource">
+              <h3>Inherited from <a href="package$$CanReleaseResource.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a>[<span class="extype" name="scala.io.Source">Source</span>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

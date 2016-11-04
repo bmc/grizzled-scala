@@ -115,8 +115,7 @@ complete details, including installation instructions.
       <p class="shortcomment cmt">Miscellaneous utility functions and methods not otherwise categorized.</p><div class="fullcomment"><div class="comment cmt"><p>Miscellaneous utility functions and methods not otherwise categorized.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
     </li><li class="current-entities indented2">
-                        <a class="object" href="" title="Companion object for CanReleaseResource, providing predefined implicit
-evidence parameters for withResource()."></a>
+                        <a class="object" href="" title="Companion object for CanReleaseResource."></a>
                         <a class="trait" href="package$$CanReleaseResource.html" title="withResource() needs an implicit evidence parameter of this type
 to know how to release what's passed to it."></a>
                         <a href="package$$CanReleaseResource.html" title="withResource() needs an implicit evidence parameter of this type
@@ -159,12 +158,7 @@ to know how to release what's passed to it.">
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object for <code>CanReleaseResource</code>, providing predefined implicit
-evidence parameters for <code>withResource()</code>.</p><p>Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
-2.12.x. Doing so will cause compiler errors if you then attempt to use
-<code>withResource</code> on a <code>scala.io.Source</code>, since <code>Source</code> is also a
-<code>Closeable</code> in 2.12, and this object provides implicit evidence objects
-for both. Use explicit imports for the evidence objects you need.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object for <code>CanReleaseResource</code>.
 </p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
@@ -556,42 +550,31 @@ for both. Use explicit imports for the evidence objects you need.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="grizzled.util.CanReleaseResource.CanReleaseCloseable" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CanReleaseCloseable"></a><a id="CanReleaseCloseable:CanReleaseCloseable"></a>
+    </li><li name="grizzled.util.CanReleaseResource.Implicits" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Implicits"></a><a id="Implicits:Implicits"></a>
       <span class="permalink">
-      <a href="../../grizzled/util/package$$CanReleaseResource$.html#CanReleaseCloseable" title="Permalink">
+      <a href="../../grizzled/util/package$$CanReleaseResource$.html#Implicits" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
       <span class="modifier_kind">
-        <span class="modifier">implicit </span>
+        <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a title="Defines evidence for type Closeable." href="package$$CanReleaseResource$$CanReleaseCloseable$.html">
-              <span class="name">CanReleaseCloseable</span>
-            </a><span class="result"> extends <a href="package$$CanReleaseResource.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a>[<span class="extype" name="java.io.Closeable">Closeable</span>]</span>
+        <a title="Note: Do _not_ import grizzled.util.CanReleaseResource._ in Scala
+2.12.x." href="package$$CanReleaseResource$$Implicits$.html">
+              <span class="name">Implicits</span>
+            </a>
       </span>
       
-      <p class="shortcomment cmt">Defines evidence for type <code>Closeable</code>.</p>
-    </li><li name="grizzled.util.CanReleaseResource.CanReleaseSource" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CanReleaseSource"></a><a id="CanReleaseSource:CanReleaseSource"></a>
-      <span class="permalink">
-      <a href="../../grizzled/util/package$$CanReleaseResource$.html#CanReleaseSource" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a title="Defines evidence for type Source." href="package$$CanReleaseResource$$CanReleaseSource$.html">
-              <span class="name">CanReleaseSource</span>
-            </a><span class="result"> extends <a href="package$$CanReleaseResource.html" class="extype" name="grizzled.util.CanReleaseResource">CanReleaseResource</a>[<span class="extype" name="scala.io.Source">Source</span>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">Defines evidence for type <code>Source</code>.</p>
+      <p class="shortcomment cmt">Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
+2.12.x.</p><div class="fullcomment"><div class="comment cmt"><p>Note: Do _not_ import <code>grizzled.util.CanReleaseResource._</code> in Scala
+2.12.x. Doing so will cause compiler errors if you then attempt to use
+<code>withResource</code> on a <code>scala.io.Source</code>, since <code>Source</code> is also a
+<code>Closeable</code> in 2.12, and this object provides implicit evidence objects
+for both. Use explicit imports for the evidence objects you need.
+</p></div></div>
     </li>
               </ol>
             </div>
