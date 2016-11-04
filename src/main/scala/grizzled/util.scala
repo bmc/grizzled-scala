@@ -74,7 +74,7 @@ package object util {
     * @tparam T the type (which must be contravariant to allow, for instance,
     *           a `T` of `Closeable` to apply to subclasses like `InputStream`).
     */
-  @implicitNotFound("Can't find a CanReleaseSource[${T}] for withCloseable()")
+  @implicitNotFound("Can't find a CanReleaseSource[${T}] for withResource/tryWithResource")
   trait CanReleaseResource[-T] {
     def release(a: T): Unit
   }
@@ -94,7 +94,7 @@ package object util {
       import java.io.Closeable
       import scala.io.Source
 
-      /** Defines evidence for type `Closeable`.
+      /** Evidence for type `Closeable`.
         */
       implicit object CanReleaseCloseable
         extends CanReleaseResource[Closeable] {
@@ -102,12 +102,17 @@ package object util {
         def release(c: Closeable) = c.close()
       }
 
-      /** Defines evidence for type `Source`.
+      /** Evidence for type `Source`. Note that, in Scala 2.12.0,
+        * `Source` is also `Closeable`.
         */
       implicit object CanReleaseSource extends CanReleaseResource[Source] {
         def release(s: Source) = s.close()
       }
 
+      /** Evidence for type `AutoCloseable`, which allows the use of
+        * `withResource` and `tryWithResource` with types such as
+        * `java.sql.Connection`.
+        */
       implicit object CanReleaseAutoCloseable
         extends CanReleaseResource[AutoCloseable] {
 
