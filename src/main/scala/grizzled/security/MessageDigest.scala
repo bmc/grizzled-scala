@@ -94,7 +94,7 @@ class Digester(dg: JMessageDigest) {
 
       @tailrec def readNext(): Unit = {
         val c = stream.read()
-        if (c > 0) {
+        if (c >= 0) {
           dg.update(c.toByte)
           readNext()
         }
