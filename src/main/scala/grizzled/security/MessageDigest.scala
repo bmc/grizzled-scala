@@ -92,7 +92,7 @@ class Digester(dg: JMessageDigest) {
     dg.synchronized {
       dg.reset()
 
-      val buf = Array.ofDim[Byte](512)
+      val buf = Array.ofDim[Byte](8192)
       var readLen = stream.read(buf)
 
       while (readLen > 0) {
