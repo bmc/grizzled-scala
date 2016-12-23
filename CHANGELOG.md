@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 4.1.0
+
+* Added `grizzled.random.RandomUtil`, containing some random number helper
+  functions.
+
 Version 4.0.0
 
 _Contains breaking API changes._
