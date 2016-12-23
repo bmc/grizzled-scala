@@ -4,6 +4,8 @@ Version 4.1.0
 
 * Added `grizzled.random.RandomUtil`, containing some random number helper
   functions.
+* Changed `grizzled.file.Includer` to use a `List`, internally, rather than
+  a `Stack`.
 
 Version 4.0.0
 

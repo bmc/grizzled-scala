@@ -55,6 +55,8 @@ import scala.sys.SystemProperties
   * contains some utility functions that permit using include-enabled files
   * in other contexts.
   *
+  * '''WARNING''': This class is not thread-safe.
+  *
   * <h3>Syntax</h3>
   *
   * The <i>include</i> syntax is defined by a regular expression; any
@@ -127,9 +129,7 @@ class Includer private(val source: IncludeSource,
 extends Iterator[String] {
   /** The stack of sources being read.
     */
-  private val sourceStack = new scala.collection.mutable.Stack[IncludeSource]
-
-  sourceStack.push(source)
+  private var sourceStack = List(source)
 
   /** Determine whether there are any more input lines to be read from the
     * includer.
@@ -160,14 +160,16 @@ extends Iterator[String] {
   def next: String = {
     @tailrec
     def nextFromStack: String = {
-      if (sourceStack.isEmpty)
-        throw new IllegalStateException("No more data")
-
-      if (sourceStack.top.iterator.hasNext)
-        sourceStack.top.iterator.next
-      else {
-        sourceStack.pop
-        nextFromStack
+      sourceStack match {
+        case Nil =>
+          throw new IllegalStateException("No more data")
+        case top :: rest =>
+          if (top.iterator.hasNext)
+            top.iterator.next
+          else {
+            sourceStack = rest
+            nextFromStack
+          }
       }
     }
 
@@ -181,10 +183,10 @@ extends Iterator[String] {
       line match {
         case includeRegex(inc) if isURL(inc) =>
           val url = new URL(inc)
-          sourceStack.push(
-            new IncludeSource(Source.fromInputStream(url.openStream(), "UTF-8"),
-                              url.toURI)
-          )
+          val src = new IncludeSource(Source.fromInputStream(url.openStream(),
+                                                             "UTF-8"),
+                                      url.toURI)
+          sourceStack = src :: sourceStack
           processNext
 
         case includeRegex(inc) =>
@@ -193,7 +195,7 @@ extends Iterator[String] {
                                             maxNesting + ") " +
                                             "exceeded.")
 
-          val curURI =  sourceStack.top.uri
+          val curURI =  sourceStack.head.uri
           val parentURI = getParent(curURI)
           val parentPath = parentURI.getPath
           val newPath = parentPath match {
@@ -215,7 +217,7 @@ extends Iterator[String] {
                                                   "UTF-8")
           }
 
-          sourceStack.push(new IncludeSource(source, newURI))
+          sourceStack = new IncludeSource(source, newURI) :: sourceStack
           processNext
 
         case _ =>
