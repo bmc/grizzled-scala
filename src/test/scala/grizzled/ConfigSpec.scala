@@ -70,7 +70,7 @@ class ConfigSpec extends BaseSpec {
 
   it should "allow + to replace an option without mutating the original" in {
     val eCfg = Configuration.read(Source.fromString(Fixture.TestConfig))
-    eCfg shouldBe success
+    eCfg shouldBe 'success
 
     val cfg: Configuration = eCfg.get
     val newCfg = cfg + ("section2", "o1", "bar")
@@ -227,7 +227,7 @@ class ConfigSpec extends BaseSpec {
     val cfg = Fixture.cfg
     val section1 = cfg.getSection("section1")
 
-    section1.isDefined
+    section1 shouldBe 'defined
     section1.get.options.get("o2") !== None
     section1.get.options.get("o2") shouldBe Some("val2")
     section1.get.options.get("o99") shouldBe None
@@ -350,14 +350,14 @@ class ConfigSpec extends BaseSpec {
     val cfg = Configuration.read(Source.fromString(Fixture.TestConfig),
                                  safe = false).get
 
-    cfg.tryGet("section2", "substError") shouldBe failure
+    cfg.tryGet("section2", "substError") shouldBe 'failure
     cfg.asTry[Int]("section3", "intOpt") shouldBe Success(Some(10))
     cfg.asTry[Int]("section1", "intOpt") shouldBe Success(Some(10))
   }
 
   it should "detect illegal characters in section names" in {
     val cfg = Configuration.read(Source.fromString(Fixture.TestConfigWithExoticSection))
-    cfg shouldBe failure
+    cfg shouldBe 'failure
   }
 
   it should "honor given SectionNamePattern when loading data" in {
@@ -365,7 +365,7 @@ class ConfigSpec extends BaseSpec {
       Source.fromString(Fixture.TestConfigWithExoticSection),
       sectionNamePattern = """([a-zA-Z0-9_\.]+)""".r
     )
-    cfg shouldBe success
+    cfg shouldBe 'success
     val loadedCfg = cfg.get
     loadedCfg.get("section1.1", "bar") shouldBe Some("baz")
   }

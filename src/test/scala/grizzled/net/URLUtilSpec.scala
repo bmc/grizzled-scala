@@ -99,7 +99,7 @@ class URLUtilSpec extends BaseSpec {
         Source.fromFile(f).mkString
       }
 
-      t shouldBe success
+      t shouldBe 'success
       t.get shouldBe Contents
     }
   }
@@ -112,7 +112,7 @@ class URLUtilSpec extends BaseSpec {
       Source.fromFile(f).mkString
     }
 
-    t shouldBe success
+    t shouldBe 'success
     t.get.length should be > 0
   }
 }

@@ -10,6 +10,8 @@ Version 4.1.0
   functions.
 * Added `grizzled.datetime.Implicits` to provide enrichment classes for
   `java.util.Date`, `java.util.Calendar` and `java.sql.Timestamp`.
+* Removed custom matchers trait and `scala.util.Try` custom matcher in testers,
+  in favor of ScalaTest's `shouldBe 'success` and `shouldBe 'failure`.
 
 Version 4.0.0
 
