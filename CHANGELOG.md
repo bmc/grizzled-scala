@@ -6,6 +6,10 @@ Version 4.1.0
   functions.
 * Changed `grizzled.file.Includer` to use a `List`, internally, rather than
   a `Stack`.
+* Added `grizzled.datetime.DateTimeUtil`, with a couple useful datetime-related
+  functions.
+* Added `grizzled.datetime.Implicits` to provide enrichment classes for
+  `java.util.Date`, `java.util.Calendar` and `java.sql.Timestamp`.
 
 Version 4.0.0
 
