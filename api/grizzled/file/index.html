@@ -138,6 +138,24 @@ files. This package is similar, in concept, to the Python
 <code>ConfigParser</code> module (though its implementation and capabilities
 differ quite a bit).
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
+    </li><li name="grizzled.datetime" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="datetime"></a><a id="datetime:datetime"></a>
+      <span class="permalink">
+      <a href="../grizzled/index.html#datetime" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../datetime/index.html">
+              <span class="name">datetime</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
     </li><li name="grizzled.file" visbl="pub" class="indented2 current" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="file"></a><a id="file:file"></a>
       <span class="permalink">
@@ -280,6 +298,24 @@ objects, and on Scala <code>Source</code> objects.</p><p>See <a href="" class="e
       
       <p class="shortcomment cmt">Methods and classes useful for parsing various things.</p><div class="fullcomment"><div class="comment cmt"><p>Methods and classes useful for parsing various things.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
+    </li><li name="grizzled.random" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="random"></a><a id="random:random"></a>
+      <span class="permalink">
+      <a href="../grizzled/index.html#random" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../random/index.html">
+              <span class="name">random</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="grizzled">grizzled</a></dd></dl></div>
     </li><li name="grizzled.security" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="security"></a><a id="security:security"></a>
       <span class="permalink">
@@ -482,7 +518,7 @@ lines from the flattened files.</p><div class="fullcomment"><div class="comment 
 lines from the flattened files.</p><p>The <code>grizzled.file.Includer</code> class can be used to process &quot;include&quot;
 directives within a text file, returning a file-like object. It also
 contains some utility functions that permit using include-enabled files
-in other contexts.</p><h5> Syntax </h5><p>The <i>include</i> syntax is defined by a regular expression; any
+in other contexts.</p><p><b>WARNING</b>: This class is not thread-safe.</p><h5> Syntax </h5><p>The <i>include</i> syntax is defined by a regular expression; any
 line that matches the regular expression is treated as an <i>include</i>
 directive. The default regular expression, <code><sup>%include\s&quot;([</sup>&quot;]+)&quot;$</code>
 matches include directives like this:</p><pre>%include <span class="lit">"/absolute/path/to/file"</span>
