@@ -61,6 +61,22 @@ trait RandomUtilFunctions {
     if (low == high) low else rng.nextInt(high - low) + low
   }
 
+  /** Return a random long integer between `low` and `high`, inclusive. If `low`
+    * and `high` are identical, `low` is returned.
+    *
+    * @param low  the lowest number
+    * @param high the highest number
+    *
+    * @return a long integer in the range `[low, high]`.
+    *
+    * @throws IllegalArgumentException if `low` is greater than `high`.
+    */
+  def randomLongBetween(low: Long, high: Long): Long = {
+    require(low <= high)
+    val range = high - low + 1
+    if (low == high) low else Math.abs(rng.nextLong % range) + low
+  }
+
   /** Return a random string. This method is similar to `Random.nextString()`,
     * except that it allows you to control the set of characters that are
     * allowed to be in the returned string. The set of characters defaults to

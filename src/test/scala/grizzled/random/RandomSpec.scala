@@ -49,10 +49,10 @@ class RandomSpec extends BaseSpec {
   "randomIntBetween" should "always return an integer between lower and upper" in {
     val lower = 1
     val upper = 100
-    val nums  = BitSet(1 to 100: _*)
+    val nums  = BitSet(lower to upper: _*)
 
     for (i <- 1 to Iterations) {
-      val n = RandomUtil.randomIntBetween(1, 100)
+      val n = RandomUtil.randomIntBetween(lower, upper)
       nums should contain (n)
     }
   }
@@ -66,6 +66,42 @@ class RandomSpec extends BaseSpec {
     for (i <- 1 to Iterations) {
       val n = RandomUtil.randomIntBetween(100, 100)
       n shouldBe 100
+    }
+  }
+
+  it should "return the same elements if a constant seed is used" in {
+    val seed = Random.nextInt
+    val low = 1
+    val high = 10000
+    val ru1 = new RandomUtil(new Random(seed))
+    val ru2 = new RandomUtil(new Random(seed))
+
+    val seq1 = (1 to 200).map { _ => ru1.randomIntBetween(low, high) }
+    val seq2 = (1 to 200).map { _ => ru2.randomIntBetween(low, high) }
+
+    seq1 shouldBe seq2
+  }
+
+  "randomLongBetween" should "always return an integer between lower and upper" in {
+    val lower = 1000L
+    val upper = 100000000L
+
+    for (i <- 1 to Iterations) {
+      val n = RandomUtil.randomLongBetween(lower, upper)
+      n should (be >= lower and be <= upper)
+    }
+  }
+
+  it should "abort if lower is less than upper" in {
+    an [IllegalArgumentException] should be thrownBy
+      RandomUtil.randomLongBetween(10000000L, 50000L)
+  }
+
+  it should "always return the same number if low == high" in {
+    for (i <- 1 to Iterations) {
+      val param = Random.nextLong
+      val n = RandomUtil.randomLongBetween(param, param)
+      n shouldBe param
     }
   }
 

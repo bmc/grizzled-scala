@@ -1,6 +1,10 @@
 # Grizzled Scala Change Log
 
-Version 4.1.0
+Version 4.2.0:
+
+* Added `RandomUtil.randomLongBetween()`.
+
+Version 4.1.0:
 
 * Added `grizzled.random.RandomUtil`, containing some random number helper
   functions.
@@ -13,7 +17,7 @@ Version 4.1.0
 * Removed custom matchers trait and `scala.util.Try` custom matcher in testers,
   in favor of ScalaTest's `shouldBe 'success` and `shouldBe 'failure`.
 
-Version 4.0.0
+Version 4.0.0:
 
 _Contains breaking API changes._
 
