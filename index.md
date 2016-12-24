@@ -50,7 +50,7 @@ repository. (From JCenter, it's eventually pushed to the
 
 **NOTE**: This library uses [semantic versioning](http://semver.org).
 
-- Versions 4.1.0, 4.0.0 and 3.1.0 support Scala 2.10, 2.11 and 2.12
+- Versions 4.2.0, 4.1.0, 4.0.0 and 3.1.0 support Scala 2.10, 2.11 and 2.12
 - Version 3.0.0 supports Scala 2.10, 2.11 and 2.12.0-RC1
 - Versions 2.5.0 and 2.6.0 support Scala 2.10, 2.11 and 2.12.0-M5
 - Versions 2.4.x, 2.3.x, 2.2.x, 2.1.0 and 2.0.0 support Scala 2.10, 2.11 and 2.12-M4.
