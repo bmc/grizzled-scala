@@ -1,5 +1,9 @@
 # Grizzled Scala Change Log
 
+Version 4.3.0:
+
+* Added `grizzled.file.util.longestCommonPathPrefix()`
+
 Version 4.2.0:
 
 * Added `RandomUtil.randomLongBetween()`.

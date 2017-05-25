@@ -1173,6 +1173,45 @@ object util {
     }
   }
 
+  /** Find the longest common path prefix from a list of paths. Based on
+    * [[https://rosettacode.org/wiki/Find_common_directory_path#Advanced]]
+    *
+    * @param paths the paths
+    *
+    * @return the longest common path, which might be the empty string
+    */
+  def longestCommonPathPrefix(paths: List[String]): String = {
+    val PathSep = "/"
+    val BoundaryRe = s"(?=[$PathSep])(?<=[^$PathSep])|(?=[^$PathSep])(?<=[$PathSep])"
+
+    def common(a: List[String], b: List[String]): List[String] = {
+      (a, b) match {
+        case (a :: as, b :: bs) if a equals b => a :: common(as, bs)
+        case _ => Nil
+      }
+    }
+
+    if (paths.length < 2) {
+      paths.headOption.getOrElse("")
+    }
+    else {
+      val uPaths = paths
+      val res = paths
+        // Convert all paths to "universal" paths (i.e., with "/" characters,
+        // even if we're on Windows). We'll convert back when we're done.
+        .map(universalPath)
+        // Split on path boundaries
+        .map { _.split(BoundaryRe).toList }
+        // Find the common prefix
+        .reduceLeft(common)
+        // Rebuild
+        .mkString
+
+      // Convert back to a native path
+      nativePath(res)
+    }
+  }
+
   // -------------------------------------------------------------------------
   // Private Methods
   // -------------------------------------------------------------------------

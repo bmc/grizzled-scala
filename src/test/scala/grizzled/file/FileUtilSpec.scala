@@ -420,4 +420,50 @@ class FileUtilSpec extends BaseSpec {
       glob("[a-z")
     }
   }
+
+  "longestCommonPathPrefix" should "work when only one component is common" in {
+    longestCommonPathPrefix(List(
+      "/foo/",
+      "/foo/bar",
+      "/foo/bar/baz"
+    )) shouldBe "/foo/"
+
+    longestCommonPathPrefix(List(
+      "/foo",
+      "/foo/bar",
+      "/foo/bar/baz"
+    )) shouldBe "/foo"
+  }
+
+  it should "return / on absolute files when no components are common" in {
+    longestCommonPathPrefix(List(
+      "/foo",
+      "/bar",
+      "/baz"
+    )) shouldBe "/"
+  }
+
+  it should "work with relative paths that have a common prefix" in {
+    longestCommonPathPrefix(List(
+      "foo/baz",
+      "foo/bar",
+      "foo/bar/baz"
+    )) shouldBe "foo/"
+  }
+
+  it should "return an empty string on relative paths with nothing in common" in {
+    longestCommonPathPrefix(List(
+      "foo/baz",
+      "bar/baz",
+      "foo/bar/baz"
+    )) shouldBe ""
+  }
+
+  it should "work with one string, returning that string" in {
+    longestCommonPathPrefix("/foo/bar/baz" :: Nil) shouldBe "/foo/bar/baz"
+  }
+
+  it should "work with an empty list, returning an empty string" in {
+    longestCommonPathPrefix(Nil) shouldBe ""
+  }
 }
