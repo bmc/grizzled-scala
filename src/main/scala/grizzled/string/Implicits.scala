@@ -38,7 +38,7 @@ object Implicits {
         * @return `true` if the character is a valid hexadecimal
         *         digit, `false` if not.
         */
-      def isHexDigit = isDigit(16)
+      def isHexDigit: Boolean = isDigit(16)
 
       /** Determine whether the character represents a valid digit in a
         * given base.
@@ -276,6 +276,40 @@ object Implicits {
         }
 
         doParse(this.string.toList, "")
+      }
+
+      /** Replace the first instance of the specified character with another
+        * character, returning the new string. This method differs from the
+        * JDK's `replaceFirst()` method in that it takes a target character,
+        * not a regular expression. It's ideal when you don't want to worry
+        * about escaping a regular expression metacharacter.
+        *
+        * @param c           the character to find
+        * @param replacement the replacement character
+        *
+        * @return the (possibly changed) new string
+        */
+      def replaceFirstChar(c: Char, replacement: Char): String = {
+        replaceFirstChar(c, replacement.toString)
+      }
+
+      /** Replace the first instance of the specified character with string,
+        * returning the new string. This method differs from the JDK's
+        * `replaceFirst()` method in that it takes a target character,
+        * not a regular expression. It's ideal when you don't want to worry
+        * about escaping a regular expression metacharacter.
+        *
+        * @param c           the character to find
+        * @param replacement the replacement string
+        *
+        * @return the (possibly changed) new string
+        */
+      def replaceFirstChar(c: Char, replacement: String): String = {
+        val i = string.indexOf(c)
+        if (i < 0)
+          string
+        else
+          string.slice(0, i) + replacement + string.slice(i + 1, string.length)
       }
     }
   }

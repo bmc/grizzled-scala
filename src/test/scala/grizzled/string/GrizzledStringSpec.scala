@@ -132,4 +132,22 @@ class GrizzledStringSpec extends BaseSpec {
   it should "handle special metacharacters" in  {
     "\n\r\t\f".escapeNonPrintables should be ("""\n\r\t\f""")
   }
+
+  "replaceFirstChar" should "replace properly, using a replacment char " in {
+    "abcdefghij".replaceFirstChar('a', 'X') shouldBe "Xbcdefghij"
+  }
+
+  it should "replace properly, using a replacement string" in {
+    "asdlkfj".replaceFirstChar('a', "ZZZ") shouldBe "ZZZsdlkfj"
+  }
+
+  it should "only replace the first instance" in {
+    "aaaaaaaaaa".replaceFirstChar('a', 'A') shouldBe "Aaaaaaaaaa"
+  }
+
+  it should "ignore any regular expression characters" in {
+    val source = "a.b"
+    source.replaceFirst(".", "X") shouldBe "X.b"
+    source.replaceFirstChar('.', 'X') shouldBe "aXb"
+  }
 }

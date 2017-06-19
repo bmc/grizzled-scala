@@ -2,7 +2,13 @@
 
 Version 4.3.0:
 
+* Added `replaceFirstChar()` to `GrizzledString`.
 * Added `grizzled.file.util.longestCommonPathPrefix()`
+* Updated version of Lightbend Activator.
+* Updated version of Scalatest.
+* Updated version of SBT.
+* Removed copyrights from some more source files, as they're hard to
+  maintain.
 
 Version 4.2.0:
 
