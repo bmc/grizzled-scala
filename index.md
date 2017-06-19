@@ -50,7 +50,7 @@ repository. (From JCenter, it's eventually pushed to the
 
 **NOTE**: This library uses [semantic versioning](http://semver.org).
 
-- Versions 4.2.0, 4.1.0, 4.0.0 and 3.1.0 support Scala 2.10, 2.11 and 2.12
+- Versions 4.3.0, 4.2.0, 4.1.0, 4.0.0 and 3.1.0 support Scala 2.10, 2.11 and 2.12
 - Version 3.0.0 supports Scala 2.10, 2.11 and 2.12.0-RC1
 - Versions 2.5.0 and 2.6.0 support Scala 2.10, 2.11 and 2.12.0-M5
 - Versions 2.4.x, 2.3.x, 2.2.x, 2.1.0 and 2.0.0 support Scala 2.10, 2.11 and 2.12-M4.
@@ -76,7 +76,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.11</artifactId>
-      <version>4.1.0</version>
+      <version>4.3.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -100,7 +100,7 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 Add the following to your SBT build:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.1.0"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.3.0"
 
 ## Source Code Repository
 
@@ -141,7 +141,7 @@ Brian M. Clapper, [bmc@clapper.org][]
 
 ## Copyright and License
 
-The Grizzled Scala Library is copyright &copy; 2009-2012 Brian M. Clapper
+The Grizzled Scala Library is copyright &copy; 2009-2017 Brian M. Clapper
 and is released under a [BSD License][].
 
 ## Patches

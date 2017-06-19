@@ -923,6 +923,24 @@ function provides a similar capability in JDK 8. Prior to JDK 8, you can
 also use  <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor)" target="_blank">java.nio.file.Files.walkFileTree()</a>
 </p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>The <code>File</code> object, presumed to represent a directory.</p></dd><dt class="param">topdown</dt><dd class="cmt"><p>If <code>true</code> (the default), the stream will be generated
                top down. If <code>false</code>, it'll be generated bottom-up.</p></dd><dt>returns</dt><dd class="cmt"><p>a stream of <code>File</code> objects.</p></dd></dl></div>
+    </li><li name="grizzled.file.util#longestCommonPathPrefix" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="longestCommonPathPrefix(paths:List[String]):String"></a><a id="longestCommonPathPrefix(List[String]):String"></a>
+      <span class="permalink">
+      <a href="../../grizzled/file/util$.html#longestCommonPathPrefix(paths:List[String]):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">longestCommonPathPrefix</span><span class="params">(<span name="paths">paths: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Find the longest common path prefix from a list of paths.</p><div class="fullcomment"><div class="comment cmt"><p>Find the longest common path prefix from a list of paths. Based on
+<a href="https://rosettacode.org/wiki/Find_common_directory_path#Advanced" target="_blank">https://rosettacode.org/wiki/Find_common_directory_path#Advanced</a>
+</p></div><dl class="paramcmts block"><dt class="param">paths</dt><dd class="cmt"><p>the paths</p></dd><dt>returns</dt><dd class="cmt"><p>the longest common path, which might be the empty string</p></dd></dl></div>
     </li><li name="grizzled.file.util#nativePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nativePath(path:String):String"></a><a id="nativePath(String):String"></a>
       <span class="permalink">
