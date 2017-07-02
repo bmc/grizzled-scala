@@ -4,8 +4,8 @@ import grizzled.BaseSpec
 
 import scala.concurrent.duration.Duration
 
-class EnhancedDurationSpec extends BaseSpec {
-  import grizzled.datetime.Implicits.EnhancedDuration
+class EnrichedDurationSpec extends BaseSpec {
+  import grizzled.datetime.Implicits.EnrichedDuration
 
   "humanize" should "produce valid human-readable strings" in {
     val Data = Seq(

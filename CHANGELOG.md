@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 4.4.1:
+
+* Changed `grizzled.datetime.EnhancedDuration` to 
+  `grizzled.datetime.EnrichedDuration`, for consistency.
+
 Version 4.4.0:
 
 * Added `grizzled.datetime.EnhancedDuration` class, with a `humanize` method

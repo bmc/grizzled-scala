@@ -13,7 +13,7 @@ object Implicits {
 
   private val NumFormatter = new DecimalFormat("#,###")
 
-  implicit class EnhancedDuration(val duration: Duration) extends AnyVal {
+  implicit class EnrichedDuration(val duration: Duration) extends AnyVal {
 
     /** Return a better-formatted result than `toString`. For instance,
       * given this `Duration`:
