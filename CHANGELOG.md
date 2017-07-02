@@ -1,5 +1,11 @@
 # Grizzled Scala Change Log
 
+Version 4.4.0:
+
+* Added `grizzled.datetime.EnhancedDuration` class, with a `humanize` method
+  that provides more human-readable string representations for `Duration`
+  objects.
+
 Version 4.3.0:
 
 * Added `replaceFirstChar()` to `GrizzledString`.
