@@ -150,7 +150,7 @@ import scala.language.implicitConversions
   *     process(buf, socket.receive(buf))
   * }}}
   */
-trait UDPDatagramSocket {
+trait UDPDatagramSocket extends AutoCloseable {
 
   /** Whether or not the socket's broadcast flag is set. The broadcast
     * flag corresponds to the `SO_BROADCAST` socket option. When
@@ -344,7 +344,7 @@ private class UDPDatagramSocketImpl(val socket: JDKDatagramSocket)
   extends UDPDatagramSocket {
 
   def broadcast: Boolean = socket.getBroadcast
-  def broadcast_=(enable: Boolean) = socket.setBroadcast(enable)
+  def broadcast_=(enable: Boolean): Unit = socket.setBroadcast(enable)
 
   def port: Int = socket.getPort
 
@@ -426,7 +426,7 @@ object UDPDatagramSocket {
     * @param port     UDP port to which to send bytes
     */
   def send(bytes: Seq[Byte], address: IPAddress, port: Int): Unit =
-    UDPDatagramSocket.send(bytes, address, port, false)
+    UDPDatagramSocket.send(bytes, address, port, broadcast = false)
 
   /** Utility method for sending a UDP packet. This method is equivalent
     * to the following code snippet:
