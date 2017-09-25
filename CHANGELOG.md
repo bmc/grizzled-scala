@@ -1,5 +1,11 @@
 # Grizzled Scala Change Log
 
+Version 4.4.2:
+
+* Fixed bug in `grizzled.file.util.glob()` that caused it to match
+  non-existent files.
+* Added `coursier` to SBT.
+
 Version 4.4.1:
 
 * Changed `grizzled.datetime.EnhancedDuration` to 

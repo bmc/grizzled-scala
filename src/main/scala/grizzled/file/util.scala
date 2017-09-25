@@ -215,23 +215,26 @@ object util {
     def glob0(dirname: String, basename: String): List[String] = {
       if (basename.length == 0) {
         if (new File(dirname).isDirectory)
-          List[String](basename)
+          List(basename)
         else
           Nil
       }
         else {
           val path = dirname + fileSeparator + basename
           if (new File(path).exists())
-            List[String](basename)
+            List(basename)
           else
             Nil
         }
     }
 
     val wildcards = """[\*\?\[]""".r
-    if ((wildcards findFirstIn path).isEmpty)
-      List[String](path)
-
+    if ((wildcards findFirstIn path).isEmpty) {
+      if (new File(path).exists)
+        List(path)
+      else
+        List.empty[String]
+    }
     else {
       val (dirname, basename) = dirnameBasename(path)
       if (dirname.length == 0)
@@ -241,7 +244,7 @@ object util {
         val dirs = if ((wildcards findFirstIn dirname).nonEmpty)
           glob(dirname)
         else
-          List[String](dirname)
+          List(dirname)
         val globber = if ((wildcards findFirstIn basename).nonEmpty)
           glob1 _
         else

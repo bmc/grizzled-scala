@@ -287,14 +287,6 @@ class FileUtilSpec extends BaseSpec {
     }
   }
 
-  private def makeFiles(directory: String, files: Seq[String]): Seq[String] = {
-    for (fname <- files) yield {
-      val path = joinPath(directory, fname)
-      touch(path)
-      path
-    }
-  }
-
   "eglob" should """glob a "*" properly""" in {
     withTemporaryDirectory("glob") { d =>
       val paths = makeFiles(d.getAbsolutePath,
@@ -303,6 +295,22 @@ class FileUtilSpec extends BaseSpec {
 
       val matches = eglob(joinPath(d.getPath, "*.txt")).toSet
       matches shouldBe expected
+    }
+  }
+
+  it should "not match nonexistent files" in {
+    withTemporaryDirectory("glob") { d =>
+      val subdirs = makeDirectories(d.getAbsolutePath,
+                                    Array("one", "two", "three"))
+      val subdirs2 = for { dir <- subdirs } yield {
+        makeDirectories(dir, Array("aaa", "bbb", "ccc"))
+      }
+
+      val file1 = makeFiles(d.getAbsolutePath, Array("README")).head
+      val file2 = makeFiles(subdirs.head, Array("README")).head
+
+      val matches = eglob(joinPath(d.getPath, "**", "README")).toSet
+      matches shouldBe Set(file1, file2)
     }
   }
 
