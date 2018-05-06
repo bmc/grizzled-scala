@@ -7,8 +7,8 @@ organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.11.8"
-crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.3")
+scalaVersion := "2.11.12"
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6")
 
 // Incremental compilation performance improvement. See
 // http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
@@ -47,7 +47,7 @@ wartremoverErrors in (Compile, compile) ++= Seq(
 // ScalaTest
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 )
 
 parallelExecution in Test := true
