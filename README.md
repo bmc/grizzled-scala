@@ -13,7 +13,7 @@ The home page for the Grizzled Scala Library is
 <http://software.clapper.org/grizzled-scala/>. Please see that page for
 complete details, including installation instructions.
 
-Grizzled Scala is copyright &copy; 2009-2016 [Brian M. Clapper][] and
+Grizzled Scala is copyright &copy; 2009-2018 [Brian M. Clapper][] and
 is released under a new [BSD license](LICENSE.md).
 
 [Brian M. Clapper]: mailto:bmc@clapper.org
