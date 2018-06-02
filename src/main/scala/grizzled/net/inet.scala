@@ -316,13 +316,18 @@ object IPAddress {
     * @return a `Success` containing the list of resolved IP addresses, or
     *         `Failure(exception)` on error.
     */
+  @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
   def allForName(hostname: String): Try[List[IPAddress]] = {
     val res = InetAddress.getAllByName(hostname)
                          .map((x: InetAddress) => IPAddress(x.getAddress))
                          .toList
     res.filter(_.isFailure) match {
-      case failure :: rest => Try { List(failure.get) }
-      case Nil             => Success(res.map(_.get))
+      case failure :: rest =>
+        Try { List(failure.get) }
+
+      case Nil =>
+        // All successes
+        Success(res.map(_.get))
     }
   }
 }

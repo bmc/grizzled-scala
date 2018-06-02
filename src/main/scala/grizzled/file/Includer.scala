@@ -198,6 +198,7 @@ extends Iterator[String] {
     processNext
   }
 
+  @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
   private def isURL(s: String) = {
     Try {
       new URL(s)

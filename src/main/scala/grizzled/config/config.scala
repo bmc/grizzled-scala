@@ -1405,8 +1405,10 @@ object Configuration {
       }
     }
 
-    val it = new BackslashContinuedLineIterator(Includer(source).get)
-    processLines(it, None, Map.empty[String, Map[String, Value]])
+    for { inc <- Includer(source)
+          it   = new BackslashContinuedLineIterator(inc)
+          m   <- processLines(it, None, Map.empty[String, Map[String, Value]]) }
+      yield m
   }
 
 }

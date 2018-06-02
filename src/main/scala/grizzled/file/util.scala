@@ -749,6 +749,7 @@ object util {
     * @return `Success(true)` if the copy worked. `Failure(exception)` on
     *         error.
     */
+  @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
   def copy(files: Iterable[String],
            targetDir: String,
            createTarget: Boolean = true): Try[Boolean] = {
@@ -951,6 +952,7 @@ object util {
     else if (! dir.isDirectory)
       Failure(new IOException(s""""$dir" is not a directory."""))
     else {
+      @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
       val treeResults = dir.listFiles.map { f =>
 
         val t = Try {
@@ -988,6 +990,7 @@ object util {
 
     val useTime = if (time < 0) System.currentTimeMillis else time
     Try {
+      @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
       val results = files.map { name =>
         // Force a failure on error.
         touch(name, time).get
