@@ -27,7 +27,7 @@ wartremoverErrors in (Compile, compile) ++= Seq(
   Wart.Enumeration,
   Wart.ExplicitImplicitTypes,
   Wart.FinalCaseClass,
-//  Wart.FinalVal,
+  Wart.FinalVal,
 //  Wart.IsInstanceOf,
 //  Wart.JavaConversions,
 //  Wart.LeakingSealed,

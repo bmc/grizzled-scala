@@ -941,8 +941,8 @@ final class Configuration private[config](
   * Companion object for the `Configuration` class
   */
 object Configuration {
-  final val DefaultSectionNamePattern = """([a-zA-Z0-9_]+)""".r
-  final val DefaultCommentPattern     = """^\s*(#.*)$""".r
+  val DefaultSectionNamePattern = """([a-zA-Z0-9_]+)""".r
+  val DefaultCommentPattern     = """^\s*(#.*)$""".r
 
   private def DefaultOptionNameTransformer(name: String) = name.toLowerCase()
 

@@ -116,7 +116,7 @@ class IPAddress(val address: Array[Byte]) {
 object IPAddress {
   /** Singleton `IPAddress` for the local loop address.
     */
-  final val Localhost = IPAddress(Array(127, 0, 0, 1))
+  val Localhost = IPAddress(Array(127, 0, 0, 1))
 
   private val MaxIPv4 = BigInt("4294967295")
 
