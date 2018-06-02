@@ -563,7 +563,7 @@ object util {
             if (c1 == fileSep)
               c2.toString
             else
-              c1 + c2
+              s"$c1$c2"
         }
 
     val absolute = path.startsWith(fileSep) || (prefix != "")
@@ -692,8 +692,7 @@ object util {
 
       if (tries > maxTries)
         throw new IOException(
-          "Failed to create temporary directory " + "after " + maxTries +
-          " attempts."
+          s"Failed to create temporary directory after $maxTries attempts."
         )
 
       val usePrefix = Option(prefix).getOrElse("")
@@ -752,17 +751,19 @@ object util {
 
       if ((! target.exists()) && createTarget)
         if (! target.mkdirs())
-          throw new IOException("Unable to create target directory \"" +
-                                targetDir + "\"")
+          throw new IOException(
+            s"""Unable to create target directory "$targetDir"."""
+          )
 
       if (target.exists() && (! target.isDirectory))
-        throw new IOException("Cannot copy files to non-directory \"" +
-                              targetDir + "\"")
+        throw new IOException(
+          s"""Cannot copy files to non-directory "$targetDir"."""
+        )
 
       if (! target.exists())
-        throw new FileDoesNotExistException("Target directory \"" +
-                                            targetDir +
-                                            "\" does not exist.")
+        throw new FileDoesNotExistException(
+          s"""Target directory "$targetDir" does not exist."""
+        )
 
       for (file <- files) {
         // The .get() forces a failure if a specific copy fails.
@@ -1266,7 +1267,7 @@ object util {
     case (Mac | Posix) => splitPosixEglobPattern _
     case Windows       => splitWindowsEglobPattern _
     case _             =>
-      throw new UnsupportedOperationException("Unknown OS: " + os)
+      throw new UnsupportedOperationException(s"Unknown OS: $os")
   }
 
   /** Windows pattern splitter for eglob(). See description for the
@@ -1323,7 +1324,8 @@ object util {
   private lazy val doPathNormalizing = os match {
     case (Mac | Posix) => normalizePosixPath(_)
     case Windows       => normalizeWindowsPath(_)
-    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
+    case _             =>
+      throw new UnsupportedOperationException(s"Unknown OS: $os")
   }
 
   /** Shared between normalizeWindowsPath() and normalizePosixPath(),
@@ -1360,13 +1362,15 @@ object util {
   private lazy val makeUniversalPath: (String) => String = os match {
     case (Mac | Posix) => (path: String) => path
     case Windows       => (path: String) => path.replace(fileSeparator, "/")
-    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
+    case _             =>
+      throw new UnsupportedOperationException(s"Unknown OS: $os")
   }
 
   private lazy val makeNativePath: (String) => String = os match {
     case (Mac | Posix) => (path: String) => path
     case Windows       => (path: String) => path.replace("/", fileSeparator)
-    case _             => throw new UnsupportedOperationException("Unknown OS: " + os)
+    case _             =>
+      throw new UnsupportedOperationException(s"Unknown OS: $os")
   }
 
 }
