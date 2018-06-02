@@ -36,6 +36,7 @@ object Implicits {
       *
       * @return something nicer
       */
+    @SuppressWarnings(Array("org.wartremover.warts.Option2Iterable"))
     def humanize: String = {
       val days         = duration.toDays
       val minusDays    = duration - Duration(days, TimeUnit.DAYS)
@@ -69,7 +70,7 @@ object Implicits {
         case (value, _, plural) =>
           Some(NumFormatter.format(value) + " " + plural)
       }
-        .mkString(", ")
+      .mkString(", ")
 
       if (s.isEmpty) "0 milliseconds" else s
     }

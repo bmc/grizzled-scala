@@ -35,7 +35,7 @@ wartremoverErrors in (Compile, compile) ++= Seq(
   // Wart.NonUnitStatements,
   // Wart.Nothing,
   Wart.Null,
-//  Wart.Option2Iterable,
+  Wart.Option2Iterable,
 //  Wart.OptionPartial,
 //  Wart.PublicInference,
 //  Wart.Return,
