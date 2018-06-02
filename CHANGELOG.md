@@ -1,5 +1,12 @@
 # Grizzled Scala Change Log
 
+Version 4.4.3:
+
+* Merged [PR #12](https://github.com/bmc/grizzled-scala/pull/12), with fixes
+  and performance improvements for `grizzled.security.MessageDigest`, courtesy
+  of @lespea.
+ 
+
 Version 4.4.2:
 
 * Fixed bug in `grizzled.file.util.glob()` that caused it to match
