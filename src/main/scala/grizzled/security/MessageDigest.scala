@@ -88,6 +88,7 @@ class Digester(dg: JMessageDigest) {
     *
     * @return the digest bytes
     */
+  @SuppressWarnings(Array("org.wartremover.warts.While"))
   def digest(stream: InputStream): Array[Byte] = {
     dg.synchronized {
       dg.reset()

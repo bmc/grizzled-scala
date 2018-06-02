@@ -1102,6 +1102,8 @@ private[zip] final case class ReaderSource(r: Reader) extends ItemSource {
   *
   * @param source  the source
   */
+// No idea why Wart Remover is complaining about Array == here
+@SuppressWarnings(Array("org.wartremover.warts.ArrayEquals"))
 private[zip] final case class SourceSource(source: Source) extends ItemSource {
   def read(consumer: (Array[Byte], Int) => Try[Int]) = {
 
@@ -1127,6 +1129,8 @@ private[zip] final case class SourceSource(source: Source) extends ItemSource {
   *
   * @param bytes  the byte array
   */
+// No idea why Wart Remover is complaining about Array == here
+@SuppressWarnings(Array("org.wartremover.warts.ArrayEquals"))
 private[zip] final case class BytesSource(bytes: Array[Byte])
   extends ItemSource {
 

@@ -28,11 +28,11 @@ object reflect {
   def isOfType[T: ClassTag](o: Any): Boolean = {
     val clsT = classTag[T].runtimeClass
 
-    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.AsInstanceOf"))
+    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
     def isPrimitive[P: ClassTag]: Boolean =
       classTag[P].runtimeClass.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 
-    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.AsInstanceOf"))
+    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
     def isClass: Boolean =
       clsT.isAssignableFrom(o.asInstanceOf[AnyRef].getClass)
 

@@ -230,7 +230,7 @@ object Implicits {
         string.map {
           case c if SpecialMetachars.get(c).isDefined => SpecialMetachars(c)
           case c if c.isPrintable => c
-          case c                    => f"\\u${c.toLong}%04x"
+          case c => f"\\u${c.toLong}%04x"
         }.mkString("")
       }
 

@@ -126,19 +126,19 @@ object Implicits {
       val buf = new ArrayBuffer[Char]
 
       // Lay them out in columns. Simple-minded for now.
-      val strings: List[String] = container.map(_.toString).toList
+      val strings: Seq[String] = container.map(_.toString)
       val colSize = maxnum(strings.map(_.length): _*) + 2
       val colsPerLine = width / colSize
 
-      for ((s, i) <- strings.zipWithIndex) {
-        val count = i + 1
-        val padding = " " * (colSize - s.length)
-        buf ++= (s + padding)
-        if ((count % colsPerLine) == 0)
-          buf ++= lineSep
-      }
-
-      buf mkString ""
+      strings
+        .zipWithIndex
+        .map { case (s: String, i: Int) =>
+          val count = i + 1
+          val padding = " " * (colSize - s.length)
+          val sep = if ((count % colsPerLine) == 0) lineSep else ""
+          s + padding + sep
+        }
+        .mkString("")
     }
 
     override def toString = container.toString

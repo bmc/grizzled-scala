@@ -2,7 +2,7 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "4.4.3"
+version := "4.5.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
@@ -17,21 +17,36 @@ autoCompilerPlugins := true
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 bintrayPackageLabels := Seq("library", "grizzled", "scala")
 
-/* Wart Remover doesn't yet work with 2.12. Disabled for now.
+// Wart Remover doesn't yet work with 2.12. Disabled for now.
 wartremoverErrors in (Compile, compile) ++= Seq(
-  Wart.Any2StringAdd,
+  Wart.ArrayEquals,
+  // Wart.Any,
+  // Wart.AnyVal,
   Wart.AsInstanceOf,
-  Wart.EitherProjectionPartial,
-  Wart.Enumeration,
-  Wart.FinalCaseClass,
-  Wart.IsInstanceOf,
-  Wart.JavaConversions,
-  Wart.Null,
-  Wart.OptionPartial,
-  Wart.Return,
-  Wart.Var
+//  Wart.EitherProjectionPartial,
+//  Wart.Enumeration,
+//  Wart.ExplicitImplicitTypes,
+//  Wart.FinalCaseClass,
+//  Wart.FinalVal,
+//  Wart.IsInstanceOf,
+//  Wart.JavaConversions,
+//  Wart.LeakingSealed,
+//  Wart.MutableDataStructures,
+//  Wart.NonUnitStatements,
+//  Wart.Nothing,
+//  Wart.Null,
+//  Wart.Option2Iterable,
+//  Wart.OptionPartial,
+//  Wart.PublicInference,
+//  Wart.Return,
+//  Wart.StringPlusAny,
+//  Wart.Throw,
+//  Wart.TraversableOps,
+//  Wart.TryPartial,
+//  Wart.Var,
+  Wart.While
 )
-*/
+
 
 // ---------------------------------------------------------------------------
 // Helpers

@@ -70,7 +70,7 @@ object util {
     */
   def hexStringToBytes(hexString: String): Option[Array[Byte]] = {
 
-    @SuppressWarnings(Array("org.brianmckenna.wartremover.warts.AsInstanceOf"))
+    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
     def parse(chars: Seq[Char], accum: Array[Byte]): Option[Array[Byte]] = {
       chars match {
         case upper :: lower :: rest => {

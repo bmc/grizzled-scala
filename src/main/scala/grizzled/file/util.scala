@@ -885,6 +885,7 @@ object util {
     * @return `Success(true)` if the copy worked. `Failure(exception)` on
     *         error.
     */
+  @SuppressWarnings(Array("org.wartremover.warts.Any"))
   def copyTree(sourceDir: File, targetDir: File): Try[Boolean] = {
     Try {
       if (! sourceDir.exists())
@@ -894,11 +895,17 @@ object util {
         throw new IOException("Source directory \"" + sourceDir.getPath +
                               "\" is not a directory.")
 
-      val files = sourceDir.list.map(f => (new File(sourceDir, f),
-                                           new File(targetDir, f)))
+      val files: Seq[(File, File)] = sourceDir
+        .list
+        .map { f: String =>
+          (new File(sourceDir, f), new File(targetDir, f))
+        }
 
       targetDir.mkdirs
-      for ((src, target) <- files) {
+
+      // Not sure why Wart Remover is complaining about inferred Any here,
+      // since everything is explicit.
+      files.foreach { case (src: File, target: File) =>
         if (src.isDirectory)
           copyTree(src, target)
         else
