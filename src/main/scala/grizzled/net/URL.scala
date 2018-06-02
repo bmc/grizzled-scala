@@ -17,6 +17,7 @@ import scala.util.Try
   * @param userInfo   the URL's user info, if any
   * @param fragment   the fragment, if any
   */
+@SuppressWarnings(Array("org.wartremover.warts.Null"))
 final case class URL(protocol: String,
                      host:     Option[String],
                      port:     Option[Int],

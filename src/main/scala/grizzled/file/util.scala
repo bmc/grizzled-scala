@@ -1033,11 +1033,12 @@ object util {
   def splitDrivePath(path: String): (String, String) = {
     path match {
       case DrivePathPattern(driveSpec, subPath) =>
-        driveSpec match {
-          case null => ("", subPath)
-          case ":"  => ("", subPath)
-          case _    => (driveSpec, subPath)
-        }
+        Option(driveSpec)
+          .map {
+            case ":" => ("", subPath)
+            case _   => (driveSpec, subPath)
+          }
+          .getOrElse(("", subPath))
 
       case _ => ("", path)
     }

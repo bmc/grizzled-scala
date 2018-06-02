@@ -12,6 +12,7 @@ import scala.util.Try
   * @param query      the query string, if defined
   * @param fragment   the fragment, if defined
   */
+@SuppressWarnings(Array("org.wartremover.warts.Null"))
 final case class URI(scheme:    Option[String],
                      userInfo:  Option[String],
                      host:      Option[String],

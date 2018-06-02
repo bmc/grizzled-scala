@@ -53,7 +53,7 @@ trait ValueConverter[T] {
   * @param message   the exception message
   * @param exception a nested exception
   */
-@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
+@SuppressWarnings(Array("org.wartremover.warts.Null"))
 class ConfigurationException(val message:   String,
                              val exception: Throwable = null)
   extends Exception(message, exception)
@@ -68,7 +68,7 @@ object ConfigurationException {
 /** A specific kind of configuration exception, tied to a specific section
   * and option.
   */
-@SuppressWarnings(Array("org.brianmckenna.wartremover.warts.Null"))
+@SuppressWarnings(Array("org.wartremover.warts.Null"))
 class ConfigurationOptionException(message:     String,
                                    val section: String,
                                    val option:  String,

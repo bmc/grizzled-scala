@@ -221,19 +221,12 @@ class UnixShellStringTemplate(resolveVar:  (String) => Option[String],
     def handleMatch(m: Match): Option[Variable] = {
       val name = m.group(1)
 
-      val default = m.group(2) match {
-        case null      =>
-          None
-        case s: String =>
-          // Pull off the "?". Can't do Some(s drop 1),
-          // because that yields a StringOps, not a String.
-          // Casting doesn't work, either. But assigning to a
-          // temporary string does.
-          val realDefault: String = s drop 1
-          Some(realDefault)
+      val default = Option(m.group(2)).map { s =>
+        // Pull off the "?".
+        s.drop(1)
       }
 
-        Some(new Variable(m.start, m.end, name, default))
+      Some(new Variable(m.start, m.end, name, default))
     }
 
     def handleNoMatch: Option[Variable] = {
