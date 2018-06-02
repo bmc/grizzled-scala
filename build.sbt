@@ -41,9 +41,9 @@ wartremoverErrors in (Compile, compile) ++= Seq(
   Wart.Return,
   Wart.StringPlusAny,
 //  Wart.Throw,
-//  Wart.TraversableOps,
+  Wart.TraversableOps,
 //  Wart.TryPartial,
-//  Wart.Var,
+  //Wart.Var,
   Wart.While
 )
 

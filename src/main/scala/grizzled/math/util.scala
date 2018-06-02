@@ -8,13 +8,16 @@ object util {
     * `Ordering` is defined, returning the "largest" one, as defined by the
     * `Ordering`.
     *
-    * @param args  the items for which to find the maximum
+    * @param arg   the first item
+    * @param args  the remaining items for which to find the maximum
     * @tparam T    the argument type
     *
     * @return the maximum value
     */
-  def max[T: Ordering](args: T*): T = {
-    args.reduce { (a: T, b: T) =>
+  // reduce() is okay here, since the argument list cannot be empty.
+  @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
+  def max[T: Ordering](arg: T, args: T*): T = {
+    (arg +: args).reduce { (a: T, b: T) =>
       val ev = implicitly[Ordering[T]]
       ev.compare(a, b) match {
         case i if i < 0 => b
@@ -28,13 +31,16 @@ object util {
     * `Ordering` is defined, returning the "largest" one, as defined by the
     * `Ordering`.
     *
-    * @param args  the items for which to find the maximum
+    * @param arg   the first item
+    * @param args  the remaining items for which to find the maximum
     * @tparam T    the argument type
     *
     * @return the maximum value
     */
-  def min[T: Ordering](args: T*): T = {
-    args.reduce { (a: T, b: T) =>
+  // reduce() is okay here, since the argument list cannot be empty.
+  @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
+  def min[T: Ordering](arg: T, args: T*): T = {
+    (arg +: args).reduce { (a: T, b: T) =>
       val ev = implicitly[Ordering[T]]
       ev.compare(a, b) match {
         case i if i < 0 => a

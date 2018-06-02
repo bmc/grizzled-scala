@@ -8,6 +8,10 @@ Version 4.5.0:
 * Updated SBT to version 1.1.6. 
 * Enabled [Wart Remover](http://www.wartremover.org) and many, but not all,
   of its errors. Cleaned up offending code.
+* Various functions in `grizzled.math` and `grizzled.math.stats` (`max()`, 
+  `min()`, `geometricMean()`, etc.) now take one fixed parameter and a variable
+  argument list, instead of just a variable argument list, to ensure that they
+  are always called with at least one parameter.
 
 Version 4.4.2:
 

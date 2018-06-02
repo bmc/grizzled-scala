@@ -45,14 +45,16 @@ object Implicits {
                       (implicit cbf: CanBuildFrom[List[T], U, J]): J = {
       @tailrec
       def loop(xs: List[T], acc: MutableBuilder[U, J]): J = {
-        if (xs.isEmpty) acc.result
-        else {
-          val b = mapper(xs.head)
-          if (!predicate(b))
+        xs match {
+          case Nil =>
             acc.result
-          else {
-            acc += b
-            loop(xs.tail, acc)
+          case head :: tail =>
+            val b = mapper(head)
+            if (!predicate(b))
+              acc.result
+            else {
+              acc += b
+              loop(tail, acc)
           }
         }
       }
@@ -127,7 +129,15 @@ object Implicits {
 
       // Lay them out in columns. Simple-minded for now.
       val strings: Seq[String] = container.map(_.toString)
-      val colSize = maxnum(strings.map(_.length): _*) + 2
+      val colSize = strings match {
+        case s if s.isEmpty =>
+          0
+        case Seq(s) =>
+          s.length
+        case Seq(head, tail @ _*) =>
+          maxnum(head.length, tail.map(_.length): _*) + 2
+      }
+
       val colsPerLine = width / colSize
 
       strings

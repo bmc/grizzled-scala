@@ -23,7 +23,7 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data) {
-      geometricMean(values: _*) shouldBe expected
+      geometricMean(values.head, values.tail: _*) shouldBe expected
     }
   }
 
@@ -36,7 +36,7 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data) {
-      harmonicMean(values: _*) shouldBe expected
+      harmonicMean(values.head, values.tail: _*) shouldBe expected
     }
   }
 
@@ -50,7 +50,7 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data) {
-      mean(values: _*) shouldBe expected
+      mean(values.head, values.tail: _*) shouldBe expected
     }
   }
 
@@ -66,7 +66,7 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data) {
-      median(values: _*) shouldBe expected
+      median(values.head, values.tail: _*) shouldBe expected
     }
   }
 
@@ -80,7 +80,7 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data) {
-      mode(values: _*).sortWith(_ < _) shouldBe expected
+      mode(values.head, values.tail: _*).sortWith(_ < _) shouldBe expected
     }
   }
 
@@ -94,7 +94,7 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data) {
-      sampleVariance(values: _*) shouldBe expected
+      sampleVariance(values.head, values.tail: _*) shouldBe expected
     }
   }
 
@@ -123,14 +123,14 @@ class StatsSpec extends BaseSpec {
 
   "sample standard deviation" should "produce proper values" in {
     for ((expected, values) <- SampleStddevData) {
-      sampleStandardDeviation(values: _*) shouldBe expected
+      sampleStandardDeviation(values.head, values.tail: _*) shouldBe expected
     }
   }
 
   it should "be the square root of the sample variance" in {
     for ((expected, values) <- SampleStddevData) {
-      val variance = sampleVariance(values: _*)
-      val stddev = sampleStandardDeviation(values: _*)
+      val variance = sampleVariance(values.head, values.tail: _*)
+      val stddev = sampleStandardDeviation(values.head, values.tail: _*)
 
       sqrt(variance) shouldBe stddev
     }
@@ -138,20 +138,20 @@ class StatsSpec extends BaseSpec {
 
   "population variance" should "produce proper values" in {
     for ((expected, values) <- PopulationVarianceData) {
-      populationVariance(values: _*) shouldBe expected
+      populationVariance(values.head, values.tail: _*) shouldBe expected
     }
   }
 
   "population standard deviation" should "produce proper values" in {
     for ((expected, values) <- PopulationStddevData) {
-      populationStandardDeviation(values: _*) shouldBe expected
+      populationStandardDeviation(values.head, values.tail: _*) shouldBe expected
     }
   }
 
   it should "be the square root of the population variance" in {
     for ((expected, values) <- PopulationStddevData) {
-      val variance = populationVariance(values: _*)
-      val stddev = populationStandardDeviation(values: _*)
+      val variance = populationVariance(values.head, values.tail: _*)
+      val stddev = populationStandardDeviation(values.head, values.tail: _*)
 
       sqrt(variance) shouldBe stddev
     }
@@ -171,11 +171,11 @@ class StatsSpec extends BaseSpec {
     )
 
     for ((expected, values) <- Data1) {
-      range(values: _*) shouldBe expected
+      range(values.head, values.tail: _*) shouldBe expected
     }
 
     for ((expected, values) <- Data2) {
-      range(values: _*) shouldBe expected
+      range(values.head, values.tail: _*) shouldBe expected
     }
   }
 

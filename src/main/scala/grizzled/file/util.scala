@@ -100,19 +100,20 @@ object util {
       // expression (which causes problems with a Windows-style "\".
       // NOTE: We deliberately don't use splitPath() here.
       val components = (path split fileSep(0)).toList
-
-      if (components.length == 1)
-        (components.head, "")
-
-      else {
-        val listTuple = components splitAt (components.length - 1)
-        val s: String = listTuple._1 mkString fileSep
-        val prefix =
-          if ((s.length == 0) && (path startsWith fileSep))
-            fileSep
-          else
-            s
-        (prefix, listTuple._2 mkString fileSep)
+      components match {
+        case Nil =>
+          ("", "")
+        case head :: Nil =>
+          (head, "")
+        case head :: tail =>
+          val listTuple = components splitAt (components.length - 1)
+          val s: String = listTuple._1 mkString fileSep
+          val prefix =
+            if ((s.length == 0) && (path startsWith fileSep))
+              fileSep
+            else
+              s
+          (prefix, listTuple._2 mkString fileSep)
       }
     }
   }
@@ -275,45 +276,50 @@ object util {
 
       val result = new ArrayBuffer[String]()
 
-      val piece = pieces.head
-      val last = pieces.length == 1
+      pieces match {
+        case Nil => pieces
+        case head :: tail =>
+          val last = tail.isEmpty
 
-      if (piece == "**") {
-        val remainingPieces = if (last) Nil else pieces.drop(1)
+          if (head == "**") {
+            val remainingPieces = if (last) Nil else pieces.drop(1)
 
-        for ((root, dirs, files) <- walk(directory, topdown = true)) {
-          if (last)
-            // At the end of a pattern, "**" just recursively
-            // matches directories.
-            result += root
+            for ((root, dirs, files) <- walk(directory, topdown = true)) {
+              if (last) {
+                // At the end of a pattern, "**" just recursively
+                // matches directories.
+                result += root
+              }
 
-          else
-            // Recurse downward, trying to match the rest of
-            // the pattern.
-            result ++= doGlob(remainingPieces, root)
-        }
-      }
-
-      else {
-        // Regular glob pattern.
-
-        val path = directory + fileSeparator + piece
-        val matches = glob(path)
-        if (matches.nonEmpty) {
-          if (last)
-            // Save the matches, and stop.
-            result ++= matches
-
-          else {
-            // Must continue recursing.
-            val remainingPieces = pieces.drop(1)
-            for (m <- matches if new File(m).isDirectory) {
-              val subResult = doGlob(remainingPieces, m)
-              for (partialPath <- subResult)
-                result += partialPath
+              else {
+                // Recurse downward, trying to match the rest of
+                // the pattern.
+                result ++= doGlob(remainingPieces, root)
+              }
             }
           }
-        }
+
+          else {
+            // Regular glob pattern.
+
+            val path = directory + fileSeparator + head
+            val matches = glob(path)
+            if (matches.nonEmpty) {
+              if (last)
+              // Save the matches, and stop.
+                result ++= matches
+
+              else {
+                // Must continue recursing.
+                val remainingPieces = pieces.drop(1)
+                for (m <- matches if new File(m).isDirectory) {
+                  val subResult = doGlob(remainingPieces, m)
+                  for (partialPath <- subResult)
+                    result += partialPath
+                }
+              }
+            }
+          }
       }
 
       result.toList
@@ -574,10 +580,10 @@ object util {
     // ass.
     val pieces = (subpath split fileSep(0)).toList
     if (absolute) {
-      if (pieces.isEmpty)
-        List[String](prefix + fileSep)
-      else
-        (prefix + fileSep + pieces.head) :: pieces.tail
+      pieces match {
+        case Nil          => List[String](prefix + fileSep)
+        case head :: tail => (prefix + fileSep + head) :: tail
+      }
     }
     else
       pieces
@@ -1192,6 +1198,8 @@ object util {
     *
     * @return the longest common path, which might be the empty string
     */
+  // reduceLeft() is okay here, since we're checking the size first.
+  @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
   def longestCommonPathPrefix(paths: List[String]): String = {
     val PathSep = "/"
     val BoundaryRe = s"(?=[$PathSep])(?<=[^$PathSep])|(?=[^$PathSep])(?<=[$PathSep])"
@@ -1351,8 +1359,8 @@ object util {
       case a :: ".." :: tail =>
         normalizePathPieces(tail)
 
-      case _ =>
-        List[String](pieces.head) ++ normalizePathPieces(pieces.tail)
+      case head :: tail =>
+        List[String](head) ++ normalizePathPieces(tail)
     }
   }
 

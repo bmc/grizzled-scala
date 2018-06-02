@@ -103,12 +103,14 @@ extends Iterator[String] {
   def hasNext: Boolean = {
     @tailrec
     def somethingHasNext(stack: List[IncludeSource]): Boolean = {
-      if (stack.isEmpty)
-        false
-      else if (stack.head.iterator.hasNext)
-        true
-      else
-        somethingHasNext(stack.tail)
+      stack match {
+        case Nil => false
+        case head :: tail =>
+          if (head.iterator.hasNext)
+            true
+          else
+            somethingHasNext(tail)
+      }
     }
 
     somethingHasNext(sourceStack.toList.reverse)
@@ -136,6 +138,7 @@ extends Iterator[String] {
       }
     }
 
+    @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
     @tailrec
     def processNext: String = {
       val line = nextFromStack

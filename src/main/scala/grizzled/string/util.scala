@@ -180,11 +180,16 @@ object util {
   def longestCommonPrefix(strings: Seq[String]): String = {
 
     def isCommonPrefix(len: Int): Boolean = {
-      val prefix = strings.head.slice(0, len)
+      strings match {
+        case Seq(head, _*) =>
+          val prefix = head.slice(0, len)
+          // If there's a single string in the list that doesn't start with this
+          // prefix, the first N characters of strings(0) is not a common prefix.
+          strings.forall { _.startsWith(prefix) }
 
-      // If there's a single string in the list that doesn't start with this
-      // prefix, the first N characters of strings(0) is not a common prefix.
-      ! strings.exists { s => ! s.startsWith(prefix) }
+        case _ =>
+          false
+      }
     }
 
     @tailrec
@@ -201,15 +206,13 @@ object util {
 
     }
 
-    if (strings.isEmpty) {
-      ""
-    }
+    strings match {
+      case Seq(head, _*) =>
+        val minLen = strings.map(_.length).min
+        val (low, high) = search(1, minLen)
+        head.slice(0, (low + high) / 2)
 
-    else {
-      val minLen = strings.map(_.length).min
-      val (low, high) = search(1, minLen)
-      strings.head.slice(0, (low + high) / 2)
+      case _ => ""
     }
   }
-
 }

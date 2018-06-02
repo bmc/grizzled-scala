@@ -456,11 +456,14 @@ class Zipper private(private val items:           Map[String, ZipSource],
         }
 
         stream match {
-          case s if s.isEmpty               => Success(currentZipper)
-          case s if s.head.isDirectory      => addNext(s.tail, currentZipper)
-          case s if ! wildcardMatch(s.head) => addNext(s.tail, currentZipper)
-          case s =>
-            val f = s.head       // the next file or directory (File)
+          case s if s.isEmpty =>
+            Success(currentZipper)
+          case head #:: tail if head.isDirectory =>
+            addNext(tail, currentZipper)
+          case head #:: tail if ! wildcardMatch(head) =>
+            addNext(tail, currentZipper)
+          case head #:: tail =>
+            val f = head       // the next file or directory (File)
             val path = f.getPath // its path (String)
             val t = if (flatten)
               currentZipper.addFile(f, flatten = true)
@@ -477,7 +480,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
 
             t match {
               case Failure(ex) => Failure(ex)
-              case Success(z)  => addNext(s.tail, z)
+              case Success(z)  => addNext(tail, z)
             }
         }
       }
@@ -530,7 +533,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
     * be represented in this list. Only the paths that have been explicitly
     * added are represented.
     */
-  val paths = {
+  val paths: Set[String] = {
     bareDirectories ++ items.keySet
   }
 
