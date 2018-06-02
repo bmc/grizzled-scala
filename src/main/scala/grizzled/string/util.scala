@@ -104,7 +104,7 @@ object util {
     * Examples:
     *
     * {{{
-    * val s = """one two "three four" ""
+    * val s = """one two "three four" """
     * for (t <- tokenizeWithQuotes(s)) println("|" + t + "|")
     * // Prints:
     * // |one|
