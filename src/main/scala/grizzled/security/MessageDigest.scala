@@ -3,7 +3,6 @@ package grizzled.security
 import java.io.{File, FileInputStream, InputStream}
 import java.security.{MessageDigest => JMessageDigest}
 
-import scala.annotation.tailrec
 import scala.io.Source
 
 import grizzled.string.{util => StringUtil}
@@ -91,17 +90,16 @@ class Digester(dg: JMessageDigest) {
     */
   def digest(stream: InputStream): Array[Byte] = {
     dg.synchronized {
+      dg.reset()
 
-      @tailrec def readNext(): Unit = {
-        val c = stream.read()
-        if (c > 0) {
-          dg.update(c.toByte)
-          readNext()
-        }
+      val buf = Array.ofDim[Byte](8192)
+      var readLen = stream.read(buf)
+
+      while (readLen > 0) {
+        dg.update(buf, 0, readLen)
+        readLen = stream.read(buf)
       }
 
-      dg.reset()
-      readNext()
       dg.digest
     }
   }
