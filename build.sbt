@@ -31,7 +31,7 @@ wartremoverErrors in (Compile, compile) ++= Seq(
   Wart.IsInstanceOf,
   Wart.JavaConversions,
   Wart.LeakingSealed,
-//  Wart.MutableDataStructures,
+  Wart.MutableDataStructures,
 //  Wart.NonUnitStatements,
 //  Wart.Nothing,
 //  Wart.Null,
