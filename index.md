@@ -9,8 +9,7 @@ layout: withTOC
 ## Introduction
 
 The Grizzled Scala Library is a general-purpose [Scala][] library with a
-variety of different modules and packages. It's similar to the clapper.org
-[Grizzled Python][] Library, only for Scala. (Duh.) It's roughly organized
+variety of different modules and packages. It's roughly organized
 into subpackages that group different kinds of utility functions and
 classes. Currently, the library is broken into the following modules:
 
@@ -50,7 +49,7 @@ repository. (From JCenter, it's eventually pushed to the
 
 **NOTE**: This library uses [semantic versioning](http://semver.org).
 
-- Versions 4.3.0, 4.2.0, 4.1.0, 4.0.0 and 3.1.0 support Scala 2.10, 2.11 and 2.12
+- Versions 3.1.0 and better support Scala 2.10, 2.11 and 2.12
 - Version 3.0.0 supports Scala 2.10, 2.11 and 2.12.0-RC1
 - Versions 2.5.0 and 2.6.0 support Scala 2.10, 2.11 and 2.12.0-M5
 - Versions 2.4.x, 2.3.x, 2.2.x, 2.1.0 and 2.0.0 support Scala 2.10, 2.11 and 2.12-M4.
@@ -76,7 +75,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.11</artifactId>
-      <version>4.3.0</version>
+      <version>4.5.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -100,7 +99,7 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 Add the following to your SBT build:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.3.0"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.5.0"
 
 ## Source Code Repository
 
@@ -111,16 +110,11 @@ To clone the repository, run this command:
 
 ## Building from Source
 
-Building the library requires [SBT][] 0.13.x, but you don't have to
-install it (unless you're building on Windows). Instead, just use the
-`./activator` script at the top level of the repository. The script,
-part of [Lightbend Activator](https://www.lightbend.com/activator/download),
-automatically downloads the appropriate versions of SBT and Scala for
-you. (You _do_ need to have an installed Java JDK. I recommend 1.8.)
+Building the library requires [SBT][] 1.x and a 1.8 version of the Java JDK.
 
 You can build with this one simple command:
 
-    bin/activator +compile +test +package
+    sbt +compile +test +package
 
 The resulting jar file will be under the top-level `target` directory.
 
@@ -129,7 +123,7 @@ The resulting jar file will be under the top-level `target` directory.
 The Scaladoc-generated the [API documentation][] is available locally.
 In addition, you can generate your own version with:
 
-    bin/activator doc
+    sbt doc
 
 ## Change log
 
@@ -141,7 +135,7 @@ Brian M. Clapper, [bmc@clapper.org][]
 
 ## Copyright and License
 
-The Grizzled Scala Library is copyright &copy; 2009-2017 Brian M. Clapper
+The Grizzled Scala Library is copyright &copy; 2009-2018 Brian M. Clapper
 and is released under a [BSD License][].
 
 ## Patches
@@ -166,11 +160,3 @@ request. Along with any patch you send:
 [SBT]: http://code.google.com/p/simple-build-tool
 [bmc@clapper.org]: mailto:bmc@clapper.org
 [changelog]: https://github.com/bmc/grizzled-scala/blob/master/CHANGELOG.md
-[SBT cross-building]: http://code.google.com/p/simple-build-tool/wiki/CrossBuild
-[Apache Ivy]: http://ant.apache.org/ivy/
-[Library Management Maven/Ivy section]: http://code.google.com/p/simple-build-tool/wiki/LibraryManagement#Maven/Ivy
-[SBT Manual]: http://code.google.com/p/simple-build-tool/wiki/DocumentationHome
-[SBT-repo-email-thread]: http://groups.google.com/group/simple-build-tool/browse_thread/thread/470bba921252a167
-[Grizzled Python]: http://software.clapper.org/grizzled-python/
-[Doug Tangren]: http://github.com/softprops/
-[ls.implicit.ly]: http://ls.implicit.ly

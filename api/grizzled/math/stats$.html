@@ -65,9 +65,7 @@
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="" href="../../index.html">
-              <span class="name">root</span>
-            </a>
+        <a title="" href="../../index.html"><span class="name">root</span></a>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
@@ -83,10 +81,7 @@
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="The Grizzled Scala Library contains a variety of miscellaneous,
-general purpose utility classes and objects." href="../index.html">
-              <span class="name">grizzled</span>
-            </a>
+        <a title="The Grizzled Scala Library contains a variety of miscellaneous, general purpose utility classes and objects." href="../index.html"><span class="name">grizzled</span></a>
       </span>
       
       <p class="shortcomment cmt">The Grizzled Scala Library contains a variety of miscellaneous,
@@ -107,9 +102,7 @@ complete details, including installation instructions.
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="Miscellaneous math and statistics utilities." href="index.html">
-              <span class="name">math</span>
-            </a>
+        <a title="Miscellaneous math and statistics utilities." href="index.html"><span class="name">math</span></a>
       </span>
       
       <p class="shortcomment cmt">Miscellaneous math and statistics utilities.</p><div class="fullcomment"><div class="comment cmt"><p>Miscellaneous math and statistics utilities.
@@ -117,15 +110,11 @@ complete details, including installation instructions.
     </li><li class="current-entities indented2">
                         <span class="separator"></span>
                         <a class="object" href="" title="Miscellaneous statistics-related functions."></a>
-                        <a href="" title="Miscellaneous statistics-related functions.">
-                          stats
-                        </a>
+                        <a href="" title="Miscellaneous statistics-related functions.">stats</a>
                       </li><li class="current-entities indented2">
                         <span class="separator"></span>
                         <a class="object" href="util$.html" title="Useful math-related utility functions."></a>
-                        <a href="util$.html" title="Useful math-related utility functions.">
-                          util
-                        </a>
+                        <a href="util$.html" title="Useful math-related utility functions.">util</a>
                       </li>
               </ul>
             </div>
@@ -265,9 +254,9 @@ println(median(l))</pre></div><div class="toggleContainer block">
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="grizzled.math.stats#arithmeticMean" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="arithmeticMean[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="arithmeticMean[T](T*)(Numeric[T]):Double"></a>
+      <a id="arithmeticMean[T](item:T,items:T*)(implicitevidence$3:Numeric[T]):Double"></a><a id="arithmeticMean[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#arithmeticMean[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#arithmeticMean[T](item:T,items:T*)(implicitevidence$3:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -276,13 +265,13 @@ println(median(l))</pre></div><div class="toggleContainer block">
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">arithmeticMean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.arithmeticMean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.arithmeticMean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">arithmeticMean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.arithmeticMean.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.arithmeticMean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.arithmeticMean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculates the arithmetic mean of the values of the passed-in
 numbers.</p><div class="fullcomment"><div class="comment cmt"><p>Calculates the arithmetic mean of the values of the passed-in
 numbers.
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the arithmetic mean</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the arithmetic mean</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
@@ -315,6 +304,8 @@ numbers.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -376,9 +367,9 @@ numbers.
               
         </dd></dl></div>
     </li><li name="grizzled.math.stats#geometricMean" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="geometricMean[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="geometricMean[T](T*)(Numeric[T]):Double"></a>
+      <a id="geometricMean[T](item:T,items:T*)(implicitevidence$1:Numeric[T]):Double"></a><a id="geometricMean[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#geometricMean[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#geometricMean[T](item:T,items:T*)(implicitevidence$1:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -387,7 +378,7 @@ numbers.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">geometricMean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.geometricMean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.geometricMean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">geometricMean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.geometricMean.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.geometricMean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.geometricMean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculates the geometric mean of the values of the passed-in
@@ -397,7 +388,7 @@ all numbers used in the calculation of a geometric mean must be
 positive.</p><p>For a discussion of when a geometric mean is more suitable than an
 arithmetic mean, see
 <a href="http://www.math.toronto.edu/mathnet/questionCorner/geomean.html" target="_blank">http://www.math.toronto.edu/mathnet/questionCorner/geomean.html</a>.
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the geometric mean</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the geometric mean</p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
@@ -413,11 +404,14 @@ arithmetic mean, see
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.math.stats#harmonicMean" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="harmonicMean[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="harmonicMean[T](T*)(Numeric[T]):Double"></a>
+      <a id="harmonicMean[T](item:T,items:T*)(implicitevidence$2:Numeric[T]):Double"></a><a id="harmonicMean[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#harmonicMean[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#harmonicMean[T](item:T,items:T*)(implicitevidence$2:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -426,14 +420,14 @@ arithmetic mean, see
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">harmonicMean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.harmonicMean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.harmonicMean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">harmonicMean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.harmonicMean.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.harmonicMean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.harmonicMean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculates the harmonic mean of the values of the passed-in
 numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n</sup>).</code>
 </p><div class="fullcomment"><div class="comment cmt"><p>Calculates the harmonic mean of the values of the passed-in
 numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n</sup>).</code>
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the harmonic mean</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the harmonic mean</p></dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <span class="permalink">
@@ -449,7 +443,10 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
@@ -467,9 +464,9 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="grizzled.math.stats#mean" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mean[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="mean[T](T*)(Numeric[T]):Double"></a>
+      <a id="mean[T](item:T,items:T*)(implicitevidence$4:Numeric[T]):Double"></a><a id="mean[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#mean[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#mean[T](item:T,items:T*)(implicitevidence$4:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -478,15 +475,15 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.mean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.mean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">mean</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.mean.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.mean.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.mean.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Synonym for <code>arithmeticMean</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Synonym for <code>arithmeticMean</code>.
-</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>arithmeticMean</p></span></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the arithmetic mean</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>arithmeticMean</p></span></dd></dl></div>
     </li><li name="grizzled.math.stats#median" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="median[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="median[T](T*)(Numeric[T]):Double"></a>
+      <a id="median[T](item:T,items:T*)(implicitevidence$5:Numeric[T]):Double"></a><a id="median[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#median[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#median[T](item:T,items:T*)(implicitevidence$5:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -495,15 +492,15 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">median</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.median.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.median.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">median</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.median.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.median.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.median.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculates the median of the values of the passed-in numbers.</p><div class="fullcomment"><div class="comment cmt"><p>Calculates the median of the values of the passed-in numbers.
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the median</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the median</p></dd></dl></div>
     </li><li name="grizzled.math.stats#mode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mode[T](items:T*)(implicitn:Numeric[T]):List[T]"></a><a id="mode[T](T*)(Numeric[T]):List[T]"></a>
+      <a id="mode[T](item:T,items:T*)(implicitevidence$6:Numeric[T]):List[T]"></a><a id="mode[T](T,T*)(Numeric[T]):List[T]"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#mode[T](items:T*)(implicitn:Numeric[T]):List[T]" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#mode[T](item:T,items:T*)(implicitevidence$6:Numeric[T]):List[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -512,14 +509,14 @@ numbers, namely: <code>n / (1/x<sup>1</sup> + 1/x<sup>2</sup> + ... + 1/x<sup>n<
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mode</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.mode.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.mode.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="grizzled.math.stats.mode.T">T</span>]</span>
+        <span class="name">mode</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.mode.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.mode.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.mode.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="grizzled.math.stats.mode.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Calculates the mode (most common value(s)) of the values of the
 passed-in numbers.</p><div class="fullcomment"><div class="comment cmt"><p>Calculates the mode (most common value(s)) of the values of the
 passed-in numbers. If there are multiple common values, they're all
 returned.
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>list of modal values</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>list of modal values</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
@@ -551,7 +548,10 @@ returned.
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
@@ -567,11 +567,14 @@ returned.
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.math.stats#popStdDev" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="popStdDev[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="popStdDev[T](T*)(Numeric[T]):Double"></a>
+      <a id="popStdDev[T](item:T,items:T*)(implicitevidence$10:Numeric[T]):Double"></a><a id="popStdDev[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#popStdDev[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#popStdDev[T](item:T,items:T*)(implicitevidence$10:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -580,15 +583,15 @@ returned.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">popStdDev</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.popStdDev.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.popStdDev.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">popStdDev</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.popStdDev.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.popStdDev.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.popStdDev.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Shorter synonym for <code>populationStandardDeviation</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Shorter synonym for <code>populationStandardDeviation</code>.
-</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>populationStandardDeviation</p></span></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the standard deviation</p></dd></dl></div>
     </li><li name="grizzled.math.stats#populationStandardDeviation" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="populationStandardDeviation[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="populationStandardDeviation[T](T*)(Numeric[T]):Double"></a>
+      <a id="populationStandardDeviation[T](item:T,items:T*)(implicitevidence$9:Numeric[T]):Double"></a><a id="populationStandardDeviation[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#populationStandardDeviation[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#populationStandardDeviation[T](item:T,items:T*)(implicitevidence$9:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -597,16 +600,16 @@ returned.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">populationStandardDeviation</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.populationStandardDeviation.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.populationStandardDeviation.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">populationStandardDeviation</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.populationStandardDeviation.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.populationStandardDeviation.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.populationStandardDeviation.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculate the population standard deviation of the specified values.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the population standard deviation of the specified values.
 The population standard deviation is merely the square root of the
-population variance. Thus, this function is just shorthand for:</p><pre>java.lang.Math.sqrt(populationVariance(items))</pre></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the standard deviation</p></dd></dl></div>
+population variance. Thus, this function is just shorthand for:</p><pre>java.lang.Math.sqrt(populationVariance(items))</pre></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the standard deviation</p></dd></dl></div>
     </li><li name="grizzled.math.stats#populationVariance" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="populationVariance[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="populationVariance[T](T*)(Numeric[T]):Double"></a>
+      <a id="populationVariance[T](item:T,items:T*)(implicitevidence$7:Numeric[T]):Double"></a><a id="populationVariance[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#populationVariance[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#populationVariance[T](item:T,items:T*)(implicitevidence$7:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -615,7 +618,7 @@ population variance. Thus, this function is just shorthand for:</p><pre>java.lan
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">populationVariance</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.populationVariance.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.populationVariance.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">populationVariance</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.populationVariance.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.populationVariance.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.populationVariance.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculate the population variance of the finite population defined
@@ -624,11 +627,11 @@ by the <code>items</code> arguments. The population variance is defined as:</p><
 - *  SUM(i=<span class="num">1</span>, N) { (x[i] - mean)^<span class="num">2</span>^ }
 N</pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance" target="_blank">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
 - <a href="http://www.quickmba.com/stats/standard-deviation/" target="_blank">http://www.quickmba.com/stats/standard-deviation/</a>
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the variance</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the variance</p></dd></dl></div>
     </li><li name="grizzled.math.stats#range" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="range[T](items:T*)(implicitn:Numeric[T]):T"></a><a id="range[T](T*)(Numeric[T]):T"></a>
+      <a id="range[T](item:T,items:T*)(implicitevidence$13:Numeric[T]):T"></a><a id="range[T](T,T*)(Numeric[T]):T"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#range[T](items:T*)(implicitn:Numeric[T]):T" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#range[T](item:T,items:T*)(implicitevidence$13:Numeric[T]):T" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -637,16 +640,16 @@ N</pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">range</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.range.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.range.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="grizzled.math.stats.range.T">T</span></span>
+        <span class="name">range</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.range.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.range.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.range.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="grizzled.math.stats.range.T">T</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculate the range of a data set.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the range of a data set. This function does a single
 linear pass over the data set.
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the range</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the range</p></dd></dl></div>
     </li><li name="grizzled.math.stats#sampleStandardDeviation" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sampleStandardDeviation[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="sampleStandardDeviation[T](T*)(Numeric[T]):Double"></a>
+      <a id="sampleStandardDeviation[T](item:T,items:T*)(implicitevidence$11:Numeric[T]):Double"></a><a id="sampleStandardDeviation[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#sampleStandardDeviation[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#sampleStandardDeviation[T](item:T,items:T*)(implicitevidence$11:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -655,16 +658,16 @@ linear pass over the data set.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sampleStandardDeviation</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.sampleStandardDeviation.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.sampleStandardDeviation.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">sampleStandardDeviation</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.sampleStandardDeviation.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.sampleStandardDeviation.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.sampleStandardDeviation.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculate the sample standard deviation of the specified values.</p><div class="fullcomment"><div class="comment cmt"><p>Calculate the sample standard deviation of the specified values.
 The sample standard deviation is merely the square root of the
-sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Math.sqrt(sampleVariance(items))</pre></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the standard deviation</p></dd></dl></div>
+sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Math.sqrt(sampleVariance(items))</pre></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the sample standard deviation</p></dd></dl></div>
     </li><li name="grizzled.math.stats#sampleStdDev" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sampleStdDev[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="sampleStdDev[T](T*)(Numeric[T]):Double"></a>
+      <a id="sampleStdDev[T](item:T,items:T*)(implicitevidence$12:Numeric[T]):Double"></a><a id="sampleStdDev[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#sampleStdDev[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#sampleStdDev[T](item:T,items:T*)(implicitevidence$12:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -673,15 +676,15 @@ sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Ma
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sampleStdDev</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.sampleStdDev.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.sampleStdDev.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">sampleStdDev</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.sampleStdDev.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.sampleStdDev.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.sampleStdDev.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Shorter synonym for <code>sampleStandardDeviation</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Shorter synonym for <code>sampleStandardDeviation</code>.
-</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>populationStandardDeviation</p></span></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the sample standard deviation</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>populationStandardDeviation</p></span></dd></dl></div>
     </li><li name="grizzled.math.stats#sampleVariance" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sampleVariance[T](items:T*)(implicitn:Numeric[T]):Double"></a><a id="sampleVariance[T](T*)(Numeric[T]):Double"></a>
+      <a id="sampleVariance[T](item:T,items:T*)(implicitevidence$8:Numeric[T]):Double"></a><a id="sampleVariance[T](T,T*)(Numeric[T]):Double"></a>
       <span class="permalink">
-      <a href="../../grizzled/math/stats$.html#sampleVariance[T](items:T*)(implicitn:Numeric[T]):Double" title="Permalink">
+      <a href="../../grizzled/math/stats$.html#sampleVariance[T](item:T,items:T*)(implicitevidence$8:Numeric[T]):Double" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -690,7 +693,7 @@ sample variance. Thus, this function is just shorthand for:</p><pre>java.lang.Ma
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sampleVariance</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="items">items: <span class="extype" name="grizzled.math.stats.sampleVariance.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="n">n: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.sampleVariance.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
+        <span class="name">sampleVariance</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="item">item: <span class="extype" name="grizzled.math.stats.sampleVariance.T">T</span></span>, <span name="items">items: <span class="extype" name="grizzled.math.stats.sampleVariance.T">T</span>*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.Numeric">Numeric</span>[<span class="extype" name="grizzled.math.stats.sampleVariance.T">T</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
       </span>
       
       <p class="shortcomment cmt">Calculate the unbiased sample variance of the finite sample defined
@@ -699,7 +702,7 @@ by the <code>items</code> arguments. The sample variance is defined as:</p><pre>
 ----- *   SUM(i=<span class="num">1</span>, N) { (x[i] - sampleMean)^<span class="num">2</span>^  }
 N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance" target="_blank">http://en.wikipedia.org/wiki/Variance#Population_variance_and_sample_variance</a>
 - <a href="http://www.quickmba.com/stats/standard-deviation/" target="_blank">http://www.quickmba.com/stats/standard-deviation/</a>
-</p></div><dl class="paramcmts block"><dt class="param">items</dt><dd class="cmt"><p>the numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the variance</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">item</dt><dd class="cmt"><p>the first number on which to operate</p></dd><dt class="param">items</dt><dd class="cmt"><p>the remaining numbers on which to operate</p></dd><dt>returns</dt><dd class="cmt"><p>the variance</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
@@ -792,6 +795,8 @@ N - <span class="num">1</span></pre><p>See:</p><p>- <a href="http://en.wikipedia
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>

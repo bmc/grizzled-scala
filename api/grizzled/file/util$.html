@@ -65,9 +65,7 @@
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="" href="../../index.html">
-              <span class="name">root</span>
-            </a>
+        <a title="" href="../../index.html"><span class="name">root</span></a>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
@@ -83,10 +81,7 @@
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="The Grizzled Scala Library contains a variety of miscellaneous,
-general purpose utility classes and objects." href="../index.html">
-              <span class="name">grizzled</span>
-            </a>
+        <a title="The Grizzled Scala Library contains a variety of miscellaneous, general purpose utility classes and objects." href="../index.html"><span class="name">grizzled</span></a>
       </span>
       
       <p class="shortcomment cmt">The Grizzled Scala Library contains a variety of miscellaneous,
@@ -107,9 +102,7 @@ complete details, including installation instructions.
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="File-related classes and utilities." href="index.html">
-              <span class="name">file</span>
-            </a>
+        <a title="File-related classes and utilities." href="index.html"><span class="name">file</span></a>
       </span>
       
       <p class="shortcomment cmt">File-related classes and utilities.</p><div class="fullcomment"><div class="comment cmt"><p>File-related classes and utilities. This package is distinguished from
@@ -128,9 +121,7 @@ paths, not on open streams or sources.
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="Contains various file- and I/O-related filter classes." href="filter/index.html">
-              <span class="name">filter</span>
-            </a>
+        <a title="Contains various file- and I/O-related filter classes." href="filter/index.html"><span class="name">filter</span></a>
       </span>
       
       <p class="shortcomment cmt">Contains various file- and I/O-related filter classes.</p><div class="fullcomment"><div class="comment cmt"><p>Contains various file- and I/O-related filter classes.
@@ -138,29 +129,19 @@ paths, not on open streams or sources.
     </li><li class="current-entities indented2">
                         <span class="separator"></span>
                         <a class="class" href="FileDoesNotExistException.html" title=""></a>
-                        <a href="FileDoesNotExistException.html" title="">
-                          FileDoesNotExistException
-                        </a>
+                        <a href="FileDoesNotExistException.html" title="">FileDoesNotExistException</a>
                       </li><li class="current-entities indented2">
                         <span class="separator"></span>
                         <a class="object" href="Implicits$.html" title="Enrichment classes for File objects and the like."></a>
-                        <a href="Implicits$.html" title="Enrichment classes for File objects and the like.">
-                          Implicits
-                        </a>
+                        <a href="Implicits$.html" title="Enrichment classes for File objects and the like.">Implicits</a>
                       </li><li class="current-entities indented2">
                         <a class="object" href="Includer$.html" title="Companion object for the Includer class."></a>
-                        <a class="class" href="Includer.html" title="Process &quot;include&quot; directives in files, returning an iterator over
-lines from the flattened files."></a>
-                        <a href="Includer.html" title="Process &quot;include&quot; directives in files, returning an iterator over
-lines from the flattened files.">
-                          Includer
-                        </a>
+                        <a class="class" href="Includer.html" title="Process &quot;include&quot; directives in files, returning an iterator over lines from the flattened files."></a>
+                        <a href="Includer.html" title="Process &quot;include&quot; directives in files, returning an iterator over lines from the flattened files.">Includer</a>
                       </li><li class="current-entities indented2">
                         <span class="separator"></span>
                         <a class="object" href="" title="Useful file-related utility functions."></a>
-                        <a href="" title="Useful file-related utility functions.">
-                          util
-                        </a>
+                        <a href="" title="Useful file-related utility functions.">util</a>
                       </li>
               </ul>
             </div>
@@ -345,6 +326,8 @@ lines from the flattened files.">
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -414,7 +397,10 @@ method that takes only one file.
 </p></div><dl class="paramcmts block"><dt class="param">files</dt><dd class="cmt"><p>An <code>Iterable</code> of file names to be copied</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>Path name to target directory</p></dd><dt class="param">createTarget</dt><dd class="cmt"><p><code>true</code> to create the target directory,
                     <code>false</code> to throw an exception if the
                     directory doesn't already exist.</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
-        error.</p></dd></dl></div>
+        error.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.file.util#copyFile" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="copyFile(source:java.io.File,target:java.io.File):scala.util.Try[java.io.File]"></a><a id="copyFile(File,File):Try[File]"></a>
       <span class="permalink">
@@ -480,7 +466,10 @@ function provides a similar capability.
 directory.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively copy a source directory and its contents to a target
 directory. Creates the target directory if it does not exist.
 </p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
-        error.</p></dd></dl></div>
+        error.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.file.util#copyTree" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="copyTree(sourceDir:String,targetDir:String):scala.util.Try[Boolean]"></a><a id="copyTree(String,String):Try[Boolean]"></a>
       <span class="permalink">
@@ -501,25 +490,6 @@ directory.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively c
 directory. Creates the target directory if it does not exist.
 </p></div><dl class="paramcmts block"><dt class="param">sourceDir</dt><dd class="cmt"><p>the source directory</p></dd><dt class="param">targetDir</dt><dd class="cmt"><p>the target directory</p></dd><dt>returns</dt><dd class="cmt"><p><code>Success(true)</code> if the copy worked. <code>Failure(exception)</code> on
         error.</p></dd></dl></div>
-    </li><li name="grizzled.file.util#createTemporaryDirectory" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File"></a><a id="createTemporaryDirectory(String,Int):File"></a>
-      <span class="permalink">
-      <a href="../../grizzled/file/util$.html#createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">createTemporaryDirectory</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">3</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Create a temporary directory.</p><div class="fullcomment"><div class="comment cmt"><p>Create a temporary directory.
-</p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>Prefix for directory name</p></dd><dt class="param">maxTries</dt><dd class="cmt"><p>Maximum number of times to try creating the
-                 directory before giving up.</p></dd><dt>returns</dt><dd class="cmt"><p>the directory. Throws an IOException if it can't create
-        the directory.</p></dd></dl></div>
     </li><li name="grizzled.file.util#deleteTree" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="deleteTree(dir:java.io.File):scala.util.Try[Int]"></a><a id="deleteTree(File):Try[Int]"></a>
       <span class="permalink">
@@ -632,7 +602,7 @@ pieces.
       <p class="shortcomment cmt">An extended <i>glob</i> function that supports all the wildcards of
 the <code>glob()</code> function, in addition to:</p><div class="fullcomment"><div class="comment cmt"><p>An extended <i>glob</i> function that supports all the wildcards of
 the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</code>, signifying the user's home directory</li><li>a special <code>**</code> wildcard that recursively matches any directory.
-   (Think &quot;ant&quot;.)</li></ul><p><i>~user</i> is not supported, however.
+   (Think &quot;ant&quot;.)</li></ul><p><i>~user</i> is not supported, however.</p><p>NOTE: Any non-Windows operating system is treated as Posix.
 </p></div><dl class="paramcmts block"><dt class="param">pattern</dt><dd class="cmt"><p>the wildcard pattern</p></dd><dt>returns</dt><dd class="cmt"><p>list of matches, or an empty list for none</p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
@@ -678,7 +648,7 @@ the <code>glob()</code> function, in addition to:</p><ul><li>a leading <code>~</
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">fileSeparator</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">fileSeparator</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
       
@@ -756,7 +726,10 @@ case-sensitive on Posix operating systems, case-insensitive elsewhere.
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.file.util#glob" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="glob(path:String):List[String]"></a><a id="glob(String):List[String]"></a>
       <span class="permalink">
@@ -794,7 +767,10 @@ is essentially a direct port of the Python <code>glob.glob()</code> function.</p
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
@@ -829,7 +805,7 @@ is essentially a direct port of the Python <code>glob.glob()</code> function.</p
       <p class="shortcomment cmt">Join components of a path together, using the current file separator;
 then, normalize the result.</p><div class="fullcomment"><div class="comment cmt"><p>Join components of a path together, using the current file separator;
 then, normalize the result.
-</p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite, normalized path</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#normalizePath(path:String):String" class="extmbr" name="grizzled.file.util#normalizePath">normalizePath</a></p></span><span class="cmt"><p><a href="#joinPath(pieces:String*):String" class="extmbr" name="grizzled.file.util#joinPath">joinPath(pieces:String*):String*</a></p></span></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite, normalized path</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#joinPath(pieces:String*):String" class="extmbr" name="grizzled.file.util#joinPath">joinPath(pieces:String*):String*</a></p></span><span class="cmt"><p><a href="#normalizePath(path:String):String" class="extmbr" name="grizzled.file.util#normalizePath">normalizePath</a></p></span></dd></dl></div>
     </li><li name="grizzled.file.util#joinAndNormalizePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="joinAndNormalizePath(pieces:String*):String"></a><a id="joinAndNormalizePath(String*):String"></a>
       <span class="permalink">
@@ -848,7 +824,7 @@ then, normalize the result.
       <p class="shortcomment cmt">Join components of a path together, using the current file separator;
 then, normalize the result.</p><div class="fullcomment"><div class="comment cmt"><p>Join components of a path together, using the current file separator;
 then, normalize the result.
-</p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite, normalized path</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#normalizePath(path:String):String" class="extmbr" name="grizzled.file.util#normalizePath">normalizePath</a></p></span><span class="cmt"><p><a href="#joinPath(pieces:String*):String" class="extmbr" name="grizzled.file.util#joinPath">joinPath(pieces:String*):String*</a></p></span></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">pieces</dt><dd class="cmt"><p>path pieces</p></dd><dt>returns</dt><dd class="cmt"><p>a composite, normalized path</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="#joinPath(pieces:String*):String" class="extmbr" name="grizzled.file.util#joinPath">joinPath(pieces:String*):String*</a></p></span><span class="cmt"><p><a href="#normalizePath(path:String):String" class="extmbr" name="grizzled.file.util#normalizePath">normalizePath</a></p></span></dd></dl></div>
     </li><li name="grizzled.file.util#joinPath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="joinPath(pieces:java.io.File*):java.io.File"></a><a id="joinPath(File*):File"></a>
       <span class="permalink">
@@ -940,7 +916,29 @@ also use  <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files
       
       <p class="shortcomment cmt">Find the longest common path prefix from a list of paths.</p><div class="fullcomment"><div class="comment cmt"><p>Find the longest common path prefix from a list of paths. Based on
 <a href="https://rosettacode.org/wiki/Find_common_directory_path#Advanced" target="_blank">https://rosettacode.org/wiki/Find_common_directory_path#Advanced</a>
-</p></div><dl class="paramcmts block"><dt class="param">paths</dt><dd class="cmt"><p>the paths</p></dd><dt>returns</dt><dd class="cmt"><p>the longest common path, which might be the empty string</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">paths</dt><dd class="cmt"><p>the paths</p></dd><dt>returns</dt><dd class="cmt"><p>the longest common path, which might be the empty string</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="grizzled.file.util#makeTemporaryDirectory" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="makeTemporaryDirectory(prefix:String,maxTries:Int):scala.util.Try[java.io.File]"></a><a id="makeTemporaryDirectory(String,Int):Try[File]"></a>
+      <span class="permalink">
+      <a href="../../grizzled/file/util$.html#makeTemporaryDirectory(prefix:String,maxTries:Int):scala.util.Try[java.io.File]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">makeTemporaryDirectory</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">3</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="java.io.File">File</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Create a temporary directory.</p><div class="fullcomment"><div class="comment cmt"><p>Create a temporary directory.
+</p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>Prefix for directory name</p></dd><dt class="param">maxTries</dt><dd class="cmt"><p>Maximum number of times to try creating the
+                 directory before giving up.</p></dd><dt>returns</dt><dd class="cmt"><p>A <code>Success</code> of the directory, or a <code>Failure</code> with any error
+        that occurs.</p></dd></dl></div>
     </li><li name="grizzled.file.util#nativePath" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nativePath(path:String):String"></a><a id="nativePath(String):String"></a>
       <span class="permalink">
@@ -1052,7 +1050,10 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
@@ -1068,7 +1069,10 @@ Python version of normpath() in Python's <code>os.ntpath</code> module.
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="grizzled.file.util#pwd" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="pwd:String"></a>
       <span class="permalink">
@@ -1247,7 +1251,7 @@ beginning. Examples:</p><p><table border="1">
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+        <span class="name">touch</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">-1</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Similar to the Unix <code>touch</code> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <code>touch</code> command, this function:</p><ul><li>updates the access and modification times for a file</li><li>creates the file if it does not exist</li></ul><p>If the file is a directory, this method will return an error.
@@ -1265,7 +1269,7 @@ beginning. Examples:</p><p><table border="1">
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">1</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+        <span class="name">touchMany</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="time">time: <span class="extype" name="scala.Long">Long</span> = <span class="symbol">-1</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Similar to the Unix <i>touch</i> command, this function:</p><div class="fullcomment"><div class="comment cmt"><p>Similar to the Unix <i>touch</i> command, this function:</p><ul><li>updates the access and modification times for any existing files
@@ -1355,6 +1359,8 @@ this function simply returns the <code>path</code> parameter unmodified.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
@@ -1413,14 +1419,45 @@ also use  <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files
 directory.</p><div class="fullcomment"><div class="comment cmt"><p>Allow execution of a block of code within the context of a temporary
 directory. The temporary directory is cleaned up after the operation
 completes.
-</p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>file name prefix to use</p></dd><dt class="param">action</dt><dd class="cmt"><p>action to perform</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the action returns</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>file name prefix to use</p></dd><dt class="param">action</dt><dd class="cmt"><p>action to perform</p></dd><dt>returns</dt><dd class="cmt"><p>whatever the action returns. Errors are thrown as <code>IOException</code>.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li>
               </ol>
             </div>
 
         
 
-        
+        <div class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="grizzled.file.util#createTemporaryDirectory" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File"></a><a id="createTemporaryDirectory(String,Int):File"></a>
+      <span class="permalink">
+      <a href="../../grizzled/file/util$.html#createTemporaryDirectory(prefix:String,maxTries:Int):java.io.File" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 4.5.0) Use makeTemporaryDirectory">createTemporaryDirectory</span><span class="params">(<span name="prefix">prefix: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">3</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Create a temporary directory.</p><div class="fullcomment"><div class="comment cmt"><p>Create a temporary directory. Note: This function is deprecated, in
+favor of <a href="#makeTemporaryDirectory(prefix:String,maxTries:Int):scala.util.Try[java.io.File]" class="extmbr" name="grizzled.file.util#makeTemporaryDirectory">makeTemporaryDirectory</a>, which does not throw exceptions.
+</p></div><dl class="paramcmts block"><dt class="param">prefix</dt><dd class="cmt"><p>Prefix for directory name</p></dd><dt class="param">maxTries</dt><dd class="cmt"><p>Maximum number of times to try creating the
+                 directory before giving up.</p></dd><dt>returns</dt><dd class="cmt"><p>the directory. Throws an IOException if it can't create
+        the directory.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+                <span class="name">@SuppressWarnings</span><span class="args">()</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 4.5.0)</i> Use makeTemporaryDirectory</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">
