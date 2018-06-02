@@ -6,7 +6,8 @@ import scala.util.{Failure, Success, Try}
 
 /** An exception used to signal substitution errors.
   */
-case class SubstitutionException(message: String) extends Exception(message)
+final case class SubstitutionException(message: String)
+  extends Exception(message)
 
 /** Information about a parsed variable name.
   */
