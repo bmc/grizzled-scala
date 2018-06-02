@@ -7,6 +7,7 @@ package grizzled.parsing
   */
 trait Pushback[T] extends SafeIterator[T] {
 
+  @SuppressWarnings(Array("org.wartremover.warts.Var"))
   private var pushbackStack = List.empty[T]
 
   /** Get the next item from the stream, advancing the cursor, while

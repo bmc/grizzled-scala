@@ -92,6 +92,7 @@ class Includer private(val source: IncludeSource,
 extends Iterator[String] {
   /** The stack of sources being read.
     */
+  @SuppressWarnings(Array("org.wartremover.warts.Var"))
   private var sourceStack = List(source)
 
   /** Determine whether there are any more input lines to be read from the
