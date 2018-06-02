@@ -40,7 +40,7 @@ wartremoverErrors in (Compile, compile) ++= Seq(
   Wart.PublicInference,
   Wart.Return,
   Wart.StringPlusAny,
-//  Wart.Throw,
+  Wart.Throw,
   Wart.TraversableOps,
   Wart.TryPartial,
   Wart.Var,

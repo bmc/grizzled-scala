@@ -12,6 +12,7 @@ Version 4.5.0:
   `min()`, `geometricMean()`, etc.) now take one fixed parameter and a variable
   argument list, instead of just a variable argument list, to ensure that they
   are always called with at least one parameter.
+* `grizzled.file.util` functions no longer throw exceptions.
 
 Version 4.4.2:
 

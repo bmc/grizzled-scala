@@ -79,6 +79,7 @@ class SourceReader(sourceToWrap: Source) extends Reader {
     *
     * @param readAheadLimit the mark limit. Ignored.
     */
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   override def mark(readAheadLimit: Int): Unit = {
     throw new IOException("mark() not supported.")
   }

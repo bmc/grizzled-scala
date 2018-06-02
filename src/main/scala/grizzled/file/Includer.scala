@@ -123,6 +123,7 @@ extends Iterator[String] {
     *
     * @return the next input line
     */
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def next: String = {
     @tailrec
     def nextFromStack: String = {
@@ -139,7 +140,8 @@ extends Iterator[String] {
       }
     }
 
-    @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
+    @SuppressWarnings(Array("org.wartremover.warts.TraversableOps",
+                            "org.wartremover.warts.Throw"))
     @tailrec
     def processNext: String = {
       val line = nextFromStack

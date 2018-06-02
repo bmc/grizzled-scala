@@ -266,6 +266,8 @@ object util {
     *
     * ''~user'' is not supported, however.
     *
+    * NOTE: Any non-Windows operating system is treated as Posix.
+    *
     * @param pattern   the wildcard pattern
     *
     * @return list of matches, or an empty list for none
@@ -657,7 +659,7 @@ object util {
         case Posix => "/tmp"
         case Mac   => "/tmp"
         case (Windows | WindowsCE | OS2 | NetWare) => """C:\TEMP"""
-        case _  => throw new UnsupportedOperationException
+        case _  => "/tmp"
       }
     }
 
@@ -672,46 +674,69 @@ object util {
     * @param maxTries  Maximum number of times to try creating the
     *                  directory before giving up.
     *
-    * @return the directory. Throws an IOException if it can't create
-    *         the directory.
+    * @return A `Success` of the directory, or a `Failure` with any error
+    *         that occurs.
     */
-  def createTemporaryDirectory(prefix: String, maxTries: Int = 3): File = {
+  def makeTemporaryDirectory(prefix: String, maxTries: Int = 3): Try[File] = {
     import grizzled.file.Implicits._
 
-    def createDirectory(dir: File): Option[File] = {
+    def createDirectory(dir: File): Try[Option[File]] = {
       if (! dir.exists) {
-        if (! dir.mkdirs())
-          throw new IOException(
-            "Failed to create directory \"" + dir.getAbsolutePath + "\""
-          )
-
-        Some(dir)
+        if (! dir.mkdirs()) {
+          Failure(new IOException(
+            s"""Failed to create directory "${dir.getAbsolutePath}"."""
+          ))
+        }
+        else {
+          Success(Some(dir))
+        }
       }
 
       else {
-        None
+        Success(None)
       }
     }
 
-    @tailrec def create(tries: Int): File = {
+    @tailrec def create(tries: Int): Try[File] = {
       import java.lang.{Integer => JInt}
 
-      if (tries > maxTries)
-        throw new IOException(
+      if (tries > maxTries) {
+        Failure(new IOException(
           s"Failed to create temporary directory after $maxTries attempts."
-        )
+        ))
+      }
+      else {
+        val usePrefix = Option(prefix).getOrElse("")
+        val randomName = usePrefix + JInt.toHexString(random.nextInt)
+        val dir = new File (temporaryDirectory, randomName)
 
-      val usePrefix = Option(prefix).getOrElse("")
-      val randomName = usePrefix + JInt.toHexString(random.nextInt)
-      val dir = new File (temporaryDirectory, randomName)
-
-      createDirectory(dir) match {
-        case Some(d) if d.isEmpty => dir
-        case _                    => create(tries + 1)
+        createDirectory(dir) match {
+          case f @ Failure(e)   => Failure(e)
+          case Success(Some(d)) => Success(d)
+          case Success(None)    => create(tries + 1)
+        }
       }
     }
 
     create(0)
+  }
+
+  /** Create a temporary directory. Note: This function is deprecated, in
+    * favor of [[makeTemporaryDirectory]], which does not throw exceptions.
+    *
+    * @param prefix    Prefix for directory name
+    * @param maxTries  Maximum number of times to try creating the
+    *                  directory before giving up.
+    *
+    * @return the directory. Throws an IOException if it can't create
+    *         the directory.
+    */
+  @deprecated("Use makeTemporaryDirectory", "4.5.0")
+  @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
+  def createTemporaryDirectory(prefix: String, maxTries: Int = 3): File = {
+    import grizzled.file.Implicits._
+
+    makeTemporaryDirectory(prefix, maxTries).get
   }
 
   /** Allow execution of a block of code within the context of a temporary
@@ -721,19 +746,21 @@ object util {
     * @param prefix  file name prefix to use
     * @param action  action to perform
     *
-    * @return whatever the action returns
+    * @return whatever the action returns. Errors are thrown as `IOException`.
     */
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def withTemporaryDirectory[T](prefix: String)(action: File => T): T = {
     import grizzled.file.Implicits._
 
-    val temp = createTemporaryDirectory(prefix)
-    temp.deleteOnExit()
-    try {
-      action(temp)
-    }
-
-    finally {
-      temp.deleteRecursively()
+    makeTemporaryDirectory(prefix) match {
+      case Failure(ex) => throw ex
+      case Success(dir) =>
+        try {
+          action(dir)
+        }
+        finally {
+          dir.deleteRecursively()
+        }
     }
   }
 
@@ -753,31 +780,34 @@ object util {
   def copy(files: Iterable[String],
            targetDir: String,
            createTarget: Boolean = true): Try[Boolean] = {
-    Try {
-      val target = new File(targetDir)
+    val target = new File(targetDir)
 
-      if ((! target.exists()) && createTarget)
-        if (! target.mkdirs())
-          throw new IOException(
-            s"""Unable to create target directory "$targetDir"."""
-          )
-
-      if (target.exists() && (! target.isDirectory))
-        throw new IOException(
-          s"""Cannot copy files to non-directory "$targetDir"."""
-        )
-
-      if (! target.exists())
-        throw new FileDoesNotExistException(
-          s"""Target directory "$targetDir" does not exist."""
-        )
-
-      for (file <- files) {
+    if ((! target.exists()) && createTarget && (! target.mkdirs())) {
+      Failure(new IOException(
+        s"""Unable to create target directory "$targetDir"."""
+      ))
+    }
+    else if (target.exists() && (! target.isDirectory)) {
+      Failure(new IOException(
+        s"""Cannot copy files to non-directory "$targetDir"."""
+      ))
+    }
+    else if (! target.exists()) {
+      Failure(new FileDoesNotExistException(
+        s"""Target directory "$targetDir" does not exist."""
+      ))
+    }
+    else {
+      val results = for (file <- files) yield {
         // The .get() forces a failure if a specific copy fails.
-        copyFile(file, targetDir + fileSeparator + basename(file)).get
+        copyFile(file, targetDir + fileSeparator + basename(file))
       }
 
-      true
+      results.toSeq.filter(_.isFailure) match {
+        case Seq(head, _*)  => Try { head.get }.map { _ => false }
+        case s if s.isEmpty => Success(true)
+      }
+
     }
   }
 
@@ -895,14 +925,15 @@ object util {
     */
   @SuppressWarnings(Array("org.wartremover.warts.Any"))
   def copyTree(sourceDir: File, targetDir: File): Try[Boolean] = {
-    Try {
-      if (! sourceDir.exists())
-        throw new FileDoesNotExistException(sourceDir.getPath)
-
-      if (! sourceDir.isDirectory)
-        throw new IOException("Source directory \"" + sourceDir.getPath +
-                              "\" is not a directory.")
-
+    if (! sourceDir.exists()) {
+      Failure(new FileDoesNotExistException(sourceDir.getPath))
+    }
+    else if (! sourceDir.isDirectory) {
+      Failure(new IOException(
+        s"""Source directory "${sourceDir.getPath}" is not a directory."""
+      ))
+    }
+    else {
       val files: Seq[(File, File)] = sourceDir
         .list
         .map { f: String =>
@@ -920,7 +951,7 @@ object util {
           copyFile(src, target)
       }
 
-      true
+      Success(true)
     }
   }
 
@@ -1015,19 +1046,28 @@ object util {
     * @return `Failure(exception)` on error, `Success(true)` on success
     */
   def touch(path: String, time: Long = -1): Try[Boolean] = {
-    Try {
-      val file = new File(path)
-      if (file.isDirectory)
-        throw new Exception(s"""File "$path" is a directory.""")
+    val file = new File(path)
+    if (file.isDirectory)
+      Failure(new Exception(s"""File "$path" is a directory."""))
 
-      if ((! file.exists) && (! file.createNewFile()))
-        throw new IOException(s"""Unable to create "$path"""")
+    else if (! file.exists) {
+      Try {
+        file.createNewFile()
+      }
+      .flatMap { succeeded =>
+        if (! succeeded)
+          Failure(new IOException(s"""Unable to create "$path""""))
+        else
+          Success(true)
+      }
+    }
 
+    else {
       val useTime = if (time < 0) System.currentTimeMillis else time
       if (! file.setLastModified(useTime))
-        throw new IOException(s"""Unable to set time on "$path"""")
-
-      true
+        Failure(new IOException(s"""Unable to set time on "$path""""))
+      else
+        Success(true)
     }
   }
 
@@ -1277,8 +1317,7 @@ object util {
   private lazy val eglobPatternSplitter = os match {
     case (Mac | Posix) => splitPosixEglobPattern _
     case Windows       => splitWindowsEglobPattern _
-    case _             =>
-      throw new UnsupportedOperationException(s"Unknown OS: $os")
+    case _             => splitPosixEglobPattern _
   }
 
   /** Windows pattern splitter for eglob(). See description for the
@@ -1333,10 +1372,9 @@ object util {
     * holds the real path normalizer, determined once.
     */
   private lazy val doPathNormalizing = os match {
-    case (Mac | Posix) => normalizePosixPath(_)
-    case Windows       => normalizeWindowsPath(_)
-    case _             =>
-      throw new UnsupportedOperationException(s"Unknown OS: $os")
+    case (Mac | Posix) => normalizePosixPath _
+    case Windows       => normalizeWindowsPath _
+    case _             => (path: String) => path
   }
 
   /** Shared between normalizeWindowsPath() and normalizePosixPath(),
@@ -1371,17 +1409,21 @@ object util {
     * These values hold the real converters, determined once.
     */
   private lazy val makeUniversalPath: (String) => String = os match {
-    case (Mac | Posix) => (path: String) => path
-    case Windows       => (path: String) => path.replace(fileSeparator, "/")
-    case _             =>
-      throw new UnsupportedOperationException(s"Unknown OS: $os")
+    case (Mac | Posix) =>
+      (path: String) => path
+    case Windows =>
+      (path: String) => path.replace(fileSeparator, "/")
+    case _ =>
+      (path: String) => path
   }
 
   private lazy val makeNativePath: (String) => String = os match {
-    case (Mac | Posix) => (path: String) => path
-    case Windows       => (path: String) => path.replace("/", fileSeparator)
-    case _             =>
-      throw new UnsupportedOperationException(s"Unknown OS: $os")
+    case (Mac | Posix) =>
+      (path: String) => path
+    case Windows =>
+      (path: String) => path.replace("/", fileSeparator)
+    case _ =>
+      (path: String) => path
   }
 
 }
