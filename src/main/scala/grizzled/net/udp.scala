@@ -170,7 +170,7 @@ trait UDPDatagramSocket extends AutoCloseable {
     *
     * @param enable `true` to enable broadcast, `false` to disable it.
     */
-  def broadcast_=(enable: Boolean)
+  def broadcast_=(enable: Boolean): Unit
 
   /** The local port to which the socket is bound.
     */

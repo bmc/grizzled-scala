@@ -28,7 +28,7 @@ final case class URL(protocol: String,
 
   /** The underlying `java.net.URL`.
     */
-  val javaURL = {
+  val javaURL: JavaURL = {
     // Get around some really odd Java URL issues by simply creating a
     // URL, then mapping it to a URL. Except that this doesn't work with
     // "jar" URLs.
@@ -51,13 +51,13 @@ final case class URL(protocol: String,
     *
     * @return the authority, if any
     */
-  def authority = Option(javaURL.getAuthority)
+  def authority: Option[String] = Option(javaURL.getAuthority)
 
   /** Get the default port for the protocol.
     *
-    * @return the default port
+    * @return the default port, if defined
     */
-  val defaultPort = {
+  val defaultPort: Option[Int] = {
     val port = javaURL.getDefaultPort
     if (port < 0) None else Some(port)
   }
@@ -77,7 +77,7 @@ final case class URL(protocol: String,
     *
     * @return the string
     */
-  def toExternalForm = javaURL.toExternalForm
+  def toExternalForm: String = javaURL.toExternalForm
 }
 
 /** Companion object, adding some functions that aren't available in the

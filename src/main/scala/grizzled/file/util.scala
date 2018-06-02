@@ -15,8 +15,8 @@ class FileDoesNotExistException(message: String) extends Exception
 /** Useful file-related utility functions.
   */
 object util {
-  val fileSeparator = File.separator
-  val fileSeparatorChar = fileSeparator(0)
+  val fileSeparator: String = File.separator
+  val fileSeparatorChar: Char = fileSeparator(0)
 
   private lazy val random = new Random()
 
@@ -718,7 +718,7 @@ object util {
     *
     * @return whatever the action returns
     */
-  def withTemporaryDirectory[T](prefix: String)(action: File => T) = {
+  def withTemporaryDirectory[T](prefix: String)(action: File => T): T = {
     import grizzled.file.Implicits._
 
     val temp = createTemporaryDirectory(prefix)

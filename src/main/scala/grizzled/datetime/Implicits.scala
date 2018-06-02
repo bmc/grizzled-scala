@@ -118,6 +118,6 @@ object Implicits {
       *
       * @return the `java.sql.Timestamp`
       */
-    def toTimestamp = new Timestamp(cal.getTime.getTime)
+    def toTimestamp: Timestamp = new Timestamp(cal.getTime.getTime)
   }
 }

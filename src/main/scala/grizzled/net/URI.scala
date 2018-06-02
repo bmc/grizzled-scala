@@ -23,19 +23,21 @@ final case class URI(scheme:    Option[String],
 
   /** The underlying `java.net.URI`.
     */
-  val javaURI = new java.net.URI(scheme.orNull,
-                                 userInfo.orNull,
-                                 host.orNull,
-                                 port.getOrElse(-1),
-                                 path.orNull,
-                                 query.orNull,
-                                 fragment.orNull)
+  val javaURI: java.net.URI = new java.net.URI(
+    scheme.orNull,
+    userInfo.orNull,
+    host.orNull,
+    port.getOrElse(-1),
+    path.orNull,
+    query.orNull,
+    fragment.orNull
+  )
 
   /** The coded authority for this URI.
     *
     * @return the authority, if any
     */
-  def authority = Option(javaURI.getAuthority)
+  def authority: Option[String] = Option(javaURI.getAuthority)
 
   /** Resolve the given URI against this URI.
     *
@@ -68,19 +70,19 @@ final case class URI(scheme:    Option[String],
     *
     * @return true if absolute, false if not
     */
-  val isAbsolute = javaURI.isAbsolute
+  val isAbsolute: Boolean = javaURI.isAbsolute
 
   /** Determine whether this URI is opaque or not.
     *
     * @return true if opaque, false if not
     */
-  val isOpaque = javaURI.isOpaque
+  val isOpaque: Boolean = javaURI.isOpaque
 
   /** Normalize the URI's path, returning a new URI.
     *
     * @return a possibly normalized URI.
     */
-  def normalize = URI(javaURI.normalize)
+  def normalize: URI = URI(javaURI.normalize)
 
   /** Get the URI string representation of this URI (i.e., the string
     * you could paste into a browser). Contrast this function with
@@ -89,7 +91,7 @@ final case class URI(scheme:    Option[String],
     *
     * @return the string
     */
-  def toExternalForm = javaURI.toString
+  def toExternalForm: String = javaURI.toString
 
   /** Convert to a URL object.
     *

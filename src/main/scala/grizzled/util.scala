@@ -24,7 +24,7 @@ package object util {
         *
         * @return the corresponding `Future`.
         */
-      def toFuture = t match {
+      def toFuture: Future[T] = t match {
         case Success(value) => Future.successful(value)
         case Failure(ex)    => Future.failed(ex)
       }

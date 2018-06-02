@@ -30,13 +30,13 @@ object sys {
   /** The current operating system, a value of the `OperatingSystem`
     * enumeration.
     */
-  val os = getOS(System.getProperty("os.name"))
+  val os: OperatingSystem = getOS(System.getProperty("os.name"))
 
   /** Version of the `os` function that takes an operating system name
     * and returns the `OperatingSystem` enumerated value.
     */
   private val WindowsNameMatch = "^(windows)(.*)$".r
-  def getOS(name: String) = {
+  def getOS(name: String): OperatingSystem = {
     val lcName = name.toLowerCase
     val firstToken = lcName.split("""\s""")(0)
     firstToken match {

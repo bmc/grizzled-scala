@@ -223,11 +223,11 @@ extends Iterator[String] {
 object Includer {
   /** The default regular expression for matching include directives.
     */
-  val DefaultIncludeRegex = """^%include\s+"([^"]+)"\s*$""".r
+  val DefaultIncludeRegex: Regex = """^%include\s+"([^"]+)"\s*$""".r
 
   /** The default maximum nesting level for includes.
     */
-  val DefaultMaxNesting   = 100
+  val DefaultMaxNesting: Int = 100
 
   private val lineSep = (new SystemProperties).getOrElse("line.separator", "\n")
 

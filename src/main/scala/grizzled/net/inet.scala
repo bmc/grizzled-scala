@@ -77,7 +77,7 @@ class IPAddress(val address: Array[Byte]) {
     *
     * @return the corresponding `InetAddress`
     */
-  def toInetAddress = InetAddress.getByAddress(this.address)
+  def toInetAddress: InetAddress = InetAddress.getByAddress(this.address)
 
   /** Return a printable version of this IP address.
     *
@@ -116,7 +116,7 @@ class IPAddress(val address: Array[Byte]) {
 object IPAddress {
   /** Singleton `IPAddress` for the local loop address.
     */
-  val Localhost = IPAddress(Array(127, 0, 0, 1))
+  val Localhost: IPAddress = new IPAddress(Array(127, 0, 0, 1))
 
   private val MaxIPv4 = BigInt("4294967295")
 

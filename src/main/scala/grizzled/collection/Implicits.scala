@@ -106,7 +106,7 @@ object Implicits {
   implicit class GrizzledLinearSeq[+T](val container: LinearSeq[T])
     extends {
 
-    def realSeq = container
+    def realSeq: Seq[T] = container
 
     /** Create a string containing the contents of this sequence, arranged
       * in columns.
@@ -151,11 +151,11 @@ object Implicits {
     */
   implicit class GrizzledIterable[+T](val container: Iterable[T])
     extends Iterable[T] {
-    def self = this
+    def self: GrizzledIterable[T] = this
 
-    def realIterable = container
+    def realIterable: Iterable[T] = container
 
-    def iterator = container.iterator
+    def iterator: Iterator[T] = container.iterator
 
 
     /** Create a string containing the contents of this iterable, arranged

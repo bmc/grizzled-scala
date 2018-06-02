@@ -39,13 +39,13 @@ object Implicits {
       *
       * @return the directory portion, as a `File`.
       */
-    def dirname = new File(util.dirname(file.getPath))
+    def dirname: File = new File(util.dirname(file.getPath))
 
     /** Get the basename (file name only) part of a path.
       *
       * @return the file name portion, as a `File`
       */
-    def basename = new File(util.basename(file.getPath))
+    def basename: File = new File(util.basename(file.getPath))
 
     /** Get the path of this file, relative to some other file.
       *

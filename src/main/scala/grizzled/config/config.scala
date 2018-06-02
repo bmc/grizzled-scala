@@ -59,9 +59,9 @@ class ConfigurationException(val message:   String,
   extends Exception(message, exception)
 
 object ConfigurationException {
-  def apply(message: String) =
+  def apply(message: String): ConfigurationException =
     new ConfigurationException(message)
-  def apply(message: String, exception: Throwable) =
+  def apply(message: String, exception: Throwable): ConfigurationException =
     new ConfigurationException(message, exception)
 }
 
@@ -861,7 +861,7 @@ final class Configuration private[config](
     * @param regex  the regular expression to match
     * @param code   the block of code to invoke with each section
     */
-  def forMatchingSections(regex: Regex)(code: Section => Unit) = {
+  def forMatchingSections(regex: Regex)(code: Section => Unit): Unit = {
     for (name <- sectionNames; if regex.findFirstIn(name).nonEmpty)
       code(new Section(name, options(name)))
   }
@@ -936,8 +936,8 @@ final class Configuration private[config](
   * Companion object for the `Configuration` class
   */
 object Configuration {
-  val DefaultSectionNamePattern = """([a-zA-Z0-9_]+)""".r
-  val DefaultCommentPattern     = """^\s*(#.*)$""".r
+  val DefaultSectionNamePattern: Regex = """([a-zA-Z0-9_]+)""".r
+  val DefaultCommentPattern: Regex     = """^\s*(#.*)$""".r
 
   private def DefaultOptionNameTransformer(name: String) = name.toLowerCase()
 
