@@ -464,10 +464,16 @@ class Zipper private(private val items:           Map[String, ZipSource],
             val path = f.getPath // its path (String)
             val t = if (flatten)
               currentZipper.addFile(f, flatten = true)
-            else if (strip.isDefined && strip.exists(p => path.startsWith(p)))
-              currentZipper.addFile(f, path.substring(strip.get.length))
-            else
-              currentZipper.addFile(f)
+            else {
+              strip
+                .map { p =>
+                  if (path.startsWith(p))
+                    currentZipper.addFile(f, path.substring(p.length))
+                  else
+                    currentZipper.addFile(f)
+                }
+                .getOrElse(currentZipper.addFile(f))
+            }
 
             t match {
               case Failure(ex) => Failure(ex)

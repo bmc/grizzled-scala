@@ -409,14 +409,9 @@ final class Configuration private[config](
           option -> Some(value.value)
         case (option, value) =>
           option -> resolveOpt(name, value.value)
-      }.
-      filter { case (key, value) =>
-        value.isDefined
-      }.
-      map { case (key, optValue) =>
-        // At this point, courtesy of the filter(), we know the option is
-        // not None.
-        key.originalKey -> optValue.get
+      }
+      .collect { case (key, Some(value)) =>
+        key.originalKey -> value
       }
 
       new Section(name, sectionMap)
