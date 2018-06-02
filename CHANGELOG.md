@@ -5,7 +5,7 @@ Version 4.4.3:
 * Merged [PR #12](https://github.com/bmc/grizzled-scala/pull/12), with fixes
   and performance improvements for `grizzled.security.MessageDigest`, courtesy
   of @lespea.
- 
+* Updated SBT to version 1.1.6. 
 
 Version 4.4.2:
 

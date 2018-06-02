@@ -2,20 +2,13 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "4.4.2"
+version := "4.4.3"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
 scalaVersion := "2.11.12"
 crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6")
-
-// Incremental compilation performance improvement. See
-// http://scala-lang.org/news/2014/04/21/release-notes-2.11.0.html
-
-incOptions := incOptions.value.withNameHashing(true)
-
-ivyScala := ivyScala.value.map { _.copy(overrideScalaVersion = true) }
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
