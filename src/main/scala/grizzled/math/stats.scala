@@ -40,7 +40,7 @@ object stats {
 
       case _ =>
         val recip = 1.0 / itemList.length.toDouble
-        (1.0 /: itemList)((a, b) => a * math.pow(n.toDouble(b), recip))
+        itemList.foldLeft(1.0)((a, b) => a * math.pow(n.toDouble(b), recip))
     }
   }
 
@@ -59,7 +59,7 @@ object stats {
       case Nil => n.toDouble(item)
       case _ =>
         val allItems = item +: items
-        allItems.length / (0.0 /: allItems)((a, b) => a + (1.0 / n.toDouble(b)))
+        allItems.length / allItems.foldLeft(0.0)((a, b) => a + (1.0 / n.toDouble(b)))
     }
   }
 
@@ -78,7 +78,7 @@ object stats {
       case Nil => n.toDouble(item)
       case _ =>
         val allItems = item +: items
-        (0.0 /: allItems)((a, b) => a + n.toDouble(b)) / allItems.length
+        allItems.foldLeft(0.0)((a, b) => a + n.toDouble(b)) / allItems.length
     }
   }
 
@@ -268,7 +268,7 @@ object stats {
         // Fold left, generating a (min, max) tuple along the way.
         val allItems = item +: items
         val (min, max) =
-          ((n.fromInt(Int.MaxValue), n.fromInt(0)) /: allItems)((tuple, i) =>
+          allItems.foldLeft((n.fromInt(Int.MaxValue), n.fromInt(0)))((tuple, i) =>
            (n.min(tuple._1, i), n.max(tuple._1, i)))
         n.minus(max, min)
     }
@@ -277,7 +277,7 @@ object stats {
   private def calculateVariance[T: Numeric](denominator: Int,
                                             items: Seq[T]): Double = {
     def sumOfSquares(dList: Seq[Double]): Double =
-      (0.0 /: dList) ((sum, d) => sum + (d * d))
+      dList.foldLeft(0.0) ((sum, d) => sum + (d * d))
 
     require (items.length > 1)
     val n = implicitly[Numeric[T]]
