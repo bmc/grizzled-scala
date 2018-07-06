@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 4.5.1:
+
+* Change `/:` to `foldLeft`, since `/:` is deprecated in Scala 2.13.
+  (Thanks to @xuwei-k for the patch.)
+
 Version 4.5.0:
 
 * Merged [PR #12](https://github.com/bmc/grizzled-scala/pull/12), with fixes
