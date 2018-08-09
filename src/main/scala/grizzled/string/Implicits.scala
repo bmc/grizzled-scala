@@ -3,7 +3,6 @@ package grizzled.string
 /** String and character implicits.
   */
 object Implicits {
-  import scala.collection.immutable.StringLike
   import scala.language.implicitConversions
   import grizzled.parsing.StringToken
   import scala.util.matching.Regex.Match
@@ -81,10 +80,7 @@ object Implicits {
 
   /** String enrichment classes.
     */
-  object String {
-
-    implicit def String_GrizzledString(rs: StringLike[String]): GrizzledString =
-      new GrizzledString(rs.toString)
+  object String extends ToGrizzledString {
 
     /** An analog to Scala's `RichString` class, providing some methods
       * that neither `RichString` nor `String` provide. By
