@@ -208,6 +208,7 @@ object util {
 
     strings match {
       case Seq(head, _*) =>
+        @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
         val minLen = strings.map(_.length).min
         val (low, high) = search(1, minLen)
         head.slice(0, (low + high) / 2)
