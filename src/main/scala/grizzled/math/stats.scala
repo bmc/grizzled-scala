@@ -142,6 +142,7 @@ object stats {
         .map { case (n, counts) => n -> counts.map(_._2).sum }
 
       // Find the maximum count.
+      @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
       val max = m.values.max
 
       // Extract the keys with values that match
