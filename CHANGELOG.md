@@ -1,5 +1,13 @@
 # Grizzled Scala Change Log
 
+Version 4.6.0:
+
+* This release doesn't change anything, but marks the release of a
+  4.6.x branch for Scala 2.10-only. The 4.7.x series (and greater) will
+  not support Scala 2.10. This branching is necessary because of changes
+  in the Scala collections library in 2.13; the collections compatibility
+  library isn't available for 2.10.
+
 Version 4.5.1:
 
 * Change `/:` to `foldLeft`, since `/:` is deprecated in Scala 2.13.

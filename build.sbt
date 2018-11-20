@@ -2,13 +2,12 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "4.5.1"
+version := "4.6.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.11.12"
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6")
+scalaVersion := "2.10.7"
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
