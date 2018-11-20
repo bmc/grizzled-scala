@@ -49,16 +49,11 @@ repository. (From JCenter, it's eventually pushed to the
 
 **NOTE**: This library uses [semantic versioning](http://semver.org).
 
-- Versions 3.1.0 and better support Scala 2.10, 2.11 and 2.12
-- Version 3.0.0 supports Scala 2.10, 2.11 and 2.12.0-RC1
-- Versions 2.5.0 and 2.6.0 support Scala 2.10, 2.11 and 2.12.0-M5
-- Versions 2.4.x, 2.3.x, 2.2.x, 2.1.0 and 2.0.0 support Scala 2.10, 2.11 and 2.12-M4.
-- Version 1.6.1 supports Scala 2.10, 2.11 and 2.12-M4.
-- Version 1.6.0 supports Scala 2.10, 2.11 and 2.12-M1.
-- Versions 1.5.1, 1.5.0, 1.4.0, 1.3, 1.2 and 1.1.6 support Scala 2.10 and 2.11.
-- Versions 1.1.3, 1.1.4 and 1.1.5 support Scala 2.10.
-- Version 1.0.14 supports Scala 2.8.0, 2.8.1, 2.8.2, 2.9.0, 2.9.0-1, 2.9.1,
-  2.9.1-1 and 2.9.2.
+- Version 4.7.0 and on support Scala 2.11, Scala 2.12 and Scala 2.13.
+- Version 4.6.0 (and any subsequent patch releases) support Scala 2.10 **only**.
+- All releases prior to 4.6.0 support Scala 2.10, 2.11 and 2.12.
+
+tl;dr: If you don't need Scala 2.10 support, use 4.7.0 or better. 
 
 ### Installing for Maven
 
@@ -74,8 +69,8 @@ For example:
 
     <dependency>
       <groupId>org.clapper</groupId>
-      <artifactId>grizzled-scala_2.11</artifactId>
-      <version>4.5.0</version>
+      <artifactId>grizzled-scala_2.12</artifactId>
+      <version>4.7.0</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -99,7 +94,7 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 Add the following to your SBT build:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.5.0"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.7.0"
 
 ## Source Code Repository
 
