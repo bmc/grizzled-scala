@@ -244,6 +244,18 @@ span.symbol > a {
   background: url("package.svg") no-repeat center;
 }
 
+.big-circle.annotation {
+  background: url("annotation.svg") no-repeat center;
+}
+
+.big-circle.object-companion-annotation {
+  background: url("object_comp_annotation.svg") no-repeat center;
+}
+
+.big-circle.annotation-companion-object {
+  background: url("annotation_comp.svg") no-repeat center;
+}
+
 body.abstract.type div.big-circle {
   background: url("abstract_type.svg") no-repeat center;
 }
@@ -666,7 +678,7 @@ div#definition > h4#signature > span.modifier_kind > i.unfold-arrow,
 }
 
 .cmt code {
-  font-weight: bold;
+  font-family: "Source Code Pro", "Monaco", "Ubuntu Mono Regular", "Lucida Console", monospace;
 }
 
 .cmt a {
@@ -845,6 +857,19 @@ div.fullcomment dl.paramcmts > dd {
   padding: 0.5em;
   background: rgba(255, 255, 255, 0.2);
   font-family: "Open Sans";
+}
+
+#memberfilter > .input > input::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+#memberfilter > .input > input:-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+#memberfilter > .input > input::placeholder  {
+  color: #fff;
+  opacity: 0.6;
 }
 
 #memberfilter > .clear {
