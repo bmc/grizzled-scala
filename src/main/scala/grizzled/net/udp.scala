@@ -213,7 +213,7 @@ trait UDPDatagramSocket extends AutoCloseable {
     writer.write(data)
     writer.flush()
     val bytes: Array[Byte] = buf.toByteArray
-    send(bytes, address, port)
+    send(bytes.toIndexedSeq, address, port)
   }
 
   /** Send string data over the socket. Converts the string to UTF-8

@@ -934,7 +934,7 @@ object util {
       ))
     }
     else {
-      val files: Seq[(File, File)] = sourceDir
+      val files = sourceDir
         .list
         .map { f: String =>
           (new File(sourceDir, f), new File(targetDir, f))

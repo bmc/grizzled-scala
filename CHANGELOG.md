@@ -1,5 +1,9 @@
 # Grizzled Scala Change Log
 
+Version 4.7.1:
+
+* Got rid of some of the 2.13.0 compiler deprecation warnings.
+
 Version 4.7.0:
 
 * Removed support for Scala 2.10. 

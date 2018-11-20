@@ -524,7 +524,8 @@ class Zipper private(private val items:           Map[String, ZipSource],
     else {
       for { p <- stripRoot(path, forceRoot = Some("/"))
             _ <- ensureNotThere(p) }
-      yield new Zipper(items = items, bareDirectories = bareDirectories + p)
+      yield new Zipper(items = items,
+                       bareDirectories = bareDirectories ++ Set(p))
     }
   }
 
@@ -697,7 +698,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
             val entry = new ZipEntry(dir2)
             for { _   <- Try { zo.putNextEntry(entry) }
                   _   <- Try { zo.closeEntry() }
-                  res <- makeNext(rest, existing + dir2) }
+                  res <- makeNext(rest, existing ++ Set(dir2)) }
             yield res
         }
       }
@@ -744,7 +745,7 @@ class Zipper private(private val items:           Map[String, ZipSource],
             for { _   <- Try { zo.putNextEntry(entry) }
                   _   <- Try { zo.closeEntry() }
                   res <- makeBareDirectories(rest, countSoFar + 1,
-                                             existingDirs + d) }
+                                             existingDirs ++ Set(d)) }
             yield res
           }
       }
