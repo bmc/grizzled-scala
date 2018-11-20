@@ -2,13 +2,13 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "4.5.1"
+version := "4.7.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.11.12"
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6")
+scalaVersion := "2.12.7"
+crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-M5")
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins
@@ -46,15 +46,12 @@ wartremoverErrors in (Compile, compile) ++= Seq(
   Wart.While
 )
 
-
 // ---------------------------------------------------------------------------
-// Helpers
-
-// ---------------------------------------------------------------------------
-// ScalaTest
+// Dependencies
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+  "org.scala-lang.modules" %% "scala-collection-compat" % "0.2.1",
+  "org.scalatest"          %% "scalatest"               % "3.0.6-SNAP5" % Test
 )
 
 parallelExecution in Test := true

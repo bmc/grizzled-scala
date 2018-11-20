@@ -1,9 +1,10 @@
 package grizzled.string
 
+import scala.collection.immutable.WrappedString
+
 /** String and character implicits.
   */
 object Implicits {
-  import scala.collection.immutable.StringLike
   import scala.language.implicitConversions
   import grizzled.parsing.StringToken
   import scala.util.matching.Regex.Match
@@ -83,8 +84,12 @@ object Implicits {
     */
   object String {
 
-    implicit def String_GrizzledString(rs: StringLike[String]): GrizzledString =
+    implicit def WrappedString_GrizzledString(rs: WrappedString): GrizzledString =
       new GrizzledString(rs.toString)
+
+    implicit def StringBuilder_GrizzledString(rs: StringBuilder): GrizzledString =
+      new GrizzledString(rs.toString)
+
 
     /** An analog to Scala's `RichString` class, providing some methods
       * that neither `RichString` nor `String` provide. By

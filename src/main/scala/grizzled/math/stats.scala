@@ -141,8 +141,9 @@ object stats {
         .groupBy(_._1)
         .map { case (n, counts) => n -> counts.map(_._2).sum }
 
-      // Find the maximum count.
-      val max = m.values.max
+      // Find the maximum count. Use foldLeft() instead of max, because
+      // max bails with an exception on an empty collection.
+      val max = m.values.foldLeft(0) { (a, b) => if (a > b) a else b }
 
       // Extract the keys with values that match
       m.filter { case (_, v) => v == max }.keys.toList

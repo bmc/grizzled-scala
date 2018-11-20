@@ -208,7 +208,11 @@ object util {
 
     strings match {
       case Seq(head, _*) =>
-        val minLen = strings.map(_.length).min
+        // Use foldLeft(), instead of min, because min bails with an exception
+        // on an empty sequence.
+        val minLen = strings
+          .map(_.length)
+          .foldLeft(Int.MaxValue) { (a, b) => if (a < b) a else b }
         val (low, high) = search(1, minLen)
         head.slice(0, (low + high) / 2)
 
