@@ -151,7 +151,8 @@ import scala.util.{Failure, Success, Try}
   **/
 class Zipper private(private val items:           Map[String, ZipSource],
                      private val bareDirectories: Set[String],
-                             val comment:         Option[String] = None) {
+                             val comment:         Option[String] = None)
+  extends VersionSpecificZipper {
 
   /** Add a file to the `Zipper`. The path in the resulting zip or jar file
     * will be the path (if it's relative) or the path with the file system root
@@ -438,60 +439,15 @@ class Zipper private(private val items:           Map[String, ZipSource],
     *                  all files found are added. This is a simple glob
     *                  pattern, acceptable to [[grizzled.file.util.fnmatch]].
     *
-    * @return A `Success` with the number of files found and added, or
-    *         `Failure` on error.
+    * @return A `Success` with the new `Zipper`, or `Failure` on error.
     */
   def addDirectory(dir:      File,
                    strip:    Option[String] = None,
                    flatten:  Boolean = false,
                    wildcard: Option[String] = None): Try[Zipper] = {
 
-    def addRecursively(dir: File, flatten: Boolean): Try[Zipper] = {
-
-      @tailrec
-      def addNext(stream: Stream[File], currentZipper: Zipper): Try[Zipper] = {
-
-        def wildcardMatch(f: File): Boolean = {
-          wildcard.forall(pat => fileutil.fnmatch(f.getName, pat))
-        }
-
-        stream match {
-          case s if s.isEmpty =>
-            Success(currentZipper)
-          case head #:: tail if head.isDirectory =>
-            addNext(tail, currentZipper)
-          case head #:: tail if ! wildcardMatch(head) =>
-            addNext(tail, currentZipper)
-          case head #:: tail =>
-            val f = head       // the next file or directory (File)
-            val path = f.getPath // its path (String)
-            val t = if (flatten)
-              currentZipper.addFile(f, flatten = true)
-            else {
-              strip
-                .map { p =>
-                  if (path.startsWith(p))
-                    currentZipper.addFile(f, path.substring(p.length))
-                  else
-                    currentZipper.addFile(f)
-                }
-                .getOrElse(currentZipper.addFile(f))
-            }
-
-            t match {
-              case Failure(ex) => Failure(ex)
-              case Success(z)  => addNext(tail, z)
-            }
-        }
-      }
-
-      addNext(fileutil.listRecursively(dir), this)
-    }
-
-    // Main logic
-
     for { _         <- dir.pathExists
-          newZipper <- addRecursively(dir, flatten) }
+          newZipper <- addRecursively(dir, strip, flatten, wildcard) }
     yield newZipper
   }
 

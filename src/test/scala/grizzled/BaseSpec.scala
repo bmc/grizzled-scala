@@ -25,7 +25,7 @@ class BaseSpec extends FlatSpec with Matchers {
     createTextFile(dir, filename, contents.mkString(lineSep))
   }
 
-  def makeFiles(directory: String, files: Seq[String]): Seq[String] = {
+  def makeEmptyFiles(directory: String, files: Seq[String]): Seq[String] = {
     for (fname <- files) yield {
       val path = joinPath(directory, fname)
       new File(path).createNewFile()

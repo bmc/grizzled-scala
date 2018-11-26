@@ -157,24 +157,6 @@ object Implicits {
       util.touch(file.getPath, time)
     }
 
-    /** List a directory recursively, returning `File` objects for each file
-      * (and subdirectory) found. This method does lazy evaluation, instead
-      * of calculating everything up-front, as `walk()` does.
-      *
-      * If `topdown` is `true`, a directory is generated before the entries
-      * for any of its subdirectories (directories are generated top down).
-      * If `topdown` is `false`, a directory directory is generated after
-      * the entries for all of its subdirectories (directories are generated
-      * bottom up).
-      *
-      * @param topdown `true` to do a top-down traversal, `false` otherwise.
-      *
-      * @return a stream of `File` objects for everything under
-      *         the directory.
-      */
-    def listRecursively(topdown: Boolean = true): Stream[File] =
-      util.listRecursively(file, topdown)
-
     /** Determine whether a directory is empty. Only meaningful for a directory.
       *
       * @return true if the directory is empty, false if not

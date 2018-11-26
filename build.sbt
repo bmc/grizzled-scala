@@ -2,13 +2,22 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "4.7.1"
+version := "4.8.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.12.7"
+scalaVersion := "2.13.0-M5"
 crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-M5")
+
+
+unmanagedSourceDirectories in Compile += {
+  val sourceDir = (sourceDirectory in Compile).value
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, n)) if n >= 13 => sourceDir / "scala-2.13"
+    case _                       => sourceDir / "pre-scala-2.13"
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Additional compiler options and plugins

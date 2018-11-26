@@ -1,5 +1,18 @@
 # Grizzled Scala Change Log
 
+Version 4.8.0:
+
+* `grizzled.file.util.listRecursively()` and 
+  `grizzled.file.Implicits.GrizzledFile.listRecursively()` now return
+  `LazyList` for Scala 2.13. They still return `Stream` for Scala 2.12 and 
+  earlier.
+* Various internal functions that used `Stream` have been tweaked to use
+  `LazyList` for 2.13. 
+
+These changes necessitated some refactoring, as well as the introduction
+of `src/main/pre-scala-2.13` and `src/main/scala-2.13` directories to the
+source code, to contain parallel implementations.
+
 Version 4.7.1:
 
 * Got rid of some of the 2.13.0 compiler deprecation warnings.

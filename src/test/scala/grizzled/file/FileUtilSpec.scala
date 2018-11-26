@@ -14,21 +14,26 @@ import grizzled.BaseSpec
  */
 class FileUtilSpec extends BaseSpec {
   "basename" should "handle all kinds of paths" in {
-    val data = Map(("", "/")                 -> "",
-                   ("foo", "/")              -> "foo",
-                   ("foo/bar", "/")          -> "bar",
-                   (".", "/")                -> ".",
-                   ("../foo", "/")           -> "foo",
-                   ("/foo/bar/baz", "/")     -> "baz",
-                   ("////", "/")             -> "/",
+    // The Map type annotations are mostly for IntelliJ, which (as of
+    // 2.13.0-M5) gets confused and doesn't infer types properly, leading
+    // to the dreaded squiggly reds.
+    val data = Map[(String, String),String](
+      ("", "/")                 -> "",
+      ("foo", "/")              -> "foo",
+      ("foo/bar", "/")          -> "bar",
+      (".", "/")                -> ".",
+      ("../foo", "/")           -> "foo",
+      ("/foo/bar/baz", "/")     -> "baz",
+      ("////", "/")             -> "/",
 
-                   ("", "\\")                -> "",
-                   ("foo", "\\")             -> "foo",
-                   ("foo\\bar", "\\")        -> "bar",
-                   (".", "\\")               -> ".",
-                   ("..\\foo", "\\")         -> "foo",
-                   ("\\foo\\bar\\baz", "\\") -> "baz",
-                   ("D:\\foo\\bar", "\\")    -> "bar")
+      ("", "\\")                -> "",
+      ("foo", "\\")             -> "foo",
+      ("foo\\bar", "\\")        -> "bar",
+      (".", "\\")               -> ".",
+      ("..\\foo", "\\")         -> "foo",
+      ("\\foo\\bar\\baz", "\\") -> "baz",
+      ("D:\\foo\\bar", "\\")    -> "bar"
+    )
 
     for(((path, sep), expected) <- data) {
       basename(path, sep) shouldBe expected
@@ -36,27 +41,29 @@ class FileUtilSpec extends BaseSpec {
   }
 
   "dirname" should "handle all kinds of paths" in {
-    val data = Map(("", "/")                  -> "",
-                   ("foo", "/")               -> ".",
-                   ("foo/bar", "/")           -> "foo",
-                   (".", "/")                 -> ".",
-                   ("../foo", "/")            -> "..",
-                   ("/foo/bar/baz", "/")      -> "/foo/bar",
-                   ("/foo", "/")              -> "/",
-                   ("/foo", "/")              -> "/",
-                   ("/", "/")                 -> "/",
-                   ("////", "/")              -> "/",
+    val data = Map[(String, String), String](
+      ("", "/")                  -> "",
+      ("foo", "/")               -> ".",
+      ("foo/bar", "/")           -> "foo",
+      (".", "/")                 -> ".",
+      ("../foo", "/")            -> "..",
+      ("/foo/bar/baz", "/")      -> "/foo/bar",
+      ("/foo", "/")              -> "/",
+      ("/foo", "/")              -> "/",
+      ("/", "/")                 -> "/",
+      ("////", "/")              -> "/",
 
-                   ("", "\\")                 -> "",
-                   ("foo", "\\")              -> ".",
-                   ("foo\\bar", "\\")         -> "foo",
-                   (".", "\\")                -> ".",
-                   ("..\\foo", "\\")          -> "..",
-                   ("\\foo\\bar\\baz", "\\")  -> "\\foo\\bar",
-                   ("\\foo", "\\")            -> "\\",
-                   ("\\foo", "\\")            -> "\\",
-                   ("\\", "\\")               -> "\\",
-                   ("\\\\\\\\", "\\")         -> "\\")
+      ("", "\\")                 -> "",
+      ("foo", "\\")              -> ".",
+      ("foo\\bar", "\\")         -> "foo",
+      (".", "\\")                -> ".",
+      ("..\\foo", "\\")          -> "..",
+      ("\\foo\\bar\\baz", "\\")  -> "\\foo\\bar",
+      ("\\foo", "\\")            -> "\\",
+      ("\\foo", "\\")            -> "\\",
+      ("\\", "\\")               -> "\\",
+      ("\\\\\\\\", "\\")         -> "\\"
+    )
 
     for(((path, sep), expected) <- data) {
       dirname(path, sep) shouldBe expected
@@ -64,26 +71,28 @@ class FileUtilSpec extends BaseSpec {
   }
 
   "dirnameBasename" should "handle all kinds of files" in {
-    val data = Map(("", "/")                 -> ("", ""),
-                   ("foo", "/")              -> (".", "foo"),
-                   ("foo/bar", "/")          -> ("foo", "bar"),
-                   (".", "/")                -> (".", ""),
-                   ("../foo", "/")           -> ("..", "foo"),
-                   ("./foo", "/")            -> (".", "foo"),
-                   ("/foo/bar/baz", "/")     -> ("/foo/bar", "baz"),
-                   ("/foo", "/")             -> ("/", "foo"),
-                   ("/", "/")                -> ("/",  ""),
+    val data = Map[(String, String), (String, String)](
+      ("", "/")                 -> ("", ""),
+      ("foo", "/")              -> (".", "foo"),
+      ("foo/bar", "/")          -> ("foo", "bar"),
+      (".", "/")                -> (".", ""),
+      ("../foo", "/")           -> ("..", "foo"),
+      ("./foo", "/")            -> (".", "foo"),
+      ("/foo/bar/baz", "/")     -> ("/foo/bar", "baz"),
+      ("/foo", "/")             -> ("/", "foo"),
+      ("/", "/")                -> ("/",  ""),
 
-                   ("", "\\")                -> ("", ""),
-                   ("foo", "\\")             -> (".", "foo"),
-                   ("foo\\bar", "\\")        -> ("foo", "bar"),
-                   (".", "\\")               -> (".", ""),
-                   ("..\\foo", "\\")         -> ("..", "foo"),
-                   (".\\foo", "\\")          -> (".", "foo"),
-                   ("\\foo\\bar\\baz", "\\") -> ("\\foo\\bar", "baz"),
-                   ("\\foo", "\\")           -> ("\\", "foo"),
-                   ("\\", "\\")              -> ("\\",  ""),
-                   ("D:\\foo\\bar", "\\")    -> ("D:\\foo", "bar"))
+      ("", "\\")                -> ("", ""),
+      ("foo", "\\")             -> (".", "foo"),
+      ("foo\\bar", "\\")        -> ("foo", "bar"),
+      (".", "\\")               -> (".", ""),
+      ("..\\foo", "\\")         -> ("..", "foo"),
+      (".\\foo", "\\")          -> (".", "foo"),
+      ("\\foo\\bar\\baz", "\\") -> ("\\foo\\bar", "baz"),
+      ("\\foo", "\\")           -> ("\\", "foo"),
+      ("\\", "\\")              -> ("\\",  ""),
+      ("D:\\foo\\bar", "\\")    -> ("D:\\foo", "bar")
+    )
 
     for(((path, sep), expected) <- data) {
       dirnameBasename(path, sep) shouldBe expected
@@ -91,7 +100,7 @@ class FileUtilSpec extends BaseSpec {
   }
 
   "splitPath, Posix" should "handle all kinds of paths" in {
-    val data = Map(
+    val data = Map[(String, String), List[String]](
       ("", "/")                  -> List[String](""),
       ("foo", "/")               -> List[String]("foo"),
       ("foo/bar", "/")           -> List[String]("foo", "bar"),
@@ -122,7 +131,7 @@ class FileUtilSpec extends BaseSpec {
   }
 
   "joinPath" should "handle all kinds of paths" in {
-    val data = Map(
+    val data = Map[(String, List[String]), String](
       ("/", List(""))                       -> "",
       ("/", List("foo"))                    -> "foo",
       ("/", List("foo", "bar"))             -> "foo/bar",
@@ -151,7 +160,7 @@ class FileUtilSpec extends BaseSpec {
   }
 
   "joinAndNormalizePath" should "normalize a joined path" in {
-    val data = Array(
+    val data = Seq[(List[String], String)](
       (List(".", "..", "foo", "bar"), "../foo/bar"),
       (List("..", ".", "foo", "..", "bar", "x"), "../bar/x")
     )
@@ -289,8 +298,8 @@ class FileUtilSpec extends BaseSpec {
 
   "eglob" should """glob a "*" properly""" in {
     withTemporaryDirectory("glob") { d =>
-      val paths = makeFiles(d.getAbsolutePath,
-                            Array("aaa.txt", "bbb.txt", "ccc.java"))
+      val paths = makeEmptyFiles(d.getAbsolutePath,
+                                 Seq("aaa.txt", "bbb.txt", "ccc.java"))
       val expected = paths.filter(_.endsWith(".txt")).toSet
 
       val matches = eglob(joinPath(d.getPath, "*.txt")).toSet
@@ -301,13 +310,13 @@ class FileUtilSpec extends BaseSpec {
   it should "not match nonexistent files" in {
     withTemporaryDirectory("glob") { d =>
       val subdirs = makeDirectories(d.getAbsolutePath,
-                                    Array("one", "two", "three"))
+                                    Seq("one", "two", "three"))
       val subdirs2 = for { dir <- subdirs } yield {
-        makeDirectories(dir, Array("aaa", "bbb", "ccc"))
+        makeDirectories(dir, Seq("aaa", "bbb", "ccc"))
       }
 
-      val file1 = makeFiles(d.getAbsolutePath, Array("README")).head
-      val file2 = makeFiles(subdirs.head, Array("README")).head
+      val file1 = makeEmptyFiles(d.getAbsolutePath, Seq("README")).head
+      val file2 = makeEmptyFiles(subdirs.head, Seq("README")).head
 
       val matches = eglob(joinPath(d.getPath, "**", "README")).toSet
       matches shouldBe Set(file1, file2)
@@ -316,9 +325,9 @@ class FileUtilSpec extends BaseSpec {
 
   it should "glob a character class properly" in {
     withTemporaryDirectory("glob") { d =>
-      val paths = makeFiles(d.getAbsolutePath,
-                            Array("abc.txt", "aaa.txt", "abd.txt",
-                                  "abcdef.txt", "aaa.scala"))
+      val paths = makeEmptyFiles(d.getAbsolutePath,
+                                 Seq("abc.txt", "aaa.txt", "abd.txt",
+                                       "abcdef.txt", "aaa.scala"))
       val matches = eglob(joinPath(d.getPath, "a[ab][a-z].txt")).toSet
       val expected = Set("aaa.txt", "abc.txt", "abd.txt")
       matches.map(basename(_)) shouldBe expected
@@ -327,8 +336,8 @@ class FileUtilSpec extends BaseSpec {
 
   it should "glob a ? properly" in {
     withTemporaryDirectory("glob") { d =>
-      val paths = makeFiles(d.getAbsolutePath,
-                            Array("aba.txt", "aaa.txt", "abd.txt"))
+      val paths = makeEmptyFiles(d.getAbsolutePath,
+                                 Seq("aba.txt", "aaa.txt", "abd.txt"))
       val matches = eglob(joinPath(d.getPath, "a?a.txt")).toSet
       matches.map(basename(_)) shouldBe Set("aaa.txt", "aba.txt")
     }
@@ -337,12 +346,12 @@ class FileUtilSpec extends BaseSpec {
   it should """handle "**" properly""" in {
     withTemporaryDirectory("glob") { d =>
       val fullDirPath = d.getAbsolutePath
-      val subdirs = Array("d1", "d2", "longer-dir-name")
-      val files = Array("a.scala", "foobar.scala", "README.md", "config.txt")
+      val subdirs = Seq("d1", "d2", "longer-dir-name")
+      val files = Seq("a.scala", "foobar.scala", "README.md", "config.txt")
       val filePaths = subdirs.flatMap { subdir =>
         val subdirPath = joinPath(fullDirPath, subdir)
         new File(subdirPath).mkdirs()
-        makeFiles(subdirPath, files)
+        makeEmptyFiles(subdirPath, files)
       }
 
       val expected = filePaths.filter(_.endsWith(".scala")).toSet
@@ -353,13 +362,13 @@ class FileUtilSpec extends BaseSpec {
   it should """ensure that a trailing "**" just gets directories""" in {
     withTemporaryDirectory("glob") { d =>
       val fullDirPath = d.getAbsolutePath
-      val subdirs = Array("d1", "d2", "longer-dir-name")
-      val files = Array("a.scala", "f.scala", "foobar.scala", "README.md",
+      val subdirs = Seq("d1", "d2", "longer-dir-name")
+      val files = Seq("a.scala", "f.scala", "foobar.scala", "README.md",
                         "config.txt")
       val filePaths = subdirs.flatMap { subdir =>
         val subdirPath = joinPath(fullDirPath, subdir)
         new File(subdirPath).mkdirs()
-        makeFiles(subdirPath, files)
+        makeEmptyFiles(subdirPath, files)
       }
 
       val expected = subdirs.map(joinPath(fullDirPath, _)) :+ fullDirPath
@@ -383,8 +392,8 @@ class FileUtilSpec extends BaseSpec {
   "glob" should "properly glob with a *" in {
     withTemporaryDirectory("glob") { d =>
       val fullDirPath = d.getAbsolutePath
-      val simpleFilenames = Array("foo.txt", "bar.c", "bar.txt")
-      makeFiles(fullDirPath, simpleFilenames)
+      val simpleFilenames = Seq("foo.txt", "bar.c", "bar.txt")
+      makeEmptyFiles(fullDirPath, simpleFilenames)
       val expected = simpleFilenames.filter(_ startsWith "bar")
                                     .map(s => joinPath(fullDirPath, s))
                                     .toSet
@@ -395,8 +404,8 @@ class FileUtilSpec extends BaseSpec {
   it should "properly glob with ?" in {
     withTemporaryDirectory("glob") { d =>
       val fullDirPath = d.getAbsolutePath
-      val simpleFilenames = Array("foo.txt", "bar.c", "boo.txt", "bar.txt")
-      makeFiles(fullDirPath, simpleFilenames)
+      val simpleFilenames = Seq("foo.txt", "bar.c", "boo.txt", "bar.txt")
+      makeEmptyFiles(fullDirPath, simpleFilenames)
       val expected = simpleFilenames.filter(_ contains "oo.txt")
                                     .map(s => joinPath(fullDirPath, s))
                                     .toSet
@@ -407,8 +416,8 @@ class FileUtilSpec extends BaseSpec {
   it should "properly glob with a character class" in {
     withTemporaryDirectory("glob") { d =>
       val fullDirPath = d.getAbsolutePath
-      val simpleFilenames = Array("foo.txt", "bar.c", "boo.txt", "bar.txt")
-      makeFiles(fullDirPath, simpleFilenames)
+      val simpleFilenames = Seq("foo.txt", "bar.c", "boo.txt", "bar.txt")
+      makeEmptyFiles(fullDirPath, simpleFilenames)
       val expected = simpleFilenames.filter(_ contains "oo.txt")
                                     .map(s => joinPath(fullDirPath, s))
                                     .toSet
