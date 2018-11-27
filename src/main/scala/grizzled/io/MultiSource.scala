@@ -1,6 +1,7 @@
 package grizzled.io
 
 import scala.io.Source
+import scala.collection.compat._
 
 /** A `MultiSource` contains multiple `scala.io.Source`
   * objects and satisfies reads from them serially. Once composed, a
@@ -19,7 +20,7 @@ class MultiSource(sources: List[Source]) extends Source {
   /** The actual iterator.
     */
   protected val iter: Iterator[Char] = {
-    sources.map(_.toIterator).foldLeft(Iterator[Char]())(_ ++ _)
+    sources.map(_.iterator).foldLeft(Iterator[Char]())(_ ++ _)
   }
 
   /** Reset, returning a new source.

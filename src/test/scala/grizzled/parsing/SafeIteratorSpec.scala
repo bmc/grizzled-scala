@@ -2,9 +2,11 @@ package grizzled.parsing
 
 import grizzled.BaseSpec
 
+import scala.collection.compat._
+
 class SafeIteratorSpec extends BaseSpec {
   "SafeIterator" should "iterate properly over a wrapped iterator" in {
-    val i = SafeIterator((1 to 10).toIterator)
+    val i = SafeIterator((1 to 10).iterator)
     for (j <- 1 to 10)
       i.next shouldBe Some(j)
   }

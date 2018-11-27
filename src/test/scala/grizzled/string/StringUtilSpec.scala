@@ -1,35 +1,4 @@
-/*
- ---------------------------------------------------------------------------
-  Copyright © 2009-2018, Brian M. Clapper. All rights reserved.
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are
-  met:
-
-  * Redistributions of source code must retain the above copyright notice,
-    this list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
-
-  * Neither the names "clapper.org", "Grizzled Scala Library", nor the
-    names of its contributors may be used to endorse or promote products
-    derived from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  --------------------------------------------------------------------------
-*/
+package grizzled.string
 
 import grizzled.BaseSpec
 import grizzled.string._
@@ -40,7 +9,8 @@ import grizzled.string.util._
  */
 class StringUtilSpec extends BaseSpec {
   "strToBoolean" should "succeed on valid input" in {
-    val data = Map(
+    // Type annotations on Map are for IntelliJ, which gets confused...
+    val data = Map[String, Either[String, Boolean]](
       "true"  -> Right(true),
       "t"     -> Right(true),
       "yes"   -> Right(true),
@@ -54,7 +24,7 @@ class StringUtilSpec extends BaseSpec {
       "0"     -> Right(false)
     )
 
-    for {(input, expected) <- data;
+    for {(input: String, expected: Either[String, Boolean]) <- data
          permutations = List(input,
                              input.capitalize,
                              input.toUpperCase,
@@ -128,30 +98,30 @@ class StringUtilSpec extends BaseSpec {
   }
 
   "longestCommonPrefix" should "properly find a common prefix" in {
-    longestCommonPrefix(Array("abc", "abcdef", "abcdefg")) shouldBe "abc"
-    longestCommonPrefix(Array("a", "abcdef", "abcdefg")) shouldBe "a"
-    longestCommonPrefix(Array("ab", "abcdef", "abcdefg")) shouldBe "ab"
+    longestCommonPrefix(Seq("abc", "abcdef", "abcdefg")) shouldBe "abc"
+    longestCommonPrefix(Seq("a", "abcdef", "abcdefg")) shouldBe "a"
+    longestCommonPrefix(Seq("ab", "abcdef", "abcdefg")) shouldBe "ab"
   }
 
   it should "properly handle an array of length 1" in {
-    longestCommonPrefix(Array("a")) shouldBe "a"
+    longestCommonPrefix(Seq("a")) shouldBe "a"
   }
 
   it should "properly handle an array of length 0" in {
-    longestCommonPrefix(Array.empty[String]) shouldBe ""
+    longestCommonPrefix(Seq.empty[String]) shouldBe ""
   }
 
   it should "properly handle an array containing N of the same string" in {
-    val a = (1 to 20).map(_ => "xxx").toArray
+    val a = (1 to 20).map(_ => "xxx")
     longestCommonPrefix(a) shouldBe "xxx"
   }
 
   it should "properly handle an array with an empty string" in {
-    longestCommonPrefix(Array("abc", "abcdef", "abcdefg", "")) shouldBe ""
+    longestCommonPrefix(Seq("abc", "abcdef", "abcdefg", "")) shouldBe ""
   }
 
   it should "properly handle an array with no common substring" in {
-    longestCommonPrefix(Array("abc", "abcdef", "abcdefg", "xyz")) shouldBe ""
+    longestCommonPrefix(Seq("abc", "abcdef", "abcdefg", "xyz")) shouldBe ""
   }
 
   private def byteArray(b: Array[Int]) = b.map { _.asInstanceOf[Byte] }

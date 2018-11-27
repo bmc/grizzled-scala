@@ -9,6 +9,8 @@ import scala.util.{Failure, Success, Try}
 object Implicits {
   import scala.language.implicitConversions
 
+  import grizzled.ScalaCompat._
+
   /** A wrapper for `java.io.File` that provides additional methods.
     * By importing the implicit conversion functions, you can use the methods
     * in this class transparently from a `java.io.File` object.
@@ -153,7 +155,7 @@ object Implicits {
       *
       * @return `Success(true)` on success, `Failure(exception)` on error.
       */
-    def touch(time: Long = -1): Try[Boolean] = {
+    def touch(time: Long = -1l): Try[Boolean] = {
       util.touch(file.getPath, time)
     }
 
@@ -165,6 +167,25 @@ object Implicits {
       assert (file.isDirectory)
       file.listFiles.isEmpty
     }
+
+    /** List a directory recursively, returning `File` objects for each file
+      * (and subdirectory) found. This method does lazy evaluation, instead
+      * of calculating everything up-front, as `walk()` does.
+      *
+      * If `topdown` is `true`, a directory is generated before the entries
+      * for any of its subdirectories (directories are generated top down).
+      * If `topdown` is `false`, a directory directory is generated after
+      * the entries for all of its subdirectories (directories are generated
+      * bottom up).
+      *
+      * @param topdown `true` to do a top-down traversal, `false` otherwise.
+      *
+      * @return a lazy sequence of `File` objects for everything under
+      *         the directory. This sequence will be a `LazyList` (typedef'd)
+      *         in Scala 2.13 or better, and a `Stream` in Scala 2.12 and older.
+      */
+    def listRecursively(topdown: Boolean = true): LazyList[File] =
+      util.listRecursively(this.file, topdown)
 
     /** Copy the file to a target directory or file.
       *

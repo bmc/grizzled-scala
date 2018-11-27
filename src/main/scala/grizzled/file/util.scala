@@ -1,11 +1,11 @@
 package grizzled.file
 
 import scala.annotation.tailrec
+import scala.language.higherKinds
 
 import grizzled.io.Implicits.RichInputStream
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
-import grizzled.file.VersionSpecificUtil
 
 import java.io.{File, IOException}
 import java.security.{SecureRandom => Random}
@@ -15,11 +15,13 @@ class FileDoesNotExistException(message: String) extends Exception
 
 /** Useful file-related utility functions.
   */
-object util extends VersionSpecificUtil {
+object util {
   val fileSeparator: String = File.separator
   val fileSeparatorChar: Char = fileSeparator(0)
 
   private lazy val random = new Random()
+
+  import grizzled.ScalaCompat._
 
   // -------------------------------------------------------------------------
   // Public Methods
@@ -420,7 +422,7 @@ object util extends VersionSpecificUtil {
     * @return List of triplets, as described above.
     */
   def walk(top: String, topdown: Boolean = true):
-  List[(String, List[String], List[String])] = {
+    List[(String, List[String], List[String])] = {
     // This needs to be made more efficient, with some kind of generator.
     import scala.collection.mutable.ArrayBuffer
 
@@ -452,6 +454,41 @@ object util extends VersionSpecificUtil {
     result.toList
   }
 
+  /** List a directory recursively, returning `File` objects for each file
+    * (and subdirectory) found. This method does lazy evaluation, instead
+    * of calculating everything up-front, as `walk()` does.
+    *
+    * The JDK's [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-int-java.nio.file.FileVisitOption...- java.nio.file.Files.walk()]]
+    * function provides a similar capability in JDK 8. Prior to JDK 8, you can
+    * also use  [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor) java.nio.file.Files.walkFileTree()]]
+    *
+    * @param file    The `File` object, presumed to represent a directory.
+    * @param topdown If `true` (the default), the stream will be generated
+    *                top down. If `false`, it'll be generated bottom-up.
+    *
+    * @return a stream of `File` objects.
+    */
+  def listRecursively(file: File, topdown: Boolean = true): LazyList[File] = {
+
+    def go(list: List[File]): LazyList[File] = {
+      // See http://www.nurkiewicz.com/2013/05/lazy-sequences-in-scala-and-clojure.html
+      list match {
+        case Nil => LazyList.empty[File]
+
+        case f :: tail =>
+          val list = if (f.isDirectory) f.listFiles.toList else Nil
+          if (topdown)
+            f #:: go(list ++ tail)
+          else
+            go(list ++ tail) :+ f
+      }
+    }
+
+    if (file.isDirectory)
+      go(file.listFiles.toList)
+    else
+      LazyList.empty[File]
+  }
   /** Split a path into its constituent components. If the path is
     * absolute, the first piece will have a file separator in the
     * beginning. Examples:

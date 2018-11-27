@@ -1,5 +1,15 @@
 # Grizzled Scala Change Log
 
+Version 4.9.0:
+
+* Implemented a better way to handle compatibility between Scala 2.13 and
+  earlier versions, one that requires less duplicate code, by providing
+  appropriate type aliases in a new, conditionally-compiled
+  `grizzled.ScalaCompat` package. Functions that use `Stream` in 2.12 and
+  earlier still use `LazyList` in 2.13, but the implementation is better.
+  Bumped the minor version, rather than the patch version, even though there 
+  aren't major API changes, because of the possible impact on compilation.
+
 Version 4.8.0:
 
 * `grizzled.file.util.listRecursively()` and 

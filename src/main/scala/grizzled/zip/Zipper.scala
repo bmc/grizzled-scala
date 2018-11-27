@@ -9,6 +9,7 @@ import java.util.jar.{JarOutputStream, Manifest => JarManifest}
 import java.util.zip.{ZipEntry, ZipOutputStream}
 
 import scala.annotation.tailrec
+import scala.collection.compat._
 import scala.collection.Set
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
@@ -151,8 +152,9 @@ import scala.util.{Failure, Success, Try}
   **/
 class Zipper private(private val items:           Map[String, ZipSource],
                      private val bareDirectories: Set[String],
-                             val comment:         Option[String] = None)
-  extends VersionSpecificZipper {
+                             val comment:         Option[String] = None) {
+
+  import grizzled.ScalaCompat._
 
   /** Add a file to the `Zipper`. The path in the resulting zip or jar file
     * will be the path (if it's relative) or the path with the file system root
@@ -618,6 +620,53 @@ class Zipper private(private val items:           Map[String, ZipSource],
   // --------------------------------------------------------------------------
   // Private methods
   // --------------------------------------------------------------------------
+
+  private def addRecursively(dir: File,
+                             strip: Option[String],
+                             flatten: Boolean,
+                             wildcard: Option[String]): Try[Zipper] = {
+
+    import LazyList.#::
+
+    @tailrec
+    def addNext(files: LazyList[File], currentZipper: Zipper): Try[Zipper] = {
+
+      def wildcardMatch(f: File): Boolean = {
+        wildcard.forall(pat => fileutil.fnmatch(f.getName, pat))
+      }
+
+      files match {
+        case s if s.isEmpty =>
+          Success(currentZipper)
+        case head #:: tail if head.isDirectory =>
+          addNext(tail, currentZipper)
+        case head #:: tail if ! wildcardMatch(head) =>
+          addNext(tail, currentZipper)
+        case head #:: tail =>
+          val f = head       // the next file or directory (File)
+        val path = f.getPath // its path (String)
+        val t = if (flatten)
+          currentZipper.addFile(f, flatten = true)
+        else {
+          strip
+            .map { p =>
+              if (path.startsWith(p))
+                currentZipper.addFile(f, path.substring(p.length))
+              else
+                currentZipper.addFile(f)
+            }
+            .getOrElse(currentZipper.addFile(f))
+        }
+
+          t match {
+            case Failure(ex) => Failure(ex)
+            case Success(z)  => addNext(tail, z)
+          }
+      }
+    }
+
+    addNext(fileutil.listRecursively(dir), this)
+  }
 
   /** Utility method to write the contents of this Zipper to an open
     * ZipOutputStream. Since a JarOutputStream is a subclass of a
