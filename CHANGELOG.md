@@ -1,5 +1,15 @@
 # Grizzled Scala Change Log
 
+Version 4.9.1:
+
+* Added `grizzled.ScalaCompat.math.Ordering.Double.IeeeOrdering`,
+ `grizzled.ScalaCompat.math.Ordering.Double.TotalOrdering`,
+ `grizzled.ScalaCompat.math.Ordering.Float.IeeeOrdering`, and
+ `grizzled.ScalaCompat.math.Ordering.Float.TotalOrdering`, which map to their
+  appropriate `scala.math.Ordering` counterparts for both 2.12 (and earlier) 
+  and 2.13 (and greater). This compatibility layer eliminates warnings in
+  tester compilation.
+
 Version 4.9.0:
 
 * Implemented a better way to handle compatibility between Scala 2.13 and

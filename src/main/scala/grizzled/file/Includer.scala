@@ -122,14 +122,16 @@ extends Iterator[String] {
     * `next` on an empty `Includer` will result in a runtime exception
     *
     * @return the next input line
+    * @throws NoSuchElementException if there isn't a next element.
     */
   @SuppressWarnings(Array("org.wartremover.warts.Throw"))
+  @throws[NoSuchElementException]
   def next: String = {
     @tailrec
     def nextFromStack: String = {
       sourceStack match {
         case Nil =>
-          throw new IllegalStateException("No more data")
+          throw new NoSuchElementException("No more data")
         case top :: rest =>
           if (top.iterator.hasNext)
             top.iterator.next

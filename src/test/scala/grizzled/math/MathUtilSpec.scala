@@ -7,6 +7,7 @@ import scala.util.Random
 
 class MathUtilSpec extends BaseSpec {
   "max" should "work on floats" in {
+    import grizzled.ScalaCompat.math.Ordering.Float.IeeeOrdering
     val nums = (1 to 100).map(_ => Random.nextFloat * 1000)
     val biggest = nums.sortWith { _ > _ }.head
     maximum(nums.head, nums.tail: _*) shouldBe biggest
@@ -22,10 +23,11 @@ class MathUtilSpec extends BaseSpec {
     val bytes = new Array[Byte](1000)
     Random.nextBytes(bytes)
     val biggest = bytes.sortWith { _ > _ }.head
-    maximum(bytes.head, bytes.tail: _*) shouldBe biggest
+    maximum(bytes.head, bytes.tail.toSeq: _*) shouldBe biggest
   }
 
   it should "work on doubles" in {
+    import grizzled.ScalaCompat.math.Ordering.Double.IeeeOrdering
     val nums = (1 to 100).map(_ => Random.nextDouble * 100000000)
     val biggest = nums.sortWith { _ > _ }.head
     maximum(nums.head, nums.tail: _*) shouldBe biggest
@@ -51,10 +53,11 @@ class MathUtilSpec extends BaseSpec {
       "wertyuijkl"
     )
     val biggest = strings.sortWith { _ > _ }.head
-    maximum(strings.head, strings.tail: _*) shouldBe biggest
+    maximum(strings.head, strings.tail.toSeq: _*) shouldBe biggest
   }
 
   "min" should "work on floats" in {
+    import grizzled.ScalaCompat.math.Ordering.Float.IeeeOrdering
     val nums = (1 to 100).map(_ => Random.nextFloat * 1000)
     val biggest = nums.sortWith { _ < _ }.head
     minimum(nums.head, nums.tail: _*) shouldBe biggest
@@ -70,10 +73,11 @@ class MathUtilSpec extends BaseSpec {
     val bytes = new Array[Byte](1000)
     Random.nextBytes(bytes)
     val biggest = bytes.sortWith { _ < _ }.head
-    minimum(bytes.head, bytes.tail: _*) shouldBe biggest
+    minimum(bytes.head, bytes.tail.toSeq: _*) shouldBe biggest
   }
 
   it should "work on doubles" in {
+    import grizzled.ScalaCompat.math.Ordering.Double.IeeeOrdering
     val nums = (1 to 100).map(_ => Random.nextDouble * 100000000)
     val biggest = nums.sortWith { _ < _ }.head
     minimum(nums.head, nums.tail: _*) shouldBe biggest
@@ -92,7 +96,7 @@ class MathUtilSpec extends BaseSpec {
   }
 
   it should "work on Strings" in {
-    val strings = Array(
+    val strings = Seq(
       "klasdfj",
       "8haklshdfasdjh asdkjhasdfh",
       "jklasdf lkjasdf",
