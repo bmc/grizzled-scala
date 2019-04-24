@@ -59,8 +59,8 @@ wartremoverErrors in (Compile, compile) ++= Seq(
 // Dependencies
 
 libraryDependencies ++= Seq(
-  "org.scala-lang.modules" %% "scala-collection-compat" % "0.2.1",
-  "org.scalatest"          %% "scalatest"               % "3.0.6-SNAP5" % Test
+  "org.scala-lang.modules" %% "scala-collection-compat" % "1.0.0",
+  "org.scalatest"          %% "scalatest"               % "3.0.8-RC2" % Test
 )
 
 parallelExecution in Test := true
