@@ -1414,5 +1414,5 @@ object Configuration {
 }
 
 private[config] final case class Value(value: String, isRaw: Boolean = false) {
-  override val toString = s"Value<value=$value, isRaw=$isRaw>"
+  override val toString = s"Value<value=$value, isRaw=${isRaw.toString}>"
 }

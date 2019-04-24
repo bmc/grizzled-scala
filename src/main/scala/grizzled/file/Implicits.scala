@@ -34,7 +34,7 @@ object Implicits {
       if (file.exists)
         Success(true)
       else
-        Failure(new FileDoesNotExistException(s""""$file" does not exist."""))
+        Failure(new FileDoesNotExistException(s""""${file.toString}" does not exist."""))
     }
 
     /** Get the directory name of the file.

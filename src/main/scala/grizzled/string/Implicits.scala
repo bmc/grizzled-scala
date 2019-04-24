@@ -263,7 +263,7 @@ object Implicits {
             case '\\' :: 'f' :: rest  => doParse(rest, buf + "\f")
             case '\\' :: '\\' :: rest => doParse(rest, buf + "\\")
 
-            case '\\' :: 'u' :: a :: b :: c :: d :: rest if isHexString(s"$a$b$c$d") =>
+            case '\\' :: 'u' :: a :: b :: c :: d :: rest if isHexString(s"${a.toString}${b.toString}${c.toString}${d.toString}") =>
               val chars = Integer.parseInt(Array(a, b, c, d).mkString(""), 16)
               doParse(rest.toList, buf + Character.toChars(chars).mkString(""))
 
@@ -271,7 +271,7 @@ object Implicits {
               doParse(rest, buf + "\\u")
 
             case '\\' :: c :: rest =>
-              doParse(rest, buf + s"\\$c")
+              doParse(rest, buf + s"\\${c.toString}")
 
             case '\\' :: Nil =>
               buf + "\\"
