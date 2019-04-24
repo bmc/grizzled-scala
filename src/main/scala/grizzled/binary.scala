@@ -14,7 +14,7 @@ object binary {
     */
   def bitCount(num: Int): Int = {
     val numLong: Long = num.toLong
-    bitCount(numLong & 0xffffffffl)
+    bitCount(numLong & 0xffffffffL)
   }
 
   /** Count the number of bits in a numeric (integer or long) value. This
@@ -27,16 +27,16 @@ object binary {
     */
   def bitCount(num: Long): Int = {
     // Put count of each 2 bits into those 2 bits.
-    val res1: Long = num - ((num >> 1) & 0x5555555555555555l)
+    val res1: Long = num - ((num >> 1) & 0x5555555555555555L)
 
     // Put count of each 4 bits into those 4 bits.
-    val allThrees = 0x3333333333333333l
+    val allThrees = 0x3333333333333333L
     val res2 = (res1 & allThrees) + ((res1 >> 2) & allThrees)
 
     // Put count of each 8 bits into those 8 bits.
-    val res3 = (res2 + (res2 >> 4)) & 0x0f0f0f0f0f0f0f0fl
+    val res3 = (res2 + (res2 >> 4)) & 0x0f0f0f0f0f0f0f0fL
 
     // Left-most bits.
-    ((res3 * 0x0101010101010101l) >> 56).toInt
+    ((res3 * 0x0101010101010101L) >> 56).toInt
   }
 }
