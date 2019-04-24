@@ -262,16 +262,16 @@ class FileUtilSpec extends BaseSpec {
   }
 
   "copy" should "fail if the directory doesn't exist" in {
-    copy(Seq("foo.c"), "/nonexistent/directory", createTarget=false) shouldBe 'failure
+    copy(Seq("foo.c"), "/nonexistent/directory", createTarget=false) shouldBe Symbol("failure")
   }
 
   it should "fail if the directory cannot be created" in {
-    copy(Seq("foo.c"), "/etc/foo/bar/baz") shouldBe 'failure
+    copy(Seq("foo.c"), "/etc/foo/bar/baz") shouldBe Symbol("failure")
   }
 
   it should "fail if the source path doesn't exist" in {
     withTemporaryDirectory("copy") { d =>
-      copy(Seq("foo.c"), d.getPath) shouldBe 'failure
+      copy(Seq("foo.c"), d.getPath) shouldBe Symbol("failure")
     }
   }
 
@@ -285,7 +285,7 @@ class FileUtilSpec extends BaseSpec {
           f.write("This is a test.\n")
         }
         val sourceSize = sourceFile.length
-        copy(sourceFile.getPath, d.getPath) shouldBe 'success
+        copy(sourceFile.getPath, d.getPath) shouldBe Symbol("success")
         val targetPath = joinPath(d.getPath, basename(sourceFile.getPath))
         new File(targetPath).length shouldBe sourceSize
       }

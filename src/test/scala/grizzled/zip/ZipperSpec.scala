@@ -54,13 +54,13 @@ class ZipperSpec extends BaseSpec {
       ))
 
       val t1 = z.addFile(f1, flatten = true)
-      t1 shouldBe 'success
+      t1 shouldBe Symbol("success")
 
       val t2 = t1.get.addFile(f2, flatten = true)
-      t2 shouldBe 'success
+      t2 shouldBe Symbol("success")
 
       val zipPath = new File(joinPath(absDir, "out.zip"))
-      t2.get.writeZip(zipPath) shouldBe 'success
+      t2.get.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.asScala.toSeq
@@ -95,15 +95,15 @@ class ZipperSpec extends BaseSpec {
 
       val f1ZipPath = f1Path.replace(File.separatorChar, '/')
       val t1 = z.addFile(f1, f1ZipPath)
-      t1 shouldBe 'success
+      t1 shouldBe Symbol("success")
 
       val f2ZipPath = f2Path.replace(File.separatorChar, '/')
       val t2 = t1.get.addFile(f2, f2ZipPath)
-      t2 shouldBe 'success
+      t2 shouldBe Symbol("success")
 
 
       val zipPath = new File(joinPath(absDir, "out.zip"))
-      t2.get.writeZip(zipPath) shouldBe 'success
+      t2.get.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.asScala.toSeq
@@ -138,12 +138,12 @@ class ZipperSpec extends BaseSpec {
         (new File(joinPath(absDir, path)), path)
       }
       val t = Zipper(files)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val fullZipper = t.get
 
 
       val zipPath = new File(joinPath(absDir, "out.zip"))
-      fullZipper.writeZip(zipPath) shouldBe 'success
+      fullZipper.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.asScala.toSeq
@@ -179,10 +179,10 @@ class ZipperSpec extends BaseSpec {
       val files = makeFiles(absDir, filesToCreate)
 
       val t = Zipper(files, flatten = false)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val fullZipper = t.get
       val zipPath = new File(joinPath(absDir, "out.zip"))
-      fullZipper.writeZip(zipPath) shouldBe 'success
+      fullZipper.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.asScala.toSeq
@@ -205,10 +205,10 @@ class ZipperSpec extends BaseSpec {
       val files = makeFiles(absDir, filesToCreate)
 
       val t = Zipper(files, flatten = true)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val fullZipper = t.get
       val zipPath = new File(joinPath(absDir, "out.zip"))
-      fullZipper.writeZip(zipPath) shouldBe 'success
+      fullZipper.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val entries = zipFile.entries.asScala.toSeq
@@ -234,7 +234,7 @@ class ZipperSpec extends BaseSpec {
       val files = makeFiles(absDir, filesToCreate)
       val t = Zipper(files, flatten = true)
 
-      t shouldBe 'failure
+      t shouldBe Symbol("failure")
     }
   }
 
@@ -246,13 +246,13 @@ class ZipperSpec extends BaseSpec {
 
       val z = Zipper()
       val t1 = z.addURL(foo.toURI.toURL, "foo.txt")
-      t1 shouldBe 'success
+      t1 shouldBe Symbol("success")
       val t2 = t1.get.addURL(bar.toURI.toURL, "bar.txt")
-      t2 shouldBe 'success
+      t2 shouldBe Symbol("success")
       val fullZipper = t2.get
 
       val zipPath = new File(joinPath(absDir, "outurl.zip"))
-      fullZipper.writeZip(zipPath) shouldBe 'success
+      fullZipper.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       readEntryAsChars(zipFile, "foo.txt") shouldBe fooContents
@@ -268,9 +268,9 @@ class ZipperSpec extends BaseSpec {
       val z = Zipper()
       val entryName = "foobar/bytes.dat"
       val t = z.addInputStream(new ByteArrayInputStream(buf), entryName)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val zipPath = new File(joinPath(absDir, "bin.zip"))
-      t.get.writeZip(zipPath) shouldBe 'success
+      t.get.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val bytes = readEntryAsBytes(zipFile, entryName)
@@ -287,9 +287,9 @@ class ZipperSpec extends BaseSpec {
       val z = Zipper()
       val entryName = "foo/bar/bytes.dat"
       val t = z.addBytes(buf, entryName)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val zipPath = new File(joinPath(absDir, "binary.zip"))
-      t.get.writeZip(zipPath) shouldBe 'success
+      t.get.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       val bytes = readEntryAsBytes(zipFile, entryName)
@@ -305,12 +305,12 @@ class ZipperSpec extends BaseSpec {
       val z = Zipper()
       val entryName = "baz/bar/foo.txt"
       val t = z.addReader(reader, entryName)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val t2 = t.get.addReader(new StringReader(bazContents), "baz.txt")
-      t2 shouldBe 'success
+      t2 shouldBe Symbol("success")
 
       val zipPath = new File(joinPath(absDir, "bin.zip"))
-      t2.get.writeZip(zipPath) shouldBe 'success
+      t2.get.writeZip(zipPath) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zipPath)
       readEntryAsChars(zipFile, entryName) shouldBe fooContents
@@ -342,7 +342,7 @@ class ZipperSpec extends BaseSpec {
       val entryName = "grizzled/NotValidClass.class"
 
       val t = z.addInputStream(new ByteArrayInputStream(binaryFile), entryName)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
 
       val jarPath = new File(joinPath(dir.getAbsolutePath, "foo.jar"))
       t.get.writeJar(jarPath, Some(manifest))
@@ -358,7 +358,7 @@ class ZipperSpec extends BaseSpec {
     val z = Zipper()
     val zip = joinPath(System.getProperty("java.io.tmpdir"), "out.zip")
     val t = z.addZipDirectory("foo/")
-    t shouldBe 'success
+    t shouldBe Symbol("success")
     t.get.writeZip(zip)
     val zipFile = new ZipFile(zip)
 
@@ -370,7 +370,7 @@ class ZipperSpec extends BaseSpec {
 
   it should "fail to add an zip directory entry if it doesn't end in /" in {
     val z = Zipper()
-    z.addZipDirectory("foo") shouldBe 'failure
+    z.addZipDirectory("foo") shouldBe Symbol("failure")
   }
 
   it should "allow adding an explicit zip directory that's also implied" in {
@@ -379,12 +379,12 @@ class ZipperSpec extends BaseSpec {
       val z = Zipper()
       val zip = joinPath(absDir, "out.zip")
       val t1 = z.addZipDirectory("foo/")
-      t1 shouldBe 'success
+      t1 shouldBe Symbol("success")
 
       val t2 = t1.get.addFile(new File("build.sbt"), "foo/bar/build.sbt")
-      t2 shouldBe 'success
+      t2 shouldBe Symbol("success")
 
-      t2.get.writeZip(zip) shouldBe 'success
+      t2.get.writeZip(zip) shouldBe Symbol("success")
 
       val zipFile = new ZipFile(zip)
       val matches = zipFile.entries.asScala.filter(_.getName == "foo/").toSeq
@@ -399,11 +399,11 @@ class ZipperSpec extends BaseSpec {
   it should "allow retrieving the list of paths to be written" in {
     val z = Zipper()
     val t = z.addZipDirectory("foo/")
-    t shouldBe 'success
+    t shouldBe Symbol("success")
     val t2 = t.get.addFile("build.sbt")
-    t2 shouldBe 'success
+    t2 shouldBe Symbol("success")
     val t3 = t2.get.addFile("project/build.properties")
-    t3 shouldBe 'success
+    t3 shouldBe Symbol("success")
     t3.get.paths shouldBe Set("foo/", "build.sbt", "project/build.properties")
   }
 
@@ -414,7 +414,7 @@ class ZipperSpec extends BaseSpec {
       val z = Zipper()
       val t = z.addDirectory(dir   = new File(joinPath(dirPath, "src")),
                              strip = Some(dirPath))
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val z2 = t.get
       val paths = z2.paths
       for (path <- files.map(_._1)) {
@@ -430,7 +430,7 @@ class ZipperSpec extends BaseSpec {
       val dirPath = dir.getPath
       val z = Zipper()
       val t = z.addDirectory(new File(joinPath(dirPath, "src")))
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val z2 = t.get
       val paths = z2.paths
       val prefix = dirPath.tail
@@ -450,7 +450,7 @@ class ZipperSpec extends BaseSpec {
         dir     = new File(joinPath(dirPath, "src")),
         flatten = true
       )
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val z2 = t.get
       val paths = z2.paths
       val prefix = dirPath.tail
@@ -471,7 +471,7 @@ class ZipperSpec extends BaseSpec {
         dir      = new File(joinPath(dirPath, "src")),
         wildcard = Some(pattern)
       )
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val z2 = t.get
       val paths = z2.paths
       val prefix = dirPath.tail
@@ -490,9 +490,9 @@ class ZipperSpec extends BaseSpec {
       val f = makeFile(absDir, "foobar.txt", "Some text\n")
       val z = Zipper()
       val t = z.addFile(f, flatten = true)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val zipFile = new File(joinPath(absDir, "foo.zip"))
-      t.get.writeZip(zipFile) shouldBe 'success
+      t.get.writeZip(zipFile) shouldBe Symbol("success")
       val zip = new ZipFile(zipFile)
       Option(zip.getComment) shouldBe None
     }
@@ -504,11 +504,11 @@ class ZipperSpec extends BaseSpec {
       val f = makeFile(absDir, "foobar.txt", "Some text\n")
       val z = Zipper()
       val t = z.addFile(f, flatten = true)
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       val zipFile = new File(joinPath(absDir, "foo.zip"))
       val z2 = t.get
       val comment = "Written by ZipperSpec"
-      z2.setComment(comment).writeZip(zipFile) shouldBe 'success
+      z2.setComment(comment).writeZip(zipFile) shouldBe Symbol("success")
       val zip = new ZipFile(zipFile)
       Option(zip.getComment) shouldBe Some(comment)
     }

@@ -41,7 +41,7 @@ class WithResourceSpec extends BaseSpec {
     import grizzled.util.CanReleaseResource.Implicits.CanReleaseCloseable
 
     val t = tryWithResource(new TestCloseable) { _ => 1 }
-    t shouldBe 'success
+    t shouldBe Symbol("success")
     t.get shouldBe 1
   }
 
@@ -50,7 +50,7 @@ class WithResourceSpec extends BaseSpec {
 
     val c = new TestCloseable
     val t = tryWithResource(c) { _ => 1 }
-    t shouldBe 'success
+    t shouldBe Symbol("success")
     c.isClosed shouldBe true
   }
 
@@ -60,7 +60,7 @@ class WithResourceSpec extends BaseSpec {
     val c = new TestCloseable
     val t = tryWithResource(c) { _ => true }
 
-    t shouldBe 'success
+    t shouldBe Symbol("success")
     c.isClosed shouldBe true
   }
 
@@ -72,12 +72,12 @@ class WithResourceSpec extends BaseSpec {
       throw new java.io.IOException("oops")
     }
 
-    f shouldBe 'failure
+    f shouldBe Symbol("failure")
 
     val msg = f.recover {
       case e: Exception => e.getMessage
     }
-    msg shouldBe 'success
+    msg shouldBe Symbol("success")
     msg.get shouldBe "oops"
   }
 
