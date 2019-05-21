@@ -7,8 +7,8 @@ organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.13.0-RC1"
-crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-RC1")
+scalaVersion := "2.13.0-RC2"
+crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-RC2")
 
 
 unmanagedSourceDirectories in Compile += {
