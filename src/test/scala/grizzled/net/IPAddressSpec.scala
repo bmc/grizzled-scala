@@ -50,7 +50,7 @@ class IPAddressSpec extends BaseSpec {
       // Map the expected value into a list of bytes
       val mappedExpected = expected.map(_.toByte)
       val ipAddrRes = getIPAddress(input)
-      ipAddrRes shouldBe 'success
+      ipAddrRes shouldBe Symbol("success")
 
       val ipAddr = ipAddrRes.get
 
@@ -59,7 +59,7 @@ class IPAddressSpec extends BaseSpec {
       ipAddr.toString shouldBe expectedString
     }
 
-    IPAddress(Nil) shouldBe 'failure
+    IPAddress(Nil) shouldBe Symbol("failure")
   }
 
   "IPAddress implicits" should "properly convert" in {
@@ -72,7 +72,7 @@ class IPAddressSpec extends BaseSpec {
       val mappedExpected = expected.map(_.toByte)
 
       val ipAddrRes = getIPAddress(input)
-      ipAddrRes shouldBe 'success
+      ipAddrRes shouldBe Symbol("success")
 
       val ipAddr = ipAddrRes.get
       val jdkInetAddress: java.net.InetAddress = ipAddr
@@ -102,7 +102,7 @@ class IPAddressSpec extends BaseSpec {
       val expectedBytes = expected.map(_.toByte)
 
       val ipAddrRes = getIPAddress(input)
-      ipAddrRes shouldBe 'success
+      ipAddrRes shouldBe Symbol("success")
 
       val ipAddr = ipAddrRes.get
       ipAddr.toInetAddress.getAddress.toList shouldBe expectedBytes
@@ -111,14 +111,14 @@ class IPAddressSpec extends BaseSpec {
 
   "java.net.InetAddress call-throughs" should "work on an IPAddress" in {
     val ipAddrRes1 = IPAddress(127, 0, 0, 1)
-    ipAddrRes1 shouldBe 'success
+    ipAddrRes1 shouldBe Symbol("success")
 
     val ipAddr1 = ipAddrRes1.get
     ipAddr1.isLoopbackAddress shouldBe true
 
 
     val ipAddrRes2 = IPAddress(192, 168, 0, 1)
-    ipAddrRes2 shouldBe 'success
+    ipAddrRes2 shouldBe Symbol("success")
     val ipAddr2 = ipAddrRes2.get
     ipAddr2.isLoopbackAddress shouldBe false
   }
@@ -126,15 +126,15 @@ class IPAddressSpec extends BaseSpec {
   "IPAddress.parseAddress" should "handle a valid IPv4 address" in {
     val addresses = Array("192.168.12.0", "200.30.99.254", "127.0.0.1")
     for (a <- addresses)
-      IPAddress.parseAddress(a) shouldBe 'success
+      IPAddress.parseAddress(a) shouldBe Symbol("success")
   }
 
   it should "fail on a nonsense string" in {
-    IPAddress.parseAddress("foobar") shouldBe 'failure
+    IPAddress.parseAddress("foobar") shouldBe Symbol("failure")
   }
 
   it should "fail on an invalid IPv4 address" in {
-    IPAddress.parseAddress("256.0.0.1") shouldBe 'failure
+    IPAddress.parseAddress("256.0.0.1") shouldBe Symbol("failure")
   }
 
   it should "handle a valid IPv6 address" in {
@@ -146,7 +146,7 @@ class IPAddressSpec extends BaseSpec {
     )
 
     for (a <- addresses)
-      IPAddress.parseAddress(a) shouldBe 'success
+      IPAddress.parseAddress(a) shouldBe Symbol("success")
   }
 
   private val IPv4sAndNumbers = Array(
@@ -165,20 +165,20 @@ class IPAddressSpec extends BaseSpec {
 
   "IPAddress.apply(BigInt)" should "handle a valid IPv6 address" in {
     for ((_, addrNum) <- IPv6sAndNumbers) {
-      IPAddress(addrNum) shouldBe 'success
+      IPAddress(addrNum) shouldBe Symbol("success")
     }
   }
 
   it should "handle a valid IPv4 address" in {
     for ((_, addrNum) <- IPv4sAndNumbers) {
-      IPAddress(addrNum) shouldBe 'success
+      IPAddress(addrNum) shouldBe Symbol("success")
     }
   }
 
   "IPAddress.toNumber" should "return valid numbers for IPv6 addresses" in {
     for ((s, expected) <- IPv6sAndNumbers) {
       val res = IPAddress.parseAddress(s)
-      res shouldBe 'success
+      res shouldBe Symbol("success")
       IPAddress.parseAddress(s).get.toNumber shouldBe expected
     }
   }
@@ -186,7 +186,7 @@ class IPAddressSpec extends BaseSpec {
   it should "return value numbers for IPv4 addresses" in {
     for ((s, expected) <- IPv4sAndNumbers) {
       val res = IPAddress.parseAddress(s)
-      res shouldBe 'success
+      res shouldBe Symbol("success")
       IPAddress.parseAddress(s).get.toNumber shouldBe expected
     }
   }

@@ -150,7 +150,7 @@ object URLUtil {
       if (path.isDirectory) {
         Future.failed(
           new IOException(
-            s"""Output file "$pathOut" exists and is a directory."""
+            s"""Output file "${pathOut.toString}" exists and is a directory."""
           )
         )
       }
@@ -158,7 +158,7 @@ object URLUtil {
         val dir = pathOut.dirname
         if ((! dir.exists) && (! dir.mkdirs())) {
           Future.failed(new IOException(
-            s"Can't create target directory '$dir' or one of its parents."
+            s"Can't create target directory '${dir.toString}' or one of its parents."
           ))
         }
         else {

@@ -163,7 +163,7 @@ extends Iterator[String] {
         case includeRegex(inc) =>
           if (sourceStack.length >= maxNesting)
             throw new IllegalStateException(
-              s"Max nesting level ($maxNesting) exceeded."
+              s"Max nesting level (${maxNesting.toString}) exceeded."
             )
 
           val curURI =  sourceStack.head.uri

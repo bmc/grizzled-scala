@@ -34,7 +34,7 @@ object Implicits {
       if (file.exists)
         Success(true)
       else
-        Failure(new FileDoesNotExistException(s""""$file" does not exist."""))
+        Failure(new FileDoesNotExistException(s""""${file.toString}" does not exist."""))
     }
 
     /** Get the directory name of the file.
@@ -155,7 +155,7 @@ object Implicits {
       *
       * @return `Success(true)` on success, `Failure(exception)` on error.
       */
-    def touch(time: Long = -1l): Try[Boolean] = {
+    def touch(time: Long = -1L): Try[Boolean] = {
       util.touch(file.getPath, time)
     }
 

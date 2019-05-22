@@ -14,7 +14,7 @@ class GrizzledFileSpec extends BaseSpec {
     withTemporaryDirectory("GrizzledFile") { dir =>
       val path = new File(fileutil.joinPath(dir.getAbsolutePath, "foobar.txt"))
       path should not (exist)
-      path.touch() shouldBe 'success
+      path.touch() shouldBe Symbol("success")
       path should exist
     }
   }
@@ -40,22 +40,22 @@ class GrizzledFileSpec extends BaseSpec {
     withTemporaryDirectory("GrizzledFile") { dir =>
       val absDir = dir.getAbsolutePath
       val f = new File(fileutil.joinPath(absDir, "foo", "bar", "baz.txt"))
-      f.touch() shouldBe 'failure
+      f.touch() shouldBe Symbol("failure")
     }
   }
 
   "pathExists" should "return Success for an existing file" in {
     withTemporaryDirectory("GrizzedFile") { dir =>
       val path = new File(fileutil.joinPath(dir.getAbsolutePath, "foo.txt"))
-      path.touch() shouldBe 'success
-      path.pathExists shouldBe 'success
+      path.touch() shouldBe Symbol("success")
+      path.pathExists shouldBe Symbol("success")
     }
   }
 
   it should "return Failure for a nonexistent file" in {
     withTemporaryDirectory("GrizzedFile") { dir =>
       val path = new File(fileutil.joinPath(dir.getAbsolutePath, "foo.txt"))
-      path.pathExists shouldBe 'failure
+      path.pathExists shouldBe Symbol("failure")
     }
   }
 
@@ -68,7 +68,7 @@ class GrizzledFileSpec extends BaseSpec {
   it should "return false for a non-empty directory" in {
     withTemporaryDirectory("GrizzledFile") { dir =>
       val f = new File(fileutil.joinPath(dir.getAbsolutePath, "foo.txt"))
-      f.touch() shouldBe 'success
+      f.touch() shouldBe Symbol("success")
       dir.isEmpty shouldBe false
     }
   }
@@ -76,7 +76,7 @@ class GrizzledFileSpec extends BaseSpec {
   it should "fail with an assertion error for a non-directory" in {
     withTemporaryDirectory("GrizzledFile") { dir =>
       val f = new File(fileutil.joinPath(dir.getAbsolutePath, "foo.txt"))
-      f.touch() shouldBe 'success
+      f.touch() shouldBe Symbol("success")
 
       an [AssertionError] should be thrownBy {
         f.isEmpty
@@ -93,10 +93,10 @@ class GrizzledFileSpec extends BaseSpec {
 
       parentDir.mkdirs() should be (true)
       parentDir should exist
-      file.touch() shouldBe 'success
+      file.touch() shouldBe Symbol("success")
 
       val t = topDir.deleteRecursively()
-      t shouldBe 'success
+      t shouldBe Symbol("success")
       t.get shouldEqual 1
       topDir should not (exist)
       new File(absDir) should exist

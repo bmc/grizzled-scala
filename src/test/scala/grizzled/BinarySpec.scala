@@ -20,15 +20,15 @@ class BinarySpec extends BaseSpec {
     )
 
     val longData = Map[Long, Int](
-      0l                   -> 0,
-      1l                   -> 1,
-      2l                   -> 1,
-      3l                   -> 2,
-      0x444444444l         -> 9,
-      0xeeeeeeeeel         -> 27,
-      0xffffffffl          -> 32,
-      0x7fffffffl          -> 31,
-      0xffffffffffffl      -> 48
+      0L                   -> 0,
+      1L                   -> 1,
+      2L                   -> 1,
+      3L                   -> 2,
+      0x444444444L         -> 9,
+      0xeeeeeeeeeL         -> 27,
+      0xffffffffL          -> 32,
+      0x7fffffffL          -> 31,
+      0xffffffffffffL      -> 48
     )
 
     for((n, expected) <- intData) {

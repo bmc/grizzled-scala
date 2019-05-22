@@ -574,7 +574,7 @@ object util {
             if (c1 == fileSep)
               c2.toString
             else
-              s"$c1$c2"
+              s"$c1${c2.toString}"
         }
 
     val absolute = path.startsWith(fileSep) || (prefix != "")
@@ -705,7 +705,7 @@ object util {
 
       if (tries > maxTries) {
         Failure(new IOException(
-          s"Failed to create temporary directory after $maxTries attempts."
+          s"Failed to create temporary directory after ${maxTries.toString} attempts."
         ))
       }
       else {
@@ -976,7 +976,7 @@ object util {
   def deleteTree(dir: File): Try[Int] = {
     def deleteOne(f: File): Try[Int] = {
       if (! f.delete)
-        Failure(new IOException(s"Can't delete '$f'"))
+        Failure(new IOException(s"Can't delete '${f.toString}'"))
       else
         Success(1)
     }
@@ -984,7 +984,7 @@ object util {
     if (! dir.exists)
       Success(0)
     else if (! dir.isDirectory)
-      Failure(new IOException(s""""$dir" is not a directory."""))
+      Failure(new IOException(s""""${dir.toString}" is not a directory."""))
     else {
       @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
       val treeResults = dir.listFiles.map { f =>

@@ -7,8 +7,8 @@ organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.13.0-M5"
-crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-M5")
+scalaVersion := "2.13.0-RC2"
+crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-RC2")
 
 
 unmanagedSourceDirectories in Compile += {
@@ -59,8 +59,8 @@ wartremoverErrors in (Compile, compile) ++= Seq(
 // Dependencies
 
 libraryDependencies ++= Seq(
-  "org.scala-lang.modules" %% "scala-collection-compat" % "0.2.1",
-  "org.scalatest"          %% "scalatest"               % "3.0.6-SNAP5" % Test
+  "org.scala-lang.modules" %% "scala-collection-compat" % "2.0.0",
+  "org.scalatest"          %% "scalatest"               % "3.0.8-RC4" % Test
 )
 
 parallelExecution in Test := true
