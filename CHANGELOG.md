@@ -1,5 +1,16 @@
 # Grizzled Scala Change Log
 
+Version 4.9.2:
+
+* Merged in changes from @Philippus:
+    - Updated Scala 2.13 to 2.13.0-RC1
+    - Updaed various dependencies, including `sbt-wartremover`
+    - Changed `Long` constants to use upper-case `L`, instead of 
+      deprecated lower-case `l`.
+    - Replaced deprecated symbol literals.
+    - Used explicit string conversion in some spots, to get past a
+      wart-remover issue with interpolating non-string values.
+
 Version 4.9.1:
 
 * Added `grizzled.ScalaCompat.math.Ordering.Double.IeeeOrdering`,
