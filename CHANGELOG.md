@@ -1,5 +1,10 @@
 # Grizzled Scala Change Log
 
+Version 4.9.3:
+
+* Upgraded to ScalaTest 3.0.8.
+* Now cross-compiles against Scala 2.13.0.
+
 Version 4.9.2:
 
 * Merged in changes from @Philippus:
