@@ -70,7 +70,7 @@ For example:
     <dependency>
       <groupId>org.clapper</groupId>
       <artifactId>grizzled-scala_2.12</artifactId>
-      <version>4.9.2</version>
+      <version>4.9.3</version>
     </dependency>
 
 If you cannot resolve the artifact, then add the JCenter repository:
@@ -94,7 +94,7 @@ For more information on using Maven and Scala, see Josh Suereth's
 
 Add the following to your SBT build:
 
-    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.9.2"
+    libraryDependencies += "org.clapper" %% "grizzled-scala" % "4.9.3"
 
 ## Source Code Repository
 
