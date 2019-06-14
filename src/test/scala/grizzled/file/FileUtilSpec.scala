@@ -6,8 +6,11 @@ import grizzled.file.util._
 import grizzled.util.CanReleaseResource.Implicits.CanReleaseAutoCloseable
 import grizzled.util.withResource
 import java.io.File
+import java.nio.file.{Files, Path, Paths}
 
 import grizzled.BaseSpec
+
+import scala.util.Success
 
 /**
  * Tests the grizzled.file functions.
@@ -482,5 +485,25 @@ class FileUtilSpec extends BaseSpec {
 
   it should "work with an empty list, returning an empty string" in {
     longestCommonPathPrefix(Nil) shouldBe ""
+  }
+
+  "tryWithTemporaryDirectory" should "clean up & return Success on success" in {
+    val t = tryWithTemporaryDirectory("foo") { dir: Path =>
+      dir
+    }
+
+    t shouldBe Symbol("success")
+    Files.exists(t.get) shouldBe false
+  }
+
+  it should "clean up and return Failure on failure" in {
+    var savedDir: Path = Paths.get(".")
+    val t = tryWithTemporaryDirectory("bar") { dir: Path =>
+      savedDir = dir
+      throw new Exception("intentional failure")
+    }
+
+    t shouldBe Symbol("failure")
+    Files.exists(savedDir) shouldBe false
   }
 }

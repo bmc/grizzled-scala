@@ -1,5 +1,7 @@
 package grizzled
 
+import scala.collection.convert.{AsJavaExtensions, AsScalaExtensions}
+
 /** Compatibility definitions for Scala 2.13+ vs. Scala 2.12 and lesser.
   * This object is conceptually similar to `scala.collection.compat`.
   *
@@ -15,6 +17,9 @@ package grizzled
   *   `scala.math.Ordering.Double.IeeeOrdering`).
   */
 package object ScalaCompat {
+
+  val CollectionConverters: AsJavaExtensions with AsScalaExtensions =
+    scala.jdk.CollectionConverters
 
   object math {
     object Ordering {

@@ -2,13 +2,13 @@ package grizzled.file
 
 import scala.annotation.tailrec
 import scala.language.higherKinds
-
 import grizzled.io.Implicits.RichInputStream
 import grizzled.sys.os
 import grizzled.sys.OperatingSystem._
-
 import java.io.{File, IOException}
+import java.nio.file.{Files, Path, Paths}
 import java.security.{SecureRandom => Random}
+
 import scala.util.{Failure, Success, Try}
 
 class FileDoesNotExistException(message: String) extends Exception
@@ -388,6 +388,9 @@ object util {
   /** Directory tree generator, adapted from Python's `os.walk()`
     * function.
     *
+    * Note that `java.nio.Files.walk()` and `java.nio.Files.walkTree()`
+    * provide similar functionality, though with a different interface.
+    *
     * For each directory in the directory tree rooted at top (including top
     * itself, but excluding '.' and '..'), yields a 3-tuple
     *
@@ -458,9 +461,8 @@ object util {
     * (and subdirectory) found. This method does lazy evaluation, instead
     * of calculating everything up-front, as `walk()` does.
     *
-    * The JDK's [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#walk-java.nio.file.Path-int-java.nio.file.FileVisitOption...- java.nio.file.Files.walk()]]
-    * function provides a similar capability in JDK 8. Prior to JDK 8, you can
-    * also use  [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#walkFileTree(java.nio.file.Path,%20java.util.Set,%20int,%20java.nio.file.FileVisitor) java.nio.file.Files.walkFileTree()]]
+    * The JDK's `java.io.Files.walk()` and `java.io.Files.walkTree()`
+    * functions provide a similar capability, starting in JDK 8.
     *
     * @param file    The `File` object, presumed to represent a directory.
     * @param topdown If `true` (the default), the stream will be generated
@@ -595,6 +597,8 @@ object util {
   }
 
   /** Join components of a path together, using the specified file separator.
+    * Note that `java.nio.file.Paths.get()` can be used to join paths, as
+    * well.
     *
     * @param fileSep the file separator to use
     * @param pieces  path pieces
@@ -605,6 +609,8 @@ object util {
     pieces mkString fileSep
 
   /** Join components of a path together, using the current file separator.
+    * Note that `java.nio.file.Paths.get()` can be used to join paths, as
+    * well.
     *
     * @param pieces  path pieces
     *
@@ -614,6 +620,8 @@ object util {
     joinPath(fileSeparator, pieces.toList)
 
   /** Join components of a path together, using the current file separator.
+    * Note that `java.nio.file.Paths.get()` can be used to join paths, as
+    * well.
     *
     * @param pieces  path pieces
     *
@@ -671,80 +679,28 @@ object util {
     new File(tempDirName)
   }
 
-  /** Create a temporary directory.
+  /** Create a temporary directory. This is now just a simple front-end
+    * to `java.nio.file.Files.createTempDirectory()`, and it's deprecated.
+    * Use `java.nio.file.Files.createTempDirectory()` directly.
     *
     * @param prefix    Prefix for directory name
     * @param maxTries  Maximum number of times to try creating the
-    *                  directory before giving up.
+    *                  directory before giving up. '''Ignored now.'''
     *
     * @return A `Success` of the directory, or a `Failure` with any error
     *         that occurs.
     */
+  @deprecated("Use java.nio.file.Files.createTempDirectory()", "4.10.0")
   def makeTemporaryDirectory(prefix: String, maxTries: Int = 3): Try[File] = {
-    import grizzled.file.Implicits._
-
-    def createDirectory(dir: File): Try[Option[File]] = {
-      if (! dir.exists) {
-        if (! dir.mkdirs()) {
-          Failure(new IOException(
-            s"""Failed to create directory "${dir.getAbsolutePath}"."""
-          ))
-        }
-        else {
-          Success(Some(dir))
-        }
-      }
-
-      else {
-        Success(None)
-      }
+    Try {
+      Files.createTempDirectory(prefix).toFile
     }
-
-    @tailrec def create(tries: Int): Try[File] = {
-      import java.lang.{Integer => JInt}
-
-      if (tries > maxTries) {
-        Failure(new IOException(
-          s"Failed to create temporary directory after ${maxTries.toString} attempts."
-        ))
-      }
-      else {
-        val usePrefix = Option(prefix).getOrElse("")
-        val randomName = usePrefix + JInt.toHexString(random.nextInt)
-        val dir = new File (temporaryDirectory, randomName)
-
-        createDirectory(dir) match {
-          case f @ Failure(e)   => Failure(e)
-          case Success(Some(d)) => Success(d)
-          case Success(None)    => create(tries + 1)
-        }
-      }
-    }
-
-    create(0)
-  }
-
-  /** Create a temporary directory. Note: This function is deprecated, in
-    * favor of [[makeTemporaryDirectory]], which does not throw exceptions.
-    *
-    * @param prefix    Prefix for directory name
-    * @param maxTries  Maximum number of times to try creating the
-    *                  directory before giving up.
-    *
-    * @return the directory. Throws an IOException if it can't create
-    *         the directory.
-    */
-  @deprecated("Use makeTemporaryDirectory", "4.5.0")
-  @SuppressWarnings(Array("org.wartremover.warts.TryPartial"))
-  def createTemporaryDirectory(prefix: String, maxTries: Int = 3): File = {
-    import grizzled.file.Implicits._
-
-    makeTemporaryDirectory(prefix, maxTries).get
   }
 
   /** Allow execution of a block of code within the context of a temporary
     * directory. The temporary directory is cleaned up after the operation
-    * completes.
+    * completes. This version throws exceptions. Use
+    * [[tryWithTemporaryDirectory]] if you'd prefer a `Try`.
     *
     * @param prefix  file name prefix to use
     * @param action  action to perform
@@ -755,15 +711,42 @@ object util {
   def withTemporaryDirectory[T](prefix: String)(action: File => T): T = {
     import grizzled.file.Implicits._
 
-    makeTemporaryDirectory(prefix) match {
+    Try { Files.createTempDirectory(prefix) } match {
       case Failure(ex) => throw ex
       case Success(dir) =>
         try {
-          action(dir)
+          action(dir.toFile)
         }
         finally {
-          dir.deleteRecursively()
+          dir.toFile.deleteRecursively()
         }
+    }
+  }
+
+  /** Similar to [[withTemporaryDirectory]], this function creates a temporary
+    * directory, runs a block of code, and recursively removes the temporary
+    * directory when the code block returns. Unlike [[withTemporaryDirectory]],
+    * `tryWithTemporaryDirectory`:
+    *
+    * - returns a `Try`, instead of throwing or propagating exceptions
+    * - passes a `java.nio.files.Path` to the code block, instead of a
+    *   `java.io.File`
+    *
+    * @param prefix  the desired prefix to use when generating the directory
+    *                name
+    * @param action  the code to run
+    * @tparam        T the type of the code's return value
+    *
+    * @return A `Success` containing the result of the code block, or a
+    *         `Failure` if an exception is thrown.
+    */
+  def tryWithTemporaryDirectory[T](prefix: String)(action: Path => T): Try[T] = {
+    import grizzled.file.Implicits._
+
+    Try { Files.createTempDirectory(prefix) }.flatMap { dir: Path =>
+      val res = Try { action(dir) }
+      dir.toFile.deleteRecursively()
+      res
     }
   }
 
@@ -872,9 +855,8 @@ object util {
     * it is a directory, the target file will have the same base name as
     * as the source file.
     *
-    * The JDK's
-    * [[https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#copy(java.nio.file.Path,%20java.nio.file.Path,%20java.nio.file.CopyOption...) java.nio.file.Files.copy()]]
-    * function provides a similar capability.
+    * The JDK's `java.nio.file.Files.copy()` function provides a similar
+    * capability.
     *
     * @param source  path to the source file
     * @param target  path to the target file or directory
@@ -958,6 +940,52 @@ object util {
     }
   }
 
+  /** Recursively copy a source directory and its contents to a target
+    * directory. Creates the target directory if it does not exist.
+    *
+    * @param sourceDir  the source directory
+    * @param targetDir  the target directory
+    *
+    * @return `Success(true)` if the copy worked. `Failure(exception)` on
+    *         error.
+    */
+  def copyTree(sourceDir: Path, targetDir: Path): Try[Boolean] = {
+    if (! Files.exists(sourceDir)) {
+      Failure(new FileDoesNotExistException(sourceDir.toAbsolutePath.toString))
+    }
+    else if (! Files.isDirectory(sourceDir)) {
+      Failure(new IOException(
+        s"""Source "${sourceDir.toAbsolutePath.toString}" is not a directory."""
+      ))
+    }
+    else {
+      import grizzled.ScalaCompat.CollectionConverters._
+
+      Files.createDirectories(targetDir)
+
+      val targetAsString = targetDir.toString
+
+      Files
+        .walk(sourceDir)
+        .iterator
+        .asScala
+        .filter { path: Path => ! Files.isDirectory(path) }
+        .foreach { path: Path =>
+          // These paths contain the parent directory.
+          val src = sourceDir.toString
+          val p = path.toString
+
+          val minusParent = if (p startsWith src) p.drop(src.length + 1) else p
+          val targetFile = Paths.get(targetAsString, minusParent)
+          val targetParent = dirname(targetFile.toString)
+          Files.createDirectories(Paths.get(targetParent))
+          Files.copy(path, targetFile)
+        }
+
+      Success(true)
+    }
+  }
+
   /** Recursively remove a directory tree. This function is conceptually
     * equivalent to `rm -r` on a Unix system.
     *
@@ -1005,6 +1033,16 @@ object util {
       }
     }
   }
+
+  /** Recursively remove a directory tree. This function is conceptually
+    * equivalent to `rm -r` on a Unix system.
+    *
+    * @param dir The directory
+    *
+    * @return `Failure(exception)` on error, `Success(total)` on success. `total`
+    *         is the total number of deleted files.
+    */
+  def deleteTree(dir: Path): Try[Int] = deleteTree(dir.toFile)
 
   /** Similar to the Unix ''touch'' command, this function:
     *
@@ -1132,6 +1170,18 @@ object util {
     * @return the normalized path
     */
   def normalizePath(path: String): String = doPathNormalizing(path)
+
+  /** Normalize a path, eliminating double slashes, resolving embedded
+    * ".." strings (e.g., "/foo/../bar" becomes "/bar"), etc. Works for
+    * Windows and Posix operating systems.
+    *
+    * @param path  the path
+    *
+    * @return the normalized path
+    */
+  def normalizePath(path: Path): Path = {
+    Paths.get(doPathNormalizing(path.toString))
+  }
 
   /** Normalize a Windows path name. Handles UNC paths. Adapted from the
     * Python version of normpath() in Python's `os.ntpath` module.

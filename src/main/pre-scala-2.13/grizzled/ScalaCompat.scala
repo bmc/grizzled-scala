@@ -15,6 +15,12 @@ package grizzled
   *   `scala.math.Ordering.Double.IeeeOrdering`).
   */
 package object ScalaCompat {
+
+  import scala.collection.convert.{DecorateAsJava, DecorateAsScala}
+
+  val CollectionConverters: DecorateAsJava with DecorateAsScala =
+    scala.collection.JavaConverters
+
   type LazyList[+T] = Stream[T]
 
   object LazyList {

@@ -1,5 +1,20 @@
 # Grizzled Scala Change Log
 
+Version 4.10.0
+
+* Now _requires_ Java 1.8 or better. (Upgrade, already.)
+* `grizzled.file.util.makeTemporaryDirectory()` is deprecated. Use
+  `java.nio.file.Path.createTempDirectory()`, instead.
+* Added `grizzled.file.util.tryWithTemporaryDirectory()`, which works
+  like `withTemporaryDirectory`, except that it returns a `Try` instead of
+  throwing or propagating exceptions.
+* Added a version of `grizzled.file.util.copyTree` that takes
+  `java.nio.file.Path` arguments.
+* Added a version of `grizzled.file.util.deleteTree` that takes a
+ `java.nio.file.Path` argument.
+* Added a version of `grizzled.file.util.normalizePath` that takes a
+ `java.nio.file.Path` argument.
+
 Version 4.9.3:
 
 * Upgraded to ScalaTest 3.0.8.
