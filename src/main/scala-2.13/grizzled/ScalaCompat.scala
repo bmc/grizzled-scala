@@ -17,6 +17,7 @@ import scala.collection.convert.{AsJavaExtensions, AsScalaExtensions}
   *   `scala.math.Ordering.Double.IeeeOrdering`).
   */
 package object ScalaCompat {
+  import scala.util.Using.Releasable
 
   val CollectionConverters: AsJavaExtensions with AsScalaExtensions =
     scala.jdk.CollectionConverters
@@ -36,4 +37,23 @@ package object ScalaCompat {
           scala.math.Ordering.Float.TotalOrdering
       }
     }
-  }}
+  }
+
+  object scalautil {
+    import scala.util.{Using => ScalaUsing, Try}
+
+    object Using {
+      type Releasable[-R] = scala.util.Using.Releasable[R]
+
+      @inline
+      def apply[R: scala.util.Using.Releasable, A](resource: R)(f: R => A): Try[A] = {
+        ScalaUsing.apply(resource)(f)
+      }
+
+      @inline
+      def resource[R, A](resource: R)(body: R => A)(implicit rel: Releasable[R]): A = {
+        ScalaUsing.resource(resource)(body)(rel)
+      }
+    }
+  }
+}

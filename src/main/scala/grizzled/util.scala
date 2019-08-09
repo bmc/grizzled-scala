@@ -1,5 +1,7 @@
 package grizzled
 
+import grizzled.ScalaCompat.scalautil.Using
+
 import scala.annotation.implicitNotFound
 import scala.language.implicitConversions
 import scala.language.reflectiveCalls
@@ -32,15 +34,14 @@ package object util {
   }
 
   /** `withResource()` needs an implicit evidence parameter of this type
-    * to know how to release what's passed to it.
+    * to know how to release what's passed to it. Note that on Scala 2.13,
+    * this type is just a type alias for `scala.util.Using.Releasable`.
     *
     * @tparam T the type (which must be contravariant to allow, for instance,
     *           a `T` of `Closeable` to apply to subclasses like `InputStream`).
     */
   @implicitNotFound("Can't find a CanReleaseSource[${T}] for withResource/tryWithResource")
-  trait CanReleaseResource[-T] {
-    def release(a: T): Unit
-  }
+  type CanReleaseResource[-T] = Using.Releasable[T]
 
   /** Companion object for `CanReleaseResource`.
     */
@@ -92,10 +93,25 @@ package object util {
     * Sample use:
     *
     * {{{
-    * withResource(new java.io.FileInputStream("/path/to/file")) {
-    *     in => ...
+    * withResource(new java.io.FileInputStream("/path/to/file")) { in =>
+    *   ...
     * }
     * }}}
+    *
+    * In Scala 2.13, you can use `scala.util.Using.resource` to accomplish the
+    * the same thing:
+    *
+    * {{{
+    * import scala.util.Using
+    *
+    * Using.resource(new java.io.FileInputStream("/path/to/file")) { in =>
+    *   ...
+    * }
+    * }}}
+    *
+    * On Scala 2.13, `withResource` is implemented in terms of `Using.resource`.
+    * On previous versions, it is implemented in terms of a `Using`
+    * compatibility layer.
     *
     * '''Note''': If the block throws an exception, `withResource` propagates
     * the exception. If you want to capture the exception, instead, use
@@ -110,20 +126,38 @@ package object util {
     *
     * @return whatever the block returns
     */
-  def withResource[T, R](resource: T)
-                         (code: T => R)
-                         (implicit mgr: CanReleaseResource[T]): R = {
-    try {
-      code(resource)
-    }
-
-    finally {
-      mgr.release(resource)
-    }
+  @inline
+  final def withResource[T, R](resource: T)
+                              (code: T => R)
+                              (implicit mgr: CanReleaseResource[T]): R = {
+    import ScalaCompat.scalautil.Using
+    Using.resource(resource)(code)
   }
 
   /** A version of [[grizzled.util.withResource]] that captures any thrown
     * exception, instead of propagating it.
+    *
+    * Example:
+    *
+    * {{{
+    * val t: Try[Unit] = tryWithResource(new java.io.FileInputStream("...")) { in =>
+    * }
+    * }}}
+    *
+    * In Scala 2.13, you can use `scala.util.Using.apply` to accomplish the
+    * the same thing:
+    *
+    * {{{
+    * import scala.util.Using
+    *
+    * val t: Try[Unit] = Using(new java.io.FileInputStream("/path/to/file")) { in =>
+    *   ...
+    * }
+    * }}}
+    *
+    * On Scala 2.13, `tryWithResource` is implemented in terms of `Using.apply`.
+    * On previous versions, it is implemented in terms of a `Using`
+    * compatibility layer.
     *
     * @param open  the by-name parameter (code block) to open the resource.
     *              This parameter is a by-name parameter so that this
@@ -137,9 +171,10 @@ package object util {
     * @return A `Success` containing the result of the code block, or a
     *         `Failure` with any thrown exception.
     */
-  def tryWithResource[T, R](open: => T)
-                           (code: T => R)
-                           (implicit mgr: CanReleaseResource[T]): Try[R] = {
+  @inline
+  final def tryWithResource[T, R](open: => T)
+                                (code: T => R)
+                                (implicit mgr: CanReleaseResource[T]): Try[R] = {
     Try {
       withResource(open)(code)(mgr)
     }

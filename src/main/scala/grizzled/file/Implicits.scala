@@ -10,6 +10,7 @@ object Implicits {
   import scala.language.implicitConversions
 
   import grizzled.ScalaCompat._
+  import grizzled.file.{util => fileutil}
 
   /** A wrapper for `java.io.File` that provides additional methods.
     * By importing the implicit conversion functions, you can use the methods
@@ -41,13 +42,13 @@ object Implicits {
       *
       * @return the directory portion, as a `File`.
       */
-    def dirname: File = new File(util.dirname(file.getPath))
+    def dirname: File = new File(fileutil.dirname(file.getPath))
 
     /** Get the basename (file name only) part of a path.
       *
       * @return the file name portion, as a `File`
       */
-    def basename: File = new File(util.basename(file.getPath))
+    def basename: File = new File(fileutil.basename(file.getPath))
 
     /** Get the path of this file, relative to some other file.
       *
@@ -56,7 +57,7 @@ object Implicits {
       * @return the path of this file, relative to the other file.
       */
     def relativePath(relativeTo: File): String =
-      grizzled.file.util.relativePath(this, relativeTo)
+      fileutil.relativePath(this, relativeTo)
 
     /** Split the file's path into directory (dirname) and file (basename)
       * components. Analogous to Python's `os.path.pathsplit()` function.
@@ -64,7 +65,7 @@ object Implicits {
       * @return a (dirname, basename) tuple of `File` objects.
       */
     def dirnameBasename: (File, File) = {
-      val tuple = util.dirnameBasename(file.getPath)
+      val tuple = fileutil.dirnameBasename(file.getPath)
       (new File(tuple._1), new File(tuple._2))
     }
 
@@ -74,7 +75,7 @@ object Implicits {
       * @return `Failure(exception)` or `Success(total)`, where `total` is the
       *         number of files and directories actually deleted.
       */
-    def deleteRecursively(): Try[Int] = util.deleteTree(file)
+    def deleteRecursively(): Try[Int] = fileutil.deleteTree(file)
 
     /** Split this file's pathname into the directory name, basename, and
       * extension pieces.
@@ -82,7 +83,7 @@ object Implicits {
       * @return a 3-tuple of (dirname, basename, extension)
       */
     def dirnameBasenameExtension: (File, String, String) = {
-      val (dir, base, ext) = util.dirnameBasenameExtension(file.getPath)
+      val (dir, base, ext) = fileutil.dirnameBasenameExtension(file.getPath)
       (new File(dir), base, ext)
     }
 
@@ -139,7 +140,7 @@ object Implicits {
       *
       * @return the component pieces.
       */
-    def split: List[String] = util.splitPath(file.getPath)
+    def split: List[String] = fileutil.splitPath(file.getPath)
 
     /** Similar to the Unix ''touch'' command, this function:
       *
@@ -156,7 +157,7 @@ object Implicits {
       * @return `Success(true)` on success, `Failure(exception)` on error.
       */
     def touch(time: Long = -1L): Try[Boolean] = {
-      util.touch(file.getPath, time)
+      fileutil.touch(file.getPath, time)
     }
 
     /** Determine whether a directory is empty. Only meaningful for a directory.
@@ -185,7 +186,7 @@ object Implicits {
       *         in Scala 2.13 or better, and a `Stream` in Scala 2.12 and older.
       */
     def listRecursively(topdown: Boolean = true): LazyList[File] =
-      util.listRecursively(this.file, topdown)
+      fileutil.listRecursively(this.file, topdown)
 
     /** Copy the file to a target directory or file.
       *
@@ -201,7 +202,7 @@ object Implicits {
       *
       * @return A `Success` containing the target file, or `Failure(exception)`
       */
-    def copyTo(target: File): Try[File] = util.copyFile(file, target)
+    def copyTo(target: File): Try[File] = fileutil.copyFile(file, target)
   }
 
   implicit def grizzledFileToJavaIoFile(gf: GrizzledFile): File = gf.file

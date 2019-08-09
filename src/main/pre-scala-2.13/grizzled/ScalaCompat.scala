@@ -15,7 +15,6 @@ package grizzled
   *   `scala.math.Ordering.Double.IeeeOrdering`).
   */
 package object ScalaCompat {
-
   import scala.collection.convert.{DecorateAsJava, DecorateAsScala}
 
   val CollectionConverters: DecorateAsJava with DecorateAsScala =
@@ -47,6 +46,88 @@ package object ScalaCompat {
         implicit val TotalOrdering: Ordering[Float] =
           scala.math.Ordering.Float
       }
+    }
+  }
+
+  object scalautil {
+    import scala.util.Try
+    import scala.util.control.{ControlThrowable, NonFatal}
+
+    // Stolen directly from
+    // https://github.com/scala/scala/blob/2.13.x/src/library/scala/util/Using.scala
+    // See that file and the official API docs for details.
+    //
+    // Doesn't include everything in the 2.13 Using. Includes enough to make
+    //
+    object Using {
+      trait Releasable[-R] {
+        def release(resource: R): Unit
+      }
+
+      object Releasable {
+        implicit object AutoCloseableIsReleasable extends Releasable[AutoCloseable] {
+          def release(resource: AutoCloseable): Unit = resource.close()
+        }
+      }
+
+      def apply[R: Releasable, A](resource: => R)(f: R => A): Try[A] = {
+        Try {
+          Using.resource(resource)(f)
+        }
+      }
+      @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf",
+                              "org.wartremover.warts.Throw",
+                              "org.wartremover.warts.Var",
+                              "org.wartremover.warts.Null"))
+      def resource[R, A](resource: R)(body: R => A)
+                        (implicit releaseable: Releasable[R]): A = {
+        if (resource == null) throw new NullPointerException("null resource")
+
+        var toThrow: Throwable = null
+        try {
+          body(resource)
+        }
+        catch {
+          case t: Throwable =>
+            toThrow = t
+            null.asInstanceOf[A]
+        }
+        finally {
+          if (toThrow eq null) {
+            releaseable.release(resource)
+          }
+          else {
+            try {
+              releaseable.release(resource)
+            }
+            catch {
+              case other: Throwable =>
+                toThrow = preferentiallySuppress(toThrow, other)
+            }
+            finally {
+              throw toThrow
+            }
+          }
+        }
+      }
+    }
+
+    private def preferentiallySuppress(primary: Throwable, secondary: Throwable): Throwable = {
+      def score(t: Throwable): Int = t match {
+        case _: VirtualMachineError                   => 4
+        case _: LinkageError                          => 3
+        case _: InterruptedException | _: ThreadDeath => 2
+        case _: ControlThrowable                      => 0
+        case e if !NonFatal(e)                        => 1 // in case this method gets out of sync with NonFatal
+        case _                                        => -1
+      }
+      @inline def suppress(t: Throwable, suppressed: Throwable): Throwable = {
+        t.addSuppressed(suppressed)
+        t
+      }
+
+      if (score(secondary) > score(primary)) suppress(secondary, primary)
+      else suppress(primary, secondary)
     }
   }
 }
