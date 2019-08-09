@@ -2,14 +2,13 @@
 // Basic settings
 
 name := "grizzled-scala"
-version := "4.10.0"
+version := "4.11.0"
 organization := "org.clapper"
 licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
 scalaVersion := "2.13.0"
 crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0")
-
 
 unmanagedSourceDirectories in Compile += {
   val sourceDir = (sourceDirectory in Compile).value
