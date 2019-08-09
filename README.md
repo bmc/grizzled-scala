@@ -14,6 +14,6 @@ The home page for the Grizzled Scala Library is
 complete details, including installation instructions.
 
 Grizzled Scala is copyright &copy; 2009-2019 [Brian M. Clapper][] and
-is released under a new [BSD license](LICENSE.md).
+is released under the [Apache Software License](LICENSE.md).
 
 [Brian M. Clapper]: mailto:bmc@clapper.org

@@ -6,6 +6,10 @@ Version 4.11.0
   `scala.util.Using.resource` in 2.13 and in terms of a pared-down, backported
   version in 2.12 and 2.11. Similarly, `grizzled.util.tryWithResource` is
   implemented in terms of `Using.apply`. Both are marked `@inline final`.
+* From this version forward, this library is released under the Apache Software
+  License, version 2. Prior versions are still under the 3-Clause BSD license.
+  See [LICENSE.md](LICENSE.md) for details.
+
 
 Version 4.10.0
 
@@ -32,7 +36,7 @@ Version 4.9.2:
 * Merged in changes from @Philippus:
     - Updated Scala 2.13 to 2.13.0-RC1
     - Updaed various dependencies, including `sbt-wartremover`
-    - Changed `Long` constants to use upper-case `L`, instead of 
+    - Changed `Long` constants to use upper-case `L`, instead of
       deprecated lower-case `l`.
     - Replaced deprecated symbol literals.
     - Used explicit string conversion in some spots, to get past a
@@ -44,7 +48,7 @@ Version 4.9.1:
  `grizzled.ScalaCompat.math.Ordering.Double.TotalOrdering`,
  `grizzled.ScalaCompat.math.Ordering.Float.IeeeOrdering`, and
  `grizzled.ScalaCompat.math.Ordering.Float.TotalOrdering`, which map to their
-  appropriate `scala.math.Ordering` counterparts for both 2.12 (and earlier) 
+  appropriate `scala.math.Ordering` counterparts for both 2.12 (and earlier)
   and 2.13 (and greater). This compatibility layer eliminates warnings in
   tester compilation.
 
@@ -55,17 +59,17 @@ Version 4.9.0:
   appropriate type aliases in a new, conditionally-compiled
   `grizzled.ScalaCompat` package. Functions that use `Stream` in 2.12 and
   earlier still use `LazyList` in 2.13, but the implementation is better.
-  Bumped the minor version, rather than the patch version, even though there 
+  Bumped the minor version, rather than the patch version, even though there
   aren't major API changes, because of the possible impact on compilation.
 
 Version 4.8.0:
 
-* `grizzled.file.util.listRecursively()` and 
+* `grizzled.file.util.listRecursively()` and
   `grizzled.file.Implicits.GrizzledFile.listRecursively()` now return
-  `LazyList` for Scala 2.13. They still return `Stream` for Scala 2.12 and 
+  `LazyList` for Scala 2.13. They still return `Stream` for Scala 2.12 and
   earlier.
 * Various internal functions that used `Stream` have been tweaked to use
-  `LazyList` for 2.13. 
+  `LazyList` for 2.13.
 
 These changes necessitated some refactoring, as well as the introduction
 of `src/main/pre-scala-2.13` and `src/main/scala-2.13` directories to the
@@ -77,7 +81,7 @@ Version 4.7.1:
 
 Version 4.7.0:
 
-* Removed support for Scala 2.10. 
+* Removed support for Scala 2.10.
 * Updated to support Scala 2.13.0-M5 (with much help from @xuwei-k).
 * Updated ScalaTest dependency, to support Scala 2.13.0.
 * Updated various SBT plugins.
@@ -100,10 +104,10 @@ Version 4.5.0:
 * Merged [PR #12](https://github.com/bmc/grizzled-scala/pull/12), with fixes
   and performance improvements for `grizzled.security.MessageDigest`, courtesy
   of @lespea.
-* Updated SBT to version 1.1.6. 
+* Updated SBT to version 1.1.6.
 * Enabled [Wart Remover](http://www.wartremover.org) and many, but not all,
   of its errors. Cleaned up offending code.
-* Various functions in `grizzled.math` and `grizzled.math.stats` (`max()`, 
+* Various functions in `grizzled.math` and `grizzled.math.stats` (`max()`,
   `min()`, `geometricMean()`, etc.) now take one fixed parameter and a variable
   argument list, instead of just a variable argument list, to ensure that they
   are always called with at least one parameter.
@@ -117,7 +121,7 @@ Version 4.4.2:
 
 Version 4.4.1:
 
-* Changed `grizzled.datetime.EnhancedDuration` to 
+* Changed `grizzled.datetime.EnhancedDuration` to
   `grizzled.datetime.EnrichedDuration`, for consistency.
 
 Version 4.4.0:
@@ -180,8 +184,8 @@ _Contains breaking API changes._
   are part of `Either` in Scala 2.12 (though are implemented somewhat
   differently).
 * The `sub()` method in `grizzled.string.template.StringTemplate` now
-  returns a `Try`, instead of an `Either`. 
-* `grizzled.parsing.Pushback.pushback(List[T])` is now called 
+  returns a `Try`, instead of an `Either`.
+* `grizzled.parsing.Pushback.pushback(List[T])` is now called
   `pushbackMany()`.
 * Removed the following classes, which have been deprecated for some time:
     - `grizzled.io.RichInputStream`
@@ -191,7 +195,7 @@ _Contains breaking API changes._
 * Removed the following methods/functions, which have deprecated for some time:
     - `grizzled.parsing.Pushback.totalRead`
     - `grizzled.parsing.SafeIterator.totalRead`.
-    - `grizzled.file.Implicits.GrizzledFile.walk` 
+    - `grizzled.file.Implicits.GrizzledFile.walk`
     - `grizzled.sys.systemProperties`
 
 Version 2.8.0:
@@ -199,7 +203,7 @@ Version 2.8.0:
 * Added `grizzled.file.util.joinAndNormalizePath`, which combines the
   functionality of `joinPath` with that of `normalizePath`.
 * Fixed `grizzed.file.util.deleteTree()` to return successfully if the
-  directory doesn't exist, instead of failing. 
+  directory doesn't exist, instead of failing.
 
 Version 2.7.0:
 
@@ -214,8 +218,8 @@ Version 2.6.0:
   like [AVSL](http://software.clapper.org/avsl)
 * Corrected a bug in `grizzled.file.Includer` that prevented the final read
   from completing in certain circumstances.
-* 
- 
+*
+
 Version 2.5.0:
 
 * Added `grizzled.string.util.longestCommonPrefix()`.
