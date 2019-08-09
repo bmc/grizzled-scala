@@ -1,5 +1,12 @@
 # Grizzled Scala Change Log
 
+Version 4.11.0
+
+* `grizzled.util.withResource` is now implemented in terms of
+  `scala.util.Using.resource` in 2.13 and in terms of a pared-down, backported
+  version in 2.12 and 2.11. Similarly, `grizzled.util.tryWithResource` is
+  implemented in terms of `Using.apply`. Both are marked `@inline final`.
+
 Version 4.10.0
 
 * Now _requires_ Java 1.8 or better. (Upgrade, already.)
