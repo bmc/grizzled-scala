@@ -12,7 +12,7 @@ import java.io._
 import java.util.zip.ZipFile
 
 import scala.annotation.tailrec
-import scala.collection.JavaConverters._
+import grizzled.ScalaCompat.CollectionConverters._
 import scala.io.Source
 import scala.util.Random
 
