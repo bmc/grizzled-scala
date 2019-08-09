@@ -7,6 +7,8 @@ project/plugins/lib_managed
 project/plugins/project
 project/plugins/src_managed
 project/plugins/target
+project/.bloop
+.metals
 target
 .history
 *.sublime-*
@@ -15,3 +17,4 @@ target
 *.iml
 atlassian*.xml
 tmp
+.bloop
