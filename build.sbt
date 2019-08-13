@@ -4,7 +4,7 @@
 name := "grizzled-scala"
 version := "4.11.0"
 organization := "org.clapper"
-licenses := Seq("BSD" -> url("http://software.clapper.org/grizzled-scala/license.html"))
+licenses := Seq("ASF" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
 scalaVersion := "2.13.0"
