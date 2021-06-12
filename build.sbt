@@ -7,8 +7,8 @@ organization := "org.clapper"
 licenses := Seq("ASF" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
 homepage := Some(url("http://software.clapper.org/grizzled-scala/"))
 description := "A general-purpose Scala utility library"
-scalaVersion := "2.13.0"
-crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0")
+scalaVersion := "2.13.6"
+crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.6")
 
 unmanagedSourceDirectories in Compile += {
   val sourceDir = (sourceDirectory in Compile).value
